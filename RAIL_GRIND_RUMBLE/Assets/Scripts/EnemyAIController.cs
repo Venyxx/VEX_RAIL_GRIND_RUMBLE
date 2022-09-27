@@ -26,7 +26,7 @@ public bool playerInSightRange, playerInAttackRange;
 
 private void Awake()
 {
-	player = GameObject.Find("Player").transform;
+	player = GameObject.Find("PlayerArmature").transform;
 	agent = GetComponent<NavMeshAgent>();
 }
 private void Update()
@@ -62,7 +62,7 @@ walkPointSet = true;
 }
 private void ChasePlayer()
 {
-agent.SetDestination(player.position);
+agent.SetDestination(player.transform.position);
 }
 private void AttackPlayer()
 {
