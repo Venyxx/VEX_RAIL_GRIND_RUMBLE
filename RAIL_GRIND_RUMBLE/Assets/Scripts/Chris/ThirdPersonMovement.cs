@@ -11,7 +11,7 @@ public class ThirdPersonMovement : MonoBehaviour
     public float jumpForce;
     public float jumpCoolDown;
     public float airMultiplier;
-    bool canJump = true;
+    bool canJump;
 
     //Keys
     KeyCode jump = KeyCode.Space;
@@ -20,6 +20,10 @@ public class ThirdPersonMovement : MonoBehaviour
     public float playerHeight;
     public LayerMask whatIsGround;
     public bool grounded;
+
+    //Grapple Check
+    public bool isGrappling;
+    public float swingSpeed;
 
     public Transform orientation;
 
@@ -34,6 +38,8 @@ public class ThirdPersonMovement : MonoBehaviour
     void Start()
     {
         rigidBody.freezeRotation = true;
+        isGrappling = false;
+        canJump = true;
     }
 
     // Update is called once per frame
@@ -68,7 +74,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
         if (Input.GetKey(jump) && canJump == true && grounded == true)
         {
-            Debug.Log("Jump");
+            //Debug.Log("Jump");
             canJump = false;
 
             Jump();
@@ -79,6 +85,11 @@ public class ThirdPersonMovement : MonoBehaviour
 
     void PlayerMovement()
     {
+        //Uncomment once air movement is programmed
+        // if (isGrappling == true)
+        // {
+        //     return;
+        // }
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
         if (grounded == true)
@@ -86,7 +97,13 @@ public class ThirdPersonMovement : MonoBehaviour
             rigidBody.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
         } else if (grounded == false)
         {
-            rigidBody.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+            if (isGrappling == true)
+            {
+                rigidBody.AddForce(moveDirection.normalized * moveSpeed * 10f * swingSpeed, ForceMode.Force);
+            } else {
+                rigidBody.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+            }
+            
         }
         
     }
