@@ -1,0 +1,110 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class WallRun : MonoBehaviour
+{
+    //References
+    public GameObject playerREF;
+    public Transform orientation;
+    private ThirdPersonMovement playerScript;
+    private Rigidbody rigidBody;
+
+    //Wallrunning
+    public LayerMask wall;
+    public float wallRunForce;
+    public float maxWallRunTime;
+    private float wallRunTimer;
+    private bool isWallRunning;
+
+    //Input
+    private float horizontalInput;
+    private float verticalInput;
+
+    //Wall Detection
+    public float wallCheckDistance;
+    private RaycastHit leftWallHit;
+    private RaycastHit rightWallHit;
+    private bool wallLeft;
+    private bool wallRight;
+
+
+    private float setY;
+    
+    void Start()
+    {
+       playerScript = playerREF.gameObject.GetComponent<ThirdPersonMovement>();
+       rigidBody = playerREF.GetComponent<Rigidbody>();
+    }
+
+    void Update()
+    {
+        CheckForWall();
+        StateMachine();
+    }
+
+    void FixedUpdate()
+    {
+        if (isWallRunning == true)
+        {
+             WallRunMovement();
+        }
+    }
+
+    private void CheckForWall()
+    {
+        wallRight = Physics.Raycast(transform.position, orientation.right, out rightWallHit, wallCheckDistance, wall);
+        wallLeft = Physics.Raycast(transform.position, -orientation.right, out leftWallHit, wallCheckDistance, wall);
+    }
+
+    private void StateMachine()
+    {
+        //Get Player Input
+        horizontalInput = Input.GetAxisRaw("Horizontal");
+        verticalInput = Input.GetAxisRaw("Vertical");
+
+        //Wallrunning
+        if((wallLeft || wallRight) && verticalInput > 0 && playerScript.grounded == false)
+        {
+            ///Check if player is wallrunnning
+            StartWallRun();
+        } else {
+            StopWallRun();
+        }
+    }
+
+    private void StartWallRun()
+    {
+        rigidBody.useGravity = false;
+        isWallRunning = true;
+    }
+    
+    private void WallRunMovement()
+    {
+        //Suspend player's vertical movement
+        rigidBody.velocity = new Vector3(rigidBody.velocity.x, 0f, rigidBody.velocity.z);
+
+        //Discover forward direction of wall based on player orientation
+        Vector3 wallNormal = wallRight ? rightWallHit.normal : leftWallHit.normal;
+        Vector3 wallForward = Vector3.Cross(wallNormal, transform.up);
+
+        //Decide forward direction of player based on approach
+        if ((orientation.forward - wallForward).magnitude > (orientation.forward - -wallForward).magnitude)
+        {
+            wallForward = -wallForward;
+        }
+
+        //Forward Force
+        rigidBody.AddForce(wallForward * wallRunForce, ForceMode.Force);
+        
+
+    }
+
+    private void StopWallRun()
+    {
+        isWallRunning = false;
+        rigidBody.useGravity = true;
+    }
+
+}

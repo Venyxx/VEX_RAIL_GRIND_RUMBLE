@@ -26,7 +26,7 @@ public bool playerInSightRange, playerInAttackRange;
 
 private void Awake()
 {
-	player = GameObject.Find("PlayerArmature").transform;
+	player = GameObject.Find("PlayerObject").transform;
 	agent = GetComponent<NavMeshAgent>();
 }
 private void Update()
