@@ -19,6 +19,7 @@ public float walkPointRange;
 //Attacking
 public float timeBetweenAttacks;
 bool alreadyAttacked;
+public GameObject projectile;
 
 //States
 public float sightRange, attackRange;
@@ -26,7 +27,7 @@ public bool playerInSightRange, playerInAttackRange;
 
 private void Awake()
 {
-	player = GameObject.Find("PlayerObject").transform;
+	player = GameObject.Find("playerPrefab").transform;
 	agent = GetComponent<NavMeshAgent>();
 }
 private void Update()
@@ -73,8 +74,13 @@ transform.LookAt(player);
 
 if (!alreadyAttacked)
 {
+	Rigidbody rb = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
+
+	rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
+	rb.AddForce(transform.up * 5f, ForceMode.Impulse);
 	alreadyAttacked = true;
 	Invoke(nameof(ResetAttack), timeBetweenAttacks);
+
 }
 }
 private void ResetAttack()
