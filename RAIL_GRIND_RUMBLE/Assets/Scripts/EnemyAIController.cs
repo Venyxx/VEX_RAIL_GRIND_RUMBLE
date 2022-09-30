@@ -19,7 +19,6 @@ public float walkPointRange;
 //Attacking
 public float timeBetweenAttacks;
 bool alreadyAttacked;
-public GameObject projectile;
 
 //States
 public float sightRange, attackRange;
@@ -63,21 +62,17 @@ walkPointSet = true;
 }
 private void ChasePlayer()
 {
-agent.SetDestination(player.position);
+agent.SetDestination(player.transform.position);
 }
 private void AttackPlayer()
 {
-
+//Attack code here
 //Make sure enemy doesn't move
 agent.SetDestination(transform.position);
 transform.LookAt(player);
 
 if (!alreadyAttacked)
 {
-	Rigidbody rb = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
-
-	rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
-	rb.AddForce(transform.up * 5f, ForceMode.Impulse);
 	alreadyAttacked = true;
 	Invoke(nameof(ResetAttack), timeBetweenAttacks);
 }
