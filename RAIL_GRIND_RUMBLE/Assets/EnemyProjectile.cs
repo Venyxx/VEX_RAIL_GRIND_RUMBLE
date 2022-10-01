@@ -60,14 +60,15 @@ public class EnemyProjectile : MonoBehaviour
 	 
  }
 
- private void OnCollisionEnter(Collision collision)
+ private void OnTriggerEnter(Collider collision)
  {
 	
 	  //Count up collisions
 	  collisions++;
 	  
 	  //Explode if bullet hits an enemy directly and explodeOnTouch is activated
-	  if (collision.collider.CompareTag("Player") && explodeOnTouch) Explode();
+	  //if (collision.collider.CompareTag("Player") && explodeOnTouch) Explode(); -- Unity refers to this line as "obsolete" when used with OnTriggerEnter/Collider component
+	  if (collision.gameObject.tag == "Player" && explodeOnTouch) Explode();
  }
 
  private void Setup()

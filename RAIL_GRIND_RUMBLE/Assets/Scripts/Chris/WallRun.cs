@@ -17,6 +17,8 @@ public class WallRun : MonoBehaviour
     public float maxWallRunTime;
     private float wallRunTimer;
     private bool isWallRunning;
+    public float wallJumpSideForce;
+    public float wallJumpUpForce;
 
     //Input
     private float horizontalInput;
@@ -28,6 +30,11 @@ public class WallRun : MonoBehaviour
     private RaycastHit rightWallHit;
     private bool wallLeft;
     private bool wallRight;
+
+    //Exiting Wall
+    private bool exitingWall = false;
+    public float exitWallTime;
+    private float exitWallTimer;
 
 
     private float setY;
@@ -65,10 +72,33 @@ public class WallRun : MonoBehaviour
         verticalInput = Input.GetAxisRaw("Vertical");
 
         //Wallrunning
-        if((wallLeft || wallRight) && verticalInput > 0 && playerScript.grounded == false)
+        if((wallLeft || wallRight) && verticalInput > 0 && playerScript.grounded == false && !exitingWall)
         {
             ///Check if player is wallrunnning
             StartWallRun();
+
+            //Walljump
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                WallJump();
+            }
+        } else if (exitingWall == true){
+
+            if (isWallRunning == true)
+            {
+                StopWallRun();
+            }
+
+            if (exitWallTimer > 0)
+            {
+                exitWallTimer -= Time.deltaTime;
+            }
+
+            if (exitWallTimer <= 0)
+            {
+                exitingWall = false;
+            }
+
         } else {
             StopWallRun();
         }
@@ -105,6 +135,20 @@ public class WallRun : MonoBehaviour
     {
         isWallRunning = false;
         rigidBody.useGravity = true;
+    }
+
+    private void WallJump()
+    {
+        //Enter exit wall state
+        exitingWall = true;
+        exitWallTimer = exitWallTime;
+
+        Vector3 wallNormal = wallRight ? rightWallHit.normal : leftWallHit.normal;
+        Vector3 forceToApply = transform.up * wallJumpUpForce + wallNormal * wallJumpSideForce;
+
+        //Reset y velocity, then add force to rigidbody
+        rigidBody.velocity = new Vector3(rigidBody.velocity.x, 0f, rigidBody.velocity.z);
+        rigidBody.AddForce(forceToApply, ForceMode.Impulse);
     }
 
 }
