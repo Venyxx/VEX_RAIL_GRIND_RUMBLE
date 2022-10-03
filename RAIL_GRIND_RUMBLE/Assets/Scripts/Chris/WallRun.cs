@@ -76,10 +76,12 @@ public class WallRun : MonoBehaviour
         {
             ///Check if player is wallrunnning
             StartWallRun();
+            
 
             //Walljump
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                Debug.Log("Wall jump input detected");
                 WallJump();
             }
         } else if (exitingWall == true){
@@ -149,6 +151,7 @@ public class WallRun : MonoBehaviour
         //Reset y velocity, then add force to rigidbody
         rigidBody.velocity = new Vector3(rigidBody.velocity.x, 0f, rigidBody.velocity.z);
         rigidBody.AddForce(forceToApply, ForceMode.Impulse);
+        Debug.Log("completed wall jump method");
     }
 
 }
