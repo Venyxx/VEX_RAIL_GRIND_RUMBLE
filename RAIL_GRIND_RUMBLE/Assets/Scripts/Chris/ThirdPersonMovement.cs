@@ -131,10 +131,11 @@ public class ThirdPersonMovement : MonoBehaviour
     void PlayerMovement()
     {
         //Uncomment once air movement is programmed
-        // if (isGrappling == true)
-        // {
-        //     return;
-        // }
+        if (isGrappling == true)
+        {
+            return;
+        }
+
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
         if (grounded == true)

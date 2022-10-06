@@ -30,6 +30,12 @@ public class GrappleHook : MonoBehaviour
     // public float damper;
     // public float massScale;
 
+    //Air Movement
+    public Rigidbody rigidBody;
+    public float horizontalThrustForce;
+    public float forwardThrustForce;
+    public float extendCableSpeed;
+
     void Start()
     {
         
@@ -45,6 +51,11 @@ public class GrappleHook : MonoBehaviour
         if (Input.GetKeyUp(swingKey))
         {
             StopSwing();
+        }
+
+        if (joint != null)
+        {
+            AirMovement();
         }
     }
 
@@ -106,5 +117,41 @@ public class GrappleHook : MonoBehaviour
         line.positionCount = 0;
         playerREF.gameObject.GetComponent<ThirdPersonMovement>().isGrappling = false;
         Destroy(joint);
+    }
+
+    void AirMovement()
+    {
+        //Right Force
+        if (Input.GetKey(KeyCode.D))
+        {
+            rigidBody.AddForce(orientation.right * horizontalThrustForce * Time.deltaTime);
+        }
+
+        //Left Force
+        if (Input.GetKey(KeyCode.A))
+        {
+            rigidBody.AddForce(-orientation.right * horizontalThrustForce * Time.deltaTime);
+        }
+
+        //Shorten Grapple Cable
+        if (Input.GetKey(KeyCode.Space))
+        {
+            Vector3 directionToPoint = swingPoint - transform.position;
+            rigidBody.AddForce(directionToPoint.normalized * forwardThrustForce * Time.deltaTime);
+
+            float distanceFromPoint = Vector3.Distance(transform.position, swingPoint);
+
+            joint.maxDistance = distanceFromPoint * 0.8f;
+            joint.minDistance = distanceFromPoint * 0.25f;
+        }
+
+        //Extend Cable
+        if (Input.GetKey(KeyCode.S))
+        {
+            float extendedDistanceFromPoint = Vector3.Distance(transform.position, swingPoint) + extendCableSpeed;
+
+            joint.maxDistance = extendedDistanceFromPoint * 0.8f;
+            joint.minDistance = extendedDistanceFromPoint * 0.25f;
+        }
     }
 }
