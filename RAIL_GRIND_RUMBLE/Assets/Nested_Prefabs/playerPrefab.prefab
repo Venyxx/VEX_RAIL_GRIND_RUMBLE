@@ -162,6 +162,7 @@ GameObject:
   - component: {fileID: 2030071780202691820}
   - component: {fileID: 2030071780202691821}
   - component: {fileID: 1733502242}
+  - component: {fileID: 474983805264959317}
   m_Layer: 7
   m_Name: playerPrefab
   m_TagString: Player
@@ -199,6 +200,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 12
+  baseMoveSpeed: 0
+  speedLerp: 0
   groundDrag: 5
   jumpForce: 12
   jumpCoolDown: 0.25
@@ -387,6 +390,20 @@ CapsuleCollider:
   m_Height: 0.1
   m_Direction: 1
   m_Center: {x: 0.18, y: 0.56, z: 0.39}
+--- !u!114 &474983805264959317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030071780202691818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b2ba566ef8d3f44bb9532e521c6057, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 10
+  currentHealth: 0
 --- !u!1 &2030071780292815590
 GameObject:
   m_ObjectHideFlags: 0

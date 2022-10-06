@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
-public class EnemyAIController : MonoBehaviour
+public class MeleeEnemyAIController : MonoBehaviour
 {
-public NavMeshAgent agent;
+
+public UnityEngine.AI.NavMeshAgent agent;
 
 public Transform player;
+
+public PlayerHealth playerhealth;
 
 public LayerMask whatIsGround, whatIsPlayer;
 
@@ -19,7 +21,8 @@ public float walkPointRange;
 //Attacking
 public float timeBetweenAttacks;
 bool alreadyAttacked;
-public GameObject projectile;
+
+
 
 //States
 public float sightRange, attackRange;
@@ -27,8 +30,9 @@ public bool playerInSightRange, playerInAttackRange;
 
 private void Awake()
 {
+
 	player = GameObject.Find("playerPrefab").transform;
-	agent = GetComponent<NavMeshAgent>();
+	agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
 }
 private void Update()
 {
@@ -74,10 +78,7 @@ transform.LookAt(player);
 
 if (!alreadyAttacked)
 {
-	Rigidbody rb = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
-
-	rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
-	rb.AddForce(transform.up * 5f, ForceMode.Impulse);
+	playerhealth.TakeDamage(1);
 	alreadyAttacked = true;
 	Invoke(nameof(ResetAttack), timeBetweenAttacks);
 
