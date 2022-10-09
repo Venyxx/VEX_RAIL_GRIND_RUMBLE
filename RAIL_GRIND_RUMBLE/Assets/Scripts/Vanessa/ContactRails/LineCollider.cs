@@ -16,8 +16,8 @@ public class LineCollider : MonoBehaviour
 
     private void addColliderToLine()
     {
-        startPos = (start.x, start.y, start.z);
-        endPos = (end.x, end.y, end.z);
+        startPos = new Vector3(start.transform.position.x, start.transform.position.y, start.transform.position.z);
+        endPos = new Vector3(end.transform.position.x, end.transform.position.y, end.transform.position.z);
 
         BoxCollider col =
             new GameObject("Collider").AddComponent<BoxCollider>();

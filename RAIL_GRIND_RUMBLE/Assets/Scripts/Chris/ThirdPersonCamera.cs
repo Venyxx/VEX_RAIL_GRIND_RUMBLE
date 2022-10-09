@@ -7,9 +7,12 @@ public class ThirdPersonCamera : MonoBehaviour
     //References
     public Transform orientation;
     public Transform player;
-    public Transform playerREF;
+    public GameObject playerREF;
+    public GameObject playerPrefabREF;
+    private Transform playerTransform;
     public Transform cam;
     public Rigidbody rigidBody;
+    public GameObject grappleDetection;
 
     public float rotationSpeed;
 
@@ -34,6 +37,8 @@ public class ThirdPersonCamera : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        playerTransform = playerREF.gameObject.GetComponent<Transform>();
     }
 
     // Update is called once per frame
@@ -43,11 +48,19 @@ public class ThirdPersonCamera : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             SwitchCameraStyle(CameraStyle.Aiming);
+
+            grappleDetection.gameObject.GetComponent<GrappleDetection>().AimSwitch();
+
+            if (playerPrefabREF.gameObject.GetComponent<ThirdPersonMovement>().grounded == false)
+            {
+                Time.timeScale = 0.3f;
+            }
         }
 
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             SwitchCameraStyle(CameraStyle.Basic);
+            Time.timeScale = 1f;
         }
 
 
@@ -69,13 +82,13 @@ public class ThirdPersonCamera : MonoBehaviour
 
                 if (inputDir != Vector3.zero)
                 {
-                    playerREF.forward = Vector3.Slerp(playerREF.forward, inputDir.normalized, Time.deltaTime * rotationSpeed);
+                    playerTransform.forward = Vector3.Slerp(playerTransform.forward, inputDir.normalized, Time.deltaTime * rotationSpeed);
                 }
             } else if (currentStyle == CameraStyle.Aiming) {
                 Vector3 dirToAimingLookAt = aimingLookAt.position - new Vector3(transform.position.x, aimingLookAt.position.y, transform.position.z);
                 orientation.forward = dirToAimingLookAt.normalized;
 
-                playerREF.forward = dirToAimingLookAt.normalized;
+                playerTransform.forward = dirToAimingLookAt.normalized;
             }
             
         //}
