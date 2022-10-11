@@ -33,8 +33,9 @@ public class Moveable : MonoBehaviour
     private void OnTriggerEnter(Collider collider)
     {
         speedMetersPerSecond = target.moveSpeed;
-        Debug.Log("got trigger");
-        if (collider.tag == "RailRoute")
+        //Debug.Log("got trigger");
+
+        if (collider.tag == "Line")
         {
             canGrind = true;
             Debug.Log("got trigger tag");

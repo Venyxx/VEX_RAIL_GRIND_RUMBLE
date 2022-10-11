@@ -4,42 +4,41 @@ using UnityEngine;
 
 public class LineCollider : MonoBehaviour
 {
-    public GameObject start;
+   public LineRenderer Line;
+   
 
-    public GameObject end;
 
-    private Vector3 startPos;
+   
+   
+   public void GenerateMeshCollider ()
+   {
+    
+    MeshCollider LinesCollider = GetComponent<MeshCollider>();
 
-    private Vector3 endPos;
-
-    public LineRenderer line;
-
-    private void addColliderToLine()
+    if (LinesCollider == null)
     {
-        startPos = new Vector3(start.transform.position.x, start.transform.position.y, start.transform.position.z);
-        endPos = new Vector3(end.transform.position.x, end.transform.position.y, end.transform.position.z);
-
-        BoxCollider col =
-            new GameObject("Collider").AddComponent<BoxCollider>();
-        col.transform.parent = line.transform; // Collider is added as child object of line
-        float lineLength = Vector3.Distance(startPos, endPos); // length of line
-        col.size = new Vector3(lineLength, 0.1f, 1f); // size of collider is set where X is length of line, Y is width of line, Z will be set as per requirement
-        Vector3 midPoint = (startPos + endPos) / 2;
-        col.transform.position = midPoint; // setting position of collider object
-
-        // Following lines calculate the angle between startPos and endPos
-        float angle =
-            (
-            Mathf.Abs(startPos.y - endPos.y) / Mathf.Abs(startPos.x - endPos.x)
-            );
-        if (
-            (startPos.y < endPos.y && startPos.x > endPos.x) ||
-            (endPos.y < startPos.y && endPos.x > startPos.x)
-        )
-        {
-            angle *= -1;
-        }
-        angle = Mathf.Rad2Deg * Mathf.Atan(angle);
-        col.transform.Rotate(0, 0, angle);
+        LinesCollider = gameObject.AddComponent<MeshCollider>();
+        //LinesCollider.tag = "Line";
     }
+
+    Mesh mesh = new Mesh ();
+    Line.BakeMesh(mesh);
+    LinesCollider.sharedMesh = mesh;
+   }
+
+
+  void OnTriggerEnter (Collider collision)
+   {
+    //Debug.Log("hit");
+    
+    if (collision.tag == "RailStart")
+    {
+        Debug.Log("move towards railstart");
+    }
+    else if (collision.tag == "RailEnd")
+    {
+        Debug.Log("Move towards railend");
+    }
+   }
+
 }

@@ -170,7 +170,7 @@ public class ThirdPersonMovement : MonoBehaviour
         
         if (Input.GetKeyUp(KeyCode.W))
         {
-            Debug.Log("lerp speed down");
+            //Debug.Log("lerp speed down");
             rigidBody.velocity = Vector3.Lerp(rigidBody.velocity, standingStill, speedLerp * Time.deltaTime);
         }
     }
