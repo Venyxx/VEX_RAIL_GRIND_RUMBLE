@@ -18,6 +18,7 @@ public class GrappleHook : MonoBehaviour
     public Camera cam;
 
     public LayerMask canGrapple;
+    public LayerMask canPull;
 
     //Swinging
     private Vector3 swingPoint;
@@ -36,22 +37,32 @@ public class GrappleHook : MonoBehaviour
     public float forwardThrustForce;
     public float extendCableSpeed;
 
+    //Cooldown Check
+    private bool canShoot;
+
+    //Aim Prediction
+    public RaycastHit predictionHit;
+    public float predictionSphereCastRadius;
+    //public Transform predictionPoint;
+
     void Start()
     {
-        
+        canShoot = true;
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(swingKey))
+        if (Input.GetKeyDown(swingKey) && canShoot == true)
         {
             StartSwing();
         }
 
-        if (Input.GetKeyUp(swingKey))
+        if (Input.GetKeyUp(swingKey) && joint != null)
         {
             StopSwing();
         }
+
+        CheckForSwingPoints();
 
         if (joint != null)
         {
@@ -80,15 +91,21 @@ public class GrappleHook : MonoBehaviour
 
     void StartSwing()
     {
+        if (predictionHit.point == Vector3.zero)
+        {
+            return;
+        }
+
+
         //Checks for grappleable surface
         //RaycastHit hit;
-        RaycastHit hit;
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        //Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out hit, maxSwingDistance, canGrapple))
-        {
+        //if (Physics.Raycast(ray, out hit, maxSwingDistance, canGrapple))
+        //{
             Debug.Log("SwingStart");
-            swingPoint = hit.point;
+            //swingPoint = hit.point;
+            swingPoint = predictionHit.point;
             joint = player.gameObject.AddComponent<SpringJoint>();
             joint.autoConfigureConnectedAnchor = false;
             joint.connectedAnchor = swingPoint;
@@ -108,7 +125,7 @@ public class GrappleHook : MonoBehaviour
             currentGrapplePosition = hookTip.position;
 
             playerREF.gameObject.GetComponent<ThirdPersonMovement>().isGrappling = true;
-        }
+        //}
     }
 
     void StopSwing()
@@ -117,6 +134,17 @@ public class GrappleHook : MonoBehaviour
         line.positionCount = 0;
         playerREF.gameObject.GetComponent<ThirdPersonMovement>().isGrappling = false;
         Destroy(joint);
+    }
+
+    IEnumerator Cooldown ()
+    {
+        canShoot = false;
+        for (int i = 0; i < 5; i++)
+        {
+            yield return new WaitForSeconds(1f);
+            Debug.Log("Grapple Cooldown: "+ i);
+        }
+        canShoot = true;
     }
 
     void AirMovement()
@@ -154,4 +182,63 @@ public class GrappleHook : MonoBehaviour
             joint.minDistance = extendedDistanceFromPoint * 0.25f;
         }
     }
+
+    void CheckForSwingPoints()
+    {
+        if (joint != null)
+        {
+            return;
+        }
+
+        //RaycastHit hit;
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+
+        RaycastHit sphereCastHit;
+        Physics.SphereCast(ray, predictionSphereCastRadius, out sphereCastHit, maxSwingDistance, canGrapple);
+
+        RaycastHit raycastHit;
+        Physics.Raycast(ray, out raycastHit, maxSwingDistance, canGrapple);
+
+        Vector3 realHitPoint;
+
+        //Direct Hit
+        if (raycastHit.point != Vector3.zero)
+        {
+            realHitPoint = raycastHit.point;
+        } 
+        //Indirect Hit
+        else if (sphereCastHit.point != Vector3.zero)
+        {
+            realHitPoint = sphereCastHit.point;
+        } 
+        else 
+        {
+            realHitPoint = Vector3.zero;
+        }
+
+        // //realHitPoint found
+        // if (realHitPoint != Vector3.zero)
+        // {
+        //     predictionPoint.gameObject.SetActive(true);
+        //     predictionPoint.position = realHitPoint;
+        // }
+        // //realHitPoint not found
+        // else 
+        // {
+        //     predictionPoint.gameObject.SetActive(false);
+        // }
+
+        predictionHit = raycastHit.point == Vector3.zero ? sphereCastHit : raycastHit;
+
+    }
+
+    void OnCollisionEnter (Collision collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            StartCoroutine(Cooldown());
+        }
+    }
+
+
 }

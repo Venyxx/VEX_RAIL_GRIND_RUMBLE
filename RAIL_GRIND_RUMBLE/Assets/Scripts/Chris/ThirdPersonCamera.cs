@@ -45,11 +45,14 @@ public class ThirdPersonCamera : MonoBehaviour
     void Update()
     {
         //Aiming
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+
+        //Add reference to Grapple Hook Script so you can only aim after cooldown
+        if (Input.GetKeyDown(KeyCode.LeftShift) && grappleDetection.gameObject.GetComponent<GrappleDetection>().aimPoints[0] != null)
         {
             SwitchCameraStyle(CameraStyle.Aiming);
 
             grappleDetection.gameObject.GetComponent<GrappleDetection>().AimSwitch();
+            //grappleDetection.gameObject.GetComponent<GrappleDetection>().aimPointChoice = 0;
 
             if (playerPrefabREF.gameObject.GetComponent<ThirdPersonMovement>().grounded == false)
             {
