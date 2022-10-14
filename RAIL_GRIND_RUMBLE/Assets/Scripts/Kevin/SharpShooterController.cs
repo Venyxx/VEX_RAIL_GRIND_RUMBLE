@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-[RequireComponent(typeof(UnityEngine.AI.NavMeshAgent))]
+[RequireComponent(typeof(NavMeshAgent))]
 
 public class SharpShooterController : MonoBehaviour
 {
+	
 	public LayerMask HidableLayers;
 	public EnemyLineOfSightChecker LineOfSightChecker;
-	public UnityEngine.AI.NavMeshAgent Agent;
+	public NavMeshAgent Agent;
 	[Range(-1, 1)]
 	[Tooltip("Lower is a better hiding spot")]
 	public float HideSensitivity = 0;
@@ -18,13 +20,41 @@ public class SharpShooterController : MonoBehaviour
 	private Coroutine MovementCoroutine;
 	private Collider[] Colliders = new Collider[10];
 
+	public EnemyState DefaultState;
+	private EnemyState _state;
+
+	public EnemyState State
+    {
+		get
+        {
+			return _state;
+        }
+        set
+        {
+			OnStateChange?.Invoke(_state, value);
+			_state = value;
+        }
+    }
+
+	public delegate void StateChangeEvent(EnemyState oldState, EnemyState newState);
+	public StateChangeEvent OnStateChange;
+
 	private void Awake()
 	{
 		Agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
 
 		LineOfSightChecker.OnGainSight += HandleGainSight;
 		LineOfSightChecker.OnLoseSight += HandleLoseSight;
+
+		OnStateChange += HandleStateChange;
+	
 	}
+
+	private void OnDisable()
+    {
+		_state = DefaultState;
+    }
+
 	private void HandleGainSight(Transform Target)
 	{
 		if (MovementCoroutine != null)
@@ -67,9 +97,9 @@ public class SharpShooterController : MonoBehaviour
 			
 			for (int i = 0; i < hits; i++)
 			{
-				if (UnityEngine.AI.NavMesh.SamplePosition(Colliders[i].transform.position, out UnityEngine.AI.NavMeshHit hit, 15f, Agent.areaMask))
+				if (NavMesh.SamplePosition(Colliders[i].transform.position, out UnityEngine.AI.NavMeshHit hit, 15f, Agent.areaMask))
 				{
-					if (!UnityEngine.AI.NavMesh.FindClosestEdge(hit.position, out hit, Agent.areaMask))
+					if (NavMesh.FindClosestEdge(hit.position, out hit, Agent.areaMask))
 					{
 						Debug.LogError($"Unable to find edge close to {hit.position}");
 					}
@@ -81,9 +111,9 @@ public class SharpShooterController : MonoBehaviour
 					}
 					else
 					{
-						if (UnityEngine.AI.NavMesh.SamplePosition(Colliders[i].transform.position - (Target.position - hit.position).normalized * 2, out UnityEngine.AI.NavMeshHit hit2, 15f, Agent.areaMask))
+						if (NavMesh.SamplePosition(Colliders[i].transform.position - (Target.position - hit.position).normalized * 2, out NavMeshHit hit2, 15f, Agent.areaMask))
 						{
-							if (!UnityEngine.AI.NavMesh.FindClosestEdge(hit2.position, out hit2, Agent.areaMask))
+							if (!NavMesh.FindClosestEdge(hit2.position, out hit2, Agent.areaMask))
 							{
 								Debug.LogError($"Unable to find edge close to {hit2.position}");
 							}
@@ -125,5 +155,27 @@ public class SharpShooterController : MonoBehaviour
         {
 			return Vector3.Distance(Agent.transform.position, A.transform.position).CompareTo(Vector3.Distance(Agent.transform.position, B.transform.position));
         }
+    }
+	private void HandleStateChange(EnemyState oldState, EnemyState newState)
+    {
+		
+		if (oldState != newState)
+        {
+			if (MovementCoroutine != null)
+			{
+				StopCoroutine(MovementCoroutine);
+			}
+
+			switch (newState)
+            {
+				case EnemyState.Hide:
+					
+					break;
+
+				case EnemyState.Shoot:
+
+					break;
+            }
+		}
     }
 }

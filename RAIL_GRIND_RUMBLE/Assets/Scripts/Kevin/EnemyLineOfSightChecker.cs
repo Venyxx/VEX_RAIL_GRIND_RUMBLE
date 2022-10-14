@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 [RequireComponent(typeof(SphereCollider))]
 public class EnemyLineOfSightChecker : MonoBehaviour
@@ -22,14 +23,16 @@ public class EnemyLineOfSightChecker : MonoBehaviour
 	}
 	private void OnTriggerEnter(Collider other)
 	{
-		if (!CheckLineOfSight(other.transform))
-		{
-			CheckForLineOfSightCoroutine = StartCoroutine(CheckForLineOfSight(other.transform));
-		}
+			if (!CheckLineOfSight(other.transform))
+			{
+				CheckForLineOfSightCoroutine = StartCoroutine(CheckForLineOfSight(other.transform));
+			}
+		
 	}
 
 	private void OnTriggerExit(Collider other)
 	{
+		
 		OnLoseSight?.Invoke(other.transform);
 		if (CheckForLineOfSightCoroutine != null)
 		{
@@ -43,10 +46,11 @@ public class EnemyLineOfSightChecker : MonoBehaviour
 		float dotProduct = Vector3.Dot(transform.forward, direction);
 		if (dotProduct >= Mathf.Cos(FieldOfView))
 		{
+
 			if (Physics.Raycast(transform.position, direction, out RaycastHit hit, Collider.radius, LineOfSightLayer))
 			{
-				OnGainSight?.Invoke(Target);
-				return true;
+					OnGainSight?.Invoke(Target);
+					return true;
 			}
 		}
 		return false;
