@@ -81,7 +81,9 @@ public class ThirdPersonMovement : MonoBehaviour
 
         //Add function for increasing player speed when keys held down
         TimerSpace();
-        if (Input.GetKey(KeyCode.W) && canAccelerate == true)
+        
+        //old input system version
+        /*if (Input.GetKey(KeyCode.W) && canAccelerate == true)
         {
             Mathf.Lerp(moveSpeed, moveSpeed + 5, speedLerp * Time.deltaTime);
             moveSpeed += 5;
@@ -89,7 +91,7 @@ public class ThirdPersonMovement : MonoBehaviour
         else if (Input.GetKeyUp(KeyCode.W))
         {
             moveSpeed = baseMoveSpeed;
-        }
+        }*/
 
 
         //Drag
@@ -106,6 +108,25 @@ public class ThirdPersonMovement : MonoBehaviour
         }
     }
 
+    //new input system version, tied to W for now
+    public void Move(InputAction.CallbackContext context)
+    {
+        //if held, end method
+        if (context.performed) return;
+        
+        //if button pressed this frame, do stuff
+        if (context.started && canAccelerate)
+        {
+            Mathf.Lerp(moveSpeed, moveSpeed + 5, speedLerp * Time.deltaTime);
+            moveSpeed += 5;
+        }
+        //else if button released this frame, do other stuff
+        else if (context.canceled)
+        {
+            moveSpeed = baseMoveSpeed;
+        }
+    }
+
     void FixedUpdate()
     {
         PlayerMovement();
@@ -116,7 +137,7 @@ public class ThirdPersonMovement : MonoBehaviour
         //VS i changed these from getaxisraw to getaxis to induce smoothing
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
-
+        
         if (Input.GetKey(jump) && canJump == true && grounded == true)
         {
             //Debug.Log("Jump");

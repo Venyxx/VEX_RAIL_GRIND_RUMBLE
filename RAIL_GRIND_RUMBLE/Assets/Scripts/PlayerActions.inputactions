@@ -1,0 +1,74 @@
+{
+    "name": "PlayerActions",
+    "maps": [
+        {
+            "name": "Mapping 1",
+            "id": "829e7416-919b-4c1d-af89-4f045068756e",
+            "actions": [
+                {
+                    "name": "Grapple Switch",
+                    "type": "Button",
+                    "id": "6c689b1b-bf46-495c-9d9a-354fd2a479d2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Grapple Release",
+                    "type": "Button",
+                    "id": "e065dc05-4bd1-4b79-b2d1-1143afcb780b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "WallJump",
+                    "type": "Button",
+                    "id": "04638b8e-9ffd-42c8-877a-8a4fec5c27f0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "bc4dd424-7b15-4898-8348-2a5d18d0fb49",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Grapple Switch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d698645a-0db6-48c9-a5be-abc2f832dccf",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Grapple Release",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c5f8410c-81f9-4c33-9ce1-e7544365c3ab",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WallJump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

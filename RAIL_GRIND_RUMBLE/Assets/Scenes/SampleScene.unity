@@ -3002,6 +3002,7 @@ MonoBehaviour:
   Agent: {fileID: 1703826916}
   HideSensitivity: 0
   MinPlayerDistance: 20
+  DefaultState: 0
 --- !u!195 &1703826916 stripped
 NavMeshAgent:
   m_CorrespondingSourceObject: {fileID: 6189971141438865500, guid: 4e01d462eab19354da48697e2e6615d1, type: 3}
@@ -3427,6 +3428,95 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4baa9127ff3afad42848eea9ddffa557, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1733502251 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2030071780202691794, guid: a25d5b724a7d3b8409cda94db4fe800e, type: 3}
+  m_PrefabInstance: {fileID: 2030071780627290610}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 521861366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 619625bcc8b710640b21ad09a3c648c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1733502254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 521861366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 09bad21b59f292145b9ae3c799027dab, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 813469730}
+        m_TargetAssemblyTypeName: GrappleDetection, Assembly-CSharp
+        m_MethodName: GrappleSwitch
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 6c689b1b-bf46-495c-9d9a-354fd2a479d2
+    m_ActionName: Mapping 1/Grapple Switch[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 813469730}
+        m_TargetAssemblyTypeName: GrappleDetection, Assembly-CSharp
+        m_MethodName: GrappleRelease
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: e065dc05-4bd1-4b79-b2d1-1143afcb780b
+    m_ActionName: Mapping 1/Grapple Release[/Keyboard/leftShift]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1733502251}
+        m_TargetAssemblyTypeName: WallRun, Assembly-CSharp
+        m_MethodName: WallJumpInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 04638b8e-9ffd-42c8-877a-8a4fec5c27f0
+    m_ActionName: Mapping 1/WallJump[/Keyboard/space]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Mapping 1
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &1833175373
 GameObject:
   m_ObjectHideFlags: 0

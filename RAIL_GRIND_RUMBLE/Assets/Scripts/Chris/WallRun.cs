@@ -78,13 +78,14 @@ public class WallRun : MonoBehaviour
             StartWallRun();
             
 
-            //Walljump
-            if (Input.GetKeyDown(KeyCode.Space))
+            //Walljump (old input system implementation)
+            /*if (Input.GetKeyDown(KeyCode.Space))
             {
                 Debug.Log("Wall jump input detected");
                 WallJump();
-            }
-        } else if (exitingWall == true){
+            }*/
+        } 
+        else if (exitingWall == true){
 
             if (isWallRunning == true)
             {
@@ -104,6 +105,18 @@ public class WallRun : MonoBehaviour
         } else {
             StopWallRun();
         }
+    }
+
+    //new input system version, tied to SPACEBAR for now
+    //needs additional logic to prevent the player from 
+    //walljumping forever after a wall run.
+    public void WallJumpInput(InputAction.CallbackContext context)
+    {
+        //if the context is anything BUT just pressing the button/key, end the method.
+        //ensures that the method doesn't get called one for a press, once every frame held, and once when released
+        if (!context.started) return;
+        Debug.Log("Wall jump input detected");
+        WallJump();
     }
 
     private void StartWallRun()
