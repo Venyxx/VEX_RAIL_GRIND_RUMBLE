@@ -6,26 +6,26 @@ using UnityEngine.InputSystem;
 public class WallRun : MonoBehaviour
 {
     //References
-    public GameObject playerREF;
+    private GameObject playerREF;
     public Transform orientation;
     private ThirdPersonMovement playerScript;
     private Rigidbody rigidBody;
 
     //Wallrunning
     public LayerMask wall;
-    public float wallRunForce;
+    private float wallRunForce = 200f;
     public float maxWallRunTime;
     private float wallRunTimer;
     private bool isWallRunning;
-    public float wallJumpSideForce;
-    public float wallJumpUpForce;
+    private float wallJumpSideForce = 12f;
+    private float wallJumpUpForce = 7f;
 
     //Input
     private float horizontalInput;
     private float verticalInput;
 
     //Wall Detection
-    public float wallCheckDistance;
+    private float wallCheckDistance = 0.7f;
     private RaycastHit leftWallHit;
     private RaycastHit rightWallHit;
     private bool wallLeft;
@@ -33,7 +33,7 @@ public class WallRun : MonoBehaviour
 
     //Exiting Wall
     private bool exitingWall = false;
-    public float exitWallTime;
+    private float exitWallTime = 0.2f;
     private float exitWallTimer;
 
 
@@ -41,6 +41,7 @@ public class WallRun : MonoBehaviour
     
     void Start()
     {
+        playerREF = this.gameObject;
        playerScript = playerREF.gameObject.GetComponent<ThirdPersonMovement>();
        rigidBody = playerREF.GetComponent<Rigidbody>();
     }

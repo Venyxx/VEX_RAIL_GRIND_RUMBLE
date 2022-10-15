@@ -9,16 +9,15 @@ public class GrappleHook : MonoBehaviour
     KeyCode swingKey = KeyCode.Mouse0;
 
     //References
-    public LineRenderer line;
+    private LineRenderer line;
     public Transform hookTip;
     public Transform orientation;
-    public Transform player;
-    public GameObject playerREF;
+    private Transform player;
+    private GameObject playerREF;
     public Transform camTransform;
     public Camera cam;
 
     public LayerMask canGrapple;
-    public LayerMask canPull;
 
     //Swinging
     private Vector3 swingPoint;
@@ -32,27 +31,44 @@ public class GrappleHook : MonoBehaviour
     // public float massScale;
 
     //Air Movement
-    public Rigidbody rigidBody;
-    public float horizontalThrustForce;
-    public float forwardThrustForce;
-    public float extendCableSpeed;
+    private Rigidbody rigidBody;
+    private float horizontalThrustForce = 2000f;
+    private float forwardThrustForce = 3000f;
+    private float extendCableSpeed = 20f;
 
     //Cooldown Check
     private bool canShoot;
+    private bool grappleStored;
+    private int maxSwings = 3;
+    private int swingCount = 0;
 
     //Aim Prediction
     public RaycastHit predictionHit;
-    public float predictionSphereCastRadius;
+    private float predictionSphereCastRadius = 6f;
     //public Transform predictionPoint;
+
+    //Check if Grapple Point is a throwable object
+    private bool canPull;
+    private GameObject pullableObject;
+    private ThrowObject throwObjectScript;
 
     void Start()
     {
         canShoot = true;
+        grappleStored = true;
+        canPull = false;
+
+        //Set References
+        playerREF = this.gameObject;
+        throwObjectScript = playerREF.gameObject.GetComponent<ThrowObject>();
+        player = playerREF.gameObject.GetComponent<Transform>();
+        rigidBody = playerREF.gameObject.GetComponent<Rigidbody>();
+        line = playerREF.gameObject.GetComponent<LineRenderer>();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(swingKey) && canShoot == true)
+        if (Input.GetKeyDown(swingKey) && canShoot == true && grappleStored == true)
         {
             StartSwing();
         }
@@ -66,7 +82,12 @@ public class GrappleHook : MonoBehaviour
 
         if (joint != null)
         {
-            AirMovement();
+            if (canPull == false)
+            {
+                AirMovement();
+            } else {
+                PullObject();
+            }
         }
     }
 
@@ -96,7 +117,6 @@ public class GrappleHook : MonoBehaviour
             return;
         }
 
-
         //Checks for grappleable surface
         //RaycastHit hit;
         //Ray ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -125,6 +145,7 @@ public class GrappleHook : MonoBehaviour
             currentGrapplePosition = hookTip.position;
 
             playerREF.gameObject.GetComponent<ThirdPersonMovement>().isGrappling = true;
+
         //}
     }
 
@@ -134,6 +155,15 @@ public class GrappleHook : MonoBehaviour
         line.positionCount = 0;
         playerREF.gameObject.GetComponent<ThirdPersonMovement>().isGrappling = false;
         Destroy(joint);
+
+        if (swingCount < maxSwings - 1)
+        {
+            swingCount++;
+        } else {
+            grappleStored = false;
+            swingCount = 0;
+        }
+
     }
 
     IEnumerator Cooldown ()
@@ -145,6 +175,7 @@ public class GrappleHook : MonoBehaviour
             //Debug.Log("Grapple Cooldown: "+ i);
         }
         canShoot = true;
+        grappleStored = true;
     }
 
     void AirMovement()
@@ -216,6 +247,7 @@ public class GrappleHook : MonoBehaviour
             realHitPoint = Vector3.zero;
         }
 
+        //Aiming Reticle Code (WIP)
         // //realHitPoint found
         // if (realHitPoint != Vector3.zero)
         // {
@@ -228,17 +260,53 @@ public class GrappleHook : MonoBehaviour
         //     predictionPoint.gameObject.SetActive(false);
         // }
 
+        //Check if point is a pullable object
+        if (raycastHit.collider != null && raycastHit.collider.gameObject.layer == LayerMask.NameToLayer("GrapplePickUp"))
+        {
+            canPull = true;
+            pullableObject = raycastHit.collider.gameObject;
+        } else {
+            canPull = false;
+        }
+
         predictionHit = raycastHit.point == Vector3.zero ? sphereCastHit : raycastHit;
 
     }
 
     void OnCollisionEnter (Collision collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") && grappleStored == false)
         {
             StartCoroutine(Cooldown());
         }
+
+        if (collision.gameObject.layer == LayerMask.NameToLayer("GrapplePickUp") && joint != null)
+        {
+            StopSwing();
+            Destroy(collision.gameObject);
+            throwObjectScript.SpawnHeldObject();
+            
+            //Temporary solution
+            playerREF.gameObject.GetComponent<ThirdPersonMovement>().canJump = true;
+        }
     }
 
+    void PullObject()
+    {
+        Debug.Log("Pull Active");
+        playerREF.gameObject.GetComponent<ThirdPersonMovement>().canJump = false;
+        if (Input.GetKey(KeyCode.Space))
+        {
+            // Vector3 directionToPoint = transform.position - swingPoint;
+            // pullableObject.AddForce(directionToPoint.normalized * forwardThrustForce * Time.deltaTime);
+
+            pullableObject.transform.position = Vector3.MoveTowards(pullableObject.transform.position, transform.position, 25f * Time.deltaTime);
+
+            float distanceFromPoint = Vector3.Distance(transform.position, swingPoint);
+
+            joint.maxDistance = distanceFromPoint * 0.8f;
+            joint.minDistance = distanceFromPoint * 0.25f;
+        }
+    }
 
 }

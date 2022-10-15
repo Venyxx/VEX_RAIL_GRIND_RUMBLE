@@ -15,7 +15,7 @@ public class ThirdPersonMovement : MonoBehaviour
     public float jumpForce;
     public float jumpCoolDown;
     public float airMultiplier;
-    bool canJump;
+    public bool canJump;
 
     //Keys
     KeyCode jump = KeyCode.Space;
