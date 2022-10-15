@@ -83,7 +83,7 @@ public class ThirdPersonMovement : MonoBehaviour
         TimerSpace();
         
         //old input system version
-        /*if (Input.GetKey(KeyCode.W) && canAccelerate == true)
+        if (Input.GetKey(KeyCode.W) && canAccelerate == true)
         {
             Mathf.Lerp(moveSpeed, moveSpeed + 5, speedLerp * Time.deltaTime);
             moveSpeed += 5;
@@ -91,7 +91,7 @@ public class ThirdPersonMovement : MonoBehaviour
         else if (Input.GetKeyUp(KeyCode.W))
         {
             moveSpeed = baseMoveSpeed;
-        }*/
+        }
 
 
         //Drag
@@ -109,7 +109,7 @@ public class ThirdPersonMovement : MonoBehaviour
     }
 
     //new input system version, tied to W for now
-    public void Move(InputAction.CallbackContext context)
+    /*public void Move(InputAction.CallbackContext context)
     {
         //if held, end method
         if (context.performed) return;
@@ -117,6 +117,7 @@ public class ThirdPersonMovement : MonoBehaviour
         //if button pressed this frame, do stuff
         if (context.started && canAccelerate)
         {
+            Debug.Log("did we make it");
             Mathf.Lerp(moveSpeed, moveSpeed + 5, speedLerp * Time.deltaTime);
             moveSpeed += 5;
         }
@@ -126,7 +127,7 @@ public class ThirdPersonMovement : MonoBehaviour
             moveSpeed = baseMoveSpeed;
         }
     }
-
+*/
     void FixedUpdate()
     {
         PlayerMovement();
@@ -134,7 +135,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
     void PlayerInput()
     {
-        //VS i changed these from getaxisraw to getaxis to induce smoothing
+    
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
         

@@ -19,29 +19,33 @@ public class RailWaypointNav : MonoBehaviour
         if (MoveableREF.canGrind == true)
         {
             waypoints = GetComponentsInChildren<Transform>().ToList();
-            waypoints.RemoveAt(index: 0);
+            
             MoveToNextWaypoint();
         }
+
     }
 
     private void MoveToNextWaypoint()
     {
-        var targetWayPointTransform = waypoints[nextWayPointIndex];
-        MoveableREF.MoveTo(targetWayPointTransform.position, MoveToNextWaypoint);
+      
+        if (MoveableREF.startToEnd)
+        {
+            nextWayPointIndex = 1;
+            
+        }
+        
 
-        Debug.Log("finished movement");
+        var targetWayPointTransform = waypoints[nextWayPointIndex];
+        MoveableREF.MoveTo(targetWayPointTransform.position);
+
+        
         MoveableREF.transform.LookAt(waypoints[nextWayPointIndex].position); //CURRENTLY CHANGES LOOK DIRECTION
 
-        if (
-            Vector3
-                .Distance(MoveableREF.transform.position,
-                targetWayPointTransform.position) <
-            0.001f
-        )
+        if (Vector3.Distance(MoveableREF.transform.position,targetWayPointTransform.position) < 0.001f )
         {
-            nextWayPointIndex++;
-            if (nextWayPointIndex >= waypoints.Count)
-            {
+            
+            //nextWayPointIndex++;
+            //Debug.Log(nextWayPointIndex);
                 MoveableREF.canGrind = false;
 
                 //A LIL PUSH
@@ -50,7 +54,8 @@ public class RailWaypointNav : MonoBehaviour
 
                 ThirdPersonMovementREF.rigidBody.AddForce(transform.forward * 2f, ForceMode.Impulse);
                 //nextWayPointIndex = 0; //THIS LINE WOULD BE TO MAKE IT AN INFINITE LOOP, CLOSED CIRCLE
-            }
+            
         }
+        
     }
 }

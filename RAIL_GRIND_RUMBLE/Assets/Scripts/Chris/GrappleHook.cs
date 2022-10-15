@@ -142,7 +142,7 @@ public class GrappleHook : MonoBehaviour
         for (int i = 0; i < 5; i++)
         {
             yield return new WaitForSeconds(1f);
-            Debug.Log("Grapple Cooldown: "+ i);
+            //Debug.Log("Grapple Cooldown: "+ i);
         }
         canShoot = true;
     }

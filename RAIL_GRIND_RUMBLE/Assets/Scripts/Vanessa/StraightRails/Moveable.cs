@@ -20,9 +20,11 @@ public class Moveable : MonoBehaviour
     private float elapsedLerpDuration;
 
     public bool canGrind;
+    public bool startToEnd;
 
     private Action onCompleteCallback;
     public Rigidbody rigidBody;
+   
 
     private void Start()
     {
@@ -33,13 +35,17 @@ public class Moveable : MonoBehaviour
     private void OnTriggerEnter(Collider collider)
     {
         speedMetersPerSecond = target.moveSpeed;
-        //Debug.Log("got trigger");
+        Debug.Log("got trigger");
 
-        if (collider.tag == "Line")
+        if (collider.tag == "RailStart")
         {
             canGrind = true;
-            Debug.Log("got trigger tag");
+            startToEnd = true;
+            Debug.Log("moving to rail end");
+            transform.position = Vector3.Lerp(transform.position,collider.transform.position, 2f);
         }
+
+
     }
 
     private void Update()
@@ -76,7 +82,7 @@ public class Moveable : MonoBehaviour
         }
     }
 
-    public void MoveTo(Vector3 methodDestination, Action onComplete = null)
+    public void MoveTo(Vector3 methodDestination)
     {
         var distanceToNextWayPoint =
             Vector3.Distance(transform.position, methodDestination);
@@ -86,7 +92,7 @@ public class Moveable : MonoBehaviour
         destination = methodDestination;
 
         elapsedLerpDuration = 0f;
-        onCompleteCallback = onComplete;
+        
     }
 
 }
