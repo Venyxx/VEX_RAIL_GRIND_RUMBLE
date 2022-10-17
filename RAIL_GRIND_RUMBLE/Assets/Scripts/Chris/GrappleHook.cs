@@ -52,11 +52,16 @@ public class GrappleHook : MonoBehaviour
     private GameObject pullableObject;
     private ThrowObject throwObjectScript;
 
+    //Check if Grapple Point is an enemy
+    private bool enemyPullTo;
+    private GameObject enemyObject;
+
     void Start()
     {
         canShoot = true;
         grappleStored = true;
         canPull = false;
+        enemyPullTo = false;
 
         //Set References
         playerREF = this.gameObject;
@@ -180,6 +185,14 @@ public class GrappleHook : MonoBehaviour
 
     void AirMovement()
     {
+        //Enemy Grapple Logic
+        if (enemyPullTo == true)
+        {
+            Debug.Log("Enemy Pull To");
+            swingPoint = enemyObject.transform.position;
+        }
+
+
         //Right Force
         if (Input.GetKey(KeyCode.D))
         {
@@ -212,6 +225,8 @@ public class GrappleHook : MonoBehaviour
             joint.maxDistance = extendedDistanceFromPoint * 0.8f;
             joint.minDistance = extendedDistanceFromPoint * 0.25f;
         }
+
+        
     }
 
     void CheckForSwingPoints()
@@ -260,13 +275,23 @@ public class GrappleHook : MonoBehaviour
         //     predictionPoint.gameObject.SetActive(false);
         // }
 
-        //Check if point is a pullable object
-        if (raycastHit.collider != null && raycastHit.collider.gameObject.layer == LayerMask.NameToLayer("GrapplePickUp"))
+        //Check if point is a pullable object or enemy
+        if (raycastHit.collider != null)
         {
-            canPull = true;
-            pullableObject = raycastHit.collider.gameObject;
-        } else {
-            canPull = false;
+            if (raycastHit.collider.gameObject.layer == LayerMask.NameToLayer("GrapplePickUp"))
+            {
+                canPull = true;
+                enemyPullTo = false;
+                pullableObject = raycastHit.collider.gameObject;
+            } else if (raycastHit.collider.gameObject.layer == LayerMask.NameToLayer("Enemy")) 
+            {
+                enemyPullTo = true;
+                canPull = false;
+                enemyObject = raycastHit.collider.gameObject;
+            } else {
+                canPull = false;
+                enemyPullTo = false;
+            }
         }
 
         predictionHit = raycastHit.point == Vector3.zero ? sphereCastHit : raycastHit;
@@ -306,6 +331,7 @@ public class GrappleHook : MonoBehaviour
 
             joint.maxDistance = distanceFromPoint * 0.8f;
             joint.minDistance = distanceFromPoint * 0.25f;
+            swingPoint = pullableObject.transform.position;
         }
     }
 

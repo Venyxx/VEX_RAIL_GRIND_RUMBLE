@@ -1474,17 +1474,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 619625bcc8b710640b21ad09a3c648c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerREF: {fileID: 838269788}
   orientation: {fileID: 1833175374}
   wall:
     serializedVersion: 2
     m_Bits: 256
-  wallRunForce: 1000
   maxWallRunTime: 1.5
-  wallJumpSideForce: 0
-  wallJumpUpForce: 0
-  wallCheckDistance: 0.7
-  exitWallTime: 0
 --- !u!4 &838269797 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4551959710839744746, guid: 496fb2f8ba61d9646955958888de1240, type: 3}
@@ -5092,7 +5086,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2030071780202691821, guid: a25d5b724a7d3b8409cda94db4fe800e, type: 3}
       propertyPath: canGrapple.m_Bits
-      value: 66048
+      value: 67072
       objectReference: {fileID: 0}
     - target: {fileID: 2030071780202691821, guid: a25d5b724a7d3b8409cda94db4fe800e, type: 3}
       propertyPath: forwardThrustForce
@@ -5565,7 +5559,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6189971141438865501, guid: 4e01d462eab19354da48697e2e6615d1, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6616868334429356705, guid: 4e01d462eab19354da48697e2e6615d1, type: 3}
       propertyPath: player

@@ -94,7 +94,7 @@ public class GrappleDetection : MonoBehaviour
     {
         /*if (collision.gameObject.tag == "AimPoint")
         use COMPARETAG instead of == string comparison*/
-        if(collision.gameObject.CompareTag("AimPoint"))
+        if(collision.gameObject.CompareTag("AimPoint") || collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             currentAim = collision.gameObject.GetComponent<Transform>();
             if (!Array.Exists(aimPoints, element => element == (currentAim)))
