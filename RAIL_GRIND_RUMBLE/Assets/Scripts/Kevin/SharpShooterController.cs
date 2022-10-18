@@ -22,6 +22,7 @@ public class SharpShooterController : MonoBehaviour
 
 	public EnemyState DefaultState;
 	private EnemyState _state;
+	private bool IsInHideState = true;
 
 	public EnemyState State
     {
@@ -57,9 +58,9 @@ public class SharpShooterController : MonoBehaviour
 
 	private void HandleGainSight(Transform Target)
 	{
-		if (MovementCoroutine != null)
+		if (MovementCoroutine != null && IsInHideState == true)
 		{
-			StopCoroutine(MovementCoroutine);
+			StopCoroutine(MovementCoroutine);	
 		}
 		MovementCoroutine = StartCoroutine(Hide(Target));
 	}
@@ -97,11 +98,11 @@ public class SharpShooterController : MonoBehaviour
 			
 			for (int i = 0; i < hits; i++)
 			{
-				if (NavMesh.SamplePosition(Colliders[i].transform.position, out UnityEngine.AI.NavMeshHit hit, 15f, Agent.areaMask))
+				if (NavMesh.SamplePosition(Colliders[i].transform.position, out NavMeshHit hit, 15f, Agent.areaMask))
 				{
 					if (NavMesh.FindClosestEdge(hit.position, out hit, Agent.areaMask))
 					{
-						Debug.LogError($"Unable to find edge close to {hit.position}");
+						Debug.LogError($"1Unable to find edge close to {hit.position}");
 					}
 
 					if (Vector3.Dot(hit.normal, (Target.position - hit.position).normalized) < HideSensitivity)
@@ -115,7 +116,7 @@ public class SharpShooterController : MonoBehaviour
 						{
 							if (!NavMesh.FindClosestEdge(hit2.position, out hit2, Agent.areaMask))
 							{
-								Debug.LogError($"Unable to find edge close to {hit2.position}");
+								Debug.LogError($"2Unable to find edge close to {hit2.position}");
 							}
 
 							if (Vector3.Dot(hit2.normal, (Target.position - hit2.position).normalized) < HideSensitivity)
@@ -169,6 +170,7 @@ public class SharpShooterController : MonoBehaviour
 			switch (newState)
             {
 				case EnemyState.Hide:
+					IsInHideState = true;
 					
 					break;
 

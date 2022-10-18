@@ -1474,17 +1474,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 619625bcc8b710640b21ad09a3c648c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerREF: {fileID: 838269788}
   orientation: {fileID: 1833175374}
   wall:
     serializedVersion: 2
     m_Bits: 256
-  wallRunForce: 1000
   maxWallRunTime: 1.5
-  wallJumpSideForce: 0
-  wallJumpUpForce: 0
-  wallCheckDistance: 0.7
-  exitWallTime: 0
 --- !u!4 &838269797 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4551959710839744746, guid: 496fb2f8ba61d9646955958888de1240, type: 3}
@@ -3016,7 +3010,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6189971141438865501, guid: 4e01d462eab19354da48697e2e6615d1, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6616868334429356705, guid: 4e01d462eab19354da48697e2e6615d1, type: 3}
       propertyPath: player
@@ -3029,36 +3023,6 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 6616868334429356705, guid: 4e01d462eab19354da48697e2e6615d1, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4e01d462eab19354da48697e2e6615d1, type: 3}
---- !u!1 &1703826914 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6189971141438865501, guid: 4e01d462eab19354da48697e2e6615d1, type: 3}
-  m_PrefabInstance: {fileID: 1671798225}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1703826915
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1703826914}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b60522d639127d47a36e9bd155ccb38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HidableLayers:
-    serializedVersion: 2
-    m_Bits: 4096
-  LineOfSightChecker: {fileID: 1834182608}
-  Agent: {fileID: 1703826916}
-  HideSensitivity: 0
-  MinPlayerDistance: 20
-  DefaultState: 0
---- !u!195 &1703826916 stripped
-NavMeshAgent:
-  m_CorrespondingSourceObject: {fileID: 6189971141438865500, guid: 4e01d462eab19354da48697e2e6615d1, type: 3}
-  m_PrefabInstance: {fileID: 1671798225}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1703826920 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6189971141438865499, guid: 4e01d462eab19354da48697e2e6615d1, type: 3}
@@ -3565,7 +3529,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1834182610}
   - component: {fileID: 1834182609}
-  - component: {fileID: 1834182608}
   m_Layer: 11
   m_Name: Line of Sight Checker
   m_TagString: Untagged
@@ -3573,23 +3536,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1834182608
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1834182607}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df3658ca45294c748a6783b56df7407f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Collider: {fileID: 1834182609}
-  FieldOfView: 360
-  LineOfSightLayer:
-    serializedVersion: 2
-    m_Bits: 8320
 --- !u!135 &1834182609
 SphereCollider:
   m_ObjectHideFlags: 0
