@@ -8,10 +8,12 @@ namespace PathCreation.Examples
     {
         public PathCreator pathCreator;
         public EndOfPathInstruction endOfPathInstruction;
+        private ThirdPersonMovement ThirdPersonMovementREF;
         public float speed = 5;
         float distanceTravelled;
 
         void Start() {
+            ThirdPersonMovementREF = gameObject.GetComponent<ThirdPersonMovement>();
             if (pathCreator != null)
             {
                 // Subscribed to the pathUpdated event so that we're notified if the path changes during the game
@@ -21,6 +23,7 @@ namespace PathCreation.Examples
 
         void Update()
         {
+            speed = ThirdPersonMovementREF.moveSpeed;
             if (pathCreator != null)
             {
                 distanceTravelled += speed * Time.deltaTime;
