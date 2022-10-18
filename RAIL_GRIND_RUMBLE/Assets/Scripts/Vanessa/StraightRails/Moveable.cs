@@ -35,7 +35,7 @@ public class Moveable : MonoBehaviour
     private void OnTriggerEnter(Collider collider)
     {
         speedMetersPerSecond = target.moveSpeed;
-        Debug.Log("got trigger");
+        //Debug.Log("got trigger");
 
         if (collider.tag == "RailStart")
         {
