@@ -7,8 +7,8 @@ public class PauseMenu : MonoBehaviour
 {
 
     public string mainMenuScene;
-    public string pauseSettings;
     public GameObject pauseMenu;
+    public GameObject pauseSettings;
     public bool isPaused;
     // Start is called before the first frame update
     void Start()
@@ -23,11 +23,7 @@ public class PauseMenu : MonoBehaviour
         {
             if (isPaused)
             {
-                isPaused = false;
-                pauseMenu.SetActive(false);
-                Time.timeScale = 1f;
-                Cursor.visible = false;
-              
+                ResumeGame();
             }
             else
             {
@@ -40,14 +36,33 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
-    public void PauseSettings()
-    { 
+    public void ResumeGame()
+    {
+        isPaused = false;
+        pauseMenu.SetActive(false);
+        pauseSettings.SetActive(false);
+        Time.timeScale = 1f;
+        Cursor.visible = false;
+    }
     
+    
+    public void OpenPauseSettings()
+    {
+        pauseSettings.SetActive(true);
+        pauseMenu.SetActive(false);
+
+    }
+
+    public void ClosePauseSettings()
+    {
+        pauseSettings.SetActive(false);
+        pauseMenu.SetActive(true);
     }
 
     public void ReturnToMain()
     {
         SceneManager.LoadScene(mainMenuScene);
+        Time.timeScale = 1f;
     }
 
 
