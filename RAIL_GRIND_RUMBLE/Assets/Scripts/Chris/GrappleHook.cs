@@ -38,6 +38,7 @@ public class GrappleHook : MonoBehaviour
     private float extendCableSpeed = 20f;
 
     //Cooldown Check
+    private bool cooldownRunning;
     private bool canShoot;
     private bool grappleStored;
     private int maxSwings = 3;
@@ -59,6 +60,7 @@ public class GrappleHook : MonoBehaviour
 
     void Start()
     {
+        cooldownRunning = false;
         canShoot = true;
         canPull = false;
         enemyPullTo = false;
@@ -82,6 +84,11 @@ public class GrappleHook : MonoBehaviour
         if (Input.GetKeyUp(swingKey) && joint != null)
         {
             StopSwing();
+        }
+        //Reset canShoot after throwing object
+        else if (Input.GetKeyUp(swingKey) && joint == null && canShoot == false && cooldownRunning == false && GameObject.Find("PickUpHeld") == null)
+        {
+            canShoot = true;
         }
 
         CheckForSwingPoints();
@@ -177,6 +184,7 @@ public class GrappleHook : MonoBehaviour
 
     IEnumerator Cooldown ()
     {
+        cooldownRunning = true;
         canShoot = false;
         for (int i = 0; i < 3; i++)
         {
@@ -185,6 +193,7 @@ public class GrappleHook : MonoBehaviour
         }
         canShoot = true;
         grappleStored = true;
+        cooldownRunning = false;
     }
 
     void AirMovement()
@@ -318,6 +327,7 @@ public class GrappleHook : MonoBehaviour
             
             //Temporary solution
             playerREF.gameObject.GetComponent<ThirdPersonMovement>().canJump = true;
+            canShoot = false;
         }
     }
 

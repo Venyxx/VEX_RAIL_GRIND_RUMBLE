@@ -9,6 +9,7 @@ public class ThrowObject : MonoBehaviour
     [SerializeField] GameObject heldObjectThrowREF;
     [SerializeField] Transform throwPoint;
     [SerializeField] Transform orientation;
+    GrappleHook grappleHookScript;
 
     private float throwForce = 70f;
     private float throwUpwardForce = 50f;
@@ -19,6 +20,7 @@ public class ThrowObject : MonoBehaviour
         isHoldingObject = false;
         throwForce = throwForce * Time.deltaTime;
         throwUpwardForce = throwUpwardForce * Time.deltaTime;
+        grappleHookScript = gameObject.GetComponent<GrappleHook>();
     }
 
     // Update is called once per frame
@@ -43,6 +45,14 @@ public class ThrowObject : MonoBehaviour
 
         GameObject thrownObject;
         thrownObject = Instantiate(heldObjectThrowREF, throwPoint.transform.position, heldObjectThrowREF.transform.rotation);
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            thrownObject.gameObject.GetComponent<PlayerThrownObject>().target = true;
+            return;
+        } else {
+            thrownObject.gameObject.GetComponent<PlayerThrownObject>().target = false;
+        }
         
         Vector3 forceToAdd = orientation.transform.forward * throwForce + transform.up * throwUpwardForce;
         thrownObject.gameObject.GetComponent<Rigidbody>().AddForce(forceToAdd, ForceMode.Impulse);
