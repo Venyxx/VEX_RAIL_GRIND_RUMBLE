@@ -832,9 +832,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 816378b74748a604e9d2875d50e172ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveableREF: {fileID: 0}
-  ThirdPersonMovementREF: {fileID: 0}
-  contactHit: {x: 0, y: 0, z: 0}
 --- !u!1 &590780281
 GameObject:
   m_ObjectHideFlags: 0
@@ -5107,6 +5104,10 @@ PrefabInstance:
       propertyPath: forwardThrustForce
       value: 3000
       objectReference: {fileID: 0}
+    - target: {fileID: 2030071780202691821, guid: a25d5b724a7d3b8409cda94db4fe800e, type: 3}
+      propertyPath: grappleDetectorREF
+      value: 
+      objectReference: {fileID: 813469727}
     - target: {fileID: 2030071780202691821, guid: a25d5b724a7d3b8409cda94db4fe800e, type: 3}
       propertyPath: horizontalThrustForce
       value: 2000

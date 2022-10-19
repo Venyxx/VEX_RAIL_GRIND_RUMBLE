@@ -27,7 +27,8 @@ public class CollisionFollow : MonoBehaviour
     }
     private void Update ()
    {
-    if (Input.GetKey(KeyCode.Space))
+    
+    if (Input.GetKey(KeyCode.Space) && pathFollowerREF != null)
     {
         pathFollowerREF.pathCreator = null;
     }
