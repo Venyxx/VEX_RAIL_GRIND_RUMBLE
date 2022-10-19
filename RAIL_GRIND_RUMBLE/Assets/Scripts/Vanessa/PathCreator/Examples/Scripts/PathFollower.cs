@@ -10,7 +10,7 @@ namespace PathCreation.Examples
         public EndOfPathInstruction endOfPathInstruction;
         private ThirdPersonMovement ThirdPersonMovementREF;
         public float speed = 5;
-        float distanceTravelled;
+        [SerializeField] public float distanceTravelled;
 
         void Start() {
             ThirdPersonMovementREF = gameObject.GetComponent<ThirdPersonMovement>();

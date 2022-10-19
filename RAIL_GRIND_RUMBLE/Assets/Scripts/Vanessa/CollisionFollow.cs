@@ -25,6 +25,17 @@ public class CollisionFollow : MonoBehaviour
     }
 
     }
+
+    private void OnCollisionExit (Collision rail)
+    {
+        if (rail.gameObject.tag == "Rail")
+        {
+           
+         pathFollowerREF.distanceTravelled = 0;
+       
+        
+        }
+    }
     private void Update ()
    {
     
