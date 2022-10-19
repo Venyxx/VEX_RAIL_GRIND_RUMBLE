@@ -9,7 +9,7 @@ public class GrappleDetection : MonoBehaviour
 {
     public GameObject aimingCamREF;
     public Transform currentAim;
-    public Transform[] aimPoints;
+    public List<Transform> aimPoints;
     private int aimPointCount;
     private int aimPointChoice;
 
@@ -22,7 +22,7 @@ public class GrappleDetection : MonoBehaviour
         cinemachineCam = aimingCamREF.gameObject.GetComponent<CinemachineFreeLook>();
         aimPointCount = 0;
         aimPointChoice = 0;
-        aimPoints = new Transform[5];
+        aimPoints = new List<Transform>();
     }
 
     
@@ -47,6 +47,10 @@ public class GrappleDetection : MonoBehaviour
             canSwitch = false;
             aimPointChoice = 0;
         }*/
+        if (currentAim == null && aimPoints[0] != null)
+        {
+            currentAim = aimPoints[0];
+        }
     }
 
     //new input system conversion, method tied to RELEASING SHIFT for now.
@@ -74,7 +78,7 @@ public class GrappleDetection : MonoBehaviour
         //not a mind reader so leaving it this way
         if (!canSwitch) return;
         
-        if (aimPointChoice < aimPointCount && aimPoints[aimPointChoice + 1] != null)
+        if (aimPointChoice < aimPointCount - 1)
         {
             aimPointChoice++;
         }
@@ -83,6 +87,7 @@ public class GrappleDetection : MonoBehaviour
             aimPointChoice = 0;
         }
 
+        //Fix possibility for aimPointChoice to be out of bounds
         currentAim = aimPoints[aimPointChoice];
         AimSwitch();
         
@@ -94,22 +99,45 @@ public class GrappleDetection : MonoBehaviour
     {
         /*if (collision.gameObject.tag == "AimPoint")
         use COMPARETAG instead of == string comparison*/
-        if(collision.gameObject.CompareTag("AimPoint"))
+        if(collision.gameObject.CompareTag("AimPoint") || collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             currentAim = collision.gameObject.GetComponent<Transform>();
-            if (!Array.Exists(aimPoints, element => element == (currentAim)))
+            if (!aimPoints.Exists(element => element == (currentAim)))
             {
                 if (aimPointCount < 6)
                 {
-                    aimPoints[aimPointCount] = collision.gameObject.GetComponent<Transform>();
+                    //aimPoints[aimPointCount] = collision.gameObject.GetComponent<Transform>();
+                    aimPoints.Add(collision.gameObject.transform);
                     aimPointCount++;
+                    //Array.Resize(ref aimPoints, aimPointCount);
                 } else {
                     aimPointCount = 0;
-                    aimPoints[aimPointCount] = collision.gameObject.GetComponent<Transform>();
+                    aimPoints.Add(collision.gameObject.transform);
+                    //aimPoints[aimPointCount] = collision.gameObject.GetComponent<Transform>();
                 }
                 
             }
             
+        }
+    }
+
+    void OnTriggerExit(Collider collision)
+    {
+        if (collision.gameObject.CompareTag("AimPoint") || collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            // for (int i = 0; i < aimPoints.Length; i++)
+            // {
+            //     if (aimPoints[i] == collision.gameObject.transform && i != aimPoints.Length)
+            //     {
+            //         Transform placeholder = aimPoints[aimPoints.Length];
+            //         aimPoints[aimPoints.Length] = aimPoints[i];
+            //         aimPoints[i] = placeholder;
+            //     }
+            //     Array.Resize(ref aimPoints, aimPoints.Length -1);
+            // }
+            aimPoints.Remove(collision.gameObject.transform);
+
+
         }
     }
 

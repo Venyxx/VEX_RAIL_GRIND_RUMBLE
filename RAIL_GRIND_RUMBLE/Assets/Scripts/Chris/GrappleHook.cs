@@ -16,6 +16,7 @@ public class GrappleHook : MonoBehaviour
     private GameObject playerREF;
     public Transform camTransform;
     public Camera cam;
+    [SerializeField] GameObject grappleDetectorREF;
 
     public LayerMask canGrapple;
 
@@ -52,11 +53,16 @@ public class GrappleHook : MonoBehaviour
     private GameObject pullableObject;
     private ThrowObject throwObjectScript;
 
+    //Check if Grapple Point is an enemy
+    private bool enemyPullTo;
+    private GameObject enemyObject;
+
     void Start()
     {
         canShoot = true;
-        grappleStored = true;
         canPull = false;
+        enemyPullTo = false;
+        grappleStored = true;
 
         //Set References
         playerREF = this.gameObject;
@@ -156,23 +162,26 @@ public class GrappleHook : MonoBehaviour
         playerREF.gameObject.GetComponent<ThirdPersonMovement>().isGrappling = false;
         Destroy(joint);
 
+        //WIP Method for limiting in-air swings
         if (swingCount < maxSwings - 1)
         {
             swingCount++;
         } else {
-            grappleStored = false;
             swingCount = 0;
+            grappleStored = false;
+            Debug.Log("Swings Empty");
         }
 
+        enemyPullTo = false;
     }
 
     IEnumerator Cooldown ()
     {
         canShoot = false;
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 3; i++)
         {
             yield return new WaitForSeconds(1f);
-            //Debug.Log("Grapple Cooldown: "+ i);
+            Debug.Log("Grapple Cooldown: "+ i);
         }
         canShoot = true;
         grappleStored = true;
@@ -180,6 +189,14 @@ public class GrappleHook : MonoBehaviour
 
     void AirMovement()
     {
+        //Enemy Grapple Logic
+        if (enemyPullTo == true)
+        {
+            Debug.Log("Enemy Pull To");
+            swingPoint = enemyObject.transform.position;
+        }
+
+
         //Right Force
         if (Input.GetKey(KeyCode.D))
         {
@@ -212,6 +229,8 @@ public class GrappleHook : MonoBehaviour
             joint.maxDistance = extendedDistanceFromPoint * 0.8f;
             joint.minDistance = extendedDistanceFromPoint * 0.25f;
         }
+
+        
     }
 
     void CheckForSwingPoints()
@@ -260,13 +279,23 @@ public class GrappleHook : MonoBehaviour
         //     predictionPoint.gameObject.SetActive(false);
         // }
 
-        //Check if point is a pullable object
-        if (raycastHit.collider != null && raycastHit.collider.gameObject.layer == LayerMask.NameToLayer("GrapplePickUp"))
+        //Check if point is a pullable object or enemy
+        if (sphereCastHit.collider != null)
         {
-            canPull = true;
-            pullableObject = raycastHit.collider.gameObject;
-        } else {
-            canPull = false;
+            if (sphereCastHit.collider.gameObject.layer == LayerMask.NameToLayer("GrapplePickUp"))
+            {
+                canPull = true;
+                enemyPullTo = false;
+                pullableObject = sphereCastHit.collider.gameObject;
+            } else if (sphereCastHit.collider.gameObject.layer == LayerMask.NameToLayer("Enemy")) 
+            {
+                enemyPullTo = true;
+                canPull = false;
+                enemyObject = sphereCastHit.collider.gameObject;
+            } else {
+                canPull = false;
+                //enemyPullTo = false;
+            }
         }
 
         predictionHit = raycastHit.point == Vector3.zero ? sphereCastHit : raycastHit;
@@ -282,6 +311,7 @@ public class GrappleHook : MonoBehaviour
 
         if (collision.gameObject.layer == LayerMask.NameToLayer("GrapplePickUp") && joint != null)
         {
+            grappleDetectorREF.gameObject.GetComponent<GrappleDetection>().aimPoints.Remove(collision.gameObject.transform);
             StopSwing();
             Destroy(collision.gameObject);
             throwObjectScript.SpawnHeldObject();
@@ -306,6 +336,7 @@ public class GrappleHook : MonoBehaviour
 
             joint.maxDistance = distanceFromPoint * 0.8f;
             joint.minDistance = distanceFromPoint * 0.25f;
+            swingPoint = pullableObject.transform.position;
         }
     }
 
