@@ -16,6 +16,7 @@ public class GrappleHook : MonoBehaviour
     private GameObject playerREF;
     public Transform camTransform;
     public Camera cam;
+    [SerializeField] GameObject grappleDetectorREF;
 
     public LayerMask canGrapple;
 
@@ -59,9 +60,9 @@ public class GrappleHook : MonoBehaviour
     void Start()
     {
         canShoot = true;
-        grappleStored = true;
         canPull = false;
         enemyPullTo = false;
+        grappleStored = true;
 
         //Set References
         playerREF = this.gameObject;
@@ -161,23 +162,26 @@ public class GrappleHook : MonoBehaviour
         playerREF.gameObject.GetComponent<ThirdPersonMovement>().isGrappling = false;
         Destroy(joint);
 
+        //WIP Method for limiting in-air swings
         if (swingCount < maxSwings - 1)
         {
             swingCount++;
         } else {
-            grappleStored = false;
             swingCount = 0;
+            grappleStored = false;
+            Debug.Log("Swings Empty");
         }
 
+        enemyPullTo = false;
     }
 
     IEnumerator Cooldown ()
     {
         canShoot = false;
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 3; i++)
         {
             yield return new WaitForSeconds(1f);
-            //Debug.Log("Grapple Cooldown: "+ i);
+            Debug.Log("Grapple Cooldown: "+ i);
         }
         canShoot = true;
         grappleStored = true;
@@ -276,21 +280,21 @@ public class GrappleHook : MonoBehaviour
         // }
 
         //Check if point is a pullable object or enemy
-        if (raycastHit.collider != null)
+        if (sphereCastHit.collider != null)
         {
-            if (raycastHit.collider.gameObject.layer == LayerMask.NameToLayer("GrapplePickUp"))
+            if (sphereCastHit.collider.gameObject.layer == LayerMask.NameToLayer("GrapplePickUp"))
             {
                 canPull = true;
                 enemyPullTo = false;
-                pullableObject = raycastHit.collider.gameObject;
-            } else if (raycastHit.collider.gameObject.layer == LayerMask.NameToLayer("Enemy")) 
+                pullableObject = sphereCastHit.collider.gameObject;
+            } else if (sphereCastHit.collider.gameObject.layer == LayerMask.NameToLayer("Enemy")) 
             {
                 enemyPullTo = true;
                 canPull = false;
-                enemyObject = raycastHit.collider.gameObject;
+                enemyObject = sphereCastHit.collider.gameObject;
             } else {
                 canPull = false;
-                enemyPullTo = false;
+                //enemyPullTo = false;
             }
         }
 
@@ -307,6 +311,7 @@ public class GrappleHook : MonoBehaviour
 
         if (collision.gameObject.layer == LayerMask.NameToLayer("GrapplePickUp") && joint != null)
         {
+            grappleDetectorREF.gameObject.GetComponent<GrappleDetection>().aimPoints.Remove(collision.gameObject.transform);
             StopSwing();
             Destroy(collision.gameObject);
             throwObjectScript.SpawnHeldObject();

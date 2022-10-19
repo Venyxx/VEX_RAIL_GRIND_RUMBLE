@@ -5082,7 +5082,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2030071780202691821, guid: a25d5b724a7d3b8409cda94db4fe800e, type: 3}
       propertyPath: maxSwingDistance
-      value: 25
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 2030071780202691821, guid: a25d5b724a7d3b8409cda94db4fe800e, type: 3}
       propertyPath: canGrapple.m_Bits
@@ -5092,6 +5092,10 @@ PrefabInstance:
       propertyPath: forwardThrustForce
       value: 3000
       objectReference: {fileID: 0}
+    - target: {fileID: 2030071780202691821, guid: a25d5b724a7d3b8409cda94db4fe800e, type: 3}
+      propertyPath: grappleDetectorREF
+      value: 
+      objectReference: {fileID: 813469727}
     - target: {fileID: 2030071780202691821, guid: a25d5b724a7d3b8409cda94db4fe800e, type: 3}
       propertyPath: horizontalThrustForce
       value: 2000
@@ -5160,6 +5164,10 @@ PrefabInstance:
       propertyPath: heldObjectFakeREF
       value: 
       objectReference: {fileID: 1119081549}
+    - target: {fileID: 9069784105693932722, guid: a25d5b724a7d3b8409cda94db4fe800e, type: 3}
+      propertyPath: grappleDetectorREF
+      value: 
+      objectReference: {fileID: 813469727}
     - target: {fileID: 9069784105693932722, guid: a25d5b724a7d3b8409cda94db4fe800e, type: 3}
       propertyPath: heldObjectThrowREF
       value: 
@@ -5389,15 +5397,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3528749938080904422, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.06952535
+      value: 0.069525346
       objectReference: {fileID: 0}
     - target: {fileID: 3528749938080904422, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.00000001769301
+      value: 0.000000017693017
       objectReference: {fileID: 0}
     - target: {fileID: 3528749938080904422, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000012330967
+      value: -0.0000000012330971
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
