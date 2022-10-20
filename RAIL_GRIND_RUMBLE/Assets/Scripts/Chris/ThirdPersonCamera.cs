@@ -5,16 +5,16 @@ using UnityEngine;
 public class ThirdPersonCamera : MonoBehaviour
 {
     //References
-    public Transform orientation;
-    public Transform player;
-    public GameObject playerREF;
-    public GameObject playerPrefabREF;
+    private Transform orientation;
+    private Transform player;
+    private GameObject playerREF;
+    private GameObject playerPrefabREF;
     private Transform playerTransform;
     public Transform cam;
-    public Rigidbody rigidBody;
-    public GameObject grappleDetection;
+    private Rigidbody rigidBody;
+    private GameObject grappleDetection;
 
-    public float rotationSpeed;
+    private float rotationSpeed = 7f;
 
     //Aiming
     public GameObject basicCamREF;
@@ -38,7 +38,16 @@ public class ThirdPersonCamera : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
+        playerREF = GameObject.Find("PlayerObject");
         playerTransform = playerREF.gameObject.GetComponent<Transform>();
+        playerPrefabREF = GameObject.Find("playerPrefab");
+        player = playerPrefabREF.gameObject.GetComponent<Transform>();
+        rigidBody = playerPrefabREF.gameObject.GetComponent<Rigidbody>();
+        GameObject orientationREF = GameObject.Find("Orientation");
+        orientation = orientationREF.gameObject.GetComponent<Transform>();
+        grappleDetection = GameObject.Find("GrappleDetector");
+
+
     }
 
     // Update is called once per frame

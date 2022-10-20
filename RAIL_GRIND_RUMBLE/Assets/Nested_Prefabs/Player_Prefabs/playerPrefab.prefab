@@ -92,7 +92,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1815343056433227308}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -262,6 +262,9 @@ GameObject:
   - component: {fileID: 2030071780202691821}
   - component: {fileID: 9069784105693932722}
   - component: {fileID: 474983805264959317}
+  - component: {fileID: 5446298453998633873}
+  - component: {fileID: 4794284961370761463}
+  - component: {fileID: 5866341839462765902}
   m_Layer: 7
   m_Name: playerPrefab
   m_TagString: Player
@@ -284,6 +287,7 @@ Transform:
   - {fileID: 2030071780292815591}
   - {fileID: 2030071780611383565}
   - {fileID: 5364517585217655432}
+  - {fileID: 1043937162738320533}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -457,17 +461,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 619625bcc8b710640b21ad09a3c648c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerREF: {fileID: 2030071780202691818}
   orientation: {fileID: 2030071780611383565}
   wall:
     serializedVersion: 2
     m_Bits: 256
-  wallRunForce: 200
   maxWallRunTime: 1.5
-  wallJumpSideForce: 12
-  wallJumpUpForce: 7
-  wallCheckDistance: 0.7
-  exitWallTime: 0.2
 --- !u!114 &2030071780202691821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -480,22 +478,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da5f1e843b96861428ff722a618bf356, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  line: {fileID: 2030071780202691820}
   hookTip: {fileID: 2030071779272977633}
   orientation: {fileID: 2030071780611383565}
-  player: {fileID: 2030071780202691816}
-  playerREF: {fileID: 2030071780202691818}
-  camTransform: {fileID: 0}
   cam: {fileID: 0}
   canGrapple:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 67072
   maxSwingDistance: 25
-  rigidBody: {fileID: 0}
-  horizontalThrustForce: 0
-  forwardThrustForce: 0
-  extendCableSpeed: 0
-  predictionSphereCastRadius: 0
 --- !u!114 &9069784105693932722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -511,6 +500,7 @@ MonoBehaviour:
   heldObjectFakeREF: {fileID: 2420403136504482216}
   heldObjectThrowREF: {fileID: 6612094082640162571, guid: 41dba3388b7822148811fd713c28107d, type: 3}
   throwPoint: {fileID: 1220496207279035374}
+  orientation: {fileID: 0}
 --- !u!114 &474983805264959317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -525,6 +515,112 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   currentHealth: 0
+--- !u!114 &5446298453998633873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030071780202691818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 09bad21b59f292145b9ae3c799027dab, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: GrappleDetection, Assembly-CSharp
+        m_MethodName: GrappleSwitch
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 6c689b1b-bf46-495c-9d9a-354fd2a479d2
+    m_ActionName: Mapping 1/Grapple Switch[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: GrappleDetection, Assembly-CSharp
+        m_MethodName: GrappleRelease
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: e065dc05-4bd1-4b79-b2d1-1143afcb780b
+    m_ActionName: Mapping 1/Grapple Release[/Keyboard/leftShift]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2030071780202691794}
+        m_TargetAssemblyTypeName: WallRun, Assembly-CSharp
+        m_MethodName: WallJumpInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 04638b8e-9ffd-42c8-877a-8a4fec5c27f0
+    m_ActionName: Mapping 1/WallJump[/Keyboard/space]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Mapping 1
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &4794284961370761463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030071780202691818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a15c28236e584a4fa2f6ed366111015, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5866341839462765902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030071780202691818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33aabe1a2dec93349b06e6e5dc51bc06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pathCreator: {fileID: 0}
+  endOfPathInstruction: 2
+  speed: 5
+  distanceTravelled: 0
 --- !u!1 &2030071780292815590
 GameObject:
   m_ObjectHideFlags: 0
@@ -743,6 +839,68 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &3066502952136038584
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1043937162738320533}
+  - component: {fileID: 5858886619781428319}
+  - component: {fileID: 3400830846209403069}
+  m_Layer: 15
+  m_Name: GrappleDetector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1043937162738320533
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3066502952136038584}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2030071780202691816}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &5858886619781428319
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3066502952136038584}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 30
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3400830846209403069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3066502952136038584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3622972dbae76048b4e9cb317a5866a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aimingCamREF: {fileID: 0}
+  currentAim: {fileID: 0}
+  aimPoints: []
+  cinemachineCam: {fileID: 0}
 --- !u!1 &3352124791980763053
 GameObject:
   m_ObjectHideFlags: 0

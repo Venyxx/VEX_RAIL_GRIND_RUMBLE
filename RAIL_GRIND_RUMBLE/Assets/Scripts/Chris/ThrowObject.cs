@@ -8,7 +8,7 @@ public class ThrowObject : MonoBehaviour
     [SerializeField] GameObject heldObjectFakeREF;
     [SerializeField] GameObject heldObjectThrowREF;
     [SerializeField] Transform throwPoint;
-    [SerializeField] Transform orientation;
+    Transform orientation;
     GrappleHook grappleHookScript;
 
     private float throwForce = 70f;
@@ -21,6 +21,8 @@ public class ThrowObject : MonoBehaviour
         throwForce = throwForce * Time.deltaTime;
         throwUpwardForce = throwUpwardForce * Time.deltaTime;
         grappleHookScript = gameObject.GetComponent<GrappleHook>();
+        GameObject orientationREF = GameObject.Find("Orientation");
+        orientation = orientationREF.gameObject.GetComponent<Transform>();
     }
 
     // Update is called once per frame
