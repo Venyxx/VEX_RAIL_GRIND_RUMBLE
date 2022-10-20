@@ -40,7 +40,7 @@ public class GrappleHook : MonoBehaviour
     //Cooldown Check
     private bool cooldownRunning;
     private bool canShoot;
-    private bool grappleStored;
+    public bool grappleStored;
     private int maxSwings = 3;
     private int swingCount = 0;
 
@@ -132,15 +132,6 @@ public class GrappleHook : MonoBehaviour
         {
             return;
         }
-
-        //Checks for grappleable surface
-        //RaycastHit hit;
-        //Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-
-        //if (Physics.Raycast(ray, out hit, maxSwingDistance, canGrapple))
-        //{
-            Debug.Log("SwingStart");
-            //swingPoint = hit.point;
             swingPoint = predictionHit.point;
             joint = player.gameObject.AddComponent<SpringJoint>();
             joint.autoConfigureConnectedAnchor = false;
@@ -161,13 +152,11 @@ public class GrappleHook : MonoBehaviour
             currentGrapplePosition = hookTip.position;
 
             playerREF.gameObject.GetComponent<ThirdPersonMovement>().isGrappling = true;
-
-        //}
     }
 
     void StopSwing()
     {
-        Debug.Log("StopSwing");
+        //Debug.Log("StopSwing");
         line.positionCount = 0;
         playerREF.gameObject.GetComponent<ThirdPersonMovement>().isGrappling = false;
         Destroy(joint);
@@ -316,7 +305,7 @@ public class GrappleHook : MonoBehaviour
 
     void OnCollisionEnter (Collision collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") && grappleStored == false)
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") && grappleStored == false && cooldownRunning == false)
         {
             StartCoroutine(Cooldown());
         }

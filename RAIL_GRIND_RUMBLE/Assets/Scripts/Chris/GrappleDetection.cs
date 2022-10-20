@@ -51,14 +51,10 @@ public class GrappleDetection : MonoBehaviour
 
 
         //Figure this shit out homie!!!
-        // if (currentAim == null && aimPoints != null)
-        // {
-        //    currentAim = aimPoints[0];
-        // }
-        // if (currentAim == null)
-        // {
-        //     currentAim = aimLookAtREF;
-        // }
+        if (currentAim == null && aimPoints.Count != 0)
+        {
+           currentAim = aimPoints[0];
+        }
     }
 
     //new input system conversion, method tied to RELEASING SHIFT for now.
@@ -94,7 +90,7 @@ public class GrappleDetection : MonoBehaviour
         {
             aimPointChoice = 0;
         }
-
+        //Debug.Log(aimPointChoice);
         //Fix possibility for aimPointChoice to be out of bounds
         currentAim = aimPoints[aimPointChoice];
         AimSwitch();
@@ -144,6 +140,7 @@ public class GrappleDetection : MonoBehaviour
             //     Array.Resize(ref aimPoints, aimPoints.Length -1);
             // }
             aimPoints.Remove(collision.gameObject.transform);
+            aimPointCount--;
 
 
         }
