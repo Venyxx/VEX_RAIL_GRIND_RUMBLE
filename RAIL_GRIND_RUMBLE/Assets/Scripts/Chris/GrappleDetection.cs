@@ -12,6 +12,7 @@ public class GrappleDetection : MonoBehaviour
     public List<Transform> aimPoints;
     private int aimPointCount;
     private int aimPointChoice;
+    public Transform aimLookAtREF;
 
     private bool canSwitch = false;
 
@@ -47,10 +48,17 @@ public class GrappleDetection : MonoBehaviour
             canSwitch = false;
             aimPointChoice = 0;
         }*/
-        if (currentAim == null && aimPoints[0] != null)
-        {
-            currentAim = aimPoints[0];
-        }
+
+
+        //Figure this shit out homie!!!
+        // if (currentAim == null && aimPoints != null)
+        // {
+        //    currentAim = aimPoints[0];
+        // }
+        // if (currentAim == null)
+        // {
+        //     currentAim = aimLookAtREF;
+        // }
     }
 
     //new input system conversion, method tied to RELEASING SHIFT for now.
