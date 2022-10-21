@@ -93,6 +93,7 @@ public class ThirdPersonMovement : MonoBehaviour
         }
         else if (Input.GetKeyUp(KeyCode.W))
         {
+            // was commented out for longer speed decrease time -V
             moveSpeed = baseMoveSpeed;
         }
 
@@ -100,6 +101,7 @@ public class ThirdPersonMovement : MonoBehaviour
         //Drag
         if (grounded == true)
         {
+            
             rigidBody.drag = groundDrag;
 
             if (_hasAnimator)
@@ -189,14 +191,15 @@ public class ThirdPersonMovement : MonoBehaviour
         {
             Vector3 limitedVel = flatVel.normalized * moveSpeed;
             rigidBody.velocity = new Vector3(limitedVel.x, rigidBody.velocity.y, limitedVel.z); 
-            //rigidBody.velocity = Vector3.Lerp(flatVel, limitedVel, speedLerp * Time.deltaTime); testing if i could lerp instead
+            
             
         }
         
         if (Input.GetKeyUp(KeyCode.W))
         {
             //Debug.Log("lerp speed down");
-            rigidBody.velocity = Vector3.Lerp(rigidBody.velocity, standingStill, speedLerp * Time.deltaTime);
+            //rigidBody.velocity = Vector3.Lerp(rigidBody.velocity, standingStill, speedLerp * Time.deltaTime);
+            rigidBody.velocity -= 0.1f * rigidBody.velocity;
         }
     }
 
