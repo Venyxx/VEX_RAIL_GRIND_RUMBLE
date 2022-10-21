@@ -7,9 +7,10 @@ public class MainMenu : MonoBehaviour
 {
 
     public string firstLevel;
-    public string mainMenu;
+    public GameObject mainMenu;
 
-    public string mainSettings;
+    public GameObject mainSettings;
+
 
     // Start is called before the first frame update
     void Start()
@@ -29,13 +30,16 @@ public class MainMenu : MonoBehaviour
     }
 
     public void OpenSettings()
-    { 
-        SceneManager.LoadScene(mainSettings);
+    {
+        mainSettings.SetActive(true);
+        mainMenu.SetActive(false);
     }
 
     public void CloseSettings()
     {
-        SceneManager.LoadScene(mainMenu);
+        mainSettings.SetActive(false);
+        mainMenu.SetActive(true);
+
     }
 
     public void QuitGame()
