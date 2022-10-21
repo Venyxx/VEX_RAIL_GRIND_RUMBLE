@@ -11,15 +11,13 @@ public class ThrowObject : MonoBehaviour
     Transform orientation;
     GrappleHook grappleHookScript;
 
-    private float throwForce = 70f;
-    private float throwUpwardForce = 50f;
+    [SerializeField] private float throwForce;
+    [SerializeField] private float throwUpwardForce;
 
     // Start is called before the first frame update
     void Start()
     {
         isHoldingObject = false;
-        throwForce = throwForce * Time.deltaTime;
-        throwUpwardForce = throwUpwardForce * Time.deltaTime;
         grappleHookScript = gameObject.GetComponent<GrappleHook>();
         GameObject orientationREF = GameObject.Find("Orientation");
         orientation = orientationREF.gameObject.GetComponent<Transform>();
@@ -57,6 +55,7 @@ public class ThrowObject : MonoBehaviour
         }
         
         Vector3 forceToAdd = orientation.transform.forward * throwForce + transform.up * throwUpwardForce;
+        //Debug.Log($"Transform Up:{transform.up}\nOrientation Transform Forward:{orientation.transform.forward}\nThrow Force{throwForce}\nThrow Upward Force{throwUpwardForce}");
         thrownObject.gameObject.GetComponent<Rigidbody>().AddForce(forceToAdd, ForceMode.Impulse);
     }
 }

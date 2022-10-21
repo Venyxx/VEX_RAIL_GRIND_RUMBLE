@@ -29,7 +29,7 @@ public class ThirdPersonMovement : MonoBehaviour
     public bool isGrappling;
     public float swingSpeed;
 
-    public Transform orientation;
+    private Transform orientation;
 
     float horizontalInput;
     float verticalInput;
@@ -68,6 +68,9 @@ public class ThirdPersonMovement : MonoBehaviour
          AssignAnimationIDs();
 
          currentTime = maxTime;
+
+        GameObject orientationREF = GameObject.Find("Orientation");
+        orientation = orientationREF.gameObject.GetComponent<Transform>();
     }
 
     // Update is called once per frame
@@ -146,7 +149,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
             Jump();
 
-            Invoke(nameof(ResetJump), jumpCoolDown);
+            //Invoke(nameof(ResetJump), jumpCoolDown);
         }
     }
 
@@ -232,4 +235,15 @@ public class ThirdPersonMovement : MonoBehaviour
                 currentTime -= Time.deltaTime;
             }
     }    
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") || collision.gameObject.tag == "Rail")
+        {
+            if (canJump == false)
+            {
+                Invoke(nameof(ResetJump), jumpCoolDown);
+            }
+        }
+    }
 }

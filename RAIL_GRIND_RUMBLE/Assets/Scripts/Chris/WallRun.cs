@@ -7,7 +7,7 @@ public class WallRun : MonoBehaviour
 {
     //References
     private GameObject playerREF;
-    public Transform orientation;
+    private Transform orientation;
     private ThirdPersonMovement playerScript;
     private Rigidbody rigidBody;
 
@@ -44,6 +44,9 @@ public class WallRun : MonoBehaviour
         playerREF = this.gameObject;
        playerScript = playerREF.gameObject.GetComponent<ThirdPersonMovement>();
        rigidBody = playerREF.GetComponent<Rigidbody>();
+
+       GameObject orientationREF = GameObject.Find("Orientation");
+       orientation = orientationREF.gameObject.GetComponent<Transform>();
     }
 
     void Update()

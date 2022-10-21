@@ -13,6 +13,7 @@ public class GrappleDetection : MonoBehaviour
     private int aimPointCount;
     private int aimPointChoice;
     public Transform aimLookAtREF;
+    private Transform nextAim;
 
     private bool canSwitch = false;
 
@@ -55,6 +56,7 @@ public class GrappleDetection : MonoBehaviour
         {
            currentAim = aimPoints[0];
         }
+
     }
 
     //new input system conversion, method tied to RELEASING SHIFT for now.
@@ -90,13 +92,25 @@ public class GrappleDetection : MonoBehaviour
         {
             aimPointChoice = 0;
         }
-        //Debug.Log(aimPointChoice);
-        //Fix possibility for aimPointChoice to be out of bounds
+        //nextAim = aimPoints[aimPointChoice];
+        //Debug.Log($"Current Aim:{currentAim.position}\nAim Point Choice:{aimPoints[aimPointChoice].position}");
+        //StartCoroutine(CamLerp());
         currentAim = aimPoints[aimPointChoice];
         AimSwitch();
-        
     }
 
+
+    // IEnumerator CamLerp()
+    // {
+    //     for (int i = 0; i < 10; i++)
+    //     {
+    //         aimLookAtREF.transform.position = Vector3.Lerp(currentAim.transform.position, nextAim.transform.position, 0.5f);
+    //         cinemachineCam.m_LookAt = aimLookAtREF;
+    //         yield return new WaitForSeconds(0.5f);
+    //     }
+    //     currentAim = aimPoints[aimPointChoice];
+    //     AimSwitch();
+    // }
     
 
     void OnTriggerEnter(Collider collision)
@@ -129,20 +143,8 @@ public class GrappleDetection : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("AimPoint") || collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            // for (int i = 0; i < aimPoints.Length; i++)
-            // {
-            //     if (aimPoints[i] == collision.gameObject.transform && i != aimPoints.Length)
-            //     {
-            //         Transform placeholder = aimPoints[aimPoints.Length];
-            //         aimPoints[aimPoints.Length] = aimPoints[i];
-            //         aimPoints[i] = placeholder;
-            //     }
-            //     Array.Resize(ref aimPoints, aimPoints.Length -1);
-            // }
             aimPoints.Remove(collision.gameObject.transform);
             aimPointCount--;
-
-
         }
     }
 

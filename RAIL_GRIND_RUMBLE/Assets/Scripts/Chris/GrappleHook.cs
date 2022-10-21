@@ -10,12 +10,12 @@ public class GrappleHook : MonoBehaviour
 
     //References
     private LineRenderer line;
-    public Transform hookTip;
-    public Transform orientation;
+    private Transform hookTip;
+    private Transform orientation;
     private Transform player;
     private GameObject playerREF;
     private Transform camTransform;
-    public Camera cam;
+    private Camera cam;
     private GameObject grappleDetectorREF;
 
     public LayerMask canGrapple;
@@ -73,13 +73,25 @@ public class GrappleHook : MonoBehaviour
         rigidBody = playerREF.gameObject.GetComponent<Rigidbody>();
         line = playerREF.gameObject.GetComponent<LineRenderer>();
         grappleDetectorREF = GameObject.Find("GrappleDetector");
+
+        //Maybe make this more efficient
         GameObject basicCam = GameObject.Find("BasicCam");
         camTransform = basicCam.gameObject.GetComponent<Transform>();
+
+        GameObject mainCamREF = GameObject.Find("Main Camera");
+        cam = mainCamREF.gameObject.GetComponent<Camera>();
+
+        GameObject orientationREF = GameObject.Find("Orientation");
+        orientation = orientationREF.gameObject.GetComponent<Transform>();
+
+        GameObject hookTipREF = GameObject.Find("HookTip");
+        hookTip = hookTipREF.gameObject.GetComponent<Transform>();
+        
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(swingKey) && canShoot == true && grappleStored == true)
+        if (Input.GetKeyDown(swingKey) && canShoot == true && grappleStored == true && GameObject.Find("AimingCam") != null)
         {
             StartSwing();
         }
@@ -325,7 +337,7 @@ public class GrappleHook : MonoBehaviour
 
     void PullObject()
     {
-        Debug.Log("Pull Active");
+        //Debug.Log("Pull Active");
         playerREF.gameObject.GetComponent<ThirdPersonMovement>().canJump = false;
         if (Input.GetKey(KeyCode.Space))
         {

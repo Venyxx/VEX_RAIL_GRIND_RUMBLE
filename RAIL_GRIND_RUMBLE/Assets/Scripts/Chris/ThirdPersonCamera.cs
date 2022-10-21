@@ -47,6 +47,8 @@ public class ThirdPersonCamera : MonoBehaviour
         orientation = orientationREF.gameObject.GetComponent<Transform>();
         grappleDetection = GameObject.Find("GrappleDetector");
 
+        // GameObject mainCamREF = GameObject.Find("Main Camera");
+        // cam = mainCamREF.gameObject.GetComponent<Transform>();
 
     }
 
