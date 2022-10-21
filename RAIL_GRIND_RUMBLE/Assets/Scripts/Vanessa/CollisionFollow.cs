@@ -18,8 +18,10 @@ public class CollisionFollow : MonoBehaviour
     // Start is called before the first frame update
     private void OnCollisionEnter (Collision rail)
     {
-        if (rail.gameObject.tag == "Rail")
+        if (rail.gameObject.tag == "RailStraight")
     {
+        
+        
         //check for direction the player will go
         PointA = rail.transform.Find("PointA");
         PointB = rail.transform.Find("PointB");
@@ -39,12 +41,25 @@ public class CollisionFollow : MonoBehaviour
         }
 
 
-
         var RoadCreator = rail.transform.Find("Road Creator");
         pathFollowerREF = gameObject.GetComponent<PathFollower>();
        
         pathCreatorREF = RoadCreator.GetComponent<PathCreator>();
         
+        pathFollowerREF.endOfPathInstruction = PathCreation.EndOfPathInstruction.Reverse;
+        pathFollowerREF.pathCreator = pathCreatorREF;
+
+    }
+     if (rail.gameObject.tag == "RailCircular")
+    {
+
+        
+        var RoadCreator = rail.transform.Find("Road Creator");
+        pathFollowerREF = gameObject.GetComponent<PathFollower>();
+       
+        pathCreatorREF = RoadCreator.GetComponent<PathCreator>();
+        
+        pathFollowerREF.endOfPathInstruction = PathCreation.EndOfPathInstruction.Loop;
         pathFollowerREF.pathCreator = pathCreatorREF;
 
     }
@@ -54,7 +69,7 @@ public class CollisionFollow : MonoBehaviour
 
     private void OnCollisionExit (Collision rail)
     {
-        if (rail.gameObject.tag == "Rail")
+        if (rail.gameObject.tag == "RailStraight" || rail.gameObject.tag == "RailCircular")
         {
            
          pathFollowerREF.distanceTravelled = 0;
