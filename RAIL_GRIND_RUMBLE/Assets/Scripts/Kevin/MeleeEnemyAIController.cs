@@ -7,9 +7,10 @@ public class MeleeEnemyAIController : MonoBehaviour
 
 public UnityEngine.AI.NavMeshAgent agent;
 
-public Transform player;
+private Transform player;
+private GameObject playerREF;
 
-public PlayerHealth playerhealth;
+private PlayerHealth playerhealth;
 
 public LayerMask whatIsGround, whatIsPlayer;
 
@@ -30,8 +31,9 @@ public bool playerInSightRange, playerInAttackRange;
 
 private void Awake()
 {
-
+	playerREF = GameObject.Find("playerPrefab");
 	player = GameObject.Find("playerPrefab").transform;
+	playerhealth = playerREF.GetComponent<PlayerHealth>();
 	agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
 }
 private void Update()
