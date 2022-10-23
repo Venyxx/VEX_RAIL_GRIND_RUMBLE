@@ -2,17 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider))]
+[RequireComponent(typeof(SphereCollider))]
 public class AttackRadius : MonoBehaviour
 {
-    private List<IDamageable> Damageables = new List<IDamageable>();
+    public SphereCollider Collider;
+    protected List<IDamageable> Damageables = new List<IDamageable>();
     public int Damage = 10;
     public float AttackDelay = 0.5f;
     public delegate void AttackEvent(IDamageable Target);
     public AttackEvent OnAttack;
-    private Coroutine AttackCoroutine;
+    protected Coroutine AttackCoroutine;
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void Awake()
+    {
+        Collider = GetComponent<SphereCollider>();
+    }
+
+    protected virtual void OnTriggerEnter(Collider other)
     {
         IDamageable damageable = other.GetComponent<IDamageable>();
         if (damageable != null)
@@ -25,7 +31,7 @@ public class AttackRadius : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    protected virtual void OnTriggerExit(Collider other)
     {
         IDamageable damageable = other.GetComponent<IDamageable>();
         if (damageable != null)
@@ -39,7 +45,7 @@ public class AttackRadius : MonoBehaviour
         }
     }
 
-    private IEnumerator Attack()
+    protected virtual IEnumerator Attack()
     {
         WaitForSeconds Wait = new WaitForSeconds(AttackDelay);
         
@@ -77,7 +83,7 @@ public class AttackRadius : MonoBehaviour
         AttackCoroutine = null;
     }
 
-    private bool DisabledDamageables (IDamageable Damageable)
+    protected bool DisabledDamageables (IDamageable Damageable)
     {
         return Damageable != null && !Damageable.GetTransform().gameObject.activeSelf;
     }

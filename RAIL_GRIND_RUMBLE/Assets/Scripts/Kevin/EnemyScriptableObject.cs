@@ -11,6 +11,10 @@ public class EnemyScriptableObject : ScriptableObject
 {
     // Enemy Stats
     public int Health = 100;
+    public float AttackDelay = 1f;
+    public int Damage = 5;
+    public float AttackRadius = 1.5f;
+    public bool IsRanged = false;
 
     //NavMeshAgent Configs
     public float AIUpdateInterval = 0.1f;

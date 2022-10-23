@@ -98,7 +98,7 @@ public class SharpShooterController : MonoBehaviour
 			
 			for (int i = 0; i < hits; i++)
 			{
-				if (NavMesh.SamplePosition(Colliders[i].transform.position, out NavMeshHit hit, 15f, Agent.areaMask))
+				if (NavMesh.SamplePosition(Colliders[i].transform.position, out NavMeshHit hit, 20f, Agent.areaMask))
 				{
 					if (NavMesh.FindClosestEdge(hit.position, out hit, Agent.areaMask))
 					{
@@ -112,7 +112,7 @@ public class SharpShooterController : MonoBehaviour
 					}
 					else
 					{
-						if (NavMesh.SamplePosition(Colliders[i].transform.position - (Target.position - hit.position).normalized * 2, out NavMeshHit hit2, 15f, Agent.areaMask))
+						if (NavMesh.SamplePosition(Colliders[i].transform.position - (Target.position - hit.position).normalized * 2, out NavMeshHit hit2, 20f, Agent.areaMask))
 						{
 							if (!NavMesh.FindClosestEdge(hit2.position, out hit2, Agent.areaMask))
 							{

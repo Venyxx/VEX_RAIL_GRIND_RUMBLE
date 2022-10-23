@@ -10,15 +10,24 @@ public class EnemyMovement : MonoBehaviour
     public float UpdateSpeed = 0.1f;
 
     private NavMeshAgent Agent;
+    private Coroutine FollowCoroutine;
 
     private void Awake ()
     {
         Agent = GetComponent<NavMeshAgent>();
     }
 
-    void Start()
+    public void StartChasing()
     {
-        StartCoroutine(FollowTarget());
+        if (FollowCoroutine == null)
+        {
+            FollowCoroutine = StartCoroutine(FollowTarget());
+        }
+        else
+        {
+            Debug.LogWarning("Called StartChasing on Enemy that is already chasing! This is likely a bug in some calling class!");
+        }
+        
     }
 
     private IEnumerator FollowTarget()

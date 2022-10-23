@@ -22,4 +22,20 @@ public class Bullet : PoolableObject
         CancelInvoke(DISABLE_METHOD_NAME);
         Invoke(DISABLE_METHOD_NAME, AutoDestroyTime);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        IDamageable damageable;
+        if (other.TryGetComponent<IDamageable>(out damageable))
+        {
+            damageable.TakeDamage(Damage);
+        }
+        Disable();
+    }
+    private void Disable()
+    {
+        CancelInvoke(DISABLE_METHOD_NAME);
+        Rigidbody.velocity = Vector3.zero;
+        gameObject.SetActive(false);
+    }
 }

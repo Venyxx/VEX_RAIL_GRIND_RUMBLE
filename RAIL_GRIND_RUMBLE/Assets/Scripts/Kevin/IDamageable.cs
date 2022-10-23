@@ -2,7 +2,7 @@ using UnityEngine;
 
 public interface IDamageable 
 {
-    void TakeDamage(int Damage);
+    void TakeDamage(float Damage);
 
     Transform GetTransform();
 }
