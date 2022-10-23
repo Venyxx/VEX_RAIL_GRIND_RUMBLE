@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour, IDamageable
 {
@@ -18,8 +19,9 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
         if (currentHealth <= 0)
         {
+            int y = SceneManager.GetActiveScene().buildIndex;
             //the player is dead
-            Destroy(gameObject);
+            SceneManager.LoadScene(y);
         }
     }
     public Transform GetTransform()

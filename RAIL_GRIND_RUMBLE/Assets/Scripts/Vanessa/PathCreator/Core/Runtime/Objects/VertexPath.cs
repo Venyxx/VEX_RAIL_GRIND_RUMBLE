@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using PathCreation.Utility;
 using UnityEngine;
 
@@ -208,7 +208,7 @@ namespace PathCreation {
         public Vector3 GetDirection (float t, EndOfPathInstruction endOfPathInstruction = EndOfPathInstruction.Loop) {
             var data = CalculatePercentOnPathData (t, endOfPathInstruction);
             Vector3 dir = Vector3.Lerp (localTangents[data.previousIndex], localTangents[data.nextIndex], data.percentBetweenIndices);
-            return MathUtility.TransformDirection (-dir, transform, space);
+            return MathUtility.TransformDirection (dir, transform, space);
         }
 
         /// Gets normal vector on path based on 'time' (where 0 is start, and 1 is end of path).
