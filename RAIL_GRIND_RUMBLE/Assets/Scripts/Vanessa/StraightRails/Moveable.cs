@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Moveable : MonoBehaviour
 {
@@ -51,10 +52,10 @@ public class Moveable : MonoBehaviour
     private void Update()
     {
         //Debug.Log(canGrind);
-        if (Input.GetKey(KeyCode.Space))
+        /*if (Input.GetKey(KeyCode.Space))
         {
             canGrind = false;
-        }
+        }*/
 
         if (canGrind == true)
         {
@@ -93,6 +94,12 @@ public class Moveable : MonoBehaviour
 
         elapsedLerpDuration = 0f;
         
+    }
+
+    public void JumpOffRail(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+        canGrind = false;
     }
 
 }

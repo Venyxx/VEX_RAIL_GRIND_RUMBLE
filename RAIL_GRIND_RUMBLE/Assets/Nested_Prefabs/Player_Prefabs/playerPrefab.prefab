@@ -443,7 +443,7 @@ MonoBehaviour:
   playerHeight: 2
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 66113
   grounded: 0
   isGrappling: 0
   swingSpeed: 5
@@ -479,7 +479,7 @@ MonoBehaviour:
   canGrapple:
     serializedVersion: 2
     m_Bits: 67072
-  maxSwingDistance: 35
+  maxSwingDistance: 50
   grappleStored: 0
 --- !u!114 &9069784105693932722
 MonoBehaviour:
@@ -567,10 +567,46 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 9069784105693932722}
+        m_TargetAssemblyTypeName: ThrowObject, Assembly-CSharp
+        m_MethodName: SetTarget
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: ThirdPersonCamera, Assembly-CSharp
+        m_MethodName: SwitchCamera
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: e065dc05-4bd1-4b79-b2d1-1143afcb780b
     m_ActionName: Mapping 1/Grapple Release[/Keyboard/leftShift]
   - m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 2030071780202691822}
+        m_TargetAssemblyTypeName: ThirdPersonMovement, Assembly-CSharp
+        m_MethodName: Jump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 2030071780202691794}
         m_TargetAssemblyTypeName: WallRun, Assembly-CSharp
         m_MethodName: WallJumpInput
@@ -583,11 +619,71 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 04638b8e-9ffd-42c8-877a-8a4fec5c27f0
-    m_ActionName: Mapping 1/WallJump[/Keyboard/space]
+      - m_Target: {fileID: 4794284961370761463}
+        m_TargetAssemblyTypeName: CollisionFollow, Assembly-CSharp
+        m_MethodName: JumpOffRail
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 59e214cf-aa86-43f1-a78e-b2d9a67ee410
+    m_ActionName: Mapping 1/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2030071780202691818}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ab8367a2-9ba5-4a58-a32c-51b5bb5daab0
+    m_ActionName: Player/Move
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9069784105693932722}
+        m_TargetAssemblyTypeName: ThrowObject, Assembly-CSharp
+        m_MethodName: Throw
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 9bb6d427-a3a1-47f5-8ebf-5a8a5f8e0833
+    m_ActionName: Player/New action
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: PauseGame
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 10810a43-77a0-479a-937e-59746fb1ae39
+    m_ActionName: Player/Pause Game[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Mapping 1
+  m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &4794284961370761463
@@ -814,7 +910,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a6bcdee415f8d004ab3e279caf2aa39e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -880,7 +976,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 30
+  m_Radius: 65
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3400830846209403069
 MonoBehaviour:
@@ -895,9 +991,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aimingCamREF: {fileID: 0}
-  currentAim: {fileID: 0}
+  currentAim: {fileID: 2030071779667499559}
   aimPoints: []
-  aimLookAtREF: {fileID: 0}
+  aimLookAtREF: {fileID: 2030071779667499559}
   cinemachineCam: {fileID: 0}
 --- !u!1 &3352124791980763053
 GameObject:

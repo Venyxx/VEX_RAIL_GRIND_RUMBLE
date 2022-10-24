@@ -10,6 +10,7 @@ public class WallRun : MonoBehaviour
     private Transform orientation;
     private ThirdPersonMovement playerScript;
     private Rigidbody rigidBody;
+    private InputHandler playerActions;
 
     //Wallrunning
     public LayerMask wall;
@@ -51,6 +52,10 @@ public class WallRun : MonoBehaviour
 
     void Update()
     {
+        if (playerActions == null)
+        {
+            playerActions = playerScript.playerActions;
+        }
         CheckForWall();
         StateMachine();
     }
@@ -72,22 +77,15 @@ public class WallRun : MonoBehaviour
     private void StateMachine()
     {
         //Get Player Input
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
+        Vector2 moveInput = playerActions.Player.Move.ReadValue<Vector2>();
+        float horizontalInput = moveInput.x;
+        float verticalInput = moveInput.y;
 
         //Wallrunning
         if((wallLeft || wallRight) && verticalInput > 0 && playerScript.grounded == false && !exitingWall)
         {
             ///Check if player is wallrunnning
             StartWallRun();
-            
-
-            //Walljump (old input system implementation)
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                Debug.Log("Wall jump input detected");
-                WallJump();
-            }
         } 
         else if (exitingWall == true){
 
@@ -114,7 +112,7 @@ public class WallRun : MonoBehaviour
     //new input system version, tied to SPACEBAR for now
     //needs additional logic to prevent the player from 
     //walljumping forever after a wall run.
-    /*
+    
     public void WallJumpInput(InputAction.CallbackContext context)
     {
         //if the context is anything BUT just pressing the button/key, end the method.
@@ -123,7 +121,7 @@ public class WallRun : MonoBehaviour
         Debug.Log("Wall jump input detected");
         WallJump();
     }
-    */
+    
     private void StartWallRun()
     {
         rigidBody.useGravity = false;

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
@@ -10,16 +11,10 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject pauseSettings;
     public bool isPaused;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("p"))
+        /*if (Input.GetKeyDown("p"))
         {
             if (isPaused)
             {
@@ -33,6 +28,24 @@ public class PauseMenu : MonoBehaviour
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
             }
+        }*/
+    }
+
+    public void PauseGame(InputAction.CallbackContext context)
+    {
+        if (!context.started) return;
+        
+        if (isPaused)
+        {
+            ResumeGame();
+        }
+        else
+        {
+            isPaused = true;
+            pauseMenu.SetActive(true);
+            Time.timeScale = 0f;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }
     }
 
@@ -64,17 +77,6 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene(mainMenuScene);
         Time.timeScale = 1f;
     }
-
-
-
-
-
-
-
-
-
-
-
 
 }
 

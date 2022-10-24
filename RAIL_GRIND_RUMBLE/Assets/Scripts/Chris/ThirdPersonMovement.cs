@@ -1,7 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ThirdPersonMovement : MonoBehaviour
 {
@@ -16,10 +18,7 @@ public class ThirdPersonMovement : MonoBehaviour
     public float jumpCoolDown;
     public float airMultiplier;
     public bool canJump;
-
-    //Keys
-    KeyCode jump = KeyCode.Space;
-
+    
     //Grounded Check
     public float playerHeight;
     public LayerMask whatIsGround;
@@ -38,20 +37,23 @@ public class ThirdPersonMovement : MonoBehaviour
 
 
 
-        // animation IDs
-        private Animator _animator;
-         private bool _hasAnimator;
-        private int _animIDSpeed;
-        private int _animIDGrounded;
-        private int _animIDJump;
-        private int _animIDFreeFall;
-        private int _animIDMotionSpeed;
+    // animation IDs
+    private Animator _animator;
+    private bool _hasAnimator;
+    private int _animIDSpeed;
+    private int _animIDGrounded;
+    private int _animIDJump;
+    private int _animIDFreeFall;
+    private int _animIDMotionSpeed;
 
 
     //Acceleration Timer
     private float maxTime = 3.0f;
     private float currentTime;
-    private bool canAccelerate; 
+    private bool canAccelerate;
+
+    public InputHandler playerActions { get; private set; }
+    private bool moveKeyUp;
 
 
     public Rigidbody rigidBody;
@@ -59,6 +61,8 @@ public class ThirdPersonMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerActions = new InputHandler();
+        playerActions.Player.Enable();
         rigidBody.freezeRotation = true;
         isGrappling = false;
         canJump = true;
@@ -71,6 +75,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
         GameObject orientationREF = GameObject.Find("Orientation");
         orientation = orientationREF.gameObject.GetComponent<Transform>();
+        
     }
 
     // Update is called once per frame
@@ -84,18 +89,6 @@ public class ThirdPersonMovement : MonoBehaviour
 
         //Add function for increasing player speed when keys held down
         TimerSpace();
-        
-        //old input system version
-        if (Input.GetKey(KeyCode.W) && canAccelerate == true)
-        {
-            Mathf.Lerp(moveSpeed, moveSpeed + 5, speedLerp * Time.deltaTime);
-            moveSpeed += 5;
-        }
-        else if (Input.GetKeyUp(KeyCode.W))
-        {
-            // was commented out for longer speed decrease time -V
-            moveSpeed = baseMoveSpeed;
-        }
 
 
         //Drag
@@ -113,26 +106,14 @@ public class ThirdPersonMovement : MonoBehaviour
         }
     }
 
-    //new input system version, tied to W for now
-    /*public void Move(InputAction.CallbackContext context)
+    public void Jump(InputAction.CallbackContext context)
     {
-        //if held, end method
-        if (context.performed) return;
-        
-        //if button pressed this frame, do stuff
-        if (context.started && canAccelerate)
+        if (context.started && grounded)
         {
-            Debug.Log("did we make it");
-            Mathf.Lerp(moveSpeed, moveSpeed + 5, speedLerp * Time.deltaTime);
-            moveSpeed += 5;
-        }
-        //else if button released this frame, do other stuff
-        else if (context.canceled)
-        {
-            moveSpeed = baseMoveSpeed;
+            Jump();
         }
     }
-*/
+
     void FixedUpdate()
     {
         PlayerMovement();
@@ -140,18 +121,27 @@ public class ThirdPersonMovement : MonoBehaviour
 
     void PlayerInput()
     {
-    
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
-        
-        if (Input.GetKey(jump) && canJump == true && grounded == true)
+        //horizontalInput = Input.GetAxisRaw("Horizontal");
+        //verticalInput = Input.GetAxisRaw("Vertical");
+        Vector2 moveInput = playerActions.Player.Move.ReadValue<Vector2>();
+        horizontalInput = moveInput.x;
+        verticalInput = moveInput.y;
+
+        if (horizontalInput != 0 || verticalInput != 0)
         {
-            //Debug.Log("Jump");
-            canJump = false;
+            moveKeyUp = false;
+        }
 
-            Jump();
+        if (canAccelerate)
+        {
+            Mathf.Lerp(moveSpeed, moveSpeed + 5, speedLerp * Time.deltaTime);
+            moveSpeed += 5;
+        }
 
-            //Invoke(nameof(ResetJump), jumpCoolDown);
+        if (horizontalInput == 0 && verticalInput == 0 && !moveKeyUp)
+        {
+            moveSpeed = baseMoveSpeed;
+            moveKeyUp = true;
         }
     }
 
@@ -194,12 +184,11 @@ public class ThirdPersonMovement : MonoBehaviour
             
             
         }
-        
-        if (Input.GetKeyUp(KeyCode.W))
+
+        if (horizontalInput == 0 && verticalInput == 0 && !moveKeyUp)
         {
-            //Debug.Log("lerp speed down");
-            //rigidBody.velocity = Vector3.Lerp(rigidBody.velocity, standingStill, speedLerp * Time.deltaTime);
             rigidBody.velocity -= 0.1f * rigidBody.velocity;
+            moveKeyUp = true;
         }
     }
 

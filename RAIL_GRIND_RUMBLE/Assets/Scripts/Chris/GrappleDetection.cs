@@ -31,26 +31,7 @@ public class GrappleDetection : MonoBehaviour
     //old input system implementation
     void Update()
     {
-        /*if (canSwitch == true && Input.GetKeyDown(KeyCode.Mouse1))
-        {
-            if (aimPointChoice < aimPointCount && aimPoints[aimPointChoice + 1] != null)
-            {
-                aimPointChoice++; 
-            } else {
-                aimPointChoice = 0;
-            }
-
-            currentAim = aimPoints[aimPointChoice];
-            AimSwitch();
-        }
-
-        if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            canSwitch = false;
-            aimPointChoice = 0;
-        }*/
-
-
+        
         //Figure this shit out homie!!!
         if (currentAim == null && aimPoints.Count != 0)
         {

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ThirdPersonCamera : MonoBehaviour
 {
@@ -13,6 +15,8 @@ public class ThirdPersonCamera : MonoBehaviour
     public Transform cam;
     private Rigidbody rigidBody;
     private GameObject grappleDetection;
+    private InputHandler playerActions;
+    private ThirdPersonMovement _thirdPersonMovement;
 
     private float rotationSpeed = 7f;
 
@@ -46,7 +50,9 @@ public class ThirdPersonCamera : MonoBehaviour
         GameObject orientationREF = GameObject.Find("Orientation");
         orientation = orientationREF.gameObject.GetComponent<Transform>();
         grappleDetection = GameObject.Find("GrappleDetector");
-
+        _thirdPersonMovement = FindObjectOfType<ThirdPersonMovement>();
+        
+        
         // GameObject mainCamREF = GameObject.Find("Main Camera");
         // cam = mainCamREF.gameObject.GetComponent<Transform>();
 
@@ -55,31 +61,16 @@ public class ThirdPersonCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Aiming
-
-        //Add reference to Grapple Hook Script so you can only aim after cooldown
-        if (Input.GetKeyDown(KeyCode.LeftShift) && grappleDetection.gameObject.GetComponent<GrappleDetection>().aimPoints.Count != 0 && playerPrefabREF.gameObject.GetComponent<GrappleHook>().grappleStored == true)
+        //not assigning on start to avoid NullReferenceException since it is
+        //instantiated/created on start in another class (ThirdPersonMovement)
+        if (playerActions == null)
         {
-            SwitchCameraStyle(CameraStyle.Aiming);
-
-            grappleDetection.gameObject.GetComponent<GrappleDetection>().AimSwitch();
-            //grappleDetection.gameObject.GetComponent<GrappleDetection>().aimPointChoice = 0;
-
-            if (playerPrefabREF.gameObject.GetComponent<ThirdPersonMovement>().grounded == false)
-            {
-                Time.timeScale = 0.3f;
-            }
+            playerActions = _thirdPersonMovement.playerActions;
         }
-
-        if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            SwitchCameraStyle(CameraStyle.Basic);
-            Time.timeScale = 1f;
-        }
-
-
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
+        
+        Vector2 moveInput = playerActions.Player.Move.ReadValue<Vector2>();
+        float horizontalInput = moveInput.x;
+        float verticalInput = moveInput.y;
 
         //Vector3 direction = new Vector3(horizontalInput, 0f, verticalInput).normalized;
 
@@ -107,6 +98,32 @@ public class ThirdPersonCamera : MonoBehaviour
             
         //}
         
+    }
+
+    public void SwitchCamera(InputAction.CallbackContext context)
+    {
+        //Aiming
+        //Add reference to Grapple Hook Script so you can only aim after cooldown
+        if (context.performed) return;
+
+        if (context.started && grappleDetection.gameObject.GetComponent<GrappleDetection>().aimPoints.Count != 0 && playerPrefabREF.gameObject.GetComponent<GrappleHook>().grappleStored)
+        {
+            SwitchCameraStyle(CameraStyle.Aiming);
+
+            grappleDetection.gameObject.GetComponent<GrappleDetection>().AimSwitch();
+            //grappleDetection.gameObject.GetComponent<GrappleDetection>().aimPointChoice = 0;
+
+            if (playerPrefabREF.gameObject.GetComponent<ThirdPersonMovement>().grounded == false)
+            {
+                Time.timeScale = 0.3f;
+            }
+        }
+
+        if (context.canceled)
+        {
+            SwitchCameraStyle(CameraStyle.Basic);
+            Time.timeScale = 1f;
+        }
     }
 
     void SwitchCameraStyle(CameraStyle newStyle)

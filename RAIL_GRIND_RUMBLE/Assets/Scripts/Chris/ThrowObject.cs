@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ThrowObject : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class ThrowObject : MonoBehaviour
     [SerializeField] Transform throwPoint;
     Transform orientation;
     GrappleHook grappleHookScript;
+    private bool _targeting = false;
 
     [SerializeField] private float throwForce;
     [SerializeField] private float throwUpwardForce;
@@ -26,10 +28,10 @@ public class ThrowObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && isHoldingObject == true) 
+        /*if (Input.GetKeyDown(KeyCode.Mouse0) && isHoldingObject == true) 
         {
             ThrowObjectAction();
-        }
+        }*/
     }
 
     public void SpawnHeldObject()
@@ -45,8 +47,8 @@ public class ThrowObject : MonoBehaviour
 
         GameObject thrownObject;
         thrownObject = Instantiate(heldObjectThrowREF, throwPoint.transform.position, heldObjectThrowREF.transform.rotation);
-
-        if (Input.GetKey(KeyCode.LeftShift))
+        
+        if(_targeting)
         {
             thrownObject.gameObject.GetComponent<PlayerThrownObject>().target = true;
             return;
@@ -57,5 +59,19 @@ public class ThrowObject : MonoBehaviour
         Vector3 forceToAdd = orientation.transform.forward * throwForce + transform.up * throwUpwardForce;
         //Debug.Log($"Transform Up:{transform.up}\nOrientation Transform Forward:{orientation.transform.forward}\nThrow Force{throwForce}\nThrow Upward Force{throwUpwardForce}");
         thrownObject.gameObject.GetComponent<Rigidbody>().AddForce(forceToAdd, ForceMode.Impulse);
+    }
+
+    public void Throw(InputAction.CallbackContext context)
+    {
+        if (!(context.started && isHoldingObject)) return;
+        ThrowObjectAction();
+    }
+
+    public void SetTarget(InputAction.CallbackContext context)
+    {
+        if (context.performed) 
+            _targeting = true;
+        else 
+            _targeting = false;
     }
 }

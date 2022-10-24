@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using PathCreation;
 using PathCreation.Examples;
+using UnityEngine.InputSystem;
 
 public class CollisionFollow : MonoBehaviour
 {
@@ -80,9 +81,17 @@ public class CollisionFollow : MonoBehaviour
     private void Update ()
    {
     
-    if (Input.GetKey(KeyCode.Space) && pathFollowerREF != null)
+        /*if (Input.GetKey(KeyCode.Space) && pathFollowerREF != null)
+        {
+            pathFollowerREF.pathCreator = null;
+        }*/
+   }
+
+    public void JumpOffRail(InputAction.CallbackContext context)
     {
+        if (!context.performed) return;
+        if (pathFollowerREF == null) return;
         pathFollowerREF.pathCreator = null;
     }
-   }
+    
 }
