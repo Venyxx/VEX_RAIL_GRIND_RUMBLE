@@ -28,6 +28,7 @@ public class GrappleHook : MonoBehaviour
     //Tweakable Physics Values
     public float maxSwingDistance;
     // public float spring;
+    // public float spring;
     // public float damper;
     // public float massScale;
 
@@ -91,7 +92,7 @@ public class GrappleHook : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(swingKey) && canShoot == true && grappleStored == true && GameObject.Find("AimingCam") != null)
+        /*if (Input.GetKeyDown(swingKey) && canShoot == true && grappleStored == true && GameObject.Find("AimingCam") != null)
         {
             StartSwing();
         }
@@ -104,7 +105,7 @@ public class GrappleHook : MonoBehaviour
         else if (Input.GetKeyUp(swingKey) && joint == null && canShoot == false && cooldownRunning == false && GameObject.Find("PickUpHeld") == null)
         {
             canShoot = true;
-        }
+        }*/
 
         CheckForSwingPoints();
 
@@ -116,6 +117,24 @@ public class GrappleHook : MonoBehaviour
             } else {
                 PullObject();
             }
+        }
+    }
+
+    public void GrapplePull(InputAction.CallbackContext context)
+    {
+        if (context.started && canShoot == true && grappleStored == true && GameObject.Find("AimingCam") != null)
+        {
+            StartSwing();
+        }
+
+        if (context.canceled && joint != null)
+        {
+            StopSwing();
+        }
+        
+        if (context.canceled && joint == null && canShoot == false && cooldownRunning == false && GameObject.Find("PickUpHeld") == null)
+        {
+            canShoot = true;
         }
     }
 

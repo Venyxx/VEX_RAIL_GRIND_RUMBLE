@@ -118,6 +118,7 @@ public class WallRun : MonoBehaviour
         //if the context is anything BUT just pressing the button/key, end the method.
         //ensures that the method doesn't get called one for a press, once every frame held, and once when released
         if (!context.started) return;
+        if (!isWallRunning) return;
         Debug.Log("Wall jump input detected");
         WallJump();
     }

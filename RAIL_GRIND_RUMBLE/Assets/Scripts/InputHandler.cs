@@ -80,6 +80,15 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Look"",
+                    ""type"": ""Value"",
+                    ""id"": ""219f795e-1e07-4249-abb8-0912b6fa90c9"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -87,6 +96,17 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""bc4dd424-7b15-4898-8348-2a5d18d0fb49"",
                     ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Grapple Switch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""43ff0014-8b63-4127-ac22-baac6a59d312"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -107,8 +127,30 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""9e58518f-480d-4d6b-88ac-b3759ae10a8b"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Grapple Release"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""7da6ec1e-7ae3-41fa-8c70-4fc3a3da7b98"",
                     ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c2423efe-ebd2-4298-a9a8-3960ca5eed1b"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -195,12 +237,56 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""65cfb76e-2858-4bdb-a7b4-50c4deb25b3c"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Grapple Pull"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c591ae14-7422-4258-bb52-39482322c0dc"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Grapple Pull"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""8532e611-0f37-449b-bf87-195a5743f70c"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Pause Game"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""03168051-8b0b-4cfa-98f2-77a6c22cf7ca"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause Game"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""171e4304-11d5-45de-a7eb-d850e507db30"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": ""ScaleVector2(x=15,y=15),StickDeadzone"",
+                    ""groups"": """",
+                    ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -217,6 +303,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_GrapplePull = m_Player.FindAction("Grapple Pull", throwIfNotFound: true);
         m_Player_PauseGame = m_Player.FindAction("Pause Game", throwIfNotFound: true);
+        m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -282,6 +369,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_GrapplePull;
     private readonly InputAction m_Player_PauseGame;
+    private readonly InputAction m_Player_Look;
     public struct PlayerActions
     {
         private @InputHandler m_Wrapper;
@@ -292,6 +380,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @GrapplePull => m_Wrapper.m_Player_GrapplePull;
         public InputAction @PauseGame => m_Wrapper.m_Player_PauseGame;
+        public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -319,6 +408,9 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 @PauseGame.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPauseGame;
                 @PauseGame.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPauseGame;
                 @PauseGame.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPauseGame;
+                @Look.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
+                @Look.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
+                @Look.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -341,6 +433,9 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 @PauseGame.started += instance.OnPauseGame;
                 @PauseGame.performed += instance.OnPauseGame;
                 @PauseGame.canceled += instance.OnPauseGame;
+                @Look.started += instance.OnLook;
+                @Look.performed += instance.OnLook;
+                @Look.canceled += instance.OnLook;
             }
         }
     }
@@ -353,5 +448,6 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnGrapplePull(InputAction.CallbackContext context);
         void OnPauseGame(InputAction.CallbackContext context);
+        void OnLook(InputAction.CallbackContext context);
     }
 }

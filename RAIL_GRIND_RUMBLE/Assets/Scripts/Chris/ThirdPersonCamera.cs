@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Cinemachine;
 
 public class ThirdPersonCamera : MonoBehaviour
 {
@@ -17,6 +17,7 @@ public class ThirdPersonCamera : MonoBehaviour
     private GameObject grappleDetection;
     private InputHandler playerActions;
     private ThirdPersonMovement _thirdPersonMovement;
+    private CinemachineFreeLook _freeLook;
 
     private float rotationSpeed = 7f;
 
@@ -51,8 +52,10 @@ public class ThirdPersonCamera : MonoBehaviour
         orientation = orientationREF.gameObject.GetComponent<Transform>();
         grappleDetection = GameObject.Find("GrappleDetector");
         _thirdPersonMovement = FindObjectOfType<ThirdPersonMovement>();
-        
-        
+        _freeLook = GameObject.Find("BasicCam").GetComponent<CinemachineFreeLook>();
+        Debug.Log(_freeLook.gameObject);
+
+
         // GameObject mainCamREF = GameObject.Find("Main Camera");
         // cam = mainCamREF.gameObject.GetComponent<Transform>();
 
@@ -97,6 +100,13 @@ public class ThirdPersonCamera : MonoBehaviour
             }
             
         //}
+        
+    }
+
+    public void Look(InputAction.CallbackContext context)
+    {
+        _freeLook.m_XAxis.m_InputAxisValue = context.ReadValue<Vector2>().x;
+        _freeLook.m_YAxis.m_InputAxisValue = context.ReadValue<Vector2>().y;
         
     }
 
