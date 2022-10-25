@@ -52,8 +52,10 @@ public class ThirdPersonCamera : MonoBehaviour
         orientation = orientationREF.gameObject.GetComponent<Transform>();
         grappleDetection = GameObject.Find("GrappleDetector");
         _thirdPersonMovement = FindObjectOfType<ThirdPersonMovement>();
-        _freeLook = GameObject.Find("BasicCam").GetComponent<CinemachineFreeLook>();
-        Debug.Log(_freeLook.gameObject);
+        GameObject basicCam = GameObject.Find("BasicCam");
+        if(basicCam!=null)
+            _freeLook = basicCam.GetComponent<CinemachineFreeLook>();
+        
 
 
         // GameObject mainCamREF = GameObject.Find("Main Camera");
@@ -93,10 +95,13 @@ public class ThirdPersonCamera : MonoBehaviour
                     playerTransform.forward = Vector3.Slerp(playerTransform.forward, inputDir.normalized, Time.deltaTime * rotationSpeed);
                 }
             } else if (currentStyle == CameraStyle.Aiming) {
-                Vector3 dirToAimingLookAt = aimingLookAt.position - new Vector3(transform.position.x, aimingLookAt.position.y, transform.position.z);
-                orientation.forward = dirToAimingLookAt.normalized;
-
-                playerTransform.forward = dirToAimingLookAt.normalized;
+                if (transform != null)
+                {
+                    Vector3 dirToAimingLookAt = aimingLookAt.position - new Vector3(transform.position.x, aimingLookAt.position.y, transform.position.z);
+                    orientation.forward = dirToAimingLookAt.normalized;
+                    playerTransform.forward = dirToAimingLookAt.normalized;
+                }
+                
             }
             
         //}

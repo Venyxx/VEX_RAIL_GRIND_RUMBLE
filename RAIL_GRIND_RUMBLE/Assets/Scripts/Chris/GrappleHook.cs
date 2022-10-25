@@ -1,12 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class GrappleHook : MonoBehaviour
 {
-    //Keys
-    KeyCode swingKey = KeyCode.Mouse0;
 
     //References
     private LineRenderer line;
@@ -17,6 +16,8 @@ public class GrappleHook : MonoBehaviour
     private Transform camTransform;
     private Camera cam;
     private GameObject grappleDetectorREF;
+    private InputHandler playerActions;
+    private ThirdPersonMovement _thirdPersonMovement;
 
     public LayerMask canGrapple;
 
@@ -59,6 +60,11 @@ public class GrappleHook : MonoBehaviour
     private bool enemyPullTo;
     private GameObject enemyObject;
 
+    private bool shorteningCable;
+    private bool pullingObject;
+    
+    
+
     void Start()
     {
         cooldownRunning = false;
@@ -74,6 +80,7 @@ public class GrappleHook : MonoBehaviour
         rigidBody = playerREF.gameObject.GetComponent<Rigidbody>();
         line = playerREF.gameObject.GetComponent<LineRenderer>();
         grappleDetectorREF = GameObject.Find("GrappleDetector");
+        _thirdPersonMovement = FindObjectOfType<ThirdPersonMovement>();
 
         //Maybe make this more efficient
         GameObject basicCam = GameObject.Find("BasicCam");
@@ -92,20 +99,11 @@ public class GrappleHook : MonoBehaviour
 
     void Update()
     {
-        /*if (Input.GetKeyDown(swingKey) && canShoot == true && grappleStored == true && GameObject.Find("AimingCam") != null)
-        {
-            StartSwing();
-        }
 
-        if (Input.GetKeyUp(swingKey) && joint != null)
+        if (playerActions == null)
         {
-            StopSwing();
+            playerActions = _thirdPersonMovement.playerActions;
         }
-        //Reset canShoot after throwing object
-        else if (Input.GetKeyUp(swingKey) && joint == null && canShoot == false && cooldownRunning == false && GameObject.Find("PickUpHeld") == null)
-        {
-            canShoot = true;
-        }*/
 
         CheckForSwingPoints();
 
@@ -227,23 +225,36 @@ public class GrappleHook : MonoBehaviour
             Debug.Log("Enemy Pull To");
             swingPoint = enemyObject.transform.position;
         }
+        
+        Vector2 moveInput = playerActions.Player.Move.ReadValue<Vector2>();
+        float horizontalInput = moveInput.x;
+        float verticalInput = moveInput.y;
 
 
         //Right Force
-        if (Input.GetKey(KeyCode.D))
+        if (horizontalInput < 0)
         {
             rigidBody.AddForce(orientation.right * horizontalThrustForce * Time.deltaTime);
         }
 
         //Left Force
-        if (Input.GetKey(KeyCode.A))
+        if (horizontalInput > 0)
         {
             rigidBody.AddForce(-orientation.right * horizontalThrustForce * Time.deltaTime);
         }
-
-        //Shorten Grapple Cable
-        if (Input.GetKey(KeyCode.Space))
+        
+        //Extend Cable
+        if (verticalInput < 0)
         {
+            float extendedDistanceFromPoint = Vector3.Distance(transform.position, swingPoint) + extendCableSpeed;
+
+            joint.maxDistance = extendedDistanceFromPoint * 0.8f;
+            joint.minDistance = extendedDistanceFromPoint * 0.25f;
+        }
+
+        if (shorteningCable)
+        {
+            Debug.Log("Shortening Cable");
             Vector3 directionToPoint = swingPoint - transform.position;
             rigidBody.AddForce(directionToPoint.normalized * forwardThrustForce * Time.deltaTime);
 
@@ -253,16 +264,34 @@ public class GrappleHook : MonoBehaviour
             joint.minDistance = distanceFromPoint * 0.25f;
         }
 
-        //Extend Cable
-        if (Input.GetKey(KeyCode.S))
+
+    }
+
+    public void ShortenGrappleCable(InputAction.CallbackContext context)
+    {
+        //Debug.Log("shorten grapple cable");
+        if (joint != null)
         {
-            float extendedDistanceFromPoint = Vector3.Distance(transform.position, swingPoint) + extendCableSpeed;
-
-            joint.maxDistance = extendedDistanceFromPoint * 0.8f;
-            joint.minDistance = extendedDistanceFromPoint * 0.25f;
+            //Debug.Log("joint is not null");
+            if (canPull == false)
+            {
+                //Debug.Log("canpull is false");
+                /*if (enemyPullTo == true)
+                {
+                    //Debug.Log("Enemy Pull To");
+                    swingPoint = enemyObject.transform.position;
+                }*/
+                
+                if (context.performed)
+                {
+                    shorteningCable = true;
+                }
+                else if(context.canceled)
+                {
+                    shorteningCable = false;
+                }
+            }
         }
-
-        
     }
 
     void CheckForSwingPoints()
@@ -273,7 +302,10 @@ public class GrappleHook : MonoBehaviour
         }
 
         //RaycastHit hit;
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition); //Input.mousePosition is the final old input system line that must be purged before we can switch to new input exclusively
+        Debug.Log(Input.mousePosition);
+
+        //mainCam.ScreenToWorldPoint(Mouse.current.position);
 
         RaycastHit sphereCastHit;
         Physics.SphereCast(ray, predictionSphereCastRadius, out sphereCastHit, maxSwingDistance, canGrapple);
@@ -358,7 +390,7 @@ public class GrappleHook : MonoBehaviour
     {
         //Debug.Log("Pull Active");
         playerREF.gameObject.GetComponent<ThirdPersonMovement>().canJump = false;
-        if (Input.GetKey(KeyCode.Space))
+        if (pullingObject)
         {
             // Vector3 directionToPoint = transform.position - swingPoint;
             // pullableObject.AddForce(directionToPoint.normalized * forwardThrustForce * Time.deltaTime);
@@ -370,6 +402,18 @@ public class GrappleHook : MonoBehaviour
             joint.maxDistance = distanceFromPoint * 0.8f;
             joint.minDistance = distanceFromPoint * 0.25f;
             swingPoint = pullableObject.transform.position;
+        }
+    }
+
+    public void PullObjectInput(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            pullingObject = true;
+        }
+        else
+        {
+            pullingObject = false;
         }
     }
 
