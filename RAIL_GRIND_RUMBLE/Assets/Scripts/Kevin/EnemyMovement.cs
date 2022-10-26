@@ -15,6 +15,7 @@ public class EnemyMovement : MonoBehaviour
     private void Awake ()
     {
         Agent = GetComponent<NavMeshAgent>();
+       
     }
 
     public void StartChasing()
