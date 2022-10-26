@@ -1,54 +1,52 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPool 
+public class ObjectPool
 {
     private PoolableObject Prefab;
-    private List<PoolableObject> AvailableObjects;
+    private int Size;
+    private List<PoolableObject> AvailableObjectsPool;
 
     private ObjectPool(PoolableObject Prefab, int Size)
     {
         this.Prefab = Prefab;
-        AvailableObjects = new List<PoolableObject>(Size);
+        this.Size = Size;
+        AvailableObjectsPool = new List<PoolableObject>(Size);
     }
 
     public static ObjectPool CreateInstance(PoolableObject Prefab, int Size)
     {
         ObjectPool pool = new ObjectPool(Prefab, Size);
-        GameObject poolObject = new GameObject(Prefab.name + " Pool");
+
+        GameObject poolGameObject = new GameObject(Prefab + " Pool");
+        pool.CreateObjects(poolGameObject);
 
         return pool;
     }
 
-    private void CreateObjects(Transform parent, int Size)
+    private void CreateObjects(GameObject parent)
     {
         for (int i = 0; i < Size; i++)
         {
             PoolableObject poolableObject = GameObject.Instantiate(Prefab, Vector3.zero, Quaternion.identity, parent.transform);
             poolableObject.Parent = this;
-            poolableObject.gameObject.SetActive(false);
+            poolableObject.gameObject.SetActive(false); // PoolableObject handles re-adding the object to the AvailableObjects
         }
     }
 
-    public void ReturnObjectToPool(PoolableObject poolableObject)
-    {
-        AvailableObjects.Add(poolableObject);
-    }
     public PoolableObject GetObject()
     {
-        if (AvailableObjects.Count > 0)
-        {
-            PoolableObject instance = AvailableObjects[0];
-            AvailableObjects.RemoveAt(0);
+        PoolableObject instance = AvailableObjectsPool[0];
 
-            instance.gameObject.SetActive(true);
+        AvailableObjectsPool.RemoveAt(0);
 
-            return instance;
-        }
-        else
-        {
-            return null;
-        }
+        instance.gameObject.SetActive(true);
+
+        return instance;
+    }
+
+    public void ReturnObjectToPool(PoolableObject Object)
+    {
+        AvailableObjectsPool.Add(Object);
     }
 }

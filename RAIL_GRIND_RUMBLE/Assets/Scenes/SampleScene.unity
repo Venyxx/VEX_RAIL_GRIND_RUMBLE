@@ -266,8 +266,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30830a3c2fa52674ca8fdd583538a493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
-  NumberOfEnemiesToSpawn: 5
+  Player: {fileID: 1733502234}
+  NumberOfEnemiesToSpawn: 50
   SpawnDelay: 1
   EnemyPrefabs:
   - {fileID: 709858256272780361, guid: 7a6b168050a4ad343a401733ab8f49c2, type: 3}
@@ -2853,6 +2853,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SharpShooterV1
       objectReference: {fileID: 0}
+    - target: {fileID: 6646993812584244264, guid: 7a6b168050a4ad343a401733ab8f49c2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6646993812584244270, guid: 7a6b168050a4ad343a401733ab8f49c2, type: 3}
       propertyPath: m_RootOrder
       value: 20
@@ -3343,15 +3347,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3528749938080904422, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.069525346
+      value: 0.06952535
       objectReference: {fileID: 0}
     - target: {fileID: 3528749938080904422, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000017693006
+      value: 0.00000001769302
       objectReference: {fileID: 0}
     - target: {fileID: 3528749938080904422, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000012330963
+      value: -0.0000000012330974
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}

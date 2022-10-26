@@ -68,7 +68,7 @@ public class EnemySpawner : MonoBehaviour
             int VertexIndex = Random.Range(0, Triangulation.vertices.Length);
 
             NavMeshHit Hit;
-            if (NavMesh.SamplePosition(Triangulation.vertices[VertexIndex], out Hit, 2f, 1))
+            if (NavMesh.SamplePosition(Triangulation.vertices[VertexIndex], out Hit, 2f, -1))
             {
                 enemy.Agent.Warp(Hit.position);
                 enemy.Movement.Target = Player;
