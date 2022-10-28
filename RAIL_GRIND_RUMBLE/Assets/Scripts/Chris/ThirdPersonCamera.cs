@@ -55,8 +55,18 @@ public class ThirdPersonCamera : MonoBehaviour
         GameObject basicCam = GameObject.Find("BasicCam");
         if(basicCam!=null)
             _freeLook = basicCam.GetComponent<CinemachineFreeLook>();
+        GameObject aimingCam = GameObject.Find("AimingCam");
+        if(aimingCam != null)
+        {
+             _freeLook = aimingCam.GetComponent<CinemachineFreeLook>();
+             _freeLook.LookAt = aimingLookAt;
+        } else {
+            _freeLook.LookAt = player;
+        }
+           
         
-
+        _freeLook.Follow = player;
+        
 
         // GameObject mainCamREF = GameObject.Find("Main Camera");
         // cam = mainCamREF.gameObject.GetComponent<Transform>();

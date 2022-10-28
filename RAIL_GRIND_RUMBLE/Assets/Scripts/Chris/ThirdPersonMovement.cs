@@ -14,7 +14,9 @@ public class ThirdPersonMovement : MonoBehaviour
     public float groundDrag;
      Vector3 standingStill = new Vector3 (0,0,0);
 
-    public float jumpForce;
+    [SerializeField]private float jumpForceMax;
+    [SerializeField]private float jumpForceMin;
+    private float jumpForce;
     public float jumpCoolDown;
     public float airMultiplier;
     public bool canJump;
@@ -110,7 +112,21 @@ public class ThirdPersonMovement : MonoBehaviour
     {
         if (context.started && grounded)
         {
+            StartCoroutine(ChargeJump());
+        }
+
+        if (context.canceled && grounded)
+        {
+            StopCoroutine(ChargeJump());
             Jump();
+        }
+    }
+
+    IEnumerator ChargeJump()
+    {
+        for (jumpForce = jumpForceMin; jumpForce < jumpForceMax; jumpForce++)
+        {
+            yield return new WaitForSeconds(0.15f);
         }
     }
 
@@ -124,8 +140,8 @@ public class ThirdPersonMovement : MonoBehaviour
         //horizontalInput = Input.GetAxisRaw("Horizontal");
         //verticalInput = Input.GetAxisRaw("Vertical");
         Vector2 moveInput = playerActions.Player.Move.ReadValue<Vector2>();
-        horizontalInput = moveInput.x;
-        verticalInput = moveInput.y;
+        horizontalInput = moveInput.x/2;
+        verticalInput = moveInput.y/2;
 
         if (horizontalInput != 0 || verticalInput != 0)
         {

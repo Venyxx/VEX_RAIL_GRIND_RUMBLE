@@ -303,7 +303,7 @@ public class GrappleHook : MonoBehaviour
 
         //RaycastHit hit;
         Ray ray = cam.ScreenPointToRay(Input.mousePosition); //Input.mousePosition is the final old input system line that must be purged before we can switch to new input exclusively
-        Debug.Log(Input.mousePosition);
+        //Debug.Log(Input.mousePosition);
 
         //mainCam.ScreenToWorldPoint(Mouse.current.position);
 

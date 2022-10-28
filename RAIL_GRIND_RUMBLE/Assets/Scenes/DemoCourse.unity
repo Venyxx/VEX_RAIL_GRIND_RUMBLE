@@ -3268,6 +3268,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: playerPrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 2030071780202691822, guid: a25d5b724a7d3b8409cda94db4fe800e, type: 3}
+      propertyPath: jumpForceMax
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2030071780202691822, guid: a25d5b724a7d3b8409cda94db4fe800e, type: 3}
+      propertyPath: jumpForceMin
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3400830846209403069, guid: a25d5b724a7d3b8409cda94db4fe800e, type: 3}
       propertyPath: aimingCamREF
       value: 
@@ -15849,11 +15857,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1130857163402291922, guid: b1b7063463958a44f9b22f408aa11444, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000034226126
+      value: -0.000000034226126
       objectReference: {fileID: 0}
     - target: {fileID: 1130857163402291922, guid: b1b7063463958a44f9b22f408aa11444, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000035792063
+      value: 0.0000000035792063
       objectReference: {fileID: 0}
     - target: {fileID: 1130857163402291922, guid: b1b7063463958a44f9b22f408aa11444, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -17721,23 +17729,23 @@ PrefabInstance:
       objectReference: {fileID: 1149184406}
     - target: {fileID: 3528749936643343461, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.13870125
+      value: 0.13870126
       objectReference: {fileID: 0}
     - target: {fileID: 3528749936643343461, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000025858128
+      value: 0.000000003914607
       objectReference: {fileID: 0}
     - target: {fileID: 3528749936643343461, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000036215595
+      value: -5.482601e-10
       objectReference: {fileID: 0}
     - target: {fileID: 3528749936814248332, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.00000001711306
+      value: -0.000000017113067
       objectReference: {fileID: 0}
     - target: {fileID: 3528749936814248332, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000017896028
+      value: 0.0000000017896036
       objectReference: {fileID: 0}
     - target: {fileID: 3528749937666218125, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
       propertyPath: m_Follow
@@ -17747,6 +17755,22 @@ PrefabInstance:
       propertyPath: m_LookAt
       value: 
       objectReference: {fileID: 1812488178}
+    - target: {fileID: 3528749937666218125, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
+      propertyPath: m_XAxis.m_MaxSpeed
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 3528749937666218125, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
+      propertyPath: m_YAxis.m_MaxSpeed
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3528749937666218125, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
+      propertyPath: m_XAxis.m_InvertInput
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3528749937666218125, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
+      propertyPath: m_YAxis.m_InvertInput
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3528749937666218126, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
       propertyPath: cam
       value: 
