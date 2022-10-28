@@ -11,7 +11,7 @@ public class RangedAttackRadius : AttackRadius
     public LayerMask Mask;
     private ObjectPool BulletPool;
     [SerializeField]
-    private float SpherecastRadius = 0.1f;
+    private float SpherecastRadius = 1f;
     private RaycastHit Hit;
     private IDamageable targetDamageable;
     private Bullet bullet;
@@ -43,6 +43,7 @@ public class RangedAttackRadius : AttackRadius
                 if (poolableObject != null)
                 {
                     bullet = poolableObject.GetComponent<Bullet>();
+                    bullet.Damage = Damage;
                     bullet.transform.position = transform.position + BulletSpawnOffset;
                     bullet.transform.rotation = Agent.transform.rotation;
                     bullet.Rigidbody.AddForce(Agent.transform.forward * BulletPrefab.MoveSpeed, ForceMode.VelocityChange);
