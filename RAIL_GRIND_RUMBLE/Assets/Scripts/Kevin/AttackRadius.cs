@@ -12,6 +12,8 @@ public class AttackRadius : MonoBehaviour
     public delegate void AttackEvent(IDamageable Target);
     public AttackEvent OnAttack;
     protected Coroutine AttackCoroutine;
+    public bool IsSharpShooter = false;
+    public EnemyMovement Movement;
 
     protected virtual void Awake()
     {
@@ -19,14 +21,23 @@ public class AttackRadius : MonoBehaviour
     }
 
     protected virtual void OnTriggerEnter(Collider other)
-    {
+    { 
         IDamageable damageable = other.GetComponent<IDamageable>();
         if (damageable != null)
         {
+            
             Damageables.Add(damageable);
             if (AttackCoroutine == null)
             {
-                AttackCoroutine = StartCoroutine(Attack());
+               if (IsSharpShooter == false)
+               {
+                 AttackCoroutine = StartCoroutine(Attack());
+                }
+                if (IsSharpShooter == true)
+                { 
+                    
+                   Movement.startHiding(other.transform);
+                }
             }
         }
     }
@@ -87,4 +98,5 @@ public class AttackRadius : MonoBehaviour
     {
         return Damageable != null && !Damageable.GetTransform().gameObject.activeSelf;
     }
+   
 }

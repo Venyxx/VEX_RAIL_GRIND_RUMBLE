@@ -72,7 +72,7 @@ public class EnemySpawner : MonoBehaviour
             if (NavMesh.SamplePosition(Triangulation.vertices[VertexIndex], out Hit, 2f, 1))
             {
                 enemy.Agent.Warp(Hit.position);
-                enemy.Movement.Target = Player;
+                enemy.Movement.Player = Player;
                 enemy.Agent.enabled = true;
                 enemy.Movement.StartChasing();
             }
