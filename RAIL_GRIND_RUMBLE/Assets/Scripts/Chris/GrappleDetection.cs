@@ -16,6 +16,7 @@ public class GrappleDetection : MonoBehaviour
     private Transform nextAim;
 
     private bool canSwitch = false;
+    private bool lookAtSwitchActive = false;
 
     public CinemachineFreeLook cinemachineCam;
 
@@ -36,6 +37,20 @@ public class GrappleDetection : MonoBehaviour
         if (currentAim == null && aimPoints.Count != 0)
         {
            currentAim = aimPoints[0];
+        }
+
+        //Smooth Aim Point Transition
+        if (lookAtSwitchActive == true)
+        {
+            if (nextAim != null && aimLookAtREF.transform.position != nextAim.transform.position)
+            {
+                aimLookAtREF.transform.position = Vector3.MoveTowards(aimLookAtREF.transform.position, nextAim.transform.position, 0.5f);
+                cinemachineCam.m_LookAt = aimLookAtREF;
+            } else {
+                lookAtSwitchActive = false;
+                currentAim = aimPoints[aimPointChoice];
+                AimSwitch();
+            }
         }
 
     }
@@ -73,25 +88,11 @@ public class GrappleDetection : MonoBehaviour
         {
             aimPointChoice = 0;
         }
-        //nextAim = aimPoints[aimPointChoice];
-        //Debug.Log($"Current Aim:{currentAim.position}\nAim Point Choice:{aimPoints[aimPointChoice].position}");
-        //StartCoroutine(CamLerp());
-        currentAim = aimPoints[aimPointChoice];
-        AimSwitch();
+        //Activates smooth aim switch in update
+        nextAim = aimPoints[aimPointChoice];
+        aimLookAtREF.transform.position = currentAim.transform.position;
+        lookAtSwitchActive = true;
     }
-
-
-    // IEnumerator CamLerp()
-    // {
-    //     for (int i = 0; i < 10; i++)
-    //     {
-    //         aimLookAtREF.transform.position = Vector3.Lerp(currentAim.transform.position, nextAim.transform.position, 0.5f);
-    //         cinemachineCam.m_LookAt = aimLookAtREF;
-    //         yield return new WaitForSeconds(0.5f);
-    //     }
-    //     currentAim = aimPoints[aimPointChoice];
-    //     AimSwitch();
-    // }
     
 
     void OnTriggerEnter(Collider collision)

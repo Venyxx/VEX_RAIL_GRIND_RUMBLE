@@ -201,6 +201,7 @@ public class GrappleHook : MonoBehaviour
         }
 
         enemyPullTo = false;
+        shorteningCable = false;
     }
 
     IEnumerator Cooldown ()
@@ -224,7 +225,7 @@ public class GrappleHook : MonoBehaviour
         {
             Debug.Log("Enemy Pull To");
             swingPoint = enemyObject.transform.position;
-        }
+        } 
         
         Vector2 moveInput = playerActions.Player.Move.ReadValue<Vector2>();
         float horizontalInput = moveInput.x;
@@ -252,7 +253,7 @@ public class GrappleHook : MonoBehaviour
             joint.minDistance = extendedDistanceFromPoint * 0.25f;
         }
 
-        if (shorteningCable)
+        if (shorteningCable == true)
         {
             Debug.Log("Shortening Cable");
             Vector3 directionToPoint = swingPoint - transform.position;
@@ -285,8 +286,7 @@ public class GrappleHook : MonoBehaviour
                 if (context.performed)
                 {
                     shorteningCable = true;
-                }
-                else if(context.canceled)
+                } else if (context.canceled)
                 {
                     shorteningCable = false;
                 }
@@ -358,7 +358,7 @@ public class GrappleHook : MonoBehaviour
                 enemyObject = sphereCastHit.collider.gameObject;
             } else {
                 canPull = false;
-                //enemyPullTo = false;
+                enemyPullTo = false;
             }
         }
 
