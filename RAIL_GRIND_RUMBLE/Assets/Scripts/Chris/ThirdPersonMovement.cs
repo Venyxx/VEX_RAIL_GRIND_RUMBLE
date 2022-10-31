@@ -1,9 +1,6 @@
 using System.Collections;
-using Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class ThirdPersonMovement : MonoBehaviour
 {
