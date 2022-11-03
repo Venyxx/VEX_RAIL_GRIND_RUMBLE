@@ -436,7 +436,8 @@ MonoBehaviour:
   baseMoveSpeed: 10
   speedLerp: 2.22
   groundDrag: 0.01
-  jumpForce: 12
+  jumpForceMax: 12
+  jumpForceMin: 4
   jumpCoolDown: 0.25
   airMultiplier: 0.4
   canJump: 0
@@ -631,6 +632,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2030071780202691821}
+        m_TargetAssemblyTypeName: GrappleHook, Assembly-CSharp
+        m_MethodName: ShortenGrappleCable
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2030071780202691821}
+        m_TargetAssemblyTypeName: GrappleHook, Assembly-CSharp
+        m_MethodName: PullObjectInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 59e214cf-aa86-43f1-a78e-b2d9a67ee410
     m_ActionName: Mapping 1/Jump[/Keyboard/space]
   - m_PersistentCalls:
@@ -663,6 +688,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2030071780202691821}
+        m_TargetAssemblyTypeName: GrappleHook, Assembly-CSharp
+        m_MethodName: GrapplePull
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 9bb6d427-a3a1-47f5-8ebf-5a8a5f8e0833
     m_ActionName: Player/New action
   - m_PersistentCalls:
@@ -681,6 +718,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 10810a43-77a0-479a-937e-59746fb1ae39
     m_ActionName: Player/Pause Game[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: ThirdPersonCamera, Assembly-CSharp
+        m_MethodName: Look
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 219f795e-1e07-4249-abb8-0912b6fa90c9
+    m_ActionName: Player/Look[/XInputControllerWindows/rightStick]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -781,7 +834,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e9dcd00efdd930f44ac90c0c424d9a86, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1057,7 +1110,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e9dcd00efdd930f44ac90c0c424d9a86, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1282,7 +1335,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e9dcd00efdd930f44ac90c0c424d9a86, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

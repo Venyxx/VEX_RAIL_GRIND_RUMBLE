@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Rotator : MonoBehaviour
+public class ArtTestRotator : MonoBehaviour
 {
     [SerializeField] private float speed;
     private bool spinning = true;

@@ -13,7 +13,8 @@ public class ThirdPersonMovement : MonoBehaviour
 
     [SerializeField]private float jumpForceMax;
     [SerializeField]private float jumpForceMin;
-    private float jumpForce;
+    [SerializeField]private float jumpForce;
+    [SerializeField] private float additionalJumpForce;
     public float jumpCoolDown;
     public float airMultiplier;
     public bool canJump;
@@ -53,6 +54,9 @@ public class ThirdPersonMovement : MonoBehaviour
 
     public InputHandler playerActions { get; private set; }
     private bool moveKeyUp;
+
+    private bool jump;
+    private bool jumpCancel;
 
 
     public Rigidbody rigidBody;
@@ -105,6 +109,9 @@ public class ThirdPersonMovement : MonoBehaviour
         }
     }
 
+    private float jumpTimer;
+    
+
     public void Jump(InputAction.CallbackContext context)
     {
         if (context.started && grounded)
@@ -131,6 +138,8 @@ public class ThirdPersonMovement : MonoBehaviour
     {
         PlayerMovement();
     }
+
+    
 
     void PlayerInput()
     {
