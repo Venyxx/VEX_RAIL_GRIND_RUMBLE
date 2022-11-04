@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class MainMenu : MonoBehaviour
 {
@@ -9,11 +10,16 @@ public class MainMenu : MonoBehaviour
 
     public GameObject mainSettings;
 
+    public GameObject mainMenuFirstButton;
+    public GameObject mainSettingsFirstButton;
+    public GameObject mainSettingsClosedButton;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        EventSystem.current.SetSelectedGameObject(null); 
+        EventSystem.current.SetSelectedGameObject(mainMenuFirstButton);
     }
 
     // Update is called once per frame
@@ -31,12 +37,18 @@ public class MainMenu : MonoBehaviour
     {
         mainSettings.SetActive(true);
         mainMenu.SetActive(false);
+
+        EventSystem.current.SetSelectedGameObject(null); 
+        EventSystem.current.SetSelectedGameObject(mainSettingsFirstButton);
     }
 
     public void CloseSettings()
     {
         mainSettings.SetActive(false);
         mainMenu.SetActive(true);
+
+        EventSystem.current.SetSelectedGameObject(null); 
+        EventSystem.current.SetSelectedGameObject(mainSettingsClosedButton);
 
     }
 

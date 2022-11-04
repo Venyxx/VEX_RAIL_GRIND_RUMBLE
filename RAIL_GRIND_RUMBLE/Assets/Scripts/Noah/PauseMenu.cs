@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -8,7 +9,16 @@ public class PauseMenu : MonoBehaviour
     public string mainMenuScene;
     public GameObject pauseMenu;
     public GameObject pauseSettings;
+    public GameObject pauseFirstButton;
+    public GameObject settingsFirstButton;
+    public GameObject settingsClosedButton;
+    
+    
+    
+    
     public bool isPaused;
+
+
 
     void Update()
     {
@@ -44,6 +54,10 @@ public class PauseMenu : MonoBehaviour
             Time.timeScale = 0f;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
+            
+            EventSystem.current.SetSelectedGameObject(null); 
+            EventSystem.current.SetSelectedGameObject(pauseFirstButton);
+            
         }
     }
 
@@ -62,12 +76,18 @@ public class PauseMenu : MonoBehaviour
         pauseSettings.SetActive(true);
         pauseMenu.SetActive(false);
 
+        EventSystem.current.SetSelectedGameObject(null); 
+        EventSystem.current.SetSelectedGameObject(settingsFirstButton);
+
     }
 
     public void ClosePauseSettings()
     {
         pauseSettings.SetActive(false);
         pauseMenu.SetActive(true);
+
+        EventSystem.current.SetSelectedGameObject(null); 
+        EventSystem.current.SetSelectedGameObject(settingsClosedButton);
     }
 
     public void ReturnToMain()

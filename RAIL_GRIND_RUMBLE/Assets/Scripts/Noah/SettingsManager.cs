@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class SettingsManager : MonoBehaviour
 {
@@ -9,6 +10,12 @@ public class SettingsManager : MonoBehaviour
     public GameObject graphicsScreen;
     public GameObject accessibilityScreen;
     public GameObject settingsScreen;
+
+    public GameObject audioFirstButton;
+    public GameObject controlsFirstButton;
+    public GameObject graphicsFirstButton;
+    public GameObject accessibilityFirstButton;
+    public GameObject settingsReturnButton;
 
 
     void Start()
@@ -29,6 +36,9 @@ public class SettingsManager : MonoBehaviour
         graphicsScreen.SetActive(false);
         accessibilityScreen.SetActive(false);
         settingsScreen.SetActive(false);
+
+        EventSystem.current.SetSelectedGameObject(null); 
+        EventSystem.current.SetSelectedGameObject(audioFirstButton);
     }
 
     public void OpenControls()
@@ -38,6 +48,9 @@ public class SettingsManager : MonoBehaviour
         graphicsScreen.SetActive(false);
         accessibilityScreen.SetActive(false);
         settingsScreen.SetActive(false);
+
+        EventSystem.current.SetSelectedGameObject(null); 
+        EventSystem.current.SetSelectedGameObject(controlsFirstButton);
     }
 
     public void OpenGraphics()
@@ -47,6 +60,9 @@ public class SettingsManager : MonoBehaviour
         graphicsScreen.SetActive(true);
         accessibilityScreen.SetActive(false);
         settingsScreen.SetActive(false);
+
+        EventSystem.current.SetSelectedGameObject(null); 
+        EventSystem.current.SetSelectedGameObject(graphicsFirstButton);
     }
 
     public void OpenAccessiblity()
@@ -56,6 +72,9 @@ public class SettingsManager : MonoBehaviour
         graphicsScreen.SetActive(false);
         accessibilityScreen.SetActive(true);
         settingsScreen.SetActive(false);
+
+        EventSystem.current.SetSelectedGameObject(null); 
+        EventSystem.current.SetSelectedGameObject(accessibilityFirstButton);
     }
 
     public void BackToSettings()
@@ -65,5 +84,8 @@ public class SettingsManager : MonoBehaviour
         graphicsScreen.SetActive(false);
         accessibilityScreen.SetActive(false);
         settingsScreen.SetActive(true);
+
+        EventSystem.current.SetSelectedGameObject(null); 
+        EventSystem.current.SetSelectedGameObject(settingsReturnButton);
     }
 }
