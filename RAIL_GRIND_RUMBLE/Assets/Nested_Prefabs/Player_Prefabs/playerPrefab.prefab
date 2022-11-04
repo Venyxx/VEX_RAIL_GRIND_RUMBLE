@@ -438,6 +438,8 @@ MonoBehaviour:
   groundDrag: 0.01
   jumpForceMax: 12
   jumpForceMin: 4
+  jumpForce: 0
+  additionalJumpForce: 0
   jumpCoolDown: 0.25
   airMultiplier: 0.4
   canJump: 0
@@ -781,7 +783,7 @@ GameObject:
   - component: {fileID: 2030071780292815588}
   m_Layer: 0
   m_Name: PlayerObject
-  m_TagString: Player
+  m_TagString: PlayerObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

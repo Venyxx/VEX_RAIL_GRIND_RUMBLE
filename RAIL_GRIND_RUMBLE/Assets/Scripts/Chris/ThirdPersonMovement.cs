@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class ThirdPersonMovement : MonoBehaviour
 {
@@ -61,6 +62,11 @@ public class ThirdPersonMovement : MonoBehaviour
 
     public Rigidbody rigidBody;
 
+    //Coins
+    public static int coinCount;
+    GameObject coinCounterREF;
+    TextMeshProUGUI coinCountText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -79,6 +85,12 @@ public class ThirdPersonMovement : MonoBehaviour
         GameObject orientationREF = GameObject.Find("Orientation");
         orientation = orientationREF.gameObject.GetComponent<Transform>();
         
+
+        //Coin Counter
+        coinCounterREF = GameObject.Find("CoinCounter");
+        coinCountText = coinCounterREF.GetComponent<TextMeshProUGUI>();
+        //Change/remove this line later based on level-to-level gameplay
+        coinCount = 0;
     }
 
     // Update is called once per frame
@@ -259,5 +271,12 @@ public class ThirdPersonMovement : MonoBehaviour
                 Invoke(nameof(ResetJump), jumpCoolDown);
             }
         }
+    }
+
+    public void AddCoin(int coin)
+    {
+            coinCount = coinCount + coin;
+            Debug.Log(coinCount);
+            coinCountText.text = $"{coinCount}";
     }
 }

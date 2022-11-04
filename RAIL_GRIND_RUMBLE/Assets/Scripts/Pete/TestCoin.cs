@@ -14,8 +14,10 @@ public class TestCoin : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("PlayerObject"))
         {
+            ThirdPersonMovement playerScript = other.gameObject.GetComponentInParent(typeof(ThirdPersonMovement)) as ThirdPersonMovement;
+            playerScript.AddCoin(1);
             Destroy(gameObject);
         }
     }
