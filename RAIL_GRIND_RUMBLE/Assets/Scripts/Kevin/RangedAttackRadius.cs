@@ -57,6 +57,7 @@ public class RangedAttackRadius : AttackRadius
             if (targetDamageable == null || !HasLineOfSightTo(targetDamageable.GetTransform()))
             {
                 Agent.enabled = true;
+                Movement.HasHidden = false;
             }
             Damageables.RemoveAll(DisabledDamageables);
         }

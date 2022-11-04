@@ -20,8 +20,9 @@ public class EnemyMovement : MonoBehaviour
     public float MinObstacleHeight = 1.25f;
     [Range(0.01f, 1f)]
     public float UpdateFrequency = 0.25f; 
-    private Coroutine FollowCoroutine;
+    public Coroutine FollowCoroutine;
     private Collider[] Colliders = new Collider[10]; // more is less performant, but more options
+    public bool HasHidden = false;
 
     private void Awake ()
     {
@@ -109,6 +110,7 @@ public class EnemyMovement : MonoBehaviour
                     if (Vector3.Dot(hit.normal, (Target.position - hit.position).normalized) < HideSensitivity)
                     {
                         Agent.SetDestination(hit.position);
+                       
                         break;
                     }
                     else
@@ -123,6 +125,8 @@ public class EnemyMovement : MonoBehaviour
                             if (Vector3.Dot(hit2.normal, (Target.position - hit2.position).normalized) < HideSensitivity)
                             {
                                 Agent.SetDestination(hit2.position);
+                                
+                                
                                 break;
                             }
                         }
@@ -133,7 +137,10 @@ public class EnemyMovement : MonoBehaviour
                     Debug.LogError($"Unable to find NavMesh near object {Colliders[i].name} at {Colliders[i].transform.position}");
                 }
             }
+            
             yield return Wait;
+            
+           
         }
     }
     public int ColliderArraySortComparer(Collider A, Collider B)
@@ -161,5 +168,14 @@ public void startHiding (Transform Target)
      StopCoroutine(FollowCoroutine);
     FollowCoroutine = StartCoroutine(Hide(Target));
     
+    
 }
+public void startChasing (Transform Target)
+{
+     
+     StopCoroutine(FollowCoroutine);
+     FollowCoroutine = StartCoroutine(FollowTarget());
+    
+}
+
 }

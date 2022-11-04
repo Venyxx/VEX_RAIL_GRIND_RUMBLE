@@ -35,8 +35,17 @@ public class AttackRadius : MonoBehaviour
                 }
                 if (IsSharpShooter == true)
                 { 
-                    
-                   Movement.startHiding(other.transform);
+                    if (Movement.HasHidden == false)
+                   {
+                       Movement.startHiding(other.transform);
+                   AttackCoroutine = Movement.FollowCoroutine;
+                   }
+                   if (Movement.HasHidden == true)
+                   {
+                       
+                      
+                       AttackCoroutine = StartCoroutine(Attack());
+                   }
                 }
             }
         }
@@ -92,6 +101,7 @@ public class AttackRadius : MonoBehaviour
             Damageables.RemoveAll(DisabledDamageables);
         }
         AttackCoroutine = null;
+        
     }
 
     protected bool DisabledDamageables (IDamageable Damageable)
