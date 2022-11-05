@@ -12,10 +12,15 @@ public class ThirdPersonMovement : MonoBehaviour
     public float groundDrag;
      Vector3 standingStill = new Vector3 (0,0,0);
 
+    //Jump
     [SerializeField]private float jumpForceMax;
     [SerializeField]private float jumpForceMin;
     [SerializeField]private float jumpForce;
     [SerializeField] private float additionalJumpForce;
+
+    bool isJumping;
+    float jumpTimeCounter;
+
     public float jumpCoolDown;
     public float airMultiplier;
     public bool canJump;
@@ -119,6 +124,13 @@ public class ThirdPersonMovement : MonoBehaviour
         } else {
             rigidBody.drag = 0;
         }
+
+        //Hold Jump WIP
+        // if (isJumping == true && jumpTimeCounter > 0)
+        // {
+        //     TapJump();
+        //     jumpTimeCounter -= Time.deltaTime;
+        // }
     }
 
     private float jumpTimer;
@@ -128,23 +140,38 @@ public class ThirdPersonMovement : MonoBehaviour
     {
         if (context.started && grounded)
         {
-            StartCoroutine(ChargeJump());
+            //StartCoroutine(ChargeJump());
+            isJumping = true;
+            jumpTimeCounter = 10f;
+            TapJump();
         }
 
-        if (context.canceled && grounded)
+        // if (context.performed && isGrappling == false && isJumping == true)
+        // {
+        //     if (jumpTimeCounter > 0)
+        //     {
+        //         TapJump();
+        //         jumpTimeCounter -= Time.deltaTime;
+        //     } else {
+        //         isJumping = false;
+        //     }
+        // }
+
+        if (context.canceled)
         {
-            StopCoroutine(ChargeJump());
-            Jump();
+            // StopCoroutine(ChargeJump());
+            // Jump();
+            isJumping = false;
         }
     }
 
-    IEnumerator ChargeJump()
-    {
-        for (jumpForce = jumpForceMin; jumpForce < jumpForceMax; jumpForce++)
-        {
-            yield return new WaitForSeconds(0.15f);
-        }
-    }
+    // IEnumerator ChargeJump()
+    // {
+    //     for (jumpForce = jumpForceMin; jumpForce < jumpForceMax; jumpForce++)
+    //     {
+    //         yield return new WaitForSeconds(0.15f);
+    //     }
+    // }
 
     void FixedUpdate()
     {
@@ -226,10 +253,9 @@ public class ThirdPersonMovement : MonoBehaviour
         }
     }
 
-    void Jump()
+    void TapJump()
     {
         rigidBody.velocity = new Vector3(rigidBody.velocity.x, 0f, rigidBody.velocity.z);
-
         rigidBody.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
 
