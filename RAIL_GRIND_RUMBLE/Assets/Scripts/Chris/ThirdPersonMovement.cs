@@ -13,12 +13,12 @@ public class ThirdPersonMovement : MonoBehaviour
      Vector3 standingStill = new Vector3 (0,0,0);
 
     //Jump
-    [SerializeField]private float jumpForceMax;
-    [SerializeField]private float jumpForceMin;
+    //[SerializeField]private float jumpForceMax;
+    //[SerializeField]private float jumpForceMin;
     [SerializeField]private float jumpForce;
-    [SerializeField] private float additionalJumpForce;
-
+    //[SerializeField]private float additionalJumpForce;
     bool isJumping;
+    bool jumpDelayRunning = false;
     float jumpTimeCounter;
 
     public float jumpCoolDown;
@@ -126,11 +126,16 @@ public class ThirdPersonMovement : MonoBehaviour
         }
 
         //Hold Jump WIP
-        // if (isJumping == true && jumpTimeCounter > 0)
-        // {
-        //     TapJump();
-        //     jumpTimeCounter -= Time.deltaTime;
-        // }
+        if (jumpDelayRunning == false)
+        {
+            if (isJumping == true && jumpTimeCounter > 0)
+            {
+                TapJump(jumpForce/3);
+                jumpTimeCounter -= Time.deltaTime;
+            } else {
+                isJumping = false;
+            }
+        }
     }
 
     private float jumpTimer;
@@ -140,29 +145,26 @@ public class ThirdPersonMovement : MonoBehaviour
     {
         if (context.started && grounded)
         {
-            //StartCoroutine(ChargeJump());
             isJumping = true;
-            jumpTimeCounter = 10f;
-            TapJump();
+            jumpTimeCounter = 0.35f;
+            TapJump(jumpForce);
+            StartCoroutine(JumpHoldDelay());
         }
-
-        // if (context.performed && isGrappling == false && isJumping == true)
-        // {
-        //     if (jumpTimeCounter > 0)
-        //     {
-        //         TapJump();
-        //         jumpTimeCounter -= Time.deltaTime;
-        //     } else {
-        //         isJumping = false;
-        //     }
-        // }
 
         if (context.canceled)
         {
-            // StopCoroutine(ChargeJump());
-            // Jump();
             isJumping = false;
         }
+    }
+
+    IEnumerator JumpHoldDelay()
+    {
+        jumpDelayRunning = true;
+        for (int i = 0; i < 1; i++)
+        {
+            yield return new WaitForSeconds(0.15f);
+        }
+        jumpDelayRunning = false;
     }
 
     // IEnumerator ChargeJump()
@@ -253,10 +255,10 @@ public class ThirdPersonMovement : MonoBehaviour
         }
     }
 
-    void TapJump()
+    void TapJump(float force)
     {
         rigidBody.velocity = new Vector3(rigidBody.velocity.x, 0f, rigidBody.velocity.z);
-        rigidBody.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        rigidBody.AddForce(transform.up * force, ForceMode.Impulse);
     }
 
     void ResetJump()
