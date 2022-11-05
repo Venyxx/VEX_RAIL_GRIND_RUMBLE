@@ -6,11 +6,11 @@ using TMPro;
 public class ThirdPersonMovement : MonoBehaviour
 {
     //Movement
-    public float moveSpeed;
-    public float baseMoveSpeed;
-    public float speedLerp;
+    [SerializeField] public float moveSpeed;
+    private float baseMoveSpeed;
+    private float speedLerp;
     public float groundDrag;
-     Vector3 standingStill = new Vector3 (0,0,0);
+    Vector3 standingStill = new Vector3 (0,0,0);
 
     //Jump
     //[SerializeField]private float jumpForceMax;
@@ -75,6 +75,11 @@ public class ThirdPersonMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        moveSpeed = 10;
+        baseMoveSpeed= 8;
+        speedLerp = 2.22f;
+
+        
         playerActions = new InputHandler();
         playerActions.Player.Enable();
         rigidBody.freezeRotation = true;
@@ -198,7 +203,7 @@ public class ThirdPersonMovement : MonoBehaviour
         if (canAccelerate)
         {
             Mathf.Lerp(moveSpeed, moveSpeed + 5, speedLerp * Time.deltaTime);
-            moveSpeed += 5;
+            moveSpeed += 2;
         }
 
         if (horizontalInput == 0 && verticalInput == 0 && !moveKeyUp)
@@ -216,7 +221,7 @@ public class ThirdPersonMovement : MonoBehaviour
             return;
         }
 
-        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput * Time.deltaTime; //added tdt at end -v
 
         if (grounded == true)
         {
