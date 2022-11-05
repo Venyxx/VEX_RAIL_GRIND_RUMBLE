@@ -126,6 +126,7 @@ public class EnemyMovement : MonoBehaviour
                             {
                                 Agent.SetDestination(hit2.position);
                                 
+                                HasHidden = true;
                                 
                                 break;
                             }

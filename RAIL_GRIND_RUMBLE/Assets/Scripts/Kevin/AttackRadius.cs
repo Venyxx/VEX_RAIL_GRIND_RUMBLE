@@ -43,7 +43,7 @@ public class AttackRadius : MonoBehaviour
                    if (Movement.HasHidden == true)
                    {
                        
-                      
+                      Movement.startChasing(other.transform);
                        AttackCoroutine = StartCoroutine(Attack());
                    }
                 }
