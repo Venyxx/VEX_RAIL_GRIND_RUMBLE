@@ -165,10 +165,7 @@ public class ThirdPersonMovement : MonoBehaviour
     IEnumerator JumpHoldDelay()
     {
         jumpDelayRunning = true;
-        for (int i = 0; i < 1; i++)
-        {
-            yield return new WaitForSeconds(0.15f);
-        }
+        yield return new WaitForSeconds(0.15f);
         jumpDelayRunning = false;
     }
 
