@@ -6,19 +6,19 @@ using TMPro;
 public class ThirdPersonMovement : MonoBehaviour
 {
     //Movement
-    public float moveSpeed;
-    public float baseMoveSpeed;
-    public float speedLerp;
+    [SerializeField] public float moveSpeed;
+    private float baseMoveSpeed;
+    private float speedLerp;
     public float groundDrag;
-     Vector3 standingStill = new Vector3 (0,0,0);
+    Vector3 standingStill = new Vector3 (0,0,0);
 
     //Jump
-    [SerializeField]private float jumpForceMax;
-    [SerializeField]private float jumpForceMin;
+    //[SerializeField]private float jumpForceMax;
+    //[SerializeField]private float jumpForceMin;
     [SerializeField]private float jumpForce;
-    [SerializeField] private float additionalJumpForce;
-
+    //[SerializeField]private float additionalJumpForce;
     bool isJumping;
+    bool jumpDelayRunning = false;
     float jumpTimeCounter;
 
     public float jumpCoolDown;
@@ -75,6 +75,11 @@ public class ThirdPersonMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        moveSpeed = 10;
+        baseMoveSpeed= 8;
+        speedLerp = 2.22f;
+
+        
         playerActions = new InputHandler();
         playerActions.Player.Enable();
         rigidBody.freezeRotation = true;
@@ -126,11 +131,16 @@ public class ThirdPersonMovement : MonoBehaviour
         }
 
         //Hold Jump WIP
-        // if (isJumping == true && jumpTimeCounter > 0)
-        // {
-        //     TapJump();
-        //     jumpTimeCounter -= Time.deltaTime;
-        // }
+        if (jumpDelayRunning == false)
+        {
+            if (isJumping == true && jumpTimeCounter > 0)
+            {
+                TapJump(jumpForce/3);
+                jumpTimeCounter -= Time.deltaTime;
+            } else {
+                isJumping = false;
+            }
+        }
     }
 
     private float jumpTimer;
@@ -140,29 +150,23 @@ public class ThirdPersonMovement : MonoBehaviour
     {
         if (context.started && grounded)
         {
-            //StartCoroutine(ChargeJump());
             isJumping = true;
-            jumpTimeCounter = 10f;
-            TapJump();
+            jumpTimeCounter = 0.35f;
+            TapJump(jumpForce);
+            StartCoroutine(JumpHoldDelay());
         }
-
-        // if (context.performed && isGrappling == false && isJumping == true)
-        // {
-        //     if (jumpTimeCounter > 0)
-        //     {
-        //         TapJump();
-        //         jumpTimeCounter -= Time.deltaTime;
-        //     } else {
-        //         isJumping = false;
-        //     }
-        // }
 
         if (context.canceled)
         {
-            // StopCoroutine(ChargeJump());
-            // Jump();
             isJumping = false;
         }
+    }
+
+    IEnumerator JumpHoldDelay()
+    {
+        jumpDelayRunning = true;
+        yield return new WaitForSeconds(0.15f);
+        jumpDelayRunning = false;
     }
 
     // IEnumerator ChargeJump()
@@ -196,7 +200,7 @@ public class ThirdPersonMovement : MonoBehaviour
         if (canAccelerate)
         {
             Mathf.Lerp(moveSpeed, moveSpeed + 5, speedLerp * Time.deltaTime);
-            moveSpeed += 5;
+            moveSpeed += 2;
         }
 
         if (horizontalInput == 0 && verticalInput == 0 && !moveKeyUp)
@@ -214,7 +218,7 @@ public class ThirdPersonMovement : MonoBehaviour
             return;
         }
 
-        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput * Time.deltaTime; //added tdt at end -v
 
         if (grounded == true)
         {
@@ -253,10 +257,10 @@ public class ThirdPersonMovement : MonoBehaviour
         }
     }
 
-    void TapJump()
+    void TapJump(float force)
     {
         rigidBody.velocity = new Vector3(rigidBody.velocity.x, 0f, rigidBody.velocity.z);
-        rigidBody.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        rigidBody.AddForce(transform.up * force, ForceMode.Impulse);
     }
 
     void ResetJump()

@@ -15,6 +15,7 @@ public class CollisionFollow : MonoBehaviour
 
     
     // Start is called before the first frame update
+    //ive come to realize if you stay on it too long it resets the collision again.
     private void OnCollisionEnter (Collision rail)
     {
         if (rail.gameObject.tag == "RailStraight")

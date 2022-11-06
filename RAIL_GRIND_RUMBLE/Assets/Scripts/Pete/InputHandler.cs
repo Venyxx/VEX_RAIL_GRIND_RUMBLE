@@ -89,6 +89,15 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Switch Mode"",
+                    ""type"": ""Button"",
+                    ""id"": ""1372210f-a333-48dd-8076-6df5d453fc7b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -289,6 +298,297 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                     ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c1f2493e-70b8-4116-a181-f40421d547ab"",
+                    ""path"": ""<Gamepad>/leftStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Switch Mode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fe8e876b-27ae-4625-ade0-756e61f9619a"",
+                    ""path"": ""<Keyboard>/#(O)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Switch Mode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""PlayerWalk"",
+            ""id"": ""29d20594-49eb-4685-9e90-071ecef9cd89"",
+            ""actions"": [
+                {
+                    ""name"": ""Grapple Switch"",
+                    ""type"": ""Button"",
+                    ""id"": ""7267f899-e6f9-4b59-b20b-a3b490bd1c15"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Grapple Release"",
+                    ""type"": ""Button"",
+                    ""id"": ""d85efdbc-7eb6-422a-b4ec-f44c1eb7ee8c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""f9fbeca2-5f0d-4131-804d-e20526a5c2d5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""8f3243fd-5dbd-4602-b243-28e78971dfa2"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Grapple Pull"",
+                    ""type"": ""Button"",
+                    ""id"": ""0d86f6cb-95c3-45e7-98d7-e4147211b7b4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause Game"",
+                    ""type"": ""Button"",
+                    ""id"": ""832bbe15-5d7f-463d-b135-4441511d14c9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Look"",
+                    ""type"": ""Value"",
+                    ""id"": ""4630d0ad-6ceb-45df-8026-bac4d988e143"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""672a86ea-c040-4faa-8d84-03cfa9948188"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Grapple Switch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""67f68a9e-a5e5-4df5-a811-19afe9c569dc"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Grapple Switch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c9e85b0c-cef8-460b-8ad2-ac4e7aa5de4c"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Grapple Release"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c332c494-068c-43b1-8b3d-16682ac65c9a"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Grapple Release"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4b3e4e74-00b5-4fcb-9041-55729f3826c4"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""228321e1-62bc-4a42-a7aa-64739b09a38f"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""61162dde-58f4-4e1f-aa96-38f7a3214ce8"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""WASD"",
+                    ""id"": ""aa4f1254-b6e8-434b-858a-7b4f8e3e280e"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""c22fd50b-19b0-4d91-8c2c-51900d58d98d"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""47d2ffbe-92de-485c-b8cf-7caff7b0ad11"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""d42b0810-7778-4931-9ea3-64ceee9398c5"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""34652ff7-964b-43ed-8282-96ad85e3527e"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b02ef0a2-af9d-4b64-bef5-723a7e97888e"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Grapple Pull"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""63ab6d91-daca-4b4e-856b-fa7585e0797e"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Grapple Pull"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9e52c263-3032-4efd-a1f3-202fa8146861"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Grapple Pull"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""69df8b50-f9ca-4acc-b95a-f2952243ec42"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause Game"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""09d34348-005f-46c9-881a-ea84cd3c92ed"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause Game"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2ae96e04-ef1f-49c7-b866-6f074b160ea9"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": ""ScaleVector2(x=15,y=15),StickDeadzone"",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -304,6 +604,16 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
         m_Player_GrapplePull = m_Player.FindAction("Grapple Pull", throwIfNotFound: true);
         m_Player_PauseGame = m_Player.FindAction("Pause Game", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
+        m_Player_SwitchMode = m_Player.FindAction("Switch Mode", throwIfNotFound: true);
+        // PlayerWalk
+        m_PlayerWalk = asset.FindActionMap("PlayerWalk", throwIfNotFound: true);
+        m_PlayerWalk_GrappleSwitch = m_PlayerWalk.FindAction("Grapple Switch", throwIfNotFound: true);
+        m_PlayerWalk_GrappleRelease = m_PlayerWalk.FindAction("Grapple Release", throwIfNotFound: true);
+        m_PlayerWalk_Jump = m_PlayerWalk.FindAction("Jump", throwIfNotFound: true);
+        m_PlayerWalk_Move = m_PlayerWalk.FindAction("Move", throwIfNotFound: true);
+        m_PlayerWalk_GrapplePull = m_PlayerWalk.FindAction("Grapple Pull", throwIfNotFound: true);
+        m_PlayerWalk_PauseGame = m_PlayerWalk.FindAction("Pause Game", throwIfNotFound: true);
+        m_PlayerWalk_Look = m_PlayerWalk.FindAction("Look", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -370,6 +680,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_GrapplePull;
     private readonly InputAction m_Player_PauseGame;
     private readonly InputAction m_Player_Look;
+    private readonly InputAction m_Player_SwitchMode;
     public struct PlayerActions
     {
         private @InputHandler m_Wrapper;
@@ -381,6 +692,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
         public InputAction @GrapplePull => m_Wrapper.m_Player_GrapplePull;
         public InputAction @PauseGame => m_Wrapper.m_Player_PauseGame;
         public InputAction @Look => m_Wrapper.m_Player_Look;
+        public InputAction @SwitchMode => m_Wrapper.m_Player_SwitchMode;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -411,8 +723,95 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 @Look.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
                 @Look.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
                 @Look.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
+                @SwitchMode.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchMode;
+                @SwitchMode.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchMode;
+                @SwitchMode.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchMode;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @GrappleSwitch.started += instance.OnGrappleSwitch;
+                @GrappleSwitch.performed += instance.OnGrappleSwitch;
+                @GrappleSwitch.canceled += instance.OnGrappleSwitch;
+                @GrappleRelease.started += instance.OnGrappleRelease;
+                @GrappleRelease.performed += instance.OnGrappleRelease;
+                @GrappleRelease.canceled += instance.OnGrappleRelease;
+                @Jump.started += instance.OnJump;
+                @Jump.performed += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
+                @Move.started += instance.OnMove;
+                @Move.performed += instance.OnMove;
+                @Move.canceled += instance.OnMove;
+                @GrapplePull.started += instance.OnGrapplePull;
+                @GrapplePull.performed += instance.OnGrapplePull;
+                @GrapplePull.canceled += instance.OnGrapplePull;
+                @PauseGame.started += instance.OnPauseGame;
+                @PauseGame.performed += instance.OnPauseGame;
+                @PauseGame.canceled += instance.OnPauseGame;
+                @Look.started += instance.OnLook;
+                @Look.performed += instance.OnLook;
+                @Look.canceled += instance.OnLook;
+                @SwitchMode.started += instance.OnSwitchMode;
+                @SwitchMode.performed += instance.OnSwitchMode;
+                @SwitchMode.canceled += instance.OnSwitchMode;
+            }
+        }
+    }
+    public PlayerActions @Player => new PlayerActions(this);
+
+    // PlayerWalk
+    private readonly InputActionMap m_PlayerWalk;
+    private IPlayerWalkActions m_PlayerWalkActionsCallbackInterface;
+    private readonly InputAction m_PlayerWalk_GrappleSwitch;
+    private readonly InputAction m_PlayerWalk_GrappleRelease;
+    private readonly InputAction m_PlayerWalk_Jump;
+    private readonly InputAction m_PlayerWalk_Move;
+    private readonly InputAction m_PlayerWalk_GrapplePull;
+    private readonly InputAction m_PlayerWalk_PauseGame;
+    private readonly InputAction m_PlayerWalk_Look;
+    public struct PlayerWalkActions
+    {
+        private @InputHandler m_Wrapper;
+        public PlayerWalkActions(@InputHandler wrapper) { m_Wrapper = wrapper; }
+        public InputAction @GrappleSwitch => m_Wrapper.m_PlayerWalk_GrappleSwitch;
+        public InputAction @GrappleRelease => m_Wrapper.m_PlayerWalk_GrappleRelease;
+        public InputAction @Jump => m_Wrapper.m_PlayerWalk_Jump;
+        public InputAction @Move => m_Wrapper.m_PlayerWalk_Move;
+        public InputAction @GrapplePull => m_Wrapper.m_PlayerWalk_GrapplePull;
+        public InputAction @PauseGame => m_Wrapper.m_PlayerWalk_PauseGame;
+        public InputAction @Look => m_Wrapper.m_PlayerWalk_Look;
+        public InputActionMap Get() { return m_Wrapper.m_PlayerWalk; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PlayerWalkActions set) { return set.Get(); }
+        public void SetCallbacks(IPlayerWalkActions instance)
+        {
+            if (m_Wrapper.m_PlayerWalkActionsCallbackInterface != null)
+            {
+                @GrappleSwitch.started -= m_Wrapper.m_PlayerWalkActionsCallbackInterface.OnGrappleSwitch;
+                @GrappleSwitch.performed -= m_Wrapper.m_PlayerWalkActionsCallbackInterface.OnGrappleSwitch;
+                @GrappleSwitch.canceled -= m_Wrapper.m_PlayerWalkActionsCallbackInterface.OnGrappleSwitch;
+                @GrappleRelease.started -= m_Wrapper.m_PlayerWalkActionsCallbackInterface.OnGrappleRelease;
+                @GrappleRelease.performed -= m_Wrapper.m_PlayerWalkActionsCallbackInterface.OnGrappleRelease;
+                @GrappleRelease.canceled -= m_Wrapper.m_PlayerWalkActionsCallbackInterface.OnGrappleRelease;
+                @Jump.started -= m_Wrapper.m_PlayerWalkActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_PlayerWalkActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_PlayerWalkActionsCallbackInterface.OnJump;
+                @Move.started -= m_Wrapper.m_PlayerWalkActionsCallbackInterface.OnMove;
+                @Move.performed -= m_Wrapper.m_PlayerWalkActionsCallbackInterface.OnMove;
+                @Move.canceled -= m_Wrapper.m_PlayerWalkActionsCallbackInterface.OnMove;
+                @GrapplePull.started -= m_Wrapper.m_PlayerWalkActionsCallbackInterface.OnGrapplePull;
+                @GrapplePull.performed -= m_Wrapper.m_PlayerWalkActionsCallbackInterface.OnGrapplePull;
+                @GrapplePull.canceled -= m_Wrapper.m_PlayerWalkActionsCallbackInterface.OnGrapplePull;
+                @PauseGame.started -= m_Wrapper.m_PlayerWalkActionsCallbackInterface.OnPauseGame;
+                @PauseGame.performed -= m_Wrapper.m_PlayerWalkActionsCallbackInterface.OnPauseGame;
+                @PauseGame.canceled -= m_Wrapper.m_PlayerWalkActionsCallbackInterface.OnPauseGame;
+                @Look.started -= m_Wrapper.m_PlayerWalkActionsCallbackInterface.OnLook;
+                @Look.performed -= m_Wrapper.m_PlayerWalkActionsCallbackInterface.OnLook;
+                @Look.canceled -= m_Wrapper.m_PlayerWalkActionsCallbackInterface.OnLook;
+            }
+            m_Wrapper.m_PlayerWalkActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @GrappleSwitch.started += instance.OnGrappleSwitch;
@@ -439,8 +838,19 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
             }
         }
     }
-    public PlayerActions @Player => new PlayerActions(this);
+    public PlayerWalkActions @PlayerWalk => new PlayerWalkActions(this);
     public interface IPlayerActions
+    {
+        void OnGrappleSwitch(InputAction.CallbackContext context);
+        void OnGrappleRelease(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
+        void OnMove(InputAction.CallbackContext context);
+        void OnGrapplePull(InputAction.CallbackContext context);
+        void OnPauseGame(InputAction.CallbackContext context);
+        void OnLook(InputAction.CallbackContext context);
+        void OnSwitchMode(InputAction.CallbackContext context);
+    }
+    public interface IPlayerWalkActions
     {
         void OnGrappleSwitch(InputAction.CallbackContext context);
         void OnGrappleRelease(InputAction.CallbackContext context);
