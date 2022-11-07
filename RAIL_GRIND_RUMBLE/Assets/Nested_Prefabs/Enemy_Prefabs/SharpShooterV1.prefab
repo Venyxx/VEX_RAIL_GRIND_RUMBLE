@@ -44,7 +44,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 80
+  m_Radius: 40
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &709858256420953716
 MonoBehaviour:
@@ -124,7 +124,7 @@ MonoBehaviour:
   Collider: {fileID: 709858256793378069}
   Damage: 10
   AttackDelay: 0.5
-  IsSharpShooter: 1
+  IsSharpShooter: 0
   Movement: {fileID: 709858256272780360}
   Agent: {fileID: 6646993812584244265}
   BulletPrefab: {fileID: 9136124367617025563, guid: 4d25e49a58745524ebe204a430c0d12e, type: 3}
@@ -276,8 +276,8 @@ MonoBehaviour:
     m_Bits: 4096
   LineOfSightChecker: {fileID: 709858256420953716}
   UpdateSpeed: 0.1
-  HideSensitivity: 0
-  MinPlayerDistance: 20
+  HideSensitivity: -0.7
+  MinPlayerDistance: 5
   MinObstacleHeight: 1.25
   UpdateFrequency: 0.25
   HasHidden: 0

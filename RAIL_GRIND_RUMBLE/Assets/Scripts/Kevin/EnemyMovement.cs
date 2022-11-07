@@ -23,6 +23,7 @@ public class EnemyMovement : MonoBehaviour
     public Coroutine FollowCoroutine;
     private Collider[] Colliders = new Collider[10]; // more is less performant, but more options
     public bool HasHidden = false;
+    
 
     private void Awake ()
     {
@@ -45,11 +46,14 @@ public class EnemyMovement : MonoBehaviour
 
     private void HandleLoseSight (Transform Target)
     {
-       // if (FollowCoroutine != null)
-        //{
+   if (FollowCoroutine != null)
+        {
+            StopCoroutine(FollowCoroutine);
             
-        //}
-        Target = null;
+            HasHidden = true;
+        }
+        
+        FollowCoroutine = StartCoroutine(FollowTarget());
     }
 
     public void StartChasing()
@@ -126,7 +130,7 @@ public class EnemyMovement : MonoBehaviour
                             {
                                 Agent.SetDestination(hit2.position);
                                 
-                                HasHidden = true;
+                                
                                 
                                 break;
                             }

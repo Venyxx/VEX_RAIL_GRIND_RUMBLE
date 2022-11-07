@@ -19,6 +19,7 @@ public class Bullet : PoolableObject
     {
         CancelInvoke(DISABLE_METHOD_NAME);
         Invoke(DISABLE_METHOD_NAME, AutoDestroyTime);
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -36,4 +37,6 @@ public class Bullet : PoolableObject
         Rigidbody.velocity = Vector3.zero;
         gameObject.SetActive(false);
     }
+   
+ 
 }
