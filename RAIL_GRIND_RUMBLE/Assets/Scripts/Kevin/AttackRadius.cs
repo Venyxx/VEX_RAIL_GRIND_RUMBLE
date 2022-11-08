@@ -43,7 +43,9 @@ public class AttackRadius : MonoBehaviour
                    }
                    if (Movement.HasHidden == true)
                    {
-                      Movement.startChasing(other.transform);
+                        Movement.FollowCoroutine = AttackCoroutine ;
+                                         
+                     
                        AttackCoroutine = StartCoroutine(Attack());
                    }
                 }
@@ -109,6 +111,7 @@ public class AttackRadius : MonoBehaviour
         return Damageable != null && !Damageable.GetTransform().gameObject.activeSelf;
     }
     
+   
    
    
 }

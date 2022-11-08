@@ -23,6 +23,7 @@ public class EnemyMovement : MonoBehaviour
     public Coroutine FollowCoroutine;
     private Collider[] Colliders = new Collider[10]; // more is less performant, but more options
     public bool HasHidden = false;
+    public AttackRadius Attack;
     
 
     private void Awake ()
@@ -48,12 +49,13 @@ public class EnemyMovement : MonoBehaviour
     {
    if (FollowCoroutine != null)
         {
-            StopCoroutine(FollowCoroutine);
+           
             
             HasHidden = true;
+            
         }
-        
-        FollowCoroutine = StartCoroutine(FollowTarget());
+       
+       
     }
 
     public void StartChasing()
@@ -72,9 +74,12 @@ public class EnemyMovement : MonoBehaviour
     private IEnumerator FollowTarget()
     {
         WaitForSeconds Wait = new WaitForSeconds(UpdateSpeed);
-        while(enabled)
+        while(gameObject.activeSelf)
         {
+            if (Agent.enabled)
+            {
             Agent.SetDestination(Player.transform.position);
+            }
             yield return Wait;
         }
     }

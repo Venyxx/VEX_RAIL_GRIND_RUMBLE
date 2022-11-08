@@ -13,6 +13,7 @@ public class Bullet : PoolableObject
     private void Awake()
     {
         Rigidbody = GetComponent<Rigidbody>();
+        
     }
 
     private void OnEnabled()
@@ -20,7 +21,18 @@ public class Bullet : PoolableObject
         CancelInvoke(DISABLE_METHOD_NAME);
         Invoke(DISABLE_METHOD_NAME, AutoDestroyTime);
         
+        
     }
+
+     private void Update()
+ {
+	
+
+	  //Count down Lifetime
+	  AutoDestroyTime -= Time.deltaTime;
+	  if (AutoDestroyTime <= 0) Disable();
+ }
+
 
     private void OnTriggerEnter(Collider other)
     {

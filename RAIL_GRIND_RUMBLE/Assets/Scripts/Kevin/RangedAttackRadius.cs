@@ -18,7 +18,7 @@ public class RangedAttackRadius : AttackRadius
     protected override void Awake()
     {
         base.Awake();
-        BulletPool = ObjectPool.CreateInstance(BulletPrefab, Mathf.CeilToInt((1 / AttackDelay) * BulletPrefab.AutoDestroyTime));
+        BulletPool = ObjectPool.CreateInstance(BulletPrefab, Mathf.CeilToInt((10)));
     }
     protected override IEnumerator Attack()
     {
