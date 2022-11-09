@@ -6,7 +6,10 @@ public class PlayerAttack : MonoBehaviour
 {
     Animator anim;
     public int Damage = 100;
-    // Start is called before the first frame update
+    public Transform attackPoint;
+    public float attackRange = 0.5f;
+    public LayerMask enemyLayers;
+   
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -16,19 +19,32 @@ public class PlayerAttack : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.X))
-            anim.SetBool("Attacking", true);
-        else if (Input.GetKeyUp(KeyCode.X))
-            anim.SetBool("Attacking", false);
-    }
-      private void OnTriggerEnter(Collider other)
-    {
-        IDamageable damageable;
-        if (anim.GetBool("Attacking") == true)
         {
-        if (other.TryGetComponent<IDamageable>(out damageable))
+            Attack();
+        }
+     
+    }
+    void Attack()
+    {
+        anim.SetTrigger("Attack");
+       Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
+
+       foreach(Collider enemy in hitEnemies)
+       {
+             IDamageable damageable;
+        if (enemy.TryGetComponent<IDamageable>(out damageable))
         {
             damageable.TakeDamage(Damage);
         }
-        }
+       }
     }
+
+void OnDrawGizmosSelected()
+{
+    if (attackPoint == null)
+    return;
+
+    Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+}
+
 }
