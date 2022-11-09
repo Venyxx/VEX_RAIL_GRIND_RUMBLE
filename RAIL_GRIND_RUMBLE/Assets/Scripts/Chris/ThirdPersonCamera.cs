@@ -41,15 +41,16 @@ public class ThirdPersonCamera : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        playerREF = GameObject.Find("PlayerObject");
-        playerTransform = playerREF.gameObject.GetComponent<Transform>();
+        //playerREF = GameObject.Find("PlayerObject");
         playerPrefabREF = GameObject.Find("playerPrefab");
+        playerTransform = playerPrefabREF.gameObject.GetComponent<Transform>();
+       
         player = playerPrefabREF.gameObject.GetComponent<Transform>();
         rigidBody = playerPrefabREF.gameObject.GetComponent<Rigidbody>();
         GameObject orientationREF = GameObject.Find("Orientation");
         orientation = orientationREF.gameObject.GetComponent<Transform>();
         grappleDetection = GameObject.Find("GrappleDetector");
-        _thirdPersonMovement = FindObjectOfType<ThirdPersonMovement>();
+        _thirdPersonMovement = playerPrefabREF.GetComponent<ThirdPersonMovement>();
         GameObject basicCam = GameObject.Find("BasicCam");
         if(basicCam!=null)
             _freeLook = basicCam.GetComponent<CinemachineFreeLook>();
@@ -74,6 +75,7 @@ public class ThirdPersonCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(_thirdPersonMovement == null);
         //not assigning on start to avoid NullReferenceException since it is
         //instantiated/created on start in another class (ThirdPersonMovement)
         if (playerActions == null)
@@ -168,9 +170,7 @@ public class ThirdPersonCamera : MonoBehaviour
             aimingCamREF.SetActive(true);
             reticleREF.SetActive(true);
         }
-
-
-
+        
         currentStyle = newStyle;
     }
 
