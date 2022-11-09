@@ -231,13 +231,13 @@ public class GrappleHook : MonoBehaviour
 
 
         //Right Force
-        if (horizontalInput < 0)
+        if (horizontalInput > 0)
         {
             rigidBody.AddForce(orientation.right * horizontalThrustForce * Time.deltaTime);
         }
 
         //Left Force
-        if (horizontalInput > 0)
+        if (horizontalInput < 0)
         {
             rigidBody.AddForce(-orientation.right * horizontalThrustForce * Time.deltaTime);
         }

@@ -5,25 +5,35 @@ using UnityEngine.InputSystem;
 
 public class GrappleDetection : MonoBehaviour
 {
-    public GameObject aimingCamREF;
+    private GameObject aimingCamREF;
     public Transform currentAim;
     public List<Transform> aimPoints;
     private int aimPointCount;
     private int aimPointChoice;
-    public Transform aimLookAtREF;
+    private Transform aimLookAtREF;
     private Transform nextAim;
+    private Transform player;
 
     private bool canSwitch = false;
     private bool lookAtSwitchActive = false;
 
-    public CinemachineFreeLook cinemachineCam;
+    private CinemachineFreeLook cinemachineCam;
 
     void Start()
     {
+        GameObject cameraPrefabREF = GameObject.Find("camerasPrefab");
+        aimingCamREF = cameraPrefabREF.transform.Find("AimingCam").gameObject;
+
+        GameObject orientationREF = GameObject.Find("Orientation");
+        aimLookAtREF = orientationREF.transform.Find("AimingLookAt");
+
         cinemachineCam = aimingCamREF.gameObject.GetComponent<CinemachineFreeLook>();
         aimPointCount = 0;
         aimPointChoice = 0;
         aimPoints = new List<Transform>();
+
+        GameObject playerREF = GameObject.Find("playerPrefab");
+        player = playerREF.GetComponent<Transform>();
     }
 
     
@@ -51,6 +61,27 @@ public class GrappleDetection : MonoBehaviour
             }
         }
 
+        //Aim Point Closest
+        if (aimPoints.Count != 0 && aimPoints.Count >= 2 && !GameObject.Find("AimingCam"))
+        {
+            
+            for (int i = 0; i < aimPoints.Count; i++)
+            {
+                if (Vector3.Distance(player.position, aimPoints[0].position) > Vector3.Distance(player.position, aimPoints[i].position))
+                {
+                    Transform temp = aimPoints[i];
+                    aimPoints.Remove(aimPoints[i]);
+                    aimPoints.Insert(0, temp);
+                    currentAim = aimPoints[0];
+                }
+            }
+        }
+
+    }
+
+    void FixedUpdate()
+    {
+        
     }
 
     //new input system conversion, method tied to RELEASING SHIFT for now.

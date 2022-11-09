@@ -1,6 +1,4 @@
 
-Y
-)Assets/Scripts/Chris/ThirdPersonCamera.cs,f\6\f6a31841a9dcbed84a8a570daf991aa3722d191b
 S
 #Assets/Scripts/Chris/GrappleHook.cs,0\a\0a398c1383cd61d3aa52c7e326a25c88314403fc
 X
