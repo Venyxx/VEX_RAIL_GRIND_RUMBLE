@@ -42,12 +42,11 @@ public class Graffiti : MonoBehaviour
             {
                 
                 GameObject madeGraffiti = Instantiate (graffiti, hit.point, Quaternion.LookRotation(hit.normal));
-                //playerX = player.transform.position.x;
-                //playerZ = player.transform.position.z;
-                //madeGraffiti.transform.position = (playerX, 0, playerZ);
+                Vector3 newPos = new Vector3 (player.transform.position.x, madeGraffiti.transform.position.y, player.transform.position.z);
+                madeGraffiti.transform.position = newPos;
                 
                 Vector3 direction = hit.point - canLocation.position;
-                canLocation.rotation = Quaternion.LookRotation(direction);
+                //canLocation.rotation = Quaternion.LookRotation(direction);
             }
         }
     }

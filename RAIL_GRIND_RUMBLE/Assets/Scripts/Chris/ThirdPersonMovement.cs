@@ -218,7 +218,7 @@ public class ThirdPersonMovement : MonoBehaviour
             return;
         }
 
-        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput * Time.deltaTime; //added tdt at end -v
+        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput; 
 
         if (grounded == true)
         {
