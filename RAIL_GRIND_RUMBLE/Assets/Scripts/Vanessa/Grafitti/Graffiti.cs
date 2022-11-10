@@ -46,7 +46,7 @@ public class Graffiti : MonoBehaviour
                 madeGraffiti.transform.position = newPos;
                 
                 Vector3 direction = hit.point - canLocation.position;
-                //canLocation.rotation = Quaternion.LookRotation(direction);
+                canLocation.rotation = Quaternion.LookRotation(direction);
             }
         }
     }
