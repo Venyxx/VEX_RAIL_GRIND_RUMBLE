@@ -18,7 +18,7 @@ public class Graffiti : MonoBehaviour
          if (Input.GetMouseButtonDown(0))
         {
             Debug.Log("input");
-            Shoot ();
+            NewShoot ();
         }
             
     }
@@ -43,5 +43,26 @@ public class Graffiti : MonoBehaviour
                     canLocation.rotation = Quaternion.LookRotation(direction);
                 }
             }
+    }
+
+    void NewShoot()
+    {
+        RaycastHit[] hits;
+        hits = Physics.RaycastAll(transform.position, transform.forward, 100.0F);
+
+        for (int i = 0; i < hits.Length; i++)
+        {
+            RaycastHit hit = hits[i];
+            Renderer rend = hit.transform.GetComponent<Renderer>();
+            Debug.Log(hit.collider.gameObject);
+            if (hit.collider.gameObject.layer == 8)
+            {
+                 Debug.Log("layer 8");
+                Instantiate (graffiti, hit.point, Quaternion.LookRotation(hit.normal));
+
+                Vector3 direction = hit.point - canLocation.position;
+                canLocation.rotation = Quaternion.LookRotation(direction);
+            }
+        }
     }
 }

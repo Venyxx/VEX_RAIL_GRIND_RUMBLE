@@ -75,7 +75,7 @@ public class ThirdPersonCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(_thirdPersonMovement == null);
+        //Debug.Log(_thirdPersonMovement == null);
         //not assigning on start to avoid NullReferenceException since it is
         //instantiated/created on start in another class (ThirdPersonMovement)
         if (playerActions == null)
