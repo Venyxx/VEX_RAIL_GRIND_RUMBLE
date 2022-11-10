@@ -6,11 +6,15 @@ public class Graffiti : MonoBehaviour
 {
    [SerializeField] private GameObject graffiti;
    [SerializeField] private Transform canLocation;
+   private GameObject player;
+   private int playerX;
+   private int playerZ;
    private Camera cam;
     
     void Start ()
     {
         cam = Camera.main;
+        player = GameObject.Find("playerPrefab");
         
     }
     void FixedUpdate()
@@ -18,48 +22,30 @@ public class Graffiti : MonoBehaviour
          if (Input.GetMouseButtonDown(0))
         {
             Debug.Log("input");
-            NewShoot ();
+            GraffitiFire();
         }
             
     }
 
-    void Shoot ()
+    void GraffitiFire()
     {
-       
-            Debug.Log("ray");
-            Ray rayOrigin = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit; 
-            Ray ray = cam.ScreenPointToRay(Input.mousePosition); 
-
-            if (Physics.Raycast(ray, out hit, 100.0f)) 
-            {
-                Debug.Log(hit.collider.gameObject);
-                if (hit.collider.gameObject.layer == 8)
-                {
-                    Debug.Log("layer 8");
-                    Instantiate (graffiti, hit.point, Quaternion.LookRotation(hit.normal));
-
-                    Vector3 direction = hit.point - canLocation.position;
-                    canLocation.rotation = Quaternion.LookRotation(direction);
-                }
-            }
-    }
-
-    void NewShoot()
-    {
+        //Debug.Log(gameObject);
         RaycastHit[] hits;
-        hits = Physics.RaycastAll(transform.position, transform.forward, 100.0F);
+        hits = Physics.RaycastAll(transform.position, transform.forward, 20.0f);
 
         for (int i = 0; i < hits.Length; i++)
         {
             RaycastHit hit = hits[i];
-            Renderer rend = hit.transform.GetComponent<Renderer>();
-            Debug.Log(hit.collider.gameObject);
+            
+            //Debug.Log(hit.collider.gameObject);
             if (hit.collider.gameObject.layer == 8)
             {
-                 Debug.Log("layer 8");
-                Instantiate (graffiti, hit.point, Quaternion.LookRotation(hit.normal));
-
+                
+                GameObject madeGraffiti = Instantiate (graffiti, hit.point, Quaternion.LookRotation(hit.normal));
+                //playerX = player.transform.position.x;
+                //playerZ = player.transform.position.z;
+                //madeGraffiti.transform.position = (playerX, 0, playerZ);
+                
                 Vector3 direction = hit.point - canLocation.position;
                 canLocation.rotation = Quaternion.LookRotation(direction);
             }
