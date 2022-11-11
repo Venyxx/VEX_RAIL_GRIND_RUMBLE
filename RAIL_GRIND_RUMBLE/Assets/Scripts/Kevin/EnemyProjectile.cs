@@ -65,6 +65,10 @@ public class EnemyProjectile : MonoBehaviour
 	
 	  //Count up collisions
 	  collisions++;
+	  if (collision.gameObject.tag == "Obstacle")
+	  {
+		  Explode();
+	  }
 	  
 	  //Explode if bullet hits an enemy directly and explodeOnTouch is activated
 	  //if (collision.collider.CompareTag("Player") && explodeOnTouch) Explode(); -- Unity refers to this line as "obsolete" when used with OnTriggerEnter/Collider component
