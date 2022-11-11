@@ -13,6 +13,7 @@ public class Enemy : PoolableObject, IDamageable
     private Coroutine LookCoroutine;
     private const string ATTACK_TRIGGER = "Attack";
 
+
     private void Awake()
     {
         AttackRadius.OnAttack += OnAttack;
@@ -43,9 +44,8 @@ public class Enemy : PoolableObject, IDamageable
 
     public virtual void OnEnable()
     {
-        SetupAgentFromConfiguration();
+         SetupAgentFromConfiguration(); 
     }
-
     public override void OnDisable()
     {
         base.OnDisable();

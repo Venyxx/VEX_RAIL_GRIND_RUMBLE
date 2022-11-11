@@ -22,13 +22,13 @@ public class PlayerAttack : MonoBehaviour
       
     }
     public void Attack(InputAction.CallbackContext context)
-    {
+    {  Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
         if (!context.started)
         {
             return;
         }
         anim.SetTrigger("Attack");
-       Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
+     
 
        foreach(Collider enemy in hitEnemies)
        {

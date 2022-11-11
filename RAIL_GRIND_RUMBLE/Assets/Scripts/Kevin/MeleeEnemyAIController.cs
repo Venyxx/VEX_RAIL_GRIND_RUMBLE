@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MeleeEnemyAIController : MonoBehaviour
+public class MeleeEnemyAIController : MonoBehaviour,  IDamageable
 {
 
 public UnityEngine.AI.NavMeshAgent agent;
@@ -11,6 +11,7 @@ private GameObject playerREF;
 private PlayerHealth playerhealth;
 
 public LayerMask whatIsGround, whatIsPlayer;
+public float Health = 100;
 
 //Patroling 
 public Vector3 walkPoint;
@@ -88,4 +89,18 @@ private void ResetAttack()
 {
 	alreadyAttacked = false;
 }
+
+  public void TakeDamage(float Damage)
+    {
+        Health -= Damage;
+        if (Health <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public Transform GetTransform()
+    {
+        return transform;
+    }
 }

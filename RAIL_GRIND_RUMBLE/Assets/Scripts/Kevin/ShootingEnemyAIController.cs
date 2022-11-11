@@ -1,13 +1,14 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class ShootingEnemyAIController : MonoBehaviour
+public class ShootingEnemyAIController : MonoBehaviour, IDamageable
 {
 public NavMeshAgent agent;
 
 private Transform player;
 
 public LayerMask whatIsGround, whatIsPlayer;
+public float Health = 100;
 
 //Patroling 
 public Vector3 walkPoint;
@@ -85,4 +86,18 @@ private void ResetAttack()
 {
 	alreadyAttacked = false;
 }
+
+   public void TakeDamage(float Damage)
+    {
+        Health -= Damage;
+        if (Health <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public Transform GetTransform()
+    {
+        return transform;
+    }
 }
