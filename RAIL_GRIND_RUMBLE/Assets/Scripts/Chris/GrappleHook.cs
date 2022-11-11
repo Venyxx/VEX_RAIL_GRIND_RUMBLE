@@ -349,6 +349,7 @@ public class GrappleHook : MonoBehaviour
                 canPull = true;
                 enemyPullTo = false;
                 pullableObject = sphereCastHit.collider.gameObject;
+                pullingObject = true;
             } else if (sphereCastHit.collider.gameObject.layer == LayerMask.NameToLayer("Enemy")) 
             {
                 enemyPullTo = true;
@@ -373,13 +374,14 @@ public class GrappleHook : MonoBehaviour
 
         if (collision.gameObject.layer == LayerMask.NameToLayer("GrapplePickUp") && joint != null)
         {
+            pullingObject = false;
             grappleDetectorREF.gameObject.GetComponent<GrappleDetection>().aimPoints.Remove(collision.gameObject.transform);
             StopSwing();
             Destroy(collision.gameObject);
             throwObjectScript.SpawnHeldObject();
             
             //Temporary solution
-            playerREF.gameObject.GetComponent<ThirdPersonMovement>().canJump = true;
+            //playerREF.gameObject.GetComponent<ThirdPersonMovement>().canJump = true;
             canShoot = false;
         }
     }
@@ -387,7 +389,7 @@ public class GrappleHook : MonoBehaviour
     void PullObject()
     {
         //Debug.Log("Pull Active");
-        playerREF.gameObject.GetComponent<ThirdPersonMovement>().canJump = false;
+        //playerREF.gameObject.GetComponent<ThirdPersonMovement>().canJump = false;
         if (pullingObject)
         {
             // Vector3 directionToPoint = transform.position - swingPoint;
@@ -405,11 +407,7 @@ public class GrappleHook : MonoBehaviour
 
     public void PullObjectInput(InputAction.CallbackContext context)
     {
-        if (context.performed)
-        {
-            pullingObject = true;
-        }
-        else
+        if (context.canceled)
         {
             pullingObject = false;
         }
