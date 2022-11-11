@@ -62,7 +62,8 @@ public class WallRun : MonoBehaviour
     {
         if (isWallRunning == true)
         {
-             WallRunMovement();
+            Debug.Log("WallRunning");
+            WallRunMovement();
         }
     }
 
