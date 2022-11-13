@@ -76,6 +76,9 @@ public class ThirdPersonMovement : MonoBehaviour
     GameObject coinCounterREF;
     TextMeshProUGUI coinCountText;
 
+    //Camera Switching
+    GameObject currentCam;
+
     private GameObject[] skateWheels;
     private GameObject[] skateShoes;
     [SerializeField] private Material skatesOnMaterial;
@@ -360,5 +363,32 @@ public class ThirdPersonMovement : MonoBehaviour
             coinCount = coinCount + coin;
             Debug.Log(coinCount);
             coinCountText.text = $"{coinCount}";
+    }
+
+    //Camera Switch
+    public void SwitchCameraTPM(InputAction.CallbackContext context)
+    {
+        if (context.performed) return;
+        
+        if (!walking)
+        {
+            if (context.started)
+            {
+                if (GameObject.Find("BasicCam"))
+                {
+                    currentCam = GameObject.Find("BasicCam");
+                } else if (GameObject.Find("AimingCam"))
+                {
+                    currentCam = GameObject.Find("AimingCam");
+                }
+                currentCam.GetComponent<ThirdPersonCamera>().SwitchCameraStarted();
+            }
+
+            if (context.canceled)
+            {
+                currentCam.GetComponent<ThirdPersonCamera>().SwitchCameraCanceled();
+            }
+        }
+        
     }
 }

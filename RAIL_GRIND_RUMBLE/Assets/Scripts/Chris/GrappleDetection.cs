@@ -162,7 +162,7 @@ public class GrappleDetection : MonoBehaviour
     public void AimSwitch()
     {
         canSwitch = true;
-
+    
         if (currentAim != null)
         {
             aimingCamREF.gameObject.GetComponent<ThirdPersonCamera>().aimingLookAt = currentAim;

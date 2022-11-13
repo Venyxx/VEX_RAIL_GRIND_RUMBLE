@@ -125,13 +125,13 @@ public class ThirdPersonCamera : MonoBehaviour
         
     }
 
-    public void SwitchCamera(InputAction.CallbackContext context)
+    public void SwitchCameraStarted()
     {
+        Debug.Log ("Aim Mode Input detected");
         //Aiming
-        //Add reference to Grapple Hook Script so you can only aim after cooldown
-        if (context.performed) return;
+        //if (context.performed) return;
 
-        if (context.started && grappleDetection.gameObject.GetComponent<GrappleDetection>().aimPoints.Count != 0 && playerPrefabREF.gameObject.GetComponent<GrappleHook>().grappleStored)
+        if (grappleDetection.gameObject.GetComponent<GrappleDetection>().aimPoints.Count != 0 && playerPrefabREF.gameObject.GetComponent<GrappleHook>().grappleStored)
         {
             SwitchCameraStyle(CameraStyle.Aiming);
 
@@ -144,11 +144,17 @@ public class ThirdPersonCamera : MonoBehaviour
             }
         }
 
-        if (context.canceled)
-        {
-            SwitchCameraStyle(CameraStyle.Basic);
-            Time.timeScale = 1f;
-        }
+        // if (context.canceled)
+        // {
+        //     SwitchCameraStyle(CameraStyle.Basic);
+        //     Time.timeScale = 1f;
+        // }
+    }
+
+    public void SwitchCameraCanceled()
+    {
+        SwitchCameraStyle(CameraStyle.Basic);
+        Time.timeScale = 1f;
     }
 
     void SwitchCameraStyle(CameraStyle newStyle)
