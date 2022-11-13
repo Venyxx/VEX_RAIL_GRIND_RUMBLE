@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 8673279422675202530}
   - component: {fileID: 6897644254497228072}
   - component: {fileID: 5222151670358661546}
+  - component: {fileID: 7955345743796007862}
+  - component: {fileID: 4913904844055318727}
   m_Layer: 0
   m_Name: favelaBuilding_V1 1
   m_TagString: Untagged
@@ -26,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4952172434066105597}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -25, y: 3.422616, z: -68.55542}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -62,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3343474239573270418, guid: 4d9dd8f440b94ae46ba4907b22d88e3a, type: 3}
+  - {fileID: 2100000, guid: dc7b58e6101df0640b5951b15472957b, type: 2}
   - {fileID: 2100000, guid: 9ae28fcc97dcf1d44bd21473149e9f20, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -96,5 +98,31 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 6.76439, y: 7.075235, z: 8.517651}
-  m_Center: {x: 0, y: 3.5376174, z: 0.00000023841858}
+  m_Size: {x: 6.72041, y: 3.4697495, z: 7.508092}
+  m_Center: {x: 0.02199006, y: 4.944542, z: -0.021001339}
+--- !u!65 &7955345743796007862
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4952172434066105597}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.76439, y: 3.1903496, z: 6.025465}
+  m_Center: {x: 0, y: 1.5951748, z: -0.7476568}
+--- !u!65 &4913904844055318727
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4952172434066105597}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.63245, y: 0.28769684, z: 8.517651}
+  m_Center: {x: 0.021989822, y: 6.79945, z: 0}

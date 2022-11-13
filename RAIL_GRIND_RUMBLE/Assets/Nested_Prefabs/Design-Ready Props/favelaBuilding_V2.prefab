@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6236337043407772095}
   - component: {fileID: 8173782867793341813}
   - component: {fileID: 6829250862738166756}
+  - component: {fileID: 3044520737386539638}
   m_Layer: 0
   m_Name: favelaBuilding_V2
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7669595281810345120}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -16.13, y: 3.422617, z: -80.02181}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -62,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 3395422699502734243, guid: 0592d9257bd801840be661b766ff105e, type: 3}
+  - {fileID: 2100000, guid: b7ef5b126f8da0f4bac98af1d6a895cf, type: 2}
   - {fileID: 2100000, guid: 5f9379afd5dddfb45ac669b86e2927a4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -96,5 +97,18 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 7.992999, y: 3.8510916, z: 7.141463}
-  m_Center: {x: 0, y: 1.9206902, z: 0}
+  m_Size: {x: 6.956684, y: 3.7030482, z: 6.2137156}
+  m_Center: {x: 0.03454399, y: 1.8466685, z: 0.019739628}
+--- !u!65 &3044520737386539638
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7669595281810345120}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 7.992999, y: 0.19931793, z: 7.171069}
+  m_Center: {x: 0, y: 3.7860565, z: 0.0049357414}
