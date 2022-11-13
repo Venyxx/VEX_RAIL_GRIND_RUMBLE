@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
@@ -6,7 +7,8 @@ using TMPro;
 public class ThirdPersonMovement : MonoBehaviour
 {
     //Movement
-    [SerializeField] public float moveSpeed;
+    public float moveSpeed;
+    [SerializeField] private float walkSpeed = 0.3f;
     private float baseMoveSpeed;
     private float speedLerp;
     public float groundDrag;
@@ -64,6 +66,8 @@ public class ThirdPersonMovement : MonoBehaviour
     private bool jump;
     private bool jumpCancel;
 
+    private bool walking = false;
+
 
     public Rigidbody rigidBody;
 
@@ -72,6 +76,18 @@ public class ThirdPersonMovement : MonoBehaviour
     GameObject coinCounterREF;
     TextMeshProUGUI coinCountText;
 
+    private GameObject[] skateWheels;
+    private GameObject[] skateShoes;
+    [SerializeField] private Material skatesOnMaterial;
+    [SerializeField] private Material skatesOffMaterial;
+
+    //COLLIDER STUFF (so ari gets shorter when skates are turned off)
+    private CapsuleCollider ariCollider;
+    private static float skateCenterY = 0.8903141f;
+    private static float skateHeight = 1.841251f;
+    private static float walkCenterY = 0.929162f;
+    private static float walkHeight = 1.763556f; 
+        
     // Start is called before the first frame update
     void Start()
     {
@@ -79,7 +95,7 @@ public class ThirdPersonMovement : MonoBehaviour
         baseMoveSpeed= 8;
         speedLerp = 2.22f;
 
-        
+
         playerActions = new InputHandler();
         playerActions.Player.Enable();
         rigidBody.freezeRotation = true;
@@ -101,11 +117,16 @@ public class ThirdPersonMovement : MonoBehaviour
         coinCountText = coinCounterREF.GetComponent<TextMeshProUGUI>();
         //Change/remove this line later based on level-to-level gameplay
         coinCount = 0;
+
+        skateShoes = GameObject.FindGameObjectsWithTag("SkateBody");
+        skateWheels = GameObject.FindGameObjectsWithTag("SkateWheel");
+        ariCollider = GetComponent<CapsuleCollider>();
     }
 
     // Update is called once per frame
     void Update()
     {
+
         //Grounded Check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
@@ -148,6 +169,8 @@ public class ThirdPersonMovement : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
+        if (walking) return;
+        
         if (context.started && grounded)
         {
             isJumping = true;
@@ -160,6 +183,32 @@ public class ThirdPersonMovement : MonoBehaviour
         {
             isJumping = false;
         }
+    }
+
+    public void ToggleWalk(InputAction.CallbackContext context)
+    {
+        if (!context.started) return;
+        
+        walking = !walking;
+        Debug.Log($"Walking: {walking}");
+
+        foreach (GameObject skateWheel in skateWheels)
+            skateWheel.SetActive(!walking); //if walking, turn off wheels. 
+
+        foreach (GameObject shoe in skateShoes)
+            shoe.GetComponent<MeshRenderer>().material = walking ? skatesOffMaterial : skatesOnMaterial;
+
+        if (walking)
+        {
+            ariCollider.center = new Vector3(ariCollider.center.x, walkCenterY, ariCollider.center.z);
+            ariCollider.height = walkHeight;
+        }
+        else
+        {
+            ariCollider.center = new Vector3(ariCollider.center.x, skateCenterY, ariCollider.center.z);
+            ariCollider.height = skateHeight;
+        }
+
     }
 
     IEnumerator JumpHoldDelay()
@@ -218,12 +267,18 @@ public class ThirdPersonMovement : MonoBehaviour
             return;
         }
 
-        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput; 
+        
+        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-        if (grounded == true)
+        if (walking)
+        {
+            rigidBody.velocity = new Vector3(moveDirection.normalized.x * walkSpeed * 10f, rigidBody.velocity.y, moveDirection.normalized.z * walkSpeed * 10f);
+        }
+        else if (grounded)
         {
             rigidBody.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
-        } else if (grounded == false)
+        } 
+        else 
         {
             if (isGrappling == true)
             {
@@ -231,11 +286,8 @@ public class ThirdPersonMovement : MonoBehaviour
             } else {
                 rigidBody.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
             }
-
-            
-            
         }
-        
+
     }
 
     void SpeedControl()
