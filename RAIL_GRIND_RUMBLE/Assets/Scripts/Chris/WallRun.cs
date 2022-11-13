@@ -13,11 +13,11 @@ public class WallRun : MonoBehaviour
     //Wallrunning
     public LayerMask wall;
     private float wallRunForce = 200f;
-    public float maxWallRunTime;
+    //public float maxWallRunTime;
     private float wallRunTimer;
     private bool isWallRunning;
-    private float wallJumpSideForce = 12f;
-    private float wallJumpUpForce = 7f;
+    [SerializeField]private float wallJumpSideForce = 12f;
+    [SerializeField]private float wallJumpUpForce = 7f;
 
     //Input
     private float horizontalInput;

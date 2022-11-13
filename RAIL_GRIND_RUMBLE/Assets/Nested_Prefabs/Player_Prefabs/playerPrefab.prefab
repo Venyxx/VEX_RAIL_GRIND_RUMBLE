@@ -312,7 +312,7 @@ GameObject:
   - component: {fileID: 1812488194}
   m_Layer: 7
   m_Name: playerPrefab
-  m_TagString: PlayerObject
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -517,7 +517,8 @@ MonoBehaviour:
   wall:
     serializedVersion: 2
     m_Bits: 256
-  maxWallRunTime: 1
+  wallJumpSideForce: 12
+  wallJumpUpForce: 7
 --- !u!114 &2030071780202691821
 MonoBehaviour:
   m_ObjectHideFlags: 0

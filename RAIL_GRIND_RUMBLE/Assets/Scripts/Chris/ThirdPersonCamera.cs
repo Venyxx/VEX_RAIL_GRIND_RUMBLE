@@ -41,9 +41,9 @@ public class ThirdPersonCamera : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        //playerREF = GameObject.Find("PlayerObject");
+        playerREF = GameObject.FindWithTag("PlayerObject");
         playerPrefabREF = GameObject.Find("playerPrefab");
-        playerTransform = playerPrefabREF.gameObject.GetComponent<Transform>();
+        playerTransform = playerREF.gameObject.GetComponent<Transform>();
        
         player = playerPrefabREF.gameObject.GetComponent<Transform>();
         rigidBody = playerPrefabREF.gameObject.GetComponent<Rigidbody>();
