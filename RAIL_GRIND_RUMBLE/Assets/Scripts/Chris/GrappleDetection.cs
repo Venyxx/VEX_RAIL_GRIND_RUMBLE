@@ -67,7 +67,7 @@ public class GrappleDetection : MonoBehaviour
             
             for (int i = 0; i < aimPoints.Count; i++)
             {
-                if (Vector3.Distance(player.position, aimPoints[0].position) > Vector3.Distance(player.position, aimPoints[i].position))
+                if (aimPoints[0] != null && Vector3.Distance(player.position, aimPoints[0].position) > Vector3.Distance(player.position, aimPoints[i].position))
                 {
                     Transform temp = aimPoints[i];
                     aimPoints.Remove(aimPoints[i]);

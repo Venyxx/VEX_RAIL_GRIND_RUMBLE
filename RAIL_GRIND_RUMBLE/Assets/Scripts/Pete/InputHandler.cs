@@ -107,6 +107,15 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Graffiti"",
+                    ""type"": ""Button"",
+                    ""id"": ""24a71db0-cb8e-4c66-a963-45bfa06ff53c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -351,6 +360,61 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4073bcc7-beb6-4086-a57c-9d97e1aa8245"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Graffiti"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0bb78d55-d953-4e10-9ed4-7d84f63dbf9a"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Graffiti"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d0ce54a1-0094-431a-b456-d19ea63c1bee"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Graffiti"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1e9d92bc-dc63-47a7-8585-f48b148bdb22"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Graffiti"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6222c16e-c418-43f0-8dd7-62957f0294d5"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Graffiti"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -368,6 +432,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_SwitchMode = m_Player.FindAction("Switch Mode", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
+        m_Player_Graffiti = m_Player.FindAction("Graffiti", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -436,6 +501,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_SwitchMode;
     private readonly InputAction m_Player_Attack;
+    private readonly InputAction m_Player_Graffiti;
     public struct PlayerActions
     {
         private @InputHandler m_Wrapper;
@@ -449,6 +515,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @SwitchMode => m_Wrapper.m_Player_SwitchMode;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
+        public InputAction @Graffiti => m_Wrapper.m_Player_Graffiti;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -485,6 +552,9 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 @Attack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
                 @Attack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
                 @Attack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
+                @Graffiti.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGraffiti;
+                @Graffiti.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGraffiti;
+                @Graffiti.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGraffiti;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -516,6 +586,9 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 @Attack.started += instance.OnAttack;
                 @Attack.performed += instance.OnAttack;
                 @Attack.canceled += instance.OnAttack;
+                @Graffiti.started += instance.OnGraffiti;
+                @Graffiti.performed += instance.OnGraffiti;
+                @Graffiti.canceled += instance.OnGraffiti;
             }
         }
     }
@@ -531,5 +604,6 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnSwitchMode(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
+        void OnGraffiti(InputAction.CallbackContext context);
     }
 }

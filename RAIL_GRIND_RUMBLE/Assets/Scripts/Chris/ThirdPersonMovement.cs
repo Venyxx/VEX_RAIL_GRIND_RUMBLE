@@ -66,7 +66,7 @@ public class ThirdPersonMovement : MonoBehaviour
     private bool jump;
     private bool jumpCancel;
 
-    private bool walking = false;
+    [SerializeField] private bool walking = true;
 
 
     public Rigidbody rigidBody;
@@ -94,6 +94,7 @@ public class ThirdPersonMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         moveSpeed = 10;
         baseMoveSpeed= 8;
         speedLerp = 2.22f;
@@ -124,6 +125,7 @@ public class ThirdPersonMovement : MonoBehaviour
         skateShoes = GameObject.FindGameObjectsWithTag("SkateBody");
         skateWheels = GameObject.FindGameObjectsWithTag("SkateWheel");
         ariCollider = GetComponent<CapsuleCollider>();
+        WalkToggleHelper();
     }
 
     // Update is called once per frame
@@ -138,7 +140,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
         //Add function for increasing player speed when keys held down
         TimerSpace();
-
+    
 
         //Drag
         if (grounded == true)
@@ -191,8 +193,12 @@ public class ThirdPersonMovement : MonoBehaviour
     public void ToggleWalk(InputAction.CallbackContext context)
     {
         if (!context.started) return;
-        
         walking = !walking;
+        WalkToggleHelper();
+    }
+
+    void WalkToggleHelper()
+    {
         Debug.Log($"Walking: {walking}");
 
         foreach (GameObject skateWheel in skateWheels)
@@ -211,7 +217,6 @@ public class ThirdPersonMovement : MonoBehaviour
             ariCollider.center = new Vector3(ariCollider.center.x, skateCenterY, ariCollider.center.z);
             ariCollider.height = skateHeight;
         }
-
     }
 
     IEnumerator JumpHoldDelay()

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 506337526877955033}
   - component: {fileID: 1575017192658423276}
   - component: {fileID: 3464118355145080438}
+  - component: {fileID: 8287377447937121933}
   m_Layer: 0
   m_Name: Ramp
   m_TagString: Untagged
@@ -84,6 +85,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &8287377447937121933
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6351909512418899873}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -478882678752539408, guid: e26e62479468ee84b8d9ba0163ca2b94, type: 3}
 --- !u!1 &7298614136100139900
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,7 +108,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7926953611363674566}
-  - component: {fileID: 7604481020671137492}
   m_Layer: 0
   m_Name: QuarterPipe_Model_V1
   m_TagString: Untagged
@@ -118,19 +132,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &7604481020671137492
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7298614136100139900}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.49, y: 1.04, z: 2.07}
-  m_Center: {x: -0.28, y: 0.5, z: 0}
 --- !u!1 &8165605036473778238
 GameObject:
   m_ObjectHideFlags: 0
@@ -142,6 +143,7 @@ GameObject:
   - component: {fileID: 2183038169350133512}
   - component: {fileID: 6296973792363934887}
   - component: {fileID: 5116388949328769158}
+  - component: {fileID: 1164230607613982179}
   m_Layer: 0
   m_Name: Pipe
   m_TagString: Untagged
@@ -215,3 +217,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &1164230607613982179
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8165605036473778238}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6402532953415861574, guid: e26e62479468ee84b8d9ba0163ca2b94, type: 3}

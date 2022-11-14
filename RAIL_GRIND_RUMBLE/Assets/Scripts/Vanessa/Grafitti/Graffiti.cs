@@ -26,15 +26,11 @@ public class Graffiti : MonoBehaviour
          graffitiRight = Resources.Load("ai3") as GameObject;
         
     }
-
-    void Update()
+    
+    public void GraffitiAction(InputAction.CallbackContext context)
     {
-         if (Input.GetMouseButtonDown(0))
-        {
-            Debug.Log("input");
-            GraffitiFire();
-        }
-            
+        if (!context.started) return;
+        GraffitiFire();
     }
 
     void GraffitiFire()
@@ -50,8 +46,6 @@ public class Graffiti : MonoBehaviour
             //Debug.Log(hit.collider.gameObject);
             if (hit.collider.gameObject.layer == 8)
             {
-                
-                
                 GameObject madeGraffiti;
                 if (hit.collider.gameObject.tag == "Poster")
                 {
