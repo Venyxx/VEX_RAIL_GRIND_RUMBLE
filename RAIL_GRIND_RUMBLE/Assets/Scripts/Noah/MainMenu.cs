@@ -20,6 +20,7 @@ public class MainMenu : MonoBehaviour
     {
         EventSystem.current.SetSelectedGameObject(null); 
         EventSystem.current.SetSelectedGameObject(mainMenuFirstButton);
+        Cursor.lockState = CursorLockMode.None;
     }
 
     // Update is called once per frame
