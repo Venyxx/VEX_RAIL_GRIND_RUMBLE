@@ -22,11 +22,12 @@ public float walkPointRange;
 public float timeBetweenAttacks;
 bool alreadyAttacked;
 
-
-
 //States
 public float sightRange, attackRange;
 public bool playerInSightRange, playerInAttackRange;
+
+//Added by Chris - Removes enemies from Aim Points list upon death
+GameObject grappleDetectorREF;
 
 private void Awake()
 {
@@ -34,7 +35,11 @@ private void Awake()
 	player = GameObject.Find("playerPrefab").transform;
 	playerhealth = playerREF.GetComponent<PlayerHealth>();
 	agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+
+	//Added by Chris
+	grappleDetectorREF = GameObject.Find("GrappleDetector");
 }
+
 private void Update()
 {
 	//Check for sight and attack range
@@ -95,6 +100,10 @@ private void ResetAttack()
         Health -= Damage;
         if (Health <= 0)
         {
+			//Added by Chris
+			grappleDetectorREF.gameObject.GetComponent<GrappleDetection>().RemovePoint(GetComponent<Transform>());
+			//
+
             Destroy(gameObject);
         }
     }

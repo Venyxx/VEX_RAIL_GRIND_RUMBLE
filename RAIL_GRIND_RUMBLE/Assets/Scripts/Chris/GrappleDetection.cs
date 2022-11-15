@@ -8,8 +8,8 @@ public class GrappleDetection : MonoBehaviour
     private GameObject aimingCamREF;
     public Transform currentAim;
     public List<Transform> aimPoints;
-    private int aimPointCount;
-    private int aimPointChoice;
+    [SerializeField]private int aimPointCount;
+    [SerializeField]private int aimPointChoice;
     private Transform aimLookAtREF;
     private Transform nextAim;
     private Transform player;
@@ -121,6 +121,7 @@ public class GrappleDetection : MonoBehaviour
         nextAim = aimPoints[aimPointChoice];
         aimLookAtREF.transform.position = currentAim.transform.position;
         lookAtSwitchActive = true;
+        Debug.Log(aimPointChoice);
     }
     
 
@@ -133,18 +134,8 @@ public class GrappleDetection : MonoBehaviour
             currentAim = collision.gameObject.GetComponent<Transform>();
             if (!aimPoints.Exists(element => element == (currentAim)))
             {
-                if (aimPointCount < 6)
-                {
-                    //aimPoints[aimPointCount] = collision.gameObject.GetComponent<Transform>();
                     aimPoints.Add(collision.gameObject.transform);
-                    aimPointCount++;
-                    //Array.Resize(ref aimPoints, aimPointCount);
-                } else {
-                    aimPointCount = 0;
-                    aimPoints.Add(collision.gameObject.transform);
-                    //aimPoints[aimPointCount] = collision.gameObject.GetComponent<Transform>();
-                }
-                
+                    aimPointCount++;    
             }
             
         }
@@ -157,6 +148,12 @@ public class GrappleDetection : MonoBehaviour
             aimPoints.Remove(collision.gameObject.transform);
             aimPointCount--;
         }
+    }
+
+    public void RemovePoint(Transform point)
+    {
+        aimPoints.Remove(point);
+        aimPointCount--;
     }
 
     public void AimSwitch()

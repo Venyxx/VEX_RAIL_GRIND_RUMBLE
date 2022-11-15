@@ -33,6 +33,7 @@ public class GrappleHook : MonoBehaviour
 
     //Air Movement
     private Rigidbody rigidBody;
+    private float rbDefaultMass;
     private float horizontalThrustForce = 2000f;
     private float forwardThrustForce = 3000f;
     private float extendCableSpeed = 20f;
@@ -79,6 +80,8 @@ public class GrappleHook : MonoBehaviour
         line = playerREF.gameObject.GetComponent<LineRenderer>();
         grappleDetectorREF = GameObject.Find("GrappleDetector");
         _thirdPersonMovement = FindObjectOfType<ThirdPersonMovement>();
+
+        rbDefaultMass = rigidBody.mass;
 
         //Maybe make this more efficient
         GameObject basicCam = GameObject.Find("BasicCam");
@@ -159,6 +162,7 @@ public class GrappleHook : MonoBehaviour
         {
             return;
         }
+
             swingPoint = predictionHit.point;
             joint = player.gameObject.AddComponent<SpringJoint>();
             joint.autoConfigureConnectedAnchor = false;
@@ -271,7 +275,7 @@ public class GrappleHook : MonoBehaviour
         //Debug.Log("shorten grapple cable");
         if (joint != null)
         {
-            //Debug.Log("joint is not null");
+            //Can Pull currently not being set back to false properly due to raycast
             if (canPull == false)
             {
                 //Debug.Log("canpull is false");
@@ -284,11 +288,34 @@ public class GrappleHook : MonoBehaviour
                 if (context.performed)
                 {
                     shorteningCable = true;
-                } else if (context.canceled)
+                } 
+                
+                if (context.canceled)
                 {
                     shorteningCable = false;
                 }
             }
+
+            //Rigidbody mass adjustment
+            if (context.started)
+            {
+                rigidBody.mass = (rbDefaultMass/2);
+            }
+        }
+
+         if (context.canceled)
+            {
+                rigidBody.mass = rbDefaultMass;
+            }
+    }
+
+    //Add to LShift once grappling is refactored
+    public void ReleaseAim(InputAction.CallbackContext context)
+    {
+        if (joint == null && context.canceled)
+        {
+            canPull = false;
+            enemyPullTo = false;
         }
     }
 
@@ -375,13 +402,11 @@ public class GrappleHook : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("GrapplePickUp") && joint != null)
         {
             pullingObject = false;
-            grappleDetectorREF.gameObject.GetComponent<GrappleDetection>().aimPoints.Remove(collision.gameObject.transform);
+            grappleDetectorREF.gameObject.GetComponent<GrappleDetection>().RemovePoint(collision.transform);
             StopSwing();
             Destroy(collision.gameObject);
             throwObjectScript.SpawnHeldObject();
             
-            //Temporary solution
-            //playerREF.gameObject.GetComponent<ThirdPersonMovement>().canJump = true;
             canShoot = false;
         }
     }

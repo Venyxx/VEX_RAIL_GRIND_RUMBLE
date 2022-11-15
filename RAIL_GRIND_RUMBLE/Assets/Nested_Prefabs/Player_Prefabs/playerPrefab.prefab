@@ -498,6 +498,7 @@ MonoBehaviour:
   grounded: 0
   isGrappling: 0
   swingSpeed: 5
+  walking: 1
   rigidBody: {fileID: 2030071780202691823}
   skatesOnMaterial: {fileID: 0}
   skatesOffMaterial: {fileID: 0}
@@ -535,6 +536,7 @@ MonoBehaviour:
     m_Bits: 67072
   maxSwingDistance: 50
   grappleStored: 0
+  canPull: 0
 --- !u!114 &9069784105693932722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -819,6 +821,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: a7a7501f-250d-4dc0-ba45-5c02fc46adfa
     m_ActionName: Player/Attack[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 24a71db0-cb8e-4c66-a963-45bfa06ff53c
+    m_ActionName: Player/Graffiti[/Keyboard/q]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -1042,6 +1048,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentAim: {fileID: 2030071779667499559}
   aimPoints: []
+  aimPointCount: 0
+  aimPointChoice: 0
 --- !u!1 &5954573490325766066
 GameObject:
   m_ObjectHideFlags: 0

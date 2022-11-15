@@ -175,6 +175,7 @@ public class ThirdPersonMovement : MonoBehaviour
     public void Jump(InputAction.CallbackContext context)
     {
         if (walking) return;
+        if (isGrappling) return;
         
         if (context.started && grounded)
         {
