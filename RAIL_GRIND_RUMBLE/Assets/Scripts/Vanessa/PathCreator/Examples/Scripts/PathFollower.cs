@@ -23,7 +23,7 @@ namespace PathCreation.Examples
 
         void Update()
         {
-            speed = ThirdPersonMovementREF.moveSpeed;
+            speed = ThirdPersonMovementREF.moveSpeed * 5;
             if (pathCreator != null)
             {
                 distanceTravelled += speed * Time.deltaTime;
