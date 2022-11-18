@@ -62,7 +62,7 @@ public class EnemyMovement : MonoBehaviour
     {
         if (FollowCoroutine == null)
         {
-            FollowCoroutine = StartCoroutine(FollowTarget());
+            FollowCoroutine = StartCoroutine(Start()); //change this to StartCoroutine(FollowTarget()); for spawner
         }
         else
         {
@@ -71,17 +71,20 @@ public class EnemyMovement : MonoBehaviour
         
     }
 
-    private IEnumerator FollowTarget()
+    private IEnumerator Start() //change this to FollowTarget for spawner 
     {
-        WaitForSeconds Wait = new WaitForSeconds(UpdateSpeed);
+      WaitForSeconds Wait = new WaitForSeconds(UpdateSpeed);
         while(gameObject.activeSelf)
-        {
+       {
             if (Agent.enabled)
-            {
+          {
             Agent.SetDestination(Player.transform.position);
             }
-            yield return Wait;
+          yield return Wait;
         }
+   
+
+      
     }
   
     private IEnumerator Hide(Transform Target)
@@ -184,7 +187,7 @@ public void startChasing (Transform Target)
 {
      
      StopCoroutine(FollowCoroutine);
-     FollowCoroutine = StartCoroutine(FollowTarget());
+    // FollowCoroutine = StartCoroutine(FollowTarget());
     
 }
 

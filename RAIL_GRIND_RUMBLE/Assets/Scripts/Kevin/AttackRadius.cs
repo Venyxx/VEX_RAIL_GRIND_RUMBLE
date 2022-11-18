@@ -29,26 +29,26 @@ public class AttackRadius : MonoBehaviour
             Damageables.Add(damageable);
             if (AttackCoroutine == null)
             {
-               if (IsSharpShooter == false)
-               {
+              // if (IsSharpShooter == false)
+              // {
                  AttackCoroutine = StartCoroutine(Attack());
-                }
-                if (IsSharpShooter == true)
-                { 
-                    if (Movement.HasHidden == false)
-                   {
-                       
-                       Movement.startHiding(other.transform);
-                   AttackCoroutine = Movement.FollowCoroutine;
-                   }
-                   if (Movement.HasHidden == true)
-                   {
-                        Movement.FollowCoroutine = AttackCoroutine ;
+                //}
+                //if (IsSharpShooter == true)
+               // { 
+                //    if (Movement.HasHidden == false)
+                 //  {
+                  //     
+                   //    Movement.startHiding(other.transform);
+                   //AttackCoroutine = Movement.FollowCoroutine;
+                   //}
+                   //if (Movement.HasHidden == true)
+                   //{
+                     //   Movement.FollowCoroutine = AttackCoroutine ;
                                          
                      
-                       AttackCoroutine = StartCoroutine(Attack());
-                   }
-                }
+                      // AttackCoroutine = StartCoroutine(Attack());
+                   //}
+               // }
             }
         }
     }

@@ -48,7 +48,7 @@ public class Enemy : PoolableObject, IDamageable
     }
     public override void OnDisable()
     {
-        base.OnDisable();
+        //base.OnDisable(); turn this off when placing enemy
         Agent.enabled = false;
     }
     public virtual void SetupAgentFromConfiguration()
