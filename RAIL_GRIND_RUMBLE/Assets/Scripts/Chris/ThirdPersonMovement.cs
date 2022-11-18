@@ -175,7 +175,7 @@ public class ThirdPersonMovement : MonoBehaviour
     public void Jump(InputAction.CallbackContext context)
     {
         if (walking) return;
-        if (isGrappling) return;
+        //if (isGrappling) return;
         
         if (context.started && grounded)
         {
@@ -380,7 +380,10 @@ public class ThirdPersonMovement : MonoBehaviour
         {
             if (context.started)
             {
-                if (GameObject.Find("BasicCam"))
+                if (GameObject.Find("BasicCam") && isGrappling) 
+                {
+                    return;
+                } else if (GameObject.Find("BasicCam"))
                 {
                     currentCam = GameObject.Find("BasicCam");
                 } else if (GameObject.Find("AimingCam"))

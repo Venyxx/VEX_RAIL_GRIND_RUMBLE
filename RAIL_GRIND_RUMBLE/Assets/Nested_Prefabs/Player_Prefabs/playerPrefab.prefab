@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2030071780202691816}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &294039647
 MonoBehaviour:
@@ -167,12 +167,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2030071779272977632}
   m_LocalRotation: {x: -0, y: -0.99996173, z: -0, w: -0.008747533}
-  m_LocalPosition: {x: -0.22, y: 1.52, z: 0}
+  m_LocalPosition: {x: -0.4449997, y: 0.98100007, z: 0.1590004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2030071780202691816}
-  m_RootOrder: 5
+  m_Father: {fileID: 543450652339396924}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2030071779667499558
 GameObject:
@@ -334,7 +334,6 @@ Transform:
   - {fileID: 907242005}
   - {fileID: 3714725117423016561}
   - {fileID: 2030071780003898554}
-  - {fileID: 2030071779272977633}
   - {fileID: 1220496207279035374}
   - {fileID: 8205342914696385885}
   - {fileID: 2620723864185030717}
@@ -646,6 +645,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2030071780202691821}
+        m_TargetAssemblyTypeName: GrappleHook, Assembly-CSharp
+        m_MethodName: ReleaseAim
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: e065dc05-4bd1-4b79-b2d1-1143afcb780b
     m_ActionName: Mapping 1/Grapple Release[/Keyboard/leftShift]
   - m_PersistentCalls:
@@ -934,7 +945,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2030071780202691816}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!33 &3845365801453465304
 MeshFilter:
@@ -1077,7 +1088,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2030071780202691816}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7265929520492490318
 GameObject:
@@ -1330,7 +1341,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 86458e609259ce341b4f90f9fcfad336, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 86458e609259ce341b4f90f9fcfad336, type: 3}
       propertyPath: m_LocalScale.x
@@ -1592,7 +1603,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2117787121892871482, guid: 8439ad98a9c1678429f24f57d65c4511, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2117787121892871482, guid: 8439ad98a9c1678429f24f57d65c4511, type: 3}
       propertyPath: m_LocalPosition.x

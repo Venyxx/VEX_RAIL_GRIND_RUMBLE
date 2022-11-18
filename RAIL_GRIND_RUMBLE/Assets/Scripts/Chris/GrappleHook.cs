@@ -23,10 +23,11 @@ public class GrappleHook : MonoBehaviour
     private Vector3 swingPoint;
     private SpringJoint joint;
     private Vector3 currentGrapplePosition;
+    bool isGrappling;
+    bool zipRunning;
 
     //Tweakable Physics Values
     public float maxSwingDistance;
-    // public float spring;
     // public float spring;
     // public float damper;
     // public float massScale;
@@ -59,7 +60,10 @@ public class GrappleHook : MonoBehaviour
     private bool enemyPullTo;
     private GameObject enemyObject;
 
+    //Adjust cable length
     private bool shorteningCable;
+    private bool extendingCable;
+
     private bool pullingObject;
     
     
@@ -71,6 +75,10 @@ public class GrappleHook : MonoBehaviour
         canPull = false;
         enemyPullTo = false;
         grappleStored = true;
+        isGrappling = false;
+        zipRunning = false;
+        shorteningCable = false;
+        extendingCable = false;
 
         //Set References
         playerREF = this.gameObject;
@@ -119,22 +127,36 @@ public class GrappleHook : MonoBehaviour
         }
     }
 
+    //Left Click
     public void GrapplePull(InputAction.CallbackContext context)
     {
-        if (context.started && canShoot == true && grappleStored == true && GameObject.Find("AimingCam") != null)
+        if (context.started && canShoot == true && grappleStored == true && GameObject.Find("AimingCam") != null && isGrappling == false)
         {
             StartSwing();
-        }
-
-        if (context.canceled && joint != null)
+            StartCoroutine(ZipRunning());
+        } 
+        
+        if (context.performed)
         {
-            StopSwing();
+            if (isGrappling == true)
+            {
+                shorteningCable = true;
+            }
         }
         
-        if (context.canceled && joint == null && canShoot == false && cooldownRunning == false && GameObject.Find("PickUpHeld") == null)
+        if (context.canceled)
         {
-            canShoot = true;
+            if (joint == null && canShoot == false && cooldownRunning == false && GameObject.Find("PickUpHeld") == null)
+            {
+                canShoot = true;
+            }
+
+            if (zipRunning == false)
+            {
+                shorteningCable = false;
+            }
         }
+         
     }
 
     void LateUpdate()
@@ -162,6 +184,10 @@ public class GrappleHook : MonoBehaviour
         {
             return;
         }
+        //Insta-zip
+        shorteningCable = true;
+        rigidBody.mass = (rbDefaultMass/2);
+        isGrappling = true;
 
             swingPoint = predictionHit.point;
             joint = player.gameObject.AddComponent<SpringJoint>();
@@ -204,6 +230,8 @@ public class GrappleHook : MonoBehaviour
 
         enemyPullTo = false;
         shorteningCable = false;
+        rigidBody.mass = rbDefaultMass;
+        isGrappling = false;
     }
 
     IEnumerator Cooldown ()
@@ -218,6 +246,13 @@ public class GrappleHook : MonoBehaviour
         canShoot = true;
         grappleStored = true;
         cooldownRunning = false;
+    }
+
+    IEnumerator ZipRunning()
+    {
+        zipRunning = true;
+        yield return new WaitForSeconds(0.8f);
+        zipRunning = false;
     }
 
     void AirMovement()
@@ -247,7 +282,8 @@ public class GrappleHook : MonoBehaviour
         }
         
         //Extend Cable
-        if (verticalInput < 0)
+        //if (verticalInput < 0)
+        if (extendingCable == true)
         {
             float extendedDistanceFromPoint = Vector3.Distance(transform.position, swingPoint) + extendCableSpeed;
 
@@ -255,6 +291,7 @@ public class GrappleHook : MonoBehaviour
             joint.minDistance = extendedDistanceFromPoint * 0.25f;
         }
 
+        //Shorten Cable
         if (shorteningCable == true)
         {
             Debug.Log("Shortening Cable");
@@ -270,52 +307,55 @@ public class GrappleHook : MonoBehaviour
 
     }
 
+    //Space Bar
     public void ShortenGrappleCable(InputAction.CallbackContext context)
     {
         //Debug.Log("shorten grapple cable");
         if (joint != null)
         {
-            //Can Pull currently not being set back to false properly due to raycast
-            if (canPull == false)
-            {
-                //Debug.Log("canpull is false");
-                /*if (enemyPullTo == true)
-                {
-                    //Debug.Log("Enemy Pull To");
-                    swingPoint = enemyObject.transform.position;
-                }*/
-                
-                if (context.performed)
-                {
-                    shorteningCable = true;
-                } 
-                
-                if (context.canceled)
-                {
-                    shorteningCable = false;
-                }
-            }
+            // if (context.started)
+            // {
+            //     if (shorteningCable == true)
+            //     {
+            //         shorteningCable = false;
+            //     } 
+            // }
 
-            //Rigidbody mass adjustment
+            // if (context.performed)
+            // {
+            //     shorteningCable = true;
+            // } else if (context.canceled)
+            // {
+            //     shorteningCable = false;
+            // }
+
             if (context.started)
             {
-                rigidBody.mass = (rbDefaultMass/2);
+                StopSwing();
+            }
+        }
+    }
+
+    //Left Shift
+    public void ReleaseAim(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            if (joint != null)
+            {
+                extendingCable = true;
             }
         }
 
-         if (context.canceled)
-            {
-                rigidBody.mass = rbDefaultMass;
-            }
-    }
-
-    //Add to LShift once grappling is refactored
-    public void ReleaseAim(InputAction.CallbackContext context)
-    {
-        if (joint == null && context.canceled)
+        if (context.canceled)
         {
-            canPull = false;
-            enemyPullTo = false;
+            if (joint == null)
+            {
+                canPull = false;
+                enemyPullTo = false;
+            }
+            
+            extendingCable = false;
         }
     }
 
@@ -408,6 +448,14 @@ public class GrappleHook : MonoBehaviour
             throwObjectScript.SpawnHeldObject();
             
             canShoot = false;
+        }
+
+        if (collision.gameObject.tag == "AimPoint")
+        {
+            if (shorteningCable == true)
+            {
+                StopSwing();
+            }
         }
     }
 
