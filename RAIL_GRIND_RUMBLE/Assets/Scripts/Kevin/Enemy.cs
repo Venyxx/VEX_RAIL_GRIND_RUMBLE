@@ -13,10 +13,14 @@ public class Enemy : PoolableObject, IDamageable
     private Coroutine LookCoroutine;
     private const string ATTACK_TRIGGER = "Attack";
 
+    //Added for Chris - Removes enemies from Aim Points list upon death
+    GameObject grappleDetectorREF;
 
     private void Awake()
     {
         AttackRadius.OnAttack += OnAttack;
+        //Added for Chris
+	    grappleDetectorREF = GameObject.Find("GrappleDetector");
     }
 
     private void OnAttack(IDamageable Target)
@@ -78,6 +82,8 @@ public class Enemy : PoolableObject, IDamageable
         if (Health <= 0)
         {
             gameObject.SetActive(false);
+            //Added for Chris
+			grappleDetectorREF.gameObject.GetComponent<GrappleDetection>().RemovePoint(GetComponent<Transform>());
         }
     }
 
