@@ -308,8 +308,6 @@ GameObject:
   - component: {fileID: 474983805264959317}
   - component: {fileID: 5446298453998633873}
   - component: {fileID: 4794284961370761463}
-  - component: {fileID: 5866341839462765902}
-  - component: {fileID: 1812488194}
   m_Layer: 7
   m_Name: playerPrefab
   m_TagString: Player
@@ -835,6 +833,42 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 24a71db0-cb8e-4c66-a963-45bfa06ff53c
     m_ActionName: Player/Graffiti[/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 
+    m_ActionName: 
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 
+    m_ActionName: 
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 
+    m_ActionName: 
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 
+    m_ActionName: 
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 
+    m_ActionName: 
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PlayerAttack, Assembly-CSharp
+        m_MethodName: Attack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a7a7501f-250d-4dc0-ba45-5c02fc46adfa
+    m_ActionName: Player/Attack[/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -852,36 +886,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a15c28236e584a4fa2f6ed366111015, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5866341839462765902
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2030071780202691818}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33aabe1a2dec93349b06e6e5dc51bc06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pathCreator: {fileID: 0}
-  endOfPathInstruction: 2
-  speed: 5
-  distanceTravelled: 0
---- !u!114 &1812488194
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2030071780202691818}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3efda54784bc10428950d4477917f7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  graffiti: {fileID: 1193813719681258576, guid: 7a16962a84966584fb31eeb66b62beec, type: 3}
-  canLocation: {fileID: 294039646}
 --- !u!1 &2030071780611383564
 GameObject:
   m_ObjectHideFlags: 0
@@ -1582,6 +1586,29 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 86458e609259ce341b4f90f9fcfad336, type: 3}
   m_PrefabInstance: {fileID: 1394181847}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &919132148400962438 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 86458e609259ce341b4f90f9fcfad336, type: 3}
+  m_PrefabInstance: {fileID: 1394181847}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1558509666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148400962438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06c0334f09da4644783ccc9a2df44ff3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 100
+  attackPoint: {fileID: 0}
+  attackRange: 0.5
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1001 &7835383478398834791
 PrefabInstance:
   m_ObjectHideFlags: 0
