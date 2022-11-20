@@ -88,12 +88,6 @@ public class CollisionFollow : MonoBehaviour
         }*/
     }
 
-    public void JumpOffRail(InputAction.CallbackContext context)
-    {
-        if (!context.performed) return;
-        if (pathFollowerREF == null) return;
-        pathFollowerREF.pathCreator = null;
-        isGrinding = false;
-    }
+    
     
 }

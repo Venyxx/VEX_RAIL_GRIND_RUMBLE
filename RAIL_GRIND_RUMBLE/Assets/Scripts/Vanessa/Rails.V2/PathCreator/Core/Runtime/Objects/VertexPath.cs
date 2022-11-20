@@ -177,6 +177,7 @@ namespace PathCreation {
         /// Gets point on path based on distance travelled.
         public Vector3 GetPointAtDistance (float dst, EndOfPathInstruction endOfPathInstruction = EndOfPathInstruction.Loop) {
             float t = dst / length;
+            
             return GetPointAtTime (t, endOfPathInstruction);
         }
 
