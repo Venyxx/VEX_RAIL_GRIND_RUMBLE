@@ -9,6 +9,7 @@ using PathCreation;
         private VertexPath vertexPath;
         public EndOfPathInstruction endOfPathInstruction;
         public float speed = 40;
+        private float baseSpeed = 40;
         [SerializeField] public float distanceTravelled;
 
             void Start() 
@@ -42,5 +43,10 @@ using PathCreation;
             public void SpeedAdjustment (float speedPass)
             {
                 speed = speedPass;
+            }
+
+            public void SpeedReAlignment ()
+            {
+                speed = baseSpeed;
             }
     }

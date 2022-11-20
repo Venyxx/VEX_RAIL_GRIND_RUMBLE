@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerRailCollider : MonoBehaviour
 {
@@ -26,5 +27,19 @@ public class PlayerRailCollider : MonoBehaviour
             gameObject.transform.parent = col.transform;
             col.gameObject.GetComponent<PositiveRunner>().SpeedAdjustment(ThirdPersonMovementREF.moveSpeed);
         }
+    }
+
+    void OnTriggerExit (Collider col)
+    {
+        if (col.gameObject.name == "PositiveRunner")
+        {
+            col.gameObject.GetComponent<PositiveRunner>().SpeedReAlignment();
+        }
+    }
+
+    public void JumpOffRail(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+        transform.parent = null;
     }
 }
