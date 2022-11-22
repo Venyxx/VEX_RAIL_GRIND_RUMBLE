@@ -13,6 +13,7 @@ public class GrappleDetection : MonoBehaviour
     private Transform aimLookAtREF;
     private Transform nextAim;
     private Transform player;
+    private GrappleHook grappleHookScript;
 
     private bool canSwitch = false;
     private bool lookAtSwitchActive = false;
@@ -34,6 +35,7 @@ public class GrappleDetection : MonoBehaviour
 
         GameObject playerREF = GameObject.Find("playerPrefab");
         player = playerREF.GetComponent<Transform>();
+        grappleHookScript = playerREF.GetComponent<GrappleHook>();
     }
 
     
@@ -55,9 +57,7 @@ public class GrappleDetection : MonoBehaviour
                 aimLookAtREF.transform.position = Vector3.MoveTowards(aimLookAtREF.transform.position, nextAim.transform.position, 0.5f);
                 cinemachineCam.m_LookAt = aimLookAtREF;
             } else {
-                lookAtSwitchActive = false;
-                currentAim = aimPoints[aimPointChoice];
-                AimSwitch();
+                SetCurrentAim();
             }
         }
 
@@ -79,9 +79,12 @@ public class GrappleDetection : MonoBehaviour
 
     }
 
-    void FixedUpdate()
+    public void SetCurrentAim()
     {
-        
+        lookAtSwitchActive = false;
+        currentAim = aimPoints[aimPointChoice];
+        grappleHookScript.CheckObjectType(currentAim);
+        AimSwitch();
     }
 
     //new input system conversion, method tied to RELEASING SHIFT for now.
@@ -131,8 +134,7 @@ public class GrappleDetection : MonoBehaviour
         use COMPARETAG instead of == string comparison*/
         if(collision.gameObject.CompareTag("AimPoint") || collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            currentAim = collision.gameObject.GetComponent<Transform>();
-            if (!aimPoints.Exists(element => element == (currentAim)))
+            if (!aimPoints.Exists(element => element == (collision.gameObject.transform)))
             {
                     aimPoints.Add(collision.gameObject.transform);
                     aimPointCount++;    
@@ -147,6 +149,11 @@ public class GrappleDetection : MonoBehaviour
         {
             aimPoints.Remove(collision.gameObject.transform);
             aimPointCount--;
+
+            if (GameObject.Find("AimingCam"))
+            {
+                AimSwitch();
+            }
         }
     }
 
@@ -159,12 +166,10 @@ public class GrappleDetection : MonoBehaviour
     public void AimSwitch()
     {
         canSwitch = true;
-    
         if (currentAim != null)
         {
             aimingCamREF.gameObject.GetComponent<ThirdPersonCamera>().aimingLookAt = currentAim;
             cinemachineCam.m_LookAt = currentAim;
         }
-        
     }
 }

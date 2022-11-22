@@ -129,26 +129,17 @@ public class ThirdPersonCamera : MonoBehaviour
     {
         Debug.Log ("Aim Mode Input detected");
         //Aiming
-        //if (context.performed) return;
-
         if (grappleDetection.gameObject.GetComponent<GrappleDetection>().aimPoints.Count != 0 && playerPrefabREF.gameObject.GetComponent<GrappleHook>().grappleStored)
         {
             SwitchCameraStyle(CameraStyle.Aiming);
-
-            grappleDetection.gameObject.GetComponent<GrappleDetection>().AimSwitch();
-            //grappleDetection.gameObject.GetComponent<GrappleDetection>().aimPointChoice = 0;
+            //grappleDetection.gameObject.GetComponent<GrappleDetection>().AimSwitch();
+            grappleDetection.gameObject.GetComponent<GrappleDetection>().SetCurrentAim();
 
             if (playerPrefabREF.gameObject.GetComponent<ThirdPersonMovement>().grounded == false)
             {
                 Time.timeScale = 0.3f;
             }
         }
-
-        // if (context.canceled)
-        // {
-        //     SwitchCameraStyle(CameraStyle.Basic);
-        //     Time.timeScale = 1f;
-        // }
     }
 
     public void SwitchCameraCanceled()

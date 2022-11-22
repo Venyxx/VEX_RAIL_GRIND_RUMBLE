@@ -52,19 +52,19 @@ public class GrappleHook : MonoBehaviour
     //public Transform predictionPoint;
 
     //Check if Grapple Point is a throwable object
-    private bool canPull;
-    private GameObject pullableObject;
+    public bool canPull;
+    public GameObject pullableObject;
     private ThrowObject throwObjectScript;
 
     //Check if Grapple Point is an enemy
-    private bool enemyPullTo;
-    private GameObject enemyObject;
+    public bool enemyPullTo;
+    public GameObject enemyObject;
 
     //Adjust cable length
     private bool shorteningCable;
     private bool extendingCable;
 
-    private bool pullingObject;
+    public bool pullingObject;
     
     
 
@@ -180,16 +180,18 @@ public class GrappleHook : MonoBehaviour
 
     void StartSwing()
     {
-        if (predictionHit.point == Vector3.zero)
-        {
-            return;
-        }
+        // if (predictionHit.point == Vector3.zero)
+        // {
+        //     return;
+        // }
+
         //Insta-zip
         shorteningCable = true;
         rigidBody.mass = (rbDefaultMass/2);
         isGrappling = true;
 
-            swingPoint = predictionHit.point;
+            //swingPoint = predictionHit.point;
+            swingPoint = grappleDetectorREF.GetComponent<GrappleDetection>().currentAim.transform.position;
             joint = player.gameObject.AddComponent<SpringJoint>();
             joint.autoConfigureConnectedAnchor = false;
             joint.connectedAnchor = swingPoint;
@@ -344,7 +346,15 @@ public class GrappleHook : MonoBehaviour
             if (joint != null)
             {
                 extendingCable = true;
+                shorteningCable = false;
+            } else {
+                CheckObjectType(grappleDetectorREF.GetComponent<GrappleDetection>().currentAim);
             }
+        }
+
+        if (context.performed)
+        {
+            shorteningCable = false;
         }
 
         if (context.canceled)
@@ -395,41 +405,61 @@ public class GrappleHook : MonoBehaviour
             realHitPoint = Vector3.zero;
         }
 
-        //Aiming Reticle Code (WIP)
-        // //realHitPoint found
-        // if (realHitPoint != Vector3.zero)
-        // {
-        //     predictionPoint.gameObject.SetActive(true);
-        //     predictionPoint.position = realHitPoint;
-        // }
-        // //realHitPoint not found
-        // else 
-        // {
-        //     predictionPoint.gameObject.SetActive(false);
-        // }
-
         //Check if point is a pullable object or enemy
-        if (sphereCastHit.collider != null)
-        {
-            if (sphereCastHit.collider.gameObject.layer == LayerMask.NameToLayer("GrapplePickUp"))
-            {
-                canPull = true;
-                enemyPullTo = false;
-                pullableObject = sphereCastHit.collider.gameObject;
-                pullingObject = true;
-            } else if (sphereCastHit.collider.gameObject.layer == LayerMask.NameToLayer("Enemy")) 
-            {
-                enemyPullTo = true;
-                canPull = false;
-                enemyObject = sphereCastHit.collider.gameObject;
-            } else {
-                canPull = false;
-                enemyPullTo = false;
-            }
-        }
+        // if (sphereCastHit.collider != null)
+        // {
+        //     if (sphereCastHit.collider.gameObject.layer == LayerMask.NameToLayer("GrapplePickUp"))
+        //     {
+        //         canPull = true;
+        //         enemyPullTo = false;
+        //         pullableObject = sphereCastHit.collider.gameObject;
+        //         pullingObject = true;
+        //     } else if (sphereCastHit.collider.gameObject.layer == LayerMask.NameToLayer("Enemy")) 
+        //     {
+        //         enemyPullTo = true;
+        //         canPull = false;
+        //         enemyObject = sphereCastHit.collider.gameObject;
+        //     } else {
+        //         canPull = false;
+        //         enemyPullTo = false;
+        //     }
+        // }
 
         predictionHit = raycastHit.point == Vector3.zero ? sphereCastHit : raycastHit;
 
+    }
+
+    public void CheckObjectType(Transform currentAim)
+    {
+        if (currentAim == null)
+        {
+            canPull = false;
+            enemyPullTo = false;
+        } else {
+
+            if (!GameObject.Find("AimingCam"))
+            {
+            return;
+            }
+
+            if (currentAim.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+            {
+                enemyPullTo = true;
+                canPull = false;
+                enemyObject = currentAim.gameObject;
+                pullingObject = false;
+            } else if (currentAim.gameObject.layer == LayerMask.NameToLayer("GrapplePickUp")){
+                canPull = true;
+                enemyPullTo = false;
+                pullableObject = currentAim.gameObject;
+                pullingObject = true;
+            } else {
+                canPull = false;
+                enemyPullTo = false;
+                pullingObject = false;
+            }
+        }
+        
     }
 
     void OnCollisionEnter (Collision collision)
