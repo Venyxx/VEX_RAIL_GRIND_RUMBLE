@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2588660619408717935}
-  - component: {fileID: 2588660619408717933}
   - component: {fileID: 2588660619408717934}
+  - component: {fileID: 2588660619408717933}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -34,24 +34,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 98.438, z: 0}
---- !u!114 &2588660619408717933
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2588660619408717928}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06c0334f09da4644783ccc9a2df44ff3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 50
-  attackPoint: {fileID: 2588660619869523072}
-  attackRange: 1.06
-  enemyLayers:
-    serializedVersion: 2
-    m_Bits: 1024
 --- !u!95 &2588660619408717934
 Animator:
   serializedVersion: 4
@@ -72,6 +54,25 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2588660619408717933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2588660619408717928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06c0334f09da4644783ccc9a2df44ff3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 50
+  attackPoint: {fileID: 2588660619869523072}
+  attackRange: 1.06
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 1024
+  cooldownTime: 2
 --- !u!1 &2588660619869523073
 GameObject:
   m_ObjectHideFlags: 0

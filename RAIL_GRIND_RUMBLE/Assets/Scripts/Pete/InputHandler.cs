@@ -100,7 +100,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Attack"",
+                    ""name"": ""HeavyAttack"",
                     ""type"": ""Button"",
                     ""id"": ""a7a7501f-250d-4dc0-ba45-5c02fc46adfa"",
                     ""expectedControlType"": ""Button"",
@@ -112,6 +112,15 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                     ""name"": ""Graffiti"",
                     ""type"": ""Button"",
                     ""id"": ""24a71db0-cb8e-4c66-a963-45bfa06ff53c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LightAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""f7fb2d2d-f7db-410d-9e23-f8fa2a8d1012"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -342,22 +351,22 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""72ebcf71-b5c1-41e8-8777-1a13ffd446f8"",
-                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Attack"",
+                    ""action"": ""HeavyAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
                     ""id"": ""0313dcce-2fa2-494a-8098-1b94bd338c6b"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Attack"",
+                    ""action"": ""HeavyAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -415,6 +424,28 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                     ""action"": ""Graffiti"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0b216fc7-180f-45b3-8e64-e5e4b63fdca4"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LightAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3d9e9cd5-7477-4347-aefe-c61d715584f4"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LightAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -431,8 +462,9 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
         m_Player_PauseGame = m_Player.FindAction("Pause Game", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_SwitchMode = m_Player.FindAction("Switch Mode", throwIfNotFound: true);
-        m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
+        m_Player_HeavyAttack = m_Player.FindAction("HeavyAttack", throwIfNotFound: true);
         m_Player_Graffiti = m_Player.FindAction("Graffiti", throwIfNotFound: true);
+        m_Player_LightAttack = m_Player.FindAction("LightAttack", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -500,8 +532,9 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_PauseGame;
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_SwitchMode;
-    private readonly InputAction m_Player_Attack;
+    private readonly InputAction m_Player_HeavyAttack;
     private readonly InputAction m_Player_Graffiti;
+    private readonly InputAction m_Player_LightAttack;
     public struct PlayerActions
     {
         private @InputHandler m_Wrapper;
@@ -514,8 +547,9 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
         public InputAction @PauseGame => m_Wrapper.m_Player_PauseGame;
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @SwitchMode => m_Wrapper.m_Player_SwitchMode;
-        public InputAction @Attack => m_Wrapper.m_Player_Attack;
+        public InputAction @HeavyAttack => m_Wrapper.m_Player_HeavyAttack;
         public InputAction @Graffiti => m_Wrapper.m_Player_Graffiti;
+        public InputAction @LightAttack => m_Wrapper.m_Player_LightAttack;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -549,12 +583,15 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 @SwitchMode.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchMode;
                 @SwitchMode.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchMode;
                 @SwitchMode.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchMode;
-                @Attack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
-                @Attack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
-                @Attack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
+                @HeavyAttack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHeavyAttack;
+                @HeavyAttack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHeavyAttack;
+                @HeavyAttack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHeavyAttack;
                 @Graffiti.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGraffiti;
                 @Graffiti.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGraffiti;
                 @Graffiti.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGraffiti;
+                @LightAttack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLightAttack;
+                @LightAttack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLightAttack;
+                @LightAttack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLightAttack;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -583,12 +620,15 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 @SwitchMode.started += instance.OnSwitchMode;
                 @SwitchMode.performed += instance.OnSwitchMode;
                 @SwitchMode.canceled += instance.OnSwitchMode;
-                @Attack.started += instance.OnAttack;
-                @Attack.performed += instance.OnAttack;
-                @Attack.canceled += instance.OnAttack;
+                @HeavyAttack.started += instance.OnHeavyAttack;
+                @HeavyAttack.performed += instance.OnHeavyAttack;
+                @HeavyAttack.canceled += instance.OnHeavyAttack;
                 @Graffiti.started += instance.OnGraffiti;
                 @Graffiti.performed += instance.OnGraffiti;
                 @Graffiti.canceled += instance.OnGraffiti;
+                @LightAttack.started += instance.OnLightAttack;
+                @LightAttack.performed += instance.OnLightAttack;
+                @LightAttack.canceled += instance.OnLightAttack;
             }
         }
     }
@@ -603,7 +643,8 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
         void OnPauseGame(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnSwitchMode(InputAction.CallbackContext context);
-        void OnAttack(InputAction.CallbackContext context);
+        void OnHeavyAttack(InputAction.CallbackContext context);
         void OnGraffiti(InputAction.CallbackContext context);
+        void OnLightAttack(InputAction.CallbackContext context);
     }
 }
