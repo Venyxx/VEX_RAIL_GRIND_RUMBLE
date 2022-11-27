@@ -31,7 +31,7 @@ public class PlayerAttack : MonoBehaviour
       {
           anim.SetBool("Hit1", false);
       }
-      if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime > .07f && anim.GetCurrentAnimatorStateInfo(0).IsName("Attack2"))
+      if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.07f && anim.GetCurrentAnimatorStateInfo(0).IsName("Attack2"))
       {
           anim.SetBool("Hit2", false);
       }
@@ -55,7 +55,7 @@ public class PlayerAttack : MonoBehaviour
        
        
     }
-    public void Attack(InputAction.CallbackContext context)
+     void Attack(InputAction.CallbackContext context)
     {  Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
         if (!context.started)
         {
@@ -69,15 +69,15 @@ public class PlayerAttack : MonoBehaviour
        {
            anim.SetBool("Hit1", true);
        }
-     noOfAttacks = Mathf.Clamp(noOfAttacks, 0, 3);
-
-     if (noOfAttacks >= 2 && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.07f && anim.GetCurrentAnimatorStateInfo(0).IsName("Attack1"))
+    
+noOfAttacks = Mathf.Clamp(noOfAttacks, 0, 3);
+     if (noOfAttacks >= 2 )
      {
          anim.SetBool("Hit1", false);
          anim.SetBool("Hit2", true);
      }
 
- if (noOfAttacks >= 3 && anim.GetCurrentAnimatorStateInfo(0).IsName("Attack2"))
+     if (noOfAttacks >= 3 )
      {
          anim.SetBool("Hit2", false);
          anim.SetBool("Hit3", true);
@@ -100,5 +100,6 @@ void OnDrawGizmosSelected()
 
     Gizmos.DrawWireSphere(attackPoint.position, attackRange);
 }
+
 
 }
