@@ -308,6 +308,7 @@ GameObject:
   - component: {fileID: 474983805264959317}
   - component: {fileID: 5446298453998633873}
   - component: {fileID: 4794284961370761463}
+  - component: {fileID: 2030071780627290621}
   m_Layer: 7
   m_Name: playerPrefab
   m_TagString: Player
@@ -686,8 +687,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 4794284961370761463}
-        m_TargetAssemblyTypeName: CollisionFollow, Assembly-CSharp
+      - m_Target: {fileID: 2030071780627290621}
+        m_TargetAssemblyTypeName: PlayerRailCollider, Assembly-CSharp
         m_MethodName: JumpOffRail
         m_Mode: 0
         m_Arguments:
@@ -871,6 +872,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a15c28236e584a4fa2f6ed366111015, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2030071780627290621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030071780202691818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe465c2c8d2b46b49b41cf000758f560, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2030071780611383564

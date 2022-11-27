@@ -87,7 +87,16 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Graffiti",
+                    "name": "LightAttack",
+                    "type": "Button",
+                    "id": "f7fb2d2d-f7db-410d-9e23-f8fa2a8d1012",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "GraffitiUp",
                     "type": "Button",
                     "id": "24a71db0-cb8e-4c66-a963-45bfa06ff53c",
                     "expectedControlType": "Button",
@@ -96,9 +105,36 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "LightAttack",
+                    "name": "GraffitiDown",
                     "type": "Button",
-                    "id": "f7fb2d2d-f7db-410d-9e23-f8fa2a8d1012",
+                    "id": "071cffc7-8be5-4f5f-9ab5-3784650a7044",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "GraffitiLeft",
+                    "type": "Button",
+                    "id": "39ba4dad-216c-47dc-ad19-dae8d20caffa",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "GraffitiRight",
+                    "type": "Button",
+                    "id": "d4914d46-0c08-480e-879c-e95b028b6dad",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "GraffitiAction",
+                    "type": "Button",
+                    "id": "9efb7824-8d43-4d87-b463-25f751613ed5",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -350,61 +386,6 @@
                 },
                 {
                     "name": "",
-                    "id": "4073bcc7-beb6-4086-a57c-9d97e1aa8245",
-                    "path": "<Gamepad>/dpad/down",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Graffiti",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "0bb78d55-d953-4e10-9ed4-7d84f63dbf9a",
-                    "path": "<Gamepad>/dpad/left",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Graffiti",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "d0ce54a1-0094-431a-b456-d19ea63c1bee",
-                    "path": "<Gamepad>/dpad/right",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Graffiti",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "1e9d92bc-dc63-47a7-8585-f48b148bdb22",
-                    "path": "<Gamepad>/dpad/up",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Graffiti",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6222c16e-c418-43f0-8dd7-62957f0294d5",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Graffiti",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "0b216fc7-180f-45b3-8e64-e5e4b63fdca4",
                     "path": "<Gamepad>/buttonEast",
                     "interactions": "",
@@ -422,6 +403,105 @@
                     "processors": "",
                     "groups": "",
                     "action": "LightAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f7b26978-2d58-41ce-a033-1eb719474b14",
+                    "path": "<Gamepad>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GraffitiDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9dbc8853-eb59-435e-a936-89554731104b",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GraffitiDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ccd49abb-8a34-4c56-b257-23a068f63c49",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GraffitiLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d649f7f4-7fd2-4f54-9068-10696b3f6fc8",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GraffitiLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "33914a71-cc5e-4958-b2fa-d7354e2b918d",
+                    "path": "<Gamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GraffitiRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "86f892c8-63f4-4416-8ebe-67f51f40ef09",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GraffitiRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1e9d92bc-dc63-47a7-8585-f48b148bdb22",
+                    "path": "<Gamepad>/dpad/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GraffitiUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ab3a05eb-97c4-4c27-821a-27a265f02646",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GraffitiUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8c987626-323f-464b-96be-2fec1deadb58",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GraffitiAction",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

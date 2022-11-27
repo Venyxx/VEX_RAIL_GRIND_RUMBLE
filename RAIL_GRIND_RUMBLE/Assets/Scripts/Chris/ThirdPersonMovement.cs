@@ -66,7 +66,7 @@ public class ThirdPersonMovement : MonoBehaviour
     private bool jump;
     private bool jumpCancel;
 
-    [SerializeField] private bool walking = true;
+    public bool walking = true;
 
 
     public Rigidbody rigidBody;

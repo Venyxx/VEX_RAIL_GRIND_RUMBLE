@@ -10,20 +10,27 @@ public class Graffiti : MonoBehaviour
     GameObject graffitiDown;
     GameObject graffitiUp;
     GameObject graffitiRight;
+    GameObject graffitiLeft;
 
    [SerializeField] private Transform canLocation;
    private GameObject player;
    private int playerX;
    private int playerZ;
    private Camera cam;
+
+   private ThirdPersonMovement ThirdPersonMovementREF;
     
     void Start ()
     {
+        ThirdPersonMovementREF = GameObject.Find("playerPrefab").GetComponent<ThirdPersonMovement>();
         cam = Camera.main;
         player = GameObject.Find("playerPrefab");
-         graffitiDown = Resources.Load("ai1") as GameObject;
-         graffitiUp = Resources.Load("ai2") as GameObject;
-         graffitiRight = Resources.Load("ai3") as GameObject;
+        graffitiUp = Resources.Load("Decal_1") as GameObject;
+        graffitiDown = Resources.Load<GameObject>("Decal_2");
+        graffitiLeft = Resources.Load("Decal_3") as GameObject;
+        graffitiRight = Resources.Load("Decal_4") as GameObject;
+         
+         Debug.Log(graffitiDown);
         
     }
     
@@ -35,18 +42,19 @@ public class Graffiti : MonoBehaviour
 
     void GraffitiFire()
     {
-        //Debug.Log(gameObject);
+        
         RaycastHit[] hits;
         hits = Physics.RaycastAll(transform.position, transform.forward, 20.0f);
-
+        
         for (int i = 0; i < hits.Length; i++)
         {
             RaycastHit hit = hits[i];
             
-            //Debug.Log(hit.collider.gameObject);
+            Debug.Log("layer " + hit.collider.gameObject);
             if (hit.collider.gameObject.layer == 8)
             {
                 GameObject madeGraffiti;
+                Debug.Log("correct layer");
                 if (hit.collider.gameObject.tag == "Poster")
                 {
                     Debug.Log("detected poster, player would rec boost");
@@ -84,6 +92,7 @@ public class Graffiti : MonoBehaviour
     }
          public void GraffitiUp(InputAction.CallbackContext context)
     {
+        //Debug.Log("fire context");
         if (context.started)
         {
             graffiti = graffitiUp;
@@ -96,6 +105,16 @@ public class Graffiti : MonoBehaviour
         if (context.started)
         {
             graffiti = graffitiRight;
+            GraffitiFire();
+        }
+
+    }
+
+        public void GraffitiLeft(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            graffiti = graffitiLeft;
             GraffitiFire();
         }
 
