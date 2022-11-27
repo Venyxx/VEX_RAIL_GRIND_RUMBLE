@@ -114,7 +114,7 @@ public class GrappleHook : MonoBehaviour
             playerActions = _thirdPersonMovement.playerActions;
         }
 
-        CheckForSwingPoints();
+        //CheckForSwingPoints();
 
         if (joint != null)
         {

@@ -132,8 +132,8 @@ public class ThirdPersonCamera : MonoBehaviour
         if (grappleDetection.gameObject.GetComponent<GrappleDetection>().aimPoints.Count != 0 && playerPrefabREF.gameObject.GetComponent<GrappleHook>().grappleStored)
         {
             SwitchCameraStyle(CameraStyle.Aiming);
-            //grappleDetection.gameObject.GetComponent<GrappleDetection>().AimSwitch();
             grappleDetection.gameObject.GetComponent<GrappleDetection>().SetCurrentAim();
+            //grappleDetection.gameObject.GetComponent<GrappleDetection>().AimSwitch();
 
             if (playerPrefabREF.gameObject.GetComponent<ThirdPersonMovement>().grounded == false)
             {

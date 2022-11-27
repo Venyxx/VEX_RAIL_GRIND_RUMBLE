@@ -16,7 +16,7 @@ public class PlayerThrownObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (target == true)
+        if (target == true && playerCurrentAim.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             transform.position = Vector3.MoveTowards(transform.position, playerCurrentAim.transform.position, 25f * Time.deltaTime);
         }

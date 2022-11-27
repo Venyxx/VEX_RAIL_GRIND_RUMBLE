@@ -12,6 +12,9 @@ public class GrappleDetection : MonoBehaviour
     [SerializeField]private int aimPointChoice;
     private Transform aimLookAtREF;
     private Transform nextAim;
+    //WIP Potential AimPoint Solution
+    private Transform prevAim;
+    //
     private Transform player;
     private GrappleHook grappleHookScript;
 
@@ -42,8 +45,6 @@ public class GrappleDetection : MonoBehaviour
     //old input system implementation
     void Update()
     {
-        
-        //Figure this shit out homie!!!
         if (currentAim == null && aimPoints.Count != 0)
         {
            currentAim = aimPoints[0];
@@ -121,10 +122,11 @@ public class GrappleDetection : MonoBehaviour
             aimPointChoice = 0;
         }
         //Activates smooth aim switch in update
+        prevAim = currentAim;
         nextAim = aimPoints[aimPointChoice];
-        aimLookAtREF.transform.position = currentAim.transform.position;
+        currentAim = nextAim;
+        aimLookAtREF.transform.position = prevAim.transform.position;
         lookAtSwitchActive = true;
-        Debug.Log(aimPointChoice);
     }
     
 
@@ -150,9 +152,11 @@ public class GrappleDetection : MonoBehaviour
             aimPoints.Remove(collision.gameObject.transform);
             aimPointCount--;
 
-            if (GameObject.Find("AimingCam"))
+            //WIP potential solution for incorrect aimpoints
+            if (aimPointChoice > 0 && GameObject.Find("AimingCam"))
             {
-                AimSwitch();
+                aimPointChoice = 0;
+                SetCurrentAim();
             }
         }
     }

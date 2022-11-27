@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2030071780202691816}
-  m_RootOrder: 8
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &294039647
 MonoBehaviour:
@@ -332,9 +332,7 @@ Transform:
   - {fileID: 907242005}
   - {fileID: 3714725117423016561}
   - {fileID: 2030071780003898554}
-  - {fileID: 1220496207279035374}
   - {fileID: 8205342914696385885}
-  - {fileID: 2620723864185030717}
   - {fileID: 294039646}
   - {fileID: 543450652339396924}
   m_Father: {fileID: 0}
@@ -533,6 +531,11 @@ MonoBehaviour:
     m_Bits: 67072
   maxSwingDistance: 50
   grappleStored: 0
+  canPull: 0
+  pullableObject: {fileID: 0}
+  enemyPullTo: 0
+  enemyObject: {fileID: 0}
+  pullingObject: 0
 --- !u!114 &9069784105693932722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -834,26 +837,6 @@ MonoBehaviour:
     m_ActionId: 24a71db0-cb8e-4c66-a963-45bfa06ff53c
     m_ActionName: Player/Graffiti[/Keyboard/q]
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 
-    m_ActionName: 
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 
-    m_ActionName: 
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 
-    m_ActionName: 
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 
-    m_ActionName: 
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 
-    m_ActionName: 
-  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerAttack, Assembly-CSharp
@@ -869,6 +852,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: a7a7501f-250d-4dc0-ba45-5c02fc46adfa
     m_ActionName: Player/Attack[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f7fb2d2d-f7db-410d-9e23-f8fa2a8d1012
+    m_ActionName: Player/LightAttack[/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -944,12 +931,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2420403136504482216}
   m_LocalRotation: {x: -0.0061854403, y: -0.70707977, z: 0.70707977, w: -0.0061854403}
-  m_LocalPosition: {x: -0.34, y: 1.52, z: 0}
-  m_LocalScale: {x: 1, y: 1.8613, z: 1}
+  m_LocalPosition: {x: -0.34000015, y: 1.5200001, z: 0}
+  m_LocalScale: {x: 1, y: 1.8613001, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2030071780202691816}
-  m_RootOrder: 7
+  m_Father: {fileID: 543450652339396924}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!33 &3845365801453465304
 MeshFilter:
@@ -1087,11 +1074,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5954573490325766066}
   m_LocalRotation: {x: -0.0061854403, y: -0.70707977, z: 0.70707977, w: -0.0061854403}
-  m_LocalPosition: {x: 0, y: 1.655, z: 1.437}
-  m_LocalScale: {x: 1, y: 1.8613, z: 1}
+  m_LocalPosition: {x: 0, y: 1.6549999, z: 1.4370003}
+  m_LocalScale: {x: 1, y: 1.8613001, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2030071780202691816}
+  m_Father: {fileID: 543450652339396924}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7265929520492490318
@@ -1345,7 +1332,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 86458e609259ce341b4f90f9fcfad336, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 86458e609259ce341b4f90f9fcfad336, type: 3}
       propertyPath: m_LocalScale.x
@@ -1609,6 +1596,7 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 0
+  cooldownTime: 2
 --- !u!1001 &7835383478398834791
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1630,7 +1618,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2117787121892871482, guid: 8439ad98a9c1678429f24f57d65c4511, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2117787121892871482, guid: 8439ad98a9c1678429f24f57d65c4511, type: 3}
       propertyPath: m_LocalPosition.x
