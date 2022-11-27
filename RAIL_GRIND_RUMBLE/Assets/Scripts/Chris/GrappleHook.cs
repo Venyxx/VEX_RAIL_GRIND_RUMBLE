@@ -155,8 +155,21 @@ public class GrappleHook : MonoBehaviour
             {
                 shorteningCable = false;
             }
-        }
-         
+        }    
+    }
+
+    public void NoAimGrapple(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            if (!GameObject.Find("AimingCam") && grappleDetectorREF.GetComponent<GrappleDetection>().aimPoints.Count > 0 && isGrappling == false && grappleStored == true)
+            {
+                //Need to fix ability to account for pickups/pulling to player
+                //CheckObjectType(grappleDetectorREF.GetComponent<GrappleDetection>().currentAim);
+                StartSwing();
+                StartCoroutine(ZipRunning());
+            }
+        } 
     }
 
     void LateUpdate()
