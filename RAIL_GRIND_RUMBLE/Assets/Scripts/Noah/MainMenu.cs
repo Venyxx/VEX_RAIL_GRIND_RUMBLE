@@ -21,6 +21,7 @@ public class MainMenu : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(null); 
         EventSystem.current.SetSelectedGameObject(mainMenuFirstButton);
         Cursor.lockState = CursorLockMode.None;
+        CheckpointController.lastCheckPointPosition = new Vector3(0, 0, 0);
     }
 
     // Update is called once per frame

@@ -161,6 +161,24 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ReloadScene"",
+                    ""type"": ""Button"",
+                    ""id"": ""a3b6f74f-d35c-41c8-91e8-fee5dd2947bc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""BackToMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""a0d8c0b9-cf24-4256-b664-67b507a93f7f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -526,6 +544,72 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                     ""action"": ""GraffitiAction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""72442157-9fcd-4147-bea1-3d0dede4e82b"",
+                    ""path"": ""<Keyboard>/anyKey"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ReloadScene"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6e6bf5a2-a702-45f7-874c-94b301cadbc6"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ReloadScene"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bd964911-3b75-47fb-bf4f-22b94a818b7f"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ReloadScene"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""70fe4940-e8e2-49ee-9c68-f8a70fbb80b6"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BackToMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cd176732-19ee-4c2d-8d4f-5fab94332922"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BackToMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4a8c7fb1-78e8-435c-baa3-feecf4b57dba"",
+                    ""path"": ""<Keyboard>/anyKey"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BackToMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -549,6 +633,8 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
         m_Player_GraffitiLeft = m_Player.FindAction("GraffitiLeft", throwIfNotFound: true);
         m_Player_GraffitiRight = m_Player.FindAction("GraffitiRight", throwIfNotFound: true);
         m_Player_GraffitiAction = m_Player.FindAction("GraffitiAction", throwIfNotFound: true);
+        m_Player_ReloadScene = m_Player.FindAction("ReloadScene", throwIfNotFound: true);
+        m_Player_BackToMenu = m_Player.FindAction("BackToMenu", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -623,6 +709,8 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_GraffitiLeft;
     private readonly InputAction m_Player_GraffitiRight;
     private readonly InputAction m_Player_GraffitiAction;
+    private readonly InputAction m_Player_ReloadScene;
+    private readonly InputAction m_Player_BackToMenu;
     public struct PlayerActions
     {
         private @InputHandler m_Wrapper;
@@ -642,6 +730,8 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
         public InputAction @GraffitiLeft => m_Wrapper.m_Player_GraffitiLeft;
         public InputAction @GraffitiRight => m_Wrapper.m_Player_GraffitiRight;
         public InputAction @GraffitiAction => m_Wrapper.m_Player_GraffitiAction;
+        public InputAction @ReloadScene => m_Wrapper.m_Player_ReloadScene;
+        public InputAction @BackToMenu => m_Wrapper.m_Player_BackToMenu;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -696,6 +786,12 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 @GraffitiAction.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGraffitiAction;
                 @GraffitiAction.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGraffitiAction;
                 @GraffitiAction.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGraffitiAction;
+                @ReloadScene.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReloadScene;
+                @ReloadScene.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReloadScene;
+                @ReloadScene.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReloadScene;
+                @BackToMenu.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackToMenu;
+                @BackToMenu.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackToMenu;
+                @BackToMenu.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackToMenu;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -745,6 +841,12 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 @GraffitiAction.started += instance.OnGraffitiAction;
                 @GraffitiAction.performed += instance.OnGraffitiAction;
                 @GraffitiAction.canceled += instance.OnGraffitiAction;
+                @ReloadScene.started += instance.OnReloadScene;
+                @ReloadScene.performed += instance.OnReloadScene;
+                @ReloadScene.canceled += instance.OnReloadScene;
+                @BackToMenu.started += instance.OnBackToMenu;
+                @BackToMenu.performed += instance.OnBackToMenu;
+                @BackToMenu.canceled += instance.OnBackToMenu;
             }
         }
     }
@@ -766,5 +868,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
         void OnGraffitiLeft(InputAction.CallbackContext context);
         void OnGraffitiRight(InputAction.CallbackContext context);
         void OnGraffitiAction(InputAction.CallbackContext context);
+        void OnReloadScene(InputAction.CallbackContext context);
+        void OnBackToMenu(InputAction.CallbackContext context);
     }
 }
