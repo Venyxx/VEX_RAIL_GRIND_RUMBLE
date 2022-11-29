@@ -9,14 +9,14 @@ using PathCreation;
         public PathCreator pathCreator;
         private VertexPath vertexPath;
         public EndOfPathInstruction endOfPathInstruction;
+       
 
         //speeds
         public float speed = 40;
         private float baseSpeed = 100;
         [SerializeField] public float distanceTravelled;
 
-       
-
+    
         void Start() 
         {
             
@@ -55,7 +55,7 @@ using PathCreation;
             speed = baseSpeed;
         }
 
-         //Rail Cooldown, prevent resnapping to rail after jumping off
+        //Rail Cooldown, prevent resnapping to rail after jumping off
         public IEnumerator Cooldown ()
         {
             speed = 0;
@@ -64,4 +64,8 @@ using PathCreation;
             speed = baseSpeed;
 
         }
+
+
+
+
     }

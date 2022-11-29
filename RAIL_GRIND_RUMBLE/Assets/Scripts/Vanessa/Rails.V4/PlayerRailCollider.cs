@@ -9,7 +9,7 @@ public class PlayerRailCollider : MonoBehaviour
     private RailModularity RailModularityREF;
     private RailModularity nextRailModularityREF;
     private GameObject RailMover;
-    private bool isGrinding;
+    [SerializeField] private bool isGrinding;
 
     // Start is called before the first frame update
     void Start()
@@ -30,8 +30,8 @@ public class PlayerRailCollider : MonoBehaviour
 
     void OnTriggerEnter (Collider col)
     {
-        //did we run into the rail collider while skating?
-        if (col.gameObject.name == "PositiveRunner" && !ThirdPersonMovementREF.walking)
+        //did we run into the POSITIVE LEFT rail collider while skating?
+        if (col.gameObject.name == "PositiveLeftCollider" && !ThirdPersonMovementREF.walking)
         {
             RailMover = col.gameObject;
             // set player as child// change speed of runner to players speed

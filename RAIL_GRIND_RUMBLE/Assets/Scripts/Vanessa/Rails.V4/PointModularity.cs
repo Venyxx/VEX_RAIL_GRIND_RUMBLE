@@ -17,25 +17,5 @@ public class PointModularity : MonoBehaviour
     {
         RailModularityREF = gameObject.transform.parent.GetComponent<RailModularity>();
     }
-   private void OnTriggerEnter (Collider col)
-    {
-        if (col.gameObject.name == "PointA" && !gotNextA)
-        {
-            NearA = col.gameObject;
-            nextRail = col.gameObject.transform.parent.gameObject;
-            gotNextA = true;
-            Debug.Log("nearest A is on " + col.gameObject);
-            RailModularityREF.SetNearAndNext(NearA, nextRail);
 
-            
-        }
-        else if (col.gameObject.name == "PointB" && !gotNextB)
-        {
-            NearB = col.gameObject;
-            pastRail = col.gameObject.transform.parent.gameObject;
-            gotNextB = true;
-            Debug.Log("nearest B is on " + col.gameObject);
-            RailModularityREF.SetNearBAndPast(NearB, pastRail);
-        }
-    }
 }

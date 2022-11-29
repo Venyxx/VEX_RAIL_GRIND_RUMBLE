@@ -7,15 +7,13 @@ public class CollisionFollow : MonoBehaviour
 {
     private PathFollower pathFollowerREF;
     private PathCreator pathCreatorREF;
-    
-    private Transform PointA;
-    private Transform PointB;
-    private bool isGrinding;
+    private RailModularity RailModularityREF;
+
+    public bool isGrinding;
     
 
     
     // Start is called before the first frame update
-    //ive come to realize if you stay on it too long it resets the collision again.
         void OnCollisionEnter (Collision rail)
         {
             if (rail.gameObject.tag == "RailStraight" && !isGrinding)
@@ -23,24 +21,6 @@ public class CollisionFollow : MonoBehaviour
                 Debug.Log("entering col");
                 isGrinding = true;
                 Debug.Log(isGrinding + "grinding state");
-        
-                //check for direction the player will go
-                /*PointA = rail.transform.Find("PointA");
-                PointB = rail.transform.Find("PointB");
-
-                Vector3 currentPos = transform.position;
-                float distanceFromA = Vector3.Distance(PointA.position, currentPos);
-                float distanceFromB = Vector3.Distance(PointB.position, currentPos);
-
-        
-                if (distanceFromA <= distanceFromB)
-                {
-                    Debug.Log("found a is the closest");
-                }
-                else if (distanceFromA > distanceFromB)
-                {
-                    Debug.Log("found b is the closest");
-                }*/
 
 
                 var RoadCreator = rail.transform.Find("Road Creator");
@@ -69,9 +49,6 @@ public class CollisionFollow : MonoBehaviour
 
         }
             
-    
-
-
     void OnCollisionExit (Collision rail)
     {
         if (rail.gameObject.tag == "RailStraight" || rail.gameObject.tag == "RailCircular")
@@ -79,15 +56,29 @@ public class CollisionFollow : MonoBehaviour
             pathFollowerREF.distanceTravelled = 0;
         }
     }
-    void Update ()
-    {
-    
-        /*if (Input.GetKey(KeyCode.Space) && pathFollowerREF != null)
-        {
-            pathFollowerREF.pathCreator = null;
-        }*/
-    }
 
     
+    void OnTriggerExit (Collider col)
+    {
+        if (col.gameObject.GetComponent("PlayerRailRightCollider"))
+        {
+            Debug.Log("there was a right col");
+            if (col.gameObject.name == "PositiveLeftRunner" || col.gameObject.name == "NegativeRightRunner")
+            {
+                col.gameObject.GetComponent<PlayerRailRightCollider>().ExitRailRight();
+            }
+        }
+
+        else if (col.gameObject.GetComponent("PlayerRailLeftCollider"))
+        {
+            Debug.Log("there was a left col");
+            if (col.gameObject.name == "PositiveRightCollider" || col.gameObject.name == "NegativeLeftCollider")
+                {
+                    col.gameObject.GetComponent<PlayerRailLeftCollider>().ExitRailLeft();
+                }
+        }
+        
+    }
+ 
     
 }

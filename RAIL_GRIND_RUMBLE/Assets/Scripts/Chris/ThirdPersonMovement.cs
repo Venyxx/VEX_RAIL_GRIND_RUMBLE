@@ -349,6 +349,7 @@ public class ThirdPersonMovement : MonoBehaviour
             else 
             {
                 canAccelerate = false;
+                //Debug.Log("cant acc");
                 currentTime -= Time.deltaTime;
             }
     }    

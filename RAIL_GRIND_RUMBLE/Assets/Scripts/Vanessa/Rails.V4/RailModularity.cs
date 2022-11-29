@@ -4,26 +4,20 @@ using UnityEngine;
 
 public class RailModularity : MonoBehaviour
 {
-    private GameObject PointA;
-    private GameObject PointB;
+    public GameObject PositiveRunner;
+    public GameObject NegativeRunner;
     private GameObject currentRail;
-    
 
     //these values get passed in from pointmodularity
-    private GameObject NearB;
-    private GameObject NearA;
-    private GameObject nextRail;
-    private GameObject pastRail;
+
 
 
     // Start is called before the first frame update
     void Start()
     {
         currentRail = gameObject;
-        PointA = currentRail.transform.Find("PointA").gameObject;
-        PointB = currentRail.transform.Find("PointB").gameObject;
-        
-
+        PositiveRunner = transform.Find("PositiveRunner").gameObject;
+        NegativeRunner = transform.Find("NegativeRunner").gameObject;
     }
 
 
@@ -33,19 +27,6 @@ public class RailModularity : MonoBehaviour
    
     }
 
-    public void SetNearAndNext (GameObject near, GameObject next)
-    {
-        NearA = near;
-        nextRail = next;
-    }
-
-    public void SetNearBAndPast (GameObject near, GameObject past)
-    {
-        NearB = near;
-        pastRail = past;
-    }
-
-    
 
 
 }
