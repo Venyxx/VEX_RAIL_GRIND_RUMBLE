@@ -311,7 +311,7 @@ GameObject:
   - component: {fileID: 2030071780627290621}
   m_Layer: 7
   m_Name: playerPrefab
-  m_TagString: Player
+  m_TagString: PlayerObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -325,7 +325,7 @@ Transform:
   m_GameObject: {fileID: 2030071780202691818}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -8.47, y: 1.65, z: -21.432802}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5745, y: 1.5745, z: 1.5745}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2030071780611383565}
@@ -451,7 +451,7 @@ LineRenderer:
     textureMode: 0
     shadowBias: 0.5
     generateLightingData: 0
-  m_UseWorldSpace: 0
+  m_UseWorldSpace: 1
   m_Loop: 0
 --- !u!136 &1733502242
 CapsuleCollider:
@@ -495,8 +495,8 @@ MonoBehaviour:
   swingSpeed: 5
   walking: 1
   rigidBody: {fileID: 2030071780202691823}
-  skatesOnMaterial: {fileID: 0}
-  skatesOffMaterial: {fileID: 0}
+  skatesOnMaterial: {fileID: 2100000, guid: c91eb20af910d1642a80dd3d4fcc267f, type: 2}
+  skatesOffMaterial: {fileID: 2100000, guid: a4460a2665666a04eaa83bfc4da261de, type: 2}
 --- !u!114 &2030071780202691794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -565,7 +565,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b2ba566ef8d3f44bb9532e521c6057, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 20
   currentHealth: 0
   debugKill: 0
 --- !u!114 &5446298453998633873
@@ -846,14 +846,10 @@ MonoBehaviour:
     m_ActionId: a7a7501f-250d-4dc0-ba45-5c02fc46adfa
     m_ActionName: Player/Attack[/Mouse/leftButton]
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 24a71db0-cb8e-4c66-a963-45bfa06ff53c
-    m_ActionName: Player/Graffiti[/Keyboard/q]
-  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlayerAttack, Assembly-CSharp
-        m_MethodName: Attack
+        m_TargetAssemblyTypeName: Graffiti, Assembly-CSharp
+        m_MethodName: GraffitiAction
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -863,36 +859,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: a7a7501f-250d-4dc0-ba45-5c02fc46adfa
-    m_ActionName: Player/Attack[/Mouse/leftButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: f7fb2d2d-f7db-410d-9e23-f8fa2a8d1012
-    m_ActionName: Player/LightAttack[/Mouse/leftButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 071cffc7-8be5-4f5f-9ab5-3784650a7044
-    m_ActionName: Player/GraffitiDown[/Keyboard/2]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 39ba4dad-216c-47dc-ad19-dae8d20caffa
-    m_ActionName: Player/GraffitiLeft[/Keyboard/3]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: d4914d46-0c08-480e-879c-e95b028b6dad
-    m_ActionName: Player/GraffitiRight[/Keyboard/4]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 9efb7824-8d43-4d87-b463-25f751613ed5
-    m_ActionName: Player/GraffitiAction[/Keyboard/q]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: a3b6f74f-d35c-41c8-91e8-fee5dd2947bc
-    m_ActionName: Player/ReloadScene[/Keyboard/anyKey,/Mouse/leftButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: a0d8c0b9-cf24-4256-b664-67b507a93f7f
-    m_ActionName: Player/BackToMenu[/Mouse/leftButton,/Keyboard/anyKey]
+    m_ActionId: 24a71db0-cb8e-4c66-a963-45bfa06ff53c
+    m_ActionName: Player/Graffiti[/Keyboard/q]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -1065,7 +1033,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3066502952136038584}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.15, y: 0, z: 2.78}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1083,8 +1051,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 30
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 16.423624
+  m_Center: {x: 0.8108783, y: 2.0975432, z: -2.58306}
 --- !u!114 &3400830846209403069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1412,6 +1380,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Weapon
       objectReference: {fileID: 0}
+    - target: {fileID: 2588660619408717933, guid: c8158d1ee19a2a8409ef71bce7ac4acf, type: 3}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 2588660618627319551}
+    - target: {fileID: 2588660619408717933, guid: c8158d1ee19a2a8409ef71bce7ac4acf, type: 3}
+      propertyPath: Weapon
+      value: 
+      objectReference: {fileID: 1994720727}
     - target: {fileID: 2588660619408717935, guid: c8158d1ee19a2a8409ef71bce7ac4acf, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1438,19 +1414,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2588660619408717935, guid: c8158d1ee19a2a8409ef71bce7ac4acf, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7310585
+      value: 0.7310561
       objectReference: {fileID: 0}
     - target: {fileID: 2588660619408717935, guid: c8158d1ee19a2a8409ef71bce7ac4acf, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2588660619408717935, guid: c8158d1ee19a2a8409ef71bce7ac4acf, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.6823148
+      value: 0.6823174
       objectReference: {fileID: 0}
     - target: {fileID: 2588660619408717935, guid: c8158d1ee19a2a8409ef71bce7ac4acf, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2588660619408717935, guid: c8158d1ee19a2a8409ef71bce7ac4acf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1466,17 +1442,40 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8158d1ee19a2a8409ef71bce7ac4acf, type: 3}
+--- !u!1 &2588660618627319545 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2588660619408717928, guid: c8158d1ee19a2a8409ef71bce7ac4acf, type: 3}
+  m_PrefabInstance: {fileID: 1052065425}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1994720727
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2588660618627319545}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.23, y: 1.2, z: 0.3}
+  m_Center: {x: -16.11, y: 0.55, z: 2.8}
 --- !u!114 &2588660618627319548 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2588660619408717933, guid: c8158d1ee19a2a8409ef71bce7ac4acf, type: 3}
   m_PrefabInstance: {fileID: 1052065425}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2588660618627319545}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 06c0334f09da4644783ccc9a2df44ff3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &2588660618627319551 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2588660619408717934, guid: c8158d1ee19a2a8409ef71bce7ac4acf, type: 3}
+  m_PrefabInstance: {fileID: 1052065425}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1394181847
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1564,6 +1563,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 738ecabb84cff8840b2200c02e011d34, type: 2}
+    - target: {fileID: -6464286926755095128, guid: 86458e609259ce341b4f90f9fcfad336, type: 3}
+      propertyPath: m_TagString
+      value: SkateBody
+      objectReference: {fileID: 0}
     - target: {fileID: -5817755989694511844, guid: 86458e609259ce341b4f90f9fcfad336, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1620,6 +1623,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 253ac2593d53710498d84bd83ebef723, type: 2}
+    - target: {fileID: -2758889690510646797, guid: 86458e609259ce341b4f90f9fcfad336, type: 3}
+      propertyPath: m_TagString
+      value: SkateBody
+      objectReference: {fileID: 0}
+    - target: {fileID: -2616479404524252510, guid: 86458e609259ce341b4f90f9fcfad336, type: 3}
+      propertyPath: m_TagString
+      value: SkateWheel
+      objectReference: {fileID: 0}
     - target: {fileID: -2458523723627176194, guid: 86458e609259ce341b4f90f9fcfad336, type: 3}
       propertyPath: m_Materials.Array.size
       value: 2
@@ -1632,6 +1643,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 253ac2593d53710498d84bd83ebef723, type: 2}
+    - target: {fileID: -2411341298164983444, guid: 86458e609259ce341b4f90f9fcfad336, type: 3}
+      propertyPath: m_TagString
+      value: SkateWheel
+      objectReference: {fileID: 0}
+    - target: {fileID: -2308712672237892356, guid: 86458e609259ce341b4f90f9fcfad336, type: 3}
+      propertyPath: m_TagString
+      value: SkateWheel
+      objectReference: {fileID: 0}
     - target: {fileID: -945152530815251131, guid: 86458e609259ce341b4f90f9fcfad336, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1640,6 +1659,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 974915691ac7cd846b6e3f5b20e440be, type: 2}
+    - target: {fileID: 322014547734544676, guid: 86458e609259ce341b4f90f9fcfad336, type: 3}
+      propertyPath: m_TagString
+      value: SkateBody
+      objectReference: {fileID: 0}
+    - target: {fileID: 719573210766081917, guid: 86458e609259ce341b4f90f9fcfad336, type: 3}
+      propertyPath: m_TagString
+      value: SkateWheel
+      objectReference: {fileID: 0}
     - target: {fileID: 891773718103496868, guid: 86458e609259ce341b4f90f9fcfad336, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1664,6 +1691,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 974915691ac7cd846b6e3f5b20e440be, type: 2}
+    - target: {fileID: 2630629580562004730, guid: 86458e609259ce341b4f90f9fcfad336, type: 3}
+      propertyPath: m_TagString
+      value: SkateBody
+      objectReference: {fileID: 0}
     - target: {fileID: 2671822399819753256, guid: 86458e609259ce341b4f90f9fcfad336, type: 3}
       propertyPath: m_Materials.Array.size
       value: 2
@@ -1688,6 +1719,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 253ac2593d53710498d84bd83ebef723, type: 2}
+    - target: {fileID: 3179498027053941677, guid: 86458e609259ce341b4f90f9fcfad336, type: 3}
+      propertyPath: m_TagString
+      value: SkateWheel
+      objectReference: {fileID: 0}
+    - target: {fileID: 5466899815124817884, guid: 86458e609259ce341b4f90f9fcfad336, type: 3}
+      propertyPath: m_TagString
+      value: SkateWheel
+      objectReference: {fileID: 0}
     - target: {fileID: 7392862167284088251, guid: 86458e609259ce341b4f90f9fcfad336, type: 3}
       propertyPath: m_Materials.Array.size
       value: 2
@@ -1727,31 +1766,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 86458e609259ce341b4f90f9fcfad336, type: 3}
   m_PrefabInstance: {fileID: 1394181847}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &919132148400962438 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 86458e609259ce341b4f90f9fcfad336, type: 3}
-  m_PrefabInstance: {fileID: 1394181847}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1558509666
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919132148400962438}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06c0334f09da4644783ccc9a2df44ff3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anim: {fileID: 0}
-  Damage: 100
-  attackPoint: {fileID: 0}
-  attackRange: 0.5
-  enemyLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  IsAttacking: 0
 --- !u!1001 &7835383478398834791
 PrefabInstance:
   m_ObjectHideFlags: 0
