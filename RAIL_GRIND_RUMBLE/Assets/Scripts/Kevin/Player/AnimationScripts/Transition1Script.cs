@@ -16,6 +16,7 @@ public class Transition1Script : StateMachineBehaviour
           if (PlayerAttack.instance.IsAttacking)
         {
             PlayerAttack.instance.anim.Play("Attack2");
+            PlayerAttack.instance.Damage = 30;
         }    
     
     }
@@ -24,6 +25,8 @@ public class Transition1Script : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
          PlayerAttack.instance.IsAttacking = false;
+         PlayerAttack.instance.Weapon.enabled = false;
+        
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
