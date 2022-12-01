@@ -30,7 +30,7 @@ public class ThirdPersonMovement : MonoBehaviour
     //Grounded Check
     public float playerHeight;
     public LayerMask whatIsGround;
-    public bool grounded;
+    public bool Grounded;
 
     //Grapple Check
     public bool isGrappling;
@@ -46,6 +46,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
 
     // animation IDs
+    private float _animationBlend;
     private Animator _animator;
     private bool _hasAnimator;
     private int _animIDSpeed;
@@ -53,6 +54,9 @@ public class ThirdPersonMovement : MonoBehaviour
     private int _animIDJump;
     private int _animIDFreeFall;
     private int _animIDMotionSpeed;
+    public float SpeedChangeRate = 10.0f;
+    private float targetSpeed;
+    public bool analogMovement;
 
 
     //Acceleration Timer
@@ -95,7 +99,7 @@ public class ThirdPersonMovement : MonoBehaviour
     void Start()
     {
 
-        moveSpeed = 10;
+        moveSpeed = 0;
         baseMoveSpeed= 8;
         speedLerp = 2.22f;
 
@@ -105,9 +109,10 @@ public class ThirdPersonMovement : MonoBehaviour
         rigidBody.freezeRotation = true;
         isGrappling = false;
         canJump = true;
-        _hasAnimator = TryGetComponent(out _animator);
-        //_input = GetComponent<StarterAssetsInputs>();
-        //_playerInput = GetComponent<PlayerInput>();
+
+        //animation setting
+        //_hasAnimator = TryGetComponent(out _animator);
+        _animator = transform.Find("AriRig").gameObject.GetComponent<Animator>();
          AssignAnimationIDs();
 
          currentTime = maxTime;
@@ -133,24 +138,24 @@ public class ThirdPersonMovement : MonoBehaviour
     {
 
         //Grounded Check
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+        Grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
         PlayerInput();
         SpeedControl();
 
         //Add function for increasing player speed when keys held down
-        TimerSpace();
+        
     
 
         //Drag
-        if (grounded == true)
+        if (Grounded == true)
         {
             
             rigidBody.drag = groundDrag;
 
             if (_hasAnimator)
             {
-                //_animator.SetBool(_animIDGrounded, Grounded);
+                _animator.SetBool(_animIDGrounded, Grounded);
             }
         } else {
             rigidBody.drag = 0;
@@ -177,7 +182,7 @@ public class ThirdPersonMovement : MonoBehaviour
         if (walking) return;
         //if (isGrappling) return;
         
-        if (context.started && grounded)
+        if (context.started && Grounded)
         {
             isJumping = true;
             jumpTimeCounter = 0.35f;
@@ -253,18 +258,25 @@ public class ThirdPersonMovement : MonoBehaviour
         if (horizontalInput != 0 || verticalInput != 0)
         {
             moveKeyUp = false;
+            TimerSpace();
+           
         }
 
         if (canAccelerate)
         {
             Mathf.Lerp(moveSpeed, moveSpeed + 5, speedLerp * Time.deltaTime);
             moveSpeed += 2;
+            Debug.Log("add");
+
         }
 
         if (horizontalInput == 0 && verticalInput == 0 && !moveKeyUp)
         {
             moveSpeed = baseMoveSpeed;
+            canAccelerate = false;
             moveKeyUp = true;
+            Debug.Log(canAccelerate);
+            
         }
     }
 
@@ -282,8 +294,9 @@ public class ThirdPersonMovement : MonoBehaviour
         if (walking)
         {
             rigidBody.velocity = new Vector3(moveDirection.normalized.x * walkSpeed * 10f, rigidBody.velocity.y, moveDirection.normalized.z * walkSpeed * 10f);
+            
         }
-        else if (grounded)
+        else if (Grounded)
         {
             rigidBody.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
         } 
@@ -295,6 +308,24 @@ public class ThirdPersonMovement : MonoBehaviour
             } else {
                 rigidBody.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
             }
+        }
+
+        //adjust animator speed
+        targetSpeed = moveSpeed;
+
+        _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
+        if (_animationBlend < 0.01f) _animationBlend = 0f;
+
+        
+        //will eventually be _animIDSpeed, _animationBlend
+        
+        //_animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
+        if (moveSpeed > 0 )
+        {
+            _animator.SetFloat(_animIDMotionSpeed, 0);
+        }else 
+        {
+            _animator.SetFloat(_animIDMotionSpeed, 1);
         }
 
     }
@@ -316,6 +347,9 @@ public class ThirdPersonMovement : MonoBehaviour
             rigidBody.velocity -= 0.1f * rigidBody.velocity;
             moveKeyUp = true;
         }
+
+        
+        
     }
 
     void TapJump(float force)
@@ -330,13 +364,13 @@ public class ThirdPersonMovement : MonoBehaviour
     }
 
     private void AssignAnimationIDs()
-        {
-            _animIDSpeed = Animator.StringToHash("Speed");
-            _animIDGrounded = Animator.StringToHash("Grounded");
-            _animIDJump = Animator.StringToHash("Jump");
-            _animIDFreeFall = Animator.StringToHash("FreeFall");
-            _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
-        }
+    {
+        _animIDSpeed = Animator.StringToHash("Speed");
+        _animIDGrounded = Animator.StringToHash("Grounded");
+        _animIDJump = Animator.StringToHash("Jump");
+        _animIDFreeFall = Animator.StringToHash("FreeFall");
+        _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
+    }
 
     private void TimerSpace ()
     {

@@ -81,7 +81,7 @@ public class WallRun : MonoBehaviour
         float verticalInput = moveInput.y;
 
         //Wallrunning
-        if((wallLeft || wallRight) && verticalInput > 0 && playerScript.grounded == false && !exitingWall)
+        if((wallLeft || wallRight) && verticalInput > 0 && playerScript.Grounded == false && !exitingWall)
         {
             ///Check if player is wallrunnning
             StartWallRun();
