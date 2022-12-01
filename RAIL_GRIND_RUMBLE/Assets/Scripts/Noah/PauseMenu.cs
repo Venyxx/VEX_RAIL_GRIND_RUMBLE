@@ -12,10 +12,15 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseFirstButton;
     public GameObject settingsFirstButton;
     public GameObject settingsClosedButton;
-    
-    
-    
-    
+
+    public GameObject audioScreen;
+    public GameObject controlsScreen;
+    public GameObject graphicsScreen;
+    public GameObject accessibilityScreen;
+
+
+
+
     public bool isPaused;
 
 
@@ -66,6 +71,10 @@ public class PauseMenu : MonoBehaviour
         isPaused = false;
         pauseMenu.SetActive(false);
         pauseSettings.SetActive(false);
+        audioScreen.SetActive(false);
+        controlsScreen.SetActive(false);
+        graphicsScreen.SetActive(false);
+        accessibilityScreen.SetActive(false);
         Time.timeScale = 1f;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
