@@ -317,7 +317,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.9625
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -478,10 +478,10 @@ AnimatorStateMachine:
     m_Position: {x: -40, y: 280, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7162439562971490265}
-    m_Position: {x: 340, y: -290, z: 0}
+    m_Position: {x: 400, y: -340, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 360238443179176087}
-    m_Position: {x: 90, y: -290, z: 0}
+    m_Position: {x: 110, y: -290, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 423629169990366956}
     m_Position: {x: 170, y: 70, z: 0}
@@ -496,7 +496,7 @@ AnimatorStateMachine:
     m_Position: {x: 500, y: -10, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5885509774079983579}
-    m_Position: {x: 180, y: -80, z: 0}
+    m_Position: {x: -50, y: -230, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4507338640878577872}
     m_Position: {x: 420, y: -90, z: 0}
@@ -1074,7 +1074,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.91906476
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -1114,6 +1114,9 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: Jump
+    m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: Grinding
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 4507338640878577872}
