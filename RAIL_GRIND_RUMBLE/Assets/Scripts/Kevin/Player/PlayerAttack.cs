@@ -7,29 +7,30 @@ public class PlayerAttack : MonoBehaviour
 {
     public Animator anim;
     public int Damage;
-    public Transform attackPoint;
-    public float attackRange = 0.5f;
     public LayerMask enemyLayers;
     public bool IsAttacking = false;
     public static PlayerAttack instance;
     public Collider Weapon; 
+    public Collider Knee;
+    public int atkCount;
 
 
     private void Awake()
     {
         instance = this;
         Weapon.enabled = false;
+        Knee.enabled = false;
 
     }
    
     void Start()
     {
-        anim = GetComponent<Animator>();
+      //  anim = GetComponent<Animator>();
         
     }
     void Update()
     {
-      
+    
     }
    
 
@@ -44,9 +45,16 @@ public class PlayerAttack : MonoBehaviour
         if (context.started && !IsAttacking)
         {
             IsAttacking = true;
+            atkCount ++;
+             
+          
         }
     
-
+       
+        if (atkCount == 1)
+        {
+           anim.SetTrigger("Attacking");
+        }
 
    //    foreach(Collider enemy in hitEnemies)
      //  {

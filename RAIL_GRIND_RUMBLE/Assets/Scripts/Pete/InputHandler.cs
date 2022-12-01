@@ -437,6 +437,17 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""2443cb16-af80-4a7d-b5a2-c2c73e0aa541"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LightAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""f7b26978-2d58-41ce-a033-1eb719474b14"",
                     ""path"": ""<Gamepad>/dpad/down"",
                     ""interactions"": """",
