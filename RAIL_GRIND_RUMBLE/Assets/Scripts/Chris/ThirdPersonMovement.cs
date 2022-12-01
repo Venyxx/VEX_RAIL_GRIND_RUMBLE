@@ -313,9 +313,9 @@ public class ThirdPersonMovement : MonoBehaviour
             _animator.SetBool(_animIDJump, false);
             if (moveInput.x != 0 || moveInput.y != 0)
             {
-                if (currentSpeed < 9)
-                    targetSpeed = Mathf.Lerp(targetSpeed, 1, .25f);
-                else 
+                //if (currentSpeed < 9)
+                    //targetSpeed = Mathf.Lerp(targetSpeed, 1, .25f);
+                //else 
                     targetSpeed = Mathf.Lerp(targetSpeed, 2, .25f);
             }
                 
