@@ -27,8 +27,8 @@ public class WallRun : MonoBehaviour
     private float wallCheckDistance = 0.7f;
     private RaycastHit leftWallHit;
     private RaycastHit rightWallHit;
-    private bool wallLeft;
-    private bool wallRight;
+    public bool wallLeft;
+    public bool wallRight;
 
     //Exiting Wall
     private bool exitingWall = false;

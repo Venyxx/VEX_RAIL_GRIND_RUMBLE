@@ -520,6 +520,8 @@ MonoBehaviour:
     m_Bits: 256
   wallJumpSideForce: 12
   wallJumpUpForce: 7
+  wallLeft: 0
+  wallRight: 0
 --- !u!114 &2030071780202691821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1409,7 +1411,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8578833261462179128}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.14009608, y: 1.8694686, z: 0.5870008}
@@ -1460,7 +1462,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8756168455697121512}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.51327515, y: 1.8342896, z: 0}
+  m_LocalPosition: {x: -0.323, y: 1.8342896, z: 0}
   m_LocalScale: {x: 1.5745, y: 1.5745, z: 1.5745}
   m_ConstrainProportionsScale: 0
   m_Children: []

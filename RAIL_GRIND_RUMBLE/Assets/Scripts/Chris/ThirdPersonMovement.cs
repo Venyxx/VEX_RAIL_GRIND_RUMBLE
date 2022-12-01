@@ -59,6 +59,8 @@ public class ThirdPersonMovement : MonoBehaviour
     private int _animIDWalking;
     private int _animIDGrinding;
     private int _animIDMotionSpeed;
+    private int _animIDWallRunLeft;
+    private int _animIDWallRunRight;
     public float SpeedChangeRate = 10.0f;
     private float targetSpeed;
     public bool analogMovement;
@@ -301,7 +303,11 @@ public class ThirdPersonMovement : MonoBehaviour
         {
             rigidBody.velocity = new Vector3(moveDirection.normalized.x * walkSpeed * 10f, rigidBody.velocity.y, moveDirection.normalized.z * walkSpeed * 10f);
             //change anim
-            _animator.SetBool(_animIDWalking, true);
+            if (moveInput.x != 0 || moveInput.y != 0)
+                _animator.SetBool(_animIDWalking, true);
+            else
+                _animator.SetBool(_animIDWalking, false);
+                
             targetSpeed = 0;
             
         }
@@ -313,7 +319,7 @@ public class ThirdPersonMovement : MonoBehaviour
             _animator.SetBool(_animIDJump, false);
             if (moveInput.x != 0 || moveInput.y != 0)
             {
-                //if (currentSpeed < 9)
+                //if (currentSpeed < 9) // this is for changing the animation slowly, slow skate into fast skate
                     //targetSpeed = Mathf.Lerp(targetSpeed, 1, .25f);
                 //else 
                     targetSpeed = Mathf.Lerp(targetSpeed, 2, .25f);
@@ -335,6 +341,29 @@ public class ThirdPersonMovement : MonoBehaviour
             _animator.SetBool(_animIDJump, true);
         }
 
+        //checking for wall running animations
+        if (moveInput.x != 0 || moveInput.y != 0)
+        {
+            if (gameObject.GetComponent<WallRun>().wallLeft)
+                _animator.SetBool(_animIDWallRunLeft, true);
+            else if (gameObject.GetComponent<WallRun>().wallRight)
+                _animator.SetBool(_animIDWallRunRight, true);
+            else
+            {
+                _animator.SetBool(_animIDWallRunLeft, false);
+                _animator.SetBool(_animIDWallRunRight, false);
+            }
+                
+        }
+
+        //checking for grinding animations
+        if (gameObject.GetComponent<CollisionFollow>().isGrinding)
+        {
+            _animator.SetBool(_animIDGrinding, true);
+        }else
+            _animator.SetBool(_animIDGrinding, false);
+
+
         //clamp skate speed
         if (currentSpeed > maxSkateSpeed)
             currentSpeed = maxSkateSpeed;
@@ -343,6 +372,8 @@ public class ThirdPersonMovement : MonoBehaviour
         //adjust animator speed
         _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
         if (_animationBlend < 0.01f) _animationBlend = 0f;
+
+
 
 
         _animator.SetFloat(_animIDSpeed, _animationBlend);
@@ -392,6 +423,8 @@ public class ThirdPersonMovement : MonoBehaviour
         _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
         _animIDWalking = Animator.StringToHash("Walking");
         _animIDGrinding = Animator.StringToHash("Grinding");
+        _animIDWallRunLeft = Animator.StringToHash("WallRunLeft");
+        _animIDWallRunRight = Animator.StringToHash("WallRunRight");
     }
 
     private void TimerSpace ()
