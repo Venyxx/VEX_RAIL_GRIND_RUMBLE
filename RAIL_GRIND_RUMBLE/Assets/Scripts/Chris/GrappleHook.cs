@@ -66,6 +66,9 @@ public class GrappleHook : MonoBehaviour
 
     public bool pullingObject;
     
+    //Audio
+    [SerializeField] private AudioClip[] grappleSounds;
+    private AudioSource audioSource;
     
 
     void Start()
@@ -88,7 +91,7 @@ public class GrappleHook : MonoBehaviour
         line = playerREF.gameObject.GetComponent<LineRenderer>();
         grappleDetectorREF = GameObject.Find("GrappleDetector");
         _thirdPersonMovement = FindObjectOfType<ThirdPersonMovement>();
-
+        audioSource = GetComponent<AudioSource>();
         rbDefaultMass = rigidBody.mass;
 
         //Maybe make this more efficient
@@ -165,7 +168,7 @@ public class GrappleHook : MonoBehaviour
             if (!GameObject.Find("AimingCam") && grappleDetectorREF.GetComponent<GrappleDetection>().aimPoints.Count > 0 && isGrappling == false && grappleStored == true)
             {
                 //Need to fix ability to account for pickups/pulling to player
-                //CheckObjectType(grappleDetectorREF.GetComponent<GrappleDetection>().currentAim);
+                CheckObjectType(grappleDetectorREF.GetComponent<GrappleDetection>().currentAim);
                 StartSwing();
                 StartCoroutine(ZipRunning());
             }
@@ -198,6 +201,12 @@ public class GrappleHook : MonoBehaviour
         //     return;
         // }
 
+        //Sound
+        audioSource.clip = grappleSounds[0];
+        audioSource.Play(0);
+        StartCoroutine(SoundDelay());
+        
+
         //Insta-zip
         shorteningCable = true;
         rigidBody.mass = (rbDefaultMass/2);
@@ -228,6 +237,10 @@ public class GrappleHook : MonoBehaviour
 
     void StopSwing()
     {
+        //Sound
+        audioSource.clip = grappleSounds[4];
+        audioSource.Play(0);
+
         //Debug.Log("StopSwing");
         line.positionCount = 0;
         playerREF.gameObject.GetComponent<ThirdPersonMovement>().isGrappling = false;
@@ -268,6 +281,12 @@ public class GrappleHook : MonoBehaviour
         zipRunning = true;
         yield return new WaitForSeconds(0.8f);
         zipRunning = false;
+    }
+
+    IEnumerator SoundDelay()
+    {
+        yield return new WaitForSeconds(0.2f);
+        ZipSound();
     }
 
     void AirMovement()
@@ -450,10 +469,10 @@ public class GrappleHook : MonoBehaviour
             enemyPullTo = false;
         } else {
 
-            if (!GameObject.Find("AimingCam"))
-            {
-            return;
-            }
+            // if (!GameObject.Find("AimingCam"))
+            // {
+            // return;
+            // }
 
             if (currentAim.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
@@ -526,6 +545,19 @@ public class GrappleHook : MonoBehaviour
         if (context.canceled)
         {
             pullingObject = false;
+        }
+    }
+
+    void ZipSound()
+    {
+        if (canPull == false)
+        {
+            int pickSound = Random.Range(1,3);
+            audioSource.clip = grappleSounds[pickSound];
+            audioSource.Play(0);
+        } else {
+            audioSource.clip = grappleSounds[3];
+            audioSource.Play(0);
         }
     }
 
