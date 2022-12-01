@@ -56,6 +56,8 @@ public class ThirdPersonMovement : MonoBehaviour
     private int _animIDGrounded;
     private int _animIDJump;
     private int _animIDFreeFall;
+    private int _animIDWalking;
+    private int _animIDGrinding;
     private int _animIDMotionSpeed;
     public float SpeedChangeRate = 10.0f;
     private float targetSpeed;
@@ -171,6 +173,12 @@ public class ThirdPersonMovement : MonoBehaviour
                 isJumping = false;
             }
         }
+
+        if (gameObject.GetComponent<CollisionFollow>().isGrinding)
+            _animator.SetBool(_animIDGrinding, true);
+        else if (!gameObject.GetComponent<CollisionFollow>().isGrinding)
+            _animator.SetBool(_animIDGrinding, false);
+
     }
 
     
@@ -293,6 +301,7 @@ public class ThirdPersonMovement : MonoBehaviour
         {
             rigidBody.velocity = new Vector3(moveDirection.normalized.x * walkSpeed * 10f, rigidBody.velocity.y, moveDirection.normalized.z * walkSpeed * 10f);
             //change anim
+            _animator.SetBool(_animIDWalking, true);
             targetSpeed = 0;
             
         }
@@ -300,9 +309,16 @@ public class ThirdPersonMovement : MonoBehaviour
         {
             rigidBody.AddForce(moveDirection.normalized * currentSpeed * 10f, ForceMode.Force);
             //change anim
+            _animator.SetBool(_animIDWalking, false);
             _animator.SetBool(_animIDJump, false);
             if (moveInput.x != 0 || moveInput.y != 0)
-                targetSpeed = Mathf.Lerp(targetSpeed, 2, .25f);
+            {
+                if (currentSpeed < 9)
+                    targetSpeed = Mathf.Lerp(targetSpeed, 1, .25f);
+                else 
+                    targetSpeed = Mathf.Lerp(targetSpeed, 2, .25f);
+            }
+                
             else 
                 targetSpeed = Mathf.Lerp(targetSpeed, 0, .25f);
 
@@ -374,6 +390,8 @@ public class ThirdPersonMovement : MonoBehaviour
         _animIDJump = Animator.StringToHash("Jump");
         _animIDFreeFall = Animator.StringToHash("FreeFall");
         _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
+        _animIDWalking = Animator.StringToHash("Walking");
+        _animIDGrinding = Animator.StringToHash("Grinding");
     }
 
     private void TimerSpace ()
