@@ -9,10 +9,13 @@ public class ThirdPersonMovement : MonoBehaviour
     //Movement
     public float moveSpeed;
     [SerializeField] private float walkSpeed = 0.3f;
+    [SerializeField] private float currentSpeed;
     private float baseMoveSpeed;
     private float speedLerp;
     public float groundDrag;
     Vector3 standingStill = new Vector3 (0,0,0);
+    public Vector2 moveInput;
+    [SerializeField] private float maxSkateSpeed;
 
     //Jump
     //[SerializeField]private float jumpForceMax;
@@ -22,6 +25,7 @@ public class ThirdPersonMovement : MonoBehaviour
     bool isJumping;
     bool jumpDelayRunning = false;
     float jumpTimeCounter;
+    private float jumpTimer;
 
     public float jumpCoolDown;
     public float airMultiplier;
@@ -48,7 +52,6 @@ public class ThirdPersonMovement : MonoBehaviour
     // animation IDs
     private float _animationBlend;
     private Animator _animator;
-    private bool _hasAnimator;
     private int _animIDSpeed;
     private int _animIDGrounded;
     private int _animIDJump;
@@ -102,6 +105,8 @@ public class ThirdPersonMovement : MonoBehaviour
         moveSpeed = 0;
         baseMoveSpeed= 8;
         speedLerp = 2.22f;
+        //max skate speed will be a better changable var later
+        maxSkateSpeed = 30;
 
 
         playerActions = new InputHandler();
@@ -111,11 +116,10 @@ public class ThirdPersonMovement : MonoBehaviour
         canJump = true;
 
         //animation setting
-        //_hasAnimator = TryGetComponent(out _animator);
         _animator = transform.Find("AriRig").gameObject.GetComponent<Animator>();
          AssignAnimationIDs();
 
-         currentTime = maxTime;
+        currentTime = maxTime;
 
         GameObject orientationREF = GameObject.Find("Orientation");
         orientation = orientationREF.gameObject.GetComponent<Transform>();
@@ -139,27 +143,21 @@ public class ThirdPersonMovement : MonoBehaviour
         
         //Grounded Check
         Grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+        _animator.SetBool(_animIDGrounded, Grounded);
 
         PlayerInput();
         SpeedControl();
 
-        //Add function for increasing player speed when keys held down
-        
-    
-
         //Drag
         if (Grounded == true)
         {
-            
             rigidBody.drag = groundDrag;
-
-            if (_hasAnimator)
-            {
-                _animator.SetBool(_animIDGrounded, Grounded);
-            }
-        } else {
-            rigidBody.drag = 0;
+ 
+        }else 
+        {
+            rigidBody.drag = 0;  
         }
+        
 
         //Hold Jump WIP
         if (jumpDelayRunning == false)
@@ -168,15 +166,15 @@ public class ThirdPersonMovement : MonoBehaviour
             {
                 TapJump(jumpForce/3);
                 jumpTimeCounter -= Time.deltaTime;
-            } else {
+            } else 
+            {
                 isJumping = false;
             }
         }
     }
 
-    private float jumpTimer;
     
-
+    
     public void Jump(InputAction.CallbackContext context)
     {
         if (walking) return;
@@ -186,6 +184,8 @@ public class ThirdPersonMovement : MonoBehaviour
         {
             isJumping = true;
             jumpTimeCounter = 0.35f;
+            _animator.SetBool(_animIDJump, true);
+            _animator.SetBool(_animIDGrounded, false);
             TapJump(jumpForce);
             StartCoroutine(JumpHoldDelay());
         }
@@ -193,6 +193,7 @@ public class ThirdPersonMovement : MonoBehaviour
         if (context.canceled)
         {
             isJumping = false;
+            
         }
     }
 
@@ -251,20 +252,19 @@ public class ThirdPersonMovement : MonoBehaviour
     {
         //horizontalInput = Input.GetAxisRaw("Horizontal");
         //verticalInput = Input.GetAxisRaw("Vertical");
-        Vector2 moveInput = playerActions.Player.Move.ReadValue<Vector2>();
+        moveInput = playerActions.Player.Move.ReadValue<Vector2>();
         horizontalInput = moveInput.x/2;
         verticalInput = moveInput.y/2;
 
         if (horizontalInput != 0 || verticalInput != 0)
         {
             moveKeyUp = false;
-            TimerSpace();
-           
+            TimerSpace(); 
         }
 
         if (canAccelerate)
         {
-            moveSpeed = Mathf.Lerp(moveSpeed, moveSpeed + 2, speedLerp * Time.deltaTime);
+            currentSpeed = Mathf.Lerp(moveSpeed, moveSpeed + 2, speedLerp * Time.deltaTime);
             Debug.Log("add");
 
         }
@@ -292,41 +292,38 @@ public class ThirdPersonMovement : MonoBehaviour
         if (walking)
         {
             rigidBody.velocity = new Vector3(moveDirection.normalized.x * walkSpeed * 10f, rigidBody.velocity.y, moveDirection.normalized.z * walkSpeed * 10f);
+            targetSpeed = 0;
             
         }
         else if (Grounded)
         {
-            rigidBody.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+            rigidBody.AddForce(moveDirection.normalized * currentSpeed * 10f, ForceMode.Force);
+            _animator.SetBool(_animIDJump, false);
+            targetSpeed = 2;
         } 
         else 
         {
             if (isGrappling == true)
             {
-                rigidBody.AddForce(moveDirection.normalized * moveSpeed * 10f * swingSpeed, ForceMode.Force);
+                rigidBody.AddForce(moveDirection.normalized * currentSpeed * 10f * swingSpeed, ForceMode.Force);
             } else {
-                rigidBody.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+                rigidBody.AddForce(moveDirection.normalized * currentSpeed * 10f * airMultiplier, ForceMode.Force);
             }
+            _animator.SetBool(_animIDJump, true);
         }
 
-        //adjust animator speed
-        targetSpeed = moveSpeed;
+        //clamp skate speed
+        if (currentSpeed > maxSkateSpeed)
+            currentSpeed = maxSkateSpeed;
 
+        
+        //adjust animator speed
         _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
         if (_animationBlend < 0.01f) _animationBlend = 0f;
 
-        
-        //will eventually be _animIDSpeed, _animationBlend
-        
+
+        _animator.SetFloat(_animIDSpeed, _animationBlend);
         //_animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
-        if (rigidBody.velocity.x <= 0 )
-        {
-            Debug.Log("idle " + rigidBody.velocity.x);
-            _animator.SetFloat(_animIDSpeed, 0);
-        }else 
-        {
-            _animator.SetFloat(_animIDSpeed, 1);
-            Debug.Log("run");
-        }
 
     }
 
