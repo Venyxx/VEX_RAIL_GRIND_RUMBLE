@@ -119,7 +119,7 @@ public class ThirdPersonMovement : MonoBehaviour
         _animator = transform.Find("AriRig").gameObject.GetComponent<Animator>();
          AssignAnimationIDs();
 
-        currentTime = maxTime;
+        currentTime = 0;
 
         GameObject orientationREF = GameObject.Find("Orientation");
         orientation = orientationREF.gameObject.GetComponent<Transform>();
@@ -292,14 +292,21 @@ public class ThirdPersonMovement : MonoBehaviour
         if (walking)
         {
             rigidBody.velocity = new Vector3(moveDirection.normalized.x * walkSpeed * 10f, rigidBody.velocity.y, moveDirection.normalized.z * walkSpeed * 10f);
+            //change anim
             targetSpeed = 0;
             
         }
         else if (Grounded)
         {
             rigidBody.AddForce(moveDirection.normalized * currentSpeed * 10f, ForceMode.Force);
+            //change anim
             _animator.SetBool(_animIDJump, false);
-            targetSpeed = 2;
+            if (moveInput.x != 0 || moveInput.y != 0)
+                targetSpeed = Mathf.Lerp(targetSpeed, 2, .25f);
+            else 
+                targetSpeed = Mathf.Lerp(targetSpeed, 0, .25f);
+
+            
         } 
         else 
         {
@@ -431,5 +438,10 @@ public class ThirdPersonMovement : MonoBehaviour
             }
         }
         
+    }
+
+    public void WallRunAnim (bool state)
+    {
+
     }
 }

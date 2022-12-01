@@ -40,7 +40,7 @@ public class WallRun : MonoBehaviour
     
     void Start()
     {
-        playerREF = this.gameObject;
+       playerREF = this.gameObject;
        playerScript = playerREF.gameObject.GetComponent<ThirdPersonMovement>();
        rigidBody = playerREF.GetComponent<Rigidbody>();
 
