@@ -136,7 +136,7 @@ public class ThirdPersonMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
         //Grounded Check
         Grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
@@ -264,8 +264,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
         if (canAccelerate)
         {
-            Mathf.Lerp(moveSpeed, moveSpeed + 5, speedLerp * Time.deltaTime);
-            moveSpeed += 2;
+            moveSpeed = Mathf.Lerp(moveSpeed, moveSpeed + 2, speedLerp * Time.deltaTime);
             Debug.Log("add");
 
         }
@@ -275,8 +274,7 @@ public class ThirdPersonMovement : MonoBehaviour
             moveSpeed = baseMoveSpeed;
             canAccelerate = false;
             moveKeyUp = true;
-            Debug.Log(canAccelerate);
-            
+          
         }
     }
 
@@ -320,12 +318,14 @@ public class ThirdPersonMovement : MonoBehaviour
         //will eventually be _animIDSpeed, _animationBlend
         
         //_animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
-        if (moveSpeed > 0 )
+        if (rigidBody.velocity.x <= 0 )
         {
-            _animator.SetFloat(_animIDMotionSpeed, 0);
+            Debug.Log("idle " + rigidBody.velocity.x);
+            _animator.SetFloat(_animIDSpeed, 0);
         }else 
         {
-            _animator.SetFloat(_animIDMotionSpeed, 1);
+            _animator.SetFloat(_animIDSpeed, 1);
+            Debug.Log("run");
         }
 
     }
