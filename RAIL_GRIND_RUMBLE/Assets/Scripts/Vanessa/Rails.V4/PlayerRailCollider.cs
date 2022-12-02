@@ -21,7 +21,7 @@ public class PlayerRailCollider : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isGrinding && !ThirdPersonMovementREF.walking)
+        if (isGrinding && !ThirdPersonMovementREF.isWalking)
         {
             //move player to runner
             gameObject.transform.position = Vector3.Lerp (gameObject.transform.position, RailMover.transform.position, 0.2f);
@@ -31,7 +31,7 @@ public class PlayerRailCollider : MonoBehaviour
     void OnTriggerEnter (Collider col)
     {
         //did we run into the POSITIVE LEFT rail collider while skating?
-        if (col.gameObject.name == "PositiveLeftCollider" && !ThirdPersonMovementREF.walking)
+        if (col.gameObject.name == "PositiveLeftCollider" && !ThirdPersonMovementREF.isWalking)
         {
             RailMover = col.gameObject;
             // set player as child// change speed of runner to players speed

@@ -13,6 +13,7 @@ public class PlayerAttack : MonoBehaviour
     public Collider Weapon; 
     public Collider Knee;
     public int atkCount;
+    private ThirdPersonMovement movementScriptREF;
 
 
     private void Awake()
@@ -20,6 +21,7 @@ public class PlayerAttack : MonoBehaviour
         instance = this;
         Weapon.enabled = false;
         Knee.enabled = false;
+        movementScriptREF = GetComponent<ThirdPersonMovement>();
 
     }
    
@@ -36,7 +38,7 @@ public class PlayerAttack : MonoBehaviour
 
     public void Attack(InputAction.CallbackContext context)
     {  //Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
-        if (!context.started)
+        if (!context.started || movementScriptREF.isWalking)
         {
             return;
         }

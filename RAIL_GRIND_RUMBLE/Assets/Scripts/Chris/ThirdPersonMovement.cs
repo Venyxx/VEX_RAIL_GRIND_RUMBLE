@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEditor;
 using TMPro;
+using UnityEngine.PlayerLoop;
 
 public class ThirdPersonMovement : MonoBehaviour
 {
@@ -81,7 +82,7 @@ public class ThirdPersonMovement : MonoBehaviour
     private bool jump;
     private bool jumpCancel;
 
-    public bool walking = true;
+    public bool isWalking { get; private set; } = true;
 
 
     public Rigidbody rigidBody;
@@ -99,15 +100,17 @@ public class ThirdPersonMovement : MonoBehaviour
 
     private GameObject[] skateWheels;
     private GameObject[] skateShoes;
+    private GameObject playerWeapon;
+    private GameObject sprayCan;
     [SerializeField] private Material skatesOnMaterial;
     [SerializeField] private Material skatesOffMaterial;
 
     //COLLIDER STUFF (so ari gets shorter when skates are turned off)
     private CapsuleCollider ariCollider;
-    private static float skateCenterY = 0.8903141f;
-    private static float skateHeight = 1.841251f;
-    private static float walkCenterY = 0.929162f;
-    private static float walkHeight = 1.763556f; 
+    private static float skateCenterY = 0.8497467f;
+    private static float skateHeight = 1.92239f;
+    private static float walkCenterY = 0.8990228f;
+    private static float walkHeight = 1.823838f; 
         
     // Start is called before the first frame update
     void Start()
@@ -148,6 +151,8 @@ public class ThirdPersonMovement : MonoBehaviour
 
         skateShoes = GameObject.FindGameObjectsWithTag("SkateBody");
         skateWheels = GameObject.FindGameObjectsWithTag("SkateWheel");
+        playerWeapon = GameObject.FindGameObjectWithTag("PlayerWeapon");
+        sprayCan = GameObject.FindWithTag("PlayerCan");
         ariCollider = GetComponent<CapsuleCollider>();
         WalkToggleHelper();
     }
@@ -199,7 +204,7 @@ public class ThirdPersonMovement : MonoBehaviour
     
     public void Jump(InputAction.CallbackContext context)
     {
-        if (walking) return;
+        if (isWalking) return;
         //if (isGrappling) return;
         
         if (context.started && Grounded)
@@ -222,29 +227,33 @@ public class ThirdPersonMovement : MonoBehaviour
     public void ToggleWalk(InputAction.CallbackContext context)
     {
         if (!context.started) return;
-        walking = !walking;
+        isWalking = !isWalking;
         WalkToggleHelper();
     }
 
     void WalkToggleHelper()
     {
-        Debug.Log($"Walking: {walking}");
+        Debug.Log($"Walking: {isWalking}");
 
         foreach (GameObject skateWheel in skateWheels)
-            skateWheel.SetActive(!walking); //if walking, turn off wheels. 
+            skateWheel.SetActive(!isWalking); //if walking, turn off wheels. 
 
         foreach (GameObject shoe in skateShoes)
-            shoe.GetComponent<MeshRenderer>().material = walking ? skatesOffMaterial : skatesOnMaterial;
+            shoe.GetComponent<SkinnedMeshRenderer>().material = isWalking ? skatesOffMaterial : skatesOnMaterial;
 
-        if (walking)
+        if (isWalking)
         {
             ariCollider.center = new Vector3(ariCollider.center.x, walkCenterY, ariCollider.center.z);
             ariCollider.height = walkHeight;
+            playerWeapon.SetActive(false);
+            sprayCan.SetActive(true);
         }
         else
         {
             ariCollider.center = new Vector3(ariCollider.center.x, skateCenterY, ariCollider.center.z);
             ariCollider.height = skateHeight;
+            playerWeapon.SetActive(true);
+            sprayCan.SetActive(false);
         }
     }
 
@@ -314,7 +323,7 @@ public class ThirdPersonMovement : MonoBehaviour
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
         skateDirection = orientation.forward;
 
-        if (walking)
+        if (isWalking)
         {
             rigidBody.velocity = new Vector3(moveDirection.normalized.x * walkSpeed * 10f, rigidBody.velocity.y, moveDirection.normalized.z * walkSpeed * 10f);
             //change anim
@@ -487,7 +496,7 @@ public class ThirdPersonMovement : MonoBehaviour
     {
         if (context.performed) return;
         
-        if (!walking)
+        if (!isWalking)
         {
             if (context.started)
             {

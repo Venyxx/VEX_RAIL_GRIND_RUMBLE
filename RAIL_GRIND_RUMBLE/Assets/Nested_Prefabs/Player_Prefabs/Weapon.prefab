@@ -9,8 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2588660619408717935}
-  - component: {fileID: 2588660619408717934}
-  - component: {fileID: 2588660619408717933}
+  - component: {fileID: 338463765}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -25,56 +24,28 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2588660619408717928}
-  m_LocalRotation: {x: -0, y: 0.75721407, z: -0, w: 0.6531668}
+  m_LocalRotation: {x: 0, y: 0.75721174, z: 0, w: 0.6531695}
   m_LocalPosition: {x: -3.263, y: 1.065961, z: -11.078}
-  m_LocalScale: {x: 0.71540993, y: 0.71540993, z: 0.71540993}
+  m_LocalScale: {x: 0.74368, y: 0.74368, z: 0.74368}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 616717778317924132}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 98.438, z: 0}
---- !u!95 &2588660619408717934
-Animator:
-  serializedVersion: 4
+--- !u!65 &338463765
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2588660619408717928}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a2cd5bc3013e9a84ca8ec7a2ab9e8f6d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2588660619408717933
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2588660619408717928}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06c0334f09da4644783ccc9a2df44ff3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anim: {fileID: 0}
-  Damage: 50
-  attackPoint: {fileID: 2588660619869523072}
-  attackRange: 1.06
-  enemyLayers:
-    serializedVersion: 2
-    m_Bits: 1024
-  IsAttacking: 0
-  Weapon: {fileID: 0}
+  serializedVersion: 2
+  m_Size: {x: 0.44, y: 1.36, z: 0.46}
+  m_Center: {x: -16.09, y: 0.5, z: 2.7}
 --- !u!1 &2588660619869523073
 GameObject:
   m_ObjectHideFlags: 0
@@ -116,6 +87,10 @@ PrefabInstance:
     - target: {fileID: 2317119874792010883, guid: ad9bea43652241347a9f330bd03abb4d, type: 3}
       propertyPath: m_Name
       value: MCweapon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2317119874792010883, guid: ad9bea43652241347a9f330bd03abb4d, type: 3}
+      propertyPath: m_TagString
+      value: PlayerWeapon
       objectReference: {fileID: 0}
     - target: {fileID: 3126554305063677497, guid: ad9bea43652241347a9f330bd03abb4d, type: 3}
       propertyPath: m_RootOrder

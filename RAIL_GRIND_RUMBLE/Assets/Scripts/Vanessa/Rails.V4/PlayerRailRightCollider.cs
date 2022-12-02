@@ -32,7 +32,7 @@ public class PlayerRailRightCollider : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerCollisionFollowREF.isGrinding && !ThirdPersonMovementREF.walking && thisScript)
+        if (playerCollisionFollowREF.isGrinding && !ThirdPersonMovementREF.isWalking && thisScript)
         {
             //move player to runner
             playerPrefabREF.transform.position = Vector3.Lerp (playerPrefabREF.transform.position, RailMover.transform.position, 0.2f);
@@ -42,7 +42,7 @@ public class PlayerRailRightCollider : MonoBehaviour
     void OnTriggerEnter (Collider col)
     {
         //did we run into the POSITIVE LEFT rail collider while skating?
-        if (col.gameObject.name == "NegativeRightRunner" && !ThirdPersonMovementREF.walking && !playerCollisionFollowREF.isGrinding)
+        if (col.gameObject.name == "NegativeRightRunner" && !ThirdPersonMovementREF.isWalking && !playerCollisionFollowREF.isGrinding)
         {
             
             thisScript = true;
@@ -69,7 +69,7 @@ public class PlayerRailRightCollider : MonoBehaviour
             //we are now grinding
             playerCollisionFollowREF.isGrinding = true; 
 
-        }else if (col.gameObject.name == "PositiveLeftRunner" && !ThirdPersonMovementREF.walking && !playerCollisionFollowREF.isGrinding)
+        }else if (col.gameObject.name == "PositiveLeftRunner" && !ThirdPersonMovementREF.isWalking && !playerCollisionFollowREF.isGrinding)
         {
             
             thisScript = true;

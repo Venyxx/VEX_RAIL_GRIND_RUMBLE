@@ -33,7 +33,7 @@ public class PlayerRailLeftCollider : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerCollisionFollowREF.isGrinding && !ThirdPersonMovementREF.walking && thisScript)
+        if (playerCollisionFollowREF.isGrinding && !ThirdPersonMovementREF.isWalking && thisScript)
         {
             //move player to runner
             playerPrefabREF.transform.position = Vector3.Lerp(playerPrefabREF.transform.position, RailMover.transform.position, 0.2f);
@@ -43,7 +43,7 @@ public class PlayerRailLeftCollider : MonoBehaviour
     void OnTriggerEnter (Collider col)
     {
         //did we run into the POSITIVE LEFT rail collider while skating?
-        if (col.gameObject.name == "PositiveRightCollider" && !ThirdPersonMovementREF.walking && !playerCollisionFollowREF.isGrinding)
+        if (col.gameObject.name == "PositiveRightCollider" && !ThirdPersonMovementREF.isWalking && !playerCollisionFollowREF.isGrinding)
         {
             
             thisScript = true;
@@ -70,7 +70,7 @@ public class PlayerRailLeftCollider : MonoBehaviour
             //we are now grinding
             playerCollisionFollowREF.isGrinding = true; 
 
-        }else if (col.gameObject.name == "NegativeLeftCollider" && !ThirdPersonMovementREF.walking && !playerCollisionFollowREF.isGrinding)
+        }else if (col.gameObject.name == "NegativeLeftCollider" && !ThirdPersonMovementREF.isWalking && !playerCollisionFollowREF.isGrinding)
         {
             thisScript = true;
             Debug.Log("the left side of the player hit the left side of the negative runner");
