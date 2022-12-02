@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 public class GrappleHook : MonoBehaviour
@@ -18,6 +19,10 @@ public class GrappleHook : MonoBehaviour
     private ThirdPersonMovement _thirdPersonMovement;
 
     public LayerMask canGrapple;
+
+    //UI
+    private Image grappleMeter;
+    [SerializeField] Sprite[] grappleMeterImages;
 
     //Swinging
     private Vector3 swingPoint;
@@ -106,6 +111,9 @@ public class GrappleHook : MonoBehaviour
 
         GameObject hookTipREF = GameObject.Find("HookTip");
         hookTip = hookTipREF.gameObject.GetComponent<Transform>();
+
+        GameObject grappleMeterREF = GameObject.Find("GrappleMeter");
+        grappleMeter = grappleMeterREF.GetComponent<Image>();
         
     }
 
@@ -253,7 +261,17 @@ public class GrappleHook : MonoBehaviour
         } else {
             swingCount = 0;
             grappleStored = false;
+            grappleMeter.sprite = grappleMeterImages[3];
             Debug.Log("Swings Empty");
+        }
+
+        //UI GrappleMeter
+        if (swingCount == 1)
+        {
+            grappleMeter.sprite = grappleMeterImages[1];
+        } else if (swingCount == 2)
+        {
+            grappleMeter.sprite = grappleMeterImages[2];
         }
 
         enemyPullTo = false;
@@ -266,10 +284,11 @@ public class GrappleHook : MonoBehaviour
     {
         cooldownRunning = true;
         canShoot = false;
-        for (int i = 0; i < 3; i++)
+        for (int i = 3; i > 0; i--)
         {
             yield return new WaitForSeconds(1f);
             Debug.Log("Grapple Cooldown: "+ i);
+            grappleMeter.sprite = grappleMeterImages[i - 1];
         }
         canShoot = true;
         grappleStored = true;

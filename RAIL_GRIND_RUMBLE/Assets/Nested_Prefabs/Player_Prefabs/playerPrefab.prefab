@@ -537,6 +537,11 @@ MonoBehaviour:
   canGrapple:
     serializedVersion: 2
     m_Bits: 67072
+  grappleMeterImages:
+  - {fileID: 21300000, guid: 691caa09982f7134a81ddc291863c338, type: 3}
+  - {fileID: 21300000, guid: 8facbe23e681bd94887af466229eaac0, type: 3}
+  - {fileID: 21300000, guid: 8d517b5cfe6133b44857eed19241ca6c, type: 3}
+  - {fileID: 21300000, guid: d1c53ad9dcbd80e47bbfcce8bbc14d97, type: 3}
   maxSwingDistance: 50
   grappleStored: 0
   canPull: 0
@@ -2713,6 +2718,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e606cc423d70dd645bd324c595a8c70f, type: 3}
       propertyPath: m_Name
       value: AriRig
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e606cc423d70dd645bd324c595a8c70f, type: 3}
+      propertyPath: m_TagString
+      value: PlayerObject
       objectReference: {fileID: 0}
     - target: {fileID: 1206490006754767376, guid: e606cc423d70dd645bd324c595a8c70f, type: 3}
       propertyPath: m_Materials.Array.size
