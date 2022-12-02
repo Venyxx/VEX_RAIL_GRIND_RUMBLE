@@ -55,7 +55,7 @@ public class PlayerRailLeftCollider : MonoBehaviour
 
             // change speed of runner to players speed and set the rail to stop at the end instead of looping
             positiveRunnerREF = col.gameObject.transform.parent.GetComponent<PositiveRunner>();
-            positiveRunnerREF.SpeedAdjustment(ThirdPersonMovementREF.moveSpeed);
+            positiveRunnerREF.SpeedAdjustment(ThirdPersonMovementREF.currentSpeed);
             //positiveRunnerREF.endOfPathInstruction = PathCreation.EndOfPathInstruction.Stop;
 
 
@@ -81,7 +81,7 @@ public class PlayerRailLeftCollider : MonoBehaviour
 
             // change speed of runner to players speed and set the rail to stop at the end instead of looping
             positiveRunnerREF = col.gameObject.transform.parent.GetComponent<PositiveRunner>();
-            positiveRunnerREF.SpeedAdjustment(ThirdPersonMovementREF.moveSpeed);
+            positiveRunnerREF.SpeedAdjustment(ThirdPersonMovementREF.currentSpeed);
             //positiveRunnerREF.endOfPathInstruction = PathCreation.EndOfPathInstruction.Stop;
 
             //get components of current rail

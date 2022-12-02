@@ -11,7 +11,7 @@ public class ThirdPersonMovement : MonoBehaviour
     //Movement
     public float moveSpeed;
     [SerializeField] private float walkSpeed = 0.3f;
-    [SerializeField] private float currentSpeed;
+    public float currentSpeed;
     private float baseMoveSpeed;
     private float speedLerp;
     public float groundDrag;

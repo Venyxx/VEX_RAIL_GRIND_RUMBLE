@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 202877168046550629}
   m_LocalRotation: {x: -0.00000007543707, y: 0.000000029801928, z: 0.000000029802319, w: 1}
-  m_LocalPosition: {x: 8.48999, y: 1.1100006, z: -0.07999998}
+  m_LocalPosition: {x: 8.48999, y: 1.1100006, z: -0.07999992}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -347,7 +347,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pathCreator: {fileID: 202877168046550628}
   endOfPathInstruction: 0
-  speed: 10
+  speed: 100
   distanceTravelled: 0
 --- !u!65 &4436861200148170846
 BoxCollider:
@@ -490,7 +490,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pathCreator: {fileID: 1226521658400817095}
   endOfPathInstruction: 0
-  speed: 10
+  speed: 100
   distanceTravelled: 0
 --- !u!65 &6621818720605103894
 BoxCollider:
@@ -685,7 +685,7 @@ MonoBehaviour:
       - 0
       globalNormalsAngle: 90
       flipNormals: 0
-    vertexPathUpToDate: 0
+    vertexPathUpToDate: 1
     vertexPathMaxAngleError: 0.3
     vertexPathMinVertexSpacing: 0
     showTransformTool: 1
