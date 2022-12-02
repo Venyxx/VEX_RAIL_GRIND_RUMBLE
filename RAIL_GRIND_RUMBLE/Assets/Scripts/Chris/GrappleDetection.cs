@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using Cinemachine;
 using UnityEngine.InputSystem;
@@ -53,13 +54,11 @@ public class GrappleDetection : MonoBehaviour
         //Smooth Aim Point Transition
         if (lookAtSwitchActive == true)
         {
-            if (nextAim != null && aimLookAtREF.transform.position != nextAim.transform.position)
+            if (currentAim != null && aimLookAtREF.transform.position != currentAim.transform.position)
             {
-                aimLookAtREF.transform.position = Vector3.MoveTowards(aimLookAtREF.transform.position, nextAim.transform.position, 0.5f);
+                aimLookAtREF.transform.position = Vector3.MoveTowards(aimLookAtREF.transform.position, currentAim.transform.position, 0.5f);
                 cinemachineCam.m_LookAt = aimLookAtREF;
-            } else {
-                SetCurrentAim();
-            }
+            } 
         }
 
         //Aim Point Closest
@@ -80,8 +79,15 @@ public class GrappleDetection : MonoBehaviour
 
     }
 
+    IEnumerator CurrentAimDelay()
+    {
+        yield return new WaitForSeconds(0.2f);
+        SetCurrentAim();
+    }
+
     public void SetCurrentAim()
     {
+        //Debug.Log ("Current Aim Set");
         lookAtSwitchActive = false;
         currentAim = aimPoints[aimPointChoice];
         grappleHookScript.CheckObjectType(currentAim);
@@ -127,6 +133,7 @@ public class GrappleDetection : MonoBehaviour
         currentAim = nextAim;
         aimLookAtREF.transform.position = prevAim.transform.position;
         lookAtSwitchActive = true;
+        StartCoroutine(CurrentAimDelay());
     }
     
 

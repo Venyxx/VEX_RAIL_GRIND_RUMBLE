@@ -121,8 +121,7 @@ public class ThirdPersonCamera : MonoBehaviour
     public void Look(InputAction.CallbackContext context)
     {
         _freeLook.m_XAxis.m_InputAxisValue = context.ReadValue<Vector2>().x;
-        _freeLook.m_YAxis.m_InputAxisValue = context.ReadValue<Vector2>().y;
-        
+        _freeLook.m_YAxis.m_InputAxisValue = context.ReadValue<Vector2>().y; 
     }
 
     public void SwitchCameraStarted()
@@ -132,8 +131,8 @@ public class ThirdPersonCamera : MonoBehaviour
         if (grappleDetection.gameObject.GetComponent<GrappleDetection>().aimPoints.Count != 0 && playerPrefabREF.gameObject.GetComponent<GrappleHook>().grappleStored)
         {
             SwitchCameraStyle(CameraStyle.Aiming);
-            grappleDetection.gameObject.GetComponent<GrappleDetection>().SetCurrentAim();
-            //grappleDetection.gameObject.GetComponent<GrappleDetection>().AimSwitch();
+            //grappleDetection.gameObject.GetComponent<GrappleDetection>().SetCurrentAim();
+            grappleDetection.gameObject.GetComponent<GrappleDetection>().AimSwitch();
 
             if (playerPrefabREF.gameObject.GetComponent<ThirdPersonMovement>().Grounded == false)
             {

@@ -274,6 +274,7 @@ public class GrappleHook : MonoBehaviour
             grappleMeter.sprite = grappleMeterImages[2];
         }
 
+        
         enemyPullTo = false;
         shorteningCable = false;
         rigidBody.mass = rbDefaultMass;
@@ -522,6 +523,13 @@ public class GrappleHook : MonoBehaviour
 
         if (collision.gameObject.layer == LayerMask.NameToLayer("GrapplePickUp") && joint != null)
         {
+            //Camera
+            if (GameObject.Find("AimingCam"))
+            {
+                GameObject aimingCamREF = GameObject.Find("AimingCam");
+                aimingCamREF.GetComponent<ThirdPersonCamera>().SwitchCameraCanceled();
+            }
+            
             pullingObject = false;
             grappleDetectorREF.gameObject.GetComponent<GrappleDetection>().RemovePoint(collision.transform);
             StopSwing();
