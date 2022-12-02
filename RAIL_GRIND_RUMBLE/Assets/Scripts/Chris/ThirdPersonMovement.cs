@@ -1,7 +1,9 @@
 using System.Collections;
+using System;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEditor;
 using TMPro;
 
 public class ThirdPersonMovement : MonoBehaviour
@@ -16,6 +18,7 @@ public class ThirdPersonMovement : MonoBehaviour
     Vector3 standingStill = new Vector3 (0,0,0);
     public Vector2 moveInput;
     [SerializeField] private float maxSkateSpeed;
+    private float slopeLimit;
 
     //Jump
     //[SerializeField]private float jumpForceMax;
@@ -46,6 +49,7 @@ public class ThirdPersonMovement : MonoBehaviour
     float verticalInput;
 
     Vector3 moveDirection;
+    Vector3 skateDirection;
 
 
 
@@ -86,6 +90,9 @@ public class ThirdPersonMovement : MonoBehaviour
     public static int coinCount;
     GameObject coinCounterREF;
     TextMeshProUGUI coinCountText;
+
+    //speed hud
+    private TextMeshProUGUI speedUIText;
 
     //Camera Switching
     GameObject currentCam;
@@ -132,8 +139,12 @@ public class ThirdPersonMovement : MonoBehaviour
         //Coin Counter
         coinCounterREF = GameObject.Find("CoinCounter");
         coinCountText = coinCounterREF.GetComponent<TextMeshProUGUI>();
+
         //Change/remove this line later based on level-to-level gameplay
         coinCount = 0;
+
+        //set speed UI element
+        speedUIText = GameObject.Find("Speed").GetComponent<TextMeshProUGUI>();
 
         skateShoes = GameObject.FindGameObjectsWithTag("SkateBody");
         skateWheels = GameObject.FindGameObjectsWithTag("SkateWheel");
@@ -150,10 +161,10 @@ public class ThirdPersonMovement : MonoBehaviour
         _animator.SetBool(_animIDGrounded, Grounded);
 
         PlayerInput();
-        SpeedControl();
+        //SpeedControl();
 
         //Drag
-        if (Grounded == true)
+        if (Grounded == true && currentSpeed <= 0)
         {
             rigidBody.drag = groundDrag;
  
@@ -161,7 +172,7 @@ public class ThirdPersonMovement : MonoBehaviour
         {
             rigidBody.drag = 0;  
         }
-        
+
 
         //Hold Jump WIP
         if (jumpDelayRunning == false)
@@ -176,6 +187,7 @@ public class ThirdPersonMovement : MonoBehaviour
             }
         }
 
+        //grinding anims
         if (gameObject.GetComponent<CollisionFollow>().isGrinding)
             _animator.SetBool(_animIDGrinding, true);
         else if (!gameObject.GetComponent<CollisionFollow>().isGrinding)
@@ -266,26 +278,28 @@ public class ThirdPersonMovement : MonoBehaviour
         horizontalInput = moveInput.x/2;
         verticalInput = moveInput.y/2;
 
+        //if there is player input, accelerate
         if (horizontalInput != 0 || verticalInput != 0)
         {
             moveKeyUp = false;
-            TimerSpace(); 
-        }
+            //kick start movement
+            if (currentSpeed == 0)
+                currentSpeed = baseMoveSpeed;
 
-        if (canAccelerate)
+            //accelerate
+            float acceleration = 2f;
+            currentSpeed += acceleration * Time.deltaTime;
+        } else
         {
-            currentSpeed = Mathf.Lerp(moveSpeed, moveSpeed + 2, speedLerp * Time.deltaTime);
-            Debug.Log("add");
-
-        }
-
-        if (horizontalInput == 0 && verticalInput == 0 && !moveKeyUp)
-        {
-            moveSpeed = baseMoveSpeed;
-            canAccelerate = false;
             moveKeyUp = true;
-          
+            float deceleration = 5f;
+
+            //if moving, decelerate
+            if (currentSpeed > 0)
+            currentSpeed -= deceleration * Time.deltaTime;
+
         }
+
     }
 
     void PlayerMovement()
@@ -298,6 +312,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
         
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        skateDirection = orientation.forward;
 
         if (walking)
         {
@@ -308,23 +323,26 @@ public class ThirdPersonMovement : MonoBehaviour
             else
                 _animator.SetBool(_animIDWalking, false);
                 
+            //target speed changes the anim blend tree.
             targetSpeed = 0;
             
         }
         else if (Grounded)
         {
-            rigidBody.AddForce(moveDirection.normalized * currentSpeed * 10f, ForceMode.Force);
+            //Debug.Log(rigidBody.velocity.x +" " + rigidBody.velocity.y +" " + rigidBody.velocity.z);
+            rigidBody.velocity = new Vector3(skateDirection.normalized.x * currentSpeed, rigidBody.velocity.y, skateDirection.normalized.z * currentSpeed);
+            //rigidBody.AddForce(moveDirection.normalized * currentSpeed * 10f, ForceMode.Force);
             //change anim
             _animator.SetBool(_animIDWalking, false);
             _animator.SetBool(_animIDJump, false);
+
+
             if (moveInput.x != 0 || moveInput.y != 0)
             {
                 //if (currentSpeed < 9) // this is for changing the animation slowly, slow skate into fast skate
                     //targetSpeed = Mathf.Lerp(targetSpeed, 1, .25f);
-                //else 
                     targetSpeed = Mathf.Lerp(targetSpeed, 2, .25f);
-            }
-                
+            }     
             else 
                 targetSpeed = Mathf.Lerp(targetSpeed, 0, .25f);
 
@@ -378,6 +396,9 @@ public class ThirdPersonMovement : MonoBehaviour
 
         _animator.SetFloat(_animIDSpeed, _animationBlend);
         //_animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
+
+        //update speed UI
+        SetSpeedUI(currentSpeed);
 
     }
 
@@ -491,8 +512,14 @@ public class ThirdPersonMovement : MonoBehaviour
         
     }
 
-    public void WallRunAnim (bool state)
+    private void SetSpeedUI(float speed)
     {
-
+        int speedAsInt = (int) currentSpeed;
+        speedUIText.text = speedAsInt.ToString();
     }
+
+
+
+
+  
 }
