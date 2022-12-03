@@ -45,7 +45,7 @@ public class PlayerRailLeftCollider : MonoBehaviour
         //did we run into the POSITIVE LEFT rail collider while skating?
         if (col.gameObject.name == "PositiveRightCollider" && !ThirdPersonMovementREF.isWalking && !playerCollisionFollowREF.isGrinding)
         {
-            
+            playerCollisionFollowREF.leftGrinding = true;
             thisScript = true;
             Debug.Log("the left side of the player hit the right side of the positive runner");
             RailMover = col.transform.parent.gameObject;
@@ -72,6 +72,7 @@ public class PlayerRailLeftCollider : MonoBehaviour
 
         }else if (col.gameObject.name == "NegativeLeftCollider" && !ThirdPersonMovementREF.isWalking && !playerCollisionFollowREF.isGrinding)
         {
+            playerCollisionFollowREF.leftGrinding = true;
             thisScript = true;
             Debug.Log("the left side of the player hit the left side of the negative runner");
             RailMover = col.transform.parent.gameObject;
@@ -101,45 +102,40 @@ public class PlayerRailLeftCollider : MonoBehaviour
 
     public void ExitRailLeft()
     {
-        //free player from rail
-        playerPrefabREF.transform.parent = null;
+            //free player from rail
+            playerPrefabREF.transform.parent = null;
 
-        //put base rail speed back
-        if(PositiveRunner != null) PositiveRunner.GetComponent<PositiveRunner>().SpeedReAlignment();
-        if (NegativeRunner != null) NegativeRunner.GetComponent<PositiveRunner>().SpeedReAlignment();
+            //put base rail speed back
+            if(PositiveRunner != null) PositiveRunner.GetComponent<PositiveRunner>().SpeedReAlignment();
+            if (NegativeRunner != null) NegativeRunner.GetComponent<PositiveRunner>().SpeedReAlignment();
 
-        //Rail cooldown
-        if(PositiveRunner != null) StartCoroutine(PositiveRunner.GetComponent<PositiveRunner>().Cooldown());
-        if (NegativeRunner != null) StartCoroutine(NegativeRunner.GetComponent<PositiveRunner>().Cooldown());
+            //Rail cooldown
+            if(PositiveRunner != null) StartCoroutine(PositiveRunner.GetComponent<PositiveRunner>().Cooldown());
+            if (NegativeRunner != null) StartCoroutine(NegativeRunner.GetComponent<PositiveRunner>().Cooldown());
 
-        //turn both runners back on
-        PositiveRunner.SetActive(true);
-        NegativeRunner.SetActive(true);
+            //turn both runners back on
+            PositiveRunner.SetActive(true);
+            NegativeRunner.SetActive(true);
 
-        //Reset loop behavior
-        positiveRunnerREF.endOfPathInstruction = PathCreation.EndOfPathInstruction.Loop;
-        playerCollisionFollowREF.isGrinding = false;
-        
-        thisScript = false;
+            //turn both runners back on
+            PositiveRunner.SetActive(true);
+            NegativeRunner.SetActive(true);
+
+            //free player from rail
+            playerPrefabREF.transform.parent = null;
+            playerCollisionFollowREF.isGrinding = false;
+
+            //Reset loop behavior
+            positiveRunnerREF.endOfPathInstruction = PathCreation.EndOfPathInstruction.Loop;
+            thisScript = false;
+
+            //Reset loop behavior
+            positiveRunnerREF.endOfPathInstruction = PathCreation.EndOfPathInstruction.Loop;
+
+            thisScript = false;
+            playerCollisionFollowREF.isGrinding = false;
+            playerCollisionFollowREF.leftGrinding = false;
     }
 
-    public void JumpOffRail(InputAction.CallbackContext context)
-    {
-        if (!context.performed) return;
-
-        StartCoroutine(PositiveRunner.GetComponent<PositiveRunner>().Cooldown());
-        StartCoroutine(NegativeRunner.GetComponent<PositiveRunner>().Cooldown());
-
-        //turn both runners back on
-        PositiveRunner.SetActive(true);
-        NegativeRunner.SetActive(true);
-
-        //free player from rail
-        playerPrefabREF.transform.parent = null;
-        playerCollisionFollowREF.isGrinding = false;
-
-        //Reset loop behavior
-        positiveRunnerREF.endOfPathInstruction = PathCreation.EndOfPathInstruction.Loop;
-        thisScript = false;
-    }
+   
 }

@@ -23,6 +23,10 @@ public class ThirdPersonMovement : MonoBehaviour
 
     public double speedPrint;
 
+    private CollisionFollow playerCollisionFollowREF;
+    private PlayerRailLeftCollider playerLeftColREF;
+    private PlayerRailRightCollider playerRightColREF;
+
     //Jump
     //[SerializeField]private float jumpForceMax;
     //[SerializeField]private float jumpForceMin;
@@ -124,7 +128,10 @@ public class ThirdPersonMovement : MonoBehaviour
         baseMoveSpeed= 8;
         speedLerp = 2.22f;
         //max skate speed will be a better changable var later
-        maxSkateSpeed = 30;
+        maxSkateSpeed = 20;
+        playerCollisionFollowREF = gameObject.GetComponent<CollisionFollow>();
+        playerLeftColREF = transform.Find("AriRig").gameObject.transform.Find("LeftCollider").gameObject.GetComponent<PlayerRailLeftCollider>();
+        playerRightColREF = transform.Find("AriRig").gameObject.transform.Find("RightCollider").gameObject.GetComponent<PlayerRailRightCollider>();
 
 
         playerActions = new InputHandler();
@@ -231,8 +238,12 @@ public class ThirdPersonMovement : MonoBehaviour
             TapJump(jumpForce);
 
             //release from rail if grinding
-            if (gameObject.GetComponent<CollisionFollow>().isGrinding)
+            if (playerCollisionFollowREF.isGrinding)
             {
+                if (playerCollisionFollowREF.leftGrinding)
+                    playerLeftColREF.ExitRailLeft();
+                else
+                    playerRightColREF.ExitRailRight();
 
             }
             StartCoroutine(JumpHoldDelay());
@@ -284,14 +295,6 @@ public class ThirdPersonMovement : MonoBehaviour
         yield return new WaitForSeconds(0.15f);
         jumpDelayRunning = false;
     }
-
-    // IEnumerator ChargeJump()
-    // {
-    //     for (jumpForce = jumpForceMin; jumpForce < jumpForceMax; jumpForce++)
-    //     {
-    //         yield return new WaitForSeconds(0.15f);
-    //     }
-    // }
 
     void FixedUpdate()
     {
@@ -347,7 +350,7 @@ public class ThirdPersonMovement : MonoBehaviour
             float deceleration = 5f;
 
             //if moving, decelerate
-            Debug.Log("outside");
+           
             if (currentSpeed > 0)
             currentSpeed -= deceleration * Time.deltaTime;
 
@@ -395,9 +398,10 @@ public class ThirdPersonMovement : MonoBehaviour
             //else if (!moveKeyUp)
             if (currentSpeed > 0)
             rigidBody.velocity = new Vector3(skateDirection.normalized.x * currentSpeed, rigidBody.velocity.y, skateDirection.normalized.z * currentSpeed);
-            else
+            else if (verticalInput == -0.5 || horizontalInput != 0)
             rigidBody.velocity = new Vector3(moveDirection.normalized.x * walkSpeed * 10f, rigidBody.velocity.y, moveDirection.normalized.z * walkSpeed * 10f);
-            
+            else 
+            rigidBody.velocity = new Vector3( rigidBody.velocity.x, rigidBody.velocity.y,  rigidBody.velocity.z);
             //change anim
             _animator.SetBool(_animIDWalking, false);
             _animator.SetBool(_animIDJump, false);
