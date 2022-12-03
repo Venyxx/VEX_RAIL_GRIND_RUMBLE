@@ -70,6 +70,8 @@ public class ThirdPersonMovement : MonoBehaviour
     private float targetSpeed;
     public bool analogMovement;
 
+    
+
 
     //Acceleration Timer
     private float maxTime = 3.0f;
@@ -198,6 +200,20 @@ public class ThirdPersonMovement : MonoBehaviour
         else if (!gameObject.GetComponent<CollisionFollow>().isGrinding)
             _animator.SetBool(_animIDGrinding, false);
 
+        //animation transitioning
+        if (!moveKeyUp)
+        {
+            targetSpeed = Mathf.Lerp(targetSpeed, 2, 0.35f);
+        }else if (moveKeyUp && rigidBody.velocity.magnitude > 1)
+        {
+            targetSpeed = Mathf.Lerp(targetSpeed, 1, 0.35f);
+            Debug.Log("in the mid");
+        }
+        else 
+            targetSpeed = Mathf.Lerp(targetSpeed, 0, 0.35f);
+            
+
+
     }
 
     
@@ -287,8 +303,12 @@ public class ThirdPersonMovement : MonoBehaviour
         horizontalInput = moveInput.x/2;
         verticalInput = moveInput.y/2;
 
+        if (rigidBody.velocity.magnitude < 1)
+                currentSpeed = 0;
+            
+
         //if there is player input, accelerate
-        if (horizontalInput != 0 || verticalInput != 0)
+        if (verticalInput == 0.5)
         {
             moveKeyUp = false;
             //kick start movement
@@ -300,6 +320,7 @@ public class ThirdPersonMovement : MonoBehaviour
             currentSpeed += acceleration * Time.deltaTime;
         } else
         {
+            
             moveKeyUp = true;
             float deceleration = 5f;
 
@@ -523,8 +544,12 @@ public class ThirdPersonMovement : MonoBehaviour
 
     private void SetSpeedUI(float speed)
     {
-        int speedAsInt = (int) currentSpeed;
-        speedUIText.text = speedAsInt.ToString();
+        //int speedAsInt = (int) currentSpeed;
+        //m/s to mph
+        var passing = rigidBody.velocity.magnitude;
+        double speedPrint =  (double) passing * 2.2369362920544;
+        int print = (int) speedPrint;
+        speedUIText.text = print.ToString();
     }
 
 
