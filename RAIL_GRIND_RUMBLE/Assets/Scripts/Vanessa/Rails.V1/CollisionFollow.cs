@@ -10,28 +10,15 @@ public class CollisionFollow : MonoBehaviour
     private RailModularity RailModularityREF;
 
     public bool isGrinding;
+    public bool leftGrinding;
+    public bool rightGrinding;
     
 
     
     // Start is called before the first frame update
         void OnCollisionEnter (Collision rail)
         {
-            if (rail.gameObject.tag == "RailStraight" && !isGrinding)
-            {
-                Debug.Log("entering col");
-                isGrinding = true;
-                Debug.Log(isGrinding + "grinding state");
 
-
-                var RoadCreator = rail.transform.Find("Road Creator");
-                pathFollowerREF = gameObject.GetComponent<PathFollower>();
-            
-                pathCreatorREF = RoadCreator.GetComponent<PathCreator>();
-                
-                pathFollowerREF.endOfPathInstruction = PathCreation.EndOfPathInstruction.Reverse;
-                pathFollowerREF.pathCreator = pathCreatorREF;
-
-            }
 
             if (rail.gameObject.tag == "RailCircular" && !isGrinding )
             {

@@ -17,9 +17,15 @@ public class ThirdPersonMovement : MonoBehaviour
     private float speedLerp;
     public float groundDrag;
     Vector3 standingStill = new Vector3 (0,0,0);
-    public Vector2 moveInput;
-    [SerializeField] private float maxSkateSpeed;
+    private Vector2 moveInput;
+    public float maxSkateSpeed;
     private float slopeLimit;
+
+    public double speedPrint;
+
+    private CollisionFollow playerCollisionFollowREF;
+    private PlayerRailLeftCollider playerLeftColREF;
+    private PlayerRailRightCollider playerRightColREF;
 
     //Jump
     //[SerializeField]private float jumpForceMax;
@@ -69,6 +75,8 @@ public class ThirdPersonMovement : MonoBehaviour
     public float SpeedChangeRate = 10.0f;
     private float targetSpeed;
     public bool analogMovement;
+
+    
 
 
     //Acceleration Timer
@@ -120,7 +128,10 @@ public class ThirdPersonMovement : MonoBehaviour
         baseMoveSpeed= 8;
         speedLerp = 2.22f;
         //max skate speed will be a better changable var later
-        maxSkateSpeed = 30;
+        maxSkateSpeed = 20;
+        playerCollisionFollowREF = gameObject.GetComponent<CollisionFollow>();
+        playerLeftColREF = transform.Find("AriRig").gameObject.transform.Find("LeftCollider").gameObject.GetComponent<PlayerRailLeftCollider>();
+        playerRightColREF = transform.Find("AriRig").gameObject.transform.Find("RightCollider").gameObject.GetComponent<PlayerRailRightCollider>();
 
 
         playerActions = new InputHandler();
@@ -166,7 +177,6 @@ public class ThirdPersonMovement : MonoBehaviour
         _animator.SetBool(_animIDGrounded, Grounded);
 
         PlayerInput();
-        //SpeedControl();
 
         //Drag
         if (Grounded == true && currentSpeed <= 0)
@@ -198,6 +208,18 @@ public class ThirdPersonMovement : MonoBehaviour
         else if (!gameObject.GetComponent<CollisionFollow>().isGrinding)
             _animator.SetBool(_animIDGrinding, false);
 
+        
+
+        //animation transitioning
+        if (!moveKeyUp)
+            targetSpeed = Mathf.Lerp(targetSpeed, 2, 0.35f);
+        else if (moveKeyUp && rigidBody.velocity.magnitude > 1)
+            targetSpeed = Mathf.Lerp(targetSpeed, 1, 0.5f);  
+        else 
+            targetSpeed = Mathf.Lerp(targetSpeed, 0, 0.35f);
+            
+
+
     }
 
     
@@ -214,6 +236,8 @@ public class ThirdPersonMovement : MonoBehaviour
             _animator.SetBool(_animIDJump, true);
             _animator.SetBool(_animIDGrounded, false);
             TapJump(jumpForce);
+
+            ExitRailMain();
             StartCoroutine(JumpHoldDelay());
         }
 
@@ -264,14 +288,6 @@ public class ThirdPersonMovement : MonoBehaviour
         jumpDelayRunning = false;
     }
 
-    // IEnumerator ChargeJump()
-    // {
-    //     for (jumpForce = jumpForceMin; jumpForce < jumpForceMax; jumpForce++)
-    //     {
-    //         yield return new WaitForSeconds(0.15f);
-    //     }
-    // }
-
     void FixedUpdate()
     {
         PlayerMovement();
@@ -281,14 +297,15 @@ public class ThirdPersonMovement : MonoBehaviour
 
     void PlayerInput()
     {
-        //horizontalInput = Input.GetAxisRaw("Horizontal");
-        //verticalInput = Input.GetAxisRaw("Vertical");
         moveInput = playerActions.Player.Move.ReadValue<Vector2>();
         horizontalInput = moveInput.x/2;
         verticalInput = moveInput.y/2;
 
+        if (rigidBody.velocity.magnitude < 1)
+                currentSpeed = 0;
+
         //if there is player input, accelerate
-        if (horizontalInput != 0 || verticalInput != 0)
+        if (verticalInput == 0.5)
         {
             moveKeyUp = false;
             //kick start movement
@@ -298,15 +315,40 @@ public class ThirdPersonMovement : MonoBehaviour
             //accelerate
             float acceleration = 2f;
             currentSpeed += acceleration * Time.deltaTime;
-        } else
+
+        } else if (verticalInput != 0.5)
         {
+            //check if the back arrow is active    
+            if (verticalInput == -0.5 && rigidBody.velocity.magnitude < 2)
+            {
+                //walk backwards
+                
+
+            }else if (verticalInput == -0.5)
+            {
+                
+                //decel faster as a breaking mech
+                moveKeyUp = true;
+                float Adeceleration = 10f;
+
+                //if moving, decelerate
+                if (currentSpeed > 0)
+                currentSpeed -= Adeceleration * Time.deltaTime;
+
+            }else 
+            {
+            //if no input forward
             moveKeyUp = true;
             float deceleration = 5f;
 
             //if moving, decelerate
+           
             if (currentSpeed > 0)
             currentSpeed -= deceleration * Time.deltaTime;
 
+            }
+                
+       
         }
 
     }
@@ -326,6 +368,7 @@ public class ThirdPersonMovement : MonoBehaviour
         if (isWalking)
         {
             rigidBody.velocity = new Vector3(moveDirection.normalized.x * walkSpeed * 10f, rigidBody.velocity.y, moveDirection.normalized.z * walkSpeed * 10f);
+
             //change anim
             if (moveInput.x != 0 || moveInput.y != 0)
                 _animator.SetBool(_animIDWalking, true);
@@ -338,24 +381,17 @@ public class ThirdPersonMovement : MonoBehaviour
         }
         else if (Grounded)
         {
-            //Debug.Log(rigidBody.velocity.x +" " + rigidBody.velocity.y +" " + rigidBody.velocity.z);
+            //moves with acceleration for forward, just walks sideways
+            if (currentSpeed > 1)
             rigidBody.velocity = new Vector3(skateDirection.normalized.x * currentSpeed, rigidBody.velocity.y, skateDirection.normalized.z * currentSpeed);
-            //rigidBody.AddForce(moveDirection.normalized * currentSpeed * 10f, ForceMode.Force);
+            //else if (verticalInput == -0.5 || horizontalInput != 0)
+            //rigidBody.velocity = new Vector3(moveDirection.normalized.x * walkSpeed * 10f, rigidBody.velocity.y, moveDirection.normalized.z * walkSpeed * 10f);
+            //else 
+            //rigidBody.velocity = new Vector3( rigidBody.velocity.x, rigidBody.velocity.y,  rigidBody.velocity.z); //PROBLEM AREA
             //change anim
             _animator.SetBool(_animIDWalking, false);
             _animator.SetBool(_animIDJump, false);
-
-
-            if (moveInput.x != 0 || moveInput.y != 0)
-            {
-                //if (currentSpeed < 9) // this is for changing the animation slowly, slow skate into fast skate
-                    //targetSpeed = Mathf.Lerp(targetSpeed, 1, .25f);
-                    targetSpeed = Mathf.Lerp(targetSpeed, 2, .25f);
-            }     
-            else 
-                targetSpeed = Mathf.Lerp(targetSpeed, 0, .25f);
-
-            
+  
         } 
         else 
         {
@@ -399,9 +435,6 @@ public class ThirdPersonMovement : MonoBehaviour
         //adjust animator speed
         _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
         if (_animationBlend < 0.01f) _animationBlend = 0f;
-
-
-
 
         _animator.SetFloat(_animIDSpeed, _animationBlend);
         //_animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
@@ -457,21 +490,6 @@ public class ThirdPersonMovement : MonoBehaviour
         _animIDWallRunRight = Animator.StringToHash("WallRunRight");
     }
 
-    private void TimerSpace ()
-    {
-            if (currentTime <= 0)
-            {
-                canAccelerate = true;
-                currentTime = maxTime;
-                //Debug.Log(currentTime);
-            }       
-            else 
-            {
-                canAccelerate = false;
-                //Debug.Log("cant acc");
-                currentTime -= Time.deltaTime;
-            }
-    }    
 
     void OnCollisionEnter(Collision collision)
     {
@@ -481,6 +499,14 @@ public class ThirdPersonMovement : MonoBehaviour
             {
                 Invoke(nameof(ResetJump), jumpCoolDown);
             }
+        }
+    }
+
+    void OnTriggerEnter (Collider collider)
+    {
+        if (collider.gameObject.tag == "END")
+        {
+            ExitRailMain();
         }
     }
 
@@ -522,12 +548,32 @@ public class ThirdPersonMovement : MonoBehaviour
     }
 
     private void SetSpeedUI(float speed)
-    {
-        int speedAsInt = (int) currentSpeed;
-        speedUIText.text = speedAsInt.ToString();
+    { 
+        //m/s to mph
+        var passing = rigidBody.velocity.magnitude;
+        speedPrint =  (double) passing * 2.2369362920544;
+        int print = (int) speedPrint;
+
+        //print
+        if (print < 10)
+        {
+            speedUIText.text = "0" + print.ToString();
+        }else
+        speedUIText.text = print.ToString();
     }
 
+    private void ExitRailMain ()
+    {
+        //release from rail if grinding
+            if (playerCollisionFollowREF.isGrinding)
+            {
+                if (playerCollisionFollowREF.leftGrinding)
+                    playerLeftColREF.ExitRailLeft();
+                else
+                    playerRightColREF.ExitRailRight();
 
+            }
+    }
 
 
   

@@ -41,10 +41,12 @@ public class PlayerRailRightCollider : MonoBehaviour
 
     void OnTriggerEnter (Collider col)
     {
+        Debug.Log("we entered the right script");
         //did we run into the POSITIVE LEFT rail collider while skating?
-        if (col.gameObject.name == "NegativeRightRunner" && !ThirdPersonMovementREF.isWalking && !playerCollisionFollowREF.isGrinding)
+        if (col.gameObject.name == "NegativeRightCollider" && !ThirdPersonMovementREF.isWalking && !playerCollisionFollowREF.isGrinding)
         {
             
+            playerCollisionFollowREF.rightGrinding = true;
             thisScript = true;
             Debug.Log("the right side of the player hit the right side of the negative runner");
             RailMover = col.transform.parent.gameObject;
@@ -69,9 +71,10 @@ public class PlayerRailRightCollider : MonoBehaviour
             //we are now grinding
             playerCollisionFollowREF.isGrinding = true; 
 
-        }else if (col.gameObject.name == "PositiveLeftRunner" && !ThirdPersonMovementREF.isWalking && !playerCollisionFollowREF.isGrinding)
+        }else if (col.gameObject.name == "PositiveLeftCollider" && !ThirdPersonMovementREF.isWalking && !playerCollisionFollowREF.isGrinding)
         {
             
+            playerCollisionFollowREF.rightGrinding = true;
             thisScript = true;
             Debug.Log("the right side of the player hit the left side of the positive runner");
             RailMover = col.transform.parent.gameObject;
@@ -115,27 +118,25 @@ public class PlayerRailRightCollider : MonoBehaviour
             //turn both runners back on
             PositiveRunner.SetActive(true);
             NegativeRunner.SetActive(true);
+
+            //turn both runners back on
+            PositiveRunner.SetActive(true);
+            NegativeRunner.SetActive(true);
+
+            //free player from rail
+            playerPrefabREF.transform.parent = null;
             playerCollisionFollowREF.isGrinding = false;
 
             //Reset loop behavior
             positiveRunnerREF.endOfPathInstruction = PathCreation.EndOfPathInstruction.Loop;
             thisScript = false;
+
+            //Reset loop behavior
+            positiveRunnerREF.endOfPathInstruction = PathCreation.EndOfPathInstruction.Loop;
+
+            thisScript = false;
+            playerCollisionFollowREF.isGrinding = false;
+            playerCollisionFollowREF.rightGrinding = false;
     }
 
-    public void JumpOffRail(InputAction.CallbackContext context)
-    {
-        if (!context.performed) return;
-
-        //turn both runners back on
-        PositiveRunner.SetActive(true);
-        NegativeRunner.SetActive(true);
-
-        //free player from rail
-        playerPrefabREF.transform.parent = null;
-        playerCollisionFollowREF.isGrinding = false;
-
-        //Reset loop behavior
-        positiveRunnerREF.endOfPathInstruction = PathCreation.EndOfPathInstruction.Loop;
-        thisScript = false;
-    }
 }

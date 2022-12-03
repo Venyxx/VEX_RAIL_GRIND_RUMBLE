@@ -463,7 +463,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2030071780202691818}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 0f258d825d959bb43afa2bf13f9523f3, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.30463132
@@ -486,8 +486,8 @@ MonoBehaviour:
   walkSpeed: 0.3
   currentSpeed: 0
   groundDrag: 0.01
-  moveInput: {x: 0, y: 0}
   maxSkateSpeed: 0
+  speedPrint: 0
   jumpForce: 25
   jumpCoolDown: 0.5
   airMultiplier: 0.4
@@ -987,6 +987,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGrinding: 0
+  leftGrinding: 0
+  rightGrinding: 0
 --- !u!82 &8221764900941215442
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1497,8 +1499,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.14009608, y: 1.8694686, z: 0.5870008}
-  m_Center: {x: 0.023162028, y: -0.27388185, z: 0.15868117}
+  m_Size: {x: 0.3668119, y: 1.8694686, z: 0.5870008}
+  m_Center: {x: 0.13651986, y: -0.27388185, z: 0.15868117}
 --- !u!114 &22996093
 MonoBehaviour:
   m_ObjectHideFlags: 0
