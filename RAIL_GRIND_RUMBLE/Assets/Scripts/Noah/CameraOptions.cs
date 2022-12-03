@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using UnityEngine.UI;
+using TMPro;
 
 public class CameraOptions : MonoBehaviour
 {
@@ -16,10 +17,15 @@ public class CameraOptions : MonoBehaviour
     public Slider YSens;
     public Slider XSens;
 
+    public TextMeshProUGUI YSensTextUI = null;
+    public TextMeshProUGUI XSensTextUI = null;
+
 
     void Start()
     {
         _freeLook = cineMachine.GetComponent<CinemachineFreeLook>();
+
+        LoadValues();
      
     }
 
@@ -34,11 +40,37 @@ public class CameraOptions : MonoBehaviour
 
     }
 
-    public void SetCameraSens(float sliderValue)
-    {
-        
 
+    public void SetSlider()
+    {
+        XSensTextUI.text = XSens.value.ToString();
+        YSensTextUI.text = YSens.value.ToString();
+    }
+    
+    
+    
+    
+    public void SaveOptionsButton()
+    {
+        float XSensValue = XSens.value;
+        float YSensValue = YSens.value;
+
+        PlayerPrefs.SetFloat("XSensValue", XSensValue);
+        PlayerPrefs.SetFloat("YSensValue", YSensValue);
+
+        LoadValues();
     }
 
-    
+    public void LoadValues()
+    {
+
+        float XSensValue = PlayerPrefs.GetFloat("XSensValue");
+        float YSensValue = PlayerPrefs.GetFloat("YSensValue");
+
+        XSens.value = XSensValue;
+        YSens.value = YSensValue;
+    }
+
+
+
 }
