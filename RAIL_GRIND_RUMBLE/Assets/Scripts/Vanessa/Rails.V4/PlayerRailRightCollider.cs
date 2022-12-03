@@ -41,8 +41,9 @@ public class PlayerRailRightCollider : MonoBehaviour
 
     void OnTriggerEnter (Collider col)
     {
+        Debug.Log("we entered the right script");
         //did we run into the POSITIVE LEFT rail collider while skating?
-        if (col.gameObject.name == "NegativeRightRunner" && !ThirdPersonMovementREF.isWalking && !playerCollisionFollowREF.isGrinding)
+        if (col.gameObject.name == "NegativeRightCollider" && !ThirdPersonMovementREF.isWalking && !playerCollisionFollowREF.isGrinding)
         {
             
             playerCollisionFollowREF.rightGrinding = true;
@@ -70,7 +71,7 @@ public class PlayerRailRightCollider : MonoBehaviour
             //we are now grinding
             playerCollisionFollowREF.isGrinding = true; 
 
-        }else if (col.gameObject.name == "PositiveLeftRunner" && !ThirdPersonMovementREF.isWalking && !playerCollisionFollowREF.isGrinding)
+        }else if (col.gameObject.name == "PositiveLeftCollider" && !ThirdPersonMovementREF.isWalking && !playerCollisionFollowREF.isGrinding)
         {
             
             playerCollisionFollowREF.rightGrinding = true;

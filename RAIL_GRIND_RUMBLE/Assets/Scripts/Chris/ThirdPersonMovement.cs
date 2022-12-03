@@ -237,15 +237,7 @@ public class ThirdPersonMovement : MonoBehaviour
             _animator.SetBool(_animIDGrounded, false);
             TapJump(jumpForce);
 
-            //release from rail if grinding
-            if (playerCollisionFollowREF.isGrinding)
-            {
-                if (playerCollisionFollowREF.leftGrinding)
-                    playerLeftColREF.ExitRailLeft();
-                else
-                    playerRightColREF.ExitRailRight();
-
-            }
+            ExitRailMain();
             StartCoroutine(JumpHoldDelay());
         }
 
@@ -330,11 +322,11 @@ public class ThirdPersonMovement : MonoBehaviour
             if (verticalInput == -0.5 && rigidBody.velocity.magnitude < 2)
             {
                 //walk backwards
-                Debug.Log("tried walking backwards");
+                
 
             }else if (verticalInput == -0.5)
             {
-                Debug.Log("tried breaking");
+                
                 //decel faster as a breaking mech
                 moveKeyUp = true;
                 float Adeceleration = 10f;
@@ -358,9 +350,6 @@ public class ThirdPersonMovement : MonoBehaviour
                 
        
         }
-
-        //if back arrow pressed 
-        
 
     }
 
@@ -393,20 +382,16 @@ public class ThirdPersonMovement : MonoBehaviour
         else if (Grounded)
         {
             //moves with acceleration for forward, just walks sideways
-            // if (verticalInput == -0.5 || horizontalInput != 0)
-            //rigidBody.velocity = new Vector3(moveDirection.normalized.x * walkSpeed * 10f, rigidBody.velocity.y, moveDirection.normalized.z * walkSpeed * 10f);
-            //else if (!moveKeyUp)
-            if (currentSpeed > 0)
+            if (currentSpeed > 1)
             rigidBody.velocity = new Vector3(skateDirection.normalized.x * currentSpeed, rigidBody.velocity.y, skateDirection.normalized.z * currentSpeed);
-            else if (verticalInput == -0.5 || horizontalInput != 0)
-            rigidBody.velocity = new Vector3(moveDirection.normalized.x * walkSpeed * 10f, rigidBody.velocity.y, moveDirection.normalized.z * walkSpeed * 10f);
-            else 
-            rigidBody.velocity = new Vector3( rigidBody.velocity.x, rigidBody.velocity.y,  rigidBody.velocity.z);
+            //else if (verticalInput == -0.5 || horizontalInput != 0)
+            //rigidBody.velocity = new Vector3(moveDirection.normalized.x * walkSpeed * 10f, rigidBody.velocity.y, moveDirection.normalized.z * walkSpeed * 10f);
+            //else 
+            //rigidBody.velocity = new Vector3( rigidBody.velocity.x, rigidBody.velocity.y,  rigidBody.velocity.z); //PROBLEM AREA
             //change anim
             _animator.SetBool(_animIDWalking, false);
             _animator.SetBool(_animIDJump, false);
-
-            
+  
         } 
         else 
         {
@@ -517,6 +502,14 @@ public class ThirdPersonMovement : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter (Collider collider)
+    {
+        if (collider.gameObject.tag == "END")
+        {
+            ExitRailMain();
+        }
+    }
+
     public void AddCoin(int coin)
     {
             coinCount = coinCount + coin;
@@ -569,7 +562,18 @@ public class ThirdPersonMovement : MonoBehaviour
         speedUIText.text = print.ToString();
     }
 
+    private void ExitRailMain ()
+    {
+        //release from rail if grinding
+            if (playerCollisionFollowREF.isGrinding)
+            {
+                if (playerCollisionFollowREF.leftGrinding)
+                    playerLeftColREF.ExitRailLeft();
+                else
+                    playerRightColREF.ExitRailRight();
 
+            }
+    }
 
 
   
