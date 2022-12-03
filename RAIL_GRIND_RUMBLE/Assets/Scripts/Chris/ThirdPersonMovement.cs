@@ -383,9 +383,15 @@ public class ThirdPersonMovement : MonoBehaviour
         {
             //moves with acceleration for forward, just walks sideways
             if (currentSpeed > 1)
-            rigidBody.velocity = new Vector3(skateDirection.normalized.x * currentSpeed, rigidBody.velocity.y, skateDirection.normalized.z * currentSpeed);
-            //else if (verticalInput == -0.5 || horizontalInput != 0)
-            //rigidBody.velocity = new Vector3(moveDirection.normalized.x * walkSpeed * 10f, rigidBody.velocity.y, moveDirection.normalized.z * walkSpeed * 10f);
+            {
+                rigidBody.velocity = new Vector3(skateDirection.normalized.x * currentSpeed, rigidBody.velocity.y, skateDirection.normalized.z * currentSpeed);
+
+            }
+            else if (verticalInput == -0.5 || horizontalInput != 0)
+            {
+                rigidBody.velocity = new Vector3(moveDirection.normalized.x * walkSpeed * 10f, rigidBody.velocity.y, moveDirection.normalized.z * walkSpeed * 10f);
+
+            }
             //else 
             //rigidBody.velocity = new Vector3( rigidBody.velocity.x, rigidBody.velocity.y,  rigidBody.velocity.z); //PROBLEM AREA
             //change anim

@@ -179,6 +179,15 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DialogueInput"",
+                    ""type"": ""Button"",
+                    ""id"": ""0ebe237e-d45a-4bc0-9359-c13ff129f95a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -394,7 +403,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""fe8e876b-27ae-4625-ade0-756e61f9619a"",
-                    ""path"": ""<Keyboard>/#(O)"",
+                    ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -610,6 +619,28 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                     ""action"": ""BackToMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""483dc340-77a3-40a5-a9ed-34b469c99de6"",
+                    ""path"": ""<Mouse>/press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DialogueInput"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2b265658-8c36-4c47-a984-ed679c8e9da7"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DialogueInput"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -635,6 +666,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
         m_Player_GraffitiAction = m_Player.FindAction("GraffitiAction", throwIfNotFound: true);
         m_Player_ReloadScene = m_Player.FindAction("ReloadScene", throwIfNotFound: true);
         m_Player_BackToMenu = m_Player.FindAction("BackToMenu", throwIfNotFound: true);
+        m_Player_DialogueInput = m_Player.FindAction("DialogueInput", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -711,6 +743,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_GraffitiAction;
     private readonly InputAction m_Player_ReloadScene;
     private readonly InputAction m_Player_BackToMenu;
+    private readonly InputAction m_Player_DialogueInput;
     public struct PlayerActions
     {
         private @InputHandler m_Wrapper;
@@ -732,6 +765,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
         public InputAction @GraffitiAction => m_Wrapper.m_Player_GraffitiAction;
         public InputAction @ReloadScene => m_Wrapper.m_Player_ReloadScene;
         public InputAction @BackToMenu => m_Wrapper.m_Player_BackToMenu;
+        public InputAction @DialogueInput => m_Wrapper.m_Player_DialogueInput;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -792,6 +826,9 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 @BackToMenu.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackToMenu;
                 @BackToMenu.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackToMenu;
                 @BackToMenu.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackToMenu;
+                @DialogueInput.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDialogueInput;
+                @DialogueInput.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDialogueInput;
+                @DialogueInput.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDialogueInput;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -847,6 +884,9 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 @BackToMenu.started += instance.OnBackToMenu;
                 @BackToMenu.performed += instance.OnBackToMenu;
                 @BackToMenu.canceled += instance.OnBackToMenu;
+                @DialogueInput.started += instance.OnDialogueInput;
+                @DialogueInput.performed += instance.OnDialogueInput;
+                @DialogueInput.canceled += instance.OnDialogueInput;
             }
         }
     }
@@ -870,5 +910,6 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
         void OnGraffitiAction(InputAction.CallbackContext context);
         void OnReloadScene(InputAction.CallbackContext context);
         void OnBackToMenu(InputAction.CallbackContext context);
+        void OnDialogueInput(InputAction.CallbackContext context);
     }
 }

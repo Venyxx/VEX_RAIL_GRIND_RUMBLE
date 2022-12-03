@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class DialogueBox : MonoBehaviour
 {
@@ -21,21 +22,21 @@ public class DialogueBox : MonoBehaviour
         StartCoroutine(TypeTalkingToName());
     }
 
-    // Update is called once per frame
-    void Update()
+    
+    public void DialogueInput(InputAction.CallbackContext context)
     {
-        if (Input.GetMouseButtonDown(0))
-         {
-            if (textComponent.text == lines[conversationIndex])
-            {
-                NextLine();
-            }
-            else
-            {
-                StopAllCoroutines();
-                textComponent.text = lines[conversationIndex];
-            }
-         }
+        if(!context.started) return;
+
+        if (textComponent.text == lines[conversationIndex])
+        {
+            NextLine();
+        }
+        else
+        {
+            StopAllCoroutines();
+            textComponent.text = lines[conversationIndex];
+        }
+    
     }
 
     void StartDialogue()
