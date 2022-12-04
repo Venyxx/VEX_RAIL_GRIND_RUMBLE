@@ -9,6 +9,8 @@ public class EnemyMovement : MonoBehaviour
     public LayerMask HidableLayers;
     public EnemyLineOfSightChecker LineOfSightChecker;
     public float UpdateSpeed = 0.1f;
+    [SerializeField]
+    private Animator Animator;
 
     private NavMeshAgent Agent;
     [Range(-1, 1)]
@@ -24,6 +26,8 @@ public class EnemyMovement : MonoBehaviour
     private Collider[] Colliders = new Collider[10]; // more is less performant, but more options
     public bool HasHidden = false;
     public AttackRadius Attack;
+
+    private const string IsWalking = "IsWalking";
     
 
     private void Awake ()
@@ -33,6 +37,10 @@ public class EnemyMovement : MonoBehaviour
         LineOfSightChecker.OnGainSight += HandleGainSight;
         LineOfSightChecker.OnLoseSight += HandleLoseSight;
        
+    }
+    private void Update()
+    {
+        Animator.SetBool(IsWalking, Agent.velocity.magnitude > 0.01f);
     }
 
     private void HandleGainSight(Transform Target)
