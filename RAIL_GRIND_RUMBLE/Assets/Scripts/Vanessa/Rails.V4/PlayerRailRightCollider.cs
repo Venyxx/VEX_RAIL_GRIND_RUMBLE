@@ -41,7 +41,7 @@ public class PlayerRailRightCollider : MonoBehaviour
 
     void OnTriggerEnter (Collider col)
     {
-        Debug.Log("we entered the right script");
+        
         //did we run into the POSITIVE LEFT rail collider while skating?
         if (col.gameObject.name == "NegativeRightCollider" && !ThirdPersonMovementREF.isWalking && !playerCollisionFollowREF.isGrinding)
         {

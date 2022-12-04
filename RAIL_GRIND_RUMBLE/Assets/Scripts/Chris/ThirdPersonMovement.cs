@@ -305,7 +305,7 @@ public class ThirdPersonMovement : MonoBehaviour
                 currentSpeed = 0;
 
         //if there is player input, accelerate
-        if (verticalInput == 0.5 && GetComponent<WallRun>().isWallRunning == false)
+        if (verticalInput > 0.1 && GetComponent<WallRun>().isWallRunning == false)
         {
             moveKeyUp = false;
             //kick start movement
@@ -316,17 +316,11 @@ public class ThirdPersonMovement : MonoBehaviour
             float acceleration = 2f;
             currentSpeed += acceleration * Time.deltaTime;
 
-        } else if (verticalInput != 0.5)
+        } else if (verticalInput < 0.1)
         {
             //check if the back arrow is active    
-            if (verticalInput == -0.5 && rigidBody.velocity.magnitude < 2)
+            if (verticalInput < 0.1 && rigidBody.velocity.magnitude < 2)
             {
-                //walk backwards
-                
-
-            }else if (verticalInput == -0.5)
-            {
-                
                 //decel faster as a breaking mech
                 moveKeyUp = true;
                 float Adeceleration = 10f;
@@ -383,15 +377,10 @@ public class ThirdPersonMovement : MonoBehaviour
         {
             //moves with acceleration for forward, just walks sideways
             if (currentSpeed > 1)
-            {
                 rigidBody.velocity = new Vector3(skateDirection.normalized.x * currentSpeed, rigidBody.velocity.y, skateDirection.normalized.z * currentSpeed);
-
-            }
             else if (verticalInput == -0.5 || horizontalInput != 0)
-            {
                 rigidBody.velocity = new Vector3(moveDirection.normalized.x * walkSpeed * 10f, rigidBody.velocity.y, moveDirection.normalized.z * walkSpeed * 10f);
 
-            }
             //else 
             //rigidBody.velocity = new Vector3( rigidBody.velocity.x, rigidBody.velocity.y,  rigidBody.velocity.z); //PROBLEM AREA
             //change anim
@@ -413,9 +402,9 @@ public class ThirdPersonMovement : MonoBehaviour
         //checking for wall running animations
         if (moveInput.x != 0 || moveInput.y != 0)
         {
-            if (gameObject.GetComponent<WallRun>().wallLeft)
+            if (gameObject.GetComponent<WallRun>().wallLeft  ||   gameObject.GetComponent<WallRun>().isWallRunning)
                 _animator.SetBool(_animIDWallRunLeft, true);
-            else if (gameObject.GetComponent<WallRun>().wallRight)
+            else if (gameObject.GetComponent<WallRun>().wallRight   ||   gameObject.GetComponent<WallRun>().isWallRunning)
                 _animator.SetBool(_animIDWallRunRight, true);
             else
             {
