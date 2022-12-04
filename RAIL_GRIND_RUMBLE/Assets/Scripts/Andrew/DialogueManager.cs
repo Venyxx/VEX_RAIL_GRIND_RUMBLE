@@ -11,6 +11,9 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI talkingToName;
     public GameObject dialogueBox;
     private Queue<string> paragraphDisplayed;
+    private bool isBoxActive = false;
+    [SerializeField]
+    private float textSpeed = 0.1f;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +33,7 @@ public class DialogueManager : MonoBehaviour
     public void StartDialogue(DialogueTemplate dialogue)
     {
         dialogueBox.SetActive(true);
+        isBoxActive = true;
         talkingToName.text = dialogue.name;
 
         paragraphDisplayed.Clear();
@@ -44,8 +48,14 @@ public class DialogueManager : MonoBehaviour
 
     public void DialogueInput(InputAction.CallbackContext context)
     {
-        DisplayNextParagraph();
-
+        if (!context.started) return;
+      
+        if (context.started)
+        {
+            DisplayNextParagraph();
+        }
+        
+ 
     }
 
     public void DisplayNextParagraph ()
@@ -57,12 +67,25 @@ public class DialogueManager : MonoBehaviour
         }
 
         string paragraph = paragraphDisplayed.Dequeue();
-        textComponent.text = paragraph;
+        StopAllCoroutines();
+        StartCoroutine(TypeParagraph(paragraph));
+    }
+
+    IEnumerator TypeParagraph(string paragraph)
+    {
+        textComponent.text = "";
+        foreach (char c in paragraph.ToCharArray())
+        {
+            
+            textComponent.text += c;
+            yield return new WaitForSeconds(textSpeed);
+        }
     }
 
     void EndDialogue()
     {
-        //dialogueBox.SetActive(false);
+        dialogueBox.SetActive(false);
+        isBoxActive = false;
     }
 
 
