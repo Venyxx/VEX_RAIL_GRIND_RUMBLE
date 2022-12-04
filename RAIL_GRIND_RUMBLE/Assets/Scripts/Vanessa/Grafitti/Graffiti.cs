@@ -49,8 +49,8 @@ public class Graffiti : MonoBehaviour
         for (int i = 0; i < hits.Length; i++)
         {
             RaycastHit hit = hits[i];
-            
-            Debug.Log("layer " + hit.collider.gameObject);
+            Debug.Log(hits.Length);
+            Debug.Log("hit object " + hit.collider.gameObject);
             if (hit.collider.gameObject.layer == 8)
             {
                 GameObject madeGraffiti;
@@ -64,7 +64,8 @@ public class Graffiti : MonoBehaviour
                 } else 
                 {
                     Debug.Log("detected no poster");
-                    madeGraffiti = Instantiate (graffiti, hit.point, player.transform.rotation);
+                    var rotation  = (player.transform.rotation * Quaternion.Euler(0, -90, 0));
+                    madeGraffiti = Instantiate (graffiti, hit.point, rotation);
                     Vector3 newPos = new Vector3 (player.transform.position.x, madeGraffiti.transform.position.y, player.transform.position.z);
                     madeGraffiti.transform.position = newPos;
                 }
