@@ -5,6 +5,7 @@ public class WallRun : MonoBehaviour
 {
     //References
     private GameObject playerREF;
+    private GameObject playerObjectREF;
     private Transform orientation;
     private ThirdPersonMovement playerScript;
     private Rigidbody rigidBody;
@@ -12,10 +13,10 @@ public class WallRun : MonoBehaviour
 
     //Wallrunning
     public LayerMask wall;
-    private float wallRunForce = 200f;
+    private float wallRunForce = 50f;
     //public float maxWallRunTime;
     private float wallRunTimer;
-    private bool isWallRunning;
+    public bool isWallRunning;
     [SerializeField]private float wallJumpSideForce = 12f;
     [SerializeField]private float wallJumpUpForce = 7f;
 
@@ -24,7 +25,7 @@ public class WallRun : MonoBehaviour
     private float verticalInput;
 
     //Wall Detection
-    private float wallCheckDistance = 0.7f;
+    private float wallCheckDistance = 1f;
     private RaycastHit leftWallHit;
     private RaycastHit rightWallHit;
     public bool wallLeft;
@@ -42,6 +43,7 @@ public class WallRun : MonoBehaviour
     {
        playerREF = this.gameObject;
        playerScript = playerREF.gameObject.GetComponent<ThirdPersonMovement>();
+       playerObjectREF = GameObject.FindWithTag("PlayerObject");
        rigidBody = playerREF.GetComponent<Rigidbody>();
 
        GameObject orientationREF = GameObject.Find("Orientation");
@@ -69,8 +71,8 @@ public class WallRun : MonoBehaviour
 
     private void CheckForWall()
     {
-        wallRight = Physics.Raycast(transform.position, orientation.right, out rightWallHit, wallCheckDistance, wall);
-        wallLeft = Physics.Raycast(transform.position, -orientation.right, out leftWallHit, wallCheckDistance, wall);
+        wallRight = Physics.Raycast(playerObjectREF.transform.position, orientation.right, out rightWallHit, wallCheckDistance, wall);
+        wallLeft = Physics.Raycast(playerObjectREF.transform.position, -orientation.right, out leftWallHit, wallCheckDistance, wall);
     }
 
     private void StateMachine()

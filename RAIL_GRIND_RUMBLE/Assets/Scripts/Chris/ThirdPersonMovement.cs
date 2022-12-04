@@ -305,7 +305,7 @@ public class ThirdPersonMovement : MonoBehaviour
                 currentSpeed = 0;
 
         //if there is player input, accelerate
-        if (verticalInput == 0.5)
+        if (verticalInput == 0.5 && GetComponent<WallRun>().isWallRunning == false)
         {
             moveKeyUp = false;
             //kick start movement

@@ -22,7 +22,7 @@ public class ThirdPersonCamera : MonoBehaviour
     //Aiming
     public GameObject basicCamREF;
     public GameObject aimingCamREF;
-    public GameObject reticleREF;
+    //public GameObject reticleREF;
 
     public CameraStyle currentStyle;
 
@@ -152,19 +152,19 @@ public class ThirdPersonCamera : MonoBehaviour
         //Turn off all existing cams
         aimingCamREF.SetActive(false);
         basicCamREF.SetActive(false);
-        reticleREF.SetActive(false);
+        //reticleREF.SetActive(false);
 
         //Switch to alternate angle
         if (newStyle == CameraStyle.Basic)
         {
             basicCamREF.SetActive(true);
-            reticleREF.SetActive(false);
+            //reticleREF.SetActive(false);
         }
 
         if (newStyle == CameraStyle.Aiming)
         {
             aimingCamREF.SetActive(true);
-            reticleREF.SetActive(true);
+            //reticleREF.SetActive(true);
         }
         
         currentStyle = newStyle;
