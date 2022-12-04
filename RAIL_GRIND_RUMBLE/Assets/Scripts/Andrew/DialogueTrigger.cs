@@ -10,4 +10,12 @@ public class DialogueTrigger : MonoBehaviour
     {
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
     }
+
+    void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.tag == "PlayerObject")
+        {
+            TriggerDialogue();
+        }
+    }
 }
