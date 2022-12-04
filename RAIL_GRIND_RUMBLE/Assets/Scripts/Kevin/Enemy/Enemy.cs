@@ -9,9 +9,11 @@ public class Enemy : PoolableObject, IDamageable
     public NavMeshAgent Agent;
     public EnemyScriptableObject EnemyScriptableObject;
     public float Health = 100;
+    public Animator Animator;
 
     private Coroutine LookCoroutine;
     private const string ATTACK_TRIGGER = "Attack";
+     private const string DEATH_TRIGGER = "Death";
 
     //Added for Chris - Removes enemies from Aim Points list upon death
     GameObject grappleDetectorREF;
@@ -25,6 +27,7 @@ public class Enemy : PoolableObject, IDamageable
 
     private void OnAttack(IDamageable Target)
     {
+        Animator.SetTrigger(ATTACK_TRIGGER);
         if (LookCoroutine != null)
         {
             StopCoroutine(LookCoroutine);
@@ -40,7 +43,7 @@ public class Enemy : PoolableObject, IDamageable
         while (time < 1)
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, time);
-            time += Time.deltaTime * 2;
+            time += Time.deltaTime * 20;
             yield return null;
         }
         transform.rotation = lookRotation;
@@ -78,12 +81,15 @@ public class Enemy : PoolableObject, IDamageable
     }
     public void TakeDamage(float Damage)
     {
+        
         Health -= Damage;
         if (Health <= 0)
         {
-            gameObject.SetActive(false);
+             Animator.SetTrigger(DEATH_TRIGGER);
+           
             //Added for Chris
 			grappleDetectorREF.gameObject.GetComponent<GrappleDetection>().RemovePoint(GetComponent<Transform>());
+             gameObject.SetActive(false);
         }
     }
 
