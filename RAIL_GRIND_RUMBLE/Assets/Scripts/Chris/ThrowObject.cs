@@ -63,6 +63,7 @@ public class ThrowObject : MonoBehaviour
     {
         if (!(context.started && isHoldingObject)) return;
         ThrowObjectAction();
+        gameObject.GetComponent<ThirdPersonMovement>().PlaySound(2);
     }
 
     public void SetTarget(InputAction.CallbackContext context)

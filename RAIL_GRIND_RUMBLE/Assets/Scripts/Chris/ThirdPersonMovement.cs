@@ -119,6 +119,10 @@ public class ThirdPersonMovement : MonoBehaviour
     private static float skateHeight = 1.92239f;
     private static float walkCenterY = 0.8990228f;
     private static float walkHeight = 1.823838f; 
+
+    //Sound Effects
+    [SerializeField] private AudioClip[] playerSounds;
+    private AudioSource audioSource;
         
     // Start is called before the first frame update
     void Start()
@@ -166,6 +170,9 @@ public class ThirdPersonMovement : MonoBehaviour
         sprayCan = GameObject.FindWithTag("PlayerCan");
         ariCollider = GetComponent<CapsuleCollider>();
         WalkToggleHelper();
+
+        //Audio
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -236,6 +243,7 @@ public class ThirdPersonMovement : MonoBehaviour
             _animator.SetBool(_animIDJump, true);
             _animator.SetBool(_animIDGrounded, false);
             TapJump(jumpForce);
+            PlaySound(1);
 
             ExitRailMain();
             StartCoroutine(JumpHoldDelay());
@@ -510,6 +518,7 @@ public class ThirdPersonMovement : MonoBehaviour
             coinCount = coinCount + coin;
             Debug.Log(coinCount);
             coinCountText.text = $"{coinCount}";
+            PlaySound(0);
     }
 
     //Camera Switch
@@ -570,6 +579,13 @@ public class ThirdPersonMovement : MonoBehaviour
             }
     }
 
+    public void PlaySound(int sound)
+    {
+        audioSource.clip = playerSounds[sound];
+        audioSource.Play(0);
 
+        //Coin = 0
+        //Jump = 1
+    }
   
 }

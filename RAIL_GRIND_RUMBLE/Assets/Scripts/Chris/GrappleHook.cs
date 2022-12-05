@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.Animations.Rigging;
 
 public class GrappleHook : MonoBehaviour
 {
@@ -17,8 +18,13 @@ public class GrappleHook : MonoBehaviour
     private GameObject grappleDetectorREF;
     private InputHandler playerActions;
     private ThirdPersonMovement _thirdPersonMovement;
-
+    
     public LayerMask canGrapple;
+
+    //Arm Rig
+    private RigBuilder ik;
+    private GameObject leftArmGrappleREF;
+    private GameObject rootRigREF;
 
     //UI
     private Image grappleMeter;
@@ -75,7 +81,6 @@ public class GrappleHook : MonoBehaviour
     //Audio
     [SerializeField] private AudioClip[] grappleSounds;
     private AudioSource audioSource;
-    
 
     void Start()
     {
@@ -98,6 +103,7 @@ public class GrappleHook : MonoBehaviour
         grappleDetectorREF = GameObject.Find("GrappleDetector");
         _thirdPersonMovement = FindObjectOfType<ThirdPersonMovement>();
         audioSource = GetComponent<AudioSource>();
+        
         rbDefaultMass = rigidBody.mass;
 
         //Maybe make this more efficient
@@ -118,6 +124,13 @@ public class GrappleHook : MonoBehaviour
 
         reticleREF = GameObject.Find("Reticle");
         reticleREF.SetActive(false);
+
+        //Arm Rig
+        rootRigREF = GameObject.Find("Root");
+        leftArmGrappleREF = GameObject.Find("LeftArmGrapple");
+        ik = rootRigREF.GetComponent<RigBuilder>();
+        ik.enabled = false;
+        
         
     }
 
@@ -221,7 +234,7 @@ public class GrappleHook : MonoBehaviour
 
         //Insta-zip
         shorteningCable = true;
-        rigidBody.mass = (rbDefaultMass/2);
+        rigidBody.mass = (rbDefaultMass/1.75f);
         isGrappling = true;
 
             //swingPoint = predictionHit.point;
@@ -244,11 +257,18 @@ public class GrappleHook : MonoBehaviour
             line.positionCount = 2;
             currentGrapplePosition = hookTip.position;
 
+            //Arm Rig
+            ik.enabled = true;
+            leftArmGrappleREF.GetComponent<TwoBoneIKConstraint>().data.target = grappleDetectorREF.GetComponent<GrappleDetection>().currentAim;
+
             playerREF.gameObject.GetComponent<ThirdPersonMovement>().isGrappling = true;
     }
 
     void StopSwing()
     {
+        //Arm Rig
+        ik.enabled = false;
+
         //Sound
         audioSource.clip = grappleSounds[4];
         audioSource.Play(0);

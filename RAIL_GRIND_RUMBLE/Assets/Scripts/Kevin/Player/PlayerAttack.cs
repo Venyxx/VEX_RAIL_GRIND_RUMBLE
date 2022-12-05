@@ -38,7 +38,7 @@ public class PlayerAttack : MonoBehaviour
 
     public void Attack(InputAction.CallbackContext context)
     {  //Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
-        if (!context.started || movementScriptREF.isWalking)
+        if (!context.started || movementScriptREF.isWalking || GameObject.Find("AimingCam") || movementScriptREF.Grounded == false)
         {
             return;
         }
