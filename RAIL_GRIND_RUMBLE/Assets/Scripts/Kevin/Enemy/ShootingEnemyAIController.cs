@@ -100,4 +100,8 @@ private void ResetAttack()
     {
         return transform;
     }
+	   public void GainHealth (float GainHealth)
+    {
+        
+    }
 }

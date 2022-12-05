@@ -15,6 +15,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     void Start()
     {
         currentHealth = maxHealth;
+         
     }
 
     void Update()
@@ -43,6 +44,19 @@ public class PlayerHealth : MonoBehaviour, IDamageable
             SceneManager.LoadScene("LoseScene");
         }
     }
+
+    public void GainHealth (float GainHealth)
+    {
+        currentHealth += GainHealth;
+
+        if (currentHealth >= maxHealth)
+        {
+            currentHealth = maxHealth;
+            
+        }
+    }
+
+
     public Transform GetTransform()
     {
         return transform;

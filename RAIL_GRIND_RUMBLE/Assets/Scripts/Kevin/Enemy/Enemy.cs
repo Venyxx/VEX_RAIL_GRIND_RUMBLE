@@ -92,7 +92,10 @@ public class Enemy : PoolableObject, IDamageable
              gameObject.SetActive(false);
         }
     }
-
+    public void GainHealth (float GainHealth)
+    {
+        
+    }
     public Transform GetTransform()
     {
         return transform;

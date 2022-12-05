@@ -108,6 +108,11 @@ private void ResetAttack()
         }
     }
 
+   public void GainHealth (float GainHealth)
+    {
+        
+    }
+
     public Transform GetTransform()
     {
         return transform;
