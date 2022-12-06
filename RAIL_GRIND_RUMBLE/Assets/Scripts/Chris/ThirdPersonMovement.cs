@@ -385,7 +385,11 @@ public class ThirdPersonMovement : MonoBehaviour
         {
             //moves with acceleration for forward, just walks sideways
             if (currentSpeed > 1)
-                rigidBody.velocity = new Vector3(skateDirection.normalized.x * currentSpeed, rigidBody.velocity.y, skateDirection.normalized.z * currentSpeed);
+            {
+                 rigidBody.velocity = new Vector3(skateDirection.normalized.x * currentSpeed, rigidBody.velocity.y, skateDirection.normalized.z * currentSpeed);
+                 PlaySound(3);
+            }
+               
             else if (verticalInput == -0.5 || horizontalInput != 0)
                 rigidBody.velocity = new Vector3(moveDirection.normalized.x * walkSpeed * 10f, rigidBody.velocity.y, moveDirection.normalized.z * walkSpeed * 10f);
 
@@ -586,6 +590,8 @@ public class ThirdPersonMovement : MonoBehaviour
 
         //Coin = 0
         //Jump = 1
+        //Railing = 2
+        //Skating = 3
     }
   
 }
