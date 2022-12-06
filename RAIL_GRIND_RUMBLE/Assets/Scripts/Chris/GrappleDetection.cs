@@ -145,8 +145,13 @@ public class GrappleDetection : MonoBehaviour
         {
             if (!aimPoints.Exists(element => element == (collision.gameObject.transform)))
             {
+                    if (aimPoints.Count == 0)
+                    {
+                        currentAim = collision.gameObject.transform;
+                    } 
+
                     aimPoints.Add(collision.gameObject.transform);
-                    aimPointCount++;    
+                    aimPointCount++;   
             }
             
         }
