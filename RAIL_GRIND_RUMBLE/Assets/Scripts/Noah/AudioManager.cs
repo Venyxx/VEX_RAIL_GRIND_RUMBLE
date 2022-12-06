@@ -62,8 +62,8 @@ public class AudioManager : MonoBehaviour
    public void LoadValues()
    {
 
-        float musicValue = PlayerPrefs.GetFloat("MusicValue");
-        float sfxValue = PlayerPrefs.GetFloat("SFXValue");
+        float musicValue = PlayerPrefs.GetFloat("MusicValue", 1);
+        float sfxValue = PlayerPrefs.GetFloat("SFXValue", 1);
 
        musicSlider.value = musicValue;
         sfxSlider.value = sfxValue;

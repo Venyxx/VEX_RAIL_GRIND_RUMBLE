@@ -64,8 +64,8 @@ public class CameraOptions : MonoBehaviour
     public void LoadValues()
     {
 
-        float XSensValue = PlayerPrefs.GetFloat("XSensValue");
-        float YSensValue = PlayerPrefs.GetFloat("YSensValue");
+        float XSensValue = PlayerPrefs.GetFloat("XSensValue", 3);
+        float YSensValue = PlayerPrefs.GetFloat("YSensValue", 3);
 
         XSens.value = XSensValue;
         YSens.value = YSensValue;
