@@ -10,7 +10,7 @@ public class WinZoneController : MonoBehaviour
     {
         if (other.CompareTag("PlayerObject"))
         {
-            SceneManager.LoadScene("WinScene");
+            SceneManager.LoadScene("EndCut");
         }
     }
 }
