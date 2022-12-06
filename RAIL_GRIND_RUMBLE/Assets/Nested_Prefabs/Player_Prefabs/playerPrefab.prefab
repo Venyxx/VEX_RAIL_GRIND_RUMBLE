@@ -350,7 +350,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2030071779272977632}
   m_LocalRotation: {x: -0.23569462, y: -0.5619854, z: -0.7854326, w: -0.10824096}
-  m_LocalPosition: {x: 0.238, y: -0.433, z: -0.231}
+  m_LocalPosition: {x: 0.06, y: -0.116, z: -0.084}
   m_LocalScale: {x: 1.5744997, y: 1.5744996, z: 1.5744992}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1685,7 +1685,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8578833261462179128}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5621033, y: 1.8342896, z: 0}
+  m_LocalPosition: {x: 0.361, y: 1.8342896, z: 0}
   m_LocalScale: {x: 1.5745, y: 1.5745, z: 1.5745}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1703,8 +1703,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.3668119, y: 1.8694686, z: 0.5870008}
-  m_Center: {x: 0.13651986, y: -0.27388185, z: 0.15868117}
+  m_Size: {x: 0.19228074, y: 1.8694686, z: 0.5870008}
+  m_Center: {x: 0.049254242, y: -0.27388185, z: 0.15868117}
 --- !u!114 &22996093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2927,6 +2927,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 4d0a5bb0d8dfd85469c0e15ead7c56d9, type: 2}
+    - target: {fileID: -257276421137043609, guid: e606cc423d70dd645bd324c595a8c70f, type: 3}
+      propertyPath: m_BlendShapeWeights.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -257276421137043609, guid: e606cc423d70dd645bd324c595a8c70f, type: 3}
+      propertyPath: m_BlendShapeWeights.Array.data[0]
+      value: 3.3
+      objectReference: {fileID: 0}
     - target: {fileID: -178753207860260279, guid: e606cc423d70dd645bd324c595a8c70f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.039387118
@@ -3555,6 +3563,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 793f75a977ce38b4e95ab0803f50b658, type: 2}
+    - target: {fileID: 5542552696944411869, guid: e606cc423d70dd645bd324c595a8c70f, type: 3}
+      propertyPath: m_BlendShapeWeights.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5542552696944411869, guid: e606cc423d70dd645bd324c595a8c70f, type: 3}
+      propertyPath: m_BlendShapeWeights.Array.data[0]
+      value: 4.2
+      objectReference: {fileID: 0}
     - target: {fileID: 5548225328174260191, guid: e606cc423d70dd645bd324c595a8c70f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.06300537
@@ -3747,6 +3763,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 2f09917e3f366514e8b334f3e721e1a0, type: 2}
+    - target: {fileID: 8081999117198444385, guid: e606cc423d70dd645bd324c595a8c70f, type: 3}
+      propertyPath: m_BlendShapeWeights.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8259118391230657275, guid: e606cc423d70dd645bd324c595a8c70f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.17448041
@@ -4102,7 +4122,7 @@ MonoBehaviour:
   m_Direction: 2
   m_Center: {x: 0.44, y: -0.29, z: -0.16}
   m_Bound: 0
-  m_Radius: 0.64
+  m_Radius: 0.95
   m_Height: 1.9
   m_Radius2: 0
 --- !u!114 &2007664213

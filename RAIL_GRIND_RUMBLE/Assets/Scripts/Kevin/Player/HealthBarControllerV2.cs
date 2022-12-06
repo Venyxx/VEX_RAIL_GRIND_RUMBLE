@@ -7,18 +7,18 @@ public class HealthBarControllerV2 : MonoBehaviour
 {
     public Image _bar;
     public RectTransform button;
-    public PlayerHealth playerhealth;
+    private PlayerHealth playerhealth;
     public float _healthValue = 0;
     // Start is called before the first frame update
     void Start()
     {
-        
+       playerhealth = GameObject.Find("playerPrefab").GetComponent<PlayerHealth>();
+    
     }
 
     // Update is called once per frame
     void Update()
     {
-        
          _healthValue = Mathf.Lerp(_healthValue, playerhealth.currentHealth, .2f);
          HealthChange(_healthValue);
     }
