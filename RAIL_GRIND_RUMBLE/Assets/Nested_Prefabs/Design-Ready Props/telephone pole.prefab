@@ -11,12 +11,14 @@ GameObject:
   - component: {fileID: 6822811180320449216}
   - component: {fileID: 7566228844447755621}
   - component: {fileID: 5684759073213356463}
+  - component: {fileID: 5074024255649936056}
+  - component: {fileID: 2936228835824983418}
   m_Layer: 0
   m_Name: telephone pole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6822811180320449216
 Transform:
@@ -84,3 +86,29 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &5074024255649936056
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6189263318727800954}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.6039301, y: 31.917175, z: 2.6371207}
+  m_Center: {x: -0.07100104, y: 15.958588, z: -0.8555878}
+--- !u!65 &2936228835824983418
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6189263318727800954}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 17.946123, y: 1.1253091, z: 0.918388}
+  m_Center: {x: 0, y: 29.046745, z: 2.0118785}
