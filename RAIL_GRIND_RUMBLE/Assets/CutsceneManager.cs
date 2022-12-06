@@ -16,7 +16,8 @@ public class CutsceneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Space))
+        SceneManager.LoadScene(sceneName);
     }
 
     IEnumerator SceneChange()
