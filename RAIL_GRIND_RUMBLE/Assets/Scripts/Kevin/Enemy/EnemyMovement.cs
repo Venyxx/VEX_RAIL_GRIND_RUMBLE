@@ -81,6 +81,7 @@ public class EnemyMovement : MonoBehaviour
 
     private IEnumerator Start() //change this to FollowTarget for spawner 
     {
+        yield return new WaitForSeconds(60);
       WaitForSeconds Wait = new WaitForSeconds(UpdateSpeed);
         while(gameObject.activeSelf)
        {
