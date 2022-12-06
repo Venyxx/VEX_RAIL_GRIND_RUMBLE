@@ -16,7 +16,7 @@ public class CarMovement : MonoBehaviour
     void Start()
     {
 
-        baseMoveSpeed = 5;
+        baseMoveSpeed = 15;
         pathCreator = gameObject.transform.root.transform.Find("Road Creator").gameObject.GetComponent<PathCreator>();
         currentMoveSpeed = baseMoveSpeed;
 

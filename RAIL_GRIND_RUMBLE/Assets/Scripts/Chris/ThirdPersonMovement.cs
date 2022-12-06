@@ -387,7 +387,7 @@ public class ThirdPersonMovement : MonoBehaviour
             if (currentSpeed > 1)
             {
                  rigidBody.velocity = new Vector3(skateDirection.normalized.x * currentSpeed, rigidBody.velocity.y, skateDirection.normalized.z * currentSpeed);
-                 PlaySound(3);
+                 //PlaySound(3);
             }
                
             else if (verticalInput == -0.5 || horizontalInput != 0)

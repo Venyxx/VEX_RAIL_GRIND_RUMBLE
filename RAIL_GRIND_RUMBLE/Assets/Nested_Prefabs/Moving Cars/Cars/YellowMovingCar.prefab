@@ -56,8 +56,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.8278491, y: 1.142149, z: 1.3171955}
-  m_Center: {x: 0.08243823, y: -0.071074486, z: 4.151402}
+  m_Size: {x: 2.8278491, y: 0.4570241, z: 1.3171955}
+  m_Center: {x: 0.08243823, y: 0.27148795, z: 4.151402}
 --- !u!1 &4822269268071670552
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,6 +179,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7384514379724231783}
   - component: {fileID: 7384514379724231780}
+  - component: {fileID: 7441141625255382614}
   m_Layer: 0
   m_Name: YellowMovingCar
   m_TagString: MovingCar
@@ -218,3 +219,19 @@ MonoBehaviour:
   pathCreator: {fileID: 0}
   endOfPathInstruction: 0
   distanceTravelled: 0
+--- !u!54 &7441141625255382614
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7384514379724231778}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
