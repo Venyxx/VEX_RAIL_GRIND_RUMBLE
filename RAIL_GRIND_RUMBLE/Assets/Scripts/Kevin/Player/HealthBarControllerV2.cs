@@ -18,14 +18,16 @@ public class HealthBarControllerV2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HealthChange(_healthValue);
-         _healthValue = playerhealth.currentHealth;
+        
+         _healthValue = Mathf.Lerp(_healthValue, playerhealth.currentHealth, .2f);
+         HealthChange(_healthValue);
     }
+
     void HealthChange(float healthValue)
     {
-        float amount = (healthValue/20.0f) * 108.0f/360;
+        float amount = (healthValue/20.0f) * .4f + .6f;
         _bar.fillAmount = amount;
-        float buttonAngle = amount * 360;
-        button.localEulerAngles = new Vector3(0, 0, -buttonAngle);
+        //float buttonAngle = amount * 360;
+        //button.localEulerAngles = new Vector3(0, 0, -buttonAngle);
     }
 }
