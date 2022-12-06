@@ -65,7 +65,7 @@ public class Graffiti : MonoBehaviour
                 {
                     Debug.Log("detected no poster");
                     //var rotation  = (player.transform.rotation * Quaternion.Euler(0, -90, 0));
-                    madeGraffiti = Instantiate (graffiti, hit.point, Quaternion.identity);
+                    madeGraffiti = Instantiate (graffiti, hit.point, canLocation.transform.rotation);
                     Vector3 newPos = new Vector3 (player.transform.position.x, madeGraffiti.transform.position.y, player.transform.position.z);
                     madeGraffiti.transform.position = newPos;
                 }
