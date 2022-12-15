@@ -26,7 +26,7 @@ public class EnemySpawner : MonoBehaviour
     {
         Triangulation = NavMesh.CalculateTriangulation();
         StartCoroutine(SpawnEnemies());
-     
+        Debug.Log("Spawner Script is attached to: " + gameObject.name);
     }
     private IEnumerator SpawnEnemies()
     {

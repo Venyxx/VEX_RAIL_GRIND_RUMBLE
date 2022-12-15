@@ -12,6 +12,8 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField]
     private Animator Animator;
 
+    [SerializeField] private float activationDistance = 20f;
+
     private NavMeshAgent Agent;
     [Range(-1, 1)]
     [Tooltip("Lower is a better hiding spot")]
@@ -28,7 +30,8 @@ public class EnemyMovement : MonoBehaviour
     public AttackRadius Attack;
 
     private const string IsWalking = "IsWalking";
-    
+
+    private bool activated = false;
 
     private void Awake ()
     {
@@ -41,6 +44,12 @@ public class EnemyMovement : MonoBehaviour
     private void Update()
     {
         Animator.SetBool(IsWalking, Agent.velocity.magnitude > 0.01f);
+        if (Vector3.Distance(Player.position, transform.position) < activationDistance && !activated)
+        {
+            Debug.Log("Player is within range, chasing the player");
+            StartCoroutine(Activate());
+            activated = true;
+        }
     }
 
     private void HandleGainSight(Transform Target)
@@ -70,7 +79,7 @@ public class EnemyMovement : MonoBehaviour
     {
         if (FollowCoroutine == null)
         {
-            FollowCoroutine = StartCoroutine(Start()); //change this to StartCoroutine(FollowTarget()); for spawner
+            FollowCoroutine = StartCoroutine(Activate()); //change this to StartCoroutine(FollowTarget()); for spawner
         }
         else
         {
@@ -78,24 +87,20 @@ public class EnemyMovement : MonoBehaviour
         }
         
     }
-
-    private IEnumerator Start() //change this to FollowTarget for spawner 
+    
+    private IEnumerator Activate()
     {
-        yield return new WaitForSeconds(60);
-      WaitForSeconds Wait = new WaitForSeconds(UpdateSpeed);
+        WaitForSeconds Wait = new WaitForSeconds(UpdateSpeed);
         while(gameObject.activeSelf)
-       {
+        {
             if (Agent.enabled)
-          {
-            Agent.SetDestination(Player.transform.position);
+            {
+                Agent.SetDestination(Player.transform.position);
             }
-          yield return Wait;
+            yield return Wait;
         }
-   
-
-      
     }
-  
+
     private IEnumerator Hide(Transform Target)
     {
         WaitForSeconds Wait = new WaitForSeconds(UpdateFrequency);
