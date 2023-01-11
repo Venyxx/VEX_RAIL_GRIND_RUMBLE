@@ -310,9 +310,10 @@ public class ThirdPersonMovement : MonoBehaviour
         verticalInput = moveInput.y/2;
 
         if (rigidBody.velocity.magnitude < 1)
-                currentSpeed = 0;
+        {Debug.Log("cut current speed"); currentSpeed = 0; }
+                
 
-        //if there is player input, accelerate
+        //if there is player input and we are, accelerate
         if (verticalInput > 0.1 && GetComponent<WallRun>().isWallRunning == false)
         {
             moveKeyUp = false;
@@ -327,7 +328,7 @@ public class ThirdPersonMovement : MonoBehaviour
         } else if (verticalInput < 0.1)
         {
             //check if the back arrow is active    
-            if (verticalInput < 0.1 && rigidBody.velocity.magnitude < 2)
+            if (verticalInput < 0.1 && rigidBody.velocity.magnitude > 2)
             {
                 //decel faster as a breaking mech
                 moveKeyUp = true;
@@ -345,7 +346,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
             //if moving, decelerate
            
-            if (currentSpeed > 0)
+            if (currentSpeed > 0 || rigidBody.velocity.magnitude > 0)
             currentSpeed -= deceleration * Time.deltaTime;
 
             }
@@ -364,8 +365,12 @@ public class ThirdPersonMovement : MonoBehaviour
         }
 
         
-        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
-        skateDirection = orientation.forward;
+        moveDirection = orientation.forward * verticalInput+ orientation.right * horizontalInput;
+
+        if (verticalInput != 0 && horizontalInput != 0)
+            skateDirection = orientation.forward * verticalInput+ orientation.right * horizontalInput;
+        else
+            skateDirection = orientation.forward;
 
         if (isWalking)
         {

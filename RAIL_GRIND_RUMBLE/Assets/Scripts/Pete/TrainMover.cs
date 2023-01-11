@@ -27,13 +27,13 @@ public class TrainMover : MonoBehaviour
     {
         if (lastSpotVisited == spots[1])
         {
-            Debug.Log("moving towards spot 0");
+            //Debug.Log("moving towards spot 0");
             transform.position = Vector3.MoveTowards(transform.position, spots[0].transform.position, speed * Time.deltaTime);
             transform.LookAt(spots[0].transform.position);
         }
         else if(lastSpotVisited == spots[0])
         {
-            Debug.Log("moving towards spot 1");
+            //Debug.Log("moving towards spot 1");
             transform.position = Vector3.MoveTowards(transform.position, spots[1].transform.position, speed * Time.deltaTime);
             transform.LookAt(spots[1].transform.position);
         }
