@@ -80,7 +80,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
 
     //Acceleration Timer
-    private float maxTime = 3.0f;
+    private float maxTime = 1.5f;
     private float currentTime;
     private bool canAccelerate;
 
@@ -132,7 +132,7 @@ public class ThirdPersonMovement : MonoBehaviour
         baseMoveSpeed= 8;
         speedLerp = 2.22f;
         //max skate speed will be a better changable var later
-        maxSkateSpeed = 20;
+        maxSkateSpeed = 15;
         playerCollisionFollowREF = gameObject.GetComponent<CollisionFollow>();
         playerLeftColREF = transform.Find("AriRig").gameObject.transform.Find("LeftCollider").gameObject.GetComponent<PlayerRailLeftCollider>();
         playerRightColREF = transform.Find("AriRig").gameObject.transform.Find("RightCollider").gameObject.GetComponent<PlayerRailRightCollider>();
