@@ -414,7 +414,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""72ebcf71-b5c1-41e8-8777-1a13ffd446f8"",
-                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -425,7 +425,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""0313dcce-2fa2-494a-8098-1b94bd338c6b"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

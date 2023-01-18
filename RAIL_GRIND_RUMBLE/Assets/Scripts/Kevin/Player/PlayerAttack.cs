@@ -14,6 +14,7 @@ public class PlayerAttack : MonoBehaviour
     public Collider Knee;
     public int atkCount;
     private ThirdPersonMovement movementScriptREF;
+    float HeavyAtkTimer;
 
 
     private void Awake()
@@ -55,7 +56,39 @@ public class PlayerAttack : MonoBehaviour
        
         if (atkCount == 1)
         {
-           anim.SetTrigger("Attacking");
+           anim.SetTrigger("LAttack");
+        }
+
+   //    foreach(Collider enemy in hitEnemies)
+     //  {
+       //      IDamageable damageable;
+       // if (enemy.TryGetComponent<IDamageable>(out damageable))
+       // {
+       //     damageable.TakeDamage(Damage);
+        //}
+       //}
+    }
+
+        public void HeavyAttack(InputAction.CallbackContext context)
+    {  //Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
+        if (!context.started || movementScriptREF.isWalking || GameObject.Find("AimingCam") || movementScriptREF.Grounded == false)
+        {
+            return;
+        }
+       
+
+        if (context.started && !IsAttacking)
+        {
+            IsAttacking = true;
+            
+           anim.SetTrigger("HAttack");   
+          
+        }
+    
+       
+        if (atkCount == 1)
+        {
+          
         }
 
    //    foreach(Collider enemy in hitEnemies)
