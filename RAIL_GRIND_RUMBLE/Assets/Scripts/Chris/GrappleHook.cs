@@ -29,7 +29,7 @@ public class GrappleHook : MonoBehaviour
     //UI
     private Image grappleMeter;
     [SerializeField] Sprite[] grappleMeterImages;
-    private GameObject reticleREF;
+    //private GameObject reticleREF;
 
     //Swinging
     private Vector3 swingPoint;
@@ -121,9 +121,6 @@ public class GrappleHook : MonoBehaviour
 
         GameObject grappleMeterREF = GameObject.Find("GrappleMeter");
         grappleMeter = grappleMeterREF.GetComponent<Image>();
-
-        reticleREF = GameObject.Find("Reticle");
-        reticleREF.SetActive(false);
 
         //Arm Rig
         rootRigREF = GameObject.Find("Root");
@@ -425,7 +422,7 @@ public class GrappleHook : MonoBehaviour
                 shorteningCable = false;
             } else if (grappleDetectorREF.GetComponent<GrappleDetection>().aimPoints.Count > 0){
                 CheckObjectType(grappleDetectorREF.GetComponent<GrappleDetection>().currentAim);
-                reticleREF.SetActive(true);
+                //reticleREF.SetActive(true);
             }
         }
 
@@ -441,7 +438,7 @@ public class GrappleHook : MonoBehaviour
                 canPull = false;
                 enemyPullTo = false;
             }
-            reticleREF.SetActive(false);
+            //reticleREF.SetActive(false);
             extendingCable = false;
         }
     }

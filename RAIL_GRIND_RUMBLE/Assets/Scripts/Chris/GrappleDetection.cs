@@ -148,6 +148,7 @@ public class GrappleDetection : MonoBehaviour
                     if (aimPoints.Count == 0)
                     {
                         currentAim = collision.gameObject.transform;
+                        GetComponent<Reticle>().ReticleToggle(true);
                     } 
 
                     aimPoints.Add(collision.gameObject.transform);
@@ -169,6 +170,12 @@ public class GrappleDetection : MonoBehaviour
             {
                 aimPointChoice = 0;
                 SetCurrentAim();
+            }
+
+            //Deactivate Reticle
+            if (aimPoints.Count == 0)
+            {
+                GetComponent<Reticle>().ReticleToggle(false);
             }
         }
     }

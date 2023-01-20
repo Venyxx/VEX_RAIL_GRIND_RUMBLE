@@ -18,12 +18,19 @@ public class PauseMenu : MonoBehaviour
     public GameObject graphicsScreen;
     public GameObject accessibilityScreen;
 
+    //Added to turn reticle off when paused
+    GameObject grappleDetectorREF;
+    Reticle reticleScript;
 
 
 
     public bool isPaused;
 
-
+    void Start()
+    {
+        grappleDetectorREF = GameObject.Find("GrappleDetector");
+        reticleScript = grappleDetectorREF.GetComponent<Reticle>();
+    }
 
     void Update()
     {
@@ -51,11 +58,14 @@ public class PauseMenu : MonoBehaviour
         if (isPaused)
         {
             ResumeGame();
+            reticleScript.ReticleToggle(true);
         }
         else
         {
             isPaused = true;
             pauseMenu.SetActive(true);
+            reticleScript.ReticleToggle(false);
+            Debug.Log("Unpause");
             Time.timeScale = 0f;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
