@@ -105,7 +105,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                     ""id"": ""a7a7501f-250d-4dc0-ba45-5c02fc46adfa"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Hold(duration=3)"",
                     ""initialStateCheck"": false
                 },
                 {

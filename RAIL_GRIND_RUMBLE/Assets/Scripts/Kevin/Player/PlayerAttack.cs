@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -23,6 +24,7 @@ public class PlayerAttack : MonoBehaviour
         Weapon.enabled = false;
         Knee.enabled = false;
         movementScriptREF = GetComponent<ThirdPersonMovement>();
+        
 
     }
    
@@ -73,22 +75,23 @@ public class PlayerAttack : MonoBehaviour
     {  //Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
         if (!context.started || movementScriptREF.isWalking || GameObject.Find("AimingCam") || movementScriptREF.Grounded == false)
         {
+          
             return;
         }
        
-
-        if (context.started && !IsAttacking)
+        if (context.started || !IsAttacking)
         {
+            Debug.Log("HeavyAttack" + context.phase);  
             IsAttacking = true;
-            
-           anim.SetTrigger("HAttack");   
-          
+            anim.SetTrigger("HAttackStart");
+
         }
-    
        
-        if (atkCount == 1)
+        else if (context.performed || IsAttacking)
         {
-          
+            Debug.Log("HeavyAttack" + context.phase);
+            anim.SetTrigger("HAttackEnd");
+
         }
 
    //    foreach(Collider enemy in hitEnemies)
