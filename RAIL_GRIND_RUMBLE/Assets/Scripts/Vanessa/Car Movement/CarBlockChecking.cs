@@ -15,7 +15,7 @@ public class CarBlockChecking : MonoBehaviour
 
     void OnTriggerEnter (Collider col)
     {
-        Debug.Log("noticed trigger");
+        //Debug.Log("noticed trigger");
         if (col.gameObject.tag ==  "PlayerObject" || col.gameObject.tag == "MovingCar")
         carMovementREF.StopCar();
     }

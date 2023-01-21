@@ -349,7 +349,7 @@ public class ThirdPersonMovement : MonoBehaviour
                 float Adeceleration = 10f;
 
                 //if moving, decelerate
-                Debug.Log("breaking mech");
+                //Debug.Log("breaking mech");
                 if (currentSpeed > 0)
                 currentSpeed -= Adeceleration * Time.deltaTime;
 

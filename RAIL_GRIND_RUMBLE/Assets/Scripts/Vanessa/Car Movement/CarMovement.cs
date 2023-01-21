@@ -17,7 +17,9 @@ public class CarMovement : MonoBehaviour
     {
 
         baseMoveSpeed = 15;
+        if(gameObject.transform.root.transform.Find("Road Creator"))
         pathCreator = gameObject.transform.root.transform.Find("Road Creator").gameObject.GetComponent<PathCreator>();
+        
         currentMoveSpeed = baseMoveSpeed;
 
     }

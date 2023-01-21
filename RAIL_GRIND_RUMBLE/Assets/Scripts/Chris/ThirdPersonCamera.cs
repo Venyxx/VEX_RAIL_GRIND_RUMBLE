@@ -62,6 +62,10 @@ public class ThirdPersonCamera : MonoBehaviour
         } else {
             _freeLook.LookAt = player;
         }
+
+        //v hot fix for rotatation lock on load
+        currentStyle = CameraStyle.Aiming;
+        currentStyle = CameraStyle.Basic;
            
         
         _freeLook.Follow = player;
@@ -93,6 +97,7 @@ public class ThirdPersonCamera : MonoBehaviour
         //{
             //Rotate Orientation
             Vector3 viewDir = player.position - new Vector3(transform.position.x, player.position.y, transform.position.z);
+
             orientation.forward = viewDir.normalized;
 
             if (currentStyle == CameraStyle.Basic)
