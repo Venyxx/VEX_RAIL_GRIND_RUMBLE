@@ -218,12 +218,26 @@ public class ThirdPersonMovement : MonoBehaviour
         
 
         //animation transitioning
-        if (!moveKeyUp)
-            targetSpeed = Mathf.Lerp(targetSpeed, 2, 0.35f);
-        else if (moveKeyUp && rigidBody.velocity.magnitude > 1)
-            targetSpeed = Mathf.Lerp(targetSpeed, 1, 0.5f);  
+
+        if (rigidBody.velocity.magnitude > 4 )     
+        {
+            //slide by anim
+            if (verticalInput == 0)
+                targetSpeed = Mathf.Lerp(targetSpeed, 2, 0.35f);
+            else
+            targetSpeed = Mathf.Lerp(targetSpeed, 3, 0.5f);
+              
+        }
+        else if (rigidBody.velocity.magnitude < 4 && rigidBody.velocity.magnitude > 1)
+        {
+            if (horizontalInput == 0 || verticalInput == 0)
+            {
+               //normal walking slow run animation, only plays during decel not accel
+                targetSpeed = Mathf.Lerp(targetSpeed, 2, 0.35f);
+            }
+        }
         else 
-            targetSpeed = Mathf.Lerp(targetSpeed, 0, 0.35f);
+            targetSpeed = Mathf.Lerp(targetSpeed, 1, 0.35f);
             
 
 
@@ -310,7 +324,7 @@ public class ThirdPersonMovement : MonoBehaviour
         verticalInput = moveInput.y/2;
 
         if (rigidBody.velocity.magnitude < 1)
-        {Debug.Log("cut current speed"); currentSpeed = 0; }
+        { currentSpeed = 0; }
                 
 
         //if there is player input and we are, accelerate
@@ -318,7 +332,7 @@ public class ThirdPersonMovement : MonoBehaviour
         {
             moveKeyUp = false;
             //kick start movement
-            if (currentSpeed == 0)
+            if (rigidBody.velocity.magnitude < baseMoveSpeed)
                 currentSpeed = baseMoveSpeed;
 
             //accelerate
@@ -335,6 +349,7 @@ public class ThirdPersonMovement : MonoBehaviour
                 float Adeceleration = 10f;
 
                 //if moving, decelerate
+                Debug.Log("breaking mech");
                 if (currentSpeed > 0)
                 currentSpeed -= Adeceleration * Time.deltaTime;
 
@@ -345,7 +360,6 @@ public class ThirdPersonMovement : MonoBehaviour
             float deceleration = 5f;
 
             //if moving, decelerate
-           
             if (currentSpeed > 0 || rigidBody.velocity.magnitude > 0)
             currentSpeed -= deceleration * Time.deltaTime;
 
@@ -393,13 +407,14 @@ public class ThirdPersonMovement : MonoBehaviour
             {
                  rigidBody.velocity = new Vector3(skateDirection.normalized.x * currentSpeed, rigidBody.velocity.y, skateDirection.normalized.z * currentSpeed);
                  //PlaySound(3);
-            }
-               
-            else if (verticalInput == -0.5 || horizontalInput != 0)
+            }  
+            else if (verticalInput < 0 || horizontalInput != 0)
                 rigidBody.velocity = new Vector3(moveDirection.normalized.x * walkSpeed * 10f, rigidBody.velocity.y, moveDirection.normalized.z * walkSpeed * 10f);
 
             //else 
             //rigidBody.velocity = new Vector3( rigidBody.velocity.x, rigidBody.velocity.y,  rigidBody.velocity.z); //PROBLEM AREA
+            
+            
             //change anim
             _animator.SetBool(_animIDWalking, false);
             _animator.SetBool(_animIDJump, false);
@@ -440,8 +455,13 @@ public class ThirdPersonMovement : MonoBehaviour
 
 
         //clamp skate speed
-        if (currentSpeed > maxSkateSpeed)
-            currentSpeed = maxSkateSpeed;
+        if (rigidBody.velocity.magnitude > maxSkateSpeed)
+        {
+            currentSpeed = maxSkateSpeed;     
+        }
+            
+
+
 
         
         //adjust animator speed

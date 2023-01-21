@@ -41,7 +41,7 @@ public class TrainMover : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.name);
+        //Debug.Log(other.name);
         if (other.gameObject == spots[1])
         {
            StartCoroutine(WaitInTheStation(1));
