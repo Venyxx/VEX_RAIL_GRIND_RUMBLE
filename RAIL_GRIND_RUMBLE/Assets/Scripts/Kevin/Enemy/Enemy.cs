@@ -87,8 +87,9 @@ public class Enemy : PoolableObject, IDamageable
         {
              Animator.SetTrigger(DEATH_TRIGGER);
            
-            //Added for Chris
-			grappleDetectorREF.gameObject.GetComponent<GrappleDetection>().RemovePoint(GetComponent<Transform>());
+            //Added for Chris 
+            //(commenting out for now since we're reworking how enemy grappling works)
+			//grappleDetectorREF.gameObject.GetComponent<GrappleDetection>().RemovePoint(GetComponent<Transform>());
              gameObject.SetActive(false);
         }
     }

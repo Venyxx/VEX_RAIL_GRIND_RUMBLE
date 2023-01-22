@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class GrappleDetection : MonoBehaviour
 {
     private GameObject aimingCamREF;
+    private Camera mainCamREF;
     public Transform currentAim;
     public List<Transform> aimPoints;
     [SerializeField]private int aimPointCount;
@@ -28,6 +29,9 @@ public class GrappleDetection : MonoBehaviour
     {
         GameObject cameraPrefabREF = GameObject.Find("camerasPrefab");
         aimingCamREF = cameraPrefabREF.transform.Find("AimingCam").gameObject;
+
+        mainCamREF = UnityEngine.Camera.main;
+        //mainCamREF = GameObject.Find("Main Camera");
 
         GameObject orientationREF = GameObject.Find("Orientation");
         aimLookAtREF = orientationREF.transform.Find("AimingLookAt");
@@ -64,17 +68,26 @@ public class GrappleDetection : MonoBehaviour
         //Aim Point Closest
         if (aimPoints.Count != 0 && aimPoints.Count >= 2 && !GameObject.Find("AimingCam"))
         {
-            
-            for (int i = 0; i < aimPoints.Count; i++)
-            {
-                if (aimPoints[0] != null && Vector3.Distance(player.position, aimPoints[0].position) > Vector3.Distance(player.position, aimPoints[i].position))
+                //Sorts aimPoints by distance
+                for (int i = 0; i < aimPoints.Count; i++)
                 {
-                    Transform temp = aimPoints[i];
-                    aimPoints.Remove(aimPoints[i]);
-                    aimPoints.Insert(0, temp);
+                    if (aimPoints[0] != null && Vector3.Distance(player.position, aimPoints[0].position) > Vector3.Distance(player.position, aimPoints[i].position))
+                    {
+                        Transform temp = aimPoints[i];
+                        aimPoints.Remove(aimPoints[i]);
+                        aimPoints.Insert(0, temp);
+                    }
+                }
+                
+                //If aimPoint is behind camera, switch to next one in list
+                if (Vector3.Dot((aimPoints[0].position - mainCamREF.transform.position), mainCamREF.transform.forward) < 5){
+                    currentAim = aimPoints[1];
+                } else {
                     currentAim = aimPoints[0];
                 }
-            }
+
+                //Update to accomodate entire list of aimPoints
+            
         }
 
     }
@@ -141,7 +154,7 @@ public class GrappleDetection : MonoBehaviour
     {
         /*if (collision.gameObject.tag == "AimPoint")
         use COMPARETAG instead of == string comparison*/
-        if(collision.gameObject.CompareTag("AimPoint") || collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        if(collision.gameObject.CompareTag("AimPoint"))
         {
             if (!aimPoints.Exists(element => element == (collision.gameObject.transform)))
             {
@@ -160,7 +173,7 @@ public class GrappleDetection : MonoBehaviour
 
     void OnTriggerExit(Collider collision)
     {
-        if (collision.gameObject.CompareTag("AimPoint") || collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        if (collision.gameObject.CompareTag("AimPoint"))
         {
             aimPoints.Remove(collision.gameObject.transform);
             aimPointCount--;

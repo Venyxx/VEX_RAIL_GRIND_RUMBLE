@@ -15,6 +15,7 @@ public class Reticle : MonoBehaviour
     void Start()
     {
         reticleREF = GameObject.Find("Reticle");
+        reticleREF.SetActive(false);
         cam = GameObject.Find("Main Camera");
         reticleImage = reticleREF.GetComponent<Image>();
         grappleDetection = GetComponent<GrappleDetection>();

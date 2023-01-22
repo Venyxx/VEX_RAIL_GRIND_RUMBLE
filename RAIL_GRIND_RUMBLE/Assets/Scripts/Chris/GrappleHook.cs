@@ -479,26 +479,6 @@ public class GrappleHook : MonoBehaviour
             realHitPoint = Vector3.zero;
         }
 
-        //Check if point is a pullable object or enemy
-        // if (sphereCastHit.collider != null)
-        // {
-        //     if (sphereCastHit.collider.gameObject.layer == LayerMask.NameToLayer("GrapplePickUp"))
-        //     {
-        //         canPull = true;
-        //         enemyPullTo = false;
-        //         pullableObject = sphereCastHit.collider.gameObject;
-        //         pullingObject = true;
-        //     } else if (sphereCastHit.collider.gameObject.layer == LayerMask.NameToLayer("Enemy")) 
-        //     {
-        //         enemyPullTo = true;
-        //         canPull = false;
-        //         enemyObject = sphereCastHit.collider.gameObject;
-        //     } else {
-        //         canPull = false;
-        //         enemyPullTo = false;
-        //     }
-        // }
-
         predictionHit = raycastHit.point == Vector3.zero ? sphereCastHit : raycastHit;
 
     }
@@ -516,13 +496,15 @@ public class GrappleHook : MonoBehaviour
             // return;
             // }
 
-            if (currentAim.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+            /*if (currentAim.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
                 enemyPullTo = true;
                 canPull = false;
                 enemyObject = currentAim.gameObject;
                 pullingObject = false;
-            } else if (currentAim.gameObject.layer == LayerMask.NameToLayer("GrapplePickUp")){
+            } else */
+            
+            if (currentAim.gameObject.layer == LayerMask.NameToLayer("GrapplePickUp")){
                 canPull = true;
                 enemyPullTo = false;
                 pullableObject = currentAim.gameObject;
