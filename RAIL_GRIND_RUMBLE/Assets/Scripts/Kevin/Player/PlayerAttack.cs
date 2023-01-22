@@ -46,7 +46,8 @@ public class PlayerAttack : MonoBehaviour
             || movementScriptREF.isWalking || 
             GameObject.Find("AimingCam") || 
             movementScriptREF.Grounded == false || 
-            movementScriptREF.DialogueBox.activeInHierarchy)
+            movementScriptREF.DialogueBox.activeInHierarchy ||
+            movementScriptREF.nearestDialogueTemplate != null)
         {
             return;
         }

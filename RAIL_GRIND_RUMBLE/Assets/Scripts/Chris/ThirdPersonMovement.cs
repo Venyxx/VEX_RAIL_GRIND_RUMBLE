@@ -59,6 +59,7 @@ public class ThirdPersonMovement : MonoBehaviour
     Vector3 skateDirection;
 
     public GameObject DialogueBox { get; private set; }
+    public DialogueTemplate nearestDialogueTemplate = null;
 
 
 

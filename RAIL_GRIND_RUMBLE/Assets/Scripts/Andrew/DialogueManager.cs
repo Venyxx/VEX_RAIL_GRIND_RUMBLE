@@ -15,6 +15,10 @@ public class DialogueManager : MonoBehaviour
     [SerializeField]
     private float textSpeed = 0.1f;
 
+    private ThirdPersonMovement thirdPersonControllerREF;
+
+    [SerializeField] private GameObject talkPrompt;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +26,7 @@ public class DialogueManager : MonoBehaviour
         textComponent.text = string.Empty;
         talkingToName.text = string.Empty;
         dialogueBox.SetActive(false);
+        thirdPersonControllerREF = FindObjectOfType<ThirdPersonMovement>();
     }
 
     // Update is called once per frame
@@ -32,7 +37,10 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(DialogueTemplate dialogue)
     {
+        if (dialogue == null) return;
+        
         dialogueBox.SetActive(true);
+        talkPrompt.SetActive(false);
         isBoxActive = true;
         talkingToName.text = dialogue.name;
 
@@ -49,8 +57,12 @@ public class DialogueManager : MonoBehaviour
     public void DialogueInput(InputAction.CallbackContext context)
     {
         if (!context.started) return;
-      
-        if (context.started)
+
+        if (!isBoxActive && context.started)
+        {
+            StartDialogue(thirdPersonControllerREF.nearestDialogueTemplate);
+        }
+        else if (context.started && isBoxActive)
         {
             DisplayNextParagraph();
         }
@@ -86,6 +98,7 @@ public class DialogueManager : MonoBehaviour
     {
         dialogueBox.SetActive(false);
         isBoxActive = false;
+        thirdPersonControllerREF.nearestDialogueTemplate = null;
     }
 
 
