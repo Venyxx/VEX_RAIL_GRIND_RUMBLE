@@ -79,12 +79,27 @@ public class GrappleDetection : MonoBehaviour
                     }
                 }
                 
-                //If aimPoint is behind camera, switch to next one in list
-                if (Vector3.Dot((aimPoints[0].position - mainCamREF.transform.position), mainCamREF.transform.forward) < 5){
-                    currentAim = aimPoints[1];
-                } else {
-                    currentAim = aimPoints[0];
+                
+                    //if currentaim is not visible, check next aimpoint
+                    //else return
+
+                for (int i = 0; i < aimPoints.Count; i++)
+                {
+                    if (Vector3.Dot((aimPoints[i].position - mainCamREF.transform.position), mainCamREF.transform.forward) < 6)
+                    {
+                        currentAim = aimPoints[0];
+                        //return;
+                    } else if (Vector3.Dot((currentAim.position - mainCamREF.transform.position), mainCamREF.transform.forward) < 6){
+                        currentAim = aimPoints[i];
+                    }
                 }
+                
+                // //If aimPoint is behind camera, switch to next one in list
+                // if (Vector3.Dot((aimPoints[0].position - mainCamREF.transform.position), mainCamREF.transform.forward) < 5){
+                //     currentAim = aimPoints[1];
+                // } else {
+                //     currentAim = aimPoints[0];
+                // }
 
                 //Update to accomodate entire list of aimPoints
             
