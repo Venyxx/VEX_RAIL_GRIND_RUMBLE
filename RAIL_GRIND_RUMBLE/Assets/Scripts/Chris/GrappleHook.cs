@@ -155,7 +155,7 @@ public class GrappleHook : MonoBehaviour
     //Left Click
     public void GrapplePull(InputAction.CallbackContext context)
     {
-        if (context.started && canShoot == true && grappleStored == true && GameObject.Find("AimingCam") != null && isGrappling == false)
+        if (context.started && canShoot == true && grappleStored == true && GameObject.Find("AimingCam") != null && isGrappling == false && !_thirdPersonMovement.DialogueBox.activeInHierarchy)
         {
             StartSwing();
             StartCoroutine(ZipRunning());

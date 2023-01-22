@@ -6,6 +6,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 {
     public float maxHealth = 3;
     public float currentHealth;
+    private ThirdPersonMovement thirdPersonMovementREF;
 
     [SerializeField] private bool debugKill;
 
@@ -15,7 +16,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     void Start()
     {
         currentHealth = maxHealth;
-         
+        thirdPersonMovementREF = GetComponent<ThirdPersonMovement>();
+
     }
 
     void Update()
@@ -36,6 +38,9 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
     public void TakeDamage (float Damage)
     {
+        //ensures ari can not take damage from enemies while stuck in dialogue
+        if (thirdPersonMovementREF.DialogueBox.activeInHierarchy) return; 
+        
         currentHealth -= Damage;
 
         if (currentHealth <= 0)

@@ -14,6 +14,8 @@ public class ThrowObject : MonoBehaviour
     [SerializeField] private float throwForce;
     [SerializeField] private float throwUpwardForce;
 
+    private ThirdPersonMovement thirdPersonMovement;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +23,7 @@ public class ThrowObject : MonoBehaviour
         grappleHookScript = gameObject.GetComponent<GrappleHook>();
         GameObject orientationREF = GameObject.Find("Orientation");
         orientation = orientationREF.gameObject.GetComponent<Transform>();
+        thirdPersonMovement = GetComponent<ThirdPersonMovement>();
     }
 
     // Update is called once per frame
@@ -61,7 +64,7 @@ public class ThrowObject : MonoBehaviour
 
     public void Throw(InputAction.CallbackContext context)
     {
-        if (!(context.started && isHoldingObject)) return;
+        if ((!(context.started && isHoldingObject)) || thirdPersonMovement.DialogueBox.activeInHierarchy) return;
         ThrowObjectAction();
         gameObject.GetComponent<ThirdPersonMovement>().PlaySound(2);
     }

@@ -16,6 +16,7 @@ public class PlayerAttack : MonoBehaviour
     public int atkCount;
     private ThirdPersonMovement movementScriptREF;
     float HeavyAtkTimer;
+    
 
 
     private void Awake()
@@ -25,7 +26,7 @@ public class PlayerAttack : MonoBehaviour
         Knee.enabled = false;
         movementScriptREF = GetComponent<ThirdPersonMovement>();
         
-
+        
     }
    
     void Start()
@@ -41,7 +42,11 @@ public class PlayerAttack : MonoBehaviour
 
     public void Attack(InputAction.CallbackContext context)
     {  //Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
-        if (!context.started || movementScriptREF.isWalking || GameObject.Find("AimingCam") || movementScriptREF.Grounded == false)
+        if (!context.started 
+            || movementScriptREF.isWalking || 
+            GameObject.Find("AimingCam") || 
+            movementScriptREF.Grounded == false || 
+            movementScriptREF.DialogueBox.activeInHierarchy)
         {
             return;
         }
@@ -73,7 +78,11 @@ public class PlayerAttack : MonoBehaviour
 
         public void HeavyAttack(InputAction.CallbackContext context)
     {  //Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
-        if (!context.started || movementScriptREF.isWalking || GameObject.Find("AimingCam") || movementScriptREF.Grounded == false)
+        if (!context.started || 
+            movementScriptREF.isWalking || 
+            GameObject.Find("AimingCam") || 
+            movementScriptREF.Grounded == false || 
+            movementScriptREF.DialogueBox.activeInHierarchy)
         {
           
             return;

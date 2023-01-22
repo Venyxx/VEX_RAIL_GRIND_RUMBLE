@@ -86,8 +86,12 @@ public class ThirdPersonCamera : MonoBehaviour
         {
             playerActions = _thirdPersonMovement.playerActions;
         }
-        
-        Vector2 moveInput = playerActions.Player.Move.ReadValue<Vector2>();
+
+        Vector2 moveInput = new Vector2(0, 0);
+        if (!_thirdPersonMovement.DialogueBox.activeInHierarchy)
+        {
+            moveInput = playerActions.Player.Move.ReadValue<Vector2>();
+        }
         float horizontalInput = moveInput.x;
         float verticalInput = moveInput.y;
 
@@ -97,7 +101,7 @@ public class ThirdPersonCamera : MonoBehaviour
         //{
             //Rotate Orientation
             Vector3 viewDir = player.position - new Vector3(transform.position.x, player.position.y, transform.position.z);
-
+            
             orientation.forward = viewDir.normalized;
 
             if (currentStyle == CameraStyle.Basic)
