@@ -106,7 +106,7 @@ public class GrappleHook : MonoBehaviour
         
         rbDefaultMass = rigidBody.mass;
 
-        //Maybe make this more efficient
+        
         GameObject basicCam = GameObject.Find("BasicCam");
         camTransform = basicCam.gameObject.GetComponent<Transform>();
 
@@ -300,6 +300,13 @@ public class GrappleHook : MonoBehaviour
         shorteningCable = false;
         rigidBody.mass = rbDefaultMass;
         isGrappling = false;
+
+        //solution for aririg object moving slightly after grapple
+        //Debug.Log(aririg.transform.position);
+        //var aririg = GameObject.Find("AriRig").transform;
+        //Vector3 newPos = new Vector3 (0f,0f,0f);
+        //aririg.transform.position = newPos;
+        
     }
 
     IEnumerator Cooldown ()
