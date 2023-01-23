@@ -396,8 +396,10 @@ public class ThirdPersonMovement : MonoBehaviour
         
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-        //if (verticalInput != 0 && horizontalInput != 0 && !DialogueBox.activeInHierarchy)
+        if (verticalInput != 0 && horizontalInput != 0 && !DialogueBox.activeInHierarchy)
             skateDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        else 
+            skateDirection = orientation.forward;
 
             if (isWalking)
         {
@@ -468,9 +470,13 @@ public class ThirdPersonMovement : MonoBehaviour
 
 
         //clamp skate speed
-        if (rigidBody.velocity.magnitude > maxSkateSpeed)
+        if (rigidBody.velocity.magnitude > 14) //arbritrary cap point
         {
-            currentSpeed = maxSkateSpeed;     
+
+            Vector3 passing = Vector3.Normalize(rigidBody.velocity);
+            passing *= maxSkateSpeed;
+
+            rigidBody.velocity = passing;
         }
             
 
@@ -485,7 +491,7 @@ public class ThirdPersonMovement : MonoBehaviour
         //_animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
 
         //update speed UI
-        SetSpeedUI(currentSpeed);
+        SetSpeedUI();
 
     }
 
@@ -593,7 +599,7 @@ public class ThirdPersonMovement : MonoBehaviour
         
     }
 
-    private void SetSpeedUI(float speed)
+    private void SetSpeedUI()
     { 
         //m/s to mph
         var passing = rigidBody.velocity.magnitude;
