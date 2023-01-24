@@ -12,7 +12,7 @@ public class DialogueTrigger : MonoBehaviour
     
     void Start()
     {
-        Debug.Log(gameObject.name);
+        //Debug.Log(gameObject.name);
         talkPrompt.SetActive(false);
         thirdPersonControllerREF = FindObjectOfType<ThirdPersonMovement>();
     }

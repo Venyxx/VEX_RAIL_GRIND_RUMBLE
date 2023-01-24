@@ -30,12 +30,16 @@ public class Graffiti : MonoBehaviour
         graffitiLeft = Resources.Load("Decal_3") as GameObject;
         graffitiRight = Resources.Load("Decal_4") as GameObject;
          
+         Debug.Log(graffitiUp);
          Debug.Log(graffitiDown);
+         Debug.Log(graffitiLeft);
+         Debug.Log(graffitiRight);
         
     }
     
     public void GraffitiAction(InputAction.CallbackContext context)
     {
+        Debug.Log("attempted");
         if (!context.started) return;
         GraffitiFire();
     }
