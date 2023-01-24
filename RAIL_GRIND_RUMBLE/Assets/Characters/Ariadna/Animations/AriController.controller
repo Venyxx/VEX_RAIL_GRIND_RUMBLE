@@ -685,16 +685,17 @@ AnimatorStateMachine:
     m_Position: {x: 938.6478, y: 689.60376, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1763805148584497553}
-    m_Position: {x: 940, y: 860, z: 0}
+    m_Position: {x: 950, y: 850, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4819408747773928173}
-    m_Position: {x: 420, y: 500, z: 0}
+    m_Position: {x: 260, y: 500, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7075871458248530923}
     m_Position: {x: 570, y: 540, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: -3291266726141815261}
+  - {fileID: 6696110945080206708}
   m_EntryTransitions:
   - {fileID: -6047547532534806773}
   m_StateMachineTransitions: {}
@@ -1558,6 +1559,31 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.91906476
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
+--- !u!1101 &6696110945080206708
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: HAttackStart
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 6669153180486388996}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0.25
+  m_TransitionOffset: 0
+  m_ExitTime: 0.75
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0

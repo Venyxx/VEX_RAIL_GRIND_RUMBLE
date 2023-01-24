@@ -16,6 +16,7 @@ public class PlayerAttack : MonoBehaviour
     public int atkCount;
     private ThirdPersonMovement movementScriptREF;
     float HeavyAtkTimer;
+    bool TimerOn;
     
 
 
@@ -31,12 +32,13 @@ public class PlayerAttack : MonoBehaviour
    
     void Start()
     {
-      //  anim = GetComponent<Animator>();
+        //  anim = GetComponent<Animator>();
+        HeavyAtkTimer = 0;
         
     }
     void Update()
     {
-    
+        Timer();
     }
    
 
@@ -46,8 +48,9 @@ public class PlayerAttack : MonoBehaviour
             || movementScriptREF.isWalking || 
             GameObject.Find("AimingCam") || 
             movementScriptREF.Grounded == false || 
-            movementScriptREF.DialogueBox.activeInHierarchy ||
-            movementScriptREF.nearestDialogueTemplate != null)
+            movementScriptREF.DialogueBox.activeInHierarchy 
+            //||movementScriptREF.nearestDialogueTemplate != null
+            )
         {
             return;
         }
@@ -91,30 +94,67 @@ public class PlayerAttack : MonoBehaviour
        
         if (context.started || !IsAttacking)
         {
-            Debug.Log("HeavyAttack" + context.phase);  
-            IsAttacking = true;
-            anim.SetTrigger("HAttackStart");
+           // Debug.Log("HeavyAttack1" + context.phase);  
+            
+          
 
         }
-       
-        else if (context.performed || IsAttacking)
+
+
+        if (context.ReadValueAsButton() == true && !IsAttacking)
         {
-            Debug.Log("HeavyAttack" + context.phase);
-            anim.SetTrigger("HAttackEnd");
+            //Debug.Log("Key Press");
+            anim.SetTrigger("HAttackStart");
+            TimerOn = true;
+            IsAttacking = true;
+            HeavyAtkTimer = 0;
 
         }
 
-   //    foreach(Collider enemy in hitEnemies)
-     //  {
-       //      IDamageable damageable;
-       // if (enemy.TryGetComponent<IDamageable>(out damageable))
-       // {
-       //     damageable.TakeDamage(Damage);
+        if (context.ReadValueAsButton() == false)
+        {
+          //  Debug.Log("Key Release");
+            anim.SetTrigger("HAttackEnd");
+            IsAttacking = false;
+            HeavyAtkTimer = 0;
+        }
+
+       
+
+        //    foreach(Collider enemy in hitEnemies)
+        //  {
+        //      IDamageable damageable;
+        // if (enemy.TryGetComponent<IDamageable>(out damageable))
+        // {
+        //     damageable.TakeDamage(Damage);
         //}
-       //}
+        //}
     }
 
-private void OnTriggerEnter(Collider other)
+    private void Timer()
+    {
+        if(TimerOn && IsAttacking)
+        {
+            HeavyAtkTimer += Time.deltaTime;
+        }
+        if(!TimerOn)
+        {
+            HeavyAtkTimer = 0;
+        }
+
+        if (HeavyAtkTimer >= 3 && IsAttacking)
+        {
+            anim.SetTrigger("HAttackEnd");
+            TimerOn = false;
+
+            HeavyAtkTimer = 0;
+
+        }
+        //Debug.Log(HeavyAtkTimer);
+    }
+
+
+    private void OnTriggerEnter(Collider other)
     {
             IDamageable damageable;
         if (other.TryGetComponent<IDamageable>(out damageable))

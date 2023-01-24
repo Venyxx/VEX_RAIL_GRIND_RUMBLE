@@ -105,7 +105,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                     ""id"": ""a7a7501f-250d-4dc0-ba45-5c02fc46adfa"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Hold(duration=3)"",
+                    ""interactions"": ""Press"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -415,7 +415,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""72ebcf71-b5c1-41e8-8777-1a13ffd446f8"",
                     ""path"": ""<Gamepad>/buttonNorth"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""HeavyAttack"",
