@@ -170,7 +170,7 @@ public class ThirdPersonMovement : MonoBehaviour
         skateShoes = GameObject.FindGameObjectsWithTag("SkateBody");
         skateWheels = GameObject.FindGameObjectsWithTag("SkateWheel");
         playerWeapon = GameObject.FindGameObjectWithTag("PlayerWeapon");
-        sprayCan = GameObject.FindWithTag("PlayerCan");
+        sprayCan = GameObject.FindGameObjectWithTag("PlayerCan");
         ariCollider = GetComponent<CapsuleCollider>();
         WalkToggleHelper();
 

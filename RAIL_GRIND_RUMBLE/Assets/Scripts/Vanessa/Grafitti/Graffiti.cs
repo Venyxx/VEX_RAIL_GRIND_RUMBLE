@@ -11,8 +11,10 @@ public class Graffiti : MonoBehaviour
     GameObject graffitiUp;
     GameObject graffitiRight;
     GameObject graffitiLeft;
+    GameObject graffitiParticle;
 
    [SerializeField] private Transform canLocation;
+   private GameObject canLocationForParticle;
    private GameObject player;
    private int playerX;
    private int playerZ;
@@ -29,11 +31,10 @@ public class Graffiti : MonoBehaviour
         graffitiDown = Resources.Load<GameObject>("Decal_2");
         graffitiLeft = Resources.Load("Decal_3") as GameObject;
         graffitiRight = Resources.Load("Decal_4") as GameObject;
-         
-         Debug.Log(graffitiUp);
-         Debug.Log(graffitiDown);
-         Debug.Log(graffitiLeft);
-         Debug.Log(graffitiRight);
+        graffitiParticle = Resources.Load("Particle_1") as GameObject;
+
+         canLocationForParticle = GameObject.FindGameObjectWithTag("PlayerCan");
+         Debug.Log(" tried to load " + graffitiParticle);
         
     }
     
@@ -58,18 +59,22 @@ public class Graffiti : MonoBehaviour
             if (hit.collider.gameObject.layer == 8)
             {
                 GameObject madeGraffiti;
+                GameObject particle;
                 Debug.Log("correct layer");
                 if (hit.collider.gameObject.tag == "Poster")
                 {
                     Debug.Log("detected poster, player would rec boost");
                     GameObject posterInfo = hit.collider.gameObject;
                     var spawnLoc = posterInfo.transform.Find("DecalSpawnLoc");
+                    particle = Instantiate (graffitiParticle, canLocationForParticle.transform.position, canLocation.transform.rotation);
                     madeGraffiti = Instantiate (graffiti, spawnLoc.transform.position, player.transform.rotation); 
+                    
                 } else 
                 {
                     Debug.Log("detected no poster");
                     //var rotation  = (player.transform.rotation * Quaternion.Euler(0, -90, 0));
                     madeGraffiti = Instantiate (graffiti, hit.point, canLocation.transform.rotation);
+                    particle = Instantiate (graffitiParticle, canLocationForParticle.transform.position, canLocation.transform.rotation);
                     Vector3 newPos = new Vector3 (player.transform.position.x, madeGraffiti.transform.position.y, player.transform.position.z);
                     madeGraffiti.transform.position = newPos;
                 }
