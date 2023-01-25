@@ -85,6 +85,10 @@ public class GrappleDetection : MonoBehaviour
 
                 for (int i = 0; i < aimPoints.Count; i++)
                 {
+                    RaycastHit hit;
+                    Ray ray = mainCamREF.ScreenPointToRay(aimPoints[i].position);
+                    //Physics.Raycast(ray, out hit);
+                    //if (Physics.Raycast(ray, out hit)){  || hit.collider.tag != "AimPoint"
                     if (Vector3.Dot((aimPoints[i].position - mainCamREF.transform.position), mainCamREF.transform.forward) < 6)
                     {
                         currentAim = aimPoints[0];
@@ -92,6 +96,7 @@ public class GrappleDetection : MonoBehaviour
                     } else if (Vector3.Dot((currentAim.position - mainCamREF.transform.position), mainCamREF.transform.forward) < 6){
                         currentAim = aimPoints[i];
                     }
+                    //}
                 }
                 
                 // //If aimPoint is behind camera, switch to next one in list
