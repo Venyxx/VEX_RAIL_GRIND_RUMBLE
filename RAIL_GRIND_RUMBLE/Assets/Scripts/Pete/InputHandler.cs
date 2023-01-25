@@ -425,8 +425,8 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""0313dcce-2fa2-494a-8098-1b94bd338c6b"",
-                    ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": """",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""HeavyAttack"",
@@ -447,7 +447,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""2443cb16-af80-4a7d-b5a2-c2c73e0aa541"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

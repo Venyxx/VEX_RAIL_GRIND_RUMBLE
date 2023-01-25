@@ -39,6 +39,20 @@ public class PlayerAttack : MonoBehaviour
     void Update()
     {
         Timer();
+        if (HeavyAtkTimer >= 3 && IsAttacking)
+        {
+            anim.SetTrigger("HAttackEnd");
+            TimerOn = false;
+            IsAttacking = false;
+            HeavyAtkTimer = 0;
+            Damage = 50;
+
+        }
+        if (!IsAttacking)
+        {
+            Damage = 0;
+        }
+
     }
    
 
@@ -103,23 +117,45 @@ public class PlayerAttack : MonoBehaviour
 
         if (context.ReadValueAsButton() == true && !IsAttacking)
         {
-            //Debug.Log("Key Press");
+            Debug.Log("Key Press");
             anim.SetTrigger("HAttackStart");
             TimerOn = true;
             IsAttacking = true;
             HeavyAtkTimer = 0;
+            
 
         }
 
-        if (context.ReadValueAsButton() == false)
+        if (context.ReadValueAsButton() == false && IsAttacking)
         {
-          //  Debug.Log("Key Release");
-            anim.SetTrigger("HAttackEnd");
-            IsAttacking = false;
-            HeavyAtkTimer = 0;
+           Debug.Log("Key Release");
+          if(HeavyAtkTimer >=1)
+            {
+                anim.SetTrigger("HAttackEnd");
+                IsAttacking = false;
+                HeavyAtkTimer = 0;
+                Damage = 35;
+            }
+            if (HeavyAtkTimer < 1)
+            {
+                anim.SetTrigger("HAttackEnd");
+                IsAttacking = false;
+                HeavyAtkTimer = 0;
+                Damage = 30;
+            }
+            if (HeavyAtkTimer >= 2)
+            {
+                anim.SetTrigger("HAttackEnd");
+                IsAttacking = false;
+                HeavyAtkTimer = 0;
+                Damage = 100;
+            }
+
+           
+
         }
 
-       
+
 
         //    foreach(Collider enemy in hitEnemies)
         //  {
@@ -142,14 +178,7 @@ public class PlayerAttack : MonoBehaviour
             HeavyAtkTimer = 0;
         }
 
-        if (HeavyAtkTimer >= 3 && IsAttacking)
-        {
-            anim.SetTrigger("HAttackEnd");
-            TimerOn = false;
-
-            HeavyAtkTimer = 0;
-
-        }
+      
         //Debug.Log(HeavyAtkTimer);
     }
 
