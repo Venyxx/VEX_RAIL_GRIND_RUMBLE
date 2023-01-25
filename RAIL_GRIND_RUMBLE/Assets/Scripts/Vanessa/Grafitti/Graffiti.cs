@@ -11,15 +11,17 @@ public class Graffiti : MonoBehaviour
     GameObject graffitiUp;
     GameObject graffitiRight;
     GameObject graffitiLeft;
+
     GameObject graffitiParticle;
+    GameObject graffitiParticle2;
 
    [SerializeField] private Transform canLocation;
    private GameObject canLocationForParticle;
+
    private GameObject player;
    private int playerX;
    private int playerZ;
    private Camera cam;
-
    private ThirdPersonMovement ThirdPersonMovementREF;
     
     void Start ()
@@ -32,18 +34,13 @@ public class Graffiti : MonoBehaviour
         graffitiLeft = Resources.Load("Decal_3") as GameObject;
         graffitiRight = Resources.Load("Decal_4") as GameObject;
         graffitiParticle = Resources.Load("Particle_1") as GameObject;
+        graffitiParticle2 = Resources.Load("Particle_1") as GameObject;
 
          canLocationForParticle = GameObject.FindGameObjectWithTag("PlayerCan");
          Debug.Log(" tried to load " + graffitiParticle);
         
     }
-    
-    public void GraffitiAction(InputAction.CallbackContext context)
-    {
-        Debug.Log("attempted");
-        if (!context.started) return;
-        GraffitiFire();
-    }
+
 
     void GraffitiFire()
     {
@@ -56,34 +53,35 @@ public class Graffiti : MonoBehaviour
             RaycastHit hit = hits[i];
             Debug.Log(hits.Length);
             Debug.Log("hit object " + hit.collider.gameObject);
+
+            GameObject madeGraffiti;
+            GameObject particle;
+            GameObject particle2;
+
             if (hit.collider.gameObject.layer == 8)
             {
-                GameObject madeGraffiti;
-                GameObject particle;
-                Debug.Log("correct layer");
+                
                 if (hit.collider.gameObject.tag == "Poster")
                 {
                     Debug.Log("detected poster, player would rec boost");
                     GameObject posterInfo = hit.collider.gameObject;
                     var spawnLoc = posterInfo.transform.Find("DecalSpawnLoc");
                     particle = Instantiate (graffitiParticle, canLocationForParticle.transform.position, canLocation.transform.rotation);
-                    madeGraffiti = Instantiate (graffiti, spawnLoc.transform.position, player.transform.rotation); 
+                    madeGraffiti = Instantiate (graffiti, spawnLoc.transform.position, spawnLoc.transform.rotation); 
+                    particle2 = Instantiate (graffitiParticle2, player.transform.position, player.transform.rotation);
+
+                    return;
                     
                 } else 
                 {
                     Debug.Log("detected no poster");
-                    //var rotation  = (player.transform.rotation * Quaternion.Euler(0, -90, 0));
                     madeGraffiti = Instantiate (graffiti, hit.point, canLocation.transform.rotation);
                     particle = Instantiate (graffitiParticle, canLocationForParticle.transform.position, canLocation.transform.rotation);
                     Vector3 newPos = new Vector3 (player.transform.position.x, madeGraffiti.transform.position.y, player.transform.position.z);
                     madeGraffiti.transform.position = newPos;
+                    return;
                 }
-
-                Vector3 direction = hit.point - canLocation.position;
-                canLocation.rotation = Quaternion.LookRotation(direction);
-                DecalProjector currentDecal = madeGraffiti.GetComponent<DecalProjector>();
-                //currentDecal.fadeFactor = Mathf.Lerp(currentDecal.fadeFactor, 1, 2f * Time.deltaTime);
-                currentDecal.fadeFactor = 1;
+                
                 
             }
         }
