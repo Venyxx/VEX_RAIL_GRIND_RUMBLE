@@ -34,7 +34,7 @@ public class Graffiti : MonoBehaviour
         graffitiLeft = Resources.Load("Decal_3") as GameObject;
         graffitiRight = Resources.Load("Decal_4") as GameObject;
         graffitiParticle = Resources.Load("Particle_1") as GameObject;
-        graffitiParticle2 = Resources.Load("Particle_1") as GameObject;
+        graffitiParticle2 = Resources.Load("Particle_2") as GameObject;
 
          canLocationForParticle = GameObject.FindGameObjectWithTag("PlayerCan");
          Debug.Log(" tried to load " + graffitiParticle);
@@ -67,7 +67,7 @@ public class Graffiti : MonoBehaviour
                     GameObject posterInfo = hit.collider.gameObject;
                     var spawnLoc = posterInfo.transform.Find("DecalSpawnLoc");
                     particle = Instantiate (graffitiParticle, canLocationForParticle.transform.position, canLocation.transform.rotation);
-                    madeGraffiti = Instantiate (graffiti, spawnLoc.transform.position, spawnLoc.transform.rotation); 
+                    madeGraffiti = Instantiate (graffiti, spawnLoc.transform.position,canLocation.transform.rotation); 
                     particle2 = Instantiate (graffitiParticle2, player.transform.position, player.transform.rotation);
 
                     return;
