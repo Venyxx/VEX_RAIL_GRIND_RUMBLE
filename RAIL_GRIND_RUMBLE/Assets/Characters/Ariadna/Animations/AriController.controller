@@ -3,12 +3,12 @@
 --- !u!1102 &-9182159779080539625
 AnimatorState:
   serializedVersion: 6
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: D_LightCombo1
-  m_Speed: 1
+  m_Speed: 1.4
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -7532062996475075600}
@@ -22,7 +22,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 64df2c6fbddd74a458096437cdb3c623, type: 2}
+  m_Motion: {fileID: 7400000, guid: 6c11064f676f1ed4ea334d86a39c5f69, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -124,7 +124,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: f8e6741cf1677c44f95a1d8cffe88684, type: 2}
+  m_Motion: {fileID: 7400000, guid: 3b16803e1b0f0094aa83e365a9a5f27e, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -219,9 +219,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.10610205
-  m_TransitionOffset: 5.004098
-  m_ExitTime: 0.8759092
+  m_TransitionDuration: 0.07880926
+  m_TransitionOffset: 0.88350236
+  m_ExitTime: 0.87590927
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -332,7 +332,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: LightCombo2
-  m_Speed: 1
+  m_Speed: 1.4
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -32207610135737152}
@@ -346,7 +346,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: d164108d3c28bc149b6fb76445c9f04c, type: 2}
+  m_Motion: {fileID: 7400000, guid: dfcb0e26e7db63444a55d8fe124838d5, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -411,12 +411,34 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
-  m_TransitionOffset: 0
-  m_ExitTime: 0.75
+  m_TransitionDuration: 0.44474074
+  m_TransitionOffset: 0.40170687
+  m_ExitTime: 0.9193354
   m_HasExitTime: 0
   m_HasFixedDuration: 0
   m_InterruptionSource: 2
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
+--- !u!1101 &-4775601167901487806
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -1763805148584497553}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0.25
+  m_TransitionOffset: 0
+  m_ExitTime: 0.8636364
+  m_HasExitTime: 1
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
 --- !u!1102 &-4204913196776768448
@@ -441,7 +463,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: eca02e7a76e5f754cb693e0b4b621719, type: 2}
+  m_Motion: {fileID: 7400000, guid: dfcb0e26e7db63444a55d8fe124838d5, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -565,7 +587,7 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 5357bd22082e82d44b5c1081c7cf639e, type: 2}
+    m_Motion: {fileID: 7400000, guid: fc0720871987c874ebb1f7513038e679, type: 2}
     m_Threshold: 1
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -643,7 +665,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -6206940462687466796}
-    m_Position: {x: 210, y: 700, z: 0}
+    m_Position: {x: 210, y: 710, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7162439562971490265}
     m_Position: {x: 400, y: -340, z: 0}
@@ -679,13 +701,13 @@ AnimatorStateMachine:
     m_Position: {x: -110, y: 710, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5228648887011758242}
-    m_Position: {x: 540, y: 700, z: 0}
+    m_Position: {x: 530, y: 710, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1987810067523925323}
     m_Position: {x: 890, y: -60, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6669153180486388996}
-    m_Position: {x: 938.6478, y: 689.60376, z: 0}
+    m_Position: {x: 940, y: 690, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1763805148584497553}
     m_Position: {x: 950, y: 850, z: 0}
@@ -745,10 +767,11 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: HeavyAttackEnd(Temp)
-  m_Speed: 1
+  m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -6860008122620284039}
+  - {fileID: -4775601167901487806}
   m_StateMachineBehaviours:
   - {fileID: -6900085590441914826}
   m_Position: {x: 50, y: 50, z: 0}
@@ -759,7 +782,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 8cf8ce5946be9d84588e4ed22a007fa3, type: 2}
+  m_Motion: {fileID: 7400000, guid: 772c2ebe86b68fb4ba8e4fcf3ccd4744, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -1090,9 +1113,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.3130303
-  m_TransitionOffset: 0
-  m_ExitTime: 0.70119524
+  m_TransitionDuration: 0.36969078
+  m_TransitionOffset: 0.9443405
+  m_ExitTime: 0.7236104
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -1145,7 +1168,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: d95136d8c003c7641bde8746a7574efa, type: 2}
+  m_Motion: {fileID: 7400000, guid: 6c11064f676f1ed4ea334d86a39c5f69, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -1386,7 +1409,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: LightCombo3
-  m_Speed: 1
+  m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 2063438489341832819}
@@ -1400,7 +1423,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 2ed75379688a8794e9d4f1a94e7af62c, type: 2}
+  m_Motion: {fileID: 7400000, guid: 88cc37d07dab5af4c9b2ddc66fadbcb9, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -1526,7 +1549,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: HeavyAttackIntro(Temp)
-  m_Speed: 1
+  m_Speed: 1.4
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -5406097901912327874}
@@ -1539,7 +1562,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 80d52b55c5801c04dabc7d221bacfa4a, type: 2}
+  m_Motion: {fileID: 7400000, guid: 5346bb079487a1346b818102c319ee8f, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
