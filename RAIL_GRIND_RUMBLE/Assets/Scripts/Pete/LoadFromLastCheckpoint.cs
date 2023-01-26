@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,5 +20,10 @@ public class LoadFromLastCheckpoint : MonoBehaviour
 
         CheckpointController.lastCheckPointPosition = new Vector3(0, 0, 0);
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public void OnApplicationQuit()
+    {
+        CheckpointController.lastCheckPointPosition = new Vector3(0, 0, 0);
     }
 }
