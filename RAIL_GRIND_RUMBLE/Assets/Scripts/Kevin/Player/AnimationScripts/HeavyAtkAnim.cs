@@ -20,6 +20,7 @@ public class HeavyAtkAnim : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
      // PlayerAttack.instance.IsAttacking = false;  
+     PlayerAttack.instance.anim.ResetTrigger("HAttackEnd");
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

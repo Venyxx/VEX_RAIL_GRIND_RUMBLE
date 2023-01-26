@@ -8,6 +8,7 @@ public class Idlescript : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         PlayerAttack.instance.atkCount = 0;
+        PlayerAttack.instance.anim.ResetTrigger("HAttackEnd");
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
