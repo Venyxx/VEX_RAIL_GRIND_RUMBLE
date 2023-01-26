@@ -262,6 +262,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 676992870}
+  - {fileID: 4716377924800218965}
   m_Father: {fileID: 7024483452530975689}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -326,6 +327,62 @@ Transform:
   m_Father: {fileID: 676992870}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &124427984542231689
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4716377924800218965}
+  - component: {fileID: 3528938506951427453}
+  m_Layer: 0
+  m_Name: Right Arm Grapple
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4716377924800218965
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 124427984542231689}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1045155430}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3528938506951427453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 124427984542231689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeda7bfbf984f2a4da5ab4b8967b115d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Weight: 1
+  m_Data:
+    m_Root: {fileID: 1871490625266049277}
+    m_Mid: {fileID: 7991261776404133986}
+    m_Tip: {fileID: 5038777628451267544}
+    m_Target: {fileID: 2030071779667499559}
+    m_Hint: {fileID: 0}
+    m_TargetPositionWeight: 1
+    m_TargetRotationWeight: 1
+    m_HintWeight: 1
+    m_MaintainTargetPositionOffset: 0
+    m_MaintainTargetRotationOffset: 0
 --- !u!1 &2030071779272977632
 GameObject:
   m_ObjectHideFlags: 0
@@ -4124,6 +4181,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1304353530280516337, guid: e606cc423d70dd645bd324c595a8c70f, type: 3}
   m_PrefabInstance: {fileID: 313423128}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1871490625266049277 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -7351881411884050971, guid: e606cc423d70dd645bd324c595a8c70f, type: 3}
+  m_PrefabInstance: {fileID: 313423128}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3041122317226343623 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3041122317521881567, guid: e606cc423d70dd645bd324c595a8c70f, type: 3}
@@ -4246,6 +4308,11 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.5, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &7991261776404133986 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7991261776695512442, guid: e606cc423d70dd645bd324c595a8c70f, type: 3}
+  m_PrefabInstance: {fileID: 313423128}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &439690122
 PrefabInstance:
   m_ObjectHideFlags: 0
