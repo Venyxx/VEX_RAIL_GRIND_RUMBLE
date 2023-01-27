@@ -126,6 +126,8 @@ public class ThirdPersonMovement : MonoBehaviour
     //Sound Effects
     [SerializeField] private AudioClip[] playerSounds;
     private AudioSource audioSource;
+
+ 
         
     // Start is called before the first frame update
     void Start()
@@ -322,7 +324,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
     
 
-    void PlayerInput()
+    public void PlayerInput()
     {
         
         if (!DialogueBox.activeInHierarchy)
