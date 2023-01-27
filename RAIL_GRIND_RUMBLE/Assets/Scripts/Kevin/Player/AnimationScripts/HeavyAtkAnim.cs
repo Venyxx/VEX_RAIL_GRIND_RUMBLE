@@ -5,22 +5,32 @@ using UnityEngine;
 public class HeavyAtkAnim : StateMachineBehaviour
 {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-    //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+     
+    }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-    //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+     
+        if (PlayerAttack.instance.anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
+        {
+           
+            
+        }
+    }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-     // PlayerAttack.instance.IsAttacking = false;  
-     PlayerAttack.instance.anim.ResetTrigger("HAttackEnd");
+
+        PlayerAttack.instance.anim.ResetTrigger("HAttackEnd1");
+        PlayerAttack.instance.anim.ResetTrigger("HAttackEnd2");
+        PlayerAttack.instance.anim.ResetTrigger("HAttackEnd3");
+        PlayerAttack.instance.IsHeavyAttacking = false;
+
+
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
