@@ -1,3 +1,4 @@
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,8 +16,7 @@ public class ThrowObject : MonoBehaviour
     [SerializeField] private float throwUpwardForce;
 
     private ThirdPersonMovement thirdPersonMovement;
-    //Kevin
-    public int Damage = 0;
+
 
     // Start is called before the first frame update
     void Start()
@@ -39,7 +39,7 @@ public class ThrowObject : MonoBehaviour
 
     public void SpawnHeldObject()
     {
-        Damage = 0;
+      
         isHoldingObject = true;
         heldObjectFakeREF.SetActive(true);
     }
@@ -63,7 +63,7 @@ public class ThrowObject : MonoBehaviour
         Vector3 forceToAdd = orientation.transform.forward * throwForce + transform.up * throwUpwardForce;
         //Debug.Log($"Transform Up:{transform.up}\nOrientation Transform Forward:{orientation.transform.forward}\nThrow Force{throwForce}\nThrow Upward Force{throwUpwardForce}");
         thrownObject.gameObject.GetComponent<Rigidbody>().AddForce(forceToAdd, ForceMode.Impulse);
-        Damage = 1000;
+      
     }
 
     public void Throw(InputAction.CallbackContext context)
@@ -80,12 +80,5 @@ public class ThrowObject : MonoBehaviour
         else 
             _targeting = false;
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        IDamageable damageable;
-        if (other.TryGetComponent<IDamageable>(out damageable))
-        {
-            damageable.TakeDamage(Damage);
-        }
-    }
+    
 }

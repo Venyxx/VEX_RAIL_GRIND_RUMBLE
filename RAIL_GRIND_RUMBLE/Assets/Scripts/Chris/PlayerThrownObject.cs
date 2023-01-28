@@ -5,6 +5,8 @@ public class PlayerThrownObject : MonoBehaviour
     public bool target;
     Transform playerCurrentAim;
     GameObject playerREF;
+    //Kevin
+    public int Damage = 1000;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +29,22 @@ public class PlayerThrownObject : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") || collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             Destroy(gameObject);
+        }
+
+        
+    }
+    //kevin
+    private void OnTriggerEnter(Collider other)
+    {
+        IDamageable damageable;
+        if (other.TryGetComponent<IDamageable>(out damageable))
+        {
+            if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+            {
+                damageable.TakeDamage(Damage);
+                Debug.Log("Hit");
+            }
+            
         }
     }
 }

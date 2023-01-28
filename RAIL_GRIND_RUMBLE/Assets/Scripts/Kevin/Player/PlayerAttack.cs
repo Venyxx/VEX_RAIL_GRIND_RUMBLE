@@ -191,7 +191,7 @@ public class PlayerAttack : MonoBehaviour
             HeavyAtkTimer = 0;
         }
 
-        Debug.Log(HeavyAtkTimer);
+       // Debug.Log(HeavyAtkTimer);
 
     }
 
