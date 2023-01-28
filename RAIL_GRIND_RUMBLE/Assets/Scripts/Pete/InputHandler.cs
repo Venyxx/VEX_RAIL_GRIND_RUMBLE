@@ -188,6 +188,15 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""InfoScreen"",
+                    ""type"": ""Button"",
+                    ""id"": ""6295e6c3-61b3-4424-baa7-87f583ea638d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -641,6 +650,28 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                     ""action"": ""DialogueInput"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4b5f62ea-051e-4ee1-a899-88168f07e2ad"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InfoScreen"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cb1f7d18-2dc4-4720-a00a-46d56e7761b1"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InfoScreen"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -667,6 +698,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
         m_Player_ReloadScene = m_Player.FindAction("ReloadScene", throwIfNotFound: true);
         m_Player_BackToMenu = m_Player.FindAction("BackToMenu", throwIfNotFound: true);
         m_Player_DialogueInput = m_Player.FindAction("DialogueInput", throwIfNotFound: true);
+        m_Player_InfoScreen = m_Player.FindAction("InfoScreen", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -744,6 +776,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_ReloadScene;
     private readonly InputAction m_Player_BackToMenu;
     private readonly InputAction m_Player_DialogueInput;
+    private readonly InputAction m_Player_InfoScreen;
     public struct PlayerActions
     {
         private @InputHandler m_Wrapper;
@@ -766,6 +799,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
         public InputAction @ReloadScene => m_Wrapper.m_Player_ReloadScene;
         public InputAction @BackToMenu => m_Wrapper.m_Player_BackToMenu;
         public InputAction @DialogueInput => m_Wrapper.m_Player_DialogueInput;
+        public InputAction @InfoScreen => m_Wrapper.m_Player_InfoScreen;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -829,6 +863,9 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 @DialogueInput.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDialogueInput;
                 @DialogueInput.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDialogueInput;
                 @DialogueInput.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDialogueInput;
+                @InfoScreen.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInfoScreen;
+                @InfoScreen.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInfoScreen;
+                @InfoScreen.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInfoScreen;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -887,6 +924,9 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 @DialogueInput.started += instance.OnDialogueInput;
                 @DialogueInput.performed += instance.OnDialogueInput;
                 @DialogueInput.canceled += instance.OnDialogueInput;
+                @InfoScreen.started += instance.OnInfoScreen;
+                @InfoScreen.performed += instance.OnInfoScreen;
+                @InfoScreen.canceled += instance.OnInfoScreen;
             }
         }
     }
@@ -911,5 +951,6 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
         void OnReloadScene(InputAction.CallbackContext context);
         void OnBackToMenu(InputAction.CallbackContext context);
         void OnDialogueInput(InputAction.CallbackContext context);
+        void OnInfoScreen(InputAction.CallbackContext context);
     }
 }

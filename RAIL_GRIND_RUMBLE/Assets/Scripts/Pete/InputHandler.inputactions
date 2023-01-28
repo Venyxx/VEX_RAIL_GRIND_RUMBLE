@@ -166,6 +166,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "InfoScreen",
+                    "type": "Button",
+                    "id": "6295e6c3-61b3-4424-baa7-87f583ea638d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -617,6 +626,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "DialogueInput",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4b5f62ea-051e-4ee1-a899-88168f07e2ad",
+                    "path": "<Gamepad>/select",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "InfoScreen",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cb1f7d18-2dc4-4720-a00a-46d56e7761b1",
+                    "path": "<Keyboard>/i",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "InfoScreen",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
