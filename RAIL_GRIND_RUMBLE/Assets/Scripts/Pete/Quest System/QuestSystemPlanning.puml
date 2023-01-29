@@ -1,0 +1,52 @@
+﻿@startuml
+'https://plantuml.com/class-diagram
+
+'STILL IN PROGRESS
+
+class MonoBehaviour
+{
+//Unity MonoBehaviour//
+}
+'make sure it does not derive from monobehaviour 
+'all classes that inherit from quest need the [Serializable] attribute
+abstract class Quest
+{
++ bool isActive
+-[SerializedField] string name
+-[SerializedField] string description
+-[SerializedField] List<QuestReward> questRewards
+
+}
+
+'attaches to NPC objects, derives from monobehaviour
+class QuestGiver
+{
+-[SerializedField] Quest questToGive;
+-[SerializedField] GameObject questWindow
+-[SerializedField] TextMeshProUGUI titleText
+-[SerializedField] TextMeshProUGUI descText
+-[SerializedField] TextMeshProUGUI rewardText;
+'not sure if the player will need its own new quest script of if questing logic can go in an existing one
+- //PlayerReference// player;
++void OpenQuestWindow()
++void AcceptQuest()
+}
+
+'interface since QuestRewards need to have RewardPlayer, but that logic will be very different from Reward to Reward
+interface QuestReward
+{
+
+'a QuestReward must be able to reward the player. Depending on the type of reward, this will do various things, so this method is not implemented in the interface
++void RewardPlayer()
+
+'so that the reward can be described in the quest window'
++String ToString()
+}
+
+QuestReward "has" *-- Quest
+Quest "gives" *-- QuestGiver
+QuestGiver "inherits from"<|-- MonoBehaviour
+
+
+
+@enduml

@@ -9,3 +9,21 @@ Z
 *Assets/Scripts/Chris/PlayerThrownObject.cs,7\c\7cfd8dcd4678b0cc531c972f9ca7564d73c66017
 S
 #Assets/Scripts/Pete/InputHandler.cs,b\1\b1c4c4d9aea171deb974245a8212348777f67e19
+Y
+)Assets/Scripts/Chris/ThirdPersonCamera.cs,f\6\f6a31841a9dcbed84a8a570daf991aa3722d191b
+S
+#Assets/Scripts/Chris/GrappleHook.cs,0\a\0a398c1383cd61d3aa52c7e326a25c88314403fc
+O
+Assets/Scripts/Chris/WallRun.cs,4\e\4e716a4499fc346faeec49875ad24b782ce5c087
+[
++Assets/Scripts/Kevin/Player/PlayerHealth.cs,6\0\60fcf97351316ef10679309e1aaf28a0b3da95db
+U
+%Assets/Scripts/Vanessa/SpeedoMeter.cs,5\5\551000e5b01d93af3e5069952b031d9de1a1d89e
+S
+#Assets/Scripts/Chris/ThrowObject.cs,9\2\92b913e5d1aa36b296e257fc40d4ecd404ac367d
+[
++Assets/Scripts/Kevin/Player/PlayerAttack.cs,b\7\b771c517414db2640ca3f059364a3dcc31f9fec2
+U
+%Assets/Scripts/Pete/CoinController.cs,1\b\1b4be58cbcf90ba24e0767dbd3313178ecf6768a
+[
++Assets/Scripts/Chris/ThirdPersonMovement.cs,8\4\8445679af98e6402112b143daf7322eef94103e8

@@ -2,11 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class TestCoin : MonoBehaviour
+public class CoinController : MonoBehaviour
 {
     [SerializeField] private float speed;
-     public int Health = 5;
+     [FormerlySerializedAs("Health")] public int health = 5;
     
     void Update()
     {
@@ -24,7 +25,7 @@ public class TestCoin : MonoBehaviour
 
         if (other.TryGetComponent<IDamageable>(out damageable))
         {
-            damageable.GainHealth(Health);
+            damageable.GainHealth(health);
         }
             Destroy(gameObject);
         }
