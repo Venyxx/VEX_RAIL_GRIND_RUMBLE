@@ -18,6 +18,7 @@ public class DialogueManager : MonoBehaviour
     private ThirdPersonMovement thirdPersonControllerREF;
 
     [SerializeField] private GameObject talkPrompt;
+    private GameObject model;
     
     // Start is called before the first frame update
     void Start()
@@ -35,6 +36,31 @@ public class DialogueManager : MonoBehaviour
         
     }
 
+    void GetNearestNPC()
+    {
+        GameObject[] NPCs = GameObject.FindGameObjectsWithTag("NPC Model");
+        float oldDistance = float.MaxValue;
+        foreach (GameObject npc in NPCs)
+        {
+            float dist;
+            if (model != null)
+            {
+                dist = Vector3.Distance(thirdPersonControllerREF.gameObject.transform.position, model.transform.position);
+                if (dist < oldDistance)
+                {
+                    model = npc;
+                    oldDistance = dist;
+                }
+            }
+            else
+            {
+                model = npc;
+            }
+
+            
+        }
+    }
+
     public void StartDialogue(DialogueTemplate dialogue)
     {
         if (dialogue == null) return;
@@ -43,6 +69,10 @@ public class DialogueManager : MonoBehaviour
         talkPrompt.SetActive(false);
         isBoxActive = true;
         talkingToName.text = dialogue.name;
+        GetNearestNPC();
+        model.transform.LookAt(thirdPersonControllerREF.gameObject.transform);
+        thirdPersonControllerREF.gameObject.transform.LookAt(model.transform);
+        
 
         paragraphDisplayed.Clear();
 

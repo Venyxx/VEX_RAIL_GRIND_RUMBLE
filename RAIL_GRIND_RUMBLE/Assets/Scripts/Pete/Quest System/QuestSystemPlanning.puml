@@ -5,48 +5,69 @@
 
 class MonoBehaviour
 {
-//Unity MonoBehaviour//
+    //Unity MonoBehaviour//
 }
-'make sure it does not derive from monobehaviour 
-'all classes that inherit from quest need the [Serializable] attribute
+
 abstract class Quest
 {
-+ bool isActive
--[SerializedField] string name
--[SerializedField] string description
--[SerializedField] List<QuestReward> questRewards
-
+    +bool isActive
+    +bool isComplete
+    #[SerializedField] string name
+    #[SerializedField] string description
+    #[SerializedField] List<QuestReward> questRewards
+    //make sure it does not derive from monobehaviour//
+    //all classes that inherit from quest need the [Serializable] attribute//
 }
 
-'attaches to NPC objects, derives from monobehaviour
+class CountQuest
+{
+    -[SerializedField] int currentCount
+    -[SerializedField] int completionCount
+    
+    +void checkWin() //sets isComplete to true if currentCount == completionCount// 
+}
+
+enum CountQuestTypes
+{
+    Grind, Graffiti, SpeedMeter, Coins
+}
+
+
+
+class RivalQuest
+{
+    //rival quests will need their own unique logic and AI//
+}
+
+
 class QuestGiver
 {
--[SerializedField] Quest questToGive;
--[SerializedField] GameObject questWindow
--[SerializedField] TextMeshProUGUI titleText
--[SerializedField] TextMeshProUGUI descText
--[SerializedField] TextMeshProUGUI rewardText;
-'not sure if the player will need its own new quest script of if questing logic can go in an existing one
-- //PlayerReference// player;
-+void OpenQuestWindow()
-+void AcceptQuest()
+    //attaches to NPC objects, derives from monobehaviour//
+    -[SerializedField] Quest questToGive;
+    -[SerializedField] GameObject questWindow
+    -[SerializedField] TextMeshProUGUI titleText
+    -[SerializedField] TextMeshProUGUI descText
+    -[SerializedField] TextMeshProUGUI rewardText;
+    //not sure if the player will need its own new quest script of if questing logic can go in an existing one//
+    - //PlayerReference// player;
+    +void OpenQuestWindow()
+    +void AcceptQuest()
+    +void CompleteQuest
 }
 
-'interface since QuestRewards need to have RewardPlayer, but that logic will be very different from Reward to Reward
+
 interface QuestReward
 {
-
-'a QuestReward must be able to reward the player. Depending on the type of reward, this will do various things, so this method is not implemented in the interface
-+void RewardPlayer()
-
-'so that the reward can be described in the quest window'
-+String ToString()
+    //interface since QuestRewards need to have RewardPlayer but that logic will vary from reward to reward//
+    +void RewardPlayer()
+    +String ToString() //so that the reward can be described in text in the quest window//
 }
 
 QuestReward "has" *-- Quest
 Quest "gives" *-- QuestGiver
 QuestGiver "inherits from"<|-- MonoBehaviour
-
-
+CountQuest "inherits from"<|-- Quest
+RivalQuest "inherits from"<|-- Quest
+CountQuest "has" *-- CountQuestTypes
 
 @enduml

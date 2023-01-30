@@ -8,8 +8,8 @@ public class DialogueTrigger : MonoBehaviour
     public DialogueTemplate dialogue;
     [SerializeField] private GameObject talkPrompt;
     private ThirdPersonMovement thirdPersonControllerREF;
-    
-    
+
+
     void Start()
     {
         //Debug.Log(gameObject.name);
