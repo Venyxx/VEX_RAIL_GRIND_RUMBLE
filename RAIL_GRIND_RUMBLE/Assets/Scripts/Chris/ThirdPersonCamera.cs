@@ -95,10 +95,6 @@ public class ThirdPersonCamera : MonoBehaviour
         float horizontalInput = moveInput.x;
         float verticalInput = moveInput.y;
 
-        //Vector3 direction = new Vector3(horizontalInput, 0f, verticalInput).normalized;
-
-        //if (direction.magnitude >= 0.1f)
-        //{
             //Rotate Orientation
             Vector3 viewDir = player.position - new Vector3(transform.position.x, player.position.y, transform.position.z);
             
@@ -109,10 +105,15 @@ public class ThirdPersonCamera : MonoBehaviour
                 //Rotate Player Object
                 Vector3 inputDir = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-                if (inputDir != Vector3.zero)
+                if (inputDir != Vector3.zero )
                 {
                     playerTransform.forward = Vector3.Slerp(playerTransform.forward, inputDir.normalized, Time.deltaTime * rotationSpeed);
                 }
+                else if (inputDir == Vector3.zero && playerPrefabREF.GetComponent<Rigidbody>().velocity.magnitude > 1) // added so that you can control direction with RTS while sliding
+                {   
+                   playerTransform.forward = Vector3.Slerp(playerTransform.forward, viewDir.normalized, Time.deltaTime * rotationSpeed);
+                }
+                
             } else if (currentStyle == CameraStyle.Aiming) {
                 if (transform != null)
                 {
@@ -123,9 +124,8 @@ public class ThirdPersonCamera : MonoBehaviour
                 
             }
             
-        //}
         
-    }
+        }
 
     public void Look(InputAction.CallbackContext context)
     {
