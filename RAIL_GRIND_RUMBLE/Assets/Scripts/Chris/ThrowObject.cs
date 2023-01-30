@@ -68,7 +68,7 @@ public class ThrowObject : MonoBehaviour
 
     public void Throw(InputAction.CallbackContext context)
     {
-        if ((!(context.started && isHoldingObject)) || thirdPersonMovement.DialogueBox.activeInHierarchy) return;
+        if ((!(context.started && isHoldingObject)) || thirdPersonMovement.dialogueBox.activeInHierarchy) return;
         ThrowObjectAction();
         gameObject.GetComponent<ThirdPersonMovement>().PlaySound(2);
     }

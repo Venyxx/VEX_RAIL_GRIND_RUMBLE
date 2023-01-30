@@ -88,7 +88,7 @@ public class ThirdPersonCamera : MonoBehaviour
         }
 
         Vector2 moveInput = new Vector2(0, 0);
-        if (!_thirdPersonMovement.DialogueBox.activeInHierarchy)
+        if (!_thirdPersonMovement.dialogueBox.activeInHierarchy)
         {
             moveInput = playerActions.Player.Move.ReadValue<Vector2>();
         }

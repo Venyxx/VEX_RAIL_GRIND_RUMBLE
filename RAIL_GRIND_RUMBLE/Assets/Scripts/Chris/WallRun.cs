@@ -120,7 +120,7 @@ public class WallRun : MonoBehaviour
         //ensures that the method doesn't get called one for a press, once every frame held, and once when released
         if (!context.started) return;
         if (!isWallRunning) return;
-        if (playerScript.DialogueBox.activeInHierarchy) return;
+        if (playerScript.dialogueBox.activeInHierarchy) return;
         Debug.Log("Wall jump input detected");
         WallJump();
     }

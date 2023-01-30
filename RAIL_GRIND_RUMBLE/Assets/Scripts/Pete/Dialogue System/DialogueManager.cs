@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
-using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 { 
@@ -12,8 +11,7 @@ public class DialogueManager : MonoBehaviour
     public GameObject dialogueBox;
     private Queue<string> paragraphDisplayed;
     private bool isBoxActive = false;
-    [SerializeField]
-    private float textSpeed = 0.1f;
+    [SerializeField] private float textSpeed = 0.1f;
 
     private ThirdPersonMovement thirdPersonControllerREF;
 
@@ -29,49 +27,25 @@ public class DialogueManager : MonoBehaviour
         dialogueBox.SetActive(false);
         thirdPersonControllerREF = FindObjectOfType<ThirdPersonMovement>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    void GetNearestNPC()
-    {
-        GameObject[] NPCs = GameObject.FindGameObjectsWithTag("NPC Model");
-        float oldDistance = float.MaxValue;
-        foreach (GameObject npc in NPCs)
-        {
-            float dist;
-            if (model != null)
-            {
-                dist = Vector3.Distance(thirdPersonControllerREF.gameObject.transform.position, model.transform.position);
-                if (dist < oldDistance)
-                {
-                    model = npc;
-                    oldDistance = dist;
-                }
-            }
-            else
-            {
-                model = npc;
-            }
-
-            
-        }
-    }
+    
 
     public void StartDialogue(DialogueTemplate dialogue)
     {
-        if (dialogue == null) return;
+        if (dialogue == null || dialogue.dialogueTrigger == null|| !thirdPersonControllerREF.isWalking) return;
         
         dialogueBox.SetActive(true);
         talkPrompt.SetActive(false);
         isBoxActive = true;
         talkingToName.text = dialogue.name;
-        GetNearestNPC();
+        model = dialogue.dialogueTrigger.npcModel;
         model.transform.LookAt(thirdPersonControllerREF.gameObject.transform);
-        thirdPersonControllerREF.gameObject.transform.LookAt(model.transform);
+        foreach (Transform childObject in thirdPersonControllerREF.transform)
+        {
+            if (childObject.name.Equals("AriRig"))
+            {
+                childObject.transform.LookAt(model.gameObject.transform);
+            }
+        }
         
 
         paragraphDisplayed.Clear();
@@ -96,8 +70,6 @@ public class DialogueManager : MonoBehaviour
         {
             DisplayNextParagraph();
         }
-        
- 
     }
 
     public void DisplayNextParagraph ()

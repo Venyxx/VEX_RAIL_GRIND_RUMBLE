@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -67,7 +64,7 @@ public class PlayerAttack : MonoBehaviour
             || movementScriptREF.isWalking ||
             GameObject.Find("AimingCam") ||
             movementScriptREF.Grounded == false ||
-            movementScriptREF.DialogueBox.activeInHierarchy
+            movementScriptREF.dialogueBox.activeInHierarchy
             //||movementScriptREF.nearestDialogueTemplate != null
             )
         {
@@ -105,7 +102,7 @@ public class PlayerAttack : MonoBehaviour
             movementScriptREF.isWalking ||
             GameObject.Find("AimingCam") ||
             movementScriptREF.Grounded == false ||
-            movementScriptREF.DialogueBox.activeInHierarchy)
+            movementScriptREF.dialogueBox.activeInHierarchy)
         {
 
             return;

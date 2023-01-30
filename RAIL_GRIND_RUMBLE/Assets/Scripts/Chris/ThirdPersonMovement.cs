@@ -1,11 +1,7 @@
 using System.Collections;
-using System;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEditor;
 using TMPro;
-using UnityEngine.PlayerLoop;
 
 public class ThirdPersonMovement : MonoBehaviour
 {
@@ -58,7 +54,7 @@ public class ThirdPersonMovement : MonoBehaviour
     Vector3 moveDirection;
     Vector3 skateDirection;
 
-    public GameObject DialogueBox { get; private set; }
+    public GameObject dialogueBox { get; private set; }
     public DialogueTemplate nearestDialogueTemplate = null;
 
 
@@ -177,7 +173,7 @@ public class ThirdPersonMovement : MonoBehaviour
         //Audio
         audioSource = GetComponent<AudioSource>();
         
-        DialogueBox = GameObject.FindWithTag("DialogueBox");
+        dialogueBox = GameObject.FindWithTag("DialogueBox");
     }
 
     // Update is called once per frame
@@ -252,7 +248,7 @@ public class ThirdPersonMovement : MonoBehaviour
     
     public void Jump(InputAction.CallbackContext context)
     {
-        if (isWalking || DialogueBox.activeInHierarchy) return;
+        if (isWalking || dialogueBox.activeInHierarchy) return;
         //if (isGrappling) return;
         
         if (context.started && Grounded)
@@ -277,7 +273,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
     public void ToggleWalk(InputAction.CallbackContext context)
     {
-        if (!context.started || DialogueBox.activeInHierarchy) return;
+        if (!context.started || dialogueBox.activeInHierarchy) return;
         isWalking = !isWalking;
         WalkToggleHelper();
     }
@@ -325,7 +321,7 @@ public class ThirdPersonMovement : MonoBehaviour
     void PlayerInput()
     {
         
-        if (!DialogueBox.activeInHierarchy)
+        if (!dialogueBox.activeInHierarchy)
         {
             moveInput = playerActions.Player.Move.ReadValue<Vector2>();
             horizontalInput = moveInput.x/2;
@@ -396,7 +392,7 @@ public class ThirdPersonMovement : MonoBehaviour
         
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-        if (verticalInput != 0 && horizontalInput != 0 && !DialogueBox.activeInHierarchy)
+        if (verticalInput != 0 && horizontalInput != 0 && !dialogueBox.activeInHierarchy)
             skateDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
         else 
             skateDirection = orientation.forward;
@@ -406,7 +402,7 @@ public class ThirdPersonMovement : MonoBehaviour
             rigidBody.velocity = new Vector3(moveDirection.normalized.x * walkSpeed * 10f, rigidBody.velocity.y, moveDirection.normalized.z * walkSpeed * 10f);
 
             //change anim
-            if ((moveInput.x != 0 || moveInput.y != 0) && !DialogueBox.activeInHierarchy)
+            if ((moveInput.x != 0 || moveInput.y != 0) && !dialogueBox.activeInHierarchy)
                 _animator.SetBool(_animIDWalking, true);
             else
                 _animator.SetBool(_animIDWalking, false);
@@ -572,7 +568,7 @@ public class ThirdPersonMovement : MonoBehaviour
     //Camera Switch
     public void SwitchCameraTPM(InputAction.CallbackContext context)
     {
-        if (context.performed || DialogueBox.activeInHierarchy) return;
+        if (context.performed || dialogueBox.activeInHierarchy) return;
         
         if (!isWalking)
         {

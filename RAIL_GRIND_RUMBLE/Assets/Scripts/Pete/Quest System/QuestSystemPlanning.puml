@@ -21,7 +21,7 @@ abstract class Quest
 
 class CountQuest
 {
-    -[SerializedField] int currentCount
+    -int currentCount
     -[SerializedField] int completionCount
     
     +void checkWin() //sets isComplete to true if currentCount == completionCount// 
@@ -29,7 +29,7 @@ class CountQuest
 
 enum CountQuestTypes
 {
-    Grind, Graffiti, SpeedMeter, Coins
+    GrindTime, Graffiti, SpeedMeter, Coins, Enemies
 }
 
 
@@ -52,7 +52,7 @@ class QuestGiver
     - //PlayerReference// player;
     +void OpenQuestWindow()
     +void AcceptQuest()
-    +void CompleteQuest
+    +void CompleteQuest()
 }
 
 
@@ -63,6 +63,8 @@ interface QuestReward
     +String ToString() //so that the reward can be described in text in the quest window//
 }
 
+QuestReward "has" *-- CountQuest
+QuestReward "has" *-- RivalQuest
 QuestReward "has" *-- Quest
 Quest "gives" *-- QuestGiver
 QuestGiver "inherits from"<|-- MonoBehaviour
