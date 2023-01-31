@@ -38,7 +38,7 @@ public class PlayerAttack : MonoBehaviour
         Timer();
         if (HeavyAtkTimer >= 3 && IsHeavyAttacking)
         {
-            Debug.Log("BugCheck1");
+           // Debug.Log("BugCheck1");
             anim.SetTrigger("HAttackEnd2");
             TimerOn = false;
            // IsHeavyAttacking = false;
@@ -46,7 +46,7 @@ public class PlayerAttack : MonoBehaviour
             Damage = 50;
         
         }
-        if (!IsAttacking)
+        if (!IsAttacking && atkCount == 0)
         {
             if (!IsHeavyAttacking) 
             {
@@ -119,7 +119,7 @@ public class PlayerAttack : MonoBehaviour
 
         if (context.ReadValueAsButton() == true && !IsHeavyAttacking && atkCount == 0)
         {
-            Debug.Log("Key Press");
+        //    Debug.Log("Key Press");
             anim.SetTrigger("HAttackStart");
             TimerOn = true;
             IsHeavyAttacking = true;
@@ -132,10 +132,10 @@ public class PlayerAttack : MonoBehaviour
         if (context.ReadValueAsButton() == false && IsHeavyAttacking)
         {
            
-            Debug.Log("Key Release");
+           // Debug.Log("Key Release");
             if (HeavyAtkTimer >= 1 && HeavyAtkTimer <= 1.9)
             {
-                Debug.Log("BugCheck2");
+             //   Debug.Log("BugCheck2");
                 anim.SetTrigger("HAttackEnd2");
             //    IsHeavyAttacking = false;
                 HeavyAtkTimer = 0;
@@ -144,7 +144,7 @@ public class PlayerAttack : MonoBehaviour
             }
             if (HeavyAtkTimer < 1)
             {
-                Debug.Log("BugCheck3");
+             //   Debug.Log("BugCheck3");
                 anim.SetTrigger("HAttackEnd1");
              //   IsHeavyAttacking = false;
                 HeavyAtkTimer = 0;
@@ -153,7 +153,7 @@ public class PlayerAttack : MonoBehaviour
             }
             if (HeavyAtkTimer >= 2)
             {
-                Debug.Log("BugCheck4");
+            //    Debug.Log("BugCheck4");
                 anim.SetTrigger("HAttackEnd3");
               //  IsHeavyAttacking = false;
                 HeavyAtkTimer = 0;

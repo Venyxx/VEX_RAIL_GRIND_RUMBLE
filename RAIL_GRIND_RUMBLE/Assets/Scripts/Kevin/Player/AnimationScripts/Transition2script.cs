@@ -16,7 +16,7 @@ public class Transition2script : StateMachineBehaviour
          if (PlayerAttack.instance.IsAttacking)
         {
             PlayerAttack.instance.anim.Play("LightCombo3");
-            PlayerAttack.instance.Damage = 40;
+           // PlayerAttack.instance.Damage = 40;
             
         }      
     }
