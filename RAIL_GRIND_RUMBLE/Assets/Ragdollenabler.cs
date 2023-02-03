@@ -7,7 +7,7 @@ public class Ragdollenabler : MonoBehaviour
     [SerializeField]
     private Transform RagdollRoot;
     [SerializeField]
-    private bool StartRagdoll = false;
+    public bool StartRagdoll = false;
     // Only public for Ragdoll Runtime GUI for explosive force
     public Rigidbody[] Rigidbodies;
     private CharacterJoint[] Joints;
@@ -39,6 +39,8 @@ public class Ragdollenabler : MonoBehaviour
     }
     public void EnableRagdoll()
     {
+        
+        StartRagdoll = false;
         Animator.enabled = false;
         foreach (CharacterJoint joint in Joints)
         {
@@ -54,6 +56,7 @@ public class Ragdollenabler : MonoBehaviour
             rigidbody.detectCollisions = true;
             rigidbody.useGravity = true;
         }
+       // StartRagdoll = false;
     }
 
     public void EnableAnimator()

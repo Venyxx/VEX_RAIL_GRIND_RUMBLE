@@ -10,6 +10,7 @@ public class Enemy : PoolableObject, IDamageable
     public EnemyScriptableObject EnemyScriptableObject;
     public float Health = 100;
     public Animator Animator;
+    public Ragdollenabler Ragdoll;
 
     private Coroutine LookCoroutine;
     private const string ATTACK_TRIGGER = "Attack";
@@ -17,14 +18,35 @@ public class Enemy : PoolableObject, IDamageable
 
     //Added for Chris - Removes enemies from Aim Points list upon death
     GameObject grappleDetectorREF;
+    float DespawnTimer;
+    bool TimerOn;
 
     private void Awake()
     {
         AttackRadius.OnAttack += OnAttack;
         //Added for Chris
 	    grappleDetectorREF = GameObject.Find("GrappleDetector");
+        
     }
 
+    void Start()
+    {
+        DespawnTimer = 0;
+
+    }
+
+    void Update()
+    {
+        
+        Timer();
+        if (DespawnTimer >= 3)
+        {
+            Debug.Log("it happened");
+            gameObject.SetActive(false);
+            TimerOn = false;
+        }
+        
+    }
     private void OnAttack(IDamageable Target)
     {
         Animator.SetTrigger(ATTACK_TRIGGER);
@@ -85,20 +107,65 @@ public class Enemy : PoolableObject, IDamageable
         Health -= Damage;
         if (Health <= 0)
         {
-             Animator.SetTrigger(DEATH_TRIGGER);
-           
+            TimerOn = true;
+            Animator.SetTrigger(DEATH_TRIGGER);
+            Ragdoll.StartRagdoll = true;
+            Movement.activated = false;
+            // StopCoroutine(LookCoroutine);
+
             //Added for Chris 
             //(commenting out for now since we're reworking how enemy grappling works)
-			//grappleDetectorREF.gameObject.GetComponent<GrappleDetection>().RemovePoint(GetComponent<Transform>());
-             gameObject.SetActive(false);
+            //grappleDetectorREF.gameObject.GetComponent<GrappleDetection>().RemovePoint(GetComponent<Transform>());
+
+            // LookCoroutine = StartCoroutine(Death());
         }
     }
     public void GainHealth (float GainHealth)
     {
+    
         
     }
     public Transform GetTransform()
     {
         return transform;
+    }
+
+    private IEnumerator Death()
+    {
+        Debug.Log("BugCheck1");
+        float time = 0;
+        while (time < 3)
+        {
+            Debug.Log("BugCheck2");
+            Ragdoll.EnableRagdoll();
+            time += Time.deltaTime;
+            yield return null;
+        }
+        if (time == 3)
+        {
+           
+            
+        }
+        if (time == .01)
+        {
+            Debug.Log("BugCheck4");
+            
+        }
+    }
+
+    private void Timer()
+    {
+        if (TimerOn)
+        {
+          DespawnTimer += Time.deltaTime;
+            Debug.Log(DespawnTimer);
+        }
+        if (!TimerOn)
+        {
+           // DespawnTimer = 0;
+        }
+
+        
+
     }
 }

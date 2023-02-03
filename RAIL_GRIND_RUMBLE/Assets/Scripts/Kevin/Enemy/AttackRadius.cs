@@ -14,6 +14,7 @@ public class AttackRadius : MonoBehaviour
     protected Coroutine AttackCoroutine;
     public bool IsSharpShooter = false;
     public EnemyMovement Movement;
+    public Enemy enemy;
 
     protected virtual void Awake()
     {
@@ -25,30 +26,33 @@ public class AttackRadius : MonoBehaviour
         IDamageable damageable = other.GetComponent<IDamageable>();
         if (damageable != null)
         {
-            
+
             Damageables.Add(damageable);
-            if (AttackCoroutine == null)
+            if (enemy.Health > 0)
             {
-              // if (IsSharpShooter == false)
-              // {
-                 AttackCoroutine = StartCoroutine(Attack());
-                //}
-                //if (IsSharpShooter == true)
-               // { 
-                //    if (Movement.HasHidden == false)
-                 //  {
-                  //     
-                   //    Movement.startHiding(other.transform);
-                   //AttackCoroutine = Movement.FollowCoroutine;
-                   //}
-                   //if (Movement.HasHidden == true)
-                   //{
-                     //   Movement.FollowCoroutine = AttackCoroutine ;
-                                         
-                     
-                      // AttackCoroutine = StartCoroutine(Attack());
-                   //}
-               // }
+                if (AttackCoroutine == null)
+                {
+                    // if (IsSharpShooter == false)
+                    // {
+                    AttackCoroutine = StartCoroutine(Attack());
+                    //}
+                    //if (IsSharpShooter == true)
+                    // { 
+                    //    if (Movement.HasHidden == false)
+                    //  {
+                    //     
+                    //    Movement.startHiding(other.transform);
+                    //AttackCoroutine = Movement.FollowCoroutine;
+                    //}
+                    //if (Movement.HasHidden == true)
+                    //{
+                    //   Movement.FollowCoroutine = AttackCoroutine ;
+
+
+                    // AttackCoroutine = StartCoroutine(Attack());
+                    //}
+                    // }
+                }
             }
         }
     }
