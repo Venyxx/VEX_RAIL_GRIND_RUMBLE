@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,24 +13,64 @@ public class DialogueManager : MonoBehaviour
     private Queue<string> paragraphDisplayed;
     private bool isBoxActive = false;
     [SerializeField] private float textSpeed = 0.1f;
+    [SerializeField] private float npcRotationSpeed = 5;
 
     private ThirdPersonMovement thirdPersonControllerREF;
 
     [SerializeField] private GameObject talkPrompt;
-    private GameObject model;
+    private GameObject npcModel;
+    private GameObject ariRig;
+    private bool rotatingNPC;
+    private bool rotatingBack;
     
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         paragraphDisplayed = new Queue<string>();
         textComponent.text = string.Empty;
         talkingToName.text = string.Empty;
         dialogueBox.SetActive(false);
         thirdPersonControllerREF = FindObjectOfType<ThirdPersonMovement>();
+        ariRig = GetAriRig();
     }
     
+    private void Update()
+    {
+        if (rotatingNPC && npcModel != null)
+        {
+            RotateNPC();
+        }
+    }
+    
+    //returns AriRig so we don't have to SerializeField or use tags; more performant than GameObject.Find()
+    private GameObject GetAriRig()
+    {
+        foreach (Transform childTransform in thirdPersonControllerREF.transform)
+        {
+            if (childTransform.name.Equals("AriRig"))
+            {
+                return childTransform.gameObject;
+            }
+        }
+        throw new Exception("Ari Model not named 'AriRig'; could not find model. Change model name to 'AriRig'");
+    }
 
-    public void StartDialogue(DialogueTemplate dialogue)
+    //rotating ariadna causes some bugginess when you finish walking. ask vanessa for help
+    private void RotateNPC()
+    {
+        Vector3 lookDirectionNPC = thirdPersonControllerREF.gameObject.transform.position - npcModel.transform.position;
+        Vector3 lookDirectionAri = npcModel.transform.position - thirdPersonControllerREF.gameObject.transform.position;
+        lookDirectionNPC.y = 0;
+        lookDirectionAri.y = 0;
+        lookDirectionNPC.Normalize();
+        lookDirectionAri.Normalize();
+        
+        npcModel.transform.rotation = Quaternion.Slerp(npcModel.transform.rotation, Quaternion.LookRotation(lookDirectionNPC), npcRotationSpeed * Time.deltaTime);
+        ariRig.transform.rotation = Quaternion.Slerp(ariRig.transform.rotation, Quaternion.LookRotation(lookDirectionAri), npcRotationSpeed * Time.deltaTime); //comment out this line to stop ari from rotating
+    }
+    
+    
+    private void StartDialogue(DialogueTemplate dialogue)
     {
         if (dialogue == null || dialogue.dialogueTrigger == null|| !thirdPersonControllerREF.isWalking) return;
         
@@ -37,17 +78,9 @@ public class DialogueManager : MonoBehaviour
         talkPrompt.SetActive(false);
         isBoxActive = true;
         talkingToName.text = dialogue.name;
-        model = dialogue.dialogueTrigger.npcModel;
-        model.transform.LookAt(thirdPersonControllerREF.gameObject.transform);
-        foreach (Transform childObject in thirdPersonControllerREF.transform)
-        {
-            if (childObject.name.Equals("AriRig"))
-            {
-                childObject.transform.LookAt(model.gameObject.transform);
-            }
-        }
+        npcModel = dialogue.dialogueTrigger.npcModel;
+        rotatingNPC = true;
         
-
         paragraphDisplayed.Clear();
 
         foreach (string paragraph in dialogue.paragraphs)
@@ -57,7 +90,8 @@ public class DialogueManager : MonoBehaviour
 
         DisplayNextParagraph();
     }
-
+    
+    //inputactions method
     public void DialogueInput(InputAction.CallbackContext context)
     {
         if (!context.started) return;
@@ -72,7 +106,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public void DisplayNextParagraph ()
+    private void DisplayNextParagraph ()
     {
         if (paragraphDisplayed.Count == 0)
         {
@@ -85,7 +119,7 @@ public class DialogueManager : MonoBehaviour
         StartCoroutine(TypeParagraph(paragraph));
     }
 
-    IEnumerator TypeParagraph(string paragraph)
+    private IEnumerator TypeParagraph(string paragraph)
     {
         textComponent.text = "";
         foreach (char c in paragraph.ToCharArray())
@@ -96,30 +130,11 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    void EndDialogue()
+    private void EndDialogue()
     {
         dialogueBox.SetActive(false);
         isBoxActive = false;
         thirdPersonControllerREF.nearestDialogueTemplate = null;
+        rotatingNPC = false;
     }
-
-
-    /* FROM THE ORIGINAL DIALOGUEBOX SCRIPT THAT PETE HELPED ME CHANGE
-     * 
-     public void DialogueInput(InputAction.CallbackContext context)
-    {
-        if(!context.started) return;
-
-        if (textComponent.text == lines[conversationIndex])
-        {
-            NextLine();
-        }
-        else
-        {
-            StopAllCoroutines();
-            textComponent.text = lines[conversationIndex];
-        }
-    
-    }
-     */
 }
