@@ -267,17 +267,6 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""6e8b769b-8dfe-4f4c-993b-c52080959925"",
-                    ""path"": ""<Gamepad>/leftStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
                     ""name"": ""WASD"",
                     ""id"": ""50ac7999-389e-4ef5-973c-60cb02dcc9d1"",
                     ""path"": ""2DVector"",
@@ -331,6 +320,17 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6e8b769b-8dfe-4f4c-993b-c52080959925"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
@@ -400,17 +400,6 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""c1f2493e-70b8-4116-a181-f40421d547ab"",
-                    ""path"": ""<Gamepad>/leftStickPress"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Switch Mode"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""fe8e876b-27ae-4625-ade0-756e61f9619a"",
                     ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
@@ -422,12 +411,12 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""72ebcf71-b5c1-41e8-8777-1a13ffd446f8"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
-                    ""interactions"": ""Press"",
+                    ""id"": ""c1f2493e-70b8-4116-a181-f40421d547ab"",
+                    ""path"": ""<Gamepad>/leftStickPress"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""HeavyAttack"",
+                    ""action"": ""Switch Mode"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -444,12 +433,12 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""0b216fc7-180f-45b3-8e64-e5e4b63fdca4"",
-                    ""path"": ""<Gamepad>/buttonWest"",
-                    ""interactions"": """",
+                    ""id"": ""72ebcf71-b5c1-41e8-8777-1a13ffd446f8"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""LightAttack"",
+                    ""action"": ""HeavyAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -466,12 +455,12 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""f7b26978-2d58-41ce-a033-1eb719474b14"",
-                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""id"": ""0b216fc7-180f-45b3-8e64-e5e4b63fdca4"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""GraffitiDown"",
+                    ""action"": ""LightAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -488,12 +477,12 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""ccd49abb-8a34-4c56-b257-23a068f63c49"",
-                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""id"": ""f7b26978-2d58-41ce-a033-1eb719474b14"",
+                    ""path"": ""<Gamepad>/dpad/down"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""GraffitiLeft"",
+                    ""action"": ""GraffitiDown"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -510,12 +499,12 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""33914a71-cc5e-4958-b2fa-d7354e2b918d"",
-                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""id"": ""ccd49abb-8a34-4c56-b257-23a068f63c49"",
+                    ""path"": ""<Gamepad>/dpad/left"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""GraffitiRight"",
+                    ""action"": ""GraffitiLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -532,8 +521,19 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""1e9d92bc-dc63-47a7-8585-f48b148bdb22"",
-                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""id"": ""33914a71-cc5e-4958-b2fa-d7354e2b918d"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GraffitiRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ab3a05eb-97c4-4c27-821a-27a265f02646"",
+                    ""path"": ""<Keyboard>/1"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -543,8 +543,8 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""ab3a05eb-97c4-4c27-821a-27a265f02646"",
-                    ""path"": ""<Keyboard>/1"",
+                    ""id"": ""1e9d92bc-dc63-47a7-8585-f48b148bdb22"",
+                    ""path"": ""<Gamepad>/dpad/up"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
