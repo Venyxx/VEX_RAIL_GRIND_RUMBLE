@@ -32,6 +32,13 @@ public class KeyRebinder : MonoBehaviour
 
     private void RebindComplete()
     {
+       
+        int bindingIndex = jumpAction.action.GetBindingIndexForControl(jumpAction.action.controls[0]);
+        
+        bindingDisplayNameText.text = InputControlPath.ToHumanReadableString(
+            jumpAction.action.bindings[bindingIndex].effectivePath,
+            InputControlPath.HumanReadableStringOptions.OmitDevice);
+        
         rebindingOperation.Dispose();
         
         jumpAction.action.Enable();
