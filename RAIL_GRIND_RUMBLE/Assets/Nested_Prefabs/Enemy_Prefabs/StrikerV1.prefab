@@ -63,6 +63,7 @@ MonoBehaviour:
   AttackDelay: 0.5
   IsSharpShooter: 0
   Movement: {fileID: 1495312388888140238}
+  enemy: {fileID: 1495312388888140239}
 --- !u!1 &1495312389010500589
 GameObject:
   m_ObjectHideFlags: 0
@@ -278,6 +279,8 @@ MonoBehaviour:
   UpdateFrequency: 0.25
   HasHidden: 0
   Attack: {fileID: 6050432086328859695}
+  enemy: {fileID: 1495312388888140239}
+  activated: 0
 --- !u!114 &1495312388888140239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -296,6 +299,7 @@ MonoBehaviour:
   EnemyScriptableObject: {fileID: 11400000, guid: 3c9acd3ddbe3865468558cf66e5197bb, type: 2}
   Health: 100
   Animator: {fileID: 5823354347041916475}
+  Ragdoll: {fileID: 1742402826431431499}
 --- !u!1001 &124447421025074090
 PrefabInstance:
   m_ObjectHideFlags: 0

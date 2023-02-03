@@ -28,10 +28,11 @@ public class EnemyMovement : MonoBehaviour
     private Collider[] Colliders = new Collider[10]; // more is less performant, but more options
     public bool HasHidden = false;
     public AttackRadius Attack;
+    public Enemy enemy;
 
     private const string IsWalking = "IsWalking";
 
-    private bool activated = false;
+    public bool activated = false;
 
     private void Awake ()
     {
@@ -44,11 +45,17 @@ public class EnemyMovement : MonoBehaviour
     private void Update()
     {
         Animator.SetBool(IsWalking, Agent.velocity.magnitude > 0.01f);
-        if (Vector3.Distance(Player.position, transform.position) < activationDistance && !activated)
+        if (Vector3.Distance(Player.position, transform.position) < activationDistance && !activated && enemy.Health >1)
         {
             Debug.Log("Player is within range, chasing the player");
             StartCoroutine(Activate());
             activated = true;
+        }
+       
+        if (enemy.Health <=0)
+        {
+            Debug.Log("BugCheck1");
+            StopAllCoroutines ();
         }
     }
 
