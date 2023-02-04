@@ -55,6 +55,7 @@ public class EnemyMovement : MonoBehaviour
         if (enemy.Health <=0)
         {
             Debug.Log("BugCheck1");
+           
             StopAllCoroutines ();
         }
     }

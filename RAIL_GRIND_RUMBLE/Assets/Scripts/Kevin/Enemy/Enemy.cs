@@ -32,6 +32,7 @@ public class Enemy : PoolableObject, IDamageable
     void Start()
     {
         DespawnTimer = 0;
+       
 
     }
 
@@ -41,11 +42,13 @@ public class Enemy : PoolableObject, IDamageable
         Timer();
         if (DespawnTimer >= 3)
         {
-            Debug.Log("it happened");
+            
             gameObject.SetActive(false);
             TimerOn = false;
         }
         
+      
+      
     }
     private void OnAttack(IDamageable Target)
     {
@@ -107,10 +110,19 @@ public class Enemy : PoolableObject, IDamageable
         Health -= Damage;
         if (Health <= 0)
         {
-            TimerOn = true;
-            Animator.SetTrigger(DEATH_TRIGGER);
-            Ragdoll.StartRagdoll = true;
             Movement.activated = false;
+            if (!TimerOn)
+            {
+                Animator.SetTrigger("Death");
+            }
+           
+            TimerOn = true;
+            if( !EnemyScriptableObject.IsRanged)
+            {
+                Ragdoll.StartRagdoll = true;
+            }
+            
+
             // StopCoroutine(LookCoroutine);
 
             //Added for Chris 
@@ -159,6 +171,7 @@ public class Enemy : PoolableObject, IDamageable
         {
           DespawnTimer += Time.deltaTime;
             Debug.Log(DespawnTimer);
+            
         }
         if (!TimerOn)
         {
