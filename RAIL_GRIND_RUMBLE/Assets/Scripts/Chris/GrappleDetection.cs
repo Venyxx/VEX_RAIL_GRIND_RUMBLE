@@ -24,6 +24,7 @@ public class GrappleDetection : MonoBehaviour
     private bool lookAtSwitchActive = false;
 
     private CinemachineFreeLook cinemachineCam;
+    float mouseValue;
 
     void Start()
     {
@@ -139,7 +140,7 @@ public class GrappleDetection : MonoBehaviour
         aimPointChoice = 0;
     }
     
-    //new input system conversion; method tied to MOUSE1 for now
+    //Right Stick Right
     public void GrappleSwitch(InputAction.CallbackContext context)
     {
         //context.started == Input.GetKeyDown
@@ -161,6 +162,26 @@ public class GrappleDetection : MonoBehaviour
             aimPointChoice = 0;
         }
         //Activates smooth aim switch in update
+        prevAim = currentAim;
+        nextAim = aimPoints[aimPointChoice];
+        currentAim = nextAim;
+        aimLookAtREF.transform.position = prevAim.transform.position;
+        lookAtSwitchActive = true;
+        StartCoroutine(CurrentAimDelay());
+    }
+
+    //Right Stick Left
+    public void GrappleSwitchBack(InputAction.CallbackContext context)
+    {
+        if (!context.started) return;
+        if (!canSwitch) return;
+
+        if (aimPointChoice > 0)
+        {
+            aimPointChoice--;
+        } else {
+            aimPointChoice = aimPointCount - 1;
+        }
         prevAim = currentAim;
         nextAim = aimPoints[aimPointChoice];
         currentAim = nextAim;

@@ -740,6 +740,7 @@ MonoBehaviour:
   swingSpeed: 5
   nearestDialogueTemplate:
     name: 
+    dialogueTrigger: {fileID: 0}
     paragraphs: []
   SpeedChangeRate: 10
   analogMovement: 0
@@ -867,18 +868,6 @@ MonoBehaviour:
       - m_Target: {fileID: 3400830846209403069}
         m_TargetAssemblyTypeName: GrappleDetection, Assembly-CSharp
         m_MethodName: GrappleSwitch
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2030071780202691821}
-        m_TargetAssemblyTypeName: GrappleHook, Assembly-CSharp
-        m_MethodName: NoAimGrapple
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1234,6 +1223,42 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 0ebe237e-d45a-4bc0-9359-c13ff129f95a
     m_ActionName: Player/DialogueInput[/Mouse/press,/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3400830846209403069}
+        m_TargetAssemblyTypeName: GrappleDetection, Assembly-CSharp
+        m_MethodName: GrappleSwitchBack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 7a5e25c5-f50a-43e4-86d9-d4bacc1b14b4
+    m_ActionName: Player/GrappleSwitch(Back)[/DualSenseGamepadHID/rightStick/left,/XInputControllerWindows/rightStick/left]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6295e6c3-61b3-4424-baa7-87f583ea638d
+    m_ActionName: Player/InfoScreen[/DualSenseGamepadHID/select,/XInputControllerWindows/select,/Keyboard/i]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2030071780202691821}
+        m_TargetAssemblyTypeName: GrappleHook, Assembly-CSharp
+        m_MethodName: NoAimGrapple
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 5aac3e22-7a16-47de-adce-2f18cb2942d9
+    m_ActionName: Player/NoAimGrapple[/Mouse/rightButton,/DualSenseGamepadHID/rightTrigger,/XInputControllerWindows/rightTrigger]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -1368,6 +1393,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   IsAttacking: 0
+  IsHeavyAttacking: 0
   Weapon: {fileID: 236564383}
   Knee: {fileID: 249219041}
   atkCount: 0
