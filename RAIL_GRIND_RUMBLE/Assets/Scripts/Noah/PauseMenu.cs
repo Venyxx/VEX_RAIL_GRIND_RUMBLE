@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using System.Collections;
+using System.Collections.Generic;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -9,6 +11,7 @@ public class PauseMenu : MonoBehaviour
     public string mainMenuScene;
     public GameObject pauseMenu;
     public GameObject pauseSettings;
+    public GameObject settingsMainPage;
     public GameObject pauseFirstButton;
     public GameObject settingsFirstButton;
     public GameObject settingsClosedButton;
@@ -17,6 +20,9 @@ public class PauseMenu : MonoBehaviour
     public GameObject controlsScreen;
     public GameObject graphicsScreen;
     public GameObject accessibilityScreen;
+
+    public GameObject speedometerREF;
+
     public GameObject questWindow;
     public GameObject acceptQuestButton;
     public GameObject denyQuestButton;
@@ -24,6 +30,11 @@ public class PauseMenu : MonoBehaviour
     //Added to turn reticle off when paused
     GameObject grappleDetectorREF;
     Reticle reticleScript;
+
+    //Added for intro
+    public GameObject pauseVideo;
+    public GameObject settingsOpenVideo;
+    public GameObject settingsCloseVideo;
 
 
 
@@ -54,19 +65,27 @@ public class PauseMenu : MonoBehaviour
         }*/
     }
 
-    public void PauseGame(InputAction.CallbackContext context)
+    public void PauseGamePressed(InputAction.CallbackContext context)
     {
         if (!context.started) return;
         
         if (isPaused)
         {
             ResumeGame();
-            reticleScript.ReticleToggle(true);
+            //reticleScript.ReticleToggle(true);
         }
         else
         {
+            PauseGame();
+        }
+    }
+
+    public void PauseGame()
+    {
             isPaused = true;
             pauseMenu.SetActive(true);
+            pauseVideo.SetActive(true);
+            speedometerREF.SetActive(false);
             reticleScript.ReticleToggle(false);
             Debug.Log("Unpause");
             Time.timeScale = 0f;
@@ -75,8 +94,6 @@ public class PauseMenu : MonoBehaviour
             
             EventSystem.current.SetSelectedGameObject(null); 
             EventSystem.current.SetSelectedGameObject(pauseFirstButton);
-            
-        }
     }
 
     public void ActivateQuestWindow()
@@ -102,6 +119,7 @@ public class PauseMenu : MonoBehaviour
         graphicsScreen.SetActive(false);
         accessibilityScreen.SetActive(false);
         questWindow.SetActive(false);
+        speedometerREF.SetActive(true);
         Time.timeScale = 1f;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -112,6 +130,10 @@ public class PauseMenu : MonoBehaviour
     {
         pauseSettings.SetActive(true);
         pauseMenu.SetActive(false);
+        settingsMainPage.SetActive(true);
+
+        //Animation
+        settingsOpenVideo.SetActive(true);
 
         EventSystem.current.SetSelectedGameObject(null); 
         EventSystem.current.SetSelectedGameObject(settingsFirstButton);
@@ -122,6 +144,9 @@ public class PauseMenu : MonoBehaviour
     {
         pauseSettings.SetActive(false);
         pauseMenu.SetActive(true);
+
+        //Animation
+        settingsCloseVideo.SetActive(true);
 
         EventSystem.current.SetSelectedGameObject(null); 
         EventSystem.current.SetSelectedGameObject(settingsClosedButton);

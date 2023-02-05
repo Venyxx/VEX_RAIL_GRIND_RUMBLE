@@ -13,6 +13,7 @@ public class MainMenu : MonoBehaviour
     public GameObject mainMenuFirstButton;
     public GameObject mainSettingsFirstButton;
     public GameObject mainSettingsClosedButton;
+    public GameObject fastTravelButtons;
 
 
     // Start is called before the first frame update
@@ -39,6 +40,7 @@ public class MainMenu : MonoBehaviour
     {
         mainSettings.SetActive(true);
         mainMenu.SetActive(false);
+        fastTravelButtons.SetActive(false);
 
         EventSystem.current.SetSelectedGameObject(null); 
         EventSystem.current.SetSelectedGameObject(mainSettingsFirstButton);
@@ -48,6 +50,7 @@ public class MainMenu : MonoBehaviour
     {
         mainSettings.SetActive(false);
         mainMenu.SetActive(true);
+        fastTravelButtons.SetActive(true);
 
         EventSystem.current.SetSelectedGameObject(null); 
         EventSystem.current.SetSelectedGameObject(mainSettingsClosedButton);

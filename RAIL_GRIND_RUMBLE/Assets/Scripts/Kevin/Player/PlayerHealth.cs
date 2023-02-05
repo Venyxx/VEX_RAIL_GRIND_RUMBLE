@@ -39,7 +39,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     public void TakeDamage (float Damage)
     {
         //ensures ari can not take damage from enemies while stuck in dialogue
-        if (thirdPersonMovementREF.dialogueBox.activeInHierarchy) return; 
+        if (thirdPersonMovementREF.dialogueBox.activeInHierarchy || SettingsManager.godMode) return; 
         
         currentHealth -= Damage;
 

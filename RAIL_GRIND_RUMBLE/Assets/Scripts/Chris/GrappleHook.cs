@@ -276,7 +276,9 @@ public class GrappleHook : MonoBehaviour
         Destroy(joint);
 
         //WIP Method for limiting in-air swings
-        if (swingCount < maxSwings - 1)
+        if (!SettingsManager.godMode)
+        {
+            if (swingCount < maxSwings - 1)
         {
             swingCount++;
         } else {
@@ -284,7 +286,9 @@ public class GrappleHook : MonoBehaviour
             grappleStored = false;
             grappleMeter.sprite = grappleMeterImages[3];
             Debug.Log("Swings Empty");
+        }   
         }
+        
 
         //UI GrappleMeter
         if (swingCount == 1)

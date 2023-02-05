@@ -1,10 +1,9 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class SettingsManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-
     public GameObject audioScreen;
     public GameObject controlsScreen;
     public GameObject graphicsScreen;
@@ -16,6 +15,10 @@ public class SettingsManager : MonoBehaviour
     public GameObject graphicsFirstButton;
     public GameObject accessibilityFirstButton;
     public GameObject settingsReturnButton;
+
+    //God Mode
+    public static bool godMode = false;
+    public GameObject godModeToggleREF;
 
 
     void Start()
@@ -87,5 +90,18 @@ public class SettingsManager : MonoBehaviour
 
         EventSystem.current.SetSelectedGameObject(null); 
         EventSystem.current.SetSelectedGameObject(settingsReturnButton);
+    }
+
+    //Turn on God Mode
+    public void GodModeToggle()
+    {
+        if (godModeToggleREF.GetComponent<Toggle>().isOn == false)
+        {
+            godMode = false;
+            Debug.Log("God Mode is Off");
+        } else {
+            godMode = true;
+            Debug.Log("God Mode is On. May you have mercy on their souls.");
+        }
     }
 }
