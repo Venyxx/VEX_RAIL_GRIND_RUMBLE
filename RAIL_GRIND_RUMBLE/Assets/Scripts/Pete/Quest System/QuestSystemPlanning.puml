@@ -73,3 +73,9 @@ RivalQuest "inherits from"<|-- Quest
 CountQuest "has" *-- CountQuestTypes
 
 @enduml
+
+
+for(int i = 0; i < questRewards.length++){
+    QuestReward currentReward = questRewards.get(i);
+    currentReward.RewardPlayer();
+}
