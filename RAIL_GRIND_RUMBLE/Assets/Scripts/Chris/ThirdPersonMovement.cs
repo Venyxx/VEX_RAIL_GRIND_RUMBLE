@@ -61,7 +61,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
     // animation IDs
     private float _animationBlend;
-    private Animator _animator;
+    public Animator _animator;
     private int _animIDSpeed;
     private int _animIDGrounded;
     private int _animIDJump;
@@ -597,12 +597,13 @@ public class ThirdPersonMovement : MonoBehaviour
         
     }
 
+    public int print;
     private void SetSpeedUI()
     { 
         //m/s to mph
         var passing = rigidBody.velocity.magnitude;
         speedPrint =  (double) passing * 2.2369362920544;
-        int print = (int) speedPrint;
+        print = (int) speedPrint;
 
         //print
         if (print < 10)

@@ -8,29 +8,21 @@ public class LinesVFX : MonoBehaviour
 {
     // Start is called before the first frame update
      private VisualEffect visualEffect;
-    private float radius;
-    private float AlphaLow;
-    private float AlphaHigh;
+    private float radius = 2;
+    private float AlphaLow = 0.4f;
+    private float AlphaHigh = 1;
     private Gradient gradient;
     public Gradient[] colorSwaps = new Gradient [3];
     private GameObject playerREF;
 
     private ThirdPersonMovement TPmovementREF;
      
+     private bool canLines;
     void Start()
     {
-        visualEffect.SetFloat("Radius", radius);
-        visualEffect.SetFloat("AlphaLow", AlphaLow);
-        visualEffect.SetFloat("AlphaHigh", AlphaHigh);
-        visualEffect.SetGradient("Color Gradient", gradient);
-
-        
-        Debug.Log("I AM RUNNING START");
-
-
-        playerREF = GameObject.Find("playerPrefab");
-        visualEffect = gameObject.GetComponent<VisualEffect>();
-        TPmovementREF = playerREF.GetComponent<ThirdPersonMovement>();
+        Recalculate();
+        gradient = colorSwaps[0]; 
+        canLines = false;
 
     }
 
@@ -43,18 +35,47 @@ public class LinesVFX : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+        
+        //relative speed management
+        if(TPmovementREF.currentSpeed > 10)
+        {
+            
+            canLines = true;
+            AlphaHigh = 1;
+            AlphaLow = 0.4f;
+            Recalculate();
+        } else
+        {
+            canLines = false;
+            AlphaLow = 0;
+            AlphaHigh = 0;
+            Recalculate();
+        }
+            
+        //color management
         if (!TPmovementREF.isWalking)
             RecalculateGradient();
     }
 
     private void RecalculateGradient ()
     {
-        if (TPmovementREF.currentSpeed == TPmovementREF.maxSkateSpeed)
-            gradient = colorSwaps[2];
+        if (playerREF.GetComponent<CollisionFollow>().isGrinding || playerREF.GetComponent<WallRun>().isWallRunning)
+        {
+           
+             gradient = colorSwaps[2];
+        }  
         else 
             gradient = colorSwaps [0];
 
+         Recalculate();
+    }
+
+    private void Recalculate ()
+    {
+        visualEffect.SetFloat("Radius", radius);
+        visualEffect.SetFloat("AlphaLow", AlphaLow);
+        visualEffect.SetFloat("AlphaHigh", AlphaHigh);
         visualEffect.SetGradient("Color Gradient", gradient);
+        
     }
 }
