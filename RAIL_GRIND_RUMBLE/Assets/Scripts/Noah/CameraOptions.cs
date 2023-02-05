@@ -23,7 +23,8 @@ public class CameraOptions : MonoBehaviour
 
     void Start()
     {
-        _freeLook = cineMachine.GetComponent<CinemachineFreeLook>();
+        if(cineMachine != null)
+            _freeLook = cineMachine.GetComponent<CinemachineFreeLook>();
 
         LoadValues();
      
@@ -32,11 +33,15 @@ public class CameraOptions : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       if (cineMachine != null)
+       {
         _freeLook.m_XAxis.m_InvertInput = XCheckbox.isOn;
         _freeLook.m_YAxis.m_InvertInput = !YCheckbox.isOn;
 
         _freeLook.m_XAxis.m_MaxSpeed = XSens.value * 75 + 25;
         _freeLook.m_YAxis.m_MaxSpeed = YSens.value + 1;
+       }
+        
 
     }
 

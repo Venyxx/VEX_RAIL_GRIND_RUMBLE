@@ -188,6 +188,9 @@ public class ThirdPersonMovement : MonoBehaviour
         Grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
         _animator.SetBool(_animIDGrounded, Grounded);
 
+        //gravity 
+        GetComponent<Rigidbody>().AddForce( new Vector3(0.0f, -9.81f, 0.0f), ForceMode.Acceleration);
+
         PlayerInput();
 
         //Drag
@@ -228,7 +231,7 @@ public class ThirdPersonMovement : MonoBehaviour
             _animator.SetBool(_animIDBrake, true);
         }else 
         {
-              _animator.SetBool(_animIDBrake, false);
+            
             if (rigidBody.velocity.magnitude > 4 )     
             {
                 //slide by anim
@@ -368,27 +371,37 @@ public class ThirdPersonMovement : MonoBehaviour
             if (verticalInput < 0.1 && rigidBody.velocity.magnitude > 3)
             {
                 //decel faster as a breaking mech
-                isBraking = true;
+                
                 moveKeyUp = true;
                 float Adeceleration = 10f;
 
                 //if moving, decelerate
                 //Debug.Log("breaking mech");
                 if (currentSpeed > 0)
-                currentSpeed -= Adeceleration * Time.deltaTime;
+                {
+                    currentSpeed -= Adeceleration * Time.deltaTime;
+
+                    if (verticalInput < -0.5 )
+                        isBraking = true;
+                }
+                
 
             }else 
             {
-                isBraking = false;
-                _animator.SetBool(_animIDBrake, false);
+                
                 //if no input forward
                 moveKeyUp = true;
                 float deceleration = 5f;
 
                 //if moving, decelerate
                 if (currentSpeed > 0 || rigidBody.velocity.magnitude > 0)
-                currentSpeed -= deceleration * Time.deltaTime;
+                {
+                    currentSpeed -= deceleration * Time.deltaTime;
+                    isBraking = false;
+                    _animator.SetBool(_animIDBrake, false);
 
+                }
+                
             }
                 
        
