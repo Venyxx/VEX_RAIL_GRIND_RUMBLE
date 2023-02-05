@@ -125,6 +125,14 @@ public class Enemy : PoolableObject, IDamageable
             }
             
             TimerOn = true;
+            
+            //set layer to ragdoll layer on death so it doesn't collide with player
+            gameObject.layer = 20;
+            foreach (Transform child in gameObject.transform)
+            {
+                child.gameObject.layer = 20;
+            }
+
             if( !EnemyScriptableObject.IsRanged)
             {
                 Ragdoll.StartRagdoll = true;

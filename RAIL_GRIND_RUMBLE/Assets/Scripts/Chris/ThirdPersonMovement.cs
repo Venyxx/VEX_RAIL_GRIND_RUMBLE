@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class ThirdPersonMovement : MonoBehaviour
 {
@@ -178,6 +179,7 @@ public class ThirdPersonMovement : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         
         dialogueBox = GameObject.FindWithTag("DialogueBox");
+        //Debug.Log($"DialogueBox is null? {dialogueBox == null}");
     }
 
     // Update is called once per frame
@@ -287,7 +289,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
     public void ToggleWalk(InputAction.CallbackContext context)
     {
-        if (!context.started || dialogueBox.activeInHierarchy) return;
+        if (!context.started || dialogueBox.activeInHierarchy || !Grounded || SceneManager.GetActiveScene().name.Equals("Ari's House")) return;
         isWalking = !isWalking;
         WalkToggleHelper();
     }
@@ -334,7 +336,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
     public void PlayerInput()
     {
-        
+        //Debug.Log($"DialogueBox is active in hierarchy? {dialogueBox.activeInHierarchy}");
         if (!dialogueBox.activeInHierarchy)
         {
             moveInput = playerActions.Player.Move.ReadValue<Vector2>();

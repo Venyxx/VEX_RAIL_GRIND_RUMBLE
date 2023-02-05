@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Random = System.Random;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class PlayerAttack : MonoBehaviour
     private ThirdPersonMovement movementScriptREF;
     float HeavyAtkTimer;
     bool TimerOn;
+    private AudioClip[] hitSounds;
+    private AudioSource audioSource;
 
 
     private void Awake()
@@ -29,8 +32,8 @@ public class PlayerAttack : MonoBehaviour
     {
         //  anim = GetComponent<Animator>();
         HeavyAtkTimer = 0;
-       
-
+        hitSounds = Resources.LoadAll<AudioClip>("Sounds/DamageSounds");
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -199,6 +202,8 @@ public class PlayerAttack : MonoBehaviour
         if (other.TryGetComponent<IDamageable>(out damageable))
         {
             damageable.TakeDamage(Damage);
+            Random rand = new Random();
+            audioSource.PlayOneShot(hitSounds[rand.Next(0, hitSounds.Length)]);
         }
     }
 

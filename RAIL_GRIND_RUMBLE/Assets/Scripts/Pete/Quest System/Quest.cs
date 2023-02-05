@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
@@ -8,7 +7,7 @@ public class Quest : MonoBehaviour
 {
     public bool isActive;
     public bool isComplete;
-    [SerializeField] private string name;
+    [SerializeField] private string questName;
     [SerializeField] private string description;
     public bool RewardsGiven { get; set; } = false;
     public List<QuestReward> questRewards;
@@ -23,7 +22,7 @@ public class Quest : MonoBehaviour
 
     public string GetName()
     {
-        return name;
+        return questName;
     }
 
     public string GetDesc()

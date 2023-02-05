@@ -36,7 +36,6 @@ public class DialogueManager : MonoBehaviour
         ariRig = GetAriRig();
         questWindow = GameObject.Find("QuestWindow");
         questWindow.SetActive(false);
-        Debug.Log(questWindow == null);
     }
     
     private void Update()
