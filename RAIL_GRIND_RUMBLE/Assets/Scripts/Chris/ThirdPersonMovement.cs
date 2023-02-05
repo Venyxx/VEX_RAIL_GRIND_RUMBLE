@@ -71,6 +71,7 @@ public class ThirdPersonMovement : MonoBehaviour
     private int _animIDMotionSpeed;
     private int _animIDWallRunLeft;
     private int _animIDWallRunRight;
+    private int _animIDBrake;
     public float SpeedChangeRate = 10.0f;
     private float targetSpeed;
     public bool analogMovement;
@@ -79,6 +80,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
 
     //Acceleration Timer
+    private bool isBraking;
     private float maxTime = 1.5f;
     private float currentTime;
     private bool canAccelerate;
@@ -221,27 +223,34 @@ public class ThirdPersonMovement : MonoBehaviour
         
 
         //animation transitioning
-
-        if (rigidBody.velocity.magnitude > 4 )     
+        if(isBraking)
         {
-            //slide by anim
-            if (verticalInput == 0)
-                targetSpeed = Mathf.Lerp(targetSpeed, 2, 0.35f);
-            else
-            targetSpeed = Mathf.Lerp(targetSpeed, 4, 0.5f);
-              
-        }
-        else if (rigidBody.velocity.magnitude < 4 && rigidBody.velocity.magnitude > 1)
+            _animator.SetBool(_animIDBrake, true);
+        }else 
         {
-            if (horizontalInput == 0 || verticalInput == 0)
+              _animator.SetBool(_animIDBrake, false);
+            if (rigidBody.velocity.magnitude > 4 )     
             {
-               //normal walking slow run animation, only plays during decel not accel
-                targetSpeed = Mathf.Lerp(targetSpeed, 3, 0.35f);
+                //slide by anim
+                if (verticalInput == 0)
+                    targetSpeed = Mathf.Lerp(targetSpeed, 2, 0.35f);
+                else
+                targetSpeed = Mathf.Lerp(targetSpeed, 4, 0.5f);
+                
             }
+            else if (rigidBody.velocity.magnitude < 4 && rigidBody.velocity.magnitude > 1)
+            {
+                if (horizontalInput == 0 || verticalInput == 0)
+                {
+                //normal walking slow run animation, only plays during decel not accel
+                    targetSpeed = Mathf.Lerp(targetSpeed, 3, 0.35f);
+                }
+            }
+            else 
+                targetSpeed = Mathf.Lerp(targetSpeed, 1, 0.35f);
+                
         }
-        else 
-            targetSpeed = Mathf.Lerp(targetSpeed, 1, 0.35f);
-            
+        
 
 
     }
@@ -356,9 +365,10 @@ public class ThirdPersonMovement : MonoBehaviour
         } else if (verticalInput < 0.1)
         {
             //check if the back arrow is active    
-            if (verticalInput < 0.1 && rigidBody.velocity.magnitude > 2)
+            if (verticalInput < 0.1 && rigidBody.velocity.magnitude > 3)
             {
                 //decel faster as a breaking mech
+                isBraking = true;
                 moveKeyUp = true;
                 float Adeceleration = 10f;
 
@@ -369,13 +379,15 @@ public class ThirdPersonMovement : MonoBehaviour
 
             }else 
             {
-            //if no input forward
-            moveKeyUp = true;
-            float deceleration = 5f;
+                isBraking = false;
+                _animator.SetBool(_animIDBrake, false);
+                //if no input forward
+                moveKeyUp = true;
+                float deceleration = 5f;
 
-            //if moving, decelerate
-            if (currentSpeed > 0 || rigidBody.velocity.magnitude > 0)
-            currentSpeed -= deceleration * Time.deltaTime;
+                //if moving, decelerate
+                if (currentSpeed > 0 || rigidBody.velocity.magnitude > 0)
+                currentSpeed -= deceleration * Time.deltaTime;
 
             }
                 
@@ -537,6 +549,7 @@ public class ThirdPersonMovement : MonoBehaviour
         _animIDGrinding = Animator.StringToHash("Grinding");
         _animIDWallRunLeft = Animator.StringToHash("WallRunLeft");
         _animIDWallRunRight = Animator.StringToHash("WallRunRight");
+        _animIDBrake = Animator.StringToHash ("Brake");
     }
 
 
