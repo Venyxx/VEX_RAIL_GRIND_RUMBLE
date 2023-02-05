@@ -191,7 +191,7 @@ public class ThirdPersonMovement : MonoBehaviour
         _animator.SetBool(_animIDGrounded, Grounded);
 
         //gravity 
-        GetComponent<Rigidbody>().AddForce( new Vector3(0.0f, -9.81f, 0.0f), ForceMode.Acceleration);
+        GetComponent<Rigidbody>().AddForce( new Vector3(0.0f, -5.81f, 0.0f), ForceMode.Acceleration);
 
         PlayerInput();
 
