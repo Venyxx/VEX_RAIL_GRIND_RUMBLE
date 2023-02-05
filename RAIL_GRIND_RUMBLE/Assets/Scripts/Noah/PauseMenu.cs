@@ -17,6 +17,9 @@ public class PauseMenu : MonoBehaviour
     public GameObject controlsScreen;
     public GameObject graphicsScreen;
     public GameObject accessibilityScreen;
+    public GameObject questWindow;
+    public GameObject acceptQuestButton;
+    public GameObject denyQuestButton;
 
     //Added to turn reticle off when paused
     GameObject grappleDetectorREF;
@@ -76,6 +79,19 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+    public void ActivateQuestWindow()
+    {
+        isPaused = true;
+        questWindow.SetActive(true);
+        reticleScript.ReticleToggle(false);
+        Time.timeScale = 0f;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+            
+        EventSystem.current.SetSelectedGameObject(null); 
+        EventSystem.current.SetSelectedGameObject(acceptQuestButton);
+    }
+
     public void ResumeGame()
     {
         isPaused = false;
@@ -85,6 +101,7 @@ public class PauseMenu : MonoBehaviour
         controlsScreen.SetActive(false);
         graphicsScreen.SetActive(false);
         accessibilityScreen.SetActive(false);
+        questWindow.SetActive(false);
         Time.timeScale = 1f;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;

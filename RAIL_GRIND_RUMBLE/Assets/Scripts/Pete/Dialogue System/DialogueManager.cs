@@ -10,6 +10,7 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI textComponent;
     public TextMeshProUGUI talkingToName;
     public GameObject dialogueBox;
+    public GameObject questWindow;
     private Queue<string> paragraphDisplayed;
     private bool isBoxActive = false;
     [SerializeField] private float textSpeed = 0.1f;
@@ -32,6 +33,9 @@ public class DialogueManager : MonoBehaviour
         dialogueBox.SetActive(false);
         thirdPersonControllerREF = FindObjectOfType<ThirdPersonMovement>();
         ariRig = GetAriRig();
+        questWindow = GameObject.Find("QuestWindow");
+        questWindow.SetActive(false);
+        Debug.Log(questWindow == null);
     }
     
     private void Update()
@@ -136,5 +140,17 @@ public class DialogueManager : MonoBehaviour
         isBoxActive = false;
         thirdPersonControllerREF.nearestDialogueTemplate = null;
         rotatingNPC = false;
+        try
+        {
+            var questGiver = npcModel.transform.parent.GetComponentInChildren<QuestGiver>();
+            questGiver.OpenQuestWindow();
+
+        }
+        catch (NullReferenceException e)
+        {
+            
+        }
+
+        
     }
 }
