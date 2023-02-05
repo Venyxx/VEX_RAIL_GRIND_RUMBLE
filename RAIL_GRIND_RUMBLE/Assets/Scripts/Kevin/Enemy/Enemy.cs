@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine.AI;
 using UnityEngine;
+using Random = System.Random;
 
 public class Enemy : PoolableObject, IDamageable
 {
@@ -20,6 +21,8 @@ public class Enemy : PoolableObject, IDamageable
     GameObject grappleDetectorREF;
     float DespawnTimer;
     bool TimerOn;
+    private AudioClip[] hitSounds;
+    private AudioSource audioSource;
 
     private void Awake()
     {
@@ -32,7 +35,8 @@ public class Enemy : PoolableObject, IDamageable
     void Start()
     {
         DespawnTimer = 0;
-       
+        hitSounds = Resources.LoadAll<AudioClip>("Sounds/DamageSounds");
+        audioSource = GetComponent<AudioSource>();
 
     }
 
@@ -107,6 +111,11 @@ public class Enemy : PoolableObject, IDamageable
     public void TakeDamage(float Damage)
     {
         
+        if (Damage > 0 )
+        {
+            Random rand = new Random();
+            audioSource.PlayOneShot(hitSounds[rand.Next(0, hitSounds.Length)]);
+        }
         Health -= Damage;
         if (Health <= 0)
         {
