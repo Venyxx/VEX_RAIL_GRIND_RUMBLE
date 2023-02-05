@@ -37,6 +37,15 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""GrappleSwitch(Back)"",
+                    ""type"": ""Button"",
+                    ""id"": ""7a5e25c5-f50a-43e4-86d9-d4bacc1b14b4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Grapple Release"",
                     ""type"": ""Button"",
                     ""id"": ""e065dc05-4bd1-4b79-b2d1-1143afcb780b"",
@@ -197,13 +206,31 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""NoAimGrapple"",
+                    ""type"": ""Button"",
+                    ""id"": ""5aac3e22-7a16-47de-adce-2f18cb2942d9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MouseScrollY"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""8a08253a-2764-47ac-96ce-8efaf769c32b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""bc4dd424-7b15-4898-8348-2a5d18d0fb49"",
-                    ""path"": ""<Mouse>/rightButton"",
+                    ""id"": ""a3620209-fe2e-4db6-9884-851fc47977ac"",
+                    ""path"": ""<Gamepad>/rightStick/right"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -213,8 +240,8 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""43ff0014-8b63-4127-ac22-baac6a59d312"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""id"": ""6b402023-dc68-4c68-8c35-67298b3877e7"",
+                    ""path"": ""<Mouse>/middleButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -672,6 +699,50 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                     ""action"": ""InfoScreen"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""93b3e7f5-679e-4e9d-a24e-d1ad0f085da4"",
+                    ""path"": ""<Gamepad>/rightStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GrappleSwitch(Back)"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b62391d1-6879-4615-9237-f9bbc6a29fb9"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NoAimGrapple"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7c108397-483d-4634-9826-5fab7a3bb3cc"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NoAimGrapple"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9f6a0678-e9ce-4d3c-b33a-f66bc446dbc5"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseScrollY"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -681,6 +752,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_GrappleSwitch = m_Player.FindAction("Grapple Switch", throwIfNotFound: true);
+        m_Player_GrappleSwitchBack = m_Player.FindAction("GrappleSwitch(Back)", throwIfNotFound: true);
         m_Player_GrappleRelease = m_Player.FindAction("Grapple Release", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
@@ -699,6 +771,8 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
         m_Player_BackToMenu = m_Player.FindAction("BackToMenu", throwIfNotFound: true);
         m_Player_DialogueInput = m_Player.FindAction("DialogueInput", throwIfNotFound: true);
         m_Player_InfoScreen = m_Player.FindAction("InfoScreen", throwIfNotFound: true);
+        m_Player_NoAimGrapple = m_Player.FindAction("NoAimGrapple", throwIfNotFound: true);
+        m_Player_MouseScrollY = m_Player.FindAction("MouseScrollY", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -759,6 +833,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_GrappleSwitch;
+    private readonly InputAction m_Player_GrappleSwitchBack;
     private readonly InputAction m_Player_GrappleRelease;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Move;
@@ -777,11 +852,14 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_BackToMenu;
     private readonly InputAction m_Player_DialogueInput;
     private readonly InputAction m_Player_InfoScreen;
+    private readonly InputAction m_Player_NoAimGrapple;
+    private readonly InputAction m_Player_MouseScrollY;
     public struct PlayerActions
     {
         private @InputHandler m_Wrapper;
         public PlayerActions(@InputHandler wrapper) { m_Wrapper = wrapper; }
         public InputAction @GrappleSwitch => m_Wrapper.m_Player_GrappleSwitch;
+        public InputAction @GrappleSwitchBack => m_Wrapper.m_Player_GrappleSwitchBack;
         public InputAction @GrappleRelease => m_Wrapper.m_Player_GrappleRelease;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Move => m_Wrapper.m_Player_Move;
@@ -800,6 +878,8 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
         public InputAction @BackToMenu => m_Wrapper.m_Player_BackToMenu;
         public InputAction @DialogueInput => m_Wrapper.m_Player_DialogueInput;
         public InputAction @InfoScreen => m_Wrapper.m_Player_InfoScreen;
+        public InputAction @NoAimGrapple => m_Wrapper.m_Player_NoAimGrapple;
+        public InputAction @MouseScrollY => m_Wrapper.m_Player_MouseScrollY;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -812,6 +892,9 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 @GrappleSwitch.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGrappleSwitch;
                 @GrappleSwitch.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGrappleSwitch;
                 @GrappleSwitch.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGrappleSwitch;
+                @GrappleSwitchBack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGrappleSwitchBack;
+                @GrappleSwitchBack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGrappleSwitchBack;
+                @GrappleSwitchBack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGrappleSwitchBack;
                 @GrappleRelease.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGrappleRelease;
                 @GrappleRelease.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGrappleRelease;
                 @GrappleRelease.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGrappleRelease;
@@ -866,6 +949,12 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 @InfoScreen.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInfoScreen;
                 @InfoScreen.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInfoScreen;
                 @InfoScreen.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInfoScreen;
+                @NoAimGrapple.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNoAimGrapple;
+                @NoAimGrapple.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNoAimGrapple;
+                @NoAimGrapple.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNoAimGrapple;
+                @MouseScrollY.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouseScrollY;
+                @MouseScrollY.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouseScrollY;
+                @MouseScrollY.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouseScrollY;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -873,6 +962,9 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 @GrappleSwitch.started += instance.OnGrappleSwitch;
                 @GrappleSwitch.performed += instance.OnGrappleSwitch;
                 @GrappleSwitch.canceled += instance.OnGrappleSwitch;
+                @GrappleSwitchBack.started += instance.OnGrappleSwitchBack;
+                @GrappleSwitchBack.performed += instance.OnGrappleSwitchBack;
+                @GrappleSwitchBack.canceled += instance.OnGrappleSwitchBack;
                 @GrappleRelease.started += instance.OnGrappleRelease;
                 @GrappleRelease.performed += instance.OnGrappleRelease;
                 @GrappleRelease.canceled += instance.OnGrappleRelease;
@@ -927,6 +1019,12 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 @InfoScreen.started += instance.OnInfoScreen;
                 @InfoScreen.performed += instance.OnInfoScreen;
                 @InfoScreen.canceled += instance.OnInfoScreen;
+                @NoAimGrapple.started += instance.OnNoAimGrapple;
+                @NoAimGrapple.performed += instance.OnNoAimGrapple;
+                @NoAimGrapple.canceled += instance.OnNoAimGrapple;
+                @MouseScrollY.started += instance.OnMouseScrollY;
+                @MouseScrollY.performed += instance.OnMouseScrollY;
+                @MouseScrollY.canceled += instance.OnMouseScrollY;
             }
         }
     }
@@ -934,6 +1032,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnGrappleSwitch(InputAction.CallbackContext context);
+        void OnGrappleSwitchBack(InputAction.CallbackContext context);
         void OnGrappleRelease(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
@@ -952,5 +1051,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
         void OnBackToMenu(InputAction.CallbackContext context);
         void OnDialogueInput(InputAction.CallbackContext context);
         void OnInfoScreen(InputAction.CallbackContext context);
+        void OnNoAimGrapple(InputAction.CallbackContext context);
+        void OnMouseScrollY(InputAction.CallbackContext context);
     }
 }

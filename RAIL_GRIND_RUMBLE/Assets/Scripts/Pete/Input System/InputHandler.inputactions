@@ -15,6 +15,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "GrappleSwitch(Back)",
+                    "type": "Button",
+                    "id": "7a5e25c5-f50a-43e4-86d9-d4bacc1b14b4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Grapple Release",
                     "type": "Button",
                     "id": "e065dc05-4bd1-4b79-b2d1-1143afcb780b",
@@ -175,13 +184,31 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "NoAimGrapple",
+                    "type": "Button",
+                    "id": "5aac3e22-7a16-47de-adce-2f18cb2942d9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MouseScrollY",
+                    "type": "PassThrough",
+                    "id": "8a08253a-2764-47ac-96ce-8efaf769c32b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
                     "name": "",
-                    "id": "bc4dd424-7b15-4898-8348-2a5d18d0fb49",
-                    "path": "<Mouse>/rightButton",
+                    "id": "a3620209-fe2e-4db6-9884-851fc47977ac",
+                    "path": "<Gamepad>/rightStick/right",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -191,8 +218,8 @@
                 },
                 {
                     "name": "",
-                    "id": "43ff0014-8b63-4127-ac22-baac6a59d312",
-                    "path": "<Gamepad>/rightShoulder",
+                    "id": "6b402023-dc68-4c68-8c35-67298b3877e7",
+                    "path": "<Mouse>/middleButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -648,6 +675,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "InfoScreen",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "93b3e7f5-679e-4e9d-a24e-d1ad0f085da4",
+                    "path": "<Gamepad>/rightStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GrappleSwitch(Back)",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b62391d1-6879-4615-9237-f9bbc6a29fb9",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NoAimGrapple",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7c108397-483d-4634-9826-5fab7a3bb3cc",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NoAimGrapple",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9f6a0678-e9ce-4d3c-b33a-f66bc446dbc5",
+                    "path": "<Mouse>/scroll/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MouseScrollY",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
