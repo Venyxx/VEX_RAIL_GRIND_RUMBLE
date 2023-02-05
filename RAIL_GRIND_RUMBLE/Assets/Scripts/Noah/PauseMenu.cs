@@ -35,6 +35,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseVideo;
     public GameObject settingsOpenVideo;
     public GameObject settingsCloseVideo;
+    public GameObject wipe;
 
 
 
@@ -76,8 +77,17 @@ public class PauseMenu : MonoBehaviour
         }
         else
         {
-            PauseGame();
+            wipe.SetActive(true);
+            StartCoroutine(PauseDelay());
+            //PauseGame();
         }
+    }
+
+    IEnumerator PauseDelay()
+    {
+        yield return new WaitForSeconds(0.10f);
+        wipe.SetActive(false);
+        PauseGame();
     }
 
     public void PauseGame()
