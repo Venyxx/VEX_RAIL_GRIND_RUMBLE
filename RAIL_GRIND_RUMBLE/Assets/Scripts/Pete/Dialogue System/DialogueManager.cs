@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.ProBuilder.MeshOperations;
 
 public class DialogueManager : MonoBehaviour
 { 
@@ -74,7 +75,7 @@ public class DialogueManager : MonoBehaviour
     }
     
     
-    private void StartDialogue(DialogueTemplate dialogue)
+    public void StartDialogue(DialogueTemplate dialogue)
     {
         if (dialogue == null || dialogue.dialogueTrigger == null|| !thirdPersonControllerREF.isWalking) return;
         
@@ -143,8 +144,15 @@ public class DialogueManager : MonoBehaviour
         try
         {
             var questGiver = npcModel.transform.parent.GetComponentInChildren<QuestGiver>();
-            questGiver.OpenQuestWindow();
-
+            if (!questGiver.acceptedOrDeniedAlready && !questGiver.GetQuest().isComplete && !questGiver.GetQuest().isActive)
+            {
+                questGiver.OpenQuestWindow();
+                questGiver.acceptedOrDeniedAlready = true;
+            }
+            else
+            {
+                questGiver.acceptedOrDeniedAlready = false;
+            }
         }
         catch (NullReferenceException e)
         {

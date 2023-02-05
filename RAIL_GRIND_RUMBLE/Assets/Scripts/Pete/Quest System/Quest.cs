@@ -10,7 +10,16 @@ public class Quest : MonoBehaviour
     public bool isComplete;
     [SerializeField] private string name;
     [SerializeField] private string description;
+    public bool RewardsGiven { get; set; } = false;
     public List<QuestReward> questRewards;
+    
+    [TextArea(3,10)] [SerializeField] private string questAcceptedText;
+    [TextArea(3,10)] [SerializeField] private string questDeniedText;
+    [TextArea(3,10)] [SerializeField] private string[] questCompletedText;
+    
+    public string QuestAcceptedText => questAcceptedText;
+    public string QuestDeniedText => questDeniedText;
+    public string[] QuestCompletedText => questCompletedText;
 
     public string GetName()
     {
@@ -37,6 +46,16 @@ public class Quest : MonoBehaviour
     void Start()
     {
         questRewards = new List<QuestReward>();
+    }
+
+    public void RewardPlayer()
+    {
+        foreach (var reward in questRewards)
+        {
+            reward.RewardPlayer();
+        }
+
+        RewardsGiven = true;
     }
 
 }

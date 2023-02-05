@@ -5,14 +5,14 @@ using UnityEngine.UI;
 public class QuestGiver : MonoBehaviour
 {
     [SerializeField] private Quest questToGive;
-    //[SerializeField] private string acceptedDialogue;
-    //[SerializeField] private string denyDialogue; 
-    
+
     private PauseMenu pauseMenu;
     
     private TextMeshProUGUI questTitleText;
     private TextMeshProUGUI questDescrText;
     private TextMeshProUGUI questRewardText;
+
+    public bool acceptedOrDeniedAlready = false;
 
 
     void Start()
@@ -27,7 +27,10 @@ public class QuestGiver : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (questToGive.isComplete && !questToGive.RewardsGiven)
+        {
+            GetComponent<DialogueTrigger>().dialogue.paragraphs = questToGive.QuestCompletedText;
+        }
     }
 
     public void OpenQuestWindow()
@@ -44,10 +47,27 @@ public class QuestGiver : MonoBehaviour
     {
         pauseMenu.ResumeGame();
         FindObjectOfType<QuestTracker>().AcceptQuest(questToGive);
+        DialogueTemplate temp = new DialogueTemplate();
+        temp.dialogueTrigger = GetComponent<DialogueTrigger>();
+        temp.name = temp.dialogueTrigger.dialogue.name;
+        temp.paragraphs = new[] { questToGive.QuestAcceptedText };
+        FindObjectOfType<DialogueManager>().StartDialogue(temp);
     }
 
     public void DenyQuest()
     {
         pauseMenu.ResumeGame();
+        DialogueTemplate temp = new DialogueTemplate();
+        temp.dialogueTrigger = GetComponent<DialogueTrigger>();
+        temp.name = temp.dialogueTrigger.dialogue.name;
+        temp.paragraphs = new[] { questToGive.QuestDeniedText };
+        FindObjectOfType<DialogueManager>().StartDialogue(temp);
+    }
+
+    public Quest GetQuest()
+    {
+        return questToGive;
     }
 }
+
+        

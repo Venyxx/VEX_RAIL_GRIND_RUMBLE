@@ -110,17 +110,27 @@ public class Enemy : PoolableObject, IDamageable
         Health -= Damage;
         if (Health <= 0)
         {
+
+            QuestTracker tracker = FindObjectOfType<QuestTracker>();
+            if (tracker.CurrentCountQuestType is CountQuestType.Enemies)
+            {
+                CountQuest quest = (CountQuest)tracker.CurrentQuest;
+                quest.IncrementCount();
+            }
+
             Movement.activated = false;
             if (!TimerOn)
             {
                 Animator.SetTrigger("Death");
             }
-           
+            
             TimerOn = true;
             if( !EnemyScriptableObject.IsRanged)
             {
                 Ragdoll.StartRagdoll = true;
             }
+            
+            
             
 
             // StopCoroutine(LookCoroutine);

@@ -14,6 +14,10 @@ public class QuestTracker : MonoBehaviour
 
     public void AcceptQuest(Quest quest)
     {
+        foreach (var otherQuest in FindObjectsOfType<Quest>())
+        {
+            otherQuest.isActive = false;
+        }
         CurrentQuest = quest;
         CurrentQuest.isActive = true;
         if (quest is CountQuest)

@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CountQuest : Quest
@@ -32,13 +30,13 @@ public class CountQuest : Quest
 }
 
 
-
+//COINS AND ENEMIES ARE IMPLEMENTED, THE REST ARE NOT 
 [Serializable]
 public enum CountQuestType
 {
-    GrindTime,
-    Graffiti,
-    SpeedMeter,
+    //GrindTime,
+    //Graffiti,
+    //SpeedMeter,
     Coins,
     Enemies,
     None
