@@ -24,4 +24,9 @@ public class DevFunctions : MonoBehaviour
     {
         SceneManager.LoadScene("ServosKitDemo");
     }
+
+    public void LoadArisHouse()
+    {
+        SceneManager.LoadScene("Ari's House");
+    }
 }

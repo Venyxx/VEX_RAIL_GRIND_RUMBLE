@@ -232,7 +232,7 @@ public class ThirdPersonMovement : MonoBehaviour
         }else 
         {
             
-            if (rigidBody.velocity.magnitude > 4 )     
+            if (rigidBody.velocity.magnitude > 6 )     
             {
                 //slide by anim
                 if (verticalInput == 0)
@@ -241,7 +241,7 @@ public class ThirdPersonMovement : MonoBehaviour
                 targetSpeed = Mathf.Lerp(targetSpeed, 4, 0.5f);
                 
             }
-            else if (rigidBody.velocity.magnitude < 4 && rigidBody.velocity.magnitude > 1)
+            else if (rigidBody.velocity.magnitude <= 6 && rigidBody.velocity.magnitude > 1)
             {
                 if (horizontalInput == 0 || verticalInput == 0)
                 {
@@ -381,7 +381,7 @@ public class ThirdPersonMovement : MonoBehaviour
                 {
                     currentSpeed -= Adeceleration * Time.deltaTime;
 
-                    if (verticalInput < -0.5 )
+                    if (verticalInput <= -0.5 )
                         isBraking = true;
                 }
                 
