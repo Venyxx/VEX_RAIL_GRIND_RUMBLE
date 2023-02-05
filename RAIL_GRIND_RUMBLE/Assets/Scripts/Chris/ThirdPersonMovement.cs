@@ -61,7 +61,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
     // animation IDs
     private float _animationBlend;
-    public Animator _animator;
+    private Animator _animator;
     private int _animIDSpeed;
     private int _animIDGrounded;
     private int _animIDJump;
@@ -228,7 +228,7 @@ public class ThirdPersonMovement : MonoBehaviour
             if (verticalInput == 0)
                 targetSpeed = Mathf.Lerp(targetSpeed, 2, 0.35f);
             else
-            targetSpeed = Mathf.Lerp(targetSpeed, 3, 0.5f);
+            targetSpeed = Mathf.Lerp(targetSpeed, 4, 0.5f);
               
         }
         else if (rigidBody.velocity.magnitude < 4 && rigidBody.velocity.magnitude > 1)
@@ -236,7 +236,7 @@ public class ThirdPersonMovement : MonoBehaviour
             if (horizontalInput == 0 || verticalInput == 0)
             {
                //normal walking slow run animation, only plays during decel not accel
-                targetSpeed = Mathf.Lerp(targetSpeed, 2, 0.35f);
+                targetSpeed = Mathf.Lerp(targetSpeed, 3, 0.35f);
             }
         }
         else 

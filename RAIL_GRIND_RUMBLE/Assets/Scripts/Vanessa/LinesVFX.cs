@@ -20,8 +20,8 @@ public class LinesVFX : MonoBehaviour
      private bool canLines;
     void Start()
     {
-        Recalculate();
         gradient = colorSwaps[0]; 
+        Recalculate();
         canLines = false;
 
     }
