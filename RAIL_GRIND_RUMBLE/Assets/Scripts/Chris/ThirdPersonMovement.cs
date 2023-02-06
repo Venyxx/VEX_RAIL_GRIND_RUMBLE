@@ -185,6 +185,7 @@ public class ThirdPersonMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        PlayerMovement();
         
         //Grounded Check
         Grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
@@ -329,7 +330,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        PlayerMovement();
+        //PlayerMovement();
     }
 
     
@@ -383,7 +384,7 @@ public class ThirdPersonMovement : MonoBehaviour
                 {
                     currentSpeed -= Adeceleration * Time.deltaTime;
 
-                    if (verticalInput <= -0.5 )
+                    if (verticalInput <= -0.3 )
                         isBraking = true;
                 }
                 
@@ -474,9 +475,9 @@ public class ThirdPersonMovement : MonoBehaviour
         //checking for wall running animations
         if (moveInput.x != 0 || moveInput.y != 0)
         {
-            if (gameObject.GetComponent<WallRun>().wallLeft  ||   gameObject.GetComponent<WallRun>().isWallRunning)
+            if (gameObject.GetComponent<WallRun>().wallLeft  &&   gameObject.GetComponent<WallRun>().isWallRunning)
                 _animator.SetBool(_animIDWallRunLeft, true);
-            else if (gameObject.GetComponent<WallRun>().wallRight   ||   gameObject.GetComponent<WallRun>().isWallRunning)
+            else if (gameObject.GetComponent<WallRun>().wallRight   &&   gameObject.GetComponent<WallRun>().isWallRunning)
                 _animator.SetBool(_animIDWallRunRight, true);
             else
             {
