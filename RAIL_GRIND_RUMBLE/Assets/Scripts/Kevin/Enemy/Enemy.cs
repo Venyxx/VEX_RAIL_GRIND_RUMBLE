@@ -23,6 +23,7 @@ public class Enemy : PoolableObject, IDamageable
     bool TimerOn;
     private AudioClip[] hitSounds;
     private AudioSource audioSource;
+    bool CanTakeDamage;
 
     private void Awake()
     {
@@ -111,7 +112,7 @@ public class Enemy : PoolableObject, IDamageable
     public void TakeDamage(float Damage)
     {
         
-        if (Damage > 0 )
+        if (Damage > 0)
         {
             Random rand = new Random();
             audioSource.PlayOneShot(hitSounds[rand.Next(0, hitSounds.Length)]);
@@ -190,6 +191,7 @@ public class Enemy : PoolableObject, IDamageable
             Debug.Log("BugCheck4");
             
         }
+        yield return new WaitForSeconds(4);
     }
 
     private void Timer()
@@ -208,4 +210,5 @@ public class Enemy : PoolableObject, IDamageable
         
 
     }
+   
 }

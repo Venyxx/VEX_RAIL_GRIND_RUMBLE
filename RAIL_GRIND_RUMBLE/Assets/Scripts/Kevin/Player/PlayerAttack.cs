@@ -10,8 +10,8 @@ public class PlayerAttack : MonoBehaviour
     public bool IsAttacking = false;
     public bool IsHeavyAttacking = false;
     public static PlayerAttack instance;
-    public Collider Weapon;
-    public Collider Knee;
+    public Collider Lefty;
+    public Collider Righty;
     public int atkCount;
     private ThirdPersonMovement movementScriptREF;
     float HeavyAtkTimer;
@@ -23,8 +23,8 @@ public class PlayerAttack : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        Weapon.enabled = false;
-        Knee.enabled = false;
+        Lefty.enabled = false;
+        Righty.enabled = false;
         movementScriptREF = GetComponent<ThirdPersonMovement>();
     }
 
@@ -199,12 +199,48 @@ public class PlayerAttack : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         IDamageable damageable;
+        
+        if (Righty.enabled )
+        {
+           // Debug.Log("ATKtest");
+           // damageable.TakeDamage(Damage);
+
+        }
+
+            if (other.TryGetComponent<IDamageable>(out damageable))
+            {
+
+            //Random rand = new Random();
+            //  audioSource.PlayOneShot(hitSounds[rand.Next(0, hitSounds.Length)]);
+          
+
+        }
+        
+        
+    }
+
+
+    private void OnTriggerStay(Collider other)
+    {
+        IDamageable damageable;
+
+        if (Righty.enabled)
+        {
+            Debug.Log("ATKtest");
+            // damageable.TakeDamage(Damage);
+
+        }
+
         if (other.TryGetComponent<IDamageable>(out damageable))
         {
-            damageable.TakeDamage(Damage);
+
             //Random rand = new Random();
-          //  audioSource.PlayOneShot(hitSounds[rand.Next(0, hitSounds.Length)]);
+            //  audioSource.PlayOneShot(hitSounds[rand.Next(0, hitSounds.Length)]);
+
+
         }
+
+
     }
 
     //void OnDrawGizmosSelected()

@@ -25,7 +25,7 @@ public class Transition2script : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         PlayerAttack.instance.IsAttacking = false;
-         PlayerAttack.instance.Weapon.enabled = false;
+        // PlayerAttack.instance.Weapon.enabled = false;
         
         
     }

@@ -21,7 +21,7 @@ public class Transition3Script : StateMachineBehaviour
     {
         PlayerAttack.instance.IsAttacking = false;
         
-        PlayerAttack.instance.Knee.enabled = false;
+       // PlayerAttack.instance.Knee.enabled = false;
         PlayerAttack.instance.Damage = 25;
     
     }

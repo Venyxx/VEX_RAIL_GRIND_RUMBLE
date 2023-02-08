@@ -7,7 +7,7 @@ public class Attack2Script : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        PlayerAttack.instance.Weapon.enabled = true;
+       // PlayerAttack.instance.Weapon.enabled = true;
         PlayerAttack.instance.IsAttacking = false;
         PlayerAttack.instance.Damage = 30;
     }
