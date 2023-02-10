@@ -38,14 +38,23 @@ public class PauseMenu : MonoBehaviour
     public GameObject settingsCloseVideo;
     public GameObject wipe;
 
+    //For audio clips
+    AudioSource audioSource;
+    public AudioClip pauseOpen;
+    public AudioClip backSound;
+    public AudioClip selectSound;
 
 
-    public bool isPaused;
+    public static bool isPaused;
 
     void Start()
     {
+        isPaused = false;
+
         grappleDetectorREF = GameObject.Find("GrappleDetector");
         reticleScript = grappleDetectorREF.GetComponent<Reticle>();
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -69,7 +78,7 @@ public class PauseMenu : MonoBehaviour
 
     public void PauseGamePressed(InputAction.CallbackContext context)
     {
-        if (!context.started) return;
+        if (!context.started || InfoScreen.isOpen == true) return;
         
         if (isPaused)
         {
@@ -110,6 +119,9 @@ public class PauseMenu : MonoBehaviour
 
     public void PauseGame()
     {
+        audioSource.clip = pauseOpen;
+        audioSource.Play(0);
+
             isPaused = true;
             pauseMenu.SetActive(true);
             pauseVideo.SetActive(true);
@@ -139,6 +151,9 @@ public class PauseMenu : MonoBehaviour
 
     public void ResumeGame()
     {
+        audioSource.clip = backSound;
+        audioSource.Play(0);
+
         isPaused = false;
         pauseMenu.SetActive(false);
         pauseSettings.SetActive(false);
@@ -162,6 +177,10 @@ public class PauseMenu : MonoBehaviour
 
         //Animation
         settingsOpenVideo.SetActive(true);
+
+        //Sound
+        audioSource.clip = selectSound;
+        audioSource.Play(0);
 
         EventSystem.current.SetSelectedGameObject(null); 
         EventSystem.current.SetSelectedGameObject(settingsFirstButton);

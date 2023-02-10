@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class InfoScreen : MonoBehaviour
 {
 
-    bool isOpen;
+    public static bool isOpen;
     string currentTab;
     public GameObject infoScreen;
     public GameObject topBar;
@@ -21,17 +21,23 @@ public class InfoScreen : MonoBehaviour
     public Animator missionsAnim;
     public Animator progressAnim;
 
+    AudioSource audioUI;
+    public AudioClip backSound;
+    public AudioClip nextSound;
+    public AudioClip selectSound;
+
     
     void Start()
     {
         isOpen = false;
+        audioUI = GetComponent<AudioSource>();
     }
 
     public void OpenInfoButtonPressed(InputAction.CallbackContext context)
     {
         if (context.started)
         {
-            if (isOpen == false)
+            if (isOpen == false && PauseMenu.isPaused == false)
             {
                 StartCoroutine(OpenInfoScreen());
             } else {
@@ -40,16 +46,37 @@ public class InfoScreen : MonoBehaviour
         }
     }
 
+    public void BackPressed (InputAction.CallbackContext context)
+    {
+        if (context.started && isOpen == true)
+        {
+            StartCoroutine(CloseInfoScreen());
+        }
+    }
+
     public void NextTabPressed(InputAction.CallbackContext context)
     {
         if (context.started && isOpen == true)
         {
             NextTab();
+            //Debug.Log("Next Tab");
+        }
+    }
+
+    public void PreviousTabPressed(InputAction.CallbackContext context)
+    {
+        if (context.started && isOpen == true)
+        {
+            PreviousTab();
+            //Debug.Log("Next Tab");
         }
     }
 
     IEnumerator OpenInfoScreen()
     {
+        audioUI.clip = selectSound;
+        audioUI.Play(0);
+
         infoScreen.SetActive(true);
         mapTab.SetActive(true);
         currentTab = "Map";
@@ -64,6 +91,9 @@ public class InfoScreen : MonoBehaviour
 
     IEnumerator CloseInfoScreen()
     {
+        audioUI.clip = backSound;
+        audioUI.Play(0);
+
         mapTab.SetActive(false);
         missionsTab.SetActive(false);
         progressTab.SetActive(false);
@@ -87,38 +117,36 @@ public class InfoScreen : MonoBehaviour
     {
         if (currentTab == "Map")
         {
-            mapTab.SetActive(false);
-            missionsTab.SetActive(true);
-            mapAnim.SetTrigger("Close");
-            currentTab = "Missions";
-        }
-
-        if (currentTab == "Missions")
+            OpenMissionsTab();
+        } else if (currentTab == "Missions")
         {
-            missionsTab.SetActive(false);
-            progressTab.SetActive(true);
-            currentTab = "Progress";
-        }
-
-        if (currentTab == "Progress")
+            OpenProgressTab();
+        } else if (currentTab == "Progress")
         {
-            progressTab.SetActive(false);
-            intelTab.SetActive(true);
-            currentTab = "Intel";
-        }
+            OpenMapTab();
+        } 
+    }
 
-        if (currentTab == "Intel")
+    void PreviousTab()
+    {
+        if (currentTab == "Map")
         {
-            intelTab.SetActive(false);
-            mapTab.SetActive(true);
-            currentTab = "Map";
-        }
+            OpenProgressTab();
+        } else if (currentTab == "Missions")
+        {
+            OpenMapTab();
+        } else if (currentTab == "Progress")
+        {
+            OpenMissionsTab();
+        } 
     }
 
     //Click Events
 
     public void OpenMapTab()
     {
+        audioUI.clip = nextSound;
+        audioUI.Play(0);
         StartCoroutine(OpenMap());
     }
     IEnumerator OpenMap()
@@ -143,6 +171,8 @@ public class InfoScreen : MonoBehaviour
 
     public void OpenMissionsTab()
     {
+        audioUI.clip = nextSound;
+        audioUI.Play(0);
         StartCoroutine(OpenMissions());
     }
     IEnumerator OpenMissions()
@@ -168,6 +198,8 @@ public class InfoScreen : MonoBehaviour
 
     public void OpenProgressTab()
     {
+        audioUI.clip = nextSound;
+        audioUI.Play(0);
         StartCoroutine(OpenProgress());
     }
     IEnumerator OpenProgress()

@@ -82,15 +82,6 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Pause Game"",
-                    ""type"": ""Button"",
-                    ""id"": ""10810a43-77a0-479a-937e-59746fb1ae39"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Look"",
                     ""type"": ""Value"",
                     ""id"": ""219f795e-1e07-4249-abb8-0912b6fa90c9"",
@@ -193,15 +184,6 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                     ""name"": ""DialogueInput"",
                     ""type"": ""Button"",
                     ""id"": ""0ebe237e-d45a-4bc0-9359-c13ff129f95a"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""InfoScreen"",
-                    ""type"": ""Button"",
-                    ""id"": ""6295e6c3-61b3-4424-baa7-87f583ea638d"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -389,28 +371,6 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Grapple Pull"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""8532e611-0f37-449b-bf87-195a5743f70c"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Pause Game"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""03168051-8b0b-4cfa-98f2-77a6c22cf7ca"",
-                    ""path"": ""<Gamepad>/start"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Pause Game"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -680,28 +640,6 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""4b5f62ea-051e-4ee1-a899-88168f07e2ad"",
-                    ""path"": ""<Gamepad>/select"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""InfoScreen"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""cb1f7d18-2dc4-4720-a00a-46d56e7761b1"",
-                    ""path"": ""<Keyboard>/i"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""InfoScreen"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""93b3e7f5-679e-4e9d-a24e-d1ad0f085da4"",
                     ""path"": ""<Gamepad>/rightStick/left"",
                     ""interactions"": """",
@@ -745,6 +683,187 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Menus"",
+            ""id"": ""c39e0ed4-3e44-425a-9015-2ba12145ee14"",
+            ""actions"": [
+                {
+                    ""name"": ""InfoTabNext"",
+                    ""type"": ""Button"",
+                    ""id"": ""fbdc4705-5182-4539-ba3b-42892b2214a5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""InfoTabPrevious"",
+                    ""type"": ""Button"",
+                    ""id"": ""387c6c04-6021-4e9f-a8a6-302490209290"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenCloseInfo"",
+                    ""type"": ""Button"",
+                    ""id"": ""af254975-b088-41a1-bdba-d9c5b3626870"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""BackButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""884f6d24-b154-4091-8028-09286a30af99"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PauseGame"",
+                    ""type"": ""Button"",
+                    ""id"": ""70a01562-7c57-4bbd-b8ad-afd89407599b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MissionsTabNext"",
+                    ""type"": ""Button"",
+                    ""id"": ""a1b3ee69-5ee7-49f0-8664-103e70ebdfd4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MissionsTabPrevious"",
+                    ""type"": ""Button"",
+                    ""id"": ""87d087a2-176c-42d6-8a32-b9e3ed8a2fdf"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""eee00ed5-1b5b-4767-9af6-dfcac9bd8807"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InfoTabNext"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""64688362-95d5-450e-a5a1-d962b8a0c50a"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InfoTabPrevious"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""22a4584c-5fdb-4dd7-8b51-8f0aee3cea98"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenCloseInfo"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""28193168-1dea-4c14-b1f2-e407327f2b53"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenCloseInfo"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6266f9f4-130f-45b1-8e10-14adfa33428d"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BackButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7e1ce248-fb90-4ae2-a7e6-7cb4be2685f2"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BackButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""62b87dbe-24c8-4a3c-9ba8-e0d78ee6720d"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseGame"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""27ad0099-e784-46c6-8008-6468d07859ec"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseGame"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e70e07c8-463c-4516-9a3e-065d2732a6ae"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MissionsTabNext"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ed5f15d0-b211-49eb-9fb8-253fcee2cd45"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MissionsTabPrevious"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -757,7 +876,6 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_GrapplePull = m_Player.FindAction("Grapple Pull", throwIfNotFound: true);
-        m_Player_PauseGame = m_Player.FindAction("Pause Game", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_SwitchMode = m_Player.FindAction("Switch Mode", throwIfNotFound: true);
         m_Player_HeavyAttack = m_Player.FindAction("HeavyAttack", throwIfNotFound: true);
@@ -770,9 +888,17 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
         m_Player_ReloadScene = m_Player.FindAction("ReloadScene", throwIfNotFound: true);
         m_Player_BackToMenu = m_Player.FindAction("BackToMenu", throwIfNotFound: true);
         m_Player_DialogueInput = m_Player.FindAction("DialogueInput", throwIfNotFound: true);
-        m_Player_InfoScreen = m_Player.FindAction("InfoScreen", throwIfNotFound: true);
         m_Player_NoAimGrapple = m_Player.FindAction("NoAimGrapple", throwIfNotFound: true);
         m_Player_MouseScrollY = m_Player.FindAction("MouseScrollY", throwIfNotFound: true);
+        // Menus
+        m_Menus = asset.FindActionMap("Menus", throwIfNotFound: true);
+        m_Menus_InfoTabNext = m_Menus.FindAction("InfoTabNext", throwIfNotFound: true);
+        m_Menus_InfoTabPrevious = m_Menus.FindAction("InfoTabPrevious", throwIfNotFound: true);
+        m_Menus_OpenCloseInfo = m_Menus.FindAction("OpenCloseInfo", throwIfNotFound: true);
+        m_Menus_BackButton = m_Menus.FindAction("BackButton", throwIfNotFound: true);
+        m_Menus_PauseGame = m_Menus.FindAction("PauseGame", throwIfNotFound: true);
+        m_Menus_MissionsTabNext = m_Menus.FindAction("MissionsTabNext", throwIfNotFound: true);
+        m_Menus_MissionsTabPrevious = m_Menus.FindAction("MissionsTabPrevious", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -838,7 +964,6 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_GrapplePull;
-    private readonly InputAction m_Player_PauseGame;
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_SwitchMode;
     private readonly InputAction m_Player_HeavyAttack;
@@ -851,7 +976,6 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_ReloadScene;
     private readonly InputAction m_Player_BackToMenu;
     private readonly InputAction m_Player_DialogueInput;
-    private readonly InputAction m_Player_InfoScreen;
     private readonly InputAction m_Player_NoAimGrapple;
     private readonly InputAction m_Player_MouseScrollY;
     public struct PlayerActions
@@ -864,7 +988,6 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @GrapplePull => m_Wrapper.m_Player_GrapplePull;
-        public InputAction @PauseGame => m_Wrapper.m_Player_PauseGame;
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @SwitchMode => m_Wrapper.m_Player_SwitchMode;
         public InputAction @HeavyAttack => m_Wrapper.m_Player_HeavyAttack;
@@ -877,7 +1000,6 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
         public InputAction @ReloadScene => m_Wrapper.m_Player_ReloadScene;
         public InputAction @BackToMenu => m_Wrapper.m_Player_BackToMenu;
         public InputAction @DialogueInput => m_Wrapper.m_Player_DialogueInput;
-        public InputAction @InfoScreen => m_Wrapper.m_Player_InfoScreen;
         public InputAction @NoAimGrapple => m_Wrapper.m_Player_NoAimGrapple;
         public InputAction @MouseScrollY => m_Wrapper.m_Player_MouseScrollY;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -907,9 +1029,6 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 @GrapplePull.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGrapplePull;
                 @GrapplePull.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGrapplePull;
                 @GrapplePull.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGrapplePull;
-                @PauseGame.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPauseGame;
-                @PauseGame.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPauseGame;
-                @PauseGame.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPauseGame;
                 @Look.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
                 @Look.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
                 @Look.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
@@ -946,9 +1065,6 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 @DialogueInput.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDialogueInput;
                 @DialogueInput.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDialogueInput;
                 @DialogueInput.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDialogueInput;
-                @InfoScreen.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInfoScreen;
-                @InfoScreen.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInfoScreen;
-                @InfoScreen.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInfoScreen;
                 @NoAimGrapple.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNoAimGrapple;
                 @NoAimGrapple.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNoAimGrapple;
                 @NoAimGrapple.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNoAimGrapple;
@@ -977,9 +1093,6 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 @GrapplePull.started += instance.OnGrapplePull;
                 @GrapplePull.performed += instance.OnGrapplePull;
                 @GrapplePull.canceled += instance.OnGrapplePull;
-                @PauseGame.started += instance.OnPauseGame;
-                @PauseGame.performed += instance.OnPauseGame;
-                @PauseGame.canceled += instance.OnPauseGame;
                 @Look.started += instance.OnLook;
                 @Look.performed += instance.OnLook;
                 @Look.canceled += instance.OnLook;
@@ -1016,9 +1129,6 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 @DialogueInput.started += instance.OnDialogueInput;
                 @DialogueInput.performed += instance.OnDialogueInput;
                 @DialogueInput.canceled += instance.OnDialogueInput;
-                @InfoScreen.started += instance.OnInfoScreen;
-                @InfoScreen.performed += instance.OnInfoScreen;
-                @InfoScreen.canceled += instance.OnInfoScreen;
                 @NoAimGrapple.started += instance.OnNoAimGrapple;
                 @NoAimGrapple.performed += instance.OnNoAimGrapple;
                 @NoAimGrapple.canceled += instance.OnNoAimGrapple;
@@ -1029,6 +1139,87 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // Menus
+    private readonly InputActionMap m_Menus;
+    private IMenusActions m_MenusActionsCallbackInterface;
+    private readonly InputAction m_Menus_InfoTabNext;
+    private readonly InputAction m_Menus_InfoTabPrevious;
+    private readonly InputAction m_Menus_OpenCloseInfo;
+    private readonly InputAction m_Menus_BackButton;
+    private readonly InputAction m_Menus_PauseGame;
+    private readonly InputAction m_Menus_MissionsTabNext;
+    private readonly InputAction m_Menus_MissionsTabPrevious;
+    public struct MenusActions
+    {
+        private @InputHandler m_Wrapper;
+        public MenusActions(@InputHandler wrapper) { m_Wrapper = wrapper; }
+        public InputAction @InfoTabNext => m_Wrapper.m_Menus_InfoTabNext;
+        public InputAction @InfoTabPrevious => m_Wrapper.m_Menus_InfoTabPrevious;
+        public InputAction @OpenCloseInfo => m_Wrapper.m_Menus_OpenCloseInfo;
+        public InputAction @BackButton => m_Wrapper.m_Menus_BackButton;
+        public InputAction @PauseGame => m_Wrapper.m_Menus_PauseGame;
+        public InputAction @MissionsTabNext => m_Wrapper.m_Menus_MissionsTabNext;
+        public InputAction @MissionsTabPrevious => m_Wrapper.m_Menus_MissionsTabPrevious;
+        public InputActionMap Get() { return m_Wrapper.m_Menus; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MenusActions set) { return set.Get(); }
+        public void SetCallbacks(IMenusActions instance)
+        {
+            if (m_Wrapper.m_MenusActionsCallbackInterface != null)
+            {
+                @InfoTabNext.started -= m_Wrapper.m_MenusActionsCallbackInterface.OnInfoTabNext;
+                @InfoTabNext.performed -= m_Wrapper.m_MenusActionsCallbackInterface.OnInfoTabNext;
+                @InfoTabNext.canceled -= m_Wrapper.m_MenusActionsCallbackInterface.OnInfoTabNext;
+                @InfoTabPrevious.started -= m_Wrapper.m_MenusActionsCallbackInterface.OnInfoTabPrevious;
+                @InfoTabPrevious.performed -= m_Wrapper.m_MenusActionsCallbackInterface.OnInfoTabPrevious;
+                @InfoTabPrevious.canceled -= m_Wrapper.m_MenusActionsCallbackInterface.OnInfoTabPrevious;
+                @OpenCloseInfo.started -= m_Wrapper.m_MenusActionsCallbackInterface.OnOpenCloseInfo;
+                @OpenCloseInfo.performed -= m_Wrapper.m_MenusActionsCallbackInterface.OnOpenCloseInfo;
+                @OpenCloseInfo.canceled -= m_Wrapper.m_MenusActionsCallbackInterface.OnOpenCloseInfo;
+                @BackButton.started -= m_Wrapper.m_MenusActionsCallbackInterface.OnBackButton;
+                @BackButton.performed -= m_Wrapper.m_MenusActionsCallbackInterface.OnBackButton;
+                @BackButton.canceled -= m_Wrapper.m_MenusActionsCallbackInterface.OnBackButton;
+                @PauseGame.started -= m_Wrapper.m_MenusActionsCallbackInterface.OnPauseGame;
+                @PauseGame.performed -= m_Wrapper.m_MenusActionsCallbackInterface.OnPauseGame;
+                @PauseGame.canceled -= m_Wrapper.m_MenusActionsCallbackInterface.OnPauseGame;
+                @MissionsTabNext.started -= m_Wrapper.m_MenusActionsCallbackInterface.OnMissionsTabNext;
+                @MissionsTabNext.performed -= m_Wrapper.m_MenusActionsCallbackInterface.OnMissionsTabNext;
+                @MissionsTabNext.canceled -= m_Wrapper.m_MenusActionsCallbackInterface.OnMissionsTabNext;
+                @MissionsTabPrevious.started -= m_Wrapper.m_MenusActionsCallbackInterface.OnMissionsTabPrevious;
+                @MissionsTabPrevious.performed -= m_Wrapper.m_MenusActionsCallbackInterface.OnMissionsTabPrevious;
+                @MissionsTabPrevious.canceled -= m_Wrapper.m_MenusActionsCallbackInterface.OnMissionsTabPrevious;
+            }
+            m_Wrapper.m_MenusActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @InfoTabNext.started += instance.OnInfoTabNext;
+                @InfoTabNext.performed += instance.OnInfoTabNext;
+                @InfoTabNext.canceled += instance.OnInfoTabNext;
+                @InfoTabPrevious.started += instance.OnInfoTabPrevious;
+                @InfoTabPrevious.performed += instance.OnInfoTabPrevious;
+                @InfoTabPrevious.canceled += instance.OnInfoTabPrevious;
+                @OpenCloseInfo.started += instance.OnOpenCloseInfo;
+                @OpenCloseInfo.performed += instance.OnOpenCloseInfo;
+                @OpenCloseInfo.canceled += instance.OnOpenCloseInfo;
+                @BackButton.started += instance.OnBackButton;
+                @BackButton.performed += instance.OnBackButton;
+                @BackButton.canceled += instance.OnBackButton;
+                @PauseGame.started += instance.OnPauseGame;
+                @PauseGame.performed += instance.OnPauseGame;
+                @PauseGame.canceled += instance.OnPauseGame;
+                @MissionsTabNext.started += instance.OnMissionsTabNext;
+                @MissionsTabNext.performed += instance.OnMissionsTabNext;
+                @MissionsTabNext.canceled += instance.OnMissionsTabNext;
+                @MissionsTabPrevious.started += instance.OnMissionsTabPrevious;
+                @MissionsTabPrevious.performed += instance.OnMissionsTabPrevious;
+                @MissionsTabPrevious.canceled += instance.OnMissionsTabPrevious;
+            }
+        }
+    }
+    public MenusActions @Menus => new MenusActions(this);
     public interface IPlayerActions
     {
         void OnGrappleSwitch(InputAction.CallbackContext context);
@@ -1037,7 +1228,6 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
         void OnGrapplePull(InputAction.CallbackContext context);
-        void OnPauseGame(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnSwitchMode(InputAction.CallbackContext context);
         void OnHeavyAttack(InputAction.CallbackContext context);
@@ -1050,8 +1240,17 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
         void OnReloadScene(InputAction.CallbackContext context);
         void OnBackToMenu(InputAction.CallbackContext context);
         void OnDialogueInput(InputAction.CallbackContext context);
-        void OnInfoScreen(InputAction.CallbackContext context);
         void OnNoAimGrapple(InputAction.CallbackContext context);
         void OnMouseScrollY(InputAction.CallbackContext context);
+    }
+    public interface IMenusActions
+    {
+        void OnInfoTabNext(InputAction.CallbackContext context);
+        void OnInfoTabPrevious(InputAction.CallbackContext context);
+        void OnOpenCloseInfo(InputAction.CallbackContext context);
+        void OnBackButton(InputAction.CallbackContext context);
+        void OnPauseGame(InputAction.CallbackContext context);
+        void OnMissionsTabNext(InputAction.CallbackContext context);
+        void OnMissionsTabPrevious(InputAction.CallbackContext context);
     }
 }

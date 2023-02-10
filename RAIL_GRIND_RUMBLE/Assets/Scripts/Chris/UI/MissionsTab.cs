@@ -192,4 +192,37 @@ public class MissionsTab : MonoBehaviour
             ServosHQLists[2].SetActive(true);
         }
     }
+
+    //Trigger Mapping
+    public void RightTriggerPressed(InputAction.CallbackContext context)
+    {
+        if (!context.started || InfoScreen.isOpen == false) return;
+
+        if (OutskirtsTab.activeInHierarchy)
+        {
+            OpenInnerRing();
+        } else if (InnerRingTab.activeInHierarchy)
+        {
+            OpenServosHQ();
+        } else if (ServosHQTab.activeInHierarchy)
+        {
+            OpenOutskirts();
+        }
+    }
+
+    public void LeftTriggerPressed(InputAction.CallbackContext context)
+    {
+        if (!context.started || InfoScreen.isOpen == false) return;
+
+        if (OutskirtsTab.activeInHierarchy)
+        {
+            OpenServosHQ();
+        } else if (InnerRingTab.activeInHierarchy)
+        {
+            OpenOutskirts();
+        } else if (ServosHQTab.activeInHierarchy)
+        {
+            OpenInnerRing();
+        }
+    }
 }
