@@ -83,6 +83,11 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+    public void ResumeButtonClicked()
+    {
+        StartCoroutine(ResumeDelay());
+    }
+
     IEnumerator PauseDelay()
     {
         wipe.SetActive(true);
