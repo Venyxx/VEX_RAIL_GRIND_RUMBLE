@@ -8,6 +8,7 @@ public class Transition1Script : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         PlayerAttack.instance.IsAttacking = false;
+       
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -26,8 +27,9 @@ public class Transition1Script : StateMachineBehaviour
     {
          
          PlayerAttack.instance.Righty.enabled = false;
-       
-        
+        PlayerAttack.instance.IsAttacking = false;
+
+
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

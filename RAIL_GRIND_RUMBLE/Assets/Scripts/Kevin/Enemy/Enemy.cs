@@ -23,7 +23,8 @@ public class Enemy : PoolableObject, IDamageable
     bool TimerOn;
     private AudioClip[] hitSounds;
     private AudioSource audioSource;
-    bool CanTakeDamage;
+     bool CanTakeDamage = true;
+    public float _takeDamageDelay = .25f;
 
     private void Awake()
     {
@@ -114,10 +115,18 @@ public class Enemy : PoolableObject, IDamageable
         
         if (Damage > 0)
         {
-            Random rand = new Random();
-            audioSource.PlayOneShot(hitSounds[rand.Next(0, hitSounds.Length)]);
+            if(CanTakeDamage)
+            {
+                CanTakeDamage = false;
+                
+                
+                StartCoroutine(TakeDamage());
+                Health -= Damage;
+              
+            }
+           
         }
-        Health -= Damage;
+        
         if (Health <= 0)
         {
 
@@ -170,28 +179,16 @@ public class Enemy : PoolableObject, IDamageable
         return transform;
     }
 
-    private IEnumerator Death()
+    private IEnumerator TakeDamage()
     {
-        Debug.Log("BugCheck1");
-        float time = 0;
-        while (time < 3)
+        if (Health > 0)
         {
-            Debug.Log("BugCheck2");
-            Ragdoll.EnableRagdoll();
-            time += Time.deltaTime;
-            yield return null;
+            Random rand = new Random();
+            audioSource.PlayOneShot(hitSounds[rand.Next(0, hitSounds.Length)]);
         }
-        if (time == 3)
-        {
-           
-            
-        }
-        if (time == .01)
-        {
-            Debug.Log("BugCheck4");
-            
-        }
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(_takeDamageDelay);
+        CanTakeDamage = true;
+        
     }
 
     private void Timer()

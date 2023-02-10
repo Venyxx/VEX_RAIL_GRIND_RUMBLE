@@ -16,8 +16,9 @@ public class Transition2script : StateMachineBehaviour
          if (PlayerAttack.instance.IsAttacking)
         {
             PlayerAttack.instance.anim.Play("LightCombo3");
-           // PlayerAttack.instance.Damage = 40;
-            
+            // PlayerAttack.instance.Damage = 40;
+            PlayerAttack.instance.Lefty.enabled = false;
+
         }      
     }
 
@@ -26,8 +27,9 @@ public class Transition2script : StateMachineBehaviour
     {
         PlayerAttack.instance.IsAttacking = false;
         // PlayerAttack.instance.Weapon.enabled = false;
-        
-        
+        PlayerAttack.instance.Lefty.enabled = false;
+
+
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

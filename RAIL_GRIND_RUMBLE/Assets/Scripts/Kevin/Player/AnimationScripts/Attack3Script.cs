@@ -10,6 +10,8 @@ public class Attack3Script : StateMachineBehaviour
       // PlayerAttack.instance.Knee.enabled = true;
         
         PlayerAttack.instance.Damage = 45;
+        PlayerAttack.instance.Righty.enabled = true;
+
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

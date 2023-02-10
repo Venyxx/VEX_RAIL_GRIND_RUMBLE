@@ -14,11 +14,8 @@ public class HeavyAtkAnim : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
      
-        if (PlayerAttack.instance.anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
-        {
-           
-            
-        }
+
+        
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
@@ -29,6 +26,7 @@ public class HeavyAtkAnim : StateMachineBehaviour
         PlayerAttack.instance.anim.ResetTrigger("HAttackEnd2");
         PlayerAttack.instance.anim.ResetTrigger("HAttackEnd3");
         PlayerAttack.instance.IsHeavyAttacking = false;
+        PlayerAttack.instance.Lefty.enabled = false;
 
 
     }

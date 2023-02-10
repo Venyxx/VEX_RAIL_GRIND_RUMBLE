@@ -84,10 +84,11 @@ public class PlayerAttack : MonoBehaviour
         }
 
 
-        if (atkCount == 1 && !IsHeavyAttacking)
+        if (atkCount == 1 && !IsHeavyAttacking && IsAttacking)
         {
             anim.SetTrigger("LAttack");
         }
+        
 
         //    foreach(Collider enemy in hitEnemies)
         //  {
@@ -199,11 +200,12 @@ public class PlayerAttack : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         IDamageable damageable;
-        
+       
+
         if (Righty.enabled )
         {
            // Debug.Log("ATKtest");
-           // damageable.TakeDamage(Damage);
+           //
 
         }
 
@@ -215,33 +217,63 @@ public class PlayerAttack : MonoBehaviour
           
 
         }
-        
-        
-    }
 
-
-    private void OnTriggerStay(Collider other)
-    {
-        IDamageable damageable;
-
-        if (Righty.enabled)
+        if (Righty.enabled || Lefty.enabled && other.TryGetComponent<IDamageable>(out damageable))
         {
-            Debug.Log("ATKtest");
-            // damageable.TakeDamage(Damage);
-
-        }
-
-        if (other.TryGetComponent<IDamageable>(out damageable))
-        {
-
-            //Random rand = new Random();
-            //  audioSource.PlayOneShot(hitSounds[rand.Next(0, hitSounds.Length)]);
+            //Debug.Log("ATKtest");
+         //   damageable.TakeDamage(Damage);
 
 
         }
 
+       
+            
+            if (Righty.enabled && other.TryGetComponent<IDamageable>(out damageable) && other.gameObject.tag == "Enemy" || Lefty.enabled && other.TryGetComponent<IDamageable>(out damageable) && other.gameObject.tag == "Enemy")
+            {
+                //Debug.Log("ATKtest");
+               //  damageable.TakeDamage(Damage);
+            
 
+        }
+
+
+
+            if(Righty.enabled && other.TryGetComponent<IDamageable>(out damageable) && other.gameObject.tag == "Enemy")
+        {
+           // Debug.Log("ATKtest");
+        }
+
+        if (Lefty.enabled && other.TryGetComponent<IDamageable>(out damageable) && other.gameObject.tag == "Enemy")
+        {
+           // Debug.Log("ATKtest");
+        }
+
+        if (other.gameObject.tag == "Enemy")
+        {
+
+            if (Lefty.enabled && other.TryGetComponent<IDamageable>(out damageable))
+            {
+                
+                
+                    Debug.Log("ATKtest1");
+                damageable.TakeDamage(Damage);
+
+
+            }
+            if (Righty.enabled && other.TryGetComponent<IDamageable>(out damageable))
+            {
+                
+                
+                
+                    Debug.Log("ATKtest1");
+                damageable.TakeDamage(Damage);
+
+            }
+        }
     }
+
+
+    
 
     //void OnDrawGizmosSelected()
     //{
