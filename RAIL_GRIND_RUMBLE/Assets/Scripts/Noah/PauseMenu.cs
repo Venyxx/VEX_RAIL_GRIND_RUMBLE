@@ -31,8 +31,9 @@ public class PauseMenu : MonoBehaviour
     GameObject grappleDetectorREF;
     Reticle reticleScript;
 
-    //Added for intro
+    //Added for videos
     public GameObject pauseVideo;
+    public GameObject closePauseVideo;
     public GameObject settingsOpenVideo;
     public GameObject settingsCloseVideo;
     public GameObject wipe;
@@ -72,12 +73,11 @@ public class PauseMenu : MonoBehaviour
         
         if (isPaused)
         {
-            ResumeGame();
+            StartCoroutine(ResumeDelay());
             //reticleScript.ReticleToggle(true);
         }
         else
         {
-            wipe.SetActive(true);
             StartCoroutine(PauseDelay());
             //PauseGame();
         }
@@ -85,9 +85,22 @@ public class PauseMenu : MonoBehaviour
 
     IEnumerator PauseDelay()
     {
+        wipe.SetActive(true);
         yield return new WaitForSeconds(0.10f);
         wipe.SetActive(false);
         PauseGame();
+    }
+
+    IEnumerator ResumeDelay()
+    {
+        ResumeGame();
+        closePauseVideo.SetActive(true);
+        yield return new WaitForSeconds(0.4f);
+        wipe.SetActive(true);
+        wipe.GetComponent<Animator>().CrossFade("PauseOutro", 0, 0);
+        yield return new WaitForSeconds(0.2f);
+        wipe.SetActive(false);
+        
     }
 
     public void PauseGame()
