@@ -26,6 +26,12 @@ public class GrappleDetection : MonoBehaviour
     private CinemachineFreeLook cinemachineCam;
     float mouseValue;
 
+    //For visibility checking
+    public List<Transform> aimPointsNonVisible;
+    public LayerMask viewBlockers;
+    public LayerMask grappleable;
+    RaycastHit hit;
+
     void Start()
     {
         GameObject cameraPrefabREF = GameObject.Find("camerasPrefab");
@@ -41,6 +47,7 @@ public class GrappleDetection : MonoBehaviour
         aimPointCount = 0;
         aimPointChoice = 0;
         aimPoints = new List<Transform>();
+        aimPointsNonVisible = new List<Transform>();
 
         GameObject playerREF = GameObject.Find("playerPrefab");
         player = playerREF.GetComponent<Transform>();
@@ -79,36 +86,42 @@ public class GrappleDetection : MonoBehaviour
                         aimPoints.Insert(0, temp);
                     }
                 }
-                
-                
-                    //if currentaim is not visible, check next aimpoint
-                    //else return
 
+                //Prioritize AimPoint in camera view
                 for (int i = 0; i < aimPoints.Count; i++)
                 {
-                    RaycastHit hit;
-                    Ray ray = mainCamREF.ScreenPointToRay(aimPoints[i].position);
-                    //Physics.Raycast(ray, out hit);
-                    //if (Physics.Raycast(ray, out hit)){  || hit.collider.tag != "AimPoint"
-                    if (Vector3.Dot((aimPoints[i].position - mainCamREF.transform.position), mainCamREF.transform.forward) < 6)
+                    //Checks if aimPoint is behind wall or not
+                    Vector3 raycastDir = aimPoints[i].position - player.position;
+                    if (Physics.Raycast(player.position, raycastDir, out hit, Vector3.Distance(transform.position, aimPoints[i].position), viewBlockers))
+                    {
+                        aimPointsNonVisible.Add(aimPoints[i]);
+                        aimPoints.Remove(aimPoints[i]);
+                        aimPointCount--;
+                    } else if (Vector3.Dot((aimPoints[i].position - mainCamREF.transform.position), mainCamREF.transform.forward) < 6)
                     {
                         currentAim = aimPoints[0];
-                        //return;
-                    } else if (Vector3.Dot((currentAim.position - mainCamREF.transform.position), mainCamREF.transform.forward) < 6){
-                        currentAim = aimPoints[i];
-                    }
-                    //}
-                }
-                
-                // //If aimPoint is behind camera, switch to next one in list
-                // if (Vector3.Dot((aimPoints[0].position - mainCamREF.transform.position), mainCamREF.transform.forward) < 5){
-                //     currentAim = aimPoints[1];
-                // } else {
-                //     currentAim = aimPoints[0];
-                // }
+                    } else if (Vector3.Dot((currentAim.position - mainCamREF.transform.position), mainCamREF.transform.forward) < 6)
+                    {
 
-                //Update to accomodate entire list of aimPoints
-            
+                        currentAim = aimPoints[i];
+
+                    }
+                }
+        }
+
+        //Checking blocked AimPoints
+        if (aimPointsNonVisible.Count != 0)
+        {
+            for (int i = 0; i < aimPointsNonVisible.Count; i++)
+            {
+                Vector3 raycastDir = aimPointsNonVisible[i].position - player.position;
+                if (Physics.Raycast(player.position, raycastDir, out hit, Vector3.Distance(transform.position, aimPointsNonVisible[i].position), grappleable))
+                    {
+                        aimPoints.Add(aimPointsNonVisible[i]);
+                        aimPointCount++;
+                        aimPointsNonVisible.Remove(aimPointsNonVisible[i]);
+                    }
+            }
         }
 
     }
@@ -217,8 +230,15 @@ public class GrappleDetection : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("AimPoint"))
         {
-            aimPoints.Remove(collision.gameObject.transform);
-            aimPointCount--;
+            if (aimPoints.Contains(collision.gameObject.transform))
+            {
+                aimPoints.Remove(collision.gameObject.transform);
+                aimPointCount--;
+            } else if (aimPointsNonVisible.Contains(collision.gameObject.transform))
+            {
+                aimPointsNonVisible.Remove(collision.gameObject.transform);
+            }
+            
 
             //WIP potential solution for incorrect aimpoints
             if (aimPointChoice > 0 && GameObject.Find("AimingCam"))
