@@ -18,6 +18,9 @@ public class ThirdPersonMovement : MonoBehaviour
     public float maxSkateSpeed;
     private float slopeLimit;
 
+    //enable and disable movement during certain actions -Raul
+    private bool movementEnabled;
+
     public double speedPrint;
 
     private CollisionFollow playerCollisionFollowREF;
@@ -670,6 +673,16 @@ public class ThirdPersonMovement : MonoBehaviour
         //Jump = 1
         //Railing = 2
         //Skating = 3
+    }
+
+    public void EndMovement()
+    {
+        movementEnabled = false;
+    }
+
+    public void StartMovement()
+    {
+        movementEnabled = true;
     }
   
 }
