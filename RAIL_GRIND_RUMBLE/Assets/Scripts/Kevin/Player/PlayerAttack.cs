@@ -68,7 +68,7 @@ public class PlayerAttack : MonoBehaviour
         //graffiti mulltiplier
         if (isBuffed)
         {
-            Debug.Log("running buff");
+            //Debug.Log("running buff");
             if (atkCount == 1)
                 Damage += 3;
             else if (atkCount == 2)

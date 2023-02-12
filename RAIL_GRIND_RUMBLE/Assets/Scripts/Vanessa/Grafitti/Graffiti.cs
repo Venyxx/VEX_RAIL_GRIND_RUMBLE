@@ -82,7 +82,7 @@ public class Graffiti : MonoBehaviour
                     Debug.Log("detected poster, player would rec boost");
                     GameObject posterInfo = hit.collider.gameObject;
                     var spawnLoc = posterInfo.transform.Find("DecalSpawnLoc");
-                    particle = Instantiate (graffitiParticle, canLocationForParticle.transform.position, canLocation.transform.rotation);
+                    //particle = Instantiate (graffitiParticle, canLocationForParticle.transform.position, canLocation.transform.rotation);
                     madeGraffiti = Instantiate (graffiti, spawnLoc.transform.position,canLocation.transform.rotation); 
                     particle2 = Instantiate (graffitiParticle2, player.transform.position, player.transform.rotation);
 
