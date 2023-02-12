@@ -16,6 +16,10 @@ public class PlayerAttack : MonoBehaviour
     private ThirdPersonMovement movementScriptREF;
     float HeavyAtkTimer;
     bool TimerOn;
+
+    //buff
+    public bool isBuffed;
+    public int buffDamage;
    // private AudioClip[] hitSounds;
   //  private AudioSource audioSource;
 
@@ -38,6 +42,9 @@ public class PlayerAttack : MonoBehaviour
 
     void Update()
     {
+        
+
+
         Timer();
         if (HeavyAtkTimer >= 3 && IsHeavyAttacking)
         {
@@ -56,6 +63,18 @@ public class PlayerAttack : MonoBehaviour
                 Damage = 0;
             }
             
+        }
+
+        //graffiti mulltiplier
+        if (isBuffed)
+        {
+            Debug.Log("running buff");
+            if (atkCount == 1)
+                Damage += 3;
+            else if (atkCount == 2)
+                Damage += 6;
+            else if (atkCount == 3)
+                Damage += 9;
         }
 
     }
@@ -79,7 +98,6 @@ public class PlayerAttack : MonoBehaviour
         {
             IsAttacking = true;
             atkCount++;
-
 
         }
 
@@ -115,9 +133,6 @@ public class PlayerAttack : MonoBehaviour
         if (context.started || !IsAttacking)
         {
             // Debug.Log("HeavyAttack1" + context.phase);  
-
-
-
         }
 
 
@@ -129,8 +144,6 @@ public class PlayerAttack : MonoBehaviour
             IsHeavyAttacking = true;
             HeavyAtkTimer = 0;
             atkCount++;
-
-
         }
 
         if (context.ReadValueAsButton() == false && IsHeavyAttacking)
@@ -143,7 +156,10 @@ public class PlayerAttack : MonoBehaviour
                 anim.SetTrigger("HAttackEnd2");
             //    IsHeavyAttacking = false;
                 HeavyAtkTimer = 0;
+
+            
                 Damage = 35;
+               
                 
             }
             if (HeavyAtkTimer < 1)
@@ -152,6 +168,7 @@ public class PlayerAttack : MonoBehaviour
                 anim.SetTrigger("HAttackEnd1");
              //   IsHeavyAttacking = false;
                 HeavyAtkTimer = 0;
+
                 Damage = 30;
                 
             }
@@ -161,15 +178,21 @@ public class PlayerAttack : MonoBehaviour
                 anim.SetTrigger("HAttackEnd3");
               //  IsHeavyAttacking = false;
                 HeavyAtkTimer = 0;
+                
+            
                 Damage = 100;
                 
             }
 
             TimerOn = false;
 
+
+        
+
         }
 
-
+   
+            
 
         //    foreach(Collider enemy in hitEnemies)
         //  {
@@ -228,10 +251,10 @@ public class PlayerAttack : MonoBehaviour
 
        
             
-            if (Righty.enabled && other.TryGetComponent<IDamageable>(out damageable) && other.gameObject.tag == "Enemy" || Lefty.enabled && other.TryGetComponent<IDamageable>(out damageable) && other.gameObject.tag == "Enemy")
-            {
-                //Debug.Log("ATKtest");
-               //  damageable.TakeDamage(Damage);
+        if (Righty.enabled && other.TryGetComponent<IDamageable>(out damageable) && other.gameObject.tag == "Enemy" || Lefty.enabled && other.TryGetComponent<IDamageable>(out damageable) && other.gameObject.tag == "Enemy")
+        {
+            //Debug.Log("ATKtest");
+            //  damageable.TakeDamage(Damage);
             
 
         }

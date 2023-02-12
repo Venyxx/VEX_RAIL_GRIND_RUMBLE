@@ -26,6 +26,9 @@ public class Enemy : PoolableObject, IDamageable
      bool CanTakeDamage = true;
     public float _takeDamageDelay = .25f;
 
+    //damage indicator
+    public GameObject damageText;
+
     private void Awake()
     {
         AttackRadius.OnAttack += OnAttack;
@@ -122,7 +125,10 @@ public class Enemy : PoolableObject, IDamageable
                 
                 StartCoroutine(TakeDamage());
                 Health -= Damage;
-              
+
+                //damage indicator
+                DamageIndicatior indicator = Instantiate (damageText, transform.position, Quaternion.identity).GetComponent<DamageIndicatior>();
+                indicator.SetDamageText(Damage);
             }
            
         }
@@ -196,7 +202,7 @@ public class Enemy : PoolableObject, IDamageable
         if (TimerOn)
         {
           DespawnTimer += Time.deltaTime;
-            Debug.Log(DespawnTimer);
+            //Debug.Log(DespawnTimer);
             
         }
         if (!TimerOn)

@@ -23,10 +23,14 @@ public class Graffiti : MonoBehaviour
    private int playerZ;
    private Camera cam;
    private ThirdPersonMovement ThirdPersonMovementREF;
+   private PlayerAttack playerAttackREF; 
+
+   public float graffitiBuffTimer;
     
     void Start ()
     {
         ThirdPersonMovementREF = GameObject.Find("playerPrefab").GetComponent<ThirdPersonMovement>();
+        playerAttackREF = GameObject.Find("playerPrefab").GetComponent<PlayerAttack>();
         cam = Camera.main;
         player = GameObject.Find("playerPrefab");
         graffitiUp = Resources.Load("Decal_1") as GameObject;
@@ -39,6 +43,18 @@ public class Graffiti : MonoBehaviour
          canLocationForParticle = GameObject.FindGameObjectWithTag("PlayerCan");
          Debug.Log(" tried to load " + graffitiParticle);
         
+    }
+
+    void Update ()
+    {
+        if (graffitiBuffTimer > 0)
+        {
+             graffitiBuffTimer -= Time.deltaTime;
+             playerAttackREF.isBuffed = true;
+             
+        } else 
+            playerAttackREF.isBuffed = false;
+           
     }
 
 
@@ -70,6 +86,11 @@ public class Graffiti : MonoBehaviour
                     madeGraffiti = Instantiate (graffiti, spawnLoc.transform.position,canLocation.transform.rotation); 
                     particle2 = Instantiate (graffitiParticle2, player.transform.position, player.transform.rotation);
 
+
+                    //buff
+                    graffitiBuffTimer = 60f;
+                    playerAttackREF.isBuffed = true;
+                    //60 seconds
                     return;
                     
                 } else 
