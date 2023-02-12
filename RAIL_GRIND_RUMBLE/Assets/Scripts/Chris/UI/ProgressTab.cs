@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 using TMPro;
 
 public class ProgressTab : MonoBehaviour
@@ -16,6 +18,8 @@ public class ProgressTab : MonoBehaviour
     public Sprite notSelected;
 
     public GameObject[] DropDown;
+    public Button Act1Button;
+    public Button ProgressTabButton;
 
 
     void Start()
@@ -26,6 +30,19 @@ public class ProgressTab : MonoBehaviour
         {
             Transform buttonText = Buttons[i].gameObject.transform.Find("Text (TMP)");
             buttonText.gameObject.GetComponent<TextMeshProUGUI>().text = Titles[i];
+        }
+    }
+
+    void Awake()
+    {
+        //Act1Button.Select();
+    }
+
+    void Update()
+    {
+        if (EventSystem.current.currentSelectedGameObject == null)
+        {
+            Act1Button.Select();
         }
     }
 

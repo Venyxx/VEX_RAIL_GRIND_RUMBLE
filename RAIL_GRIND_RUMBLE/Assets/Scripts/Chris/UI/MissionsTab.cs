@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class MissionsTab : MonoBehaviour
 {
@@ -21,7 +22,24 @@ public class MissionsTab : MonoBehaviour
     public GameObject[] OutskirtsLists;
     public GameObject[] InnerRingLists;
     public GameObject[] ServosHQLists;
+    
+    //Buttons for selection
+    public Button MainMissionButton;
+    public Button SideHustleButton;
+    public Button CompletedButton;
 
+    public Button MissionsTabButton;
+
+    private GameObject canvasREF;
+    private InfoScreen infoScreen;
+    private AudioSource audioSource;
+
+    void Start()
+    {
+        canvasREF = GameObject.Find("canvasPrefab");
+        infoScreen = canvasREF.GetComponent<InfoScreen>();
+        audioSource = canvasREF.GetComponent<AudioSource>();
+    }
 
     void Awake()
     {
@@ -41,6 +59,14 @@ public class MissionsTab : MonoBehaviour
         MainMissionTab.SetActive(true);
         OutskirtsTab.SetActive(true);
         OutskirtsLists[0].SetActive(true);
+    }
+
+    void Update()
+    {
+        if (EventSystem.current.currentSelectedGameObject == null)
+        {
+            MissionsTabButton.Select();
+        }
     }
 
     public void OpenMainMissions()
@@ -66,6 +92,9 @@ public class MissionsTab : MonoBehaviour
         {
             ServosHQLists[0].SetActive(true);
         }
+
+        MainMissionButton.Select();
+
     }
 
     public void OpenSideHustle()
@@ -91,6 +120,9 @@ public class MissionsTab : MonoBehaviour
         {
             ServosHQLists[1].SetActive(true);
         }
+
+        SideHustleButton.Select();
+
     }
 
     public void OpenCompleted()
@@ -116,6 +148,9 @@ public class MissionsTab : MonoBehaviour
         {
             ServosHQLists[2].SetActive(true);
         }
+
+        CompletedButton.Select();
+
     }
 
     public void OpenOutskirts()
@@ -134,12 +169,15 @@ public class MissionsTab : MonoBehaviour
         if (MainMissionTab.activeInHierarchy == true)
         {
             OutskirtsLists[0].SetActive(true);
+            MainMissionButton.Select();
         } else if (SideHustleTab.activeInHierarchy == true)
         {
             OutskirtsLists[1].SetActive(true);
+            SideHustleButton.Select();
         } else if (CompletedTab.activeInHierarchy == true)
         {
             OutskirtsLists[2].SetActive(true);
+            CompletedButton.Select();
         }
     }
 
@@ -159,12 +197,15 @@ public class MissionsTab : MonoBehaviour
         if (MainMissionTab.activeInHierarchy == true)
         {
             InnerRingLists[0].SetActive(true);
+            MainMissionButton.Select();
         } else if (SideHustleTab.activeInHierarchy == true)
         {
             InnerRingLists[1].SetActive(true);
+            SideHustleButton.Select();
         } else if (CompletedTab.activeInHierarchy == true)
         {
             InnerRingLists[2].SetActive(true);
+            CompletedButton.Select();
         }
     }
 
@@ -184,12 +225,15 @@ public class MissionsTab : MonoBehaviour
         if (MainMissionTab.activeInHierarchy == true)
         {
             ServosHQLists[0].SetActive(true);
+            MainMissionButton.Select();
         } else if (SideHustleTab.activeInHierarchy == true)
         {
             ServosHQLists[1].SetActive(true);
+            SideHustleButton.Select();
         } else if (CompletedTab.activeInHierarchy == true)
         {
             ServosHQLists[2].SetActive(true);
+            CompletedButton.Select();
         }
     }
 
