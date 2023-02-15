@@ -40,6 +40,9 @@ public class EnemyMovement : MonoBehaviour
 
         LineOfSightChecker.OnGainSight += HandleGainSight;
         LineOfSightChecker.OnLoseSight += HandleLoseSight;
+
+        //Added by Chris to prevent unassigned reference exception
+        Player = GameObject.FindWithTag("PlayerObject").transform;
        
     }
     private void Update()

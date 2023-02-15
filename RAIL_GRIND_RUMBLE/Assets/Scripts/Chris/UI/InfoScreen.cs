@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 
@@ -14,7 +15,8 @@ public class InfoScreen : MonoBehaviour
     public GameObject mapTab;
     public GameObject missionsTab;
     public GameObject progressTab;
-    public GameObject intelTab;
+
+    //Animators
     public Animator topBarAnim;
     public Animator bottomBarAnim;
     public Animator backgroundAnim;
@@ -22,16 +24,46 @@ public class InfoScreen : MonoBehaviour
     public Animator missionsAnim;
     public Animator progressAnim;
 
+    //Sounds
     AudioSource audioUI;
     public AudioClip backSound;
     public AudioClip nextSound;
     public AudioClip selectSound;
+
+    //Top Tabs
+    public Button mapButton;
+    public Button missionsButton;
+    public Button progressButton;
+    public Sprite tabSelected;
+    public Sprite tabNotSelected;
+
+    //Selection Handling
+    public Button MainMissionButton;
+    public Button Act1Button;
+
+
 
     
     void Start()
     {
         isOpen = false;
         audioUI = GetComponent<AudioSource>();
+    }
+
+    void Update()
+    {
+        if (EventSystem.current.currentSelectedGameObject == null)
+        {
+            if (missionsTab.activeInHierarchy)
+            {
+                MainMissionButton.Select();
+            }
+
+            if (progressTab.activeInHierarchy)
+            {
+                Act1Button.Select();
+            }
+        }
     }
 
     public void OpenInfoButtonPressed(InputAction.CallbackContext context)
@@ -79,13 +111,15 @@ public class InfoScreen : MonoBehaviour
         audioUI.Play(0);
 
         infoScreen.SetActive(true);
-        mapTab.SetActive(true);
-        currentTab = "Map";
+        mapButton.gameObject.SetActive(true);
+        missionsButton.gameObject.SetActive(true);
+        progressButton.gameObject.SetActive(true);
+        OpenMap();
         isOpen = true;
 
         yield return new WaitForSeconds(0.75f);
 
-        //Time.timeScale = 0f;
+        Time.timeScale = 0f;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
@@ -98,9 +132,12 @@ public class InfoScreen : MonoBehaviour
         mapTab.SetActive(false);
         missionsTab.SetActive(false);
         progressTab.SetActive(false);
-        intelTab.SetActive(false);
 
-        //Time.timeScale = 1f;
+        mapButton.gameObject.SetActive(false);
+        missionsButton.gameObject.SetActive(false);
+        progressButton.gameObject.SetActive(false);
+
+        Time.timeScale = 1f;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         topBarAnim.SetTrigger("Close");
@@ -149,10 +186,14 @@ public class InfoScreen : MonoBehaviour
     {
         audioUI.clip = nextSound;
         audioUI.Play(0);
-        StartCoroutine(OpenMap());
+        OpenMap();
     }
-    IEnumerator OpenMap()
+    void OpenMap()
     {
+        mapButton.GetComponent<Image>().sprite = tabSelected;
+        missionsButton.GetComponent<Image>().sprite = tabNotSelected;
+        progressButton.GetComponent<Image>().sprite = tabNotSelected;
+
         if (currentTab == "Missions")
         {
             missionsAnim.SetTrigger("Close");
@@ -163,11 +204,9 @@ public class InfoScreen : MonoBehaviour
             progressAnim.SetTrigger("Close");
         }
 
-        yield return new WaitForSeconds(0.3f);
         mapTab.SetActive(true);
         missionsTab.SetActive(false);
         progressTab.SetActive(false);
-        intelTab.SetActive(false);
         currentTab = "Map";
     }
 
@@ -175,10 +214,14 @@ public class InfoScreen : MonoBehaviour
     {
         audioUI.clip = nextSound;
         audioUI.Play(0);
-        StartCoroutine(OpenMissions());
+        OpenMissions();
     }
-    IEnumerator OpenMissions()
+    void OpenMissions()
     {
+        mapButton.GetComponent<Image>().sprite = tabNotSelected;
+        missionsButton.GetComponent<Image>().sprite = tabSelected;
+        progressButton.GetComponent<Image>().sprite = tabNotSelected;
+
         if (currentTab == "Map")
         {
             mapAnim.SetTrigger("Close");
@@ -189,23 +232,26 @@ public class InfoScreen : MonoBehaviour
             progressAnim.SetTrigger("Close");
         }
 
-        yield return new WaitForSeconds(0.3f);
-
         mapTab.SetActive(false);
         missionsTab.SetActive(true);
         progressTab.SetActive(false);
-        intelTab.SetActive(false);
         currentTab = "Missions";
+
+        MainMissionButton.Select();
     }
 
     public void OpenProgressTab()
     {
         audioUI.clip = nextSound;
         audioUI.Play(0);
-        StartCoroutine(OpenProgress());
+        OpenProgress();
     }
-    IEnumerator OpenProgress()
+    void OpenProgress()
     {
+        mapButton.GetComponent<Image>().sprite = tabNotSelected;
+        missionsButton.GetComponent<Image>().sprite = tabNotSelected;
+        progressButton.GetComponent<Image>().sprite = tabSelected;
+
         if (currentTab == "Map")
         {
             mapAnim.SetTrigger("Close");
@@ -216,21 +262,12 @@ public class InfoScreen : MonoBehaviour
             missionsAnim.SetTrigger("Close");
         }
 
-        yield return new WaitForSeconds(0.3f);
-
         mapTab.SetActive(false);
         missionsTab.SetActive(false);
         progressTab.SetActive(true);
-        intelTab.SetActive(false);
         currentTab = "Progress";
+
+        Act1Button.Select();
     }
 
-    public void OpenIntelTab()
-    {
-        mapTab.SetActive(false);
-        missionsTab.SetActive(false);
-        progressTab.SetActive(false);
-        intelTab.SetActive(true);
-        currentTab = "Intel";
-    }
 }

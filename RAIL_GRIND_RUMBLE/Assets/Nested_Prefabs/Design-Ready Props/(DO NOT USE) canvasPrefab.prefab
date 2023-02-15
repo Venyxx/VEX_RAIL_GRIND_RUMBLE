@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7111228057752699940}
   - component: {fileID: 957350232447733439}
   m_Layer: 5
-  m_Name: canvasPrefab
+  m_Name: (DO NOT USE) canvasPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -128,10 +128,26 @@ MonoBehaviour:
   mainMenuScene: MainMenu
   pauseMenu: {fileID: 4878829419320108030}
   pauseSettings: {fileID: 5127923923682152413}
+  settingsMainPage: {fileID: 0}
   pauseFirstButton: {fileID: 948431853803858706}
   settingsFirstButton: {fileID: 9107760018130356943}
   settingsClosedButton: {fileID: 7619100634387230626}
-  isPaused: 0
+  audioScreen: {fileID: 0}
+  controlsScreen: {fileID: 0}
+  graphicsScreen: {fileID: 0}
+  accessibilityScreen: {fileID: 0}
+  speedometerREF: {fileID: 0}
+  questWindow: {fileID: 0}
+  acceptQuestButton: {fileID: 0}
+  denyQuestButton: {fileID: 0}
+  pauseVideo: {fileID: 0}
+  closePauseVideo: {fileID: 0}
+  settingsOpenVideo: {fileID: 0}
+  settingsCloseVideo: {fileID: 0}
+  wipe: {fileID: 0}
+  pauseOpen: {fileID: 0}
+  backSound: {fileID: 0}
+  selectSound: {fileID: 0}
 --- !u!114 &957350232447733439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,6 +170,7 @@ MonoBehaviour:
   graphicsFirstButton: {fileID: 6300583362144689867}
   accessibilityFirstButton: {fileID: 3609911102304337308}
   settingsReturnButton: {fileID: 9107760018130356943}
+  godModeToggleREF: {fileID: 0}
 --- !u!1 &1235787035610498758
 GameObject:
   m_ObjectHideFlags: 0

@@ -27,8 +27,13 @@ public class MissionsTab : MonoBehaviour
     public Button MainMissionButton;
     public Button SideHustleButton;
     public Button CompletedButton;
-
-    public Button MissionsTabButton;
+    public Button OutskirtsButton;
+    public Button InnerRingButton;
+    public Button ServosHQButton;
+    public Sprite locationSelected;
+    public Sprite locationNotSelected;
+    public Sprite missionTypeSelected;
+    public Sprite missionTypeNotSelected;
 
     private GameObject canvasREF;
     private InfoScreen infoScreen;
@@ -61,19 +66,15 @@ public class MissionsTab : MonoBehaviour
         OutskirtsLists[0].SetActive(true);
     }
 
-    void Update()
-    {
-        if (EventSystem.current.currentSelectedGameObject == null)
-        {
-            MissionsTabButton.Select();
-        }
-    }
-
     public void OpenMainMissions()
     {
         MainMissionTab.SetActive(true);
         SideHustleTab.SetActive(false);
         CompletedTab.SetActive(false);
+
+        MainMissionButton.GetComponent<Image>().sprite = missionTypeSelected;
+        SideHustleButton.GetComponent<Image>().sprite = missionTypeNotSelected;
+        CompletedButton.GetComponent<Image>().sprite = missionTypeNotSelected;
 
         for (int i = 0; i < 3; i++)
         {
@@ -93,8 +94,7 @@ public class MissionsTab : MonoBehaviour
             ServosHQLists[0].SetActive(true);
         }
 
-        MainMissionButton.Select();
-
+        PlaySound();
     }
 
     public void OpenSideHustle()
@@ -103,6 +103,10 @@ public class MissionsTab : MonoBehaviour
         SideHustleTab.SetActive(true);
         CompletedTab.SetActive(false);
 
+        MainMissionButton.GetComponent<Image>().sprite = missionTypeNotSelected;
+        SideHustleButton.GetComponent<Image>().sprite = missionTypeSelected;
+        CompletedButton.GetComponent<Image>().sprite = missionTypeNotSelected;
+
         for (int i = 0; i < 3; i++)
         {
             OutskirtsLists[i].SetActive(false);
@@ -121,8 +125,7 @@ public class MissionsTab : MonoBehaviour
             ServosHQLists[1].SetActive(true);
         }
 
-        SideHustleButton.Select();
-
+        PlaySound();
     }
 
     public void OpenCompleted()
@@ -130,6 +133,10 @@ public class MissionsTab : MonoBehaviour
         MainMissionTab.SetActive(false);
         SideHustleTab.SetActive(false);
         CompletedTab.SetActive(true);
+
+        MainMissionButton.GetComponent<Image>().sprite = missionTypeNotSelected;
+        SideHustleButton.GetComponent<Image>().sprite = missionTypeNotSelected;
+        CompletedButton.GetComponent<Image>().sprite = missionTypeSelected;
 
         for (int i = 0; i < 3; i++)
         {
@@ -149,8 +156,7 @@ public class MissionsTab : MonoBehaviour
             ServosHQLists[2].SetActive(true);
         }
 
-        CompletedButton.Select();
-
+        PlaySound();
     }
 
     public void OpenOutskirts()
@@ -158,6 +164,10 @@ public class MissionsTab : MonoBehaviour
         OutskirtsTab.SetActive(true);
         InnerRingTab.SetActive(false);
         ServosHQTab.SetActive(false);
+
+        OutskirtsButton.GetComponent<Image>().sprite = locationSelected;
+        InnerRingButton.GetComponent<Image>().sprite = locationNotSelected;
+        ServosHQButton.GetComponent<Image>().sprite = locationNotSelected;
 
         for (int i = 0; i < 3; i++)
         {
@@ -169,16 +179,15 @@ public class MissionsTab : MonoBehaviour
         if (MainMissionTab.activeInHierarchy == true)
         {
             OutskirtsLists[0].SetActive(true);
-            MainMissionButton.Select();
         } else if (SideHustleTab.activeInHierarchy == true)
         {
             OutskirtsLists[1].SetActive(true);
-            SideHustleButton.Select();
         } else if (CompletedTab.activeInHierarchy == true)
         {
             OutskirtsLists[2].SetActive(true);
-            CompletedButton.Select();
         }
+
+        PlaySound();
     }
 
     public void OpenInnerRing()
@@ -186,6 +195,10 @@ public class MissionsTab : MonoBehaviour
         OutskirtsTab.SetActive(false);
         InnerRingTab.SetActive(true);
         ServosHQTab.SetActive(false);
+
+        OutskirtsButton.GetComponent<Image>().sprite = locationNotSelected;
+        InnerRingButton.GetComponent<Image>().sprite = locationSelected;
+        ServosHQButton.GetComponent<Image>().sprite = locationNotSelected;
 
         for (int i = 0; i < 3; i++)
         {
@@ -197,16 +210,15 @@ public class MissionsTab : MonoBehaviour
         if (MainMissionTab.activeInHierarchy == true)
         {
             InnerRingLists[0].SetActive(true);
-            MainMissionButton.Select();
         } else if (SideHustleTab.activeInHierarchy == true)
         {
             InnerRingLists[1].SetActive(true);
-            SideHustleButton.Select();
         } else if (CompletedTab.activeInHierarchy == true)
         {
             InnerRingLists[2].SetActive(true);
-            CompletedButton.Select();
         }
+
+        PlaySound();
     }
 
     public void OpenServosHQ()
@@ -214,6 +226,10 @@ public class MissionsTab : MonoBehaviour
         OutskirtsTab.SetActive(false);
         InnerRingTab.SetActive(false);
         ServosHQTab.SetActive(true);
+
+        OutskirtsButton.GetComponent<Image>().sprite = locationNotSelected;
+        InnerRingButton.GetComponent<Image>().sprite = locationNotSelected;
+        ServosHQButton.GetComponent<Image>().sprite = locationSelected;
 
         for (int i = 0; i < 3; i++)
         {
@@ -225,16 +241,15 @@ public class MissionsTab : MonoBehaviour
         if (MainMissionTab.activeInHierarchy == true)
         {
             ServosHQLists[0].SetActive(true);
-            MainMissionButton.Select();
         } else if (SideHustleTab.activeInHierarchy == true)
         {
             ServosHQLists[1].SetActive(true);
-            SideHustleButton.Select();
         } else if (CompletedTab.activeInHierarchy == true)
         {
             ServosHQLists[2].SetActive(true);
-            CompletedButton.Select();
         }
+
+        PlaySound();
     }
 
     //Trigger Mapping
@@ -268,5 +283,12 @@ public class MissionsTab : MonoBehaviour
         {
             OpenInnerRing();
         }
+    }
+
+    //Sounds
+    void PlaySound()
+    {
+        audioSource.clip = infoScreen.selectSound;
+        audioSource.Play(0);
     }
 }
