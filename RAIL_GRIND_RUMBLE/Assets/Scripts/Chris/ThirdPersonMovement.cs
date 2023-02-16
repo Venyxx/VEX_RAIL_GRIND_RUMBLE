@@ -29,7 +29,7 @@ public class ThirdPersonMovement : MonoBehaviour
     //[SerializeField]private float jumpForceMin;
     [SerializeField]private float jumpForce;
     //[SerializeField]private float additionalJumpForce;
-    bool isJumping;
+    public bool isJumping; // Kevin made this pub
     bool jumpDelayRunning = false;
     float jumpTimeCounter;
     private float jumpTimer;
@@ -284,7 +284,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
         if (context.canceled)
         {
-            isJumping = false;
+          //  isJumping = false;
             
         }
     }

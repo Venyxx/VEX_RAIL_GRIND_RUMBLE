@@ -122,6 +122,7 @@ public class WallRun : MonoBehaviour
         if (!isWallRunning) return;
         if (playerScript.dialogueBox.activeInHierarchy) return;
         Debug.Log("Wall jump input detected");
+        playerScript.isJumping = true; // added by Kevin for air attack
         WallJump();
     }
     
@@ -161,6 +162,7 @@ public class WallRun : MonoBehaviour
     private void WallJump()
     {
         //Enter exit wall state
+        
         exitingWall = true;
         exitWallTimer = exitWallTime;
 

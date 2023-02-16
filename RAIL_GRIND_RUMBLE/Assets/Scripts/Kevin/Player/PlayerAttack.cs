@@ -16,6 +16,8 @@ public class PlayerAttack : MonoBehaviour
     private ThirdPersonMovement movementScriptREF;
     float HeavyAtkTimer;
     bool TimerOn;
+    public GrappleHook grappleREF;
+    private WallRun wallRunREF;
 
     //buff
     public bool isBuffed;
@@ -30,6 +32,8 @@ public class PlayerAttack : MonoBehaviour
         Lefty.enabled = false;
         Righty.enabled = false;
         movementScriptREF = GetComponent<ThirdPersonMovement>();
+        wallRunREF = GetComponent<WallRun>();
+        
     }
 
     void Start()
@@ -85,7 +89,7 @@ public class PlayerAttack : MonoBehaviour
         if (!context.started
             || movementScriptREF.isWalking ||
             GameObject.Find("AimingCam") ||
-            movementScriptREF.Grounded == false ||
+           // movementScriptREF.Grounded == false ||
             movementScriptREF.dialogueBox.activeInHierarchy
             //||movementScriptREF.nearestDialogueTemplate != null
             )
@@ -94,7 +98,7 @@ public class PlayerAttack : MonoBehaviour
         }
 
 
-        if (context.started && !IsAttacking && !IsHeavyAttacking)
+        if (context.started && !IsAttacking && !IsHeavyAttacking && !grappleREF.isGrappling && !wallRunREF.isWallRunning)
         {
             IsAttacking = true;
             atkCount++;
@@ -102,9 +106,20 @@ public class PlayerAttack : MonoBehaviour
         }
 
 
-        if (atkCount == 1 && !IsHeavyAttacking && IsAttacking)
+       
+
+
+        if (atkCount == 1 && !IsHeavyAttacking && IsAttacking && !grappleREF.isGrappling)
         {
-            anim.SetTrigger("LAttack");
+            if (movementScriptREF.isJumping == false)
+            {
+                anim.SetTrigger("LAttack");
+            }
+            if (movementScriptREF.isJumping == true)
+            {
+                anim.SetTrigger("AirLight");
+            }
+            
         }
         
 
@@ -123,27 +138,35 @@ public class PlayerAttack : MonoBehaviour
         if (!context.started ||
             movementScriptREF.isWalking ||
             GameObject.Find("AimingCam") ||
-            movementScriptREF.Grounded == false ||
+           // movementScriptREF.Grounded == false ||
             movementScriptREF.dialogueBox.activeInHierarchy)
         {
 
             return;
         }
 
-        if (context.started || !IsAttacking)
-        {
-            // Debug.Log("HeavyAttack1" + context.phase);  
-        }
+       
 
 
-        if (context.ReadValueAsButton() == true && !IsHeavyAttacking && atkCount == 0)
+        if (context.ReadValueAsButton() == true && !IsHeavyAttacking && atkCount == 0 && !grappleREF.isGrappling && !wallRunREF.isWallRunning)
         {
         //    Debug.Log("Key Press");
-            anim.SetTrigger("HAttackStart");
-            TimerOn = true;
-            IsHeavyAttacking = true;
-            HeavyAtkTimer = 0;
-            atkCount++;
+           
+
+            if (movementScriptREF.Grounded == true)
+            {
+                anim.SetTrigger("HAttackStart");
+                TimerOn = true;
+                IsHeavyAttacking = true;
+                HeavyAtkTimer = 0;
+                atkCount++;
+            }
+            if (movementScriptREF.Grounded == false)
+            {
+                anim.SetTrigger("AirHeavy");
+                IsHeavyAttacking = true;
+                atkCount++;
+            }
         }
 
         if (context.ReadValueAsButton() == false && IsHeavyAttacking)
