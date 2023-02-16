@@ -225,51 +225,7 @@ public class PlayerAttack : MonoBehaviour
         IDamageable damageable;
        
 
-        if (Righty.enabled )
-        {
-           // Debug.Log("ATKtest");
-           //
 
-        }
-
-            if (other.TryGetComponent<IDamageable>(out damageable))
-            {
-
-            //Random rand = new Random();
-            //  audioSource.PlayOneShot(hitSounds[rand.Next(0, hitSounds.Length)]);
-          
-
-        }
-
-        if (Righty.enabled || Lefty.enabled && other.TryGetComponent<IDamageable>(out damageable))
-        {
-            //Debug.Log("ATKtest");
-         //   damageable.TakeDamage(Damage);
-
-
-        }
-
-       
-            
-        if (Righty.enabled && other.TryGetComponent<IDamageable>(out damageable) && other.gameObject.tag == "Enemy" || Lefty.enabled && other.TryGetComponent<IDamageable>(out damageable) && other.gameObject.tag == "Enemy")
-        {
-            //Debug.Log("ATKtest");
-            //  damageable.TakeDamage(Damage);
-            
-
-        }
-
-
-
-            if(Righty.enabled && other.TryGetComponent<IDamageable>(out damageable) && other.gameObject.tag == "Enemy")
-        {
-           // Debug.Log("ATKtest");
-        }
-
-        if (Lefty.enabled && other.TryGetComponent<IDamageable>(out damageable) && other.gameObject.tag == "Enemy")
-        {
-           // Debug.Log("ATKtest");
-        }
 
         if (other.gameObject.tag == "Enemy")
         {
