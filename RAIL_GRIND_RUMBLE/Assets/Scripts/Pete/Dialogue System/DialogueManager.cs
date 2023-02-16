@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
-using UnityEngine.ProBuilder.MeshOperations;
 
 public class DialogueManager : MonoBehaviour
 { 
@@ -31,11 +30,16 @@ public class DialogueManager : MonoBehaviour
         paragraphDisplayed = new Queue<string>();
         textComponent.text = string.Empty;
         talkingToName.text = string.Empty;
-        dialogueBox.SetActive(false);
+        
         thirdPersonControllerREF = FindObjectOfType<ThirdPersonMovement>();
         ariRig = GetAriRig();
-        questWindow = GameObject.Find("QuestWindow");
+        if (questWindow == null)
+        {
+            questWindow = GameObject.Find("QuestWindow");
+
+        }
         questWindow.SetActive(false);
+        dialogueBox.SetActive(false);
     }
     
     private void Update()

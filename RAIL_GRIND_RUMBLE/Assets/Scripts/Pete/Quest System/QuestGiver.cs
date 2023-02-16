@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,20 +9,27 @@ public class QuestGiver : MonoBehaviour
 
     private PauseMenu pauseMenu;
     
-    private TextMeshProUGUI questTitleText;
-    private TextMeshProUGUI questDescrText;
-    private TextMeshProUGUI questRewardText;
+    [SerializeField]private TextMeshProUGUI questTitleText;
+    [SerializeField]private TextMeshProUGUI questDescrText;
+    [SerializeField]private TextMeshProUGUI questRewardText;
 
     public bool acceptedOrDeniedAlready = false;
 
 
     void Start()
     {
+        
         questToGive = GetComponent<Quest>();
         pauseMenu = FindObjectOfType<PauseMenu>();
-        questTitleText = GameObject.Find("QuestNameField").GetComponent<TextMeshProUGUI>();
-        questDescrText = GameObject.Find("DescriptionField").GetComponent<TextMeshProUGUI>();
-        questRewardText = GameObject.Find("RewardsText").GetComponent<TextMeshProUGUI>();
+        if(questTitleText == null)
+            questTitleText = GameObject.Find("QuestNameField").GetComponent<TextMeshProUGUI>();
+        if(questDescrText == null)
+            questDescrText = GameObject.Find("DescriptionField").GetComponent<TextMeshProUGUI>();
+        if(questRewardText == null)
+            questRewardText = GameObject.Find("RewardsText").GetComponent<TextMeshProUGUI>();
+        Debug.Log("Finished Start in QuestGiver");
+
+
     }
 
     // Update is called once per frame

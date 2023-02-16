@@ -29,4 +29,14 @@ public class DevFunctions : MonoBehaviour
     {
         SceneManager.LoadScene("Ari's House");
     }
+
+    public void LoadDonovanLevel()
+    {
+        SceneManager.LoadScene("Donovan's Level");
+    }
+
+    public void LoadServosLobby()
+    {
+        SceneManager.LoadScene("ServosLobby");
+    }
 }
