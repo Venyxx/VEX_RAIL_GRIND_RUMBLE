@@ -11,6 +11,7 @@ public class Idlescript : StateMachineBehaviour
         PlayerAttack.instance.anim.ResetTrigger("HAttackEnd1");
         PlayerAttack.instance.anim.ResetTrigger("HAttackEnd2");
         PlayerAttack.instance.anim.ResetTrigger("HAttackEnd3");
+        PlayerAttack.instance.IsAttacking = false;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

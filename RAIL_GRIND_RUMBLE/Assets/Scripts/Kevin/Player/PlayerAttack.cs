@@ -111,11 +111,11 @@ public class PlayerAttack : MonoBehaviour
 
         if (atkCount == 1 && !IsHeavyAttacking && IsAttacking && !grappleREF.isGrappling)
         {
-            if (movementScriptREF.isJumping == false)
+            if (movementScriptREF.isJumping == false && movementScriptREF.Grounded == true)
             {
                 anim.SetTrigger("LAttack");
             }
-            if (movementScriptREF.isJumping == true)
+            if (movementScriptREF.isJumping == true || movementScriptREF.Grounded == false)
             {
                 anim.SetTrigger("AirLight");
             }
@@ -161,7 +161,7 @@ public class PlayerAttack : MonoBehaviour
                 HeavyAtkTimer = 0;
                 atkCount++;
             }
-            if (movementScriptREF.Grounded == false)
+            if (movementScriptREF.isJumping == true || movementScriptREF.Grounded == false)
             {
                 anim.SetTrigger("AirHeavy");
                 IsHeavyAttacking = true;

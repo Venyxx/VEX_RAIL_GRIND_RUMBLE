@@ -10,6 +10,7 @@ public class AirLight : StateMachineBehaviour
         PlayerAttack.instance.Damage = 30;
         PlayerAttack.instance.Lefty.enabled = true;
         PlayerAttack.instance.IsAttacking = false;
+
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
