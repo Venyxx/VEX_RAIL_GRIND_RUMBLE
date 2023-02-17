@@ -94,9 +94,9 @@ GameObject:
   - component: {fileID: 7574922144786318463}
   - component: {fileID: 7574922144786318465}
   - component: {fileID: 7574922144786318462}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: large_wall_straight
-  m_TagString: Untagged
+  m_TagString: WallRun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -558,7 +558,8 @@ GameObject:
   - component: {fileID: 7574922145729995828}
   - component: {fileID: 7574922145729995830}
   - component: {fileID: 7574922145729995831}
-  m_Layer: 0
+  - component: {fileID: 2480498511046160657}
+  m_Layer: 6
   m_Name: roof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -630,6 +631,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &2480498511046160657
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7574922145729995829}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 17.027935, y: 0.24965636, z: 4.3000016}
+  m_Center: {x: -4.490169, y: 0.00000030115882, z: 2.1088266}
 --- !u!1 &7574922145756349593
 GameObject:
   m_ObjectHideFlags: 0
@@ -1139,7 +1153,7 @@ GameObject:
   - component: {fileID: 7574922146203572794}
   - component: {fileID: 7574922146203572796}
   - component: {fileID: 7574922146203572797}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: roof (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
