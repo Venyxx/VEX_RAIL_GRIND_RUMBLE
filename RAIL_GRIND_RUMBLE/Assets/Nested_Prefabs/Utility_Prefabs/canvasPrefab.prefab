@@ -12641,8 +12641,6 @@ MonoBehaviour:
   settingsCloseVideo: {fileID: 5301133538572579199}
   wipe: {fileID: 6716344284507760302}
   pauseOpen: {fileID: 8300000, guid: c509311d60f83594492fac4ba21469fe, type: 3}
-  backSound: {fileID: 8300000, guid: 4f8686ffa1133344b861cd4897d0dff2, type: 3}
-  selectSound: {fileID: 8300000, guid: 45352b6a6760a9641a12316fdf302f5c, type: 3}
 --- !u!114 &3987235028224522023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12952,6 +12950,30 @@ MonoBehaviour:
       - m_Target: {fileID: 1624858096524125931}
         m_TargetAssemblyTypeName: InfoScreen, Assembly-CSharp
         m_MethodName: BackPressed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3987235028224522023}
+        m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
+        m_MethodName: ControllerBackButton
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6389651197553966524}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: ControllerResume
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16525,7 +16547,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6616480735526702429
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17097,7 +17119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Act1Titles:
-  - Act 1-1
+  - Act 1 First Datalog Title
   - Act 1-2
   - Act 1-3
   - Act 1-4
@@ -17115,7 +17137,7 @@ MonoBehaviour:
   - 
   - 
   Act1TextBoxes:
-  - 
+  - Act 1 First Datalog Text
   - 
   - 
   - 
@@ -18193,7 +18215,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 45.233124, y: 17.719545, z: -90.69249, w: -49.520935}
+  m_margin: {x: 71.67561, y: 33.514114, z: -70.980865, w: -32.95589}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -26039,7 +26061,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -71, y: 33}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: -25.0095}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6026038935637460005
 CanvasRenderer:
@@ -26132,7 +26154,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 45.233124, y: 17.719545, z: -90.69249, w: -49.520935}
+  m_margin: {x: 71.24298, y: 20.801418, z: -71.61861, w: -45.484528}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -26307,8 +26329,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -71, y: 33}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -71, y: 33.2}
+  m_SizeDelta: {x: 0, y: -31.0303}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6028010962216755445
 CanvasRenderer:
@@ -26403,7 +26425,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 45.233124, y: 17.719545, z: -90.69249, w: -49.520935}
+  m_margin: {x: 69.938354, y: 17.719545, z: -71.621796, w: -48.86388}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

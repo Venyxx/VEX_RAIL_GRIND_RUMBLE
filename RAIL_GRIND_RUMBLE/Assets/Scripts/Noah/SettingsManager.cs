@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class SettingsManager : MonoBehaviour
 {
@@ -20,16 +21,30 @@ public class SettingsManager : MonoBehaviour
     public static bool godMode = false;
     public GameObject godModeToggleREF;
 
+    //For Sounds
+    InfoScreen infoScreen;
+
+    //For Back to Pause
+    PauseMenu pauseMenu;
+
 
     void Start()
     {
-        
+        infoScreen = GetComponent<InfoScreen>();
+        pauseMenu = GetComponent<PauseMenu>();
     }
 
     // Update is called once per frame
     void Update()
     {
-       
+        //Assures controllers always function on menus
+       if (EventSystem.current.currentSelectedGameObject == null && PauseMenu.isPaused == true)
+       {
+            if (settingsScreen.activeInHierarchy)
+            {
+                settingsReturnButton.GetComponent<Button>().Select();
+            }
+       }
     }
 
     public void OpenAudio()
@@ -42,6 +57,8 @@ public class SettingsManager : MonoBehaviour
 
         EventSystem.current.SetSelectedGameObject(null); 
         EventSystem.current.SetSelectedGameObject(audioFirstButton);
+
+        infoScreen.PlaySoundUI(infoScreen.nextSound);
     }
 
     public void OpenControls()
@@ -54,6 +71,8 @@ public class SettingsManager : MonoBehaviour
 
         EventSystem.current.SetSelectedGameObject(null); 
         EventSystem.current.SetSelectedGameObject(controlsFirstButton);
+
+        infoScreen.PlaySoundUI(infoScreen.nextSound);
     }
 
     public void OpenGraphics()
@@ -66,6 +85,8 @@ public class SettingsManager : MonoBehaviour
 
         EventSystem.current.SetSelectedGameObject(null); 
         EventSystem.current.SetSelectedGameObject(graphicsFirstButton);
+
+        infoScreen.PlaySoundUI(infoScreen.nextSound);
     }
 
     public void OpenAccessiblity()
@@ -78,6 +99,8 @@ public class SettingsManager : MonoBehaviour
 
         EventSystem.current.SetSelectedGameObject(null); 
         EventSystem.current.SetSelectedGameObject(accessibilityFirstButton);
+
+        infoScreen.PlaySoundUI(infoScreen.nextSound);
     }
 
     public void BackToSettings()
@@ -90,11 +113,14 @@ public class SettingsManager : MonoBehaviour
 
         EventSystem.current.SetSelectedGameObject(null); 
         EventSystem.current.SetSelectedGameObject(settingsReturnButton);
+
+        infoScreen.PlaySoundUI(infoScreen.backSound);
     }
 
     //Turn on God Mode
     public void GodModeToggle()
     {
+        infoScreen.PlaySoundUI(infoScreen.selectSound);
         if (godModeToggleREF.GetComponent<Toggle>().isOn == false)
         {
             godMode = false;
@@ -103,5 +129,23 @@ public class SettingsManager : MonoBehaviour
             godMode = true;
             Debug.Log("God Mode is On. May you have mercy on their souls.");
         }
+    }
+
+    //B Button Back
+    public void ControllerBackButton(InputAction.CallbackContext context)
+    {
+        if (!context.started || PauseMenu.isPaused == false || pauseMenu.pauseSettings.activeInHierarchy == false) return;
+
+        //Troubleshoot why this isn't going back to main pause screen instead of resuming
+        if (context.started)
+        {
+            if (settingsScreen.activeInHierarchy == false)
+            {
+                BackToSettings();
+            } else if (pauseMenu.pauseSettings.activeInHierarchy){
+                pauseMenu.ClosePauseSettings();
+            }
+        }
+        
     }
 }

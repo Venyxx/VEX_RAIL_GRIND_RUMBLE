@@ -664,6 +664,8 @@ public class ThirdPersonMovement : MonoBehaviour
 
     public void PlaySound(int sound)
     {
+        if (PauseMenu.isPaused) return;
+
         audioSource.clip = playerSounds[sound];
         audioSource.Play(0);
 
