@@ -21,10 +21,10 @@ public class EnemyHealthProxy : MonoBehaviour, IDamageable
         }
         
     }
-    public void TakeDamage(float Damage)
+    public void TakeDamage(float damage)
     {
         Enemy enemy = gameObject.GetComponentInParent(typeof(Enemy)) as Enemy;
-        enemy.TakeDamage(Damage);
+        enemy.TakeDamage(damage);
        
     }
 

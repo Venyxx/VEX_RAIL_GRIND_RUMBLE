@@ -6,6 +6,14 @@ public class CountQuest : Quest
     private int currentCount;
     [SerializeField] private CountQuestType questType;
     [SerializeField] private int completionCount;
+    private QuestTracker questTracker;
+    [Tooltip("ONLY USABLE FOR COIN QUESTS")]
+    public bool subtractCoinsOnCompletion;
+
+    private void Start()
+    {
+        questTracker = FindObjectOfType<QuestTracker>();
+    }
 
     public CountQuestType GetCountQuestType()
     {
@@ -15,6 +23,7 @@ public class CountQuest : Quest
     public void IncrementCount()
     {
         currentCount++;
+        questTracker.QuestInfoText.text = $"Progress: {currentCount} / {completionCount}";
         Debug.Log(currentCount);
         if (currentCount >= completionCount)
         {
@@ -26,6 +35,11 @@ public class CountQuest : Quest
     public void ResetCount()
     {
         currentCount = 0;
+    }
+
+    public int GetCompletionCount()
+    {
+        return completionCount;
     }
 }
 

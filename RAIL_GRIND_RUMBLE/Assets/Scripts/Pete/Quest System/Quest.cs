@@ -1,16 +1,18 @@
 using System.Collections.Generic;
 using System.Text;
+using StarterAssets;
 using UnityEngine;
 
 [System.Serializable]
 public class Quest : MonoBehaviour
 {
+    public QuestReward[] questRewards;
     public bool isActive;
     public bool isComplete;
     [SerializeField] private string questName;
     [SerializeField] private string description;
     public bool RewardsGiven { get; set; } = false;
-    public List<QuestReward> questRewards;
+    
     
     [TextArea(3,10)] [SerializeField] private string questAcceptedText;
     [TextArea(3,10)] [SerializeField] private string questDeniedText;
@@ -44,7 +46,7 @@ public class Quest : MonoBehaviour
 
     void Start()
     {
-        questRewards = new List<QuestReward>();
+        
     }
 
     public void RewardPlayer()
@@ -53,8 +55,18 @@ public class Quest : MonoBehaviour
         {
             reward.RewardPlayer();
         }
-
-        RewardsGiven = true;
+        
+        QuestTracker tracker = FindObjectOfType<QuestTracker>();
+        if (tracker.CurrentQuest is CountQuest)
+        {
+            CountQuest countQuest = (CountQuest)tracker.CurrentQuest;
+            if (countQuest.subtractCoinsOnCompletion && countQuest.GetCountQuestType() is CountQuestType.Coins)
+            {
+                ThirdPersonMovement player = FindObjectOfType<ThirdPersonMovement>();
+                player.AddCoin(-countQuest.GetCompletionCount());
+            }
+        }
+        
     }
 
 }

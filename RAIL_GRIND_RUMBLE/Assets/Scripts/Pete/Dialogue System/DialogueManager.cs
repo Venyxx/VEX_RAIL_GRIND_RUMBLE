@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.Rendering.Universal;
 
 public class DialogueManager : MonoBehaviour
 { 
@@ -147,7 +148,8 @@ public class DialogueManager : MonoBehaviour
         try
         {
             var questGiver = npcModel.transform.parent.GetComponentInChildren<QuestGiver>();
-            if (!questGiver.acceptedOrDeniedAlready && !questGiver.GetQuest().isComplete && !questGiver.GetQuest().isActive)
+            Quest quest = questGiver.GetQuest();
+            if (!questGiver.acceptedOrDeniedAlready && !quest.isComplete && !quest.isActive)
             {
                 questGiver.OpenQuestWindow();
                 questGiver.acceptedOrDeniedAlready = true;
@@ -156,10 +158,18 @@ public class DialogueManager : MonoBehaviour
             {
                 questGiver.acceptedOrDeniedAlready = false;
             }
+            Debug.Log($"Quest is marked complete? {questGiver.GetQuest().isComplete}");
+            Debug.Log($"QuestRewards marked as Given? {questGiver.GetQuest().RewardsGiven}");
+            if (quest.isComplete && !quest.RewardsGiven)
+            {
+                quest.RewardPlayer();
+                quest.RewardsGiven = true;
+                FindObjectOfType<QuestTracker>().QuestInfoText.text = "";
+            }
         }
         catch (NullReferenceException e)
         {
-            
+            Debug.Log("There is no QuestGiver attached to this Dialogue");
         }
 
         

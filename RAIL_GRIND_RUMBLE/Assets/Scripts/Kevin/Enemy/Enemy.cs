@@ -28,6 +28,7 @@ public class Enemy : PoolableObject, IDamageable
 
     //damage indicator
     public GameObject damageText;
+    private bool dead;
 
     private void Awake()
     {
@@ -113,10 +114,10 @@ public class Enemy : PoolableObject, IDamageable
         AttackRadius.AttackDelay = EnemyScriptableObject.AttackDelay;
         AttackRadius.Damage = EnemyScriptableObject.Damage;
     }
-    public void TakeDamage(float Damage)
+    public void TakeDamage(float damage)
     {
         
-        if (Damage > 0)
+        if (damage > 0)
         {
             if(CanTakeDamage)
             {
@@ -124,25 +125,24 @@ public class Enemy : PoolableObject, IDamageable
                 
                 
                 StartCoroutine(TakeDamage());
-                Health -= Damage;
+                Health -= damage;
 
                 //damage indicator
                 DamageIndicatior indicator = Instantiate (damageText, transform.position, Quaternion.identity).GetComponent<DamageIndicatior>();
-                indicator.SetDamageText(Damage);
+                indicator.SetDamageText(damage);
             }
            
         }
         
-        if (Health <= 0)
+        if (Health <= 0 && !dead)
         {
-
+            dead = true;
             QuestTracker tracker = FindObjectOfType<QuestTracker>();
             if (tracker.CurrentCountQuestType is CountQuestType.Enemies)
             {
                 CountQuest quest = (CountQuest)tracker.CurrentQuest;
                 quest.IncrementCount();
             }
-
             Movement.activated = false;
             if (!TimerOn)
             {

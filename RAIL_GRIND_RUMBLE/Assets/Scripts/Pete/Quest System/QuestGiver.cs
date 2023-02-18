@@ -18,7 +18,6 @@ public class QuestGiver : MonoBehaviour
 
     void Start()
     {
-        
         questToGive = GetComponent<Quest>();
         pauseMenu = FindObjectOfType<PauseMenu>();
         if(questTitleText == null)
@@ -28,8 +27,6 @@ public class QuestGiver : MonoBehaviour
         if(questRewardText == null)
             questRewardText = GameObject.Find("RewardsText").GetComponent<TextMeshProUGUI>();
         Debug.Log("Finished Start in QuestGiver");
-
-
     }
 
     // Update is called once per frame

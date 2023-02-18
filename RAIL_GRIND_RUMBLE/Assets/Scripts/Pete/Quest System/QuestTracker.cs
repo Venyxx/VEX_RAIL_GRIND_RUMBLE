@@ -1,17 +1,31 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class QuestTracker : MonoBehaviour
 {
     public Quest CurrentQuest { get; set; }
+    public TextMeshProUGUI QuestInfoText { get; private set; }
     private static List<Quest> completedQuests;
     public CountQuestType CurrentCountQuestType { get; private set; } = CountQuestType.None;
 
     void Start()
     {
         completedQuests = new List<Quest>();
+        try
+        {
+            QuestInfoText = GameObject.Find("QuestInfo").transform.Find("QuestInfoText").gameObject
+                .GetComponent<TextMeshProUGUI>();
+            QuestInfoText.text = "";
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Failed to assign QuestInfoText");
+        }
     }
 
+    
     public void AcceptQuest(Quest quest)
     {
         foreach (var otherQuest in FindObjectsOfType<Quest>())
@@ -20,20 +34,16 @@ public class QuestTracker : MonoBehaviour
         }
         CurrentQuest = quest;
         CurrentQuest.isActive = true;
-        if (quest is CountQuest)
+        if (quest is CountQuest countQuest)
         {
-            CountQuest countQuest = (CountQuest) quest;
             CurrentCountQuestType = countQuest.GetCountQuestType();
+            QuestInfoText.text = $"Progress: {0} / {countQuest.GetCompletionCount()}";
         }
     }
+    
 
     public void CompleteQuest()
     {
-        foreach (QuestReward reward in CurrentQuest.questRewards)
-        {
-            reward.RewardPlayer();
-        }
-
         CurrentQuest.isActive = false;
         CurrentQuest.isComplete = true;
         completedQuests.Add(CurrentQuest);

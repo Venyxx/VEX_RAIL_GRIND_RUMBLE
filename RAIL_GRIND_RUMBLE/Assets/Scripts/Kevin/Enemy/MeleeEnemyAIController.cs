@@ -95,9 +95,9 @@ private void ResetAttack()
 	alreadyAttacked = false;
 }
 
-  public void TakeDamage(float Damage)
+  public void TakeDamage(float damage)
     {
-        Health -= Damage;
+        Health -= damage;
         if (Health <= 0)
         {
 			//Added by Chris
