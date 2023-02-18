@@ -205,6 +205,13 @@ public class PauseMenu : MonoBehaviour
             StartCoroutine(ResumeDelay());
         }
 
+        if (context.started && pauseSettings.activeInHierarchy == true)
+        {
+            ClosePauseSettings();
+        }
+
+
+
     }
 
 }
