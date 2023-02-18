@@ -23,7 +23,7 @@ public class EnemyHealthProxy : MonoBehaviour, IDamageable
     }
     public void TakeDamage(float Damage)
     {
-        Enemy enemy = gameObject.GetComponentInParent(typeof(Enemy)) as Enemy;
+     
         enemy.TakeDamage(Damage);
        
     }
@@ -35,7 +35,13 @@ public class EnemyHealthProxy : MonoBehaviour, IDamageable
     }
     public Transform GetTransform()
     {
-        Enemy enemy = gameObject.GetComponentInParent(typeof(Enemy)) as Enemy;
+       
         return enemy.transform;
     }
+
+    public void IsDizzy(bool isDizzy)
+    {
+        
+    }
+   
 }

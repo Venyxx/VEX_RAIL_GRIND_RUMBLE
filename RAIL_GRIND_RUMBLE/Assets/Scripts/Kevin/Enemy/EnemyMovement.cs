@@ -48,11 +48,16 @@ public class EnemyMovement : MonoBehaviour
     private void Update()
     {
         Animator.SetBool(IsWalking, Agent.velocity.magnitude > 0.01f);
-        if (Vector3.Distance(Player.position, transform.position) < activationDistance && !activated && enemy.Health >1)
+        if (Vector3.Distance(Player.position, transform.position) < activationDistance && !activated && enemy.Health >1 && !enemy.isDizzy)
         {
             Debug.Log("Player is within range, chasing the player");
             StartCoroutine(Activate());
-            activated = true;
+           
+            
+                activated = true;
+        
+
+
         }
        
         if (enemy.Health <=0)
@@ -61,6 +66,14 @@ public class EnemyMovement : MonoBehaviour
            
             StopAllCoroutines ();
         }
+        if ( enemy.isDizzy)
+        {
+          
+            activated = false;
+            StopAllCoroutines();
+        }
+       
+
     }
 
     private void HandleGainSight(Transform Target)
@@ -88,6 +101,7 @@ public class EnemyMovement : MonoBehaviour
 
     public void StartChasing()
     {
+
         if (FollowCoroutine == null)
         {
             FollowCoroutine = StartCoroutine(Activate()); //change this to StartCoroutine(FollowTarget()); for spawner
@@ -99,14 +113,16 @@ public class EnemyMovement : MonoBehaviour
         
     }
     
-    private IEnumerator Activate()
+    public IEnumerator Activate()
     {
+        
         WaitForSeconds Wait = new WaitForSeconds(UpdateSpeed);
         while(gameObject.activeSelf)
         {
             if (Agent.enabled)
             {
                 Agent.SetDestination(Player.transform.position);
+                
             }
             yield return Wait;
         }

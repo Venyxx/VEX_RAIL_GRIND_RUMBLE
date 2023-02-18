@@ -66,4 +66,9 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     {
         return transform;
     }
+
+    public void IsDizzy(bool isDizzy)
+    {
+        
+    }
 }

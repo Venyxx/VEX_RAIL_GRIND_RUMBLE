@@ -24,6 +24,7 @@ public class RangedAttackRadius : AttackRadius
     {
         WaitForSeconds Wait = new WaitForSeconds(AttackDelay);
         yield return Wait;
+        while (enemy.isDizzy) yield return null;
         while (Damageables.Count > 0)
         {
             for (int i = 0; i < Damageables.Count; i++)

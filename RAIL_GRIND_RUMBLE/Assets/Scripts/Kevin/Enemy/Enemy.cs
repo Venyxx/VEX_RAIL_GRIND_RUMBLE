@@ -2,6 +2,8 @@ using System.Collections;
 using UnityEngine.AI;
 using UnityEngine;
 using Random = System.Random;
+using Unity.VisualScripting;
+using UnityEngine.WSA;
 
 public class Enemy : PoolableObject, IDamageable
 {
@@ -24,7 +26,10 @@ public class Enemy : PoolableObject, IDamageable
     private AudioClip[] hitSounds;
     private AudioSource audioSource;
      bool CanTakeDamage = true;
-    public float _takeDamageDelay = .25f;
+    public float _takeDamageDelay = .6f;
+   public bool dizzy = false;
+    public bool isDizzy;
+   
 
     //damage indicator
     public GameObject damageText;
@@ -56,7 +61,7 @@ public class Enemy : PoolableObject, IDamageable
             TimerOn = false;
         }
         
-      
+     
       
     }
     private void OnAttack(IDamageable Target)
@@ -121,6 +126,12 @@ public class Enemy : PoolableObject, IDamageable
             if(CanTakeDamage)
             {
                 CanTakeDamage = false;
+                if (dizzy)
+                {
+                    StartCoroutine(Dizzy());
+
+                }
+                
                 
                 
                 StartCoroutine(TakeDamage());
@@ -180,6 +191,10 @@ public class Enemy : PoolableObject, IDamageable
     
         
     }
+    public void IsDizzy(bool isDizzy)
+    {
+        dizzy = isDizzy;
+    }
     public Transform GetTransform()
     {
         return transform;
@@ -191,11 +206,43 @@ public class Enemy : PoolableObject, IDamageable
         {
             Random rand = new Random();
             audioSource.PlayOneShot(hitSounds[rand.Next(0, hitSounds.Length)]);
+
+
+            if(!dizzy && !isDizzy)
+            {
+                Animator.SetTrigger("TakeDamage");
+            }
+                
+                yield return new WaitForSeconds(_takeDamageDelay);
+                CanTakeDamage = true;
+            
         }
-        yield return new WaitForSeconds(_takeDamageDelay);
-        CanTakeDamage = true;
+
         
     }
+
+    public IEnumerator Dizzy()
+    {
+        if (Health > 0)
+        {
+            
+            Animator.SetTrigger("DizzyStart");
+            isDizzy = true;
+            dizzy = false;
+            Debug.Log("Dizzy Start");
+            yield return new WaitForSeconds(5);
+            Debug.Log("Dizzy End");
+            Animator.SetTrigger("DizzyEnd");
+            isDizzy = false;
+          //  Movement.activated = true;
+
+
+        }
+
+
+    }
+
+
 
     private void Timer()
     {
