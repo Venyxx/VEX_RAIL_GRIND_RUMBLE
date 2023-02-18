@@ -28,6 +28,9 @@ public class ProgressTab : MonoBehaviour
 
     Animator anim;
 
+    private GameObject canvasREF;
+    private InfoScreen infoScreen;
+
 
     void Start()
     {
@@ -55,6 +58,9 @@ public class ProgressTab : MonoBehaviour
         }
 
         anim = GetComponent<Animator>();
+
+        canvasREF = GameObject.Find("canvasPrefab");
+        infoScreen = canvasREF.GetComponent<InfoScreen>();
     }
 
     public void DatalogEntryClick(GameObject button)
@@ -95,6 +101,8 @@ public class ProgressTab : MonoBehaviour
         }
         
         button.GetComponent<Image>().sprite = selected;
+        infoScreen.PlaySoundUI(infoScreen.selectSound);
+
     }
 
     public void ActivateTab(int select)
@@ -134,6 +142,9 @@ public class ProgressTab : MonoBehaviour
                 ActTabs[2].GetComponent<Button>().Select();
             }
         }
+
+        infoScreen.PlaySoundUI(infoScreen.selectSound);
+        
     }
 
     public void AnimationHandler(string condition)

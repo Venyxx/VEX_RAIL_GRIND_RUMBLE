@@ -35,7 +35,7 @@ public class GrappleHook : MonoBehaviour
     private Vector3 swingPoint;
     private SpringJoint joint;
     private Vector3 currentGrapplePosition;
-    bool isGrappling;
+   public bool isGrappling;
     bool zipRunning;
 
     //Tweakable Physics Values

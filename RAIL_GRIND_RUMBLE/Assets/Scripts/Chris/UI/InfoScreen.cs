@@ -107,8 +107,7 @@ public class InfoScreen : MonoBehaviour
 
     IEnumerator OpenInfoScreen()
     {
-        audioUI.clip = selectSound;
-        audioUI.Play(0);
+        PlaySoundUI(selectSound);
 
         infoScreen.SetActive(true);
         mapButton.gameObject.SetActive(true);
@@ -126,8 +125,7 @@ public class InfoScreen : MonoBehaviour
 
     IEnumerator CloseInfoScreen()
     {
-        audioUI.clip = backSound;
-        audioUI.Play(0);
+        PlaySoundUI(backSound);
 
         mapTab.SetActive(false);
         missionsTab.SetActive(false);
@@ -184,8 +182,7 @@ public class InfoScreen : MonoBehaviour
 
     public void OpenMapTab()
     {
-        audioUI.clip = nextSound;
-        audioUI.Play(0);
+        PlaySoundUI(nextSound);
         OpenMap();
     }
     void OpenMap()
@@ -212,8 +209,7 @@ public class InfoScreen : MonoBehaviour
 
     public void OpenMissionsTab()
     {
-        audioUI.clip = nextSound;
-        audioUI.Play(0);
+        PlaySoundUI(nextSound);
         OpenMissions();
     }
     void OpenMissions()
@@ -242,8 +238,7 @@ public class InfoScreen : MonoBehaviour
 
     public void OpenProgressTab()
     {
-        audioUI.clip = nextSound;
-        audioUI.Play(0);
+        PlaySoundUI(nextSound);
         OpenProgress();
     }
     void OpenProgress()
@@ -268,6 +263,12 @@ public class InfoScreen : MonoBehaviour
         currentTab = "Progress";
 
         Act1Button.Select();
+    }
+
+    public void PlaySoundUI(AudioClip clip)
+    {
+        audioUI.clip = clip;
+        audioUI.Play(0);
     }
 
 }

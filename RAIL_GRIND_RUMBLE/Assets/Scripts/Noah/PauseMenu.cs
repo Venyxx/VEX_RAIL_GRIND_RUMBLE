@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -41,8 +42,7 @@ public class PauseMenu : MonoBehaviour
     //For audio clips
     AudioSource audioSource;
     public AudioClip pauseOpen;
-    public AudioClip backSound;
-    public AudioClip selectSound;
+    private InfoScreen infoScreen;
 
 
     public static bool isPaused;
@@ -55,25 +55,16 @@ public class PauseMenu : MonoBehaviour
         reticleScript = grappleDetectorREF.GetComponent<Reticle>();
 
         audioSource = GetComponent<AudioSource>();
+        infoScreen = GetComponent<InfoScreen>();
     }
 
     void Update()
     {
-        /*if (Input.GetKeyDown("p"))
+        //Assures controllers always function on menus
+        if (EventSystem.current.currentSelectedGameObject == null && isPaused == true && pauseMenu.activeInHierarchy)
         {
-            if (isPaused)
-            {
-                ResumeGame();
-            }
-            else
-            {
-                isPaused = true;
-                pauseMenu.SetActive(true);
-                Time.timeScale = 0f;
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
-            }
-        }*/
+            pauseFirstButton.GetComponent<Button>().Select();
+        }
     }
 
     public void PauseGamePressed(InputAction.CallbackContext context)
@@ -119,8 +110,7 @@ public class PauseMenu : MonoBehaviour
 
     public void PauseGame()
     {
-        audioSource.clip = pauseOpen;
-        audioSource.Play(0);
+        infoScreen.PlaySoundUI(pauseOpen);
 
             isPaused = true;
             pauseMenu.SetActive(true);
@@ -151,8 +141,7 @@ public class PauseMenu : MonoBehaviour
 
     public void ResumeGame()
     {
-        audioSource.clip = backSound;
-        audioSource.Play(0);
+        infoScreen.PlaySoundUI(infoScreen.backSound);
 
         isPaused = false;
         pauseMenu.SetActive(false);
@@ -179,8 +168,7 @@ public class PauseMenu : MonoBehaviour
         settingsOpenVideo.SetActive(true);
 
         //Sound
-        audioSource.clip = selectSound;
-        audioSource.Play(0);
+        infoScreen.PlaySoundUI(infoScreen.selectSound);
 
         EventSystem.current.SetSelectedGameObject(null); 
         EventSystem.current.SetSelectedGameObject(settingsFirstButton);
@@ -197,12 +185,33 @@ public class PauseMenu : MonoBehaviour
 
         EventSystem.current.SetSelectedGameObject(null); 
         EventSystem.current.SetSelectedGameObject(settingsClosedButton);
+
+        infoScreen.PlaySoundUI(infoScreen.backSound);
     }
 
     public void ReturnToMain()
     {
         SceneManager.LoadScene(mainMenuScene);
         Time.timeScale = 1f;
+    }
+
+    //B Button on Controller
+    public void ControllerResume(InputAction.CallbackContext context)
+    {
+        if (!context.started || PauseMenu.isPaused == false || pauseMenu.activeInHierarchy == false) return;
+
+        if (context.started && pauseMenu.activeInHierarchy == true)
+        {
+            StartCoroutine(ResumeDelay());
+        }
+
+        if (context.started && pauseSettings.activeInHierarchy == true)
+        {
+            ClosePauseSettings();
+        }
+
+
+
     }
 
 }

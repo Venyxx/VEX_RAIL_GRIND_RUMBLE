@@ -112,6 +112,8 @@ public class Graffiti : MonoBehaviour
 
      public void GraffitiDown(InputAction.CallbackContext context)
     {
+        if (PauseMenu.isPaused == true) return;
+
         if (context.started)
         {
             graffiti = graffitiDown;
@@ -121,6 +123,7 @@ public class Graffiti : MonoBehaviour
     }
          public void GraffitiUp(InputAction.CallbackContext context)
     {
+        if (PauseMenu.isPaused == true) return;
         //Debug.Log("fire context");
         if (context.started)
         {
@@ -131,6 +134,7 @@ public class Graffiti : MonoBehaviour
     }
          public void GraffitiRight(InputAction.CallbackContext context)
     {
+        if (PauseMenu.isPaused == true) return;
         if (context.started)
         {
             graffiti = graffitiRight;
@@ -141,6 +145,7 @@ public class Graffiti : MonoBehaviour
 
         public void GraffitiLeft(InputAction.CallbackContext context)
     {
+        if (PauseMenu.isPaused == true) return;
         if (context.started)
         {
             graffiti = graffitiLeft;
