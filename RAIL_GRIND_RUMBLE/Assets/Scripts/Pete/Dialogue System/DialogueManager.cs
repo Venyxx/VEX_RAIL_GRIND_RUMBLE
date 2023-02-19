@@ -25,6 +25,8 @@ public class DialogueManager : MonoBehaviour
     private bool rotatingNPC;
     private bool rotatingBack;
     
+    private string lastString;
+    
     // Start is called before the first frame update
     private void Start()
     {
@@ -103,7 +105,7 @@ public class DialogueManager : MonoBehaviour
     //inputactions method
     public void DialogueInput(InputAction.CallbackContext context)
     {
-        if (!context.started) return;
+        if (!context.started || PauseMenu.isPaused || InfoScreen.isOpen) return;
 
         if (!isBoxActive && context.started)
         {
@@ -114,16 +116,16 @@ public class DialogueManager : MonoBehaviour
             DisplayNextParagraph();
         }
     }
-
+    
     private void DisplayNextParagraph ()
     {
         if (paragraphDisplayed.Count == 0)
         {
-            EndDialogue();
+            EndDialogue(lastString);
             return;
         }
-
         string paragraph = paragraphDisplayed.Dequeue();
+        lastString = paragraph;
         StopAllCoroutines();
         StartCoroutine(TypeParagraph(paragraph));
     }
@@ -131,7 +133,7 @@ public class DialogueManager : MonoBehaviour
     private IEnumerator TypeParagraph(string paragraph)
     {
         textComponent.text = "";
-        foreach (char c in paragraph.ToCharArray())
+        foreach (char c in paragraph)
         {
             
             textComponent.text += c;
@@ -139,7 +141,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    private void EndDialogue()
+    private void EndDialogue(string text)
     {
         dialogueBox.SetActive(false);
         isBoxActive = false;
@@ -158,8 +160,15 @@ public class DialogueManager : MonoBehaviour
             {
                 questGiver.acceptedOrDeniedAlready = false;
             }
-            Debug.Log($"Quest is marked complete? {questGiver.GetQuest().isComplete}");
-            Debug.Log($"QuestRewards marked as Given? {questGiver.GetQuest().RewardsGiven}");
+            
+            Debug.Log($"Attempting to Activate RivalQuest {text}, {quest.QuestAcceptedText}");
+            if (quest is RivalQuest rivalQuest && quest.QuestAcceptedText.Equals(text))
+            {
+                rivalQuest.Activate();
+            }
+            
+            //Debug.Log($"Quest is marked complete? {questGiver.GetQuest().isComplete}");
+            //Debug.Log($"QuestRewards marked as Given? {questGiver.GetQuest().RewardsGiven}");
             if (quest.isComplete && !quest.RewardsGiven)
             {
                 quest.RewardPlayer();

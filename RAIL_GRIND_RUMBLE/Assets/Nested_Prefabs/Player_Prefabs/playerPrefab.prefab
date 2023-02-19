@@ -731,6 +731,7 @@ MonoBehaviour:
   maxSkateSpeed: 0
   speedPrint: 0
   jumpForce: 45
+  isJumping: 0
   jumpCoolDown: 0.5
   airMultiplier: 0.5
   canJump: 0
@@ -1214,7 +1215,7 @@ MonoBehaviour:
     m_ActionName: Player/DialogueInput[/Mouse/press,/XInputControllerWindows/buttonSouth]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3400830846209403069}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GrappleDetection, Assembly-CSharp
         m_MethodName: GrappleSwitchBack
         m_Mode: 0
