@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class InfoScreen : MonoBehaviour
 {
@@ -41,6 +42,9 @@ public class InfoScreen : MonoBehaviour
     public Button MainMissionButton;
     public Button Act1Button;
 
+    //Quest Window Check
+    GameObject questWindow;
+
 
 
     
@@ -48,6 +52,7 @@ public class InfoScreen : MonoBehaviour
     {
         isOpen = false;
         audioUI = GetComponent<AudioSource>();
+        questWindow = GameObject.Find("QuestWindow");
     }
 
     void Update()
@@ -68,6 +73,8 @@ public class InfoScreen : MonoBehaviour
 
     public void OpenInfoButtonPressed(InputAction.CallbackContext context)
     {
+        if (!context.started || questWindow.activeInHierarchy || SceneManager.GetActiveScene().name == "MainMenu") return;
+
         if (context.started)
         {
             if (isOpen == false && PauseMenu.isPaused == false)
@@ -202,8 +209,6 @@ public class InfoScreen : MonoBehaviour
         }
 
         mapTab.SetActive(true);
-        missionsTab.SetActive(false);
-        progressTab.SetActive(false);
         currentTab = "Map";
     }
 
@@ -228,9 +233,7 @@ public class InfoScreen : MonoBehaviour
             progressAnim.SetTrigger("Close");
         }
 
-        mapTab.SetActive(false);
         missionsTab.SetActive(true);
-        progressTab.SetActive(false);
         currentTab = "Missions";
 
         MainMissionButton.Select();
@@ -257,8 +260,7 @@ public class InfoScreen : MonoBehaviour
             missionsAnim.SetTrigger("Close");
         }
 
-        mapTab.SetActive(false);
-        missionsTab.SetActive(false);
+        
         progressTab.SetActive(true);
         currentTab = "Progress";
 
@@ -269,6 +271,23 @@ public class InfoScreen : MonoBehaviour
     {
         audioUI.clip = clip;
         audioUI.Play(0);
+    }
+
+    public void TabOpened(string tabOpened)
+    {
+        if (tabOpened == "Map")
+        {
+            missionsTab.SetActive(false);
+            progressTab.SetActive(false);
+        } else if (tabOpened == "Missions")
+        {
+            mapTab.SetActive(false);
+            progressTab.SetActive(false);
+        } else if (tabOpened == "Progress")
+        {
+            mapTab.SetActive(false);
+            missionsTab.SetActive(false);
+        }
     }
 
 }

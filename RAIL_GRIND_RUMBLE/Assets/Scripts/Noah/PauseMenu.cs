@@ -47,6 +47,9 @@ public class PauseMenu : MonoBehaviour
 
     public static bool isPaused;
 
+    //Quest Window Check
+    
+
     void Start()
     {
         isPaused = false;
@@ -69,7 +72,7 @@ public class PauseMenu : MonoBehaviour
 
     public void PauseGamePressed(InputAction.CallbackContext context)
     {
-        if (!context.started || InfoScreen.isOpen == true) return;
+        if (!context.started || InfoScreen.isOpen == true || questWindow.activeInHierarchy || SceneManager.GetActiveScene().name == "MainMenu") return;
         
         if (isPaused)
         {
@@ -191,8 +194,11 @@ public class PauseMenu : MonoBehaviour
 
     public void ReturnToMain()
     {
-        SceneManager.LoadScene(mainMenuScene);
+        ResumeGame();
         Time.timeScale = 1f;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        SceneManager.LoadScene(mainMenuScene);
     }
 
     //B Button on Controller
@@ -200,15 +206,10 @@ public class PauseMenu : MonoBehaviour
     {
         if (!context.started || PauseMenu.isPaused == false || pauseMenu.activeInHierarchy == false) return;
 
-        if (context.started && pauseMenu.activeInHierarchy == true)
+        if (context.started && pauseMenu.activeInHierarchy == true && settingsCloseVideo.activeInHierarchy == false)
         {
             StartCoroutine(ResumeDelay());
-        }
-
-        if (context.started && pauseSettings.activeInHierarchy == true)
-        {
-            ClosePauseSettings();
-        }
+        } 
 
 
 

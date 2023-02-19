@@ -799,17 +799,6 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""6266f9f4-130f-45b1-8e10-14adfa33428d"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""BackButton"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""7e1ce248-fb90-4ae2-a7e6-7cb4be2685f2"",
                     ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",

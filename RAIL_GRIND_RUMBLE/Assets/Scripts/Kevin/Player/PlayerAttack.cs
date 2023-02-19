@@ -92,6 +92,7 @@ public class PlayerAttack : MonoBehaviour
            // movementScriptREF.Grounded == false ||
             movementScriptREF.dialogueBox.activeInHierarchy
             //||movementScriptREF.nearestDialogueTemplate != null
+            || GetComponent<ThrowObject>().isHoldingObject == true
             )
         {
             return;
@@ -139,7 +140,9 @@ public class PlayerAttack : MonoBehaviour
             movementScriptREF.isWalking ||
             GameObject.Find("AimingCam") ||
            // movementScriptREF.Grounded == false ||
-            movementScriptREF.dialogueBox.activeInHierarchy)
+            movementScriptREF.dialogueBox.activeInHierarchy
+            || GetComponent<ThrowObject>().isHoldingObject == true
+            )
         {
 
             return;

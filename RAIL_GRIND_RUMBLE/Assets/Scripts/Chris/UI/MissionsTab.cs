@@ -285,6 +285,12 @@ public class MissionsTab : MonoBehaviour
         }
     }
 
+    //Animation Event
+    public void AnimPassthrough(string tab)
+    {
+        infoScreen.TabOpened(tab);
+    }
+
     //Sounds
     void PlaySound()
     {

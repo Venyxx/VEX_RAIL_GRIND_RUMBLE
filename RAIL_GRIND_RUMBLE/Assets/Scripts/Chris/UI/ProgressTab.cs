@@ -166,4 +166,10 @@ public class ProgressTab : MonoBehaviour
             DropDown[2].SetActive(true);
         } 
     }
+
+    //Animation Event
+    public void AnimPassthrough(string tab)
+    {
+        infoScreen.TabOpened(tab);
+    }
 }

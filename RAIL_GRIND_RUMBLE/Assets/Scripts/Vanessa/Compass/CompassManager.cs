@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class CompassManager : MonoBehaviour
 {
@@ -60,6 +61,8 @@ public class CompassManager : MonoBehaviour
     {
         //if (PlayerController.Instance == null
            // return; 
+
+        if (SceneManager.GetActiveScene().name == "MainMenu") return;
 
         Vector2 compassUvPosition = Vector2.right * 
             (ariRig.transform.rotation.eulerAngles.y / 360);

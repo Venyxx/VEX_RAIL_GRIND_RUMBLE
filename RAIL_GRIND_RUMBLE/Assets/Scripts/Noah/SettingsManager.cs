@@ -142,7 +142,7 @@ public class SettingsManager : MonoBehaviour
             if (settingsScreen.activeInHierarchy == false)
             {
                 BackToSettings();
-            } else if (pauseMenu.pauseSettings.activeInHierarchy){
+            }  else {
                 pauseMenu.ClosePauseSettings();
             }
         }

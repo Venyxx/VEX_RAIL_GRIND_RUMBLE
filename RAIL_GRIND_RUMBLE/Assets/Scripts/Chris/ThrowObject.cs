@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class ThrowObject : MonoBehaviour
 {
-    private bool isHoldingObject;
+    public bool isHoldingObject;
     [SerializeField] GameObject heldObjectFakeREF;
     [SerializeField] GameObject heldObjectThrowREF;
     [SerializeField] Transform throwPoint;

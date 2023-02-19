@@ -223,6 +223,10 @@ public class GrappleHook : MonoBehaviour
         //     return;
         // }
 
+        //Check if holding object
+        if (GetComponent<ThrowObject>().isHoldingObject == true) return;
+        if (cooldownRunning == true) return;
+
         //Sound
         audioSource.clip = grappleSounds[0];
         audioSource.Play(0);
@@ -282,9 +286,8 @@ public class GrappleHook : MonoBehaviour
         {
             swingCount++;
         } else {
-            swingCount = 0;
+            swingCount = 3;
             grappleStored = false;
-            grappleMeter.sprite = grappleMeterImages[3];
             Debug.Log("Swings Empty");
         }   
         }
@@ -297,6 +300,9 @@ public class GrappleHook : MonoBehaviour
         } else if (swingCount == 2)
         {
             grappleMeter.sprite = grappleMeterImages[2];
+        } else if (swingCount == 3)
+        {
+            grappleMeter.sprite = grappleMeterImages[3];
         }
 
         
@@ -317,12 +323,14 @@ public class GrappleHook : MonoBehaviour
     {
         cooldownRunning = true;
         canShoot = false;
-        for (int i = 3; i > 0; i--)
+        //grappleStored = false;
+        for (int i = swingCount; i > 0; i--)
         {
             yield return new WaitForSeconds(1f);
             Debug.Log("Grapple Cooldown: "+ i);
             grappleMeter.sprite = grappleMeterImages[i - 1];
         }
+        swingCount = 0;
         canShoot = true;
         grappleStored = true;
         cooldownRunning = false;
@@ -531,7 +539,7 @@ public class GrappleHook : MonoBehaviour
 
     void OnCollisionEnter (Collision collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") && grappleStored == false && cooldownRunning == false)
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") && isGrappling == false && cooldownRunning == false) //&& grappleStored == false 
         {
             StartCoroutine(Cooldown());
         }
@@ -551,7 +559,7 @@ public class GrappleHook : MonoBehaviour
             Destroy(collision.gameObject);
             throwObjectScript.SpawnHeldObject();
             
-            canShoot = false;
+            //canShoot = false;
         }
 
         if (collision.gameObject.tag == "AimPoint")
