@@ -104,4 +104,8 @@ private void ResetAttack()
     {
         
     }
+    public void IsDizzy(bool isDizzy)
+    {
+        
+    }
 }

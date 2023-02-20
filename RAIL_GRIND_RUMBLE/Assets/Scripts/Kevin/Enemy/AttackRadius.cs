@@ -76,6 +76,7 @@ public class AttackRadius : MonoBehaviour
         WaitForSeconds Wait = new WaitForSeconds(AttackDelay);
         
         yield return Wait;
+        while (enemy.isDizzy) yield return null;
 
         IDamageable closestDamageable = null;
         float closestDistance = float.MaxValue;

@@ -6,7 +6,7 @@ public class PlayerThrownObject : MonoBehaviour
     Transform playerCurrentAim;
     GameObject playerREF;
     //Kevin
-    public int Damage = 1000;
+    public int Damage = 10;
 
     // Start is called before the first frame update
     void Start()
@@ -39,10 +39,13 @@ public class PlayerThrownObject : MonoBehaviour
         IDamageable damageable;
         if (other.TryGetComponent<IDamageable>(out damageable))
         {
+            
             if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
+                damageable.IsDizzy(true);
                 damageable.TakeDamage(Damage);
-                Debug.Log("Hit");
+                
+                
             }
             
         }

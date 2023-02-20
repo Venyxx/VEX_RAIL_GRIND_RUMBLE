@@ -117,4 +117,9 @@ private void ResetAttack()
     {
         return transform;
     }
+
+    public void IsDizzy(bool isDizzy)
+    {
+        
+    }
 }
