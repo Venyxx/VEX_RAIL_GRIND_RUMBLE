@@ -177,7 +177,8 @@ GameObject:
   - component: {fileID: 2966777470658473979}
   - component: {fileID: 2198820882400796766}
   - component: {fileID: 4136328352785306772}
-  m_Layer: 0
+  - component: {fileID: 4535575126764380923}
+  m_Layer: 6
   m_Name: roof (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -249,6 +250,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4535575126764380923
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2479175281547064641}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 8.04759, y: 0.24965636, z: 4.300002}
+  m_Center: {x: -0.0000004768374, y: 0.0000003054738, z: 2.1088266}
 --- !u!1 &2479175281774927887
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,7 +274,8 @@ GameObject:
   - component: {fileID: 2966777470565481141}
   - component: {fileID: 2198820882240042256}
   - component: {fileID: 4136328352291095002}
-  m_Layer: 0
+  - component: {fileID: 2647713807507350430}
+  m_Layer: 6
   m_Name: roof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -332,6 +347,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &2647713807507350430
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2479175281774927887}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 8.04759, y: 0.24965636, z: 4.300002}
+  m_Center: {x: -0.0000004768374, y: 0.0000003054738, z: 2.1088266}
 --- !u!1 &4022182026613208697
 GameObject:
   m_ObjectHideFlags: 0
@@ -723,9 +751,10 @@ GameObject:
   - component: {fileID: 8462114251583713234}
   - component: {fileID: 3449391745365916235}
   - component: {fileID: 7327956356021675160}
-  m_Layer: 0
+  - component: {fileID: 5070887775501402867}
+  m_Layer: 8
   m_Name: large_wall_straight
-  m_TagString: Untagged
+  m_TagString: WallRun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -795,6 +824,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &5070887775501402867
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9172664747438872014}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.000001, y: 2, z: 0.50000024}
+  m_Center: {x: -1.0000005, y: 0.9999999, z: 0.25000012}
 --- !u!1001 &29733574749325353
 PrefabInstance:
   m_ObjectHideFlags: 0
