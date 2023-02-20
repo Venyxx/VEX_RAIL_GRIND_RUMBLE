@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class DamageIndicatior : MonoBehaviour
 {
-    [SerializeField] private Text text;
+    [SerializeField] private TextMeshProUGUI text;
     public float lifetime = 0.6f; 
     public float minDist = 2f;
     public float maxDist = 3f;
@@ -17,8 +18,8 @@ public class DamageIndicatior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        text = gameObject.transform.Find("DamageText").GetComponent<Text>();
-        Debug.Log(text);
+        text = gameObject.transform.Find("DamageRE").GetComponent<TextMeshProUGUI>();
+        //Debug.Log(text);
         transform.LookAt(2 * transform.position - Camera.main.transform.position);
 
         float direction = Random.rotation.eulerAngles.z;
@@ -44,7 +45,7 @@ public class DamageIndicatior : MonoBehaviour
 
     public void SetDamageText(float damage)
     {
-        text = gameObject.transform.Find("DamageText").GetComponent<Text>();
+        text = gameObject.transform.Find("DamageRE").GetComponent<TextMeshProUGUI>();
         text.text = damage.ToString();
     }
 }
