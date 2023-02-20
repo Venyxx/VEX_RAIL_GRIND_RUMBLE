@@ -9,6 +9,7 @@ public class QuestTracker : MonoBehaviour
     public TextMeshProUGUI QuestInfoText { get; private set; }
     private static List<Quest> completedQuests;
     public CountQuestType CurrentCountQuestType { get; private set; } = CountQuestType.None;
+    
 
     void Start()
     {
@@ -25,7 +26,19 @@ public class QuestTracker : MonoBehaviour
         }
     }
 
-    
+    private void Update()
+    {
+        if (PauseMenu.isPaused || InfoScreen.isOpen)
+        {
+            QuestInfoText.gameObject.SetActive(false);
+        }
+        else
+        {
+            QuestInfoText.gameObject.SetActive(true);
+        }
+    }
+
+
     public void AcceptQuest(Quest quest)
     {
         foreach (var otherQuest in FindObjectsOfType<Quest>())
