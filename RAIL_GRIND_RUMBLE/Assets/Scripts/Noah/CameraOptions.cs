@@ -38,8 +38,8 @@ public class CameraOptions : MonoBehaviour
         _freeLook.m_XAxis.m_InvertInput = XCheckbox.isOn;
         _freeLook.m_YAxis.m_InvertInput = !YCheckbox.isOn;
 
-        _freeLook.m_XAxis.m_MaxSpeed = XSens.value * 75 + 25;
-        _freeLook.m_YAxis.m_MaxSpeed = YSens.value + 1;
+        _freeLook.m_XAxis.m_MaxSpeed = XSens.value * 20 + 70;
+        _freeLook.m_YAxis.m_MaxSpeed = YSens.value / 2 + 1;
        }
         
 
@@ -74,6 +74,8 @@ public class CameraOptions : MonoBehaviour
 
         XSens.value = XSensValue;
         YSens.value = YSensValue;
+        
+        SetSlider(); 
     }
 
 
