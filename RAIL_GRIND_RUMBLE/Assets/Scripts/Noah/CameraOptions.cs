@@ -38,8 +38,8 @@ public class CameraOptions : MonoBehaviour
         _freeLook.m_XAxis.m_InvertInput = XCheckbox.isOn;
         _freeLook.m_YAxis.m_InvertInput = !YCheckbox.isOn;
 
-        _freeLook.m_XAxis.m_MaxSpeed = XSens.value * 75 + 25;
-        _freeLook.m_YAxis.m_MaxSpeed = YSens.value + 1;
+        _freeLook.m_XAxis.m_MaxSpeed = XSens.value * 20 + 70;
+        _freeLook.m_YAxis.m_MaxSpeed = YSens.value / 2 + 1;
        }
         
 
@@ -69,11 +69,13 @@ public class CameraOptions : MonoBehaviour
     public void LoadValues()
     {
 
-        float XSensValue = PlayerPrefs.GetFloat("XSensValue", 3);
-        float YSensValue = PlayerPrefs.GetFloat("YSensValue", 3);
+        float XSensValue = PlayerPrefs.GetFloat("XSensValue", 2);
+        float YSensValue = PlayerPrefs.GetFloat("YSensValue", 2);
 
         XSens.value = XSensValue;
         YSens.value = YSensValue;
+        
+        SetSlider(); 
     }
 
 
