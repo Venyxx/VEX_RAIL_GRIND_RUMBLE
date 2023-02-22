@@ -26,7 +26,9 @@ public class DialogueManager : MonoBehaviour
     private bool rotatingBack;
     
     private string lastString;
-    
+
+    public bool SpawnHealth { get; set; } = false;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -145,42 +147,20 @@ public class DialogueManager : MonoBehaviour
     {
         dialogueBox.SetActive(false);
         isBoxActive = false;
-        thirdPersonControllerREF.nearestDialogueTemplate = null;
-        rotatingNPC = false;
-        try
+
+        if (thirdPersonControllerREF.nearestDialogueTemplate.dialogueTrigger is HealthSpawnDialogueTrigger hpSpawner)
         {
-            var questGiver = npcModel.transform.parent.GetComponentInChildren<QuestGiver>();
-            Quest quest = questGiver.GetQuest();
-            if (!questGiver.acceptedOrDeniedAlready && !quest.isComplete && !quest.isActive)
-            {
-                questGiver.OpenQuestWindow();
-                questGiver.acceptedOrDeniedAlready = true;
-            }
-            else
-            {
-                questGiver.acceptedOrDeniedAlready = false;
-            }
-            
-            Debug.Log($"Attempting to Activate RivalQuest {text}, {quest.QuestAcceptedText}");
-            if (quest is RivalQuest rivalQuest && quest.QuestAcceptedText.Equals(text))
-            {
-                rivalQuest.Activate();
-            }
-            
-            //Debug.Log($"Quest is marked complete? {questGiver.GetQuest().isComplete}");
-            //Debug.Log($"QuestRewards marked as Given? {questGiver.GetQuest().RewardsGiven}");
-            if (quest.isComplete && !quest.RewardsGiven)
-            {
-                quest.RewardPlayer();
-                quest.RewardsGiven = true;
-                FindObjectOfType<QuestTracker>().QuestInfoText.text = "";
-            }
-        }
-        catch (NullReferenceException e)
-        {
-            Debug.Log("There is no QuestGiver attached to this Dialogue");
+            hpSpawner.SpawnHealth();
         }
 
+        thirdPersonControllerREF.nearestDialogueTemplate = null;
+        rotatingNPC = false;
+        HandleQuest(text);
+
+    }
+
+    private void HandleQuest(string text)
+    {
         
     }
 }

@@ -5,8 +5,8 @@ using UnityEngine;
 public class DialogueTrigger : MonoBehaviour
 {
     public DialogueTemplate dialogue;
-    [SerializeField] private GameObject talkPrompt;
-    private ThirdPersonMovement thirdPersonControllerREF;
+    [SerializeField] protected GameObject talkPrompt;
+    protected ThirdPersonMovement thirdPersonControllerREF;
     public GameObject npcModel { get; private set; }
 
 
@@ -62,3 +62,4 @@ public class DialogueTrigger : MonoBehaviour
         thirdPersonControllerREF.nearestDialogueTemplate = null;
     }
 }
+
