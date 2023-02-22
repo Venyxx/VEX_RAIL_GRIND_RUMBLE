@@ -21,6 +21,7 @@ public class RivalQuest : Quest
 
     public void Activate()
     {
+        CheckpointController.lastCheckPointPosition = player.transform.position;
         raceStarted = true;
     }
 
@@ -49,7 +50,8 @@ public class RivalQuest : Quest
                 }
                 else
                 {
-                    Debug.Log("The race is over, and the player lost! ");
+                    QuestGiver questGiver = GetComponent<QuestGiver>();
+                    questGiver.FailQuest();
                 }
             }
         }

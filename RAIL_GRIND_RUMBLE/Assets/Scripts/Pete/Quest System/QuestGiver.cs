@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class QuestGiver : MonoBehaviour
@@ -72,6 +73,12 @@ public class QuestGiver : MonoBehaviour
     public Quest GetQuest()
     {
         return questToGive;
+    }
+
+    public void FailQuest()
+    {
+        //questDescrText.text = "You Failed! Try Again?";
+        SceneManager.LoadScene("LoseScene");
     }
 }
 
