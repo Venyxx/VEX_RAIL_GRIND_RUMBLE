@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Pete.Level_Scripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
@@ -147,20 +148,72 @@ public class DialogueManager : MonoBehaviour
     {
         dialogueBox.SetActive(false);
         isBoxActive = false;
+        
+        //Debug.Log($"ThirdPersonControllerREF is NULL {thirdPersonControllerREF == null}");
+        //Debug.Log($"nearestDialogueTemplate is NULL {thirdPersonControllerREF.nearestDialogueTemplate == null}");
+        //Debug.Log($"dialogueTrigger is NULL {thirdPersonControllerREF.nearestDialogueTemplate.dialogueTrigger == null}");
 
         if (thirdPersonControllerREF.nearestDialogueTemplate.dialogueTrigger is HealthSpawnDialogueTrigger hpSpawner)
         {
             hpSpawner.SpawnHealth();
         }
 
-        thirdPersonControllerREF.nearestDialogueTemplate = null;
-        rotatingNPC = false;
+        var npcManager = thirdPersonControllerREF.nearestDialogueTemplate.dialogueTrigger.gameObject.GetComponent<NPCManager>();
+        //Debug.Log($"NPC Manager is null: {npcManager == null}");
+        
         HandleQuest(text);
-
+        if (npcManager != null)
+        {
+            HandleProgression(npcManager);
+        }
+        else
+        {
+            Debug.Log("NPC has no NPC Manager for Progression");
+        }
+        //thirdPersonControllerREF.nearestDialogueTemplate = null;
+        rotatingNPC = false;
     }
 
     private void HandleQuest(string text)
     {
-        
+        try
+        {
+            var questGiver = npcModel.transform.parent.GetComponentInChildren<QuestGiver>();
+            Quest quest = questGiver.GetQuest();
+            if (!questGiver.acceptedOrDeniedAlready && !quest.isComplete && !quest.isActive)
+            {
+                questGiver.OpenQuestWindow();
+                questGiver.acceptedOrDeniedAlready = true;
+            }
+            else
+            {
+                questGiver.acceptedOrDeniedAlready = false;
+            }
+            
+            Debug.Log($"Attempting to Activate RivalQuest {text}, {quest.QuestAcceptedText}");
+            if (quest is RivalQuest rivalQuest && quest.QuestAcceptedText.Equals(text))
+            {
+                rivalQuest.Activate();
+            }
+            
+            //Debug.Log($"Quest is marked complete? {questGiver.GetQuest().isComplete}");
+            //Debug.Log($"QuestRewards marked as Given? {questGiver.GetQuest().RewardsGiven}");
+            if (quest.isComplete && !quest.RewardsGiven)
+            {
+                quest.RewardPlayer();
+                quest.RewardsGiven = true;
+                FindObjectOfType<QuestTracker>().QuestInfoText.text = "";
+            }
+        }
+        catch (NullReferenceException e)
+        {
+            Debug.Log("There is no QuestGiver attached to this Dialogue");
+        }
+
+    }
+
+    private void HandleProgression(NPCManager manager)
+    {
+        manager.HandleProgress();
     }
 }

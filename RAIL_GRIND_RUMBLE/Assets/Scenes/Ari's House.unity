@@ -4962,7 +4962,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3528749936814248332, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 3528749936814248333, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
       propertyPath: m_LookAt
@@ -6208,13 +6208,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 556038580}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59b2ae4c4f8727946a8083449a7da42a, type: 3}
+  m_Script: {fileID: 11500000, guid: e840efd77746a67418e19b44b6468bf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  section1Barricades: {fileID: 0}
-  section2Barricade: {fileID: 0}
-  section3Barricade: {fileID: 0}
-  section4Barricade: {fileID: 0}
+  coinCount: 0
+  diegoQuestFinished: 0
 --- !u!1 &579398541
 GameObject:
   m_ObjectHideFlags: 0
@@ -8492,6 +8490,25 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &731353190 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 909174288682221971, guid: f771723b377235d4488a7a98289a0ff6, type: 3}
+  m_PrefabInstance: {fileID: 2689359905592213863}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &731353199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 731353190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29851e8cc18218d4e837f472b7c52908, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  newParagraphs:
+  - I have a new quest now!
 --- !u!43 &732334538
 Mesh:
   m_ObjectHideFlags: 0

@@ -15,4 +15,11 @@ public class CoinController : HealthPickupController
             playerScript.AddCoin(1);
         }
     }
+
+    protected override void OnTriggerStay(Collider other)
+    {
+        /*DO NOT DELETE; EMPTY FOR A REASON
+         (to prevent base.OnTriggerStay() from 
+         getting called and adding two coins)*/
+    }
 }

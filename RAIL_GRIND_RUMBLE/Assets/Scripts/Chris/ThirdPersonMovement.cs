@@ -98,7 +98,7 @@ public class ThirdPersonMovement : MonoBehaviour
     public Rigidbody rigidBody;
 
     //Coins
-    public static int coinCount;
+    private int coinCount;
     GameObject coinCounterREF;
     TextMeshProUGUI coinCountText;
 
@@ -131,7 +131,7 @@ public class ThirdPersonMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        coinCount = ProgressionManager.Get().coinCount;
         moveSpeed = 0;
         baseMoveSpeed= 8;
         speedLerp = 2.22f;
@@ -592,6 +592,7 @@ public class ThirdPersonMovement : MonoBehaviour
     public void AddCoin(int coin)
     {
             coinCount = coinCount + coin;
+            ProgressionManager.Get().coinCount = coinCount;
             Debug.Log(coinCount);
             coinCountText.text = $"{coinCount}";
             PlaySound(0);

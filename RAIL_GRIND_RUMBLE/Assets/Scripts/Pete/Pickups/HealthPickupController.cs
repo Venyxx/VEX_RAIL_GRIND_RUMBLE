@@ -34,7 +34,7 @@ public class HealthPickupController : MonoBehaviour
         }
     }
 
-    protected void OnTriggerStay(Collider other)
+    protected virtual void OnTriggerStay(Collider other)
     {
         OnTriggerEnter(other);
     }
