@@ -62,7 +62,7 @@ MonoBehaviour:
   FieldOfView: 360
   LineOfSightLayer:
     serializedVersion: 2
-    m_Bits: 8320
+    m_Bits: 41088
 --- !u!1 &709858256793378059
 GameObject:
   m_ObjectHideFlags: 0
@@ -124,7 +124,7 @@ MonoBehaviour:
   Collider: {fileID: 709858256793378069}
   Damage: 10
   AttackDelay: 0.5
-  IsSharpShooter: 0
+  IsSharpShooter: 1
   Movement: {fileID: 709858256272780360}
   enemy: {fileID: 709858256272780361}
   Agent: {fileID: 6646993812584244265}
@@ -132,7 +132,7 @@ MonoBehaviour:
   BulletSpawnOffset: {x: 0, y: 1, z: 0.25}
   Mask:
     serializedVersion: 2
-    m_Bits: 4224
+    m_Bits: 36992
   SpherecastRadius: 0.1
 --- !u!1 &4906194190441362816
 GameObject:
@@ -369,6 +369,9 @@ MonoBehaviour:
   Animator: {fileID: 10428499752319644}
   Ragdoll: {fileID: 7223672405841571343}
   _takeDamageDelay: 0.6
+  dizzy: 0
+  isDizzy: 0
+  damageText: {fileID: 0}
 --- !u!82 &5498985556827891890
 AudioSource:
   m_ObjectHideFlags: 0
