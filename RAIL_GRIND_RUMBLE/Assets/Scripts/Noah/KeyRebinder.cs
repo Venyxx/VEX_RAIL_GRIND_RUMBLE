@@ -279,7 +279,7 @@ public class KeyRebinder : MonoBehaviour
 
         grappleReleaseAction.action.Disable();
         
-        rebindingOperation = grappleSwitchAction.action.PerformInteractiveRebinding()
+        rebindingOperation = grappleReleaseAction.action.PerformInteractiveRebinding()
             .WithControlsExcluding("<Mouse>/press")
             .WithControlsExcluding("<Pointer>/position")
             .OnMatchWaitForAnother(0.1f)
@@ -314,6 +314,7 @@ public class KeyRebinder : MonoBehaviour
         rebindingOperation = pauseAction.action.PerformInteractiveRebinding()
             .WithControlsExcluding("<Mouse>/press")
             .WithControlsExcluding("<Pointer>/position")
+            .WithControlsExcluding("<Mouse>/leftButton")
             .OnMatchWaitForAnother(0.1f)
             .OnComplete(operation => PauseRebindComplete() )
             .Start();
