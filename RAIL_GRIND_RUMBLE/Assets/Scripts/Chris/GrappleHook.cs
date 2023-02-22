@@ -556,8 +556,17 @@ public class GrappleHook : MonoBehaviour
             pullingObject = false;
             grappleDetectorREF.gameObject.GetComponent<GrappleDetection>().RemovePoint(collision.transform);
             StopSwing();
+
+            //Check for held object type
+            if (collision.gameObject.name == "Drone" || collision.gameObject.name == "Drone(Clone)")
+            {
+                throwObjectScript.SpawnHeldObject("Drone");
+            } else {
+                throwObjectScript.SpawnHeldObject("Trashcan");
+            }
+
             Destroy(collision.gameObject);
-            throwObjectScript.SpawnHeldObject();
+        
             
             //canShoot = false;
         }

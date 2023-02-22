@@ -1,10 +1,12 @@
 using UnityEngine;
+using System.Collections;
 
 public class PlayerThrownObject : MonoBehaviour
 {
     public bool target;
     Transform playerCurrentAim;
     GameObject playerREF;
+    //[SerializeField] GameObject explosion;
     //Kevin
     public int Damage = 10;
 
@@ -28,11 +30,29 @@ public class PlayerThrownObject : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") || collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            Destroy(gameObject);
+            if (this.gameObject.tag == "DroneThrow")
+            {
+                Debug.Log("BOOM");
+                StartCoroutine(Explosion());
+            } else {
+                Destroy(gameObject);
+            }
+            
         }
 
         
     }
+
+    IEnumerator Explosion()
+    {
+        Transform explosion = this.gameObject.transform.Find("Explosion");
+        explosion.gameObject.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        Destroy(gameObject);
+        DroneSpawner.droneCount--;
+    }
+
+
     //kevin
     private void OnTriggerEnter(Collider other)
     {

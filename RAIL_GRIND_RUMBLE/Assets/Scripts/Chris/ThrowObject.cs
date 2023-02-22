@@ -4,8 +4,11 @@ using UnityEngine.InputSystem;
 public class ThrowObject : MonoBehaviour
 {
     public bool isHoldingObject;
-    [SerializeField] GameObject heldObjectFakeREF;
-    [SerializeField] GameObject heldObjectThrowREF;
+    string objectHolding;
+    [SerializeField] GameObject heldTrashcanFakeREF;
+    [SerializeField] GameObject heldTrashcanThrowREF;
+    [SerializeField] GameObject heldDroneFakeREF;
+    [SerializeField] GameObject heldDroneThrowREF;
     [SerializeField] Transform throwPoint;
     Transform orientation;
     GrappleHook grappleHookScript;
@@ -25,6 +28,7 @@ public class ThrowObject : MonoBehaviour
         GameObject orientationREF = GameObject.Find("Orientation");
         orientation = orientationREF.gameObject.GetComponent<Transform>();
         thirdPersonMovement = GetComponent<ThirdPersonMovement>();
+        objectHolding = "";
     }
 
     // Update is called once per frame
@@ -36,20 +40,38 @@ public class ThrowObject : MonoBehaviour
         }*/
     }
 
-    public void SpawnHeldObject()
+    public void SpawnHeldObject(string obj)
     {
-      
         isHoldingObject = true;
-        heldObjectFakeREF.SetActive(true);
+        objectHolding = obj;
+
+        if (obj == "Trashcan")
+        {
+            heldTrashcanFakeREF.SetActive(true);
+        } else if (obj == "Drone")
+        {
+            heldDroneFakeREF.SetActive(true);
+        }
+        
     }
 
     void ThrowObjectAction()
     {
         isHoldingObject = false;
-        heldObjectFakeREF.SetActive(false);
+        heldTrashcanFakeREF.SetActive(false);
+        heldDroneFakeREF.SetActive(false);
 
-        GameObject thrownObject;
-        thrownObject = Instantiate(heldObjectThrowREF, throwPoint.transform.position, heldObjectThrowREF.transform.rotation);
+        GameObject thrownObject = null;
+
+        if (objectHolding == "Trashcan")
+        {
+            thrownObject = Instantiate(heldTrashcanThrowREF, throwPoint.transform.position, heldTrashcanThrowREF.transform.rotation);
+        } else if (objectHolding == "Drone")
+        {
+            thrownObject = Instantiate(heldDroneThrowREF, throwPoint.transform.position, heldDroneThrowREF.transform.rotation);
+        }
+        
+        objectHolding = "";
         
         if(_targeting)
         {

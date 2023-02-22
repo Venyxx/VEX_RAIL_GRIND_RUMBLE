@@ -61,13 +61,13 @@ public class Reticle : MonoBehaviour
 
     void FixedUpdate()
     {
-        // if (grappleDetection.aimPoints.Count <= 0)
-        // {
-        //     reticleREF.SetActive(false);
-        // } else {
-        //     target = grappleDetection.currentAim;
-        //     reticleREF.SetActive(true);
-        // }  
+        if (grappleDetection.aimPoints.Count <= 0)
+        {
+             reticleREF.SetActive(false);
+        } /*else {
+             target = grappleDetection.currentAim;
+             reticleREF.SetActive(true);
+        }*/  
     }
 
     public void ReticleToggle (bool isOn)
