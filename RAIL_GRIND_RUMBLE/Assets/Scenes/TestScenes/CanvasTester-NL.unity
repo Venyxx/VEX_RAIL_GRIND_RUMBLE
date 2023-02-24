@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &502938264 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3072010314067453511, guid: 17c497713ecd2204d888e8d101029aa4, type: 3}
+  m_PrefabInstance: {fileID: 568466243}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a4db7a114972834c8e4117be1d82ba3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &568466243
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -130,6 +141,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 30261198418802415, guid: 17c497713ecd2204d888e8d101029aa4, type: 3}
+      propertyPath: m_Name
+      value: Keyboard Scroll View
+      objectReference: {fileID: 0}
     - target: {fileID: 951362240550608422, guid: 17c497713ecd2204d888e8d101029aa4, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -429,6 +444,42 @@ PrefabInstance:
     - target: {fileID: 6062920574709076339, guid: 17c497713ecd2204d888e8d101029aa4, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6318811192386223631, guid: 17c497713ecd2204d888e8d101029aa4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6318811192386223631, guid: 17c497713ecd2204d888e8d101029aa4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6318811192386223631, guid: 17c497713ecd2204d888e8d101029aa4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 502938264}
+    - target: {fileID: 6318811192386223631, guid: 17c497713ecd2204d888e8d101029aa4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6318811192386223631, guid: 17c497713ecd2204d888e8d101029aa4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: set_value
+      objectReference: {fileID: 0}
+    - target: {fileID: 6318811192386223631, guid: 17c497713ecd2204d888e8d101029aa4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
+      value: UnityEngine.UI.Scrollbar, UnityEngine.UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 6318811192386223631, guid: 17c497713ecd2204d888e8d101029aa4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6318811192386223631, guid: 17c497713ecd2204d888e8d101029aa4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_FloatArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6318811192386223631, guid: 17c497713ecd2204d888e8d101029aa4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6711172684696818726, guid: 17c497713ecd2204d888e8d101029aa4, type: 3}
       propertyPath: m_Value
