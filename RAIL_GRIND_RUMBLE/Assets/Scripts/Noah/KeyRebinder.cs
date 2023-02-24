@@ -319,7 +319,7 @@ public class KeyRebinder : MonoBehaviour
             .WithControlsExcluding("<Mouse>/press")
             .WithControlsExcluding("<Pointer>/position")
             .WithControlsExcluding("<Mouse>/leftButton")
-            .WithControlsExcluding("<Gamepad>")
+           // .WithControlsExcluding("<Gamepad>")
             .OnMatchWaitForAnother(0.1f)
             .OnComplete(operation => PauseRebindComplete() )
             .Start();
@@ -331,7 +331,7 @@ public class KeyRebinder : MonoBehaviour
         int bindingIndex = pauseAction.action.GetBindingIndexForControl(pauseAction.action.controls[0]);
         
         pauseBindingDisplayNameText.text = InputControlPath.ToHumanReadableString(
-            pauseAction.action.bindings[bindingIndex].effectivePath,
+            pauseAction.action.bindings[1].effectivePath,
             InputControlPath.HumanReadableStringOptions.OmitDevice);
         
         rebindingOperation.Dispose();
