@@ -8,7 +8,7 @@ public class ProgressionManager : MonoBehaviour
     private static ProgressionManager instance;
 
     public int coinCount;
-    public bool diegoQuestFinished;
+    public bool mainQuest1Active;
     
     public static ProgressionManager Get()
     {
@@ -24,5 +24,13 @@ public class ProgressionManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+    }
+
+    private void Update()
+    {
+        if (mainQuest1Active)
+        {
+            FindObjectOfType<QuestTracker>().QuestInfoText.text = "Leave and chase the van!";
+        }
     }
 }

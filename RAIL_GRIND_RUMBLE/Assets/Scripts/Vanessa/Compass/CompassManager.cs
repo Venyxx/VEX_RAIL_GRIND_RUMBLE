@@ -27,6 +27,7 @@ public class CompassManager : MonoBehaviour
         }
 
         ariRig = GameObject.Find("AriRig");
+        Debug.Log("Awaken Compass Manager");
     }
 
     private IEnumerator Start()

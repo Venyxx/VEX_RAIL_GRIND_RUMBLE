@@ -9,7 +9,7 @@ public class CoinController : HealthPickupController
     protected override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
-        if (other.CompareTag("PlayerObject"))
+        if (other.CompareTag("PlayerObject") || other.CompareTag("Player"))
         {
             ThirdPersonMovement playerScript = other.gameObject.GetComponentInParent(typeof(ThirdPersonMovement)) as ThirdPersonMovement;
             playerScript.AddCoin(1);

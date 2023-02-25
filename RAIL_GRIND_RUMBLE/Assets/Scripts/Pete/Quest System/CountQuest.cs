@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class CountQuest : Quest
 {
-    private int currentCount;
-    [SerializeField] private CountQuestType questType;
-    [SerializeField] private int completionCount;
-    private QuestTracker questTracker;
+    protected int currentCount;
+    [SerializeField] protected CountQuestType questType;
+    [SerializeField] protected int completionCount;
+    protected QuestTracker questTracker;
     [Tooltip("ONLY USABLE FOR COIN QUESTS")]
     public bool subtractCoinsOnCompletion;
 
-    private void Start()
+    protected void Start()
     {
         questTracker = FindObjectOfType<QuestTracker>();
     }
@@ -20,7 +20,7 @@ public class CountQuest : Quest
         return questType;
     }
 
-    public void IncrementCount()
+    public virtual void IncrementCount()
     {
         currentCount++;
         questTracker.QuestInfoText.text = $"Progress: {currentCount} / {completionCount}";

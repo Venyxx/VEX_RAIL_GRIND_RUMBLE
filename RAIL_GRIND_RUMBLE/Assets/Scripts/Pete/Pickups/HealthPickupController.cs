@@ -24,7 +24,7 @@ public class HealthPickupController : MonoBehaviour
     protected virtual void OnTriggerEnter(Collider other)
     {
         IDamageable damageable;
-        if (other.CompareTag("PlayerObject") && canBePickedUp)
+        if ((other.CompareTag("PlayerObject") || other.CompareTag("Player")) && canBePickedUp)
         {
             if (other.TryGetComponent<IDamageable>(out damageable))
             {

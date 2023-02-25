@@ -6,8 +6,9 @@ using UnityEngine;
 public class DiegoManager : NPCManager
 {
 
+    public string[] secondSetNames;
     [TextArea(3,10)]
-    public string[] newParagraphs;
+    public string[] secondSetParagraphs;
 
     public override void HandleProgress()
     {
