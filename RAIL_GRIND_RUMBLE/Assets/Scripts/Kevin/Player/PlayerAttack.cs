@@ -19,6 +19,9 @@ public class PlayerAttack : MonoBehaviour
     public GrappleHook grappleREF;
     private WallRun wallRunREF;
 
+    [SerializeField]
+    private GameObject spinEffect;
+
     //buff
     public bool isBuffed;
     public int buffDamage;
@@ -38,6 +41,7 @@ public class PlayerAttack : MonoBehaviour
 
     void Start()
     {
+        spinEffect.SetActive(false);
         //  anim = GetComponent<Animator>();
         HeavyAtkTimer = 0;
      //   hitSounds = Resources.LoadAll<AudioClip>("Sounds/DamageSounds");
@@ -54,6 +58,7 @@ public class PlayerAttack : MonoBehaviour
         {
            // Debug.Log("BugCheck1");
             anim.SetTrigger("HAttackEnd2");
+            
             TimerOn = false;
            // IsHeavyAttacking = false;
             HeavyAtkTimer = 0;
@@ -154,6 +159,7 @@ public class PlayerAttack : MonoBehaviour
         if (context.ReadValueAsButton() == true && !IsHeavyAttacking && atkCount == 0 && !grappleREF.isGrappling && !wallRunREF.isWallRunning)
         {
         //    Debug.Log("Key Press");
+        spinEffect.SetActive(true);
            
 
             if (movementScriptREF.Grounded == true)
@@ -176,10 +182,13 @@ public class PlayerAttack : MonoBehaviour
         {
            
            // Debug.Log("Key Release");
+            spinEffect.SetActive(true);
+
             if (HeavyAtkTimer >= 1 && HeavyAtkTimer <= 1.9)
             {
              //   Debug.Log("BugCheck2");
                 anim.SetTrigger("HAttackEnd2");
+                spinEffect.SetActive(false);
             //    IsHeavyAttacking = false;
                 HeavyAtkTimer = 0;
 
@@ -192,6 +201,8 @@ public class PlayerAttack : MonoBehaviour
             {
              //   Debug.Log("BugCheck3");
                 anim.SetTrigger("HAttackEnd1");
+                spinEffect.SetActive(false);
+                
              //   IsHeavyAttacking = false;
                 HeavyAtkTimer = 0;
 
@@ -202,6 +213,7 @@ public class PlayerAttack : MonoBehaviour
             {
             //    Debug.Log("BugCheck4");
                 anim.SetTrigger("HAttackEnd3");
+                 spinEffect.SetActive(false);
               //  IsHeavyAttacking = false;
                 HeavyAtkTimer = 0;
                 

@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class EnemyMovement : MonoBehaviour
@@ -29,6 +30,11 @@ public class EnemyMovement : MonoBehaviour
     public bool HasHidden = false;
     public AttackRadius Attack;
     public Enemy enemy;
+    [SerializeField]
+    private bool IsBrute = false;
+    float totalDistance;
+    public bool BruteIsCharging;
+    private bool BruteChargingDelay = false;
 
     private const string IsWalking = "IsWalking";
 
@@ -42,8 +48,9 @@ public class EnemyMovement : MonoBehaviour
         LineOfSightChecker.OnLoseSight += HandleLoseSight;
 
         //Added by Chris to prevent unassigned reference exception
-        Player = GameObject.FindWithTag("PlayerObject").transform;
-       
+        Player = GameObject.FindWithTag("Player").transform;
+        totalDistance = Vector3.Distance(Player.position, Agent.transform.position);
+
     }
     private void Update()
     {
@@ -72,7 +79,18 @@ public class EnemyMovement : MonoBehaviour
             activated = false;
             StopAllCoroutines();
         }
-       
+
+        if (IsBrute )
+        {
+            
+
+
+            if (activated && totalDistance > 5  && !BruteChargingDelay)
+            {
+                StartCoroutine(Charge());
+            }
+          
+        }
 
     }
 
@@ -115,12 +133,13 @@ public class EnemyMovement : MonoBehaviour
     
     public IEnumerator Activate()
     {
-        
-        WaitForSeconds Wait = new WaitForSeconds(UpdateSpeed);
+
+        WaitForSeconds Wait =  new WaitForSeconds(UpdateSpeed); 
         while(gameObject.activeSelf)
         {
             if (Agent.enabled)
             {
+
                 Agent.SetDestination(Player.transform.position);
                 
             }
@@ -128,6 +147,32 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
+    public IEnumerator Charge()
+    {
+
+        BruteChargingDelay = true;
+        Debug.Log("Brute is charging");
+        BruteIsCharging = true;
+        Agent.speed = 0;
+        yield return new WaitForSeconds(3f);
+        Attack.Damage = 10;
+        Agent.speed = enemy.EnemyScriptableObject.Speed + 50;
+        Agent.acceleration = enemy.EnemyScriptableObject.Acceleration + 50;
+        
+        yield return new WaitForSeconds(1f);
+        Debug.Log("Brute isn't charging");
+        Agent.speed = 3;
+        Attack.Damage = 5;
+        Agent.acceleration = 8;
+         BruteIsCharging = false;
+        
+        Agent.SetDestination(Player.transform.position);
+        yield return new WaitForSeconds(10f);
+        BruteChargingDelay = false;
+        StopCoroutine(Charge());
+        
+
+    }
     private IEnumerator Hide(Transform Target)
     {
         WaitForSeconds Wait = new WaitForSeconds(UpdateFrequency);
