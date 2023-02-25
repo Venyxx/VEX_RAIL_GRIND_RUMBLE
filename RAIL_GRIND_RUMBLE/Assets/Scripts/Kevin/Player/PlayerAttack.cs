@@ -95,7 +95,7 @@ public class PlayerAttack : MonoBehaviour
             || movementScriptREF.isWalking ||
             GameObject.Find("AimingCam") ||
            // movementScriptREF.Grounded == false ||
-            movementScriptREF.dialogueBox.activeInHierarchy
+            movementScriptREF.dialogueManager.freezePlayer
             //||movementScriptREF.nearestDialogueTemplate != null
             || GetComponent<ThrowObject>().isHoldingObject == true
             )
@@ -145,7 +145,7 @@ public class PlayerAttack : MonoBehaviour
             movementScriptREF.isWalking ||
             GameObject.Find("AimingCam") ||
            // movementScriptREF.Grounded == false ||
-            movementScriptREF.dialogueBox.activeInHierarchy
+            movementScriptREF.dialogueManager.freezePlayer
             || GetComponent<ThrowObject>().isHoldingObject == true
             )
         {
@@ -159,7 +159,7 @@ public class PlayerAttack : MonoBehaviour
         if (context.ReadValueAsButton() == true && !IsHeavyAttacking && atkCount == 0 && !grappleREF.isGrappling && !wallRunREF.isWallRunning)
         {
         //    Debug.Log("Key Press");
-        spinEffect.SetActive(true);
+        
            
 
             if (movementScriptREF.Grounded == true)
@@ -182,14 +182,13 @@ public class PlayerAttack : MonoBehaviour
         {
            
            // Debug.Log("Key Release");
-            spinEffect.SetActive(true);
+            //spinEffect.SetActive(true);
 
             if (HeavyAtkTimer >= 1 && HeavyAtkTimer <= 1.9)
             {
              //   Debug.Log("BugCheck2");
                 anim.SetTrigger("HAttackEnd2");
-                spinEffect.SetActive(false);
-            //    IsHeavyAttacking = false;
+                //    IsHeavyAttacking = false;
                 HeavyAtkTimer = 0;
 
             
@@ -201,9 +200,8 @@ public class PlayerAttack : MonoBehaviour
             {
              //   Debug.Log("BugCheck3");
                 anim.SetTrigger("HAttackEnd1");
-                spinEffect.SetActive(false);
-                
-             //   IsHeavyAttacking = false;
+
+                //   IsHeavyAttacking = false;
                 HeavyAtkTimer = 0;
 
                 Damage = 30;
@@ -213,8 +211,7 @@ public class PlayerAttack : MonoBehaviour
             {
             //    Debug.Log("BugCheck4");
                 anim.SetTrigger("HAttackEnd3");
-                 spinEffect.SetActive(false);
-              //  IsHeavyAttacking = false;
+                //  IsHeavyAttacking = false;
                 HeavyAtkTimer = 0;
                 
             
@@ -251,6 +248,7 @@ public class PlayerAttack : MonoBehaviour
         if (!TimerOn)
         {
             HeavyAtkTimer = 0;
+            
         }
 
        // Debug.Log(HeavyAtkTimer);

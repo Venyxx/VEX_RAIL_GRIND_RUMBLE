@@ -58,7 +58,7 @@ public class QuestGiver : MonoBehaviour
         temp.dialogueTrigger = GetComponent<DialogueTrigger>();
         temp.paragraphs.speakers = temp.dialogueTrigger.dialogue.paragraphs.speakers;
         temp.paragraphs.spokenDialogue = new[] { questToGive.QuestAcceptedText };
-        FindObjectOfType<DialogueManager>().StartDialogue(temp);
+        FindObjectOfType<DialogueManager>().StartNPCDialogue(temp);
     }
 
     public void DenyQuest()
@@ -69,7 +69,7 @@ public class QuestGiver : MonoBehaviour
         temp.dialogueTrigger = GetComponent<DialogueTrigger>();
         temp.paragraphs.speakers = temp.dialogueTrigger.dialogue.paragraphs.speakers;
         temp.paragraphs.spokenDialogue = new[] { questToGive.QuestDeniedText };
-        FindObjectOfType<DialogueManager>().StartDialogue(temp);
+        FindObjectOfType<DialogueManager>().StartNPCDialogue(temp);
     }
 
     public Quest GetQuest()

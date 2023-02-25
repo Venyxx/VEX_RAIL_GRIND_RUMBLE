@@ -7,13 +7,24 @@ public class AutomaticDialogueTrigger : MonoBehaviour
     [SerializeField] private bool oneTimeUse;
     private bool used;
 
+    [SerializeField] private bool freezePlayer;
+
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Collision Detected");
-        if (other.CompareTag("Player") && (!oneTimeUse || !used))
+        if (other.CompareTag("Player") && (!oneTimeUse || !used) )
         {
-            Debug.Log("Starting Diego Dialogue");
-            FindObjectOfType<DialogueManager>().StartAutoDialogue(dialogue);
+            var dialogueManager = FindObjectOfType<DialogueManager>();
+            if (freezePlayer)
+            {
+                dialogueManager.StartAutoFreezeDialogue(dialogue);
+            }
+            else
+            {
+                dialogueManager.StartAutoDialogue(dialogue);
+            }
+
+
             used = true;
         }
     }

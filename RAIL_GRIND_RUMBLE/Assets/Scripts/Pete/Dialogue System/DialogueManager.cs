@@ -13,10 +13,11 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI talkingToName;
     public GameObject dialogueBox;
     public GameObject questWindow;
+    public bool freezePlayer;
     private Queue<string> paragraphDisplayed;
     private Queue<string> nameDisplayed;
     private bool isBoxActive = false;
-    [SerializeField] private float textSpeed = 0.1f;
+    private float textSpeed = 0.01f;
     [SerializeField] private float npcRotationSpeed = 5;
 
     private ThirdPersonMovement thirdPersonControllerREF;
@@ -86,17 +87,30 @@ public class DialogueManager : MonoBehaviour
     }
     
     
-    public void StartDialogue(DialogueTemplate dialogue)
+    public void StartNPCDialogue(DialogueTemplate dialogue)
     {
         if (dialogue == null || dialogue.dialogueTrigger == null|| !thirdPersonControllerREF.isWalking) return;
+        freezePlayer = true;
+        textSpeed = 0.01f;
         PlayDialogue(dialogue);
         
+    }
+
+    public void StartAutoFreezeDialogue(DialogueTemplate dialogue)
+    {
+        if (dialogue != null)
+        {
+            freezePlayer = true;
+            textSpeed = 0.01f;
+            PlayDialogue(dialogue);
+        }
     }
 
     public void StartAutoDialogue(DialogueTemplate dialogue)
     {
         if (dialogue != null)
         {
+            textSpeed = 0.03f;
             PlayDialogue(dialogue);
         }
     }
@@ -125,7 +139,6 @@ public class DialogueManager : MonoBehaviour
             nameDisplayed.Enqueue(name);
         }
         
-
         DisplayNextParagraph();
     }
 
@@ -136,9 +149,9 @@ public class DialogueManager : MonoBehaviour
 
         if (!isBoxActive && context.started)
         {
-            StartDialogue(thirdPersonControllerREF.nearestDialogueTemplate);
+            StartNPCDialogue(thirdPersonControllerREF.nearestDialogueTemplate);
         }
-        else if (context.started && isBoxActive)
+        else if (context.started && isBoxActive && freezePlayer)
         {
             DisplayNextParagraph();
         }
@@ -168,12 +181,18 @@ public class DialogueManager : MonoBehaviour
             textComponent.text += c;
             yield return new WaitForSeconds(textSpeed);
         }
+
+        if (!freezePlayer)
+        {
+            Invoke("DisplayNextParagraph", 2f);
+        }
     }
 
     private void EndDialogue(string text)
     {
         dialogueBox.SetActive(false);
         isBoxActive = false;
+        freezePlayer = false;
         
         //Debug.Log($"ThirdPersonControllerREF is NULL {thirdPersonControllerREF == null}");
         //Debug.Log($"nearestDialogueTemplate is NULL {thirdPersonControllerREF.nearestDialogueTemplate == null}");
@@ -251,4 +270,5 @@ public class DialogueManager : MonoBehaviour
     {
         manager.HandleProgress();
     }
+    
 }
