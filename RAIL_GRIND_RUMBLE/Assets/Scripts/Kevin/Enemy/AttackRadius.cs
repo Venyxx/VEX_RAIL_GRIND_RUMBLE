@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.ProBuilder.Shapes;
 
 [RequireComponent(typeof(SphereCollider))]
 public class AttackRadius : MonoBehaviour
@@ -15,6 +16,7 @@ public class AttackRadius : MonoBehaviour
     public bool IsSharpShooter = false;
     public EnemyMovement Movement;
     public Enemy enemy;
+    public float thrust = 10;
 
     protected virtual void Awake()
     {
@@ -26,12 +28,18 @@ public class AttackRadius : MonoBehaviour
         IDamageable damageable = other.GetComponent<IDamageable>();
         if (damageable != null)
         {
-
+           
+            if ( Movement.BruteIsCharging && enemy.Agent.speed > 0)
+            {
+                damageable.TakeDamage(Damage);
+               
+            }
             Damageables.Add(damageable);
             if (enemy.Health > 0)
             {
                 if (AttackCoroutine == null)
                 {
+                    
                     // if (IsSharpShooter == false)
                     // {
                     AttackCoroutine = StartCoroutine(Attack());
@@ -46,7 +54,7 @@ public class AttackRadius : MonoBehaviour
                     //}
                     //if (Movement.HasHidden == true)
                     //{
-                    //   Movement.FollowCoroutine = AttackCoroutine ;
+                  
 
 
                     // AttackCoroutine = StartCoroutine(Attack());
