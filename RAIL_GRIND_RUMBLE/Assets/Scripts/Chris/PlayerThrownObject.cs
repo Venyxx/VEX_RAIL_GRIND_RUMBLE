@@ -69,5 +69,10 @@ public class PlayerThrownObject : MonoBehaviour
             }
             
         }
+
+        if (other.gameObject.tag == "Explosion")
+        {
+            Destroy(gameObject);
+        }
     }
 }

@@ -11,6 +11,7 @@ public class DroneSpawner : MonoBehaviour
     void Start()
     {
         spawnRunning = false;
+        droneCount = 0;
     }
 
     // Update is called once per frame
