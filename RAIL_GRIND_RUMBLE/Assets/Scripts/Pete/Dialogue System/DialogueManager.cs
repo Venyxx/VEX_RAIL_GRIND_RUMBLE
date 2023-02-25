@@ -14,6 +14,7 @@ public class DialogueManager : MonoBehaviour
     public GameObject dialogueBox;
     public GameObject questWindow;
     private Queue<string> paragraphDisplayed;
+    private Queue<string> nameDisplayed;
     private bool isBoxActive = false;
     [SerializeField] private float textSpeed = 0.1f;
     [SerializeField] private float npcRotationSpeed = 5;
@@ -34,6 +35,7 @@ public class DialogueManager : MonoBehaviour
     private void Start()
     {
         paragraphDisplayed = new Queue<string>();
+        nameDisplayed = new Queue<string>();
         textComponent.text = string.Empty;
         talkingToName.text = string.Empty;
         
@@ -87,24 +89,46 @@ public class DialogueManager : MonoBehaviour
     public void StartDialogue(DialogueTemplate dialogue)
     {
         if (dialogue == null || dialogue.dialogueTrigger == null|| !thirdPersonControllerREF.isWalking) return;
+        PlayDialogue(dialogue);
         
+    }
+
+    public void StartAutoDialogue(DialogueTemplate dialogue)
+    {
+        if (dialogue != null)
+        {
+            PlayDialogue(dialogue);
+        }
+    }
+
+    private void PlayDialogue(DialogueTemplate dialogue)
+    {
         dialogueBox.SetActive(true);
         talkPrompt.SetActive(false);
         isBoxActive = true;
-        talkingToName.text = dialogue.name;
-        npcModel = dialogue.dialogueTrigger.npcModel;
-        rotatingNPC = true;
         
+
+        if (dialogue.dialogueTrigger != null)
+        {
+            npcModel = dialogue.dialogueTrigger.npcModel;
+            rotatingNPC = true;
+        }
         paragraphDisplayed.Clear();
 
-        foreach (string paragraph in dialogue.paragraphs)
+        foreach (string paragraph in dialogue.paragraphs.spokenDialogue)
         {
             paragraphDisplayed.Enqueue(paragraph);
         }
 
+        foreach (string name in dialogue.paragraphs.speakers)
+        {
+            nameDisplayed.Enqueue(name);
+        }
+        
+
         DisplayNextParagraph();
     }
-    
+
     //inputactions method
     public void DialogueInput(InputAction.CallbackContext context)
     {
@@ -127,6 +151,8 @@ public class DialogueManager : MonoBehaviour
             EndDialogue(lastString);
             return;
         }
+
+        talkingToName.text = nameDisplayed.Dequeue();
         string paragraph = paragraphDisplayed.Dequeue();
         lastString = paragraph;
         StopAllCoroutines();
@@ -158,7 +184,12 @@ public class DialogueManager : MonoBehaviour
             hpSpawner.SpawnHealth();
         }
 
-        var npcManager = thirdPersonControllerREF.nearestDialogueTemplate.dialogueTrigger.gameObject.GetComponent<NPCManager>();
+        NPCManager npcManager = null;
+        if (thirdPersonControllerREF.nearestDialogueTemplate != null &&
+            thirdPersonControllerREF.nearestDialogueTemplate.dialogueTrigger != null) 
+        {
+            npcManager = thirdPersonControllerREF.nearestDialogueTemplate.dialogueTrigger.gameObject.GetComponent<NPCManager>();
+        }
         //Debug.Log($"NPC Manager is null: {npcManager == null}");
         
         HandleQuest(text);
@@ -189,13 +220,13 @@ public class DialogueManager : MonoBehaviour
             {
                 questGiver.acceptedOrDeniedAlready = false;
             }
-            
-            Debug.Log($"Attempting to Activate RivalQuest {text}, {quest.QuestAcceptedText}");
+
+            //Debug.Log($"Attempting to Activate RivalQuest {text}, {quest.QuestAcceptedText}");
             if (quest is RivalQuest rivalQuest && quest.QuestAcceptedText.Equals(text))
             {
                 rivalQuest.Activate();
             }
-            
+
             //Debug.Log($"Quest is marked complete? {questGiver.GetQuest().isComplete}");
             //Debug.Log($"QuestRewards marked as Given? {questGiver.GetQuest().RewardsGiven}");
             if (quest.isComplete && !quest.RewardsGiven)
@@ -206,6 +237,10 @@ public class DialogueManager : MonoBehaviour
             }
         }
         catch (NullReferenceException e)
+        {
+            Debug.Log("There is no QuestGiver attached to this Dialogue");
+        }
+        catch (UnassignedReferenceException e)
         {
             Debug.Log("There is no QuestGiver attached to this Dialogue");
         }

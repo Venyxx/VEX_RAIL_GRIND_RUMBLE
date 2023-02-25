@@ -11,7 +11,7 @@ public class DiegoManager : NPCManager
 
     public override void HandleProgress()
     {
-        Quest firstQuest = GetComponent<QuestGiver>().GetQuest();
+        /*Quest firstQuest = GetComponent<QuestGiver>().GetQuest();
         
         if (!ProgressionManager.Get().diegoQuestFinished && firstQuest.RewardsGiven)
         {
@@ -20,7 +20,7 @@ public class DiegoManager : NPCManager
         
         if (ProgressionManager.Get().diegoQuestFinished)
         {
-            dialogueTemplate.paragraphs = newParagraphs;
-        }
+            dialogueTemplate.paragraphs.spokenDialogue = newParagraphs;
+        }*/
     }
 }

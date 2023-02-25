@@ -32,7 +32,7 @@ public class DialogueTrigger : MonoBehaviour
     
     void OnTriggerEnter(Collider collision)
     {
-        if (!collision.gameObject.CompareTag("PlayerObject")) return;
+        if (!collision.gameObject.CompareTag("PlayerObject") && !collision.gameObject.CompareTag("Player")) return;
         talkPrompt.SetActive(true);
         thirdPersonControllerREF.nearestDialogueTemplate = dialogue;
         
@@ -40,7 +40,7 @@ public class DialogueTrigger : MonoBehaviour
 
     private void OnTriggerStay(Collider collision)
     {
-        if (!(collision.gameObject.CompareTag("PlayerObject") || thirdPersonControllerREF.dialogueBox.activeInHierarchy))
+        if (!collision.gameObject.CompareTag("PlayerObject") && !collision.gameObject.CompareTag("Player") || thirdPersonControllerREF.dialogueBox.activeInHierarchy)
         {
             return;
         }
@@ -57,7 +57,7 @@ public class DialogueTrigger : MonoBehaviour
 
     void OnTriggerExit(Collider collision)
     {
-        if (!collision.gameObject.CompareTag("PlayerObject")) return;
+        if (!collision.gameObject.CompareTag("PlayerObject") && !collision.gameObject.CompareTag("Player")) return;
         talkPrompt.SetActive(false);
         thirdPersonControllerREF.nearestDialogueTemplate = null;
     }

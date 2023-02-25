@@ -591,17 +591,17 @@ public class ThirdPersonMovement : MonoBehaviour
 
     public void AddCoin(int coin)
     {
-            coinCount = coinCount + coin;
-            ProgressionManager.Get().coinCount = coinCount;
-            Debug.Log(coinCount);
-            coinCountText.text = $"{coinCount}";
-            PlaySound(0);
-            var questTracker = GetComponent<QuestTracker>();
-            if (questTracker.CurrentCountQuestType is CountQuestType.Coins)
-            {
-                CountQuest quest = (CountQuest) questTracker.CurrentQuest;
-                quest.IncrementCount();
-            }
+        coinCount = coinCount + coin;
+        ProgressionManager.Get().coinCount = coinCount;
+        Debug.Log(coinCount);
+        coinCountText.text = $"{coinCount}";
+        PlaySound(0);
+        var questTracker = GetComponent<QuestTracker>();
+        if (questTracker.CurrentCountQuestType is CountQuestType.Coins)
+        {
+            CountQuest quest = (CountQuest) questTracker.CurrentQuest;
+            quest.IncrementCount();
+        }
     }
 
     //Camera Switch

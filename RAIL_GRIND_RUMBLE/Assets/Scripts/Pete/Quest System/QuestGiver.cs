@@ -35,7 +35,7 @@ public class QuestGiver : MonoBehaviour
     {
         if (questToGive.isComplete && !questToGive.RewardsGiven)
         {
-            GetComponent<DialogueTrigger>().dialogue.paragraphs = questToGive.QuestCompletedText;
+            GetComponent<DialogueTrigger>().dialogue.paragraphs.spokenDialogue = questToGive.QuestCompletedText;
         }
     }
 
@@ -54,9 +54,10 @@ public class QuestGiver : MonoBehaviour
         pauseMenu.ResumeGame();
         FindObjectOfType<QuestTracker>().AcceptQuest(questToGive);
         DialogueTemplate temp = new DialogueTemplate();
+        temp.paragraphs = new DialogueParagraph();
         temp.dialogueTrigger = GetComponent<DialogueTrigger>();
-        temp.name = temp.dialogueTrigger.dialogue.name;
-        temp.paragraphs = new[] { questToGive.QuestAcceptedText };
+        temp.paragraphs.speakers = temp.dialogueTrigger.dialogue.paragraphs.speakers;
+        temp.paragraphs.spokenDialogue = new[] { questToGive.QuestAcceptedText };
         FindObjectOfType<DialogueManager>().StartDialogue(temp);
     }
 
@@ -64,9 +65,10 @@ public class QuestGiver : MonoBehaviour
     {
         pauseMenu.ResumeGame();
         DialogueTemplate temp = new DialogueTemplate();
+        temp.paragraphs = new DialogueParagraph();
         temp.dialogueTrigger = GetComponent<DialogueTrigger>();
-        temp.name = temp.dialogueTrigger.dialogue.name;
-        temp.paragraphs = new[] { questToGive.QuestDeniedText };
+        temp.paragraphs.speakers = temp.dialogueTrigger.dialogue.paragraphs.speakers;
+        temp.paragraphs.spokenDialogue = new[] { questToGive.QuestDeniedText };
         FindObjectOfType<DialogueManager>().StartDialogue(temp);
     }
 
