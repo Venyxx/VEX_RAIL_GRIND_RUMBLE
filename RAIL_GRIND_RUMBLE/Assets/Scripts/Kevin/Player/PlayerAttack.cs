@@ -22,6 +22,12 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField]
     private GameObject spinEffect;
 
+    [SerializeField]
+    private Rigidbody ariRigidbody;
+
+    [SerializeField]
+    private int slamSpeed;
+
     //buff
     public bool isBuffed;
     public int buffDamage;
@@ -175,6 +181,8 @@ public class PlayerAttack : MonoBehaviour
                 anim.SetTrigger("AirHeavy");
                 IsHeavyAttacking = true;
                 atkCount++;
+                ariRigidbody.AddForce(0, -slamSpeed, 0,  ForceMode.Acceleration);
+
             }
         }
 
