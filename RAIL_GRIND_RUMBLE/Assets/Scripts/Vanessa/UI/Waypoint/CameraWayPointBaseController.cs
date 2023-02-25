@@ -19,6 +19,7 @@ public class CameraWayPointBaseController : MonoBehaviour
 
     public void Start()
     {
+        data.worldWayPoints = GameObject.Find("WorldWayPoints");
         data.fpsCam = Camera.main;
         data.screenWidth = Screen.width;
         data.screenHeight = Screen.height; 
@@ -70,7 +71,7 @@ public class CameraWayPointBaseController : MonoBehaviour
 
         if (Vector3.Dot((item.transform.position - transform.position), transform.forward) < 0)
         {
-            if (screenPosition.x < screenWidth / 2)
+            if (screenPosition.x < Screen.width / 2)
             {
                 screenPosition.x = Screen.width - item.image.GetPixelAdjustedRect().width / 2;
             } else
@@ -78,16 +79,15 @@ public class CameraWayPointBaseController : MonoBehaviour
                 screenPosition.x = item.image.GetPixelAdjustedRect().width / 2;
             }
             
-             if (screenPosition.y < screenHeight / 2)
+             if (screenPosition.y < Screen.height / 2)
             {
                 screenPosition.y = Screen.height - item.image.GetPixelAdjustedRect().height / 2;
             } else
             {
                 screenPosition.y = item.image.GetPixelAdjustedRect().height / 2;
             }
-
-            return screenPosition;
-
         }
+
+        return screenPosition;
     }
 }

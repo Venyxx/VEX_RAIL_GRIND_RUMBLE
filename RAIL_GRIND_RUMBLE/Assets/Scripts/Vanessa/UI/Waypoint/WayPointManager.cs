@@ -27,7 +27,7 @@ public class WayPointManager : MonoBehaviour
             for ( int j = 0; j < data.waypointPrefab.Count; j++)
             {
                 GameObject tmpWaypoint = Instantiate(data.waypointPrefab[j]);
-                WaypointController tmpWayPointController = tmpWaypoint.GetComponent<WayPointController>();
+                WayPointController tmpWayPointController = tmpWaypoint.GetComponent<WayPointController>();
 
                 GameObject tmpWaypointUI = Instantiate(data.waypointUIPrefab);
                 tmpWaypointUI.GetComponent<Image>().sprite = tmpWayPointController.wayPointBaseController.data.item.icon;
@@ -37,7 +37,7 @@ public class WayPointManager : MonoBehaviour
                 tmpWayPointController.wayPointBaseController.data.item.message = tmpWaypointUI.transform.GetChild(0).GetComponent<Text>();
                 tmpWayPointController.wayPointBaseController.data.item.waypointUI = tmpWaypointUI;
                 tmpWayPointController.transform.SetParent(data.worldWayPoints.transform);
-                tmpWayPointController.transform.position = new Vector3 (Random.Range(5,995), 0.5f, Random.Range(5.995));
+                tmpWayPointController.transform.position = new Vector3 (Random.Range(5,50), 0.5f, Random.Range(5,50));
             }
         }
     }

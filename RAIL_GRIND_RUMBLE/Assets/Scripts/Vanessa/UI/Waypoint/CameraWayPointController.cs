@@ -15,7 +15,7 @@ public class CameraWayPointController : CameraWayPointBaseController
         foreach (WayPointController waypoint in data.waypoints)
         {
             waypoint.wayPointBaseController.data.item.image.transform.position = UIImagePosition(waypoint.wayPointBaseController.data.item);
-            waypoint.wayPointBaseController.data.item.message.text = WayPointDistance(waypoint.waypointBaseController.data.item) + "M";
+            waypoint.wayPointBaseController.data.item.message.text = WayPointDistance(waypoint.wayPointBaseController.data.item) + "M";
         }
     }
 }

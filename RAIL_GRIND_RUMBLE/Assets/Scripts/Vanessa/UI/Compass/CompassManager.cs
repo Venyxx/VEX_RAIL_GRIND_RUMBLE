@@ -13,6 +13,7 @@ public class CompassManager : MonoBehaviour
     public GameObject CompassObjectivePrefab;
     private readonly List<CompassObjective> _currentObjectives = new List<CompassObjective>();
     private GameObject ariRig;
+    private GameObject mainCam;
 
     private void Awake()
     {
@@ -26,7 +27,7 @@ public class CompassManager : MonoBehaviour
             Destroy(gameObject);
         }*/
 
-        ariRig = GameObject.Find("AriRig");
+        mainCam = GameObject.Find("Main Camera");
         Debug.Log("Awaken Compass Manager");
     }
 
@@ -66,7 +67,7 @@ public class CompassManager : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "MainMenu") return;
 
         Vector2 compassUvPosition = Vector2.right * 
-            (ariRig.transform.rotation.eulerAngles.y / 360);
+            (mainCam.transform.rotation.eulerAngles.y / 360);
 
         CompassImage.uvRect = new Rect(compassUvPosition, Vector2.one);
     }
