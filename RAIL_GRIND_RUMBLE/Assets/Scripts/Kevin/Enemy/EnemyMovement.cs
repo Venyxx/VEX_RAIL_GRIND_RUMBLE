@@ -57,7 +57,7 @@ public class EnemyMovement : MonoBehaviour
         Animator.SetBool(IsWalking, Agent.velocity.magnitude > 0.01f);
         if (Vector3.Distance(Player.position, transform.position) < activationDistance && !activated && enemy.Health >1 && !enemy.isDizzy)
         {
-            Debug.Log("Player is within range, chasing the player");
+            //Debug.Log("Player is within range, chasing the player");
             StartCoroutine(Activate());
            
             

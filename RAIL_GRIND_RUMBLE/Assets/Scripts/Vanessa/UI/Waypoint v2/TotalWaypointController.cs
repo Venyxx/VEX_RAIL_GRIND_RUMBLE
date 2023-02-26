@@ -12,14 +12,14 @@ public class TotalWaypointController : MonoBehaviour
     public Transform finalDestination;
     private GameObject playerREF;
     private Transform player;
-    private int currentIndex;
+    [HideInInspector] public int currentIndex;
     
 
 
     private TMP_Text distanceText;
     private RectTransform waypoint;
     public RectTransform prefab;
-    public bool posToFinal;
+    public bool Linear;
     // Start is called before the first frame update
     void Start()
     {
@@ -56,55 +56,76 @@ public class TotalWaypointController : MonoBehaviour
                 waypoints.Insert(0, temp);
             }
         }
+
+        //set current index which waypoint is visible
         for  (int i = 0; i < waypoints.Count; i++)
         {
             //if(currentIndex == 0) return;
-
-            if (Vector3.Distance(player.position, finalDestination.position)> Vector3.Distance(waypoints[i].transform.position, finalDestination.position))
+            if (Linear)
             {
-                //Debug.Log(i);
-
-                if (i < waypoints.Count - 1)
+                if (Vector3.Distance(player.position, finalDestination.position)> Vector3.Distance(waypoints[i].transform.position, finalDestination.position))
                 {
-                    if (Vector3.Distance(player.position, finalDestination.position) < 
-                        Vector3.Distance(waypoints[i + 1].transform.position, finalDestination.position))
-                        {
-                            //set the waypoint to wp[i]
-                            //Debug.Log("setting the wp to" + waypoints[i]);
+                    //Debug.Log(i);
 
-                            currentIndex = i;
-                           
-                        }
-                } 
-                else
-                {
-                    //Debug.Log("setting wp to farthest point");
-                    currentIndex = i;
-                    
+                    if (i < waypoints.Count - 1)
+                    {
+                        if (Vector3.Distance(player.position, finalDestination.position) < 
+                            Vector3.Distance(waypoints[i + 1].transform.position, finalDestination.position))
+                            {
+                                //set the waypoint to wp[i]
+                                //Debug.Log("setting the wp to" + waypoints[i]);
+
+                                currentIndex = i;
+                            
+                            }
+                    } 
+                    else
+                    {
+                        //Debug.Log("setting wp to farthest point");
+                        currentIndex = i;
+                        
+                    }
                 }
+            } else //not linear ex.servos
+            {
+                //index is handled by teleportation local, which is array based and just moves it forward one slot rather than by distanc
+            }
+                //displaying the waypoint
+                //Debug.Log(currentIndex);
 
-                var screenPos = Camera.main.WorldToScreenPoint(waypoints[i].transform.position);
+
+                //prevent waypoint clipping
+                var screenPos = Camera.main.WorldToScreenPoint(waypoints[currentIndex].transform.position);
+
+                if (Vector3.Dot((waypoints[currentIndex].transform.position) - waypoint.position, transform.forward) > 0)
+                {
+                    if (screenPos.x < Screen.width / 2)
+                        screenPos.x = 30;
+                    else
+                    screenPos.x = Screen.width - 30;
+                }
+                
+
+                screenPos.x = Mathf.Clamp(screenPos.x, 30, Screen.width - 30);
                 waypoint.position = screenPos;
+
+
         
-                if (posToFinal)
+                
+                
+                //printing the number
+                if (Linear)
                     distanceText.text = Vector3.Distance(player.position, finalDestination.position).ToString("0.0") + " m";
                 else
                     distanceText.text = Vector3.Distance(player.position, waypoints[currentIndex].transform.position).ToString("0.0") + " m";
 
-                //Debug.Log(waypoints[currentIndex]);
-            } 
+                Debug.Log(waypoints[currentIndex]);
+        } 
                   
-        }
-
+    }   
         
-        
-    }
-
-
-    private void UpdateWaypoints ()
-    {
-        
-
-        
-    }
 }
+
+
+  
+
