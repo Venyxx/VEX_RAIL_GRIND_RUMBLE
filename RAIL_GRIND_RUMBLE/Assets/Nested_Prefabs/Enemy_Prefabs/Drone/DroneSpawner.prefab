@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3336584494695171718}
   - component: {fileID: 3336584494695171719}
   - component: {fileID: 3336584494695171716}
+  - component: {fileID: 3986739711048918091}
   m_Layer: 0
   m_Name: DroneSpawner
   m_TagString: Untagged
@@ -111,3 +112,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drone: {fileID: 1012426447402202928, guid: 6fdfbad69b4dd514c99441b3acdf21d1, type: 3}
+  limit: 0
+  limitCount: 0
+--- !u!135 &3986739711048918091
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3336584494695171717}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 50
+  m_Center: {x: 0, y: 0, z: 0}

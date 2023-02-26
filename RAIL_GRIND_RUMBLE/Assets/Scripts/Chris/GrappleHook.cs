@@ -580,6 +580,14 @@ public class GrappleHook : MonoBehaviour
         }
     }
 
+    void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") && isGrappling == false && cooldownRunning == false && swingCount <= maxSwings) //&& grappleStored == false 
+        {
+            StartCoroutine(Cooldown());
+        }
+    }
+
     void PullObject()
     {
         //Debug.Log("Pull Active");

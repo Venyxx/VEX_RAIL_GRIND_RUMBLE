@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: 0
-  Damage: 5
+  Damage: 10
 --- !u!1 &5083454265256327664
 GameObject:
   m_ObjectHideFlags: 0
@@ -143,6 +143,7 @@ GameObject:
   - component: {fileID: 1793114999209625026}
   - component: {fileID: 7796595470561390489}
   - component: {fileID: 3690254445832407020}
+  - component: {fileID: 6657126365928029802}
   m_Layer: 0
   m_Name: Explosion
   m_TagString: Explosion
@@ -228,6 +229,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6657126365928029802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5083454265256327664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adb2eebe5bc4d7c48b0506fcdfc88e24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 5
 --- !u!1001 &3876947476623354769
 PrefabInstance:
   m_ObjectHideFlags: 0
