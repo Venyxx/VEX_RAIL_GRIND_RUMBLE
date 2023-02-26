@@ -744,9 +744,9 @@ MonoBehaviour:
   isGrappling: 0
   swingSpeed: 5
   nearestDialogueTemplate:
-    name: 
-    dialogueTrigger: {fileID: 0}
-    paragraphs: []
+    paragraphs:
+      speakers: []
+      spokenDialogue: []
   SpeedChangeRate: 10
   analogMovement: 0
   rigidBody: {fileID: 2030071780202691823}
@@ -1420,7 +1420,9 @@ MonoBehaviour:
   Righty: {fileID: 1935143035396237698}
   atkCount: 0
   grappleREF: {fileID: 2030071780202691821}
-  spinEffect: {fileID: 0}
+  spinEffect: {fileID: 3844792512042242024}
+  ariRigidbody: {fileID: 2030071780202691823}
+  slamSpeed: 900
   isBuffed: 0
   buffDamage: 0
 --- !u!114 &2030071779453111309
@@ -5664,6 +5666,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b119a22d8557b848a13329ee8d92ae9, type: 3}
+--- !u!1 &3844792512042242024 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7068260428930730075, guid: 0b119a22d8557b848a13329ee8d92ae9, type: 3}
+  m_PrefabInstance: {fileID: 6290669971139839923}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3844792512042242031 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7068260428930730076, guid: 0b119a22d8557b848a13329ee8d92ae9, type: 3}
