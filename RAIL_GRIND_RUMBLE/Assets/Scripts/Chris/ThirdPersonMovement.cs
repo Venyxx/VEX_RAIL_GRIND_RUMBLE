@@ -363,6 +363,7 @@ public class ThirdPersonMovement : MonoBehaviour
         if (verticalInput > 0.1 && GetComponent<WallRun>().isWallRunning == false)
         {
             moveKeyUp = false;
+
             //kick start movement
             if (rigidBody.velocity.magnitude < baseMoveSpeed)
                 currentSpeed = baseMoveSpeed;
@@ -461,7 +462,7 @@ public class ThirdPersonMovement : MonoBehaviour
             
             //change anim
             _animator.SetBool(_animIDWalking, false);
-            _animator.SetBool(_animIDJump, false);
+            //_animator.SetBool(_animIDJump, false);
   
         } 
         else 

@@ -12,12 +12,14 @@ public class TotalWaypointController : MonoBehaviour
     public Transform finalDestination;
     private GameObject playerREF;
     private Transform player;
-    public int currentIndex;
+    private int currentIndex;
+    
 
 
     private TMP_Text distanceText;
     private RectTransform waypoint;
     public RectTransform prefab;
+    public bool posToFinal;
     // Start is called before the first frame update
     void Start()
     {
@@ -84,7 +86,10 @@ public class TotalWaypointController : MonoBehaviour
                 var screenPos = Camera.main.WorldToScreenPoint(waypoints[i].transform.position);
                 waypoint.position = screenPos;
         
-                distanceText.text = Vector3.Distance(player.position, finalDestination.position).ToString("0.0") + " m";
+                if (posToFinal)
+                    distanceText.text = Vector3.Distance(player.position, finalDestination.position).ToString("0.0") + " m";
+                else
+                    distanceText.text = Vector3.Distance(player.position, waypoints[currentIndex].transform.position).ToString("0.0") + " m";
             } 
                   
         }

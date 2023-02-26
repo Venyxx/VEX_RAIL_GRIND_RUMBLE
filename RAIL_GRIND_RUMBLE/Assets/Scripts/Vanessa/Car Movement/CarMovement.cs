@@ -7,6 +7,7 @@ public class CarMovement : MonoBehaviour
 {
     private float currentMoveSpeed;
     private float baseMoveSpeed;
+    private bool isStoppingCar;
 
     private bool canMove;
     public PathCreator pathCreator;
@@ -32,6 +33,14 @@ public class CarMovement : MonoBehaviour
             distanceTravelled += currentMoveSpeed * Time.deltaTime;
             transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
             transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
+
+
+
+            if(isStoppingCar)
+            {
+                currentMoveSpeed = Mathf.Lerp(currentMoveSpeed, 0, .2f);
+            } else
+                currentMoveSpeed = Mathf.Lerp(currentMoveSpeed, baseMoveSpeed, .02f);
         }
 
 
@@ -39,11 +48,11 @@ public class CarMovement : MonoBehaviour
 
     public void StopCar ()
     {
-        currentMoveSpeed = 0;
+        isStoppingCar = true;
     }
 
     public void StartCar ()
     {
-        currentMoveSpeed = baseMoveSpeed;
+        isStoppingCar = false;
     }
 }

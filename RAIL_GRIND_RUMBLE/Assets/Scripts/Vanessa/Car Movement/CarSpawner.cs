@@ -9,7 +9,7 @@ public class CarSpawner : MonoBehaviour
     private GameObject car2;
     private GameObject car3;
 
-    [SerializeField] private GameObject[] carSelection;
+    [SerializeField] public GameObject[] carSelection;
     private PathCreator pathCreator;
 
     private Transform SpawnPoint;
@@ -21,11 +21,11 @@ public class CarSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        car1 = GameObject.Find("BlueMovingCar");
-        car2 = GameObject.Find("RedMovingCar");
-        car3 = GameObject.Find("YellowMovingCar");
+        //car1 = GameObject.Find("BlueMovingCar");
+        //car2 = GameObject.Find("RedMovingCar");
+        //car3 = GameObject.Find("YellowMovingCar");
 
-        carSelection = new GameObject [] {car1, car2, car3};
+        //carSelection = new GameObject [] {car1, car2, car3};
         SpawnPoint = gameObject.transform;
         //pathCreator = gameObject.transform.parent.GetComponent<PathCreator>();
     }
