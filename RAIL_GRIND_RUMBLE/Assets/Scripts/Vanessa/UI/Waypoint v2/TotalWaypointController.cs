@@ -97,12 +97,12 @@ public class TotalWaypointController : MonoBehaviour
                 //prevent waypoint clipping
                 var screenPos = Camera.main.WorldToScreenPoint(waypoints[currentIndex].transform.position);
 
-                if (Vector3.Dot((waypoints[currentIndex].transform.position) - waypoint.position, transform.forward) > 0)
+                if (Vector3.Dot((waypoints[currentIndex].transform.position) - player.position, player.forward) < 0)
                 {
                     if (screenPos.x < Screen.width / 2)
-                        screenPos.x = 30;
+                        screenPos.x = Screen.width - 30;
                     else
-                    screenPos.x = Screen.width - 30;
+                        screenPos.x = 30;
                 }
                 
 

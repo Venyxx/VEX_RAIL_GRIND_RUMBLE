@@ -11,6 +11,9 @@ public class CheckpointController : MonoBehaviour
     public static Vector3 lastCheckPointPosition;
     private GameObject ari;
 
+    private Teleportation teleREF;
+
+
     private void Start()
     {
         ari = GameObject.Find("playerPrefab");
@@ -18,6 +21,9 @@ public class CheckpointController : MonoBehaviour
             ari.transform.position = lastCheckPointPosition;
         Time.timeScale = 1;
         LastScene = SceneManager.GetActiveScene().buildIndex;
+
+        if (GameObject.Find("TeleportManager"))
+            teleREF = GameObject.Find("TeleportManager").GetComponent<Teleportation>();
     }
 
     private void OnTriggerEnter(Collider other)
