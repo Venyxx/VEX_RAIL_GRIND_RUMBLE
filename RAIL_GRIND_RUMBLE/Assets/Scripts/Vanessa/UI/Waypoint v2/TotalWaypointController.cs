@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using TMPro;
 
 public class TotalWaypointController : MonoBehaviour
 {
@@ -10,25 +11,35 @@ public class TotalWaypointController : MonoBehaviour
 
     public Transform finalDestination;
     private GameObject playerREF;
-    Transform player;
+    private Transform player;
     public int currentIndex;
-    private GameObject realWaypoint;
+
+
+    private TMP_Text distanceText;
+    private RectTransform waypoint;
+    public RectTransform prefab;
     // Start is called before the first frame update
     void Start()
     {
+        var canvas = GameObject.Find("WaypointsCanvas").transform;
+
+        waypoint = Instantiate(prefab, canvas);
+        
         currentIndex = 1;
         waypoints = new List<GameObject>();
         GameObject playerREF = GameObject.Find("AriRig");
         player = playerREF.GetComponent<Transform>();
 
-        realWaypoint = GameObject.Find("Waypoint");
+
         waypoints = GameObject.FindGameObjectsWithTag("WayPoint").ToList();
+
+        distanceText = waypoint.GetComponentInChildren<TMP_Text>();
 
 
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         //normally this would check if you have a quest, then the waypoints would be passed through quest giver into here.
 
@@ -45,7 +56,7 @@ public class TotalWaypointController : MonoBehaviour
         }
         for  (int i = 0; i < waypoints.Count; i++)
         {
-            if(currentIndex == 0) return;
+            //if(currentIndex == 0) return;
 
             if (Vector3.Distance(player.position, finalDestination.position)> Vector3.Distance(waypoints[i].transform.position, finalDestination.position))
             {
@@ -57,23 +68,28 @@ public class TotalWaypointController : MonoBehaviour
                         Vector3.Distance(waypoints[i + 1].transform.position, finalDestination.position))
                         {
                             //set the waypoint to wp[i]
-                            Debug.Log("setting the wp to" + waypoints[i]);
+                            //Debug.Log("setting the wp to" + waypoints[i]);
 
                             currentIndex = i;
-                            
+                           
                         }
                 } 
                 else
                 {
-                    Debug.Log("setting wp to farthest point");
+                    //Debug.Log("setting wp to farthest point");
                     currentIndex = i;
                     
                 }
 
-                
+                var screenPos = Camera.main.WorldToScreenPoint(waypoints[i].transform.position);
+                waypoint.position = screenPos;
+        
+                distanceText.text = Vector3.Distance(player.position, finalDestination.position).ToString("0.0") + " m";
             } 
                   
         }
+
+        
         
     }
 
