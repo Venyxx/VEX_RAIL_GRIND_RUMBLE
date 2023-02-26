@@ -56,15 +56,7 @@ public class FontManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*if (DyslexiaTog.isOn == true)
-        {
-            ActivateDyslexiaFriendlyFont();
-        }
-        if (DyslexiaTog.isOn == false)
-        {
-            DeactivateDyslexiaFriendlyFont();
-        }
-        */
+     
     }
 
     public void DylexiaToggle()
@@ -84,22 +76,26 @@ public class FontManager : MonoBehaviour
         for (int i = 0; i < UrbanHeroes.Count; i++)
         {
             UrbanHeroes[i].font = openDyslexicFont;
-            // UrbanHeroes[i].autoSize.isOn = true;
+            UrbanHeroes[i].enableAutoSizing = true;
         }
 
         for (int i = 0; i < Rebound.Count; i++)
         {
             Rebound[i].font = openDyslexicFont;
+            Rebound[i].enableAutoSizing = true;
+
         }
 
         for (int i = 0; i < JackArmstrong.Count; i++)
         {
             JackArmstrong[i].font = openDyslexicFont;
+            JackArmstrong[i].enableAutoSizing = true;
         }
 
         for (int i = 0; i < Liberation.Count; i++)
         {
             Liberation[i].font = openDyslexicFont;
+            Liberation[i].enableAutoSizing = true;
         }
     }
 
