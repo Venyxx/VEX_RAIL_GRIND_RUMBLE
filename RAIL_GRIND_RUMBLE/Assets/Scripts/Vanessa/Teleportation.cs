@@ -4,25 +4,6 @@ using UnityEngine;
 
 public class Teleportation : MonoBehaviour
 {
-    public GameObject[] Locations = new GameObject[5];
-    private GameObject playerPrefab;
+    public GameObject[] Locations = new GameObject[6];
 
-    void Start ()
-    {
-        playerPrefab = GameObject.Find("playerPrefab");
-    }
-
-    void OnTriggerEnter (Collider col)
-    {
-        if (col.tag == "Teleporter")
-        {
-            for (int i = 0 ; i < Locations.Length; i ++ )
-            {
-                if (col.gameObject == Locations[i])
-                    playerPrefab.transform.position = Locations[i + 1].transform.position;
-            }
-        }
-      
-    }
-    
 }

@@ -90,6 +90,8 @@ public class TotalWaypointController : MonoBehaviour
                     distanceText.text = Vector3.Distance(player.position, finalDestination.position).ToString("0.0") + " m";
                 else
                     distanceText.text = Vector3.Distance(player.position, waypoints[currentIndex].transform.position).ToString("0.0") + " m";
+
+                //Debug.Log(waypoints[currentIndex]);
             } 
                   
         }

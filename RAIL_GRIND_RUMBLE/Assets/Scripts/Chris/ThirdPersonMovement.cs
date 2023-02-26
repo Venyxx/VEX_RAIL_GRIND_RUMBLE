@@ -462,7 +462,7 @@ public class ThirdPersonMovement : MonoBehaviour
             
             //change anim
             _animator.SetBool(_animIDWalking, false);
-            //_animator.SetBool(_animIDJump, false);
+            _animator.SetBool(_animIDJump, false);
   
         } 
         else 
