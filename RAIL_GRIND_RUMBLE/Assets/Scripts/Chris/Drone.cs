@@ -25,7 +25,7 @@ public class Drone : MonoBehaviour
         var step = speed * Time.deltaTime;
         playerPos = new Vector3(playerREF.transform.position.x, playerREF.transform.position.y + 15, playerREF.transform.position.z);
         float distance = Vector3.Distance(playerPos, transform.position);
-        Debug.Log("Distance = "+distance);
+        //Debug.Log("Distance = "+distance);
 
         if (distance > 20f)
         {

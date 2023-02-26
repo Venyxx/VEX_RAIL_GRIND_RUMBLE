@@ -207,16 +207,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1882004519}
-        m_TargetAssemblyTypeName: DevFunctions, Assembly-CSharp
-        m_MethodName: LoadServosParking
-        m_Mode: 1
+      - m_Target: {fileID: 441928029}
+        m_TargetAssemblyTypeName: LoadingScreen, Assembly-CSharp
+        m_MethodName: LoadOutStart
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: ServosParkingLot
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &198671853
@@ -485,6 +485,7 @@ GameObject:
   - component: {fileID: 441928026}
   - component: {fileID: 441928027}
   - component: {fileID: 441928028}
+  - component: {fileID: 441928029}
   m_Layer: 5
   m_Name: Main Menu Canvas
   m_TagString: Untagged
@@ -573,6 +574,7 @@ RectTransform:
   - {fileID: 3394629839445444259}
   - {fileID: 4933236281940095586}
   - {fileID: 862989508}
+  - {fileID: 1605156789}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -642,6 +644,19 @@ MonoBehaviour:
   XSens: {fileID: 1283737416456348666}
   YSensTextUI: {fileID: 6008734499637348061}
   XSensTextUI: {fileID: 5872887101922282364}
+--- !u!114 &441928029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 441928021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6fd12129b1488c478c88a853667efe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadingBackground: {fileID: 1605156788}
 --- !u!1 &465959751
 GameObject:
   m_ObjectHideFlags: 0
@@ -1003,16 +1018,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1882004519}
-        m_TargetAssemblyTypeName: DevFunctions, Assembly-CSharp
-        m_MethodName: LoadInnerRing
-        m_Mode: 1
+      - m_Target: {fileID: 441928029}
+        m_TargetAssemblyTypeName: LoadingScreen, Assembly-CSharp
+        m_MethodName: LoadOutStart
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: InnerRingLevel
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &814877986
@@ -1506,6 +1521,103 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!1001 &1119830066
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 441928025}
+    m_Modifications:
+    - target: {fileID: 3054480346471087490, guid: 479b9fb415205ba408890ac0e9d03fac, type: 3}
+      propertyPath: m_Name
+      value: LoadingTest
+      objectReference: {fileID: 0}
+    - target: {fileID: 5505832133979977702, guid: 479b9fb415205ba408890ac0e9d03fac, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5505832133979977702, guid: 479b9fb415205ba408890ac0e9d03fac, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5505832133979977702, guid: 479b9fb415205ba408890ac0e9d03fac, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5505832133979977702, guid: 479b9fb415205ba408890ac0e9d03fac, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5505832133979977702, guid: 479b9fb415205ba408890ac0e9d03fac, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5505832133979977702, guid: 479b9fb415205ba408890ac0e9d03fac, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5505832133979977702, guid: 479b9fb415205ba408890ac0e9d03fac, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5505832133979977702, guid: 479b9fb415205ba408890ac0e9d03fac, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5505832133979977702, guid: 479b9fb415205ba408890ac0e9d03fac, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5505832133979977702, guid: 479b9fb415205ba408890ac0e9d03fac, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5505832133979977702, guid: 479b9fb415205ba408890ac0e9d03fac, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5505832133979977702, guid: 479b9fb415205ba408890ac0e9d03fac, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5505832133979977702, guid: 479b9fb415205ba408890ac0e9d03fac, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5505832133979977702, guid: 479b9fb415205ba408890ac0e9d03fac, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5505832133979977702, guid: 479b9fb415205ba408890ac0e9d03fac, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5505832133979977702, guid: 479b9fb415205ba408890ac0e9d03fac, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5505832133979977702, guid: 479b9fb415205ba408890ac0e9d03fac, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5505832133979977702, guid: 479b9fb415205ba408890ac0e9d03fac, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5505832133979977702, guid: 479b9fb415205ba408890ac0e9d03fac, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5505832133979977702, guid: 479b9fb415205ba408890ac0e9d03fac, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5505832133979977702, guid: 479b9fb415205ba408890ac0e9d03fac, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 479b9fb415205ba408890ac0e9d03fac, type: 3}
 --- !u!1 &1123944810
 GameObject:
   m_ObjectHideFlags: 0
@@ -1590,16 +1702,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1882004519}
-        m_TargetAssemblyTypeName: DevFunctions, Assembly-CSharp
-        m_MethodName: LoadOutskirts
-        m_Mode: 1
+      - m_Target: {fileID: 441928029}
+        m_TargetAssemblyTypeName: LoadingScreen, Assembly-CSharp
+        m_MethodName: LoadOutStart
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Outskirts
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1123944813
@@ -2026,16 +2138,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1882004519}
-        m_TargetAssemblyTypeName: DevFunctions, Assembly-CSharp
-        m_MethodName: LoadServosLobby
-        m_Mode: 1
+      - m_Target: {fileID: 441928029}
+        m_TargetAssemblyTypeName: LoadingScreen, Assembly-CSharp
+        m_MethodName: LoadOutStart
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: ServosLobby
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1533863155
@@ -2277,6 +2389,16 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1603590355}
   m_CullTransparentMesh: 1
+--- !u!1 &1605156788 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3054480346471087490, guid: 479b9fb415205ba408890ac0e9d03fac, type: 3}
+  m_PrefabInstance: {fileID: 1119830066}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &1605156789 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5505832133979977702, guid: 479b9fb415205ba408890ac0e9d03fac, type: 3}
+  m_PrefabInstance: {fileID: 1119830066}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1828390226
 GameObject:
   m_ObjectHideFlags: 0
@@ -2509,26 +2631,58 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4129599478960133395, guid: 8b84a45c319d94a77911566718826010, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4129599478960133395, guid: 8b84a45c319d94a77911566718826010, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4129599478960133395, guid: 8b84a45c319d94a77911566718826010, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 441928026}
+      objectReference: {fileID: 441928029}
+    - target: {fileID: 4129599478960133395, guid: 8b84a45c319d94a77911566718826010, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 441928029}
     - target: {fileID: 4129599478960133395, guid: 8b84a45c319d94a77911566718826010, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4129599478960133395, guid: 8b84a45c319d94a77911566718826010, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4129599478960133395, guid: 8b84a45c319d94a77911566718826010, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartGame
+      value: LoadOutStart
+      objectReference: {fileID: 0}
+    - target: {fileID: 4129599478960133395, guid: 8b84a45c319d94a77911566718826010, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: LoadOutStart
       objectReference: {fileID: 0}
     - target: {fileID: 4129599478960133395, guid: 8b84a45c319d94a77911566718826010, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: MainMenu, Assembly-CSharp
+      value: LoadingScreen, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4129599478960133395, guid: 8b84a45c319d94a77911566718826010, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: LoadingScreen, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4129599478960133395, guid: 8b84a45c319d94a77911566718826010, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: OpenCut
+      objectReference: {fileID: 0}
+    - target: {fileID: 4129599478960133395, guid: 8b84a45c319d94a77911566718826010, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
+      value: OpenCut
       objectReference: {fileID: 0}
     - target: {fileID: 4129599478960133395, guid: 8b84a45c319d94a77911566718826010, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4129599478960133395, guid: 8b84a45c319d94a77911566718826010, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4129599478960133397, guid: 8b84a45c319d94a77911566718826010, type: 3}
@@ -2827,16 +2981,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1882004519}
-        m_TargetAssemblyTypeName: DevFunctions, Assembly-CSharp
-        m_MethodName: LoadArisHouse
-        m_Mode: 1
+      - m_Target: {fileID: 441928029}
+        m_TargetAssemblyTypeName: LoadingScreen, Assembly-CSharp
+        m_MethodName: LoadOutStart
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Ari's House
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2070336887
@@ -2961,16 +3115,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1882004519}
-        m_TargetAssemblyTypeName: DevFunctions, Assembly-CSharp
-        m_MethodName: LoadDonovanLevel
-        m_Mode: 1
+      - m_Target: {fileID: 441928029}
+        m_TargetAssemblyTypeName: LoadingScreen, Assembly-CSharp
+        m_MethodName: LoadOutStart
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Donovan's Level
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2077713372

@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class DevFunctions : MonoBehaviour
 {
-
     // Update is called once per frame
     public void LoadOutskirts()
     {

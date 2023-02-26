@@ -46,6 +46,7 @@ public class PauseMenu : MonoBehaviour
 
 
     public static bool isPaused;
+    LoadingScreen loading;
 
     //Quest Window Check
     
@@ -59,6 +60,7 @@ public class PauseMenu : MonoBehaviour
 
         audioSource = GetComponent<AudioSource>();
         infoScreen = GetComponent<InfoScreen>();
+        loading = GetComponent<LoadingScreen>();
     }
 
     void Update()
@@ -194,11 +196,13 @@ public class PauseMenu : MonoBehaviour
 
     public void ReturnToMain()
     {
-        ResumeGame();
+        loading.LoadOutStart(mainMenuScene);
+        //ResumeGame();
         Time.timeScale = 1f;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        SceneManager.LoadScene(mainMenuScene);
+
+        //SceneManager.LoadScene(mainMenuScene);
     }
 
     //B Button on Controller
