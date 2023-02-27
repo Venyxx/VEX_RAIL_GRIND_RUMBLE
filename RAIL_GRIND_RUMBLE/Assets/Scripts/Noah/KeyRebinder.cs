@@ -105,6 +105,11 @@ public class KeyRebinder : MonoBehaviour
     
 
     private InputActionRebindingExtensions.RebindingOperation rebindingOperation;
+
+    void Start() 
+    { 
+            
+    }
     
     //Jump Rebind
     public void StartRebindingJump()
@@ -118,6 +123,7 @@ public class KeyRebinder : MonoBehaviour
             .WithControlsExcluding("<Mouse>/press")
             .WithControlsExcluding("<Pointer>/position")
             .WithControlsExcluding("<Gamepad>")
+            .WithTargetBinding(0)
             .OnMatchWaitForAnother(0.1f)
             .OnComplete(operation => JumpRebindComplete() )
             .Start();
@@ -220,6 +226,7 @@ public class KeyRebinder : MonoBehaviour
             .WithControlsExcluding("<Mouse>/press")
             .WithControlsExcluding("<Pointer>/position")
             .WithControlsExcluding("<Gamepad>")
+            .WithTargetBinding(0)
             .OnMatchWaitForAnother(0.1f)
             .OnComplete(operation => GrapplePullRebindComplete() )
             .Start();
@@ -253,6 +260,7 @@ public class KeyRebinder : MonoBehaviour
             .WithControlsExcluding("<Mouse>/press")
             .WithControlsExcluding("<Pointer>/position")
             .WithControlsExcluding("<Gamepad>")
+            .WithTargetBinding(1)
             .OnMatchWaitForAnother(0.1f)
             .OnComplete(operation => GrappleSwitchRebindComplete() )
             .Start();
@@ -264,7 +272,7 @@ public class KeyRebinder : MonoBehaviour
         int bindingIndex = grappleSwitchAction.action.GetBindingIndexForControl(grappleSwitchAction.action.controls[0]);
         
         grappleSwitchBindingDisplayNameText.text = InputControlPath.ToHumanReadableString(
-            grappleSwitchAction.action.bindings[bindingIndex].effectivePath,
+            grappleSwitchAction.action.bindings[1].effectivePath,
             InputControlPath.HumanReadableStringOptions.OmitDevice);
         
         rebindingOperation.Dispose();
@@ -286,6 +294,7 @@ public class KeyRebinder : MonoBehaviour
             .WithControlsExcluding("<Mouse>/press")
             .WithControlsExcluding("<Pointer>/position")
             .WithControlsExcluding("<Gamepad>")
+            .WithTargetBinding(0)
             .OnMatchWaitForAnother(0.1f)
             .OnComplete(operation => GrappleReleaseRebindComplete() )
             .Start();
@@ -319,7 +328,9 @@ public class KeyRebinder : MonoBehaviour
             .WithControlsExcluding("<Mouse>/press")
             .WithControlsExcluding("<Pointer>/position")
             .WithControlsExcluding("<Mouse>/leftButton")
-           // .WithControlsExcluding("<Gamepad>")
+            .WithControlsExcluding("<Gamepad>")
+           // .WithBindingGroup("KeyboardMouse")
+            .WithTargetBinding(1)
             .OnMatchWaitForAnother(0.1f)
             .OnComplete(operation => PauseRebindComplete() )
             .Start();
@@ -353,6 +364,7 @@ public class KeyRebinder : MonoBehaviour
             .WithControlsExcluding("<Mouse>/press")
             .WithControlsExcluding("<Pointer>/position")
             .WithControlsExcluding("<Gamepad>")
+            .WithTargetBinding(0)
             .OnMatchWaitForAnother(0.1f)
             .OnComplete(operation => SwitchRebindComplete() )
             .Start();
@@ -386,6 +398,7 @@ public class KeyRebinder : MonoBehaviour
             .WithControlsExcluding("<Mouse>/press")
             .WithControlsExcluding("<Pointer>/position")
             .WithControlsExcluding("<Gamepad>")
+            .WithTargetBinding(0)
             .OnMatchWaitForAnother(0.1f)
             .OnComplete(operation => HeavyRebindComplete() )
             .Start();
@@ -419,6 +432,7 @@ public class KeyRebinder : MonoBehaviour
             .WithControlsExcluding("<Mouse>/press")
             .WithControlsExcluding("<Pointer>/position")
             .WithControlsExcluding("<Gamepad>")
+            .WithTargetBinding(0)
             .OnMatchWaitForAnother(0.1f)
             .OnComplete(operation => LightRebindComplete() )
             .Start();
@@ -452,6 +466,7 @@ public class KeyRebinder : MonoBehaviour
             .WithControlsExcluding("<Mouse>/press")
             .WithControlsExcluding("<Pointer>/position")
             .WithControlsExcluding("<Gamepad>")
+            .WithTargetBinding(0)
             .OnMatchWaitForAnother(0.1f)
             .OnComplete(operation => GraffitiUpRebindComplete() )
             .Start();
@@ -485,6 +500,7 @@ public class KeyRebinder : MonoBehaviour
             .WithControlsExcluding("<Mouse>/press")
             .WithControlsExcluding("<Pointer>/position")
             .WithControlsExcluding("<Gamepad>")
+            .WithTargetBinding(0)
             .OnMatchWaitForAnother(0.1f)
             .OnComplete(operation => GraffitiDownRebindComplete() )
             .Start();
@@ -518,6 +534,7 @@ public class KeyRebinder : MonoBehaviour
             .WithControlsExcluding("<Mouse>/press")
             .WithControlsExcluding("<Pointer>/position")
             .WithControlsExcluding("<Gamepad>")
+            .WithTargetBinding(0)
             .OnMatchWaitForAnother(0.1f)
             .OnComplete(operation => GraffitiLeftRebindComplete() )
             .Start();
@@ -551,6 +568,7 @@ public class KeyRebinder : MonoBehaviour
             .WithControlsExcluding("<Mouse>/press")
             .WithControlsExcluding("<Pointer>/position")
             .WithControlsExcluding("<Gamepad>")
+            .WithTargetBinding(0)
             .OnMatchWaitForAnother(0.1f)
             .OnComplete(operation => GraffitiRightRebindComplete() )
             .Start();
