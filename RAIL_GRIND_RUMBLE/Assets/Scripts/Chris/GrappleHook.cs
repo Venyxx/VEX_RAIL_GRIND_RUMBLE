@@ -235,7 +235,7 @@ public class GrappleHook : MonoBehaviour
 
         //Insta-zip
         shorteningCable = true;
-        rigidBody.mass = (rbDefaultMass/1.75f);
+        rigidBody.mass = (rbDefaultMass/2.75f);
         isGrappling = true;
 
             //swingPoint = predictionHit.point;
