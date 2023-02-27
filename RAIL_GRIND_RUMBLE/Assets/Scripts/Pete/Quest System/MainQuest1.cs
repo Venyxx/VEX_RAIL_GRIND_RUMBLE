@@ -42,8 +42,6 @@ public class MainQuest1 : CountQuest
             {
                 //change wp
                 totalREF.currentIndex++;
-
-                
                 string[] dialogue = {"Great work as always! Now grab the parts and come on back."};
                 string[] speakers = {"Diego"};
                 DialogueTemplate template = new DialogueTemplate(speakers, dialogue);
@@ -59,7 +57,7 @@ public class MainQuest1 : CountQuest
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (SceneManager.GetActiveScene().name == "Outskirts")
+        if (SceneManager.GetActiveScene().name == "Outskirts" && !RewardsGiven && !isComplete)
         {
             totalREF = GameObject.Find("WayPointPrefab").GetComponent<TotalWaypointController>();
             mainQuestParent = GameObject.Find("MainQuest1 Objects");

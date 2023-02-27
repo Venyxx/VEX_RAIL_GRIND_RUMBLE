@@ -39,6 +39,12 @@ public class QuestTracker : MonoBehaviour
             QuestInfoText.gameObject.SetActive(true);
         }
 
+        if (CurrentQuest == null && GameObject.Find("WayPointPrefab") && SceneManager.GetActiveScene().name == "Outskirts")
+        {
+            GameObject waypoints = GameObject.Find("WayPointPrefab");
+            waypoints.SetActive(false);
+        }
+
         //QuestInfoText.text = questInfo;
     }
 
