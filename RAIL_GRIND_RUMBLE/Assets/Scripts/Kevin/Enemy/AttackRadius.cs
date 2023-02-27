@@ -31,7 +31,15 @@ public class AttackRadius : MonoBehaviour
            
             if ( Movement.BruteIsCharging && enemy.Agent.speed > 0)
             {
-                damageable.TakeDamage(Damage);
+                if (other.gameObject.tag == "Player")
+                {
+                    Vector3 knockbackVector =(Movement.Player.transform.position - enemy.Agent.transform.position) * 500;
+                    
+
+                    other.attachedRigidbody.AddForce((Movement.Player.transform.position - enemy.Agent.transform.position) * 500,  ForceMode.Acceleration);
+                    Debug.Log("KnockBackTest");
+                }
+                    damageable.TakeDamage(Damage);
                
             }
             Damageables.Add(damageable);
