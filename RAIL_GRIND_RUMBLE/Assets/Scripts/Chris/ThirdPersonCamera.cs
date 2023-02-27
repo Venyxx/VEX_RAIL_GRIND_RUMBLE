@@ -16,7 +16,7 @@ public class ThirdPersonCamera : MonoBehaviour
     private InputHandler playerActions;
     private ThirdPersonMovement _thirdPersonMovement;
     private CinemachineFreeLook _freeLook;
-
+    private DialogueManager dialogueManager;
     private float rotationSpeed = 7f;
 
     //Aiming
@@ -38,6 +38,7 @@ public class ThirdPersonCamera : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        dialogueManager = FindObjectOfType<DialogueManager>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
@@ -88,7 +89,7 @@ public class ThirdPersonCamera : MonoBehaviour
         }
 
         Vector2 moveInput = new Vector2(0, 0);
-        if (!_thirdPersonMovement.dialogueBox.activeInHierarchy)
+        if (!dialogueManager.freezePlayer)
         {
             moveInput = playerActions.Player.Move.ReadValue<Vector2>();
         }

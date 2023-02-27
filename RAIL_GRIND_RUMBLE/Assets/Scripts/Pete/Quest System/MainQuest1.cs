@@ -11,9 +11,11 @@ public class MainQuest1 : CountQuest
     private GameObject mainQuestParent;
     private TextMeshProUGUI questInfoText { get; set; }
     private bool endDialoguePlayed = false;
+    private TotalWaypointController totalREF;
 
     private void Awake()
     {
+        
         DontDestroyOnLoad(transform.gameObject);
         if (ProgressionManager.Get().mainQuest1 == null)
         {
@@ -28,6 +30,7 @@ public class MainQuest1 : CountQuest
     private void Start()
     {
         base.Start();
+       
     }
     
     public override void IncrementCount()
@@ -37,6 +40,10 @@ public class MainQuest1 : CountQuest
             base.IncrementCount("Goons Defeated");
             if (isComplete)
             {
+                //change wp
+                totalREF.currentIndex++;
+
+                
                 string[] dialogue = {"Great work as always! Now grab the parts and come on back."};
                 string[] speakers = {"Diego"};
                 DialogueTemplate template = new DialogueTemplate(speakers, dialogue);
@@ -54,6 +61,7 @@ public class MainQuest1 : CountQuest
     {
         if (SceneManager.GetActiveScene().name == "Outskirts")
         {
+            totalREF = GameObject.Find("WayPointPrefab").GetComponent<TotalWaypointController>();
             mainQuestParent = GameObject.Find("MainQuest1 Objects");
             questInfoText = GameObject.Find("QuestInfo").transform.Find("QuestInfoText").gameObject.GetComponent<TextMeshProUGUI>();
             if (isActive)

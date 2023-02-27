@@ -14,6 +14,7 @@ public class TotalWaypointController : MonoBehaviour
     private Transform player;
     [HideInInspector] public int currentIndex;
     
+    
 
 
     private TMP_Text distanceText;
@@ -24,6 +25,7 @@ public class TotalWaypointController : MonoBehaviour
     void Start()
     {
         var canvas = GameObject.Find("WaypointsCanvas").transform;
+        
 
         waypoint = Instantiate(prefab, canvas);
         

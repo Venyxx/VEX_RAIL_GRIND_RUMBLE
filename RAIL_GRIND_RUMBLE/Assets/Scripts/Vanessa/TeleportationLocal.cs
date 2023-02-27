@@ -30,7 +30,7 @@ public class TeleportationLocal : MonoBehaviour
                 {
                     if (i < teleportationManagerREF.Locations.Length)
                     {
-                        Debug.Log(teleportationManagerREF.Locations[i + 1]);
+                        //Debug.Log(teleportationManagerREF.Locations[i + 1]);
 
                         if (gameObject.name == teleportationManagerREF.Locations[i].name)
                             playerPrefab.transform.position = teleportationManagerREF.Locations[i + 1].transform.position + new Vector3 (0.5f, 0, 0.5f);
