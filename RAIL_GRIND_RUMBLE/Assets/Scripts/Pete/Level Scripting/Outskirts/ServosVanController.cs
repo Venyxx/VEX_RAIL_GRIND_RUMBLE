@@ -32,6 +32,8 @@ public class ServosVanController : MonoBehaviour
         
         if (_currentSpot == spots.Length - 1)
         {
+            MainQuest1 mainQuest1 = FindObjectOfType<MainQuest1>();
+            mainQuest1.VanDestinationReached();
             if (leftDoor != null && rightDoor != null)
             {
                 Destroy(rightDoor);

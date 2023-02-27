@@ -145,6 +145,8 @@ public class DialogueManager : MonoBehaviour
     //inputactions method
     public void DialogueInput(InputAction.CallbackContext context)
     {
+        //Debug.Log($"Pause Menu is paused? {PauseMenu.isPaused}");
+        //Debug.Log($"InfoScreen is open? {InfoScreen.isOpen}");
         if (!context.started || PauseMenu.isPaused || InfoScreen.isOpen) return;
 
         if (!isBoxActive && context.started)

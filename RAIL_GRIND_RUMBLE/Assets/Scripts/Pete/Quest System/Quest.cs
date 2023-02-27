@@ -14,13 +14,15 @@ public class Quest : MonoBehaviour
     public bool RewardsGiven { get; set; } = false;
     
     
-    [TextArea(3,10)] [SerializeField] private string questAcceptedText;
-    [TextArea(3,10)] [SerializeField] private string questDeniedText;
-    [TextArea(3,10)] [SerializeField] private string[] questCompletedText;
+    [TextArea(3,10)] [SerializeField] protected string questAcceptedText;
+    [TextArea(3,10)] [SerializeField] protected string questDeniedText;
+    [TextArea(3,10)] [SerializeField] protected string[] questCompletedText;
+    [SerializeField] protected string[] questCompletedSpeakers;
     
     public string QuestAcceptedText => questAcceptedText;
     public string QuestDeniedText => questDeniedText;
     public string[] QuestCompletedText => questCompletedText;
+    public string[] QuestCompletedSpeakers => questCompletedSpeakers;
 
     public string GetName()
     {

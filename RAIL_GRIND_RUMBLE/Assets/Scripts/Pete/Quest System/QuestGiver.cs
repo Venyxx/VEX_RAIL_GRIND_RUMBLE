@@ -36,6 +36,8 @@ public class QuestGiver : MonoBehaviour
         if (questToGive.isComplete && !questToGive.RewardsGiven)
         {
             GetComponent<DialogueTrigger>().dialogue.paragraphs.spokenDialogue = questToGive.QuestCompletedText;
+            GetComponent<DialogueTrigger>().dialogue.paragraphs.speakers = questToGive.QuestCompletedSpeakers;
+
         }
     }
 

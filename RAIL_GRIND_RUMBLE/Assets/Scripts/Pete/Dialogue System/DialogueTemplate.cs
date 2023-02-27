@@ -7,6 +7,17 @@ public class DialogueTemplate
     public DialogueTrigger dialogueTrigger { get; set; }
     public DialogueParagraph paragraphs;
 
+    public DialogueTemplate()
+    {
+    }
+
+    public DialogueTemplate(string[] speakers, string[] spoken)
+    {
+        paragraphs = new DialogueParagraph();
+        paragraphs.speakers = speakers;
+        paragraphs.spokenDialogue = spoken;
+    }
+
 }
 
 [System.Serializable]

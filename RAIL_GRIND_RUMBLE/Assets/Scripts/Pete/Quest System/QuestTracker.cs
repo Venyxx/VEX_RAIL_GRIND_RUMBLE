@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class QuestTracker : MonoBehaviour
 {
@@ -9,7 +11,7 @@ public class QuestTracker : MonoBehaviour
     public TextMeshProUGUI QuestInfoText { get; private set; }
     private static List<Quest> completedQuests;
     public CountQuestType CurrentCountQuestType { get; private set; } = CountQuestType.None;
-    
+    public string questInfo;
 
     void Start()
     {
@@ -18,12 +20,12 @@ public class QuestTracker : MonoBehaviour
         {
             QuestInfoText = GameObject.Find("QuestInfo").transform.Find("QuestInfoText").gameObject
                 .GetComponent<TextMeshProUGUI>();
-            QuestInfoText.text = "";
         }
         catch (Exception e)
         {
             Debug.LogError("Failed to assign QuestInfoText");
         }
+        
     }
 
     private void Update()
@@ -36,6 +38,8 @@ public class QuestTracker : MonoBehaviour
         {
             QuestInfoText.gameObject.SetActive(true);
         }
+
+        //QuestInfoText.text = questInfo;
     }
 
 
@@ -47,7 +51,12 @@ public class QuestTracker : MonoBehaviour
         }
         CurrentQuest = quest;
         CurrentQuest.isActive = true;
-        if (quest is CountQuest countQuest)
+        if (quest is MainQuest1)
+        {
+            CurrentCountQuestType = CountQuestType.Enemies;
+            QuestInfoText.text = $"Leave your house and chase that van!";
+        }
+        else if (quest is CountQuest countQuest)
         {
             CurrentCountQuestType = countQuest.GetCountQuestType();
             QuestInfoText.text = $"Progress: {0} / {countQuest.GetCompletionCount()}";
@@ -63,5 +72,22 @@ public class QuestTracker : MonoBehaviour
         CurrentCountQuestType = CountQuestType.None;
         Debug.Log("Quest Completed");
     }
-    
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        try
+        {
+            QuestInfoText = GameObject.Find("QuestInfo").transform.Find("QuestInfoText").gameObject
+                .GetComponent<TextMeshProUGUI>();
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Failed to assign QuestInfoText");
+        }
+    }
 }

@@ -163,6 +163,7 @@ public class ThirdPersonMovement : MonoBehaviour
         //Coin Counter
         coinCounterREF = GameObject.Find("CoinCounter");
         coinCountText = coinCounterREF.GetComponent<TextMeshProUGUI>();
+        coinCountText.text = $"{coinCount}";
 
         //Change/remove this line later based on level-to-level gameplay
         coinCount = 0;
@@ -599,7 +600,7 @@ public class ThirdPersonMovement : MonoBehaviour
         Debug.Log(coinCount);
         coinCountText.text = $"{coinCount}";
         PlaySound(0);
-        var questTracker = GetComponent<QuestTracker>();
+        var questTracker = FindObjectOfType<QuestTracker>();
         if (questTracker.CurrentCountQuestType is CountQuestType.Coins)
         {
             CountQuest quest = (CountQuest) questTracker.CurrentQuest;

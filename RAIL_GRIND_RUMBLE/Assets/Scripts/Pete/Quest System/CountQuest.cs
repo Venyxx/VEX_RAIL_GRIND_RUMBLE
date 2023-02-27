@@ -22,8 +22,15 @@ public class CountQuest : Quest
 
     public virtual void IncrementCount()
     {
+        //Debug.Log("IncrementCount('Progress')");
+        IncrementCount("Progress");
+    }
+
+    public virtual void IncrementCount(string thingToCount)
+    {
+        //Debug.Log("Parameterized IncrementCount");
         currentCount++;
-        questTracker.QuestInfoText.text = $"Progress: {currentCount} / {completionCount}";
+        questTracker.QuestInfoText.text = $"{thingToCount}: {currentCount} / {completionCount}";
         Debug.Log(currentCount);
         if (currentCount >= completionCount)
         {

@@ -27,7 +27,7 @@ public class TotalWaypointController : MonoBehaviour
 
         waypoint = Instantiate(prefab, canvas);
         
-        currentIndex = 1;
+        currentIndex = 0;
         waypoints = new List<GameObject>();
         GameObject playerREF = GameObject.Find("AriRig");
         player = playerREF.GetComponent<Transform>();
@@ -91,7 +91,7 @@ public class TotalWaypointController : MonoBehaviour
                 //index is handled by teleportation local, which is array based and just moves it forward one slot rather than by distanc
             }
                 //displaying the waypoint
-                //Debug.Log(currentIndex);
+                Debug.Log(currentIndex);
 
 
                 //prevent waypoint clipping

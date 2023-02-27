@@ -1,22 +1,28 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DialogueTrigger : MonoBehaviour
 {
     public DialogueTemplate dialogue;
-    [SerializeField] protected GameObject talkPrompt;
+    protected static GameObject talkPrompt;
     protected ThirdPersonMovement thirdPersonControllerREF;
     public GameObject npcModel { get; private set; }
-
+    private string homeSceneName = "";
 
     void Start()
     {
+        if (homeSceneName == "")
+        {
+            homeSceneName = SceneManager.GetActiveScene().name;
+        }
+
         //Debug.Log(gameObject.name);
         dialogue.dialogueTrigger = this;
-        talkPrompt.SetActive(false);
+        TalkPromptCheck();
         thirdPersonControllerREF = FindObjectOfType<ThirdPersonMovement>();
-        foreach (Transform child in transform.parent)
+        foreach (Transform child in transform)
         {
             if (child.gameObject.CompareTag("NPC Model"))
             {
@@ -32,34 +38,80 @@ public class DialogueTrigger : MonoBehaviour
     
     void OnTriggerEnter(Collider collision)
     {
-        if (!collision.gameObject.CompareTag("PlayerObject") && !collision.gameObject.CompareTag("Player")) return;
-        talkPrompt.SetActive(true);
-        thirdPersonControllerREF.nearestDialogueTemplate = dialogue;
+        if ((collision.gameObject.CompareTag("PlayerObject") ||
+            collision.gameObject.CompareTag("Player")) && SceneManager.GetActiveScene().name == homeSceneName)
+        {
+            talkPrompt.SetActive(true);
+            thirdPersonControllerREF.nearestDialogueTemplate = dialogue;
+        }
         
     }
 
     private void OnTriggerStay(Collider collision)
     {
-        if (!collision.gameObject.CompareTag("PlayerObject") && !collision.gameObject.CompareTag("Player") || thirdPersonControllerREF.dialogueBox.activeInHierarchy)
+        if ((collision.gameObject.CompareTag("PlayerObject") ||
+            collision.gameObject.CompareTag("Player")) && SceneManager.GetActiveScene().name == homeSceneName)
         {
-            return;
+            if (thirdPersonControllerREF.isWalking)
+            {
+                talkPrompt.GetComponent<TextMeshProUGUI>().SetText("Click or Press A to Talk");
+            }
+            else
+            {
+                talkPrompt.GetComponent<TextMeshProUGUI>().SetText("Enter Walk Mode to Talk");
+            } 
         }
 
-        if (thirdPersonControllerREF.isWalking)
-        {
-            talkPrompt.GetComponent<TextMeshProUGUI>().SetText("Click or Press A to Talk");
-        }
-        else
-        {
-            talkPrompt.GetComponent<TextMeshProUGUI>().SetText("Enter Walk Mode to Talk");
-        }
+        
     }
 
     void OnTriggerExit(Collider collision)
     {
-        if (!collision.gameObject.CompareTag("PlayerObject") && !collision.gameObject.CompareTag("Player")) return;
-        talkPrompt.SetActive(false);
-        thirdPersonControllerREF.nearestDialogueTemplate = null;
+
+        if ((collision.gameObject.CompareTag("PlayerObject") ||
+            collision.gameObject.CompareTag("Player")) && SceneManager.GetActiveScene().name == homeSceneName)
+        {
+            talkPrompt.SetActive(false);
+            thirdPersonControllerREF.nearestDialogueTemplate = null;
+        }
+    }
+    
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+    
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        TalkPromptCheck();
+        thirdPersonControllerREF = FindObjectOfType<ThirdPersonMovement>();
+        if (npcModel == null)
+        {
+            return;
+        }
+
+        if (homeSceneName != SceneManager.GetActiveScene().name)
+        {
+            npcModel.SetActive(false);
+        }
+
+        else
+        {
+            npcModel.SetActive(true);
+        }
+    }
+
+    void TalkPromptCheck()
+    {
+        if (talkPrompt == null)
+        {
+            talkPrompt = GameObject.Find("TalkPrompt");
+
+        }
+        if (talkPrompt.activeInHierarchy)
+        {
+            talkPrompt.SetActive(false);
+        }
     }
 }
 
