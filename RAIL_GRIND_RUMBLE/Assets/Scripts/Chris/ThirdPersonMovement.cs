@@ -127,6 +127,9 @@ public class ThirdPersonMovement : MonoBehaviour
     [SerializeField] private AudioClip[] playerSounds;
     private AudioSource audioSource;
 
+    //Player Stun
+    public PlayerHealth healthRef;
+
  
         
     // Start is called before the first frame update
@@ -184,6 +187,7 @@ public class ThirdPersonMovement : MonoBehaviour
         GameObject dialogueParent = GameObject.Find("Dialogue");
         dialogueBox = dialogueParent.transform.Find("DialogueBox").gameObject;
         //Debug.Log($"DialogueBox is null? {dialogueBox == null}");
+        healthRef = GetComponent<PlayerHealth>();
     }
 
     // Update is called once per frame
@@ -261,7 +265,10 @@ public class ThirdPersonMovement : MonoBehaviour
                 
         }
         
-
+        if (healthRef.Dizzy)
+        {
+            StartCoroutine(Stun());
+        }
 
     }
 
@@ -420,7 +427,7 @@ public class ThirdPersonMovement : MonoBehaviour
     void PlayerMovement()
     {
         //Uncomment once air movement is programmed
-        if (isGrappling == true)
+        if (isGrappling == true || healthRef.Dizzy )
         {
             return;
         }
@@ -679,5 +686,12 @@ public class ThirdPersonMovement : MonoBehaviour
         //Railing = 2
         //Skating = 3
     }
-  
+
+    private IEnumerator Stun()
+    {
+        yield return new WaitForSeconds(3);
+        healthRef.IsDizzy(false);
+        StopCoroutine(Stun());
+    }
+
 }

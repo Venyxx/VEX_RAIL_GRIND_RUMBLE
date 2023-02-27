@@ -7,6 +7,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     public float maxHealth = 3;
     public float currentHealth;
     private ThirdPersonMovement thirdPersonMovementREF;
+    public bool Dizzy;
 
     [SerializeField] private bool debugKill;
 
@@ -69,6 +70,6 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
     public void IsDizzy(bool isDizzy)
     {
-        
+        Dizzy = isDizzy;
     }
 }
