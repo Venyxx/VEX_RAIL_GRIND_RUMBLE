@@ -13,14 +13,14 @@ public class PlayerAttack : MonoBehaviour
     public Collider Lefty;
     public Collider Righty;
     public int atkCount;
-    private ThirdPersonMovement movementScriptREF;
+    public ThirdPersonMovement movementScriptREF;
     float HeavyAtkTimer;
     bool TimerOn;
     public GrappleHook grappleREF;
     private WallRun wallRunREF;
 
-    [SerializeField]
-    private GameObject spinEffect;
+    
+    public GameObject spinEffect;
 
     [SerializeField]
     private Rigidbody ariRigidbody;
@@ -186,15 +186,16 @@ public class PlayerAttack : MonoBehaviour
             }
         }
 
-        if (context.ReadValueAsButton() == false && IsHeavyAttacking)
+        if (context.ReadValueAsButton() == false && IsHeavyAttacking && movementScriptREF.Grounded == true)
         {
            
            // Debug.Log("Key Release");
-            //spinEffect.SetActive(true);
+           
 
             if (HeavyAtkTimer >= 1 && HeavyAtkTimer <= 1.9)
             {
-             //   Debug.Log("BugCheck2");
+                spinEffect.SetActive(true);
+                //   Debug.Log("BugCheck2");
                 anim.SetTrigger("HAttackEnd2");
                 //    IsHeavyAttacking = false;
                 HeavyAtkTimer = 0;
@@ -208,7 +209,7 @@ public class PlayerAttack : MonoBehaviour
             {
              //   Debug.Log("BugCheck3");
                 anim.SetTrigger("HAttackEnd1");
-
+                spinEffect.SetActive(true);
                 //   IsHeavyAttacking = false;
                 HeavyAtkTimer = 0;
 
@@ -221,8 +222,8 @@ public class PlayerAttack : MonoBehaviour
                 anim.SetTrigger("HAttackEnd3");
                 //  IsHeavyAttacking = false;
                 HeavyAtkTimer = 0;
-                
-            
+                spinEffect.SetActive(true);
+
                 Damage = 100;
                 
             }

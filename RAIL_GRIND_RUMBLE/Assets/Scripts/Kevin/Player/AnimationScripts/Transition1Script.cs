@@ -14,7 +14,7 @@ public class Transition1Script : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-          if (PlayerAttack.instance.IsAttacking)
+          if (PlayerAttack.instance.IsAttacking && PlayerAttack.instance.movementScriptREF.Grounded == true)
         {
             PlayerAttack.instance.anim.Play("LightCombo2");
            // PlayerAttack.instance.Damage = 30;
