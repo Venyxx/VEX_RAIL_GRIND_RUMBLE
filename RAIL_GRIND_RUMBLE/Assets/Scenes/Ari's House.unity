@@ -3453,11 +3453,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3528749936643343461, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000015799078
+      value: -0.000000015799076
       objectReference: {fileID: 0}
     - target: {fileID: 3528749936643343461, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.00000000681533
+      value: 0.0000000068153296
       objectReference: {fileID: 0}
     - target: {fileID: 3528749936814248332, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3485,7 +3485,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3528749936814248332, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -1e-45
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3528749936814248333, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
       propertyPath: m_LookAt
@@ -7899,7 +7899,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh2399936
+  m_Name: pb_Mesh4757214
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -23583,8 +23583,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue:
     paragraphs:
-      speakers: []
-      spokenDialogue: []
+      speakers:
+      - Mama Vera
+      spokenDialogue:
+      - Buenos dias mija. Tienes hambre?
   shouldSpawnHealth: 1
   healthSpawnPickUp: {fileID: 7632737246093949267, guid: 79a6991b4ce2ae846b51e4afaee62488, type: 3}
   launchForce: 5

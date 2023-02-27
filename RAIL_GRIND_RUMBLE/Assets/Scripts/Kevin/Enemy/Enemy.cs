@@ -17,7 +17,7 @@ public class Enemy : PoolableObject, IDamageable
 
     private Coroutine LookCoroutine;
     private const string ATTACK_TRIGGER = "Attack";
-     private const string DEATH_TRIGGER = "Death";
+    private const string DEATH_TRIGGER = "Death";
 
     //Added for Chris - Removes enemies from Aim Points list upon death
     GameObject grappleDetectorREF;
@@ -25,9 +25,9 @@ public class Enemy : PoolableObject, IDamageable
     bool TimerOn;
     private AudioClip[] hitSounds;
     private AudioSource audioSource;
-     bool CanTakeDamage = true;
+    bool CanTakeDamage = true;
     public float _takeDamageDelay = .6f;
-   public bool dizzy = false;
+    public bool dizzy = false;
     public bool isDizzy;
    
 
@@ -156,6 +156,9 @@ public class Enemy : PoolableObject, IDamageable
                 CountQuest quest = (CountQuest)tracker.CurrentQuest;
                 quest.IncrementCount();
             }
+            
+            
+            
             Movement.activated = false;
             if (!TimerOn)
             {
