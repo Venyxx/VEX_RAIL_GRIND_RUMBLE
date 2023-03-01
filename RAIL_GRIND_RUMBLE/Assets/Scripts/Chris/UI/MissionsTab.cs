@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class MissionsTab : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class MissionsTab : MonoBehaviour
     public GameObject SideHustleTab;
     public GameObject CompletedTab;
 
-    //Mission Lists
+    //Mission Location-Based Lists
     public GameObject[] OutskirtsLists;
     public GameObject[] InnerRingLists;
     public GameObject[] ServosHQLists;
@@ -35,9 +36,22 @@ public class MissionsTab : MonoBehaviour
     public Sprite missionTypeSelected;
     public Sprite missionTypeNotSelected;
 
+    //Actual Missions
+    List<GameObject> OutskirtsMainMissions = new List<GameObject>();
+    List<GameObject> OutskirtsSideMissions;
+    List<GameObject> InnerRingMainMissions;
+    List<GameObject> InnerRingSideMissions;
+    List<GameObject> ServosHQMainMissions;
+    List<GameObject> ServosHQSideMissions;
+    List<GameObject> Completed;
+
+
+    //Etc
     private GameObject canvasREF;
     private InfoScreen infoScreen;
     private AudioSource audioSource;
+    [SerializeField] GameObject emptyMissionButton;
+    [SerializeField] GameObject missionTest;
 
     void Start()
     {
@@ -296,5 +310,46 @@ public class MissionsTab : MonoBehaviour
     {
         audioSource.clip = infoScreen.selectSound;
         audioSource.Play(0);
+    }
+
+    public void AddMission(/*bool isMainMission, string missionTitle, string missionDesc, string missionRew*/)
+    {
+
+        //Additional conditions needed for:
+        //Other locations
+        //Main Mission or Side Mission
+
+        GameObject newButton = Instantiate(emptyMissionButton, missionTest.transform.position, Quaternion.identity);
+        newButton.transform.localScale = newButton.transform.localScale * 1.8f;
+        if (SceneManager.GetActiveScene().name == "Ari's House" || SceneManager.GetActiveScene().name == "Outskirts")
+        {
+            OutskirtsMainMissions.Add(newButton);
+            newButton.transform.SetParent(OutskirtsLists[0].gameObject.transform);
+            ReorganizeMissionList(OutskirtsMainMissions);
+        } else if (SceneManager.GetActiveScene().name == "InnerRingLevel")
+        {
+            InnerRingMainMissions.Add(newButton);
+            newButton.transform.SetParent(InnerRingLists[0].gameObject.transform);
+            ReorganizeMissionList(InnerRingMainMissions);
+        } else if (SceneManager.GetActiveScene().name == "Servos HQ")
+        {
+            ServosHQMainMissions.Add(newButton);
+            newButton.transform.SetParent(ServosHQLists[0].gameObject.transform);
+            ReorganizeMissionList(ServosHQMainMissions);
+        }
+    }
+
+    void ReorganizeMissionList(List<GameObject> list)
+    {
+        if (list.Count >= 2)
+            {
+                for (int i = 0; i < list.Count; i++)
+                {
+                    if (i != 0)
+                    {
+                        list[i].transform.position = new Vector3(list[i-1].transform.position.x, list[i-1].transform.position.y - 5, list[i-1].transform.position.z);
+                    }
+                }
+            }
     }
 }
