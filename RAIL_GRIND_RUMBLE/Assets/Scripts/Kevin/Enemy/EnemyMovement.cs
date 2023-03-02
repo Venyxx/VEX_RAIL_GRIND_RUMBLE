@@ -34,7 +34,7 @@ public class EnemyMovement : MonoBehaviour
     private bool IsBrute = false;
     float totalDistance;
     public bool BruteIsCharging;
-    private bool BruteChargingDelay = false;
+    public bool BruteChargingDelay = false;
 
     private const string IsWalking = "IsWalking";
 
@@ -155,12 +155,14 @@ public class EnemyMovement : MonoBehaviour
         BruteIsCharging = true;
         Agent.speed = 0;
         yield return new WaitForSeconds(3f);
+        Animator.SetBool("Dashing", true);
         Attack.Damage = 10;
         Agent.speed = enemy.EnemyScriptableObject.Speed + 50;
         Agent.acceleration = enemy.EnemyScriptableObject.Acceleration + 50;
         
         yield return new WaitForSeconds(1f);
         Debug.Log("Brute isn't charging");
+        Animator.SetBool("Dashing", false);
         Agent.speed = 3;
         Attack.Damage = 5;
         Agent.acceleration = 8;

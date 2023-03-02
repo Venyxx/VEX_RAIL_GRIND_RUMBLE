@@ -44,7 +44,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 5.19
+  m_Radius: 2.01
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6050432086328859695
 MonoBehaviour:
@@ -64,6 +64,7 @@ MonoBehaviour:
   IsSharpShooter: 0
   Movement: {fileID: 1495312388888140238}
   enemy: {fileID: 5265576555318656063}
+  thrust: 10
 --- !u!1 &1495312389010500589
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,6 +282,8 @@ MonoBehaviour:
   HasHidden: 0
   Attack: {fileID: 6050432086328859695}
   enemy: {fileID: 5265576555318656063}
+  IsBrute: 0
+  BruteIsCharging: 0
   activated: 0
 --- !u!82 &5854847052674931944
 AudioSource:
@@ -398,6 +401,8 @@ MonoBehaviour:
   Animator: {fileID: 5823354347041916475}
   Ragdoll: {fileID: 1742402826431431499}
   _takeDamageDelay: 0.6
+  dizzy: 0
+  isDizzy: 0
   damageText: {fileID: 3432252478998060102, guid: 896df2592015e3141ae952a379c8dee7, type: 3}
 --- !u!1 &8806937911219802743
 GameObject:

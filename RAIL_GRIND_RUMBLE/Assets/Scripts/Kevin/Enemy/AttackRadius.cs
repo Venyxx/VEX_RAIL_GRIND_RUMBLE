@@ -34,10 +34,11 @@ public class AttackRadius : MonoBehaviour
             {
                 if (other.gameObject.tag == "Player")
                 {
+                    AttackCoroutine = StartCoroutine(Attack());
                     Vector3 knockbackVector =(Movement.Player.transform.position - enemy.Agent.transform.position) * 500;
                     damageable.IsDizzy(true);
 
-                    other.attachedRigidbody.AddForce((Movement.Player.transform.position - enemy.Agent.transform.position) * 500,  ForceMode.Acceleration);
+                    other.attachedRigidbody.AddForce((Movement.Player.transform.position - enemy.Agent.transform.position) * 150,  ForceMode.Acceleration);
                     Debug.Log("KnockBackTest");
                 }
                     damageable.TakeDamage(Damage);

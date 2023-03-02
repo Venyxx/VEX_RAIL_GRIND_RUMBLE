@@ -62,7 +62,15 @@ public class Enemy : PoolableObject, IDamageable
             TimerOn = false;
         }
         
-     
+     if (Movement.BruteChargingDelay)
+        {
+
+            if (LookCoroutine != null)
+            {
+                StopCoroutine(LookCoroutine);
+            }
+            LookCoroutine = StartCoroutine(LookAt(Movement.Player));
+        }
       
     }
     private void OnAttack(IDamageable Target)
@@ -177,6 +185,7 @@ public class Enemy : PoolableObject, IDamageable
             if( !EnemyScriptableObject.IsRanged)
             {
                 Ragdoll.StartRagdoll = true;
+                
             }
             
             
