@@ -75,12 +75,15 @@ public class Enemy : PoolableObject, IDamageable
     }
     private void OnAttack(IDamageable Target)
     {
-        Animator.SetTrigger(ATTACK_TRIGGER);
-        if (LookCoroutine != null)
+        if (!Movement.IsBrute)
         {
-            StopCoroutine(LookCoroutine);
+            Animator.SetTrigger(ATTACK_TRIGGER);
+            if (LookCoroutine != null)
+            {
+                StopCoroutine(LookCoroutine);
+            }
+            LookCoroutine = StartCoroutine(LookAt(Target.GetTransform()));
         }
-        LookCoroutine = StartCoroutine(LookAt(Target.GetTransform()));
     }
 
     private IEnumerator LookAt (Transform Target)
@@ -182,7 +185,7 @@ public class Enemy : PoolableObject, IDamageable
                 child.gameObject.layer = 20;
             }
 
-            if( !EnemyScriptableObject.IsRanged)
+            if( !EnemyScriptableObject.IsRanged && !Movement.IsBrute)
             {
                 Ragdoll.StartRagdoll = true;
                 

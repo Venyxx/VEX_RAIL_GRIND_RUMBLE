@@ -99,33 +99,67 @@ public class AttackRadius : MonoBehaviour
         IDamageable closestDamageable = null;
         float closestDistance = float.MaxValue;
 
-        while (Damageables.Count > 0)
+        if (!Movement.IsBrute)
         {
-            for (int i = 0; i < Damageables.Count; i++)
+            while (Damageables.Count > 0)
             {
-                Transform damageableTransform = Damageables[i].GetTransform();
-                float distance = Vector3.Distance(transform.position, damageableTransform.position);
-
-                if (distance < closestDistance)
+                for (int i = 0; i < Damageables.Count; i++)
                 {
-                    closestDistance = distance;
-                    closestDamageable = Damageables[i];
+                    Transform damageableTransform = Damageables[i].GetTransform();
+                    float distance = Vector3.Distance(transform.position, damageableTransform.position);
+
+                    if (distance < closestDistance)
+                    {
+                        closestDistance = distance;
+                        closestDamageable = Damageables[i];
+                        
+                    }
                 }
+
+                if (closestDamageable != null)
+                {
+                    OnAttack?.Invoke(closestDamageable);
+                    closestDamageable.TakeDamage(Damage);
+                }
+                closestDamageable = null;
+                closestDistance = float.MaxValue;
+
+                yield return Wait;
+
+                Damageables.RemoveAll(DisabledDamageables);
             }
-
-            if (closestDamageable != null)
-            {
-                OnAttack?.Invoke(closestDamageable);
-                closestDamageable.TakeDamage(Damage);
-            }
-            closestDamageable = null;
-            closestDistance = float.MaxValue;
-
-            yield return Wait;
-
-            Damageables.RemoveAll(DisabledDamageables);
+            AttackCoroutine = null;
         }
-        AttackCoroutine = null;
+        if(Movement.IsBrute)
+        {
+            while (Damageables.Count > 0)
+            {
+                for (int i = 0; i < Damageables.Count; i++)
+                {
+                    Transform damageableTransform = Damageables[i].GetTransform();
+                    float distance = Vector3.Distance(transform.position, damageableTransform.position);
+
+                    if (distance < closestDistance)
+                    {
+                        closestDistance = distance;
+                        closestDamageable = Damageables[i];
+                    }
+                }
+
+                if (closestDamageable != null)
+                {
+                    OnAttack?.Invoke(closestDamageable);
+                    closestDamageable.TakeDamage(Damage);
+                }
+                closestDamageable = null;
+                closestDistance = float.MaxValue;
+
+                yield return Wait;
+
+                Damageables.RemoveAll(DisabledDamageables);
+            }
+            AttackCoroutine = null;
+        }
         
     }
 

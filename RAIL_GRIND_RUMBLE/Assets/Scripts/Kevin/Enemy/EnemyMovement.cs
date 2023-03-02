@@ -30,8 +30,8 @@ public class EnemyMovement : MonoBehaviour
     public bool HasHidden = false;
     public AttackRadius Attack;
     public Enemy enemy;
-    [SerializeField]
-    private bool IsBrute = false;
+    
+    public bool IsBrute = false;
     float totalDistance;
     public bool BruteIsCharging;
     public bool BruteChargingDelay = false;
