@@ -49,11 +49,12 @@ public class EnemyMovement : MonoBehaviour
 
         //Added by Chris to prevent unassigned reference exception
         Player = GameObject.FindWithTag("Player").transform;
-        totalDistance = Vector3.Distance(Player.position, Agent.transform.position);
+        
 
     }
     private void Update()
     {
+        totalDistance = Vector3.Distance(Player.position, Agent.transform.position);
         Animator.SetBool(IsWalking, Agent.velocity.magnitude > 0.01f);
         if (Vector3.Distance(Player.position, transform.position) < activationDistance && !activated && enemy.Health >1 && !enemy.isDizzy)
         {
@@ -85,11 +86,13 @@ public class EnemyMovement : MonoBehaviour
             
 
 
-            if (activated && totalDistance > 5  && !BruteChargingDelay)
+            if (activated && totalDistance > 5 && !BruteChargingDelay && !Attack.BruteWindingUp )
             {
                 StartCoroutine(Charge());
             }
+
           
+
         }
 
     }
@@ -149,6 +152,8 @@ public class EnemyMovement : MonoBehaviour
 
     public IEnumerator Charge()
     {
+        if (totalDistance <= 5)
+        { yield return null; }
 
         BruteChargingDelay = true;
         Debug.Log("Brute is charging");
@@ -172,6 +177,7 @@ public class EnemyMovement : MonoBehaviour
         yield return new WaitForSeconds(10f);
         BruteChargingDelay = false;
         StopCoroutine(Charge());
+        startChasing(Player);
         
 
     }
@@ -275,7 +281,7 @@ public void startChasing (Transform Target)
 {
      
      StopCoroutine(FollowCoroutine);
-    // FollowCoroutine = StartCoroutine(FollowTarget());
+     FollowCoroutine = StartCoroutine(Activate());
     
 }
 

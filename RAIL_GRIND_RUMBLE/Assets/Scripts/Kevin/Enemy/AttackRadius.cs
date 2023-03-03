@@ -18,6 +18,8 @@ public class AttackRadius : MonoBehaviour
     public EnemyMovement Movement;
     public Enemy enemy;
     public float thrust = 10;
+    public bool BruteHit = false;
+    public bool BruteWindingUp = false;
 
     protected virtual void Awake()
     {
@@ -47,7 +49,7 @@ public class AttackRadius : MonoBehaviour
             Damageables.Add(damageable);
             if (enemy.Health > 0)
             {
-                if (AttackCoroutine == null)
+                if (AttackCoroutine == null && !Movement.BruteIsCharging)
                 {
                     
                     // if (IsSharpShooter == false)
@@ -130,8 +132,9 @@ public class AttackRadius : MonoBehaviour
             }
             AttackCoroutine = null;
         }
-        if(Movement.IsBrute)
+        if (Movement.IsBrute)
         {
+            BruteWindingUp = true;
             while (Damageables.Count > 0)
             {
                 for (int i = 0; i < Damageables.Count; i++)
@@ -149,18 +152,26 @@ public class AttackRadius : MonoBehaviour
                 if (closestDamageable != null)
                 {
                     OnAttack?.Invoke(closestDamageable);
-                    closestDamageable.TakeDamage(Damage);
+                    if (BruteHit)
+                    {
+                        closestDamageable.TakeDamage(Damage);
+                     
+                    }
                 }
                 closestDamageable = null;
                 closestDistance = float.MaxValue;
 
                 yield return Wait;
+                BruteWindingUp = false;
+               // BruteHit = false;
 
                 Damageables.RemoveAll(DisabledDamageables);
             }
             AttackCoroutine = null;
+
+
+
         }
-        
     }
 
     protected bool DisabledDamageables (IDamageable Damageable)

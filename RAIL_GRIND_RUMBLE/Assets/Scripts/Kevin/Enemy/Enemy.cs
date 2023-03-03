@@ -29,7 +29,7 @@ public class Enemy : PoolableObject, IDamageable
     public float _takeDamageDelay = .6f;
     public bool dizzy = false;
     public bool isDizzy;
-   
+    public static Enemy instance;
 
     //damage indicator
     public GameObject damageText;
@@ -48,7 +48,10 @@ public class Enemy : PoolableObject, IDamageable
         DespawnTimer = 0;
         hitSounds = Resources.LoadAll<AudioClip>("Sounds/DamageSounds");
         audioSource = GetComponent<AudioSource>();
-
+        if(Movement.IsBrute)
+        {
+            instance = this;
+        }
     }
 
     void Update()
@@ -83,6 +86,20 @@ public class Enemy : PoolableObject, IDamageable
                 StopCoroutine(LookCoroutine);
             }
             LookCoroutine = StartCoroutine(LookAt(Target.GetTransform()));
+        }
+        if (Movement.IsBrute)
+        {
+            if (AttackRadius.BruteWindingUp)
+            {
+                Animator.SetTrigger(ATTACK_TRIGGER);
+              
+            }
+            if (LookCoroutine != null)
+            {
+                // StopCoroutine(LookCoroutine);
+            }
+            LookCoroutine = StartCoroutine(LookAt(Target.GetTransform()));
+
         }
     }
 
