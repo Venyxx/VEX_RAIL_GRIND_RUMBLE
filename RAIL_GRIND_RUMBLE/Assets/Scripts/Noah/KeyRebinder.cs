@@ -11,6 +11,7 @@ public class KeyRebinder : MonoBehaviour
     [SerializeField] private GameObject startJumpRebindObject = null;
     [SerializeField] private GameObject waitingForJumpInputObject = null;
     
+    /*
     //MoveForward
     [SerializeField] private InputActionReference moveForwardAction = null;
     [SerializeField] private TMP_Text moveForwardBindingDisplayNameText = null;
@@ -35,6 +36,8 @@ public class KeyRebinder : MonoBehaviour
     [SerializeField] private GameObject startMoveRightRebindObject = null;
     [SerializeField] private GameObject waitingForMoveRightInputObject = null;
     
+    */
+    
     //GrapplePull
     [SerializeField] private InputActionReference grapplePullAction = null;
     [SerializeField] private TMP_Text grapplePullBindingDisplayNameText = null;
@@ -48,10 +51,11 @@ public class KeyRebinder : MonoBehaviour
     [SerializeField] private GameObject waitingForGrappleSwitchInputObject = null;
     
     //GrappleRelease
-    [SerializeField] private InputActionReference grappleReleaseAction = null;
-    [SerializeField] private TMP_Text grappleReleaseBindingDisplayNameText = null;
-    [SerializeField] private GameObject startGrappleReleaseRebindObject = null;
-    [SerializeField] private GameObject waitingForGrappleReleaseInputObject = null;
+   
+    [SerializeField] private InputActionReference noAimGrappleAction = null;
+    [SerializeField] private TMP_Text noAimGrappleBindingDisplayNameText = null;
+    [SerializeField] private GameObject startNoAimGrappleRebindObject = null;
+    [SerializeField] private GameObject waitingForNoAimGrappleInputObject = null;
     
     //PauseGame
     [SerializeField] private InputActionReference pauseAction = null;
@@ -283,38 +287,38 @@ public class KeyRebinder : MonoBehaviour
         waitingForGrappleSwitchInputObject.SetActive(false);
     }
     
-    public void StartRebindingGrappleRelease()
+    public void StartRebindingNoAimGrapple()
     {
-        startGrappleReleaseRebindObject.SetActive(false);
-        waitingForGrappleReleaseInputObject.SetActive(true);
+        startNoAimGrappleRebindObject.SetActive(false);
+        waitingForNoAimGrappleInputObject.SetActive(true);
 
-        grappleReleaseAction.action.Disable();
+        noAimGrappleAction.action.Disable();
         
-        rebindingOperation = grappleReleaseAction.action.PerformInteractiveRebinding()
+        rebindingOperation = noAimGrappleAction.action.PerformInteractiveRebinding()
             .WithControlsExcluding("<Mouse>/press")
             .WithControlsExcluding("<Pointer>/position")
             .WithControlsExcluding("<Gamepad>")
             .WithTargetBinding(0)
             .OnMatchWaitForAnother(0.1f)
-            .OnComplete(operation => GrappleReleaseRebindComplete() )
+            .OnComplete(operation => NoAimGrappleRebindComplete())
             .Start();
     }
 
-    private void GrappleReleaseRebindComplete()
+    private void NoAimGrappleRebindComplete()
     {
        
-        int bindingIndex = grappleReleaseAction.action.GetBindingIndexForControl(grappleReleaseAction.action.controls[0]);
+        int bindingIndex = noAimGrappleAction.action.GetBindingIndexForControl(noAimGrappleAction.action.controls[0]);
         
-        grappleReleaseBindingDisplayNameText.text = InputControlPath.ToHumanReadableString(
-            grappleReleaseAction.action.bindings[bindingIndex].effectivePath,
+        noAimGrappleBindingDisplayNameText.text = InputControlPath.ToHumanReadableString(
+            noAimGrappleAction.action.bindings[bindingIndex].effectivePath,
             InputControlPath.HumanReadableStringOptions.OmitDevice);
         
         rebindingOperation.Dispose();
         
-        grappleReleaseAction.action.Enable();
+        noAimGrappleAction.action.Enable();
         
-        startGrappleReleaseRebindObject.SetActive(true);
-        waitingForGrappleReleaseInputObject.SetActive(false);
+        startNoAimGrappleRebindObject.SetActive(true);
+        waitingForNoAimGrappleInputObject.SetActive(false);
     }
     
     public void StartRebindingPause()

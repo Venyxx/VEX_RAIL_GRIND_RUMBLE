@@ -52,10 +52,10 @@ public class ControllerRebinder : MonoBehaviour
     [SerializeField] private GameObject waitingForGrappleSwitchInputObject = null;
 
     //GrappleRelease
-    [SerializeField] private InputActionReference grappleReleaseAction = null;
-    [SerializeField] private TMP_Text grappleReleaseBindingDisplayNameText = null;
-    [SerializeField] private GameObject startGrappleReleaseRebindObject = null;
-    [SerializeField] private GameObject waitingForGrappleReleaseInputObject = null;
+    [SerializeField] private InputActionReference noAimGrappleAction = null;
+    [SerializeField] private TMP_Text noAimGrappleBindingDisplayNameText = null;
+    [SerializeField] private GameObject startNoAimGrappleRebindObject = null;
+    [SerializeField] private GameObject waitingForNoAimGrappleInputObject = null;
 
     //PauseGame
     [SerializeField] private InputActionReference pauseAction = null;
@@ -230,7 +230,7 @@ public class ControllerRebinder : MonoBehaviour
             .WithControlsExcluding("<Mouse>")
             .WithControlsExcluding("<Pointer>/position")
             .WithControlsExcluding("<Keyboard>")
-            .WithTargetBinding(1)
+            .WithTargetBinding(2)
             .OnMatchWaitForAnother(0.1f)
             .OnComplete(operation => GrapplePullRebindComplete())
             .Start();
@@ -242,7 +242,7 @@ public class ControllerRebinder : MonoBehaviour
         int bindingIndex = grapplePullAction.action.GetBindingIndexForControl(grapplePullAction.action.controls[0]);
 
         grapplePullBindingDisplayNameText.text = InputControlPath.ToHumanReadableString(
-            grapplePullAction.action.bindings[1].effectivePath,
+            grapplePullAction.action.bindings[2].effectivePath,
             InputControlPath.HumanReadableStringOptions.OmitDevice);
 
         rebindingOperation.Dispose();
@@ -287,38 +287,38 @@ public class ControllerRebinder : MonoBehaviour
         waitingForGrappleSwitchInputObject.SetActive(false);
     }
 
-    public void StartRebindingGrappleRelease()
+    public void StartRebindingNoAimGrapple()
     {
-        startGrappleReleaseRebindObject.SetActive(false);
-        waitingForGrappleReleaseInputObject.SetActive(true);
+        startNoAimGrappleRebindObject.SetActive(false);
+        waitingForNoAimGrappleInputObject.SetActive(true);
 
-        grappleReleaseAction.action.Disable();
+        noAimGrappleAction.action.Disable();
 
-        rebindingOperation = grappleReleaseAction.action.PerformInteractiveRebinding()
+        rebindingOperation = noAimGrappleAction.action.PerformInteractiveRebinding()
             .WithControlsExcluding("<Mouse>")
             .WithControlsExcluding("<Pointer>/position")
             .WithControlsExcluding("<Keyboard>")
             .WithTargetBinding(1)
             .OnMatchWaitForAnother(0.1f)
-            .OnComplete(operation => GrappleReleaseRebindComplete())
+            .OnComplete(operation => NoAimGrappleRebindComplete())
             .Start();
     }
 
-    private void GrappleReleaseRebindComplete()
+    private void NoAimGrappleRebindComplete()
     {
 
-        int bindingIndex = grappleReleaseAction.action.GetBindingIndexForControl(grappleReleaseAction.action.controls[0]);
+        int bindingIndex = noAimGrappleAction.action.GetBindingIndexForControl(noAimGrappleAction.action.controls[0]);
 
-        grappleReleaseBindingDisplayNameText.text = InputControlPath.ToHumanReadableString(
-            grappleReleaseAction.action.bindings[1].effectivePath,
+        noAimGrappleBindingDisplayNameText.text = InputControlPath.ToHumanReadableString(
+            noAimGrappleAction.action.bindings[1].effectivePath,
             InputControlPath.HumanReadableStringOptions.OmitDevice);
 
         rebindingOperation.Dispose();
 
-        grappleReleaseAction.action.Enable();
+        noAimGrappleAction.action.Enable();
 
-        startGrappleReleaseRebindObject.SetActive(true);
-        waitingForGrappleReleaseInputObject.SetActive(false);
+        startNoAimGrappleRebindObject.SetActive(true);
+        waitingForNoAimGrappleInputObject.SetActive(false);
     }
 
     public void StartRebindingPause()
