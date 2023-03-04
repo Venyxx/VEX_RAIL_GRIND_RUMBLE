@@ -112,7 +112,66 @@ public class ControllerRebinder : MonoBehaviour
 
     void Start()
     {
-
+         //JumpRebindingDisplay
+        jumpBindingDisplayNameText.text = InputControlPath.ToHumanReadableString(
+            jumpAction.action.bindings[1].effectivePath,
+            InputControlPath.HumanReadableStringOptions.OmitDevice);
+        
+       //GrapplePullDisplay
+        grapplePullBindingDisplayNameText.text = InputControlPath.ToHumanReadableString(
+            grapplePullAction.action.bindings[2].effectivePath,
+            InputControlPath.HumanReadableStringOptions.OmitDevice);
+        
+        //GrappleSwitchDisplay
+        grappleSwitchBindingDisplayNameText.text = InputControlPath.ToHumanReadableString(
+            grappleSwitchAction.action.bindings[0].effectivePath,
+            InputControlPath.HumanReadableStringOptions.OmitDevice);
+        
+        //NoAimGrappleDisplay
+        noAimGrappleBindingDisplayNameText.text = InputControlPath.ToHumanReadableString(
+            noAimGrappleAction.action.bindings[1].effectivePath,
+            InputControlPath.HumanReadableStringOptions.OmitDevice);
+        
+        //PauseDisplay
+        pauseBindingDisplayNameText.text = InputControlPath.ToHumanReadableString(
+            pauseAction.action.bindings[0].effectivePath,
+            InputControlPath.HumanReadableStringOptions.OmitDevice);
+        
+        //SwitchDisplay
+        switchBindingDisplayNameText.text = InputControlPath.ToHumanReadableString(
+            switchAction.action.bindings[1].effectivePath,
+            InputControlPath.HumanReadableStringOptions.OmitDevice);
+        
+        //HeavyDisplay
+        heavyBindingDisplayNameText.text = InputControlPath.ToHumanReadableString(
+            heavyAction.action.bindings[1].effectivePath,
+            InputControlPath.HumanReadableStringOptions.OmitDevice);
+        
+        //LightDisplay
+        lightBindingDisplayNameText.text = InputControlPath.ToHumanReadableString(
+            lightAction.action.bindings[1].effectivePath,
+            InputControlPath.HumanReadableStringOptions.OmitDevice);
+        
+        //GraffitiUpDisplay
+        graffitiUpBindingDisplayNameText.text = InputControlPath.ToHumanReadableString(
+            graffitiUpAction.action.bindings[1].effectivePath,
+            InputControlPath.HumanReadableStringOptions.OmitDevice);
+        
+        //GraffitiDownDisplay
+        graffitiDownBindingDisplayNameText.text = InputControlPath.ToHumanReadableString(
+            graffitiDownAction.action.bindings[1].effectivePath,
+            InputControlPath.HumanReadableStringOptions.OmitDevice);
+        
+        //GraffitiLeftDisplay
+        graffitiLeftBindingDisplayNameText.text = InputControlPath.ToHumanReadableString(
+            graffitiLeftAction.action.bindings[1].effectivePath,
+            InputControlPath.HumanReadableStringOptions.OmitDevice);
+        
+        //GraffitiRightDisplay
+        graffitiRightBindingDisplayNameText.text = InputControlPath.ToHumanReadableString(
+            graffitiRightAction.action.bindings[1].effectivePath,
+            InputControlPath.HumanReadableStringOptions.OmitDevice);
+        
     }
 
     //Jump Rebind
