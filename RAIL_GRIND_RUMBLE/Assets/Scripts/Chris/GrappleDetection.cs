@@ -32,6 +32,9 @@ public class GrappleDetection : MonoBehaviour
     public LayerMask grappleable;
     RaycastHit hit;
 
+    //Throwable Checking
+    private ThrowObject throwObjectScript;
+
     void Start()
     {
         GameObject cameraPrefabREF = GameObject.Find("camerasPrefab");
@@ -52,6 +55,7 @@ public class GrappleDetection : MonoBehaviour
         GameObject playerREF = GameObject.Find("playerPrefab");
         player = playerREF.GetComponent<Transform>();
         grappleHookScript = playerREF.GetComponent<GrappleHook>();
+        throwObjectScript = playerREF.GetComponent<ThrowObject>();
     }
 
     
@@ -91,13 +95,13 @@ public class GrappleDetection : MonoBehaviour
                 for (int i = 0; i < aimPoints.Count; i++)
                 {
                     //Checks if aimPoint is behind wall or not
-                    Vector3 raycastDir = aimPoints[i].position - player.position;
+                    /*Vector3 raycastDir = aimPoints[i].position - player.position;
                     if (Physics.Raycast(player.position, raycastDir, out hit, Vector3.Distance(transform.position, aimPoints[i].position), viewBlockers))
                     {
                         aimPointsNonVisible.Add(aimPoints[i]);
                         aimPoints.Remove(aimPoints[i]);
                         aimPointCount--;
-                    } else if (Vector3.Dot((aimPoints[i].position - mainCamREF.transform.position), mainCamREF.transform.forward) < 6)
+                    } else*/ if (Vector3.Dot((aimPoints[i].position - mainCamREF.transform.position), mainCamREF.transform.forward) < 6)
                     {
                         currentAim = aimPoints[0];
                     } else if (Vector3.Dot((currentAim.position - mainCamREF.transform.position), mainCamREF.transform.forward) < 6)
@@ -110,7 +114,7 @@ public class GrappleDetection : MonoBehaviour
         }
 
         //Checking blocked AimPoints
-        if (aimPointsNonVisible.Count != 0)
+        /*if (aimPointsNonVisible.Count != 0)
         {
             for (int i = 0; i < aimPointsNonVisible.Count; i++)
             {
@@ -122,7 +126,7 @@ public class GrappleDetection : MonoBehaviour
                         aimPointsNonVisible.Remove(aimPointsNonVisible[i]);
                     }
             }
-        }
+        }*/
 
     }
 
@@ -226,8 +230,32 @@ public class GrappleDetection : MonoBehaviour
         }
     }
 
+    //Enemy aimPoint conditional
+    void OnTriggerStay(Collider collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            if (throwObjectScript.isHoldingObject == true && !aimPoints.Exists(element => element == collision.gameObject.transform))
+            {
+                aimPoints.Add(collision.gameObject.transform);
+            } else if (throwObjectScript.isHoldingObject == false && aimPoints.Exists(element => element == collision.gameObject.transform))
+            {
+                aimPoints.Remove(collision.gameObject.transform);
+            }
+        }
+    }
+
     void OnTriggerExit(Collider collision)
     {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            if (aimPoints.Exists(element => element == collision.gameObject.transform))
+            {
+                aimPoints.Remove(collision.gameObject.transform);
+            }
+        }
+
+
         if (collision.gameObject.CompareTag("AimPoint"))
         {
             if (aimPoints.Contains(collision.gameObject.transform))

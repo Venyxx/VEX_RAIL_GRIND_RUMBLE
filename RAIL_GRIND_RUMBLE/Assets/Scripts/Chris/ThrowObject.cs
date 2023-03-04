@@ -18,6 +18,7 @@ public class ThrowObject : MonoBehaviour
     [SerializeField] private float throwUpwardForce;
 
     private ThirdPersonMovement thirdPersonMovement;
+    private GrappleDetection grappleDetection;
 
 
     // Start is called before the first frame update
@@ -28,6 +29,7 @@ public class ThrowObject : MonoBehaviour
         GameObject orientationREF = GameObject.Find("Orientation");
         orientation = orientationREF.gameObject.GetComponent<Transform>();
         thirdPersonMovement = GetComponent<ThirdPersonMovement>();
+        grappleDetection = gameObject.transform.Find("GrappleDetector").GetComponent<GrappleDetection>();
         objectHolding = "";
     }
 
@@ -73,7 +75,7 @@ public class ThrowObject : MonoBehaviour
         
         objectHolding = "";
         
-        if(_targeting)
+        if(_targeting /*grappleDetection.aimPoints.Count > 0*/ && grappleDetection.currentAim.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             thrownObject.gameObject.GetComponent<PlayerThrownObject>().target = true;
             return;

@@ -48,8 +48,8 @@ public class PlayerThrownObject : MonoBehaviour
         Transform explosion = this.gameObject.transform.Find("Explosion");
         explosion.gameObject.SetActive(true);
         yield return new WaitForSeconds(2f);
-        Destroy(gameObject);
         DroneSpawner.droneCount--;
+        Destroy(gameObject);
     }
 
 

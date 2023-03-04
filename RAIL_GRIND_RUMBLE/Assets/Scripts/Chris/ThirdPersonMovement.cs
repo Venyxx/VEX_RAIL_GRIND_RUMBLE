@@ -215,8 +215,8 @@ public class ThirdPersonMovement : MonoBehaviour
         }
 
 
-        //Hold Jump WIP
-        if (jumpDelayRunning == false)
+        //Variable Jump Height - Commented out for now
+        /*if (jumpDelayRunning == false)
         {
             if (isJumping == true && jumpTimeCounter > 0)
             {
@@ -226,7 +226,7 @@ public class ThirdPersonMovement : MonoBehaviour
             {
                 isJumping = false;
             }
-        }
+        }*/
 
         //grinding anims
         if (gameObject.GetComponent<CollisionFollow>().isGrinding)
@@ -285,11 +285,21 @@ public class ThirdPersonMovement : MonoBehaviour
             jumpTimeCounter = 0.35f;
             _animator.SetBool(_animIDJump, true);
             _animator.SetBool(_animIDGrounded, false);
-            TapJump(jumpForce);
+
+            //Added to account for not jumping as high while going fast - this method doesn't work smoothly; jumping error likely has to do with forward velocity
+            //if (currentSpeed > 15f)
+            //{
+            //    TapJump(jumpForce * 10f);
+            //} else {
+                TapJump(jumpForce);
+            //}
+            
             PlaySound(1);
 
             ExitRailMain();
-            StartCoroutine(JumpHoldDelay());
+
+            //Commented out - related to variable jump height
+            //StartCoroutine(JumpHoldDelay());
         }
 
         if (context.canceled)

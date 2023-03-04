@@ -223,6 +223,8 @@ public class GrappleHook : MonoBehaviour
         //     return;
         // }
 
+        if (grappleDetectorREF.GetComponent<GrappleDetection>().currentAim.gameObject.layer == LayerMask.NameToLayer("Enemy")) return;
+
         //Check if holding object
         if (GetComponent<ThrowObject>().isHoldingObject == true) return;
         if (cooldownRunning == true) return;
