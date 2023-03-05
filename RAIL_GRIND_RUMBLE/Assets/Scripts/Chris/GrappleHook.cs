@@ -229,6 +229,13 @@ public class GrappleHook : MonoBehaviour
         if (GetComponent<ThrowObject>().isHoldingObject == true) return;
         if (cooldownRunning == true) return;
 
+        //Switch back to normal camera / resumes time
+        if (GameObject.Find("AimingCam"))
+        {
+            GameObject aimingCamREF = GameObject.Find("AimingCam");
+            aimingCamREF.GetComponent<ThirdPersonCamera>().SwitchCameraCanceled();
+        }
+
         //Sound
         audioSource.clip = grappleSounds[0];
         audioSource.Play(0);

@@ -34,6 +34,7 @@ public class PlayerThrownObject : MonoBehaviour
             if (this.gameObject.tag == "DroneThrow")
             {
                 Debug.Log("BOOM");
+                mesh.SetActive(false);
                 StartCoroutine(Explosion());
             } else {
                 Destroy(gameObject);
@@ -67,11 +68,14 @@ public class PlayerThrownObject : MonoBehaviour
             }
             
         }
-
         //Eventually make coroutine so trashcan rolls around on the ground for a little bit before disappearing (polish)
-        if (other.gameObject.tag == "Explosion" || other.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        else if (other.gameObject.tag == "Explosion" || other.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
-            Destroy(gameObject);
+            if (this.gameObject.tag != "DroneThrow")
+            {
+                Destroy(gameObject); 
+            }
+                
         }
     }
 }

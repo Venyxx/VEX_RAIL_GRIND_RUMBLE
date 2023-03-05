@@ -144,10 +144,10 @@ public class ThirdPersonCamera : MonoBehaviour
             //grappleDetection.gameObject.GetComponent<GrappleDetection>().SetCurrentAim();
             grappleDetection.gameObject.GetComponent<GrappleDetection>().AimSwitch();
 
-            if (playerPrefabREF.gameObject.GetComponent<ThirdPersonMovement>().Grounded == false)
-            {
+            //if (playerPrefabREF.gameObject.GetComponent<ThirdPersonMovement>().Grounded == false)
+            //{
                 Time.timeScale = 0.3f;
-            }
+            //}
         }
     }
 

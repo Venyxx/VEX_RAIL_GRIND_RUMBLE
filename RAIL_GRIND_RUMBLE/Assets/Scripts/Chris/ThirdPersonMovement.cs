@@ -541,6 +541,24 @@ public class ThirdPersonMovement : MonoBehaviour
         //update speed UI
         SetSpeedUI();
 
+
+        //Check if player is aiming
+        if (GameObject.Find("AimingCam"))
+        {
+            GrappleDetection grappleDet = GameObject.Find("GrappleDetector").GetComponent<GrappleDetection>();
+            transform.RotateAround(grappleDet.currentAim.position, Vector3.up, currentSpeed * 5 * Time.deltaTime);
+            /*if (Vector3.Distance(transform.position, grappleDet.currentAim.position) > 10f)
+            {
+                Debug.Log("Distance = "+Vector3.Distance(transform.position, grappleDet.currentAim.position));
+                var lookPos = grappleDet.currentAim.position - transform.position;
+                lookPos.y = 0;
+                var newRotation = Quaternion.LookRotation(lookPos);
+                transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, 0);
+                transform.position = Vector3.MoveTowards(transform.position, grappleDet.currentAim.position, currentSpeed * 5 * Time.deltaTime);
+            }*/
+            
+        }
+
     }
 
     void SpeedControl()

@@ -238,9 +238,11 @@ public class GrappleDetection : MonoBehaviour
             if (throwObjectScript.isHoldingObject == true && !aimPoints.Exists(element => element == collision.gameObject.transform))
             {
                 aimPoints.Add(collision.gameObject.transform);
+                aimPointCount++;
             } else if (throwObjectScript.isHoldingObject == false && aimPoints.Exists(element => element == collision.gameObject.transform))
             {
                 aimPoints.Remove(collision.gameObject.transform);
+                aimPointCount--;
                 if (aimPoints.Count > 0) 
                 {
                     currentAim = aimPoints[0];
@@ -257,6 +259,7 @@ public class GrappleDetection : MonoBehaviour
             if (aimPoints.Exists(element => element == collision.gameObject.transform))
             {
                 aimPoints.Remove(collision.gameObject.transform);
+                aimPointCount--;
             }
         }
 

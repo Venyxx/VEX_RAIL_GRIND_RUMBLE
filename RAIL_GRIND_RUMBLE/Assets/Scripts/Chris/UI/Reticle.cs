@@ -64,10 +64,10 @@ public class Reticle : MonoBehaviour
         if (grappleDetection.aimPoints.Count <= 0)
         {
              reticleREF.SetActive(false);
-        } /*else {
+        } else if (grappleDetection.aimPoints.Count > 0 && reticleREF.activeInHierarchy == false) {
              target = grappleDetection.currentAim;
              reticleREF.SetActive(true);
-        }*/  
+        } 
     }
 
     public void ReticleToggle (bool isOn)

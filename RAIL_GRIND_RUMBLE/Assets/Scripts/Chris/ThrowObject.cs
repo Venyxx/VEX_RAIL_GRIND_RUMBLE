@@ -63,6 +63,13 @@ public class ThrowObject : MonoBehaviour
         heldTrashcanFakeREF.SetActive(false);
         heldDroneFakeREF.SetActive(false);
 
+        //Resumes time
+        if (GameObject.Find("AimingCam"))
+        {
+            GameObject aimingCamREF = GameObject.Find("AimingCam");
+            aimingCamREF.GetComponent<ThirdPersonCamera>().SwitchCameraCanceled();
+        }
+
         GameObject thrownObject = null;
 
         if (objectHolding == "Trashcan")
