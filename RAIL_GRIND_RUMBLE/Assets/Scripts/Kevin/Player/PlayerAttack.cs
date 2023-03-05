@@ -126,6 +126,19 @@ public class PlayerAttack : MonoBehaviour
             if (movementScriptREF.isJumping == false && movementScriptREF.Grounded == true)
             {
                 anim.SetTrigger("LAttack");
+                if (movementScriptREF.print < 5)
+                {
+                    Debug.Log("SlowAtk");
+                }
+                if (movementScriptREF.print > 5 && movementScriptREF.print < 20)
+                {
+                    Debug.Log("MedAtk");
+                }
+                if (movementScriptREF.print > 20)
+                {
+                    Debug.Log("fastAtk");
+                }
+
             }
             if (movementScriptREF.isJumping == true || movementScriptREF.Grounded == false)
             {
@@ -168,7 +181,7 @@ public class PlayerAttack : MonoBehaviour
         
            
 
-            if (movementScriptREF.Grounded == true)
+            if (movementScriptREF.Grounded == true && !movementScriptREF.isJumping)
             {
                 anim.SetTrigger("HAttackStart");
                 TimerOn = true;
@@ -205,7 +218,7 @@ public class PlayerAttack : MonoBehaviour
                
                 
             }
-            if (HeavyAtkTimer < 1)
+            if (HeavyAtkTimer < 1 && !movementScriptREF.isJumping)
             {
              //   Debug.Log("BugCheck3");
                 anim.SetTrigger("HAttackEnd1");

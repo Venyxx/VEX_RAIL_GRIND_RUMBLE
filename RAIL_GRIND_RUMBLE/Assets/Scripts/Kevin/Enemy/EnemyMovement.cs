@@ -177,8 +177,7 @@ public class EnemyMovement : MonoBehaviour
         yield return new WaitForSeconds(10f);
         BruteChargingDelay = false;
         StopCoroutine(Charge());
-        startChasing(Player);
-        
+              
 
     }
     private IEnumerator Hide(Transform Target)

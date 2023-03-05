@@ -129,7 +129,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
     //Player Stun
     public PlayerHealth healthRef;
-
+    public bool isStunned = false;
  
         
     // Start is called before the first frame update
@@ -265,7 +265,7 @@ public class ThirdPersonMovement : MonoBehaviour
                 
         }
         
-        if (healthRef.Dizzy)
+        if (healthRef.Dizzy && !isStunned)
         {
             StartCoroutine(Stun());
         }
@@ -699,8 +699,12 @@ public class ThirdPersonMovement : MonoBehaviour
 
     private IEnumerator Stun()
     {
+        isStunned = true;
+        _animator.SetTrigger("StunStart");
         yield return new WaitForSeconds(3);
         healthRef.IsDizzy(false);
+        _animator.SetTrigger("StunEnd");
+        isStunned = false;
         StopCoroutine(Stun());
     }
 

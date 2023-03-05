@@ -64,8 +64,7 @@ public class Enemy : PoolableObject, IDamageable
             gameObject.SetActive(false);
             TimerOn = false;
         }
-        
-     if (Movement.BruteChargingDelay)
+        if (Movement.BruteChargingDelay && Health > 0)
         {
 
             if (LookCoroutine != null)
@@ -74,7 +73,8 @@ public class Enemy : PoolableObject, IDamageable
             }
             LookCoroutine = StartCoroutine(LookAt(Movement.Player));
         }
-      
+
+
     }
     private void OnAttack(IDamageable Target)
     {
@@ -202,7 +202,7 @@ public class Enemy : PoolableObject, IDamageable
                 child.gameObject.layer = 20;
             }
 
-            if( !EnemyScriptableObject.IsRanged && !Movement.IsBrute)
+            if( !EnemyScriptableObject.IsRanged && Movement.IsBrute)
             {
                 Ragdoll.StartRagdoll = true;
                 

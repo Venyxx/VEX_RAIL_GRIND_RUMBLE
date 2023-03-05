@@ -49,7 +49,7 @@ public class AttackRadius : MonoBehaviour
             Damageables.Add(damageable);
             if (enemy.Health > 0)
             {
-                if (AttackCoroutine == null && !Movement.BruteIsCharging)
+                if (AttackCoroutine == null )
                 {
                     
                     // if (IsSharpShooter == false)
@@ -88,7 +88,9 @@ public class AttackRadius : MonoBehaviour
                 StopCoroutine(AttackCoroutine);
                 AttackCoroutine = null;
             }
+
         }
+
     }
 
     protected virtual IEnumerator Attack()
