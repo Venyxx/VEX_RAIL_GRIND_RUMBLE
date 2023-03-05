@@ -9,6 +9,7 @@ public class PlayerThrownObject : MonoBehaviour
     //[SerializeField] GameObject explosion;
     //Kevin
     public int Damage = 10;
+    [SerializeField] GameObject mesh;
 
     // Start is called before the first frame update
     void Start()
@@ -37,16 +38,14 @@ public class PlayerThrownObject : MonoBehaviour
             } else {
                 Destroy(gameObject);
             }
-            
         }
-
-        
     }
 
     IEnumerator Explosion()
     {
         Transform explosion = this.gameObject.transform.Find("Explosion");
         explosion.gameObject.SetActive(true);
+        
         yield return new WaitForSeconds(2f);
         DroneSpawner.droneCount--;
         Destroy(gameObject);
@@ -64,13 +63,13 @@ public class PlayerThrownObject : MonoBehaviour
             {
                 damageable.IsDizzy(true);
                 damageable.TakeDamage(Damage);
-                
-                
+                Destroy(gameObject);
             }
             
         }
 
-        if (other.gameObject.tag == "Explosion")
+        //Eventually make coroutine so trashcan rolls around on the ground for a little bit before disappearing (polish)
+        if (other.gameObject.tag == "Explosion" || other.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             Destroy(gameObject);
         }

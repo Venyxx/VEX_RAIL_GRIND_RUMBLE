@@ -758,6 +758,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b1b412fa0051e0a49978f48b14ef2d5e, type: 3}
   - {fileID: 8300000, guid: c2841d16b4400fe4bb89ed78621feb85, type: 3}
   healthRef: {fileID: 0}
+  isStunned: 0
   print: 0
 --- !u!114 &2030071780202691794
 MonoBehaviour:
@@ -1220,7 +1221,7 @@ MonoBehaviour:
     m_ActionName: Player/DialogueInput[/Mouse/press,/XInputControllerWindows/buttonSouth]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 3400830846209403069}
         m_TargetAssemblyTypeName: GrappleDetection, Assembly-CSharp
         m_MethodName: GrappleSwitchBack
         m_Mode: 0
