@@ -42,9 +42,10 @@ public class MainQuest1 : CountQuest
             {
                 //change wp
                 totalREF.currentIndex++;
-                string[] dialogue = {"Great work as always! Now grab the parts and come on back."};
-                string[] speakers = {"Diego"};
-                DialogueTemplate template = new DialogueTemplate(speakers, dialogue);
+                string dialogue = "Great work as always! Now grab the parts and come on back.";
+                string speaker = "Diego";
+                DialogueParagraph paragraph = new DialogueParagraph(speaker, dialogue);
+                DialogueTemplate template = new DialogueTemplate(paragraph);
                 FindObjectOfType<DialogueManager>().StartAutoDialogue(template);
             }
         }

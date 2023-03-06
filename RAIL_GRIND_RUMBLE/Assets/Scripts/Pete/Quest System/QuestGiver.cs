@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class QuestGiver : MonoBehaviour
 {
     [SerializeField] private Quest questToGive;
-
     private PauseMenu pauseMenu;
     
     [SerializeField]private TextMeshProUGUI questTitleText;
@@ -21,6 +20,7 @@ public class QuestGiver : MonoBehaviour
     {
         questToGive = GetComponent<Quest>();
         pauseMenu = FindObjectOfType<PauseMenu>();
+        
         if(questTitleText == null)
             questTitleText = GameObject.Find("QuestNameField").GetComponent<TextMeshProUGUI>();
         if(questDescrText == null)
@@ -35,9 +35,9 @@ public class QuestGiver : MonoBehaviour
     {
         if (questToGive.isComplete && !questToGive.RewardsGiven)
         {
-            GetComponent<DialogueTrigger>().dialogue.paragraphs.spokenDialogue = questToGive.QuestCompletedText;
-            GetComponent<DialogueTrigger>().dialogue.paragraphs.speakers = questToGive.QuestCompletedSpeakers;
-
+            //GetComponent<DialogueTrigger>().dialogue.paragraphs.spokenDialogue = questToGive.QuestCompletedText;
+            //GetComponent<DialogueTrigger>().dialogue.paragraphs.speakers = questToGive.QuestCompletedSpeakers;
+            GetComponent<DialogueTrigger>().dialogue = questToGive.questCompletedText;
         }
     }
 
@@ -55,23 +55,15 @@ public class QuestGiver : MonoBehaviour
     {
         pauseMenu.ResumeGame();
         FindObjectOfType<QuestTracker>().AcceptQuest(questToGive);
-        DialogueTemplate temp = new DialogueTemplate();
-        temp.paragraphs = new DialogueParagraph();
-        temp.dialogueTrigger = GetComponent<DialogueTrigger>();
-        temp.paragraphs.speakers = temp.dialogueTrigger.dialogue.paragraphs.speakers;
-        temp.paragraphs.spokenDialogue = new[] { questToGive.QuestAcceptedText };
-        FindObjectOfType<DialogueManager>().StartNPCDialogue(temp);
+        Debug.Log("Quest accepted text: " + questToGive.questAcceptedText.paragraphs[0].englishDialogue);
+        FindObjectOfType<DialogueManager>().StartNPCDialogue(questToGive.questAcceptedText);
     }
 
     public void DenyQuest()
     {
         pauseMenu.ResumeGame();
-        DialogueTemplate temp = new DialogueTemplate();
-        temp.paragraphs = new DialogueParagraph();
-        temp.dialogueTrigger = GetComponent<DialogueTrigger>();
-        temp.paragraphs.speakers = temp.dialogueTrigger.dialogue.paragraphs.speakers;
-        temp.paragraphs.spokenDialogue = new[] { questToGive.QuestDeniedText };
-        FindObjectOfType<DialogueManager>().StartNPCDialogue(temp);
+        FindObjectOfType<DialogueManager>().StartNPCDialogue(questToGive.questDeniedText);
+
     }
 
     public Quest GetQuest()

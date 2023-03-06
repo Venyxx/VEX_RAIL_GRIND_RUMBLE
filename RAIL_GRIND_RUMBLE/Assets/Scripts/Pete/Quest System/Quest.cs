@@ -12,9 +12,12 @@ public class Quest : MonoBehaviour
     [SerializeField] private string questName;
     [SerializeField] private string description;
     public bool RewardsGiven { get; set; } = false;
-    
-    
-    [TextArea(3,10)] [SerializeField] protected string questAcceptedText;
+    //private DialogueTrigger dialogueTrigger;
+    public DialogueTemplate questAcceptedText;
+    public DialogueTemplate questDeniedText;
+    public DialogueTemplate questCompletedText;
+
+    /*[TextArea(3,10)] [SerializeField] protected string questAcceptedText;
     [TextArea(3,10)] [SerializeField] protected string questDeniedText;
     [TextArea(3,10)] [SerializeField] protected string[] questCompletedText;
     [SerializeField] protected string[] questCompletedSpeakers;
@@ -22,7 +25,7 @@ public class Quest : MonoBehaviour
     public string QuestAcceptedText => questAcceptedText;
     public string QuestDeniedText => questDeniedText;
     public string[] QuestCompletedText => questCompletedText;
-    public string[] QuestCompletedSpeakers => questCompletedSpeakers;
+    public string[] QuestCompletedSpeakers => questCompletedSpeakers;*/
 
     public string GetName()
     {
@@ -48,7 +51,10 @@ public class Quest : MonoBehaviour
 
     void Start()
     {
-        
+        /*dialogueTrigger = GetComponent<DialogueTrigger>();
+        questAcceptedText.dialogueTrigger = dialogueTrigger;
+        questCompletedText.dialogueTrigger = dialogueTrigger;
+        questDeniedText.dialogueTrigger = dialogueTrigger;*/
     }
 
     public void RewardPlayer()

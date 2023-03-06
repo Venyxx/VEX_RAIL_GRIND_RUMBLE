@@ -3453,11 +3453,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3528749936643343461, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000015799076
+      value: -0.000000015799078
       objectReference: {fileID: 0}
     - target: {fileID: 3528749936643343461, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000068153296
+      value: 0.00000000681533
       objectReference: {fileID: 0}
     - target: {fileID: 3528749936814248332, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3481,11 +3481,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3528749936814248332, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1e-45
+      value: -1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 3528749936814248332, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -1e-45
+      value: 1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 3528749936814248333, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
       propertyPath: m_LookAt
@@ -6441,6 +6441,11 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!1 &703264850 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4897474327189006958, guid: 17c497713ecd2204d888e8d101029aa4, type: 3}
+  m_PrefabInstance: {fileID: 1575328551030225318}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &706965525
 GameObject:
   m_ObjectHideFlags: 0
@@ -7203,6 +7208,10 @@ PrefabInstance:
     - target: {fileID: 2030071780202691818, guid: a25d5b724a7d3b8409cda94db4fe800e, type: 3}
       propertyPath: m_Name
       value: playerPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 2030071780202691822, guid: a25d5b724a7d3b8409cda94db4fe800e, type: 3}
+      propertyPath: nearestDialogueTemplate.paragraphs.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5446298453998633873, guid: a25d5b724a7d3b8409cda94db4fe800e, type: 3}
       propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -19963,20 +19972,18 @@ MonoBehaviour:
   isComplete: 0
   questName: Beat Up The Goons
   description: Yeah
-  questAcceptedText: Go Get 'em!
-  questDeniedText: Come back when you're ready and we'll go get 'em!
+  questAcceptedText:
+    paragraphs:
+    - speakerName: Diego
+      englishDialogue: You've accepted my quest
+      englishVoiceLine: {fileID: 0}
+  questDeniedText:
+    paragraphs:
+    - speakerName: Diego
+      englishDialogue: You've denied my quest
+      englishVoiceLine: {fileID: 0}
   questCompletedText:
-  - "I\u2019ve got the parts you asked for. But I dunno\u2019. "
-  - Seems like Servos is upping the firepower of the Craneo Azul.
-  - "I\u2019m sure it\u2019s nothin\u2019 you can\u2019t handle. Right, Ari?\r\n"
-  - 'Anyways, Jose just called me from the Inner Ring. '
-  - You'll do that quest, and many more, next sprint!
-  questCompletedSpeakers:
-  - Ariadna
-  - Ariadna
-  - Diego
-  - Diego
-  - Diego
+    paragraphs: []
   questType: 1
   completionCount: 5
   subtractCoinsOnCompletion: 0
@@ -22228,11 +22235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
-    paragraphs:
-      speakers:
-      - Diego
-      spokenDialogue:
-      - "Buenos dias, Ari. I got something to tell you when you\u2019ve got time.\r\n"
+    paragraphs: []
   oneTimeUse: 1
   freezePlayer: 1
 --- !u!65 &1868683295
@@ -23300,11 +23303,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1130857163402291922, guid: b1b7063463958a44f9b22f408aa11444, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000031598155
+      value: -0.000000031598155
       objectReference: {fileID: 0}
     - target: {fileID: 1130857163402291922, guid: b1b7063463958a44f9b22f408aa11444, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000013630663
+      value: 0.000000013630663
       objectReference: {fileID: 0}
     - target: {fileID: 1130857163402291922, guid: b1b7063463958a44f9b22f408aa11444, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -23583,10 +23586,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue:
     paragraphs:
-      speakers:
-      - Mama Vera
-      spokenDialogue:
-      - Buenos dias mija. Tienes hambre?
+    - speakerName: Mama Vera
+      englishDialogue: Enjoy, mija!
+      englishVoiceLine: {fileID: 0}
   shouldSpawnHealth: 1
   healthSpawnPickUp: {fileID: 7632737246093949267, guid: 79a6991b4ce2ae846b51e4afaee62488, type: 3}
   launchForce: 5
@@ -24709,8 +24711,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132148953920052}
-  m_LocalRotation: {x: -0, y: -0.99374616, z: -0, w: -0.111663185}
-  m_LocalPosition: {x: 0.0035050581, y: -0.4419934, z: -0.055304583}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.3099372, y: 0.37640923, z: 0.27805975}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -24719,7 +24721,7 @@ Transform:
   - {fileID: 2689359904802930738}
   m_Father: {fileID: 3011940198323978487}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -192.822, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &553252965158612647
 Transform:
   m_ObjectHideFlags: 0
@@ -28429,7 +28431,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2968239832061314455}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.017425945, y: -0.30573198, z: -0.62178206}
+  m_LocalPosition: {x: 0, y: -0.302, z: 0}
   m_LocalScale: {x: 0.3056529, y: 0.36888105, z: 0.5199215}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -29851,56 +29853,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue:
     paragraphs:
-      speakers:
-      - Ariadna
-      - Diego
-      - Ariadna
-      - Diego
-      - Ariadna
-      - 'Diego '
-      - 'Ariadna '
-      - 'Diego '
-      - 'Diego '
-      - Ariadna
-      - Diego
-      - Diego
-      - Diego
-      - Ariadna
-      spokenDialogue:
-      - 'Buenos dias, Di. Como amaneciste?
-
-'
-      - "Worse and less than you, dormilona. And my morning hasn\u2019t been much
-        better.\r\n"
-      - 'Que paso?
-
-'
-      - 'Domingo Industries just merged with the Servos Corporation yesterday.
-
-'
-      - "And Domingo Industries is\u2026\r\n"
-      - "They were one of the last big industrial complexes in Nuevo Domingo. They\u2019ve
-        been in business for decades! With them gone, Servos basically has a monopoly
-        on\u2026 everything.\r\n"
-      - "*tsh* Well that sucks. I guess we\u2019ll just have to pick up the pace."
-      - "Let\u2019s not be too hasty. We\u2019ve been making good progress. Better
-        safe than sorry, especially now.\r\n"
-      - 'Luis is in need of a few parts off the black market. We were just about
-        to acquire them but the Craneo Azul got them first.
-
-'
-      - 'What''re those idiots gonna do with tech parts?
-
-'
-      - "My thoughts exactly. They\u2019re probably just middlemanning for Servos.\r\n"
-      - "We were able to discern their transport route and I want you to catch them
-        before they reach their destination. \n"
-      - 'The parts are being transported in one of the Servos vans along the specified
-        route. Once you stop them, be prepared for a fight.
-
-'
-      - "Yeah, yeah. I\u2019ve beaten up plenty of gang members. This\u2019ll be
-        no different.\r\n"
+    - speakerName: Diego
+      englishDialogue: I am recording a line of test dialogue
+      englishVoiceLine: {fileID: 8300000, guid: 3f7c1143a5fbc3a49869e67c2c3f21d5, type: 3}
+    - speakerName: Ariadna
+      englishDialogue: I am recording another line of test dialogue
+      englishVoiceLine: {fileID: 8300000, guid: 8fd6d654cd7e9e44da215665cdb0ceda, type: 3}
+    - speakerName: Ariadna
+      englishDialogue: This is the third line of test dialogue
+      englishVoiceLine: {fileID: 8300000, guid: a72b91a7ce0b76743b88283c4ac8a595, type: 3}
 --- !u!4 &3011940198323978487
 Transform:
   m_ObjectHideFlags: 0
@@ -29908,8 +29869,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3011940198323978484}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 49.187763, y: 38.507233, z: 966.844}
+  m_LocalRotation: {x: -0, y: -0.73021024, z: -0, w: 0.6832226}
+  m_LocalPosition: {x: 51.87, y: 37.34, z: 966.844}
   m_LocalScale: {x: 3.2062514, y: 2.656683, z: 3.6165576}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -29917,7 +29878,7 @@ Transform:
   - {fileID: 1868683298}
   m_Father: {fileID: 0}
   m_RootOrder: 12
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -93.808, z: 0}
 --- !u!114 &3011940198323978489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29930,7 +29891,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84f3b8477a93db04b93b274a3dd47237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questToGive: {fileID: 0}
+  questToGive: {fileID: 1782719797}
   questTitleText: {fileID: 0}
   questDescrText: {fileID: 0}
   questRewardText: {fileID: 0}
@@ -31160,11 +31121,12 @@ MonoBehaviour:
   isComplete: 0
   questName: Julianna
   description: Defeat 15 Craneo Azul goons.
-  questAcceptedText: Be careful! They may just be goons, but they're criminals!
-  questDeniedText: That makes sense. You need to rest more before the next big heist!
+  questAcceptedText:
+    paragraphs: []
+  questDeniedText:
+    paragraphs: []
   questCompletedText:
-  - 'Successful as usual, Rolling Rebel! '
-  questCompletedSpeakers: []
+    paragraphs: []
   questType: 1
   completionCount: 15
   subtractCoinsOnCompletion: 0
@@ -31205,25 +31167,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue:
     paragraphs:
-      speakers:
-      - Ariadna
-      - Julianna
-      - Ariadna
-      - Julianna
-      - Ariadna
-      - Julianna
-      spokenDialogue:
-      - "*yawns* \nHola Julie."
-      - "Buenos dias. I\u2019m glad to see you awake.\r\n"
-      - "How\u2019s life?\r\n"
-      - "Oh, you know\u2026 Servos hot on my tail while I dig too deep. Same ol\u2019
-        same ol\u2019.\r\n"
-      - '*Chuckling*
-
-        Yeah, the usual I guess. Stay safe though.
-
-'
-      - "I won\u2019t!\r\n"
+    - speakerName: Julianna
+      englishDialogue: 'It''s Juliannin'' time '
+      englishVoiceLine: {fileID: 0}
+    - speakerName: Ari
+      englishDialogue: That's cringe and you're weird
+      englishVoiceLine: {fileID: 0}
 --- !u!65 &3515509808114268077
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -33300,12 +33249,108 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6071730142659887950, guid: 17c497713ecd2204d888e8d101029aa4, type: 3}
   m_PrefabInstance: {fileID: 1575328551030225318}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 703264850}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 773e518a3791d0944adf710205297cac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &4728690126147402474
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703264850}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!4 &4739738504810659865
 Transform:
   m_ObjectHideFlags: 0

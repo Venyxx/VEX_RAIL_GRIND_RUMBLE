@@ -5,17 +5,21 @@ using UnityEngine;
 public class DialogueTemplate
 {
     public DialogueTrigger dialogueTrigger { get; set; }
-    public DialogueParagraph paragraphs;
+    public DialogueParagraph[] paragraphs;
 
     public DialogueTemplate()
     {
     }
 
-    public DialogueTemplate(string[] speakers, string[] spoken)
+    public DialogueTemplate(DialogueParagraph[] paragraphs)
     {
-        paragraphs = new DialogueParagraph();
-        paragraphs.speakers = speakers;
-        paragraphs.spokenDialogue = spoken;
+        this.paragraphs = paragraphs;
+    }
+
+    public DialogueTemplate(DialogueParagraph paragraph)
+    {
+        this.paragraphs = new DialogueParagraph[1];
+        paragraphs[0] = paragraph;
     }
 
 }
@@ -23,8 +27,22 @@ public class DialogueTemplate
 [System.Serializable]
 public struct DialogueParagraph
 {
-    public string[] speakers;
-    
-    [TextArea(3,10)]
-    public string[] spokenDialogue;
+    public DialogueParagraph(string speakerName, string englishDialogue)
+    {
+        this.speakerName = speakerName;
+        this.englishDialogue = englishDialogue;
+        englishVoiceLine = null;
+        //spanishDialogue = null;
+        //spanishVoiceLine = null;
+        //facialAnimation = null;
+    }
+
+    public string speakerName;
+    [TextArea(3,10)] public string englishDialogue;
+    public AudioClip englishVoiceLine;
+    //[TextArea(3,10)] public string spanishDialogue;
+    //public AudioClip spanishVoiceLine;
+    //public SOMETHING facialAnimation;
+
+
 }

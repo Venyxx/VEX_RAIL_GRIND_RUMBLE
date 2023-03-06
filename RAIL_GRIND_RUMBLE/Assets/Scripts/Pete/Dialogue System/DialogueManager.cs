@@ -16,6 +16,7 @@ public class DialogueManager : MonoBehaviour
     public bool freezePlayer;
     private Queue<string> paragraphDisplayed;
     private Queue<string> nameDisplayed;
+    private Queue<AudioClip> voiceClips;
     private bool isBoxActive = false;
     private float textSpeed = 0.01f;
     [SerializeField] private float npcRotationSpeed = 5;
@@ -23,12 +24,13 @@ public class DialogueManager : MonoBehaviour
     private ThirdPersonMovement thirdPersonControllerREF;
 
     [SerializeField] private GameObject talkPrompt;
-    private GameObject npcModel;
+    private GameObject npc;
     private GameObject ariRig;
     private bool rotatingNPC;
     private bool rotatingBack;
     
     private string lastString;
+    private AudioSource audioSource;
 
     public bool SpawnHealth { get; set; } = false;
 
@@ -37,8 +39,10 @@ public class DialogueManager : MonoBehaviour
     {
         paragraphDisplayed = new Queue<string>();
         nameDisplayed = new Queue<string>();
+        voiceClips = new Queue<AudioClip>();
         textComponent.text = string.Empty;
         talkingToName.text = string.Empty;
+        audioSource = GetComponent<AudioSource>();
         
         thirdPersonControllerREF = FindObjectOfType<ThirdPersonMovement>();
         ariRig = GetAriRig();
@@ -53,7 +57,7 @@ public class DialogueManager : MonoBehaviour
     
     private void Update()
     {
-        if (rotatingNPC && npcModel != null)
+        if (rotatingNPC && npc != null)
         {
             RotateNPC();
         }
@@ -75,21 +79,26 @@ public class DialogueManager : MonoBehaviour
     //rotating ariadna causes some bugginess when you finish walking. ask vanessa for help
     private void RotateNPC()
     {
-        Vector3 lookDirectionNPC = thirdPersonControllerREF.gameObject.transform.position - npcModel.transform.position;
-        Vector3 lookDirectionAri = npcModel.transform.position - thirdPersonControllerREF.gameObject.transform.position;
+        Vector3 lookDirectionNPC = thirdPersonControllerREF.gameObject.transform.position - npc.transform.position;
+        Vector3 lookDirectionAri = npc.transform.position - thirdPersonControllerREF.gameObject.transform.position;
         lookDirectionNPC.y = 0;
         lookDirectionAri.y = 0;
         lookDirectionNPC.Normalize();
         lookDirectionAri.Normalize();
         
-        npcModel.transform.rotation = Quaternion.Slerp(npcModel.transform.rotation, Quaternion.LookRotation(lookDirectionNPC), npcRotationSpeed * Time.deltaTime);
+        npc.transform.rotation = Quaternion.Slerp(npc.transform.rotation, Quaternion.LookRotation(lookDirectionNPC), npcRotationSpeed * Time.deltaTime);
         ariRig.transform.rotation = Quaternion.Slerp(ariRig.transform.rotation, Quaternion.LookRotation(lookDirectionAri), npcRotationSpeed * Time.deltaTime); //comment out this line to stop ari from rotating
     }
     
     
     public void StartNPCDialogue(DialogueTemplate dialogue)
     {
-        if (dialogue == null || dialogue.dialogueTrigger == null|| !thirdPersonControllerREF.isWalking) return;
+        /*Debug.Log("Attempting to call StartNPCDialogue");
+        Debug.Log($"Is dialogue null? {dialogue == null}");
+        Debug.Log($"Is dialogue.dialogueTrigger null? {dialogue.dialogueTrigger == null}");
+        Debug.Log($"Is ari walking? {thirdPersonControllerREF.isWalking}");*/
+        if (dialogue == null || !thirdPersonControllerREF.isWalking) return;
+        Debug.Log("StartNPCDialogue called successfully");
         freezePlayer = true;
         textSpeed = 0.01f;
         PlayDialogue(dialogue);
@@ -124,20 +133,31 @@ public class DialogueManager : MonoBehaviour
 
         if (dialogue.dialogueTrigger != null)
         {
-            npcModel = dialogue.dialogueTrigger.npcModel;
+            npc = dialogue.dialogueTrigger.gameObject;
             rotatingNPC = true;
         }
         paragraphDisplayed.Clear();
 
-        foreach (string paragraph in dialogue.paragraphs.spokenDialogue)
+        /*foreach (string paragraph in dialogue.paragraphs.spokenDialogue)
         {
             paragraphDisplayed.Enqueue(paragraph);
+        }*/
+
+        Debug.Log("Length of paragraphs: " + dialogue.paragraphs.Length);
+        foreach (var dialogueParagraph in dialogue.paragraphs)
+        {
+            Debug.Log(dialogueParagraph.englishDialogue);
+            paragraphDisplayed.Enqueue(dialogueParagraph.englishDialogue);
+            nameDisplayed.Enqueue(dialogueParagraph.speakerName);
+            voiceClips.Enqueue(dialogueParagraph.englishVoiceLine);
         }
 
-        foreach (string name in dialogue.paragraphs.speakers)
+        
+
+        /*foreach (string name in dialogue.paragraphs.speakers)
         {
             nameDisplayed.Enqueue(name);
-        }
+        }*/
         
         DisplayNextParagraph();
     }
@@ -147,7 +167,7 @@ public class DialogueManager : MonoBehaviour
     {
         //Debug.Log($"Pause Menu is paused? {PauseMenu.isPaused}");
         //Debug.Log($"InfoScreen is open? {InfoScreen.isOpen}");
-        if (!context.started || PauseMenu.isPaused || InfoScreen.isOpen) return;
+        if (!context.started || PauseMenu.isPaused || InfoScreen.isOpen || thirdPersonControllerREF.nearestDialogueTemplate == null) return;
 
         if (!isBoxActive && context.started)
         {
@@ -169,6 +189,12 @@ public class DialogueManager : MonoBehaviour
 
         talkingToName.text = nameDisplayed.Dequeue();
         string paragraph = paragraphDisplayed.Dequeue();
+        AudioClip clip = voiceClips.Dequeue();
+        if (clip != null)
+        {
+            audioSource.Stop();
+            audioSource.PlayOneShot(clip);
+        }
         lastString = paragraph;
         StopAllCoroutines();
         StartCoroutine(TypeParagraph(paragraph));
@@ -195,6 +221,7 @@ public class DialogueManager : MonoBehaviour
         dialogueBox.SetActive(false);
         isBoxActive = false;
         freezePlayer = false;
+        audioSource.Stop();
         
         //Debug.Log($"ThirdPersonControllerREF is NULL {thirdPersonControllerREF == null}");
         //Debug.Log($"nearestDialogueTemplate is NULL {thirdPersonControllerREF.nearestDialogueTemplate == null}");
@@ -230,7 +257,7 @@ public class DialogueManager : MonoBehaviour
     {
         try
         {
-            var questGiver = npcModel.transform.parent.GetComponentInChildren<QuestGiver>();
+            QuestGiver questGiver = npc.GetComponent<QuestGiver>();
             Quest quest = questGiver.GetQuest();
             if (!questGiver.acceptedOrDeniedAlready && !quest.isComplete && !quest.isActive)
             {
@@ -243,7 +270,8 @@ public class DialogueManager : MonoBehaviour
             }
 
             //Debug.Log($"Attempting to Activate RivalQuest {text}, {quest.QuestAcceptedText}");
-            if (quest is RivalQuest rivalQuest && quest.QuestAcceptedText.Equals(text))
+            if (quest is RivalQuest rivalQuest && quest.questAcceptedText.paragraphs[0].englishDialogue == text)
+                //quest.QuestAcceptedText.Equals(text))
             {
                 rivalQuest.Activate();
             }
