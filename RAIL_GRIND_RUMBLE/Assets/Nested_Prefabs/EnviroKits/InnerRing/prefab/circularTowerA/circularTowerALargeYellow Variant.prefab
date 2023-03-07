@@ -9,7 +9,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 143202512351170377, guid: bd2c9d255c92ceb4bb3923aa110ec02e, type: 3}
       propertyPath: m_Name
-      value: circularTowerALargeYellow
+      value: circularTowerALargeYellow Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 143202512351170377, guid: bd2c9d255c92ceb4bb3923aa110ec02e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 143202512351170377, guid: bd2c9d255c92ceb4bb3923aa110ec02e, type: 3}
+      propertyPath: m_TagString
+      value: WallRun
       objectReference: {fileID: 0}
     - target: {fileID: 772104834220479987, guid: bd2c9d255c92ceb4bb3923aa110ec02e, type: 3}
       propertyPath: m_RootOrder
@@ -61,3 +69,22 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 0d3ef0f52f28dfc4b8c87328bbf73b17, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd2c9d255c92ceb4bb3923aa110ec02e, type: 3}
+--- !u!1 &8866858527809491662 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 143202512351170377, guid: bd2c9d255c92ceb4bb3923aa110ec02e, type: 3}
+  m_PrefabInstance: {fileID: 8859047996375489927}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &5661798350386293942
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8866858527809491662}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8370214720751511446, guid: e6e4f3a002e0cc74893b25377c3cc7d1, type: 3}
