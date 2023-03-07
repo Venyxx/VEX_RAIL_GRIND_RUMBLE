@@ -57,7 +57,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4182539058958779036, guid: 51755c10aecd5934188b85998122a916, type: 3}
       propertyPath: m_Name
-      value: slantedWallDoorColor2
+      value: slantedWallDoorColor2 Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 4182539058958779036, guid: 51755c10aecd5934188b85998122a916, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51755c10aecd5934188b85998122a916, type: 3}
+--- !u!1 &4427825844359948153 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4182539058958779036, guid: 51755c10aecd5934188b85998122a916, type: 3}
+  m_PrefabInstance: {fileID: 538621301765514725}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &2157283331752803365
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4427825844359948153}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1128060530427008967, guid: 99b81875e4669624fadb73d2ba742850, type: 3}

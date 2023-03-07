@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 8883297591372501409}
   - component: {fileID: 5541691997436796420}
   - component: {fileID: 7713818212127255246}
-  m_Layer: 0
+  - component: {fileID: 6324725369275200415}
+  m_Layer: 8
   m_Name: slantedWall
-  m_TagString: Untagged
+  m_TagString: WallRun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -84,3 +85,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &6324725369275200415
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8073829036962810651}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6604168187105725573, guid: 4da142d6f18a6f146bee5129dbe0c696, type: 3}
