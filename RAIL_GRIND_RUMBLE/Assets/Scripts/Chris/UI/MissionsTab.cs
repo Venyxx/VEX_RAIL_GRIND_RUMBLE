@@ -320,7 +320,7 @@ public class MissionsTab : MonoBehaviour
         //Main Mission or Side Mission
 
         GameObject newButton = Instantiate(emptyMissionButton, missionTest.transform.position, Quaternion.identity);
-        newButton.transform.localScale = newButton.transform.localScale * 1.8f;
+        newButton.transform.localScale = newButton.transform.localScale * 5f;
         if (SceneManager.GetActiveScene().name == "Ari's House" || SceneManager.GetActiveScene().name == "Outskirts")
         {
             OutskirtsMainMissions.Add(newButton);
