@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RocketTurret : MonoBehaviour
+public class RocketTurret : MonoBehaviour, IDamageable
 {
     [SerializeField] GameObject rocket;
     Transform target;
@@ -65,7 +65,7 @@ public class RocketTurret : MonoBehaviour
         var thisRot = Quaternion.Euler(new Vector3(90,y,z));
         var rot = Quaternion.Euler(new Vector3(-90, y, z));
 
-        GameObject rocketShot = Instantiate(rocket, new Vector3(transform.position.x, transform.position.y + 5, transform.position.z), rot);
+        GameObject rocketShot = Instantiate(rocket, new Vector3(transform.position.x, transform.position.y + 5, transform.position.z), /*rot*/ Quaternion.identity);
         Vector3 aimAt = new Vector3(target.position.x, target.position.y, target.position.z);
         rocketShot.GetComponent<Rocket>().TargetSet(aimAt);
         StartCoroutine(Charging());
@@ -73,5 +73,26 @@ public class RocketTurret : MonoBehaviour
         transform.rotation = thisRot;
 
         shootRunning = false;
+    }
+
+    //Damageable Functions - Consult PlayerHealth script for help
+    public void TakeDamage(float damage)
+    {
+        //Add variables for maxHealth and currentHealth
+    }
+
+    public void GainHealth(float GainHealth)
+    {
+        //Recharge health after being destroyed for 30 seconds
+    }
+
+    public Transform GetTransform()
+    {
+        return transform;
+    }
+
+    public void IsDizzy(bool isDizzy)
+    {
+        return;
     }
 }
