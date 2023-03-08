@@ -125,10 +125,11 @@ public class PlayerAttack : MonoBehaviour
         {
             if (movementScriptREF.isJumping == false && movementScriptREF.Grounded == true)
             {
-                anim.SetTrigger("LAttack");
+               
                 if (movementScriptREF.print < 5)
                 {
                     Debug.Log("SlowAtk");
+                    anim.SetTrigger("LAttackSlow");
                 }
                 if (movementScriptREF.print > 5 && movementScriptREF.print < 20)
                 {
@@ -192,6 +193,7 @@ public class PlayerAttack : MonoBehaviour
             if (movementScriptREF.isJumping == true || movementScriptREF.Grounded == false)
             {
                 anim.SetTrigger("AirHeavy");
+                
                 IsHeavyAttacking = true;
                 atkCount++;
                 ariRigidbody.AddForce(0, -slamSpeed, 0,  ForceMode.Acceleration);
@@ -205,15 +207,15 @@ public class PlayerAttack : MonoBehaviour
            // Debug.Log("Key Release");
            
 
-            if (HeavyAtkTimer >= 1 && HeavyAtkTimer <= 1.9)
+            if (HeavyAtkTimer >= 1 && HeavyAtkTimer <= 1.9 && movementScriptREF.Grounded == true)
             {
-                spinEffect.SetActive(true);
+               
                 //   Debug.Log("BugCheck2");
                 anim.SetTrigger("HAttackEnd2");
                 //    IsHeavyAttacking = false;
                 HeavyAtkTimer = 0;
+                spinEffect.SetActive(true);
 
-            
                 Damage = 35;
                
                 

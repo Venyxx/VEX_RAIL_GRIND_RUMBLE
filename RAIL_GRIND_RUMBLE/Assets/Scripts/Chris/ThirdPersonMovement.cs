@@ -269,6 +269,10 @@ public class ThirdPersonMovement : MonoBehaviour
         {
             StartCoroutine(Stun());
         }
+        if (Grounded)
+        {
+            isJumping = false;
+        }
 
     }
 
