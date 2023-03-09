@@ -8,6 +8,8 @@ public class fastLight2Start : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         PlayerAttack.instance.IsAttacking = false;
+        PlayerAttack.instance.Damage = 20;
+        PlayerAttack.instance.Lefthand.enabled = true;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

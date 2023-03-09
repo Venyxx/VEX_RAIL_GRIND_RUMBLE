@@ -17,15 +17,18 @@ public class mediumLightTransition1 : StateMachineBehaviour
         {
             PlayerAttack.instance.anim.Play("mediumLight2Start");
             // PlayerAttack.instance.Damage = 30;
+            PlayerAttack.instance.Damage = 0;
+            PlayerAttack.instance.Righthand.enabled = false;
         }
 
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        PlayerAttack.instance.Damage = 0;
+        PlayerAttack.instance.Righthand.enabled = false;
+    }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
     //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

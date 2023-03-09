@@ -16,16 +16,17 @@ public class fastLightTransition1 : StateMachineBehaviour
         if (PlayerAttack.instance.IsAttacking && PlayerAttack.instance.movementScriptREF.Grounded == true)
         {
             PlayerAttack.instance.anim.Play("fastLight2Start");
+            PlayerAttack.instance.Righthand.enabled = false;
             // PlayerAttack.instance.Damage = 30;
         }
 
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        PlayerAttack.instance.Righthand.enabled = false;
+    }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
     //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

@@ -12,6 +12,9 @@ public class PlayerAttack : MonoBehaviour
     public static PlayerAttack instance;
     public Collider Leftleg;
     public Collider Rightleg;
+    public Collider Lefthand;
+    public Collider Righthand;
+    public Collider Weapon;
     public int atkCount;
     public ThirdPersonMovement movementScriptREF;
     float HeavyAtkTimer;
@@ -40,6 +43,9 @@ public class PlayerAttack : MonoBehaviour
         instance = this;
         Leftleg.enabled = false;
         Rightleg.enabled = false;
+        Lefthand.enabled = false;
+        Righthand.enabled = false;
+        Weapon.enabled = false;
         movementScriptREF = GetComponent<ThirdPersonMovement>();
         wallRunREF = GetComponent<WallRun>();
         
@@ -307,6 +313,35 @@ public class PlayerAttack : MonoBehaviour
                 
                 
                     Debug.Log("ATKtest1");
+                damageable.TakeDamage(Damage);
+
+            }
+
+            if (Lefthand.enabled && other.TryGetComponent<IDamageable>(out damageable))
+            {
+
+
+                Debug.Log("ATKtest1");
+                damageable.TakeDamage(Damage);
+
+
+            }
+            if (Righthand.enabled && other.TryGetComponent<IDamageable>(out damageable))
+            {
+
+
+
+                Debug.Log("ATKtest1");
+                damageable.TakeDamage(Damage);
+
+            }
+
+            if (Weapon.enabled && other.TryGetComponent<IDamageable>(out damageable))
+            {
+
+
+
+                Debug.Log("ATKtest1");
                 damageable.TakeDamage(Damage);
 
             }

@@ -16,6 +16,8 @@ public class mediumLightTransition2 : StateMachineBehaviour
         if (PlayerAttack.instance.IsAttacking && PlayerAttack.instance.movementScriptREF.Grounded == true)
         {
             PlayerAttack.instance.anim.Play("mediumLight3Start");
+            PlayerAttack.instance.Damage = 0;
+            PlayerAttack.instance.Lefthand.enabled = false;
             // PlayerAttack.instance.Damage = 30;
         }
     }
@@ -24,6 +26,8 @@ public class mediumLightTransition2 : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         PlayerAttack.instance.IsAttacking = false;
+        PlayerAttack.instance.Damage = 0;
+        PlayerAttack.instance.Lefthand.enabled = false;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

@@ -1424,6 +1424,9 @@ MonoBehaviour:
   IsHeavyAttacking: 0
   Leftleg: {fileID: 1427008057992970847}
   Rightleg: {fileID: 1935143035396237698}
+  Lefthand: {fileID: 5407901590351302143}
+  Righthand: {fileID: 9141182517107511162}
+  Weapon: {fileID: 236564383}
   atkCount: 0
   movementScriptREF: {fileID: 0}
   grappleREF: {fileID: 2030071780202691821}
@@ -5065,11 +5068,47 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.38, y: 1, z: 1}
   m_Center: {x: -0.49, y: 0, z: 0}
+--- !u!1 &7619226334694662269 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7619226334923363685, guid: e606cc423d70dd645bd324c595a8c70f, type: 3}
+  m_PrefabInstance: {fileID: 313423128}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &5407901590351302143
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7619226334694662269}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.37, y: 0.29, z: 0.35}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &7991261776404133986 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7991261776695512442, guid: e606cc423d70dd645bd324c595a8c70f, type: 3}
   m_PrefabInstance: {fileID: 313423128}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &9036597750936482500 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9036597751160752092, guid: e606cc423d70dd645bd324c595a8c70f, type: 3}
+  m_PrefabInstance: {fileID: 313423128}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &9141182517107511162
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9036597750936482500}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.37, y: 0.35, z: -0.31}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &439690122
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5147,6 +5186,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8158d1ee19a2a8409ef71bce7ac4acf, type: 3}
+--- !u!65 &236564383 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 338463765, guid: c8158d1ee19a2a8409ef71bce7ac4acf, type: 3}
+  m_PrefabInstance: {fileID: 439690122}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1394181847
 PrefabInstance:
   m_ObjectHideFlags: 0

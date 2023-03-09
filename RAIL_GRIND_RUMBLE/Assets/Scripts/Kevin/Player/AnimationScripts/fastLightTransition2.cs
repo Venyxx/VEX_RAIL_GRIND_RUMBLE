@@ -17,6 +17,7 @@ public class fastLightTransition2 : StateMachineBehaviour
         {
             PlayerAttack.instance.anim.Play("fastLight3Start");
             // PlayerAttack.instance.Damage = 30;
+            PlayerAttack.instance.Lefthand.enabled = false;
         }
     }
 
@@ -24,6 +25,7 @@ public class fastLightTransition2 : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         PlayerAttack.instance.IsAttacking = false;
+        PlayerAttack.instance.Lefthand.enabled = false;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
