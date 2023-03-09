@@ -10,8 +10,8 @@ public class PlayerAttack : MonoBehaviour
     public bool IsAttacking = false;
     public bool IsHeavyAttacking = false;
     public static PlayerAttack instance;
-    public Collider Lefty;
-    public Collider Righty;
+    public Collider Leftleg;
+    public Collider Rightleg;
     public int atkCount;
     public ThirdPersonMovement movementScriptREF;
     float HeavyAtkTimer;
@@ -38,8 +38,8 @@ public class PlayerAttack : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        Lefty.enabled = false;
-        Righty.enabled = false;
+        Leftleg.enabled = false;
+        Rightleg.enabled = false;
         movementScriptREF = GetComponent<ThirdPersonMovement>();
         wallRunREF = GetComponent<WallRun>();
         
@@ -134,10 +134,12 @@ public class PlayerAttack : MonoBehaviour
                 if (movementScriptREF.print > 5 && movementScriptREF.print < 20)
                 {
                     Debug.Log("MedAtk");
+                    anim.SetTrigger("LAttackMedium");
                 }
                 if (movementScriptREF.print > 20)
                 {
                     Debug.Log("fastAtk");
+                    anim.SetTrigger("LAttackFast");
                 }
 
             }
@@ -290,7 +292,7 @@ public class PlayerAttack : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
 
-            if (Lefty.enabled && other.TryGetComponent<IDamageable>(out damageable))
+            if (Leftleg.enabled && other.TryGetComponent<IDamageable>(out damageable))
             {
                 
                 
@@ -299,7 +301,7 @@ public class PlayerAttack : MonoBehaviour
 
 
             }
-            if (Righty.enabled && other.TryGetComponent<IDamageable>(out damageable))
+            if (Rightleg.enabled && other.TryGetComponent<IDamageable>(out damageable))
             {
                 
                 

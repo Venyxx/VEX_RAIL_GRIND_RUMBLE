@@ -8,7 +8,7 @@ public class AirLight : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         PlayerAttack.instance.Damage = 30;
-        PlayerAttack.instance.Lefty.enabled = true;
+        PlayerAttack.instance.Leftleg.enabled = true;
         PlayerAttack.instance.IsAttacking = false;
 
     }

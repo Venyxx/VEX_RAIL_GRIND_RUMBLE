@@ -26,7 +26,7 @@ public class HeavyAtkAnim : StateMachineBehaviour
         PlayerAttack.instance.anim.ResetTrigger("HAttackEnd2");
         PlayerAttack.instance.anim.ResetTrigger("HAttackEnd3");
         PlayerAttack.instance.IsHeavyAttacking = false;
-        PlayerAttack.instance.Lefty.enabled = false;
+        PlayerAttack.instance.Leftleg.enabled = false;
         PlayerAttack.instance.spinEffect.SetActive(false);
 
 

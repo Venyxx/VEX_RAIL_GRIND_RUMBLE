@@ -17,7 +17,7 @@ public class Transition2script : StateMachineBehaviour
         {
             PlayerAttack.instance.anim.Play("LightCombo3");
             // PlayerAttack.instance.Damage = 40;
-            PlayerAttack.instance.Lefty.enabled = false;
+           // PlayerAttack.instance.Lefty.enabled = false;
 
         }      
     }
@@ -27,7 +27,7 @@ public class Transition2script : StateMachineBehaviour
     {
         PlayerAttack.instance.IsAttacking = false;
         // PlayerAttack.instance.Weapon.enabled = false;
-        PlayerAttack.instance.Lefty.enabled = false;
+      //  PlayerAttack.instance.Lefty.enabled = false;
 
 
     }

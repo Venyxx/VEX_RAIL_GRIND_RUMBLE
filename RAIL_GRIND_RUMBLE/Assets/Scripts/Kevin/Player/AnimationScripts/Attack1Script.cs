@@ -10,7 +10,7 @@ public class Attack1Script : StateMachineBehaviour
        // PlayerAttack.instance.Weapon.enabled = true;
          PlayerAttack.instance.IsAttacking = false;
         PlayerAttack.instance.Damage = 25;
-        PlayerAttack.instance.Righty.enabled = true;
+      //  PlayerAttack.instance.Righty.enabled = true;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -23,7 +23,7 @@ public class Attack1Script : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         // PlayerAttack.instance.IsAttacking = false;
-        PlayerAttack.instance.Righty.enabled = false;
+     //   PlayerAttack.instance.Righty.enabled = false;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

@@ -21,6 +21,8 @@ public class StationaryTransition3 : StateMachineBehaviour
     {
         PlayerAttack.instance.IsAttacking = false;
         PlayerAttack.instance.atkCount = 0;
+        PlayerAttack.instance.Damage = 0;
+        PlayerAttack.instance.Rightleg.enabled = false;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

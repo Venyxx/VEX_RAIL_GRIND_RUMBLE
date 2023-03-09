@@ -10,7 +10,7 @@ public class Attack2Script : StateMachineBehaviour
        // PlayerAttack.instance.Weapon.enabled = true;
         PlayerAttack.instance.IsAttacking = false;
         PlayerAttack.instance.Damage = 30;
-        PlayerAttack.instance.Lefty.enabled = true;
+      //  PlayerAttack.instance.Lefty.enabled = true;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

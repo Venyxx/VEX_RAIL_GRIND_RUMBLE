@@ -7,7 +7,7 @@ public class AirHeavy : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        PlayerAttack.instance.Lefty.enabled = true;
+        PlayerAttack.instance.Leftleg.enabled = true;
         PlayerAttack.instance.Damage = 45;
     }
 
@@ -21,7 +21,7 @@ public class AirHeavy : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         PlayerAttack.instance.IsHeavyAttacking = false;
-        PlayerAttack.instance.Lefty.enabled = false;
+        PlayerAttack.instance.Leftleg.enabled = false;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

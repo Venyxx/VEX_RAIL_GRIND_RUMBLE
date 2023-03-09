@@ -744,8 +744,12 @@ MonoBehaviour:
   swingSpeed: 5
   nearestDialogueTemplate:
     paragraphs:
-      speakers: []
-      spokenDialogue: []
+    - speakerName: 
+      englishDialogue: 
+      englishVoiceLine: {fileID: 0}
+    - speakerName: 
+      englishDialogue: 
+      englishVoiceLine: {fileID: 0}
   SpeedChangeRate: 10
   analogMovement: 0
   rigidBody: {fileID: 2030071780202691823}
@@ -4510,7 +4514,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7576303997154432464, guid: e606cc423d70dd645bd324c595a8c70f, type: 3}
       propertyPath: m_TagString
-      value: NPC Model
+      value: HitBox
       objectReference: {fileID: 0}
     - target: {fileID: 7619203570445699467, guid: e606cc423d70dd645bd324c595a8c70f, type: 3}
       propertyPath: m_Layer

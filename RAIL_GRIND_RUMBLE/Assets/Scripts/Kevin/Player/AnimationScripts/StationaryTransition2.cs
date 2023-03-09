@@ -17,6 +17,7 @@ public class StationaryTransition2 : StateMachineBehaviour
         {
             PlayerAttack.instance.anim.Play("StationaryLight3Start");
             // PlayerAttack.instance.Damage = 30;
+            PlayerAttack.instance.Leftleg.enabled = false;
         }
     }
 
@@ -24,6 +25,8 @@ public class StationaryTransition2 : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         PlayerAttack.instance.IsAttacking = false;
+         PlayerAttack.instance.Damage = 0;
+        PlayerAttack.instance.Leftleg.enabled = false;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
