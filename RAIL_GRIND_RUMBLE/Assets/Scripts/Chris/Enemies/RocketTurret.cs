@@ -10,11 +10,19 @@ public class RocketTurret : MonoBehaviour, IDamageable
     float speed = 1f;
     bool chargeRunning;
     bool shootRunning;
+
+    //Health
+    float maxHealth = 300;
+    float currentHealth;
+    bool dead;
+
     // Start is called before the first frame update
     void Start()
     {
         playerREF = GameObject.FindWithTag("PlayerObject");
         target = this.gameObject.transform.Find("Target");
+        currentHealth = maxHealth;
+        dead = false;
         StartCoroutine(Shooting());
     }
 
@@ -31,7 +39,7 @@ public class RocketTurret : MonoBehaviour, IDamageable
         }
 
         //Charging
-        if(!chargeRunning && !shootRunning)
+        if(!chargeRunning && !shootRunning && !dead)
         {
             StartCoroutine(Charging());
         }
@@ -49,8 +57,11 @@ public class RocketTurret : MonoBehaviour, IDamageable
     {
         chargeRunning = true;
         target.gameObject.SetActive(false);
-        yield return new WaitForSeconds(20f);
-        StartCoroutine(Shooting());
+        yield return new WaitForSeconds(15f);
+        if (!dead)
+        {
+            StartCoroutine(Shooting());
+        }
         chargeRunning = false;
     }
 
@@ -65,25 +76,51 @@ public class RocketTurret : MonoBehaviour, IDamageable
         var thisRot = Quaternion.Euler(new Vector3(90,y,z));
         var rot = Quaternion.Euler(new Vector3(-90, y, z));
 
-        GameObject rocketShot = Instantiate(rocket, new Vector3(transform.position.x, transform.position.y + 5, transform.position.z), /*rot*/ Quaternion.identity);
-        Vector3 aimAt = new Vector3(target.position.x, target.position.y, target.position.z);
-        rocketShot.GetComponent<Rocket>().TargetSet(aimAt);
-        StartCoroutine(Charging());
+
+        if (!dead)
+        {
+            GameObject rocketShot = Instantiate(rocket, new Vector3(transform.position.x, transform.position.y + 5, transform.position.z), /*rot*/ Quaternion.identity);
+            Vector3 aimAt = new Vector3(target.position.x, target.position.y, target.position.z);
+            rocketShot.GetComponent<Rocket>().TargetSet(aimAt);
+            StartCoroutine(Charging());
+        }
 
         transform.rotation = thisRot;
 
         shootRunning = false;
     }
 
+    IEnumerator Regenerate()
+    {
+        dead = true;
+        this.gameObject.GetComponent<MeshRenderer>().enabled = false;
+        this.gameObject.GetComponent<BoxCollider>().enabled = false;
+        yield return new WaitForSeconds(30f);
+        this.gameObject.GetComponent<MeshRenderer>().enabled = true;
+        this.gameObject.GetComponent<BoxCollider>().enabled = true;
+        currentHealth = maxHealth;
+        dead = false;
+
+    }
+
     //Damageable Functions - Consult PlayerHealth script for help
     public void TakeDamage(float damage)
     {
         //Add variables for maxHealth and currentHealth
+        currentHealth -= damage;
+
+        if (currentHealth <= 0)
+        {
+            currentHealth = 0;
+            target.gameObject.SetActive(false);
+            StartCoroutine(Regenerate());
+        }
     }
 
     public void GainHealth(float GainHealth)
     {
         //Recharge health after being destroyed for 30 seconds
+        return;
     }
 
     public Transform GetTransform()

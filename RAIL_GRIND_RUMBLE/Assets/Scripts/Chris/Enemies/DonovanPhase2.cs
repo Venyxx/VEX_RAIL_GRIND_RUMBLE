@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using PathCreation;
 
-public class DonovanPhase2 : MonoBehaviour
+public class DonovanPhase2 : MonoBehaviour, IDamageable
 {
     public PathCreator path1;
     public PathCreator path2;
@@ -12,12 +12,16 @@ public class DonovanPhase2 : MonoBehaviour
     GameObject playerREF;
     int phase;
     bool aoeRunning;
+    bool playerInRange;
+    float maxHealth = 500;
+    float currentHealth;
     // Start is called before the first frame update
     void Start()
     {
         playerREF = GameObject.FindWithTag("PlayerObject");
         phase = 1;
         aoeRunning = false;
+        currentHealth = maxHealth;
     }
 
     // Update is called once per frame
@@ -65,12 +69,20 @@ public class DonovanPhase2 : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            Debug.Log("i'm gonna fucking kill you idiot");
-
+            Debug.Log("i'm gonna h*cking kill you idiot");
+            playerInRange = true;
             if (aoeRunning == false)
             {
                 StartCoroutine(AOE());
             }
+        }
+    }
+
+    void OnTriggerExit(Collider collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            playerInRange = false;
         }
     }
 
@@ -79,7 +91,49 @@ public class DonovanPhase2 : MonoBehaviour
         aoeRunning = true;
         yield return new WaitForSeconds(5f);
         Debug.Log("BWAAAAAAAAAAAH");
-        //other.attachedRigidbody.AddForce((Movement.Player.transform.position - enemy.Agent.transform.position) * 150,  ForceMode.Acceleration);
+        if (playerInRange)
+        {
+            GameObject playerPrefab = GameObject.Find("playerPrefab");
+
+            //Work on this
+            playerPrefab.GetComponent<Rigidbody>().AddForce((playerPrefab.transform.position - this.transform.position) * 700,  ForceMode.Acceleration);
+        }
         aoeRunning = false;
+    }
+
+    //Damageable Functions - Consult PlayerHealth script for help
+    public void TakeDamage(float damage)
+    {
+        //Add variables for maxHealth and currentHealth
+        currentHealth -= damage;
+
+        if (currentHealth <= 250 && phase == 1)
+        {
+            phase++;
+        }
+
+        if (currentHealth <= 0)
+        {
+            currentHealth = 0;
+
+            //Temporary
+            Destroy(gameObject);
+        }
+    }
+
+    public void GainHealth(float GainHealth)
+    {
+        //Recharge health after being destroyed for 30 seconds
+        return;
+    }
+
+    public Transform GetTransform()
+    {
+        return transform;
+    }
+
+    public void IsDizzy(bool isDizzy)
+    {
+        return;
     }
 }
