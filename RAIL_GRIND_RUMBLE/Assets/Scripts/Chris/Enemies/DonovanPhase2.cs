@@ -15,6 +15,8 @@ public class DonovanPhase2 : MonoBehaviour, IDamageable
     bool playerInRange;
     float maxHealth = 500;
     float currentHealth;
+    SphereCollider playerArea;
+    BoxCollider hitArea;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +24,10 @@ public class DonovanPhase2 : MonoBehaviour, IDamageable
         phase = 1;
         aoeRunning = false;
         currentHealth = maxHealth;
+        //playerArea = GetComponent<SphereCollider>();
+        //hitArea = GetComponent<BoxCollider>();
+        //playerArea.enabled = true;
+        //hitArea.enabled = false;
     }
 
     // Update is called once per frame
@@ -56,8 +62,8 @@ public class DonovanPhase2 : MonoBehaviour, IDamageable
             transform.rotation = Quaternion.LookRotation(newDirection);
         } else {
             //Stay in place during attack, but in range of player's y position
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, playerREF.transform.position.y + 2, transform.position.z), singleStep);
-
+            //transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, playerREF.transform.position.y + 2, transform.position.z), singleStep);
+            transform.position = new Vector3(transform.position.x, playerREF.transform.position.y + 2, transform.position.z);
             //Turn to face player but don't face up or down
             newDirection = Vector3.RotateTowards(transform.forward, new Vector3(playerDirection.x, 0, playerDirection.z), singleStep, 0f);
             transform.rotation = Quaternion.LookRotation(newDirection);
@@ -89,6 +95,8 @@ public class DonovanPhase2 : MonoBehaviour, IDamageable
     IEnumerator AOE()
     {
         aoeRunning = true;
+        //playerArea.enabled = false;
+        //hitArea.enabled = true;
         yield return new WaitForSeconds(5f);
         Debug.Log("BWAAAAAAAAAAAH");
         if (playerInRange)
@@ -99,6 +107,9 @@ public class DonovanPhase2 : MonoBehaviour, IDamageable
             playerPrefab.GetComponent<Rigidbody>().AddForce((playerPrefab.transform.position - this.transform.position) * 700,  ForceMode.Acceleration);
         }
         aoeRunning = false;
+        /*yield return new WaitForSeconds(1f);
+        playerArea.enabled = true;
+        hitArea.enabled = false;*/
     }
 
     //Damageable Functions - Consult PlayerHealth script for help
@@ -106,7 +117,7 @@ public class DonovanPhase2 : MonoBehaviour, IDamageable
     {
         //Add variables for maxHealth and currentHealth
         currentHealth -= damage;
-
+        Debug.Log("Donovan Health: "+currentHealth);
         if (currentHealth <= 250 && phase == 1)
         {
             phase++;
