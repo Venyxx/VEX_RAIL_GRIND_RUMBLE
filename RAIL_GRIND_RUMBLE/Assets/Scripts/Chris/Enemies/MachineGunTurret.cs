@@ -8,7 +8,10 @@ public class MachineGunTurret : MonoBehaviour, IDamageable
     GameObject playerREF;
     [SerializeField] GameObject bullet;
     [SerializeField] int bulletCount;
-    bool shootRunning;
+    [SerializeField] float cooldownSeconds;
+    public bool attached;
+    public bool shootRunning;
+    Vector3 playerDirection;
     Vector3 newDirection;
 
     //Health
@@ -28,17 +31,21 @@ public class MachineGunTurret : MonoBehaviour, IDamageable
     void Update()
     {
             float singleStep = speed * Time.deltaTime;
-            Vector3 playerDirection = playerREF.transform.position - transform.position;
+            playerDirection = playerREF.transform.position - transform.position;
             newDirection = Vector3.RotateTowards(transform.forward, playerDirection, singleStep, 0f);
-            transform.rotation = Quaternion.LookRotation(newDirection);
 
-            if (!shootRunning && !dead)
+            if (!attached)
+            {
+                transform.rotation = Quaternion.LookRotation(newDirection);
+            }
+
+            if (!shootRunning && !dead && !attached)
             {
                 StartCoroutine(Shoot());
             }
     }
 
-    IEnumerator Shoot()
+    public IEnumerator Shoot()
     {
         shootRunning = true;
 
@@ -47,14 +54,14 @@ public class MachineGunTurret : MonoBehaviour, IDamageable
         {
             if (!dead)
             {
-                GameObject newBullet = Instantiate(bullet, transform.position, Quaternion.LookRotation(newDirection));
+                GameObject newBullet = Instantiate(bullet, transform.position, Quaternion.LookRotation(playerDirection));
                 newBullet.GetComponent<Bullet>().Rigidbody.AddForce(newBullet.transform.forward * newBullet.GetComponent<Bullet>().MoveSpeed, ForceMode.VelocityChange);
                 yield return new WaitForSeconds(0.3f);
             }
         }
 
         //Cooldown
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(cooldownSeconds);
 
         shootRunning = false;
     }
@@ -75,6 +82,7 @@ public class MachineGunTurret : MonoBehaviour, IDamageable
     //Damageable Functions - Consult PlayerHealth script for help
     public void TakeDamage(float damage)
     {
+        if (attached) return;
         //Add variables for maxHealth and currentHealth
         currentHealth -= damage;
 

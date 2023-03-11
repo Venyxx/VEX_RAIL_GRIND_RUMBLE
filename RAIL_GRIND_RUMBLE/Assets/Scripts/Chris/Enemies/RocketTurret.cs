@@ -8,8 +8,9 @@ public class RocketTurret : MonoBehaviour, IDamageable
     Transform target;
     GameObject playerREF;
     float speed = 1f;
-    bool chargeRunning;
-    bool shootRunning;
+    public bool chargeRunning;
+    public bool shootRunning;
+    public bool attached;
 
     //Health
     float maxHealth = 300;
@@ -30,7 +31,7 @@ public class RocketTurret : MonoBehaviour, IDamageable
     void Update()
     {   
         //Turn turret toward player
-        if (!chargeRunning)
+        if (!chargeRunning && !attached)
         {
             float singleStep = speed * Time.deltaTime;
             Vector3 playerDirection = playerREF.transform.position - transform.position;
@@ -39,7 +40,7 @@ public class RocketTurret : MonoBehaviour, IDamageable
         }
 
         //Charging
-        if(!chargeRunning && !shootRunning && !dead)
+        if(!chargeRunning && !shootRunning && !dead && !attached)
         {
             StartCoroutine(Charging());
         }
@@ -53,7 +54,7 @@ public class RocketTurret : MonoBehaviour, IDamageable
         }
     }
 
-    IEnumerator Charging()
+    public IEnumerator Charging()
     {
         chargeRunning = true;
         target.gameObject.SetActive(false);
@@ -79,14 +80,31 @@ public class RocketTurret : MonoBehaviour, IDamageable
 
         if (!dead)
         {
-            GameObject rocketShot = Instantiate(rocket, new Vector3(transform.position.x, transform.position.y + 5, transform.position.z), /*rot*/ Quaternion.identity);
+            GameObject rocketShot; 
+
+            if (attached)
+            {
+                rocketShot = Instantiate(rocket, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+            } else {
+                rocketShot = Instantiate(rocket, new Vector3(transform.position.x, transform.position.y + 5, transform.position.z), /*rot*/ Quaternion.identity);
+            }
+
             Vector3 aimAt = new Vector3(target.position.x, target.position.y, target.position.z);
-            rocketShot.GetComponent<Rocket>().TargetSet(aimAt);
-            StartCoroutine(Charging());
+
+            if (!attached)
+            {
+                rocketShot.GetComponent<Rocket>().TargetSet(aimAt, true);
+                StartCoroutine(Charging());
+            } else {
+                rocketShot.GetComponent<Rocket>().TargetSet(aimAt, false);
+            }
         }
 
-        transform.rotation = thisRot;
-
+        if (!attached)
+        {
+            transform.rotation = thisRot;
+        }
+        
         shootRunning = false;
     }
 
@@ -106,6 +124,7 @@ public class RocketTurret : MonoBehaviour, IDamageable
     //Damageable Functions - Consult PlayerHealth script for help
     public void TakeDamage(float damage)
     {
+        if (attached) return;
         //Add variables for maxHealth and currentHealth
         currentHealth -= damage;
 

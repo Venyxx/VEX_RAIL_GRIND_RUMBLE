@@ -8,11 +8,9 @@ public class Rocket : MonoBehaviour
     Transform explosion;
     float speed = 20f;
     bool spawnDelayRunning;
-    // Start is called before the first frame update
     void Start()
     {
         explosion = this.gameObject.transform.Find("Explosion");
-        StartCoroutine(SpawnDelay());
     }
 
     // Update is called once per frame
@@ -27,7 +25,7 @@ public class Rocket : MonoBehaviour
         {
             transform.position = Vector3.MoveTowards(transform.position, target, step);
             Vector3 newDirection = Vector3.RotateTowards(transform.forward, target, step, 0f);
-            transform.rotation = Quaternion.LookRotation(newDirection);
+            //transform.rotation = Quaternion.LookRotation(newDirection);
         } else {
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), step * 2);
         }
@@ -41,9 +39,13 @@ public class Rocket : MonoBehaviour
         }
     }
     
-    public void TargetSet(Vector3 targetPos)
+    public void TargetSet(Vector3 targetPos, bool launchUp)
     {
         target = targetPos;
+        if (launchUp)
+        {
+            StartCoroutine(SpawnDelay());
+        }
     }
 
     IEnumerator Explosion()
