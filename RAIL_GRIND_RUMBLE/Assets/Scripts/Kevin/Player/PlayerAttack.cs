@@ -295,7 +295,7 @@ public class PlayerAttack : MonoBehaviour
 
 
 
-        if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "Donovan")
+        if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "Donovan" || other.gameObject.tag == "Hernandez")
         {
 
             if (Leftleg.enabled && other.TryGetComponent<IDamageable>(out damageable))

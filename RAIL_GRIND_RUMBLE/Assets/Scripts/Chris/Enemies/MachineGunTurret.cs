@@ -14,6 +14,8 @@ public class MachineGunTurret : MonoBehaviour, IDamageable
     Vector3 playerDirection;
     Vector3 newDirection;
 
+    Hernandez hernandez;
+
     //Health
     float maxHealth = 300;
     float currentHealth;
@@ -25,6 +27,12 @@ public class MachineGunTurret : MonoBehaviour, IDamageable
         playerREF = GameObject.FindWithTag("PlayerObject");
         dead = false;
         currentHealth = maxHealth;
+    }
+
+    public void SetAttached()
+    {
+        attached = true;
+        hernandez = this.transform.parent.GetComponent<Hernandez>();
     }
 
     // Update is called once per frame
@@ -54,9 +62,15 @@ public class MachineGunTurret : MonoBehaviour, IDamageable
         {
             if (!dead)
             {
-                GameObject newBullet = Instantiate(bullet, transform.position, Quaternion.LookRotation(playerDirection));
-                newBullet.GetComponent<Bullet>().Rigidbody.AddForce(newBullet.transform.forward * newBullet.GetComponent<Bullet>().MoveSpeed, ForceMode.VelocityChange);
-                yield return new WaitForSeconds(0.3f);
+                if (attached && hernandez.stunned == true)
+                {
+                    shootRunning = false;
+                    yield break;
+                } else {
+                    GameObject newBullet = Instantiate(bullet, transform.position, Quaternion.LookRotation(playerDirection));
+                    newBullet.GetComponent<Bullet>().Rigidbody.AddForce(newBullet.transform.forward * newBullet.GetComponent<Bullet>().MoveSpeed, ForceMode.VelocityChange);
+                    yield return new WaitForSeconds(0.3f);
+                }
             }
         }
 

@@ -10,7 +10,9 @@ public class RocketTurret : MonoBehaviour, IDamageable
     float speed = 1f;
     public bool chargeRunning;
     public bool shootRunning;
-    public bool attached;
+    bool attached;
+
+    Hernandez hernandez;
 
     //Health
     float maxHealth = 300;
@@ -25,6 +27,12 @@ public class RocketTurret : MonoBehaviour, IDamageable
         currentHealth = maxHealth;
         dead = false;
         StartCoroutine(Shooting());
+    }
+
+    public void SetAttached()
+    {
+        attached = true;
+        hernandez = this.transform.parent.GetComponent<Hernandez>();
     }
 
     // Update is called once per frame
@@ -57,7 +65,6 @@ public class RocketTurret : MonoBehaviour, IDamageable
     public IEnumerator Charging()
     {
         chargeRunning = true;
-        target.gameObject.SetActive(false);
         yield return new WaitForSeconds(15f);
         if (!dead)
         {
@@ -66,7 +73,7 @@ public class RocketTurret : MonoBehaviour, IDamageable
         chargeRunning = false;
     }
 
-    IEnumerator Shooting()
+    public IEnumerator Shooting()
     {
         shootRunning = true;
         target.gameObject.SetActive(true);
@@ -80,23 +87,30 @@ public class RocketTurret : MonoBehaviour, IDamageable
 
         if (!dead)
         {
-            GameObject rocketShot; 
-
-            if (attached)
+            if (attached && hernandez.stunned == true)
             {
-                rocketShot = Instantiate(rocket, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+                shootRunning = false;
+                target.gameObject.SetActive(false);
+                yield break;
             } else {
-                rocketShot = Instantiate(rocket, new Vector3(transform.position.x, transform.position.y + 5, transform.position.z), /*rot*/ Quaternion.identity);
-            }
+                GameObject rocketShot; 
 
-            Vector3 aimAt = new Vector3(target.position.x, target.position.y, target.position.z);
+                if (attached)
+                {
+                    rocketShot = Instantiate(rocket, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+                } else {
+                    rocketShot = Instantiate(rocket, new Vector3(transform.position.x, transform.position.y + 5, transform.position.z), /*rot*/ Quaternion.identity);
+                }
 
-            if (!attached)
-            {
-                rocketShot.GetComponent<Rocket>().TargetSet(aimAt, true);
-                StartCoroutine(Charging());
-            } else {
-                rocketShot.GetComponent<Rocket>().TargetSet(aimAt, false);
+                Vector3 aimAt = new Vector3(target.position.x, target.position.y, target.position.z);
+
+                if (!attached)
+                {
+                    rocketShot.GetComponent<Rocket>().TargetSet(aimAt, true);
+                    StartCoroutine(Charging());
+                } else {
+                    rocketShot.GetComponent<Rocket>().TargetSet(aimAt, false);
+                }
             }
         }
 
@@ -105,6 +119,7 @@ public class RocketTurret : MonoBehaviour, IDamageable
             transform.rotation = thisRot;
         }
         
+        target.gameObject.SetActive(false);
         shootRunning = false;
     }
 

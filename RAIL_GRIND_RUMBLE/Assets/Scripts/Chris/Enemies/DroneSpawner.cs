@@ -8,6 +8,8 @@ public class DroneSpawner : MonoBehaviour
     [SerializeField] GameObject drone;
     [SerializeField] bool limit;
     [SerializeField] int limitCount;
+    [SerializeField] bool bossSpawner;
+    Hernandez hernandez;
     bool spawnRunning;
     bool inRange;
     // Start is called before the first frame update
@@ -15,7 +17,14 @@ public class DroneSpawner : MonoBehaviour
     {
         spawnRunning = false;
         droneCount = 0;
-        inRange = false;
+        
+        if (bossSpawner == true)
+        {
+            inRange = true;
+            hernandez = GameObject.FindWithTag("Hernandez").GetComponent<Hernandez>();
+        } else {
+            inRange = false;
+        }
     }
 
     // Update is called once per frame
@@ -23,6 +32,8 @@ public class DroneSpawner : MonoBehaviour
     {
         if (droneCount < 3 && spawnRunning == false && inRange == true)
         {
+            if (bossSpawner == true && hernandez.stunned == true) return;
+
             if (limit == true && limitCount > 0)
             {
                 StartCoroutine(SpawnDrone());
@@ -60,7 +71,7 @@ public class DroneSpawner : MonoBehaviour
     void OnTriggerExit(Collider collision)
     {
         Debug.Log("Drone Trigger Exit");
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player" && bossSpawner == false)
         {
             inRange = false;
         }

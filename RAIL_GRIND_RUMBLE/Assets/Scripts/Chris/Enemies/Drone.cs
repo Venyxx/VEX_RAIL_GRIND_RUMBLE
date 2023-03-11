@@ -11,12 +11,20 @@ public class Drone : MonoBehaviour
     float degrees = 45f;
     bool moving;
     bool shootDelayRunning;
+    bool bossDrone;
+    Hernandez hernandez;
     // Start is called before the first frame update
     void Start()
     {
         playerREF = GameObject.FindWithTag("PlayerObject");
         moving = false;
         shootDelayRunning = false;
+
+        if (GameObject.FindWithTag("Hernandez"))
+        {
+            bossDrone = true;
+            hernandez = GameObject.FindWithTag("Hernandez").GetComponent<Hernandez>();
+        }
     }
 
     // Update is called once per frame
@@ -37,6 +45,11 @@ public class Drone : MonoBehaviour
                 StartCoroutine(ShootDelay());
             }
         }
+
+        if (bossDrone && hernandez.stunned)
+        {
+            Destroy(gameObject);
+        }
     }
 
     void OnTriggerEnter(Collider collision)
@@ -53,8 +66,14 @@ public class Drone : MonoBehaviour
     {
         shootDelayRunning = true;
         var lookPos = playerREF.transform.position - transform.position;
-        GameObject shootBullet = Instantiate(bullet, transform.position, Quaternion.LookRotation(lookPos));
-        shootBullet.GetComponent<Bullet>().Rigidbody.AddForce(shootBullet.transform.forward * shootBullet.GetComponent<Bullet>().MoveSpeed, ForceMode.VelocityChange);
+
+        /*if (bossDrone == true && hernandez.stunned == true)
+        {
+            yield break;
+        } else*/{
+            GameObject shootBullet = Instantiate(bullet, transform.position, Quaternion.LookRotation(lookPos));
+            shootBullet.GetComponent<Bullet>().Rigidbody.AddForce(shootBullet.transform.forward * shootBullet.GetComponent<Bullet>().MoveSpeed, ForceMode.VelocityChange);
+        }
         yield return new WaitForSeconds(10f);
         shootDelayRunning = false;
     }

@@ -64,7 +64,7 @@ public class PlayerThrownObject : MonoBehaviour
             {
                 damageable.IsDizzy(true);
                 damageable.TakeDamage(Damage);
-                Destroy(gameObject);
+                //Destroy(gameObject);
             }
             
         }

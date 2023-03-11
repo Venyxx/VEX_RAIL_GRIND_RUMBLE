@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hernandez : MonoBehaviour
+public class Hernandez : MonoBehaviour, IDamageable
 {
     [SerializeField] float stunSeconds;
     MachineGunTurret gatlingGunLeft;
@@ -11,13 +11,18 @@ public class Hernandez : MonoBehaviour
 
     GameObject playerObjREF;
 
-    bool stunned;
+    public bool stunned;
+    int stunCount;
     bool grounded;
     bool playerInRange;
     bool machineGunDelayRunning;
     string currentWeapon;
     int weaponCycle;
     float speed = 5f;
+
+    //Health
+    float maxHealth = 1750f;
+    float currentHealth;
     
 
     void Start()
@@ -28,11 +33,13 @@ public class Hernandez : MonoBehaviour
         gatlingGunRight = gameObject.transform.Find("GatlingGunRight").GetComponent<MachineGunTurret>();
         rocketTurret = gameObject.transform.Find("RocketTurret").GetComponent<RocketTurret>();
 
-        gatlingGunLeft.attached = true;
-        gatlingGunRight.attached = true;
-        rocketTurret.attached = true;
+        gatlingGunLeft.SetAttached();
+        gatlingGunRight.SetAttached();
+        rocketTurret.SetAttached();
 
         weaponCycle = 1;
+        stunCount = 0;
+        currentHealth = maxHealth;
     }
 
     void Update()
@@ -44,6 +51,11 @@ public class Hernandez : MonoBehaviour
         if (!stunned)
         {
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, playerObjREF.transform.position.y + 10, transform.position.z), step);
+
+            //Rotate to face player
+            Vector3 playerDirection = playerObjREF.transform.position - transform.position;
+            Vector3 newDirection = Vector3.RotateTowards(transform.forward, new Vector3(playerDirection.x, 0f, playerDirection.z), step, 0f);
+            transform.rotation = Quaternion.LookRotation(newDirection);
         }
 
         //Ranged attack if not stunned; can add additional condition to check if player is within melee attack range
@@ -52,7 +64,7 @@ public class Hernandez : MonoBehaviour
             //Shoots two rockets before activating gatling guns
             if (weaponCycle <= 2 && rocketTurret.shootRunning == false && rocketTurret.chargeRunning == false && gatlingGunLeft.shootRunning == false)
             {
-                rocketTurret.StartCoroutine(rocketTurret.Charging());
+                rocketTurret.StartCoroutine(rocketTurret.Shooting());
 
                 if (weaponCycle == 2)
                 {
@@ -73,10 +85,10 @@ public class Hernandez : MonoBehaviour
         //Add additional else if statement above this for when not stunned and player IS in range for melee attack
         } else if (stunned)
         {
-            //grounded = (Physics.Raycast(new Vector3(transform.position.x, transform.position.y - 3.75f, transform.position.z), Vector3.down, 10f, LayerMask.NameToLayer("Ground")));
-            if (grounded == false)
+            if (!grounded)
             {
-                Debug.Log("Not Grounded");
+            //grounded = (Physics.Raycast(new Vector3(transform.position.x, transform.position.y - 3.75f, transform.position.z), Vector3.down, 10f, LayerMask.NameToLayer("Ground")));
+                //Debug.Log("Not Grounded");
                 transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, transform.position.y - 1, transform.position.z), step);
             }
         }
@@ -85,16 +97,24 @@ public class Hernandez : MonoBehaviour
     IEnumerator MachineGunDelay()
     {
         machineGunDelayRunning = true;
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(7f);
         machineGunDelayRunning = false;
     }
 
     //Need to test this
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "DroneThrow")
+        if (collision.gameObject.tag == "DroneThrow" && stunned == false)
         {
-            StartCoroutine(Stun());
+            //Hit the mech with two drones to stun them
+            if (stunCount == 0)
+            {
+                stunCount++;
+            } else if (stunCount == 1) {
+                StartCoroutine(Stun());
+                stunCount = 0;
+            }
+           
         }
         
         //Figure out why tf this doesn't work
@@ -134,7 +154,39 @@ public class Hernandez : MonoBehaviour
     {
         stunned = true;
         Debug.Log("Stunning!");
-        yield return new WaitForSeconds(stunSeconds);
+        yield return new WaitForSeconds(stunSeconds + 2f);
         stunned = false;
+    }
+
+    public void TakeDamage(float damage)
+    {
+        if (!stunned) return;
+        //Add variables for maxHealth and currentHealth
+        currentHealth -= damage;
+        Debug.Log("Hernandez Health: "+currentHealth);
+
+        if (currentHealth <= 0)
+        {
+            currentHealth = 0;
+
+            //Temporary
+            Destroy(gameObject);
+        }
+    }
+
+    public void GainHealth(float GainHealth)
+    {
+        //Recharge health after being destroyed for 30 seconds
+        return;
+    }
+
+    public Transform GetTransform()
+    {
+        return transform;
+    }
+
+    public void IsDizzy(bool isDizzy)
+    {
+        return;
     }
 }
