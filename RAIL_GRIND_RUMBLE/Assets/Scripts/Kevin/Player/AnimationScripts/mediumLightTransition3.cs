@@ -22,6 +22,7 @@ public class mediumLightTransition3 : StateMachineBehaviour
     {
         PlayerAttack.instance.IsAttacking = false;
         PlayerAttack.instance.atkCount = 0;
+        PlayerAttack.instance.movementScriptREF.CombatPause = false;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

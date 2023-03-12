@@ -202,7 +202,7 @@ public class Enemy : PoolableObject, IDamageable
                 child.gameObject.layer = 20;
             }
 
-            if( !EnemyScriptableObject.IsRanged && Movement.IsBrute)
+            if( !EnemyScriptableObject.IsRanged || Movement.IsBrute)
             {
                 Ragdoll.StartRagdoll = true;
                 

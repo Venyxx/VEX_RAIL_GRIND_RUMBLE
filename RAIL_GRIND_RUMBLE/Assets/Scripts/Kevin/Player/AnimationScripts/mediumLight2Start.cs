@@ -10,6 +10,7 @@ public class mediumLight2Start : StateMachineBehaviour
         PlayerAttack.instance.IsAttacking = false;
         PlayerAttack.instance.Damage = 21;
         PlayerAttack.instance.Lefthand.enabled = true;
+        PlayerAttack.instance.movementScriptREF.currentSpeed = PlayerAttack.instance.movementScriptREF.currentSpeed * 0.8f;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

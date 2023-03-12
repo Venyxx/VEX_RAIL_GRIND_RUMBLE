@@ -9,6 +9,8 @@ public class fastLight3Start : StateMachineBehaviour
     {
         PlayerAttack.instance.Damage = 20;
         PlayerAttack.instance.Weapon.enabled = true;
+        PlayerAttack.instance.movementScriptREF.currentSpeed = 0;
+        PlayerAttack.instance.movementScriptREF.CombatPause = true;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

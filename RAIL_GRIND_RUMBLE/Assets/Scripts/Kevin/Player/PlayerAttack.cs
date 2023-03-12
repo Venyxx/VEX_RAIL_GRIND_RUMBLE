@@ -120,6 +120,7 @@ public class PlayerAttack : MonoBehaviour
         {
             IsAttacking = true;
             atkCount++;
+          
 
         }
 

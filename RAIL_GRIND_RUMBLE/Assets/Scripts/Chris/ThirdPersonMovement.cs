@@ -130,6 +130,7 @@ public class ThirdPersonMovement : MonoBehaviour
     //Player Stun
     public PlayerHealth healthRef;
     public bool isStunned = false;
+    public bool CombatPause = false;
  
         
     // Start is called before the first frame update
@@ -441,7 +442,7 @@ public class ThirdPersonMovement : MonoBehaviour
     void PlayerMovement()
     {
         //Uncomment once air movement is programmed
-        if (isGrappling == true || healthRef.Dizzy )
+        if (isGrappling == true || healthRef.Dizzy || CombatPause)
         {
             return;
         }
