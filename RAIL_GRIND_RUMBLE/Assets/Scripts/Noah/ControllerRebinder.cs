@@ -8,11 +8,14 @@ using TMPro;
 
 public class ControllerRebinder : MonoBehaviour
 {
+    public List<GamepadIcons> xbox = new List<GamepadIcons>(); 
+
     //Jump
     [SerializeField] private InputActionReference jumpAction = null;
     [SerializeField] private TMP_Text jumpBindingDisplayNameText = null;
     [SerializeField] private GameObject startJumpRebindObject = null;
     [SerializeField] private GameObject waitingForJumpInputObject = null;
+    [SerializeField] private Image jumpBindingDisplayIcon = null; 
 
     //MoveForward
    /* [SerializeField] private InputActionReference moveForwardAction = null;
@@ -44,66 +47,77 @@ public class ControllerRebinder : MonoBehaviour
     [SerializeField] private TMP_Text grapplePullBindingDisplayNameText = null;
     [SerializeField] private GameObject startGrapplePullRebindObject = null;
     [SerializeField] private GameObject waitingForGrapplePullInputObject = null;
+    [SerializeField] private Image grapplePullBindingDisplayIcon = null; 
 
     //GrappleSwitch
     [SerializeField] private InputActionReference grappleSwitchAction = null;
     [SerializeField] private TMP_Text grappleSwitchBindingDisplayNameText = null;
     [SerializeField] private GameObject startGrappleSwitchRebindObject = null;
     [SerializeField] private GameObject waitingForGrappleSwitchInputObject = null;
+    [SerializeField] private Image grappleSwitchBindingDisplayIcon = null; 
 
     //GrappleRelease
     [SerializeField] private InputActionReference noAimGrappleAction = null;
     [SerializeField] private TMP_Text noAimGrappleBindingDisplayNameText = null;
     [SerializeField] private GameObject startNoAimGrappleRebindObject = null;
     [SerializeField] private GameObject waitingForNoAimGrappleInputObject = null;
+    [SerializeField] private Image noAimGrappleBindingDisplayIcon = null; 
 
     //PauseGame
     [SerializeField] private InputActionReference pauseAction = null;
     [SerializeField] private TMP_Text pauseBindingDisplayNameText = null;
     [SerializeField] private GameObject startPauseRebindObject = null;
     [SerializeField] private GameObject waitingForPauseInputObject = null;
+    [SerializeField] private Image pauseBindingDisplayIcon = null; 
 
     //SwitchMode
     [SerializeField] private InputActionReference switchAction = null;
     [SerializeField] private TMP_Text switchBindingDisplayNameText = null;
     [SerializeField] private GameObject startSwitchRebindObject = null;
     [SerializeField] private GameObject waitingForSwitchInputObject = null;
+    [SerializeField] private Image switchBindingDisplayIcon = null; 
 
     //HeavyAttack
     [SerializeField] private InputActionReference heavyAction = null;
     [SerializeField] private TMP_Text heavyBindingDisplayNameText = null;
     [SerializeField] private GameObject startHeavyRebindObject = null;
     [SerializeField] private GameObject waitingForHeavyInputObject = null;
+    [SerializeField] private Image heavyBindingDisplayIcon = null; 
 
     //LightAttack
     [SerializeField] private InputActionReference lightAction = null;
     [SerializeField] private TMP_Text lightBindingDisplayNameText = null;
     [SerializeField] private GameObject startLightRebindObject = null;
     [SerializeField] private GameObject waitingForLightInputObject = null;
-
+    [SerializeField] private Image lightBindingDisplayIcon = null; 
+    
     //GraffitiUp
     [SerializeField] private InputActionReference graffitiUpAction = null;
     [SerializeField] private TMP_Text graffitiUpBindingDisplayNameText = null;
     [SerializeField] private GameObject startGraffitiUpRebindObject = null;
     [SerializeField] private GameObject waitingForGraffitiUpInputObject = null;
+    [SerializeField] private Image graffitiUpBindingDisplayIcon = null; 
 
     //GraffitiDown
     [SerializeField] private InputActionReference graffitiDownAction = null;
     [SerializeField] private TMP_Text graffitiDownBindingDisplayNameText = null;
     [SerializeField] private GameObject startGraffitiDownRebindObject = null;
     [SerializeField] private GameObject waitingForGraffitiDownInputObject = null;
+    [SerializeField] private Image graffitiDownBindingDisplayIcon = null; 
 
     //GraffitiLeft
     [SerializeField] private InputActionReference graffitiLeftAction = null;
     [SerializeField] private TMP_Text graffitiLeftBindingDisplayNameText = null;
     [SerializeField] private GameObject startGraffitiLeftRebindObject = null;
     [SerializeField] private GameObject waitingForGraffitiLeftInputObject = null;
+    [SerializeField] private Image graffitiLeftBindingDisplayIcon = null; 
 
     //GraffitiRight
     [SerializeField] private InputActionReference graffitiRightAction = null;
     [SerializeField] private TMP_Text graffitiRightBindingDisplayNameText = null;
     [SerializeField] private GameObject startGraffitiRightRebindObject = null;
     [SerializeField] private GameObject waitingForGraffitiRightInputObject = null;
+    [SerializeField] private Image graffitiRightBindingDisplayIcon = null; 
 
 
 
@@ -200,7 +214,9 @@ public class ControllerRebinder : MonoBehaviour
         jumpBindingDisplayNameText.text = InputControlPath.ToHumanReadableString(
             jumpAction.action.bindings[1].effectivePath,
             InputControlPath.HumanReadableStringOptions.OmitDevice);
-
+        
+        ReplaceWithIcon();
+        
         rebindingOperation.Dispose();
 
         jumpAction.action.Enable();
@@ -304,6 +320,8 @@ public class ControllerRebinder : MonoBehaviour
             grapplePullAction.action.bindings[2].effectivePath,
             InputControlPath.HumanReadableStringOptions.OmitDevice);
 
+        ReplaceWithIcon();
+        
         rebindingOperation.Dispose();
 
         grapplePullAction.action.Enable();
@@ -337,6 +355,8 @@ public class ControllerRebinder : MonoBehaviour
         grappleSwitchBindingDisplayNameText.text = InputControlPath.ToHumanReadableString(
             grappleSwitchAction.action.bindings[0].effectivePath,
             InputControlPath.HumanReadableStringOptions.OmitDevice);
+        
+        ReplaceWithIcon();
 
         rebindingOperation.Dispose();
 
@@ -371,6 +391,8 @@ public class ControllerRebinder : MonoBehaviour
         noAimGrappleBindingDisplayNameText.text = InputControlPath.ToHumanReadableString(
             noAimGrappleAction.action.bindings[1].effectivePath,
             InputControlPath.HumanReadableStringOptions.OmitDevice);
+        
+        ReplaceWithIcon();
 
         rebindingOperation.Dispose();
 
@@ -407,6 +429,8 @@ public class ControllerRebinder : MonoBehaviour
         pauseBindingDisplayNameText.text = InputControlPath.ToHumanReadableString(
             pauseAction.action.bindings[0].effectivePath,
             InputControlPath.HumanReadableStringOptions.OmitDevice);
+        
+        ReplaceWithIcon();
 
         rebindingOperation.Dispose();
 
@@ -442,6 +466,8 @@ public class ControllerRebinder : MonoBehaviour
             switchAction.action.bindings[1].effectivePath,
             InputControlPath.HumanReadableStringOptions.OmitDevice);
 
+        ReplaceWithIcon();
+        
         rebindingOperation.Dispose();
 
         switchAction.action.Enable();
@@ -475,6 +501,8 @@ public class ControllerRebinder : MonoBehaviour
         heavyBindingDisplayNameText.text = InputControlPath.ToHumanReadableString(
             heavyAction.action.bindings[1].effectivePath,
             InputControlPath.HumanReadableStringOptions.OmitDevice);
+        
+        ReplaceWithIcon();
 
         rebindingOperation.Dispose();
 
@@ -509,6 +537,8 @@ public class ControllerRebinder : MonoBehaviour
         lightBindingDisplayNameText.text = InputControlPath.ToHumanReadableString(
             lightAction.action.bindings[1].effectivePath,
             InputControlPath.HumanReadableStringOptions.OmitDevice);
+        
+        ReplaceWithIcon();
 
         rebindingOperation.Dispose();
 
@@ -543,6 +573,8 @@ public class ControllerRebinder : MonoBehaviour
         graffitiUpBindingDisplayNameText.text = InputControlPath.ToHumanReadableString(
             graffitiUpAction.action.bindings[1].effectivePath,
             InputControlPath.HumanReadableStringOptions.OmitDevice);
+        
+        ReplaceWithIcon();
 
         rebindingOperation.Dispose();
 
@@ -577,6 +609,8 @@ public class ControllerRebinder : MonoBehaviour
         graffitiDownBindingDisplayNameText.text = InputControlPath.ToHumanReadableString(
             graffitiDownAction.action.bindings[1].effectivePath,
             InputControlPath.HumanReadableStringOptions.OmitDevice);
+        
+        ReplaceWithIcon();
 
         rebindingOperation.Dispose();
 
@@ -611,6 +645,8 @@ public class ControllerRebinder : MonoBehaviour
         graffitiLeftBindingDisplayNameText.text = InputControlPath.ToHumanReadableString(
             graffitiLeftAction.action.bindings[1].effectivePath,
             InputControlPath.HumanReadableStringOptions.OmitDevice);
+        
+        ReplaceWithIcon();
 
         rebindingOperation.Dispose();
 
@@ -645,6 +681,8 @@ public class ControllerRebinder : MonoBehaviour
         graffitiRightBindingDisplayNameText.text = InputControlPath.ToHumanReadableString(
             graffitiRightAction.action.bindings[1].effectivePath,
             InputControlPath.HumanReadableStringOptions.OmitDevice);
+        
+        ReplaceWithIcon();
 
         rebindingOperation.Dispose();
 
@@ -653,4 +691,99 @@ public class ControllerRebinder : MonoBehaviour
         startGraffitiRightRebindObject.SetActive(true);
         waitingForGraffitiRightInputObject.SetActive(false);
     }
+
+    private void ReplaceWithIcon()
+    {
+        bool foundIcon = false;
+        for(int i = 0; i < xbox.Count; i++)
+        {
+            if (xbox[i].buttonName == jumpBindingDisplayNameText.text)
+            {
+                jumpBindingDisplayIcon.sprite = xbox[i].gamepadIcon;
+                foundIcon = true;
+            }
+            
+            if (xbox[i].buttonName == grapplePullBindingDisplayNameText.text)
+            {
+                grapplePullBindingDisplayIcon.sprite = xbox[i].gamepadIcon;
+                foundIcon = true;
+            }
+            
+            if (xbox[i].buttonName == grappleSwitchBindingDisplayNameText.text)
+            {
+                grappleSwitchBindingDisplayIcon.sprite = xbox[i].gamepadIcon;
+                foundIcon = true;
+            }
+            
+            if (xbox[i].buttonName == noAimGrappleBindingDisplayNameText.text)
+            {
+                noAimGrappleBindingDisplayIcon.sprite = xbox[i].gamepadIcon;
+                foundIcon = true;
+            }
+            
+            if (xbox[i].buttonName == pauseBindingDisplayNameText.text)
+            {
+                pauseBindingDisplayIcon.sprite = xbox[i].gamepadIcon;
+                foundIcon = true;
+            }
+            
+            if (xbox[i].buttonName == switchBindingDisplayNameText.text)
+            {
+                switchBindingDisplayIcon.sprite = xbox[i].gamepadIcon;
+                foundIcon = true;
+            }
+            
+            if (xbox[i].buttonName == heavyBindingDisplayNameText.text)
+            {
+                heavyBindingDisplayIcon.sprite = xbox[i].gamepadIcon;
+                foundIcon = true;
+            }
+            
+            if (xbox[i].buttonName == lightBindingDisplayNameText.text)
+            {
+                lightBindingDisplayIcon.sprite = xbox[i].gamepadIcon;
+                foundIcon = true;
+            }
+            
+            if (xbox[i].buttonName == graffitiUpBindingDisplayNameText.text)
+            {
+                graffitiUpBindingDisplayIcon.sprite = xbox[i].gamepadIcon;
+                foundIcon = true;
+            }
+            
+            if (xbox[i].buttonName == graffitiDownBindingDisplayNameText.text)
+            {
+                graffitiDownBindingDisplayIcon.sprite = xbox[i].gamepadIcon;
+                foundIcon = true;
+            }
+            
+            if (xbox[i].buttonName == graffitiLeftBindingDisplayNameText.text)
+            {
+                graffitiLeftBindingDisplayIcon.sprite = xbox[i].gamepadIcon;
+                foundIcon = true;
+            }
+            
+            if (xbox[i].buttonName == graffitiRightBindingDisplayNameText.text)
+            {
+                graffitiRightBindingDisplayIcon.sprite = xbox[i].gamepadIcon;
+                foundIcon = true;
+            }
+            
+            
+        }
+
+        if(!foundIcon)
+        {
+            
+        }
+    }
 }
+
+[System.Serializable]
+public class GamepadIcons
+{
+    public string buttonName;
+    public Sprite gamepadIcon;
+}
+
+
