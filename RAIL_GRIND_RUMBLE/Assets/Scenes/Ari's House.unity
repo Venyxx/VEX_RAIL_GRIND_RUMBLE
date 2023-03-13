@@ -3639,11 +3639,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3528749936814248332, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -1e-45
+      value: 1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 3528749936814248332, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 1e-45
+      value: -1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 3528749936814248333, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
       propertyPath: m_LookAt
@@ -3815,11 +3815,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3528749938080904422, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000031927886
+      value: 0.000000031927886
       objectReference: {fileID: 0}
     - target: {fileID: 3528749938080904422, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000012839333
+      value: -0.000000012839333
       objectReference: {fileID: 0}
     - target: {fileID: 6077250091353073948, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
       propertyPath: m_Actions
@@ -20385,38 +20385,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!114 &1782719797
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3011940198323978484}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c69d8216eb794da8b3fefa38672cf00c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  questRewards: []
-  isActive: 0
-  isComplete: 0
-  questName: Beat Up The Goons
-  description: Yeah
-  questAcceptedText:
-    paragraphs:
-    - speakerName: Diego
-      englishDialogue: You've accepted my quest
-      englishVoiceLine: {fileID: 0}
-  questDeniedText:
-    paragraphs:
-    - speakerName: Diego
-      englishDialogue: You've denied my quest
-      englishVoiceLine: {fileID: 0}
-  questCompletedText:
-    paragraphs: []
-  questType: 1
-  completionCount: 5
-  subtractCoinsOnCompletion: 0
 --- !u!1001 &1786406105
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29377,20 +29345,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2689359906256392456
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3011940198323978484}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29851e8cc18218d4e837f472b7c52908, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  secondSetNames: []
-  secondSetParagraphs: []
 --- !u!4 &2689848310453441745
 Transform:
   m_ObjectHideFlags: 0
@@ -30327,9 +30281,7 @@ GameObject:
   - component: {fileID: 3011940198323978480}
   - component: {fileID: 3011940198323978481}
   - component: {fileID: 3011940198323978486}
-  - component: {fileID: 3011940198323978489}
-  - component: {fileID: 2689359906256392456}
-  - component: {fileID: 1782719797}
+  - component: {fileID: 3011940198323978488}
   m_Layer: 0
   m_Name: Diego
   m_TagString: Untagged
@@ -30351,15 +30303,63 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue:
     paragraphs:
+    - speakerName: Ariadna
+      englishDialogue: Buenos dias, Di. Como amaneciste?
+      englishVoiceLine: {fileID: 0}
     - speakerName: Diego
-      englishDialogue: I am recording a line of test dialogue
-      englishVoiceLine: {fileID: 8300000, guid: 3f7c1143a5fbc3a49869e67c2c3f21d5, type: 3}
+      englishDialogue: "Worse and less than you, dormilona. And my morning hasn\u2019t
+        been much better."
+      englishVoiceLine: {fileID: 0}
     - speakerName: Ariadna
-      englishDialogue: I am recording another line of test dialogue
-      englishVoiceLine: {fileID: 8300000, guid: 8fd6d654cd7e9e44da215665cdb0ceda, type: 3}
+      englishDialogue: Que paso?
+      englishVoiceLine: {fileID: 0}
+    - speakerName: Diego
+      englishDialogue: 'Domingo Industries just merged with the Servos Corporation
+        yesterday.
+
+'
+      englishVoiceLine: {fileID: 0}
     - speakerName: Ariadna
-      englishDialogue: This is the third line of test dialogue
-      englishVoiceLine: {fileID: 8300000, guid: a72b91a7ce0b76743b88283c4ac8a595, type: 3}
+      englishDialogue: And Domingo Industries is...
+      englishVoiceLine: {fileID: 0}
+    - speakerName: Diego
+      englishDialogue: "They were one of the last big industrial complexes in Nuevo
+        Domingo. They\u2019ve been in business for decades! With them gone, Servos
+        basically has a monopoly on\u2026 everything.\r\n"
+      englishVoiceLine: {fileID: 0}
+    - speakerName: Ariadna
+      englishDialogue: "*tsh* Well that sucks. I guess we\u2019ll just have to pick
+        up the pace.\r\n"
+      englishVoiceLine: {fileID: 0}
+    - speakerName: Diego
+      englishDialogue: "Let\u2019s not be too hasty. We\u2019ve been making good
+        progress. Better safe than sorry, especially now.\r\n"
+      englishVoiceLine: {fileID: 0}
+    - speakerName: Diego
+      englishDialogue: Luis is in need of a few parts off the black market. We were
+        just about to acquire them but the Craneo Azul got them first.
+      englishVoiceLine: {fileID: 0}
+    - speakerName: Ariadna
+      englishDialogue: 'What''re those idiots gonna do with tech parts?
+
+'
+      englishVoiceLine: {fileID: 0}
+    - speakerName: Diego
+      englishDialogue: "My thoughts exactly. They\u2019re probably just middlemanning
+        for Servos.\r\n"
+      englishVoiceLine: {fileID: 0}
+    - speakerName: Diego
+      englishDialogue: 'We were able to discern their transport route and I want
+        you to catch them before they reach their destination. '
+      englishVoiceLine: {fileID: 0}
+    - speakerName: Diego
+      englishDialogue: The parts are being transported in one of the Servos vans
+        along the specified route. Once you stop them, be prepared for a fight.
+      englishVoiceLine: {fileID: 0}
+    - speakerName: Ariadna
+      englishDialogue: "Yeah, yeah. I\u2019ve beaten up plenty of gang members. This\u2019ll
+        be no different.\r"
+      englishVoiceLine: {fileID: 0}
 --- !u!4 &3011940198323978487
 Transform:
   m_ObjectHideFlags: 0
@@ -30377,7 +30377,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: -93.808, z: 0}
---- !u!114 &3011940198323978489
+--- !u!114 &3011940198323978488
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -30386,14 +30386,49 @@ MonoBehaviour:
   m_GameObject: {fileID: 3011940198323978484}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84f3b8477a93db04b93b274a3dd47237, type: 3}
+  m_Script: {fileID: 11500000, guid: d883ffa7da534552b773b47ecdb25a4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questToGive: {fileID: 1782719797}
+  questToGive:
+    questRewards: []
+    isActive: 0
+    isComplete: 0
+    questName: 
+    description: 
+    questAcceptedText:
+      paragraphs: []
+    questDeniedText:
+      paragraphs: []
+    questCompletedText:
+      paragraphs: []
   questTitleText: {fileID: 0}
   questDescrText: {fileID: 0}
   questRewardText: {fileID: 0}
   acceptedOrDeniedAlready: 0
+  mainQuest1:
+    questRewards: []
+    isActive: 0
+    isComplete: 0
+    questName: Get those Goons!
+    description: Get the goons
+    questAcceptedText:
+      paragraphs:
+      - speakerName: Ariadna
+        englishDialogue: I'm gonna get those goons
+        englishVoiceLine: {fileID: 0}
+    questDeniedText:
+      paragraphs:
+      - speakerName: Ariadna
+        englishDialogue: I'm not gonna get those goons
+        englishVoiceLine: {fileID: 0}
+    questCompletedText:
+      paragraphs:
+      - speakerName: Ariadna
+        englishDialogue: I got the goons
+        englishVoiceLine: {fileID: 0}
+    questType: 1
+    completionCount: 5
+    subtractCoinsOnCompletion: 0
 --- !u!23 &3018229063919391598
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -31602,32 +31637,6 @@ Transform:
   m_Father: {fileID: 1880451948}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3515509808114268073
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3515509808114268075}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e845441981ea7ee409630ae4440e5ed3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  questRewards: []
-  isActive: 0
-  isComplete: 0
-  questName: Julianna
-  description: Defeat 15 Craneo Azul goons.
-  questAcceptedText:
-    paragraphs: []
-  questDeniedText:
-    paragraphs: []
-  questCompletedText:
-    paragraphs: []
-  questType: 1
-  completionCount: 15
-  subtractCoinsOnCompletion: 0
 --- !u!1 &3515509808114268075
 GameObject:
   m_ObjectHideFlags: 0
@@ -31643,7 +31652,6 @@ GameObject:
   - component: {fileID: 3515509808114268076}
   - component: {fileID: 3515509808114268079}
   - component: {fileID: 3515509808114268078}
-  - component: {fileID: 3515509808114268073}
   m_Layer: 0
   m_Name: JuliannaDialogueTrigger
   m_TagString: Untagged
@@ -31696,7 +31704,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84f3b8477a93db04b93b274a3dd47237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questToGive: {fileID: 0}
+  questToGive:
+    questRewards: []
+    isActive: 0
+    isComplete: 0
+    questName: 
+    description: 
+    questAcceptedText:
+      paragraphs: []
+    questDeniedText:
+      paragraphs: []
+    questCompletedText:
+      paragraphs: []
   questTitleText: {fileID: 0}
   questDescrText: {fileID: 0}
   questRewardText: {fileID: 0}

@@ -4,7 +4,7 @@ using StarterAssets;
 using UnityEngine;
 
 [System.Serializable]
-public class Quest : MonoBehaviour
+public class Quest
 {
     public QuestReward[] questRewards;
     public bool isActive;
@@ -48,14 +48,7 @@ public class Quest : MonoBehaviour
         }
         return sb.ToString();
     }
-
-    void Start()
-    {
-        /*dialogueTrigger = GetComponent<DialogueTrigger>();
-        questAcceptedText.dialogueTrigger = dialogueTrigger;
-        questCompletedText.dialogueTrigger = dialogueTrigger;
-        questDeniedText.dialogueTrigger = dialogueTrigger;*/
-    }
+    
 
     public void RewardPlayer()
     {
@@ -64,13 +57,13 @@ public class Quest : MonoBehaviour
             reward.RewardPlayer();
         }
         
-        QuestTracker tracker = FindObjectOfType<QuestTracker>();
-        if (tracker.CurrentQuest is CountQuest)
+        ProgressionManager tracker = ProgressionManager.Get();
+        if (tracker.currentQuest is CountQuest)
         {
-            CountQuest countQuest = (CountQuest)tracker.CurrentQuest;
+            CountQuest countQuest = (CountQuest)tracker.currentQuest;
             if (countQuest.subtractCoinsOnCompletion && countQuest.GetCountQuestType() is CountQuestType.Coins)
             {
-                ThirdPersonMovement player = FindObjectOfType<ThirdPersonMovement>();
+                ThirdPersonMovement player = ProgressionManager.Get().Player;
                 player.AddCoin(-countQuest.GetCompletionCount());
             }
         }

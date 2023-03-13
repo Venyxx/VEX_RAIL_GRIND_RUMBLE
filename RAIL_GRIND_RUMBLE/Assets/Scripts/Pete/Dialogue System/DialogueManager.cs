@@ -273,7 +273,7 @@ public class DialogueManager : MonoBehaviour
             if (quest is RivalQuest rivalQuest && quest.questAcceptedText.paragraphs[0].englishDialogue == text)
                 //quest.QuestAcceptedText.Equals(text))
             {
-                rivalQuest.Activate();
+                //rivalQuest.Activate();
             }
 
             //Debug.Log($"Quest is marked complete? {questGiver.GetQuest().isComplete}");
@@ -282,7 +282,7 @@ public class DialogueManager : MonoBehaviour
             {
                 quest.RewardPlayer();
                 quest.RewardsGiven = true;
-                FindObjectOfType<QuestTracker>().QuestInfoText.text = "";
+                ProgressionManager.Get().QuestInfoText.text = "";
             }
         }
         catch (NullReferenceException e)

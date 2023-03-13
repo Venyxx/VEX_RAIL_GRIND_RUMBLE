@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class RivalQuest : Quest
 {
-    [SerializeField] private Transform goalPoint;
+    /*[SerializeField] private Transform goalPoint;
     [SerializeField] private float speed;
     private bool raceStarted = false;
     private bool raceOver = false;
@@ -28,7 +28,7 @@ public class RivalQuest : Quest
     public void PlayerWin()
     {
         playerWon = true;
-        FindObjectOfType<QuestTracker>().CompleteQuest();
+        ProgressionManager.Get().CompleteQuest();
     }
 
     private void Update()
@@ -56,5 +56,5 @@ public class RivalQuest : Quest
             }
         }
 
-    }
+    }*/
 }

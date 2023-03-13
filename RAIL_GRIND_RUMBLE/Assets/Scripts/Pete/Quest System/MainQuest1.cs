@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
+[Serializable]
 public class MainQuest1 : CountQuest
 {
     private bool destinationReached;
@@ -12,26 +13,7 @@ public class MainQuest1 : CountQuest
     private TextMeshProUGUI questInfoText { get; set; }
     private bool endDialoguePlayed = false;
     private TotalWaypointController totalREF;
-
-    private void Awake()
-    {
-        
-        DontDestroyOnLoad(transform.gameObject);
-        if (ProgressionManager.Get().mainQuest1 == null)
-        {
-            ProgressionManager.Get().mainQuest1 = this;
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
-    }
-
-    private void Start()
-    {
-        base.Start();
-       
-    }
+    
     
     public override void IncrementCount()
     {
@@ -46,23 +28,20 @@ public class MainQuest1 : CountQuest
                 string speaker = "Diego";
                 DialogueParagraph paragraph = new DialogueParagraph(speaker, dialogue);
                 DialogueTemplate template = new DialogueTemplate(paragraph);
-                FindObjectOfType<DialogueManager>().StartAutoDialogue(template);
+                ProgressionManager.Get().DialogueManager.StartAutoDialogue(template);
             }
         }
     }
 
-    private void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
 
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    public void LoadMainQuest1(TotalWaypointController totalREF, GameObject mainQuestParent, TextMeshProUGUI questInfoText)
     {
-        if (SceneManager.GetActiveScene().name == "Outskirts" && !RewardsGiven && !isComplete)
+        if (SceneManager.GetActiveScene().name == "Outskirts" && !RewardsGiven && !isComplete && totalREF != null && mainQuestParent != null && questInfoText != null)
         {
-            totalREF = GameObject.Find("WayPointPrefab").GetComponent<TotalWaypointController>();
-            mainQuestParent = GameObject.Find("MainQuest1 Objects");
-            questInfoText = GameObject.Find("QuestInfo").transform.Find("QuestInfoText").gameObject.GetComponent<TextMeshProUGUI>();
+            Debug.Log("MainQuest1 OnSceneLoaded called successfully");
+            this.totalREF = totalREF;
+            this.mainQuestParent = mainQuestParent;
+            this.questInfoText = questInfoText;
             if (isActive)
             {
                 foreach (Transform child in mainQuestParent.transform)
@@ -72,11 +51,17 @@ public class MainQuest1 : CountQuest
                 }
             }
         }
+        else
+        {
+            Debug.Log("MainQuest1 OnSceneLoaded not called successfully");
+        }
     }
+    
 
     public void VanDestinationReached()
     {
         destinationReached = true;
+        questInfoText = ProgressionManager.Get().QuestInfoText;
         questInfoText.text = $"Goons Defeated: {currentCount} / {completionCount}";
     }
 }

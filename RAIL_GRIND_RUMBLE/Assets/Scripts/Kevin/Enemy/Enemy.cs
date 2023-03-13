@@ -176,12 +176,12 @@ public class Enemy : PoolableObject, IDamageable
         if (Health <= 0 && !dead)
         {
             dead = true;
-            QuestTracker tracker = FindObjectOfType<QuestTracker>();
+            ProgressionManager tracker = ProgressionManager.Get();
             Debug.Log(tracker.CurrentCountQuestType);
             if (tracker.CurrentCountQuestType is CountQuestType.Enemies)
             {
                 Debug.Log("Calling IncrementCount");
-                CountQuest quest = (CountQuest)tracker.CurrentQuest;
+                CountQuest quest = (CountQuest)tracker.currentQuest;
                 quest.IncrementCount();
             }
             

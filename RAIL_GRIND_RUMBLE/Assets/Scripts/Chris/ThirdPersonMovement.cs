@@ -640,10 +640,10 @@ public class ThirdPersonMovement : MonoBehaviour
         Debug.Log(coinCount);
         coinCountText.text = $"{coinCount}";
         PlaySound(0);
-        var questTracker = FindObjectOfType<QuestTracker>();
+        var questTracker = ProgressionManager.Get();
         if (questTracker.CurrentCountQuestType is CountQuestType.Coins)
         {
-            CountQuest quest = (CountQuest) questTracker.CurrentQuest;
+            CountQuest quest = (CountQuest) questTracker.currentQuest;
             quest.IncrementCount();
         }
     }

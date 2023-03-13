@@ -93,7 +93,7 @@ public class TotalWaypointController : MonoBehaviour
                 //index is handled by teleportation local, which is array based and just moves it forward one slot rather than by distanc
             }
                 //displaying the waypoint
-                Debug.Log(currentIndex);
+                //Debug.Log(currentIndex);
 
 
                 //prevent waypoint clipping
@@ -121,7 +121,7 @@ public class TotalWaypointController : MonoBehaviour
                 else
                     distanceText.text = Vector3.Distance(player.position, waypoints[currentIndex].transform.position).ToString("0.0") + " m";
 
-                Debug.Log(waypoints[currentIndex]);
+                //Debug.Log(waypoints[currentIndex]);
         } 
                   
     }   

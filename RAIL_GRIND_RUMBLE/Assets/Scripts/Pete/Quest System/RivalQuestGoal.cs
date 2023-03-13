@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class RivalQuestGoal : MonoBehaviour
 {
-    private RivalQuest myQuest;
+    /*private RivalQuest myQuest;
 
     public void SetMyQuest(RivalQuest quest)
     {
@@ -14,5 +14,5 @@ public class RivalQuestGoal : MonoBehaviour
     {
         if (!other.gameObject.CompareTag("PlayerObject")) return;
         myQuest.PlayerWin();
-    }
+    }*/
 }

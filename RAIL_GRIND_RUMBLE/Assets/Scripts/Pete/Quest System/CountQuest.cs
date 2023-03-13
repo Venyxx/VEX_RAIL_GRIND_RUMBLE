@@ -6,14 +6,10 @@ public class CountQuest : Quest
     protected int currentCount;
     [SerializeField] protected CountQuestType questType;
     [SerializeField] protected int completionCount;
-    protected QuestTracker questTracker;
+    //protected ProgressionManager questTracker;
     [Tooltip("ONLY USABLE FOR COIN QUESTS")]
     public bool subtractCoinsOnCompletion;
-
-    protected void Start()
-    {
-        questTracker = FindObjectOfType<QuestTracker>();
-    }
+    
 
     public CountQuestType GetCountQuestType()
     {
@@ -30,12 +26,12 @@ public class CountQuest : Quest
     {
         //Debug.Log("Parameterized IncrementCount");
         currentCount++;
-        questTracker.QuestInfoText.text = $"{thingToCount}: {currentCount} / {completionCount}";
+        ProgressionManager.Get().QuestInfoText.text = $"{thingToCount}: {currentCount} / {completionCount}";
         Debug.Log(currentCount);
         if (currentCount >= completionCount)
         {
             Debug.Log("Count Quest Completed");
-            FindObjectOfType<QuestTracker>().CompleteQuest();
+            ProgressionManager.Get().CompleteQuest();
         }
     }
 
