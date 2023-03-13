@@ -187,9 +187,25 @@ public class PlayerAttack : MonoBehaviour
 
         if (context.ReadValueAsButton() == true && !IsHeavyAttacking && atkCount == 0 && !grappleREF.isGrappling && !wallRunREF.isWallRunning)
         {
-        //    Debug.Log("Key Press");
-        
-           
+            //    Debug.Log("Key Press");
+
+
+
+            if (movementScriptREF.print < 5)
+            {
+                Debug.Log("HeavySlowAtk");
+             
+            }
+            if (movementScriptREF.print > 5 && movementScriptREF.print < 20)
+            {
+                Debug.Log("HeavyMedAtk");
+               
+            }
+            if (movementScriptREF.print > 20)
+            {
+                Debug.Log("HeavyfastAtk");
+                
+            }
 
             if (movementScriptREF.Grounded == true && !movementScriptREF.isJumping)
             {

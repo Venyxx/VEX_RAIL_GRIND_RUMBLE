@@ -723,11 +723,14 @@ public class ThirdPersonMovement : MonoBehaviour
     private IEnumerator Stun()
     {
         isStunned = true;
+        dialogueManager.freezePlayer = true;
         _animator.SetTrigger("StunStart");
         yield return new WaitForSeconds(3);
-        healthRef.IsDizzy(false);
         _animator.SetTrigger("StunEnd");
+        yield return new WaitForSeconds(2);
         isStunned = false;
+        dialogueManager.freezePlayer = false;
+        healthRef.IsDizzy(false);
         StopCoroutine(Stun());
     }
 
