@@ -344,7 +344,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4716377924800218965
 Transform:
   m_ObjectHideFlags: 0
@@ -763,7 +763,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c2841d16b4400fe4bb89ed78621feb85, type: 3}
   healthRef: {fileID: 0}
   isStunned: 0
-  CombatPause: 0
   print: 0
 --- !u!114 &2030071780202691794
 MonoBehaviour:
@@ -819,7 +818,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a4724ec0b3bdff7469ecc478234ffe10, type: 3}
   - {fileID: 8300000, guid: da4ccbb49665b7644b706711d97b19c3, type: 3}
   - {fileID: 8300000, guid: 551a17f1b82d6c847848afc3daa69848, type: 3}
-  ariAnimator: {fileID: 5866666021601855625}
 --- !u!114 &9069784105693932722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4369,13 +4367,6 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 089bdd2cdc294a149beabbfe08a987cf, type: 2}
-    - target: {fileID: 5866666021909216657, guid: e606cc423d70dd645bd324c595a8c70f, type: 3}
-      propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed
-        by Humanoid clips.\n\tTransform 'Root'\n\tFrom animation clip 'fastLight1End'\n\tFrom
-        animation clip 'fastLight1End'"
-      objectReference: {fileID: 0}
     - target: {fileID: 6048479410451371369, guid: e606cc423d70dd645bd324c595a8c70f, type: 3}
       propertyPath: m_Layer
       value: 7

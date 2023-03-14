@@ -82,11 +82,6 @@ public class GrappleHook : MonoBehaviour
     [SerializeField] private AudioClip[] grappleSounds;
     private AudioSource audioSource;
 
-    //Animation Things
-    //public Animator ariAnimator;
-    [SerializeField] private Animator ariAnimator;
-
-
     void Start()
     {
         cooldownRunning = false;
@@ -228,10 +223,6 @@ public class GrappleHook : MonoBehaviour
         //     return;
         // }
 
-        //animation trigger - Raul
-        ariAnimator.SetBool("isGrapplingAnim", true);
-
-
         if (grappleDetectorREF.GetComponent<GrappleDetection>().currentAim.gameObject.layer == LayerMask.NameToLayer("Enemy")) return;
 
         //Check if holding object
@@ -285,9 +276,6 @@ public class GrappleHook : MonoBehaviour
 
     void StopSwing()
     {
-        //Stop Grapple Anim Trigger - Raul 
-        ariAnimator.SetBool("isGrapplingAnim", false);
-
         //Arm Rig
         ik.enabled = false;
 
