@@ -162,8 +162,8 @@ public class EnemyMovement : MonoBehaviour
         yield return new WaitForSeconds(3f);
         Animator.SetBool("Dashing", true);
         Attack.Damage = 10;
-        Agent.speed = enemy.EnemyScriptableObject.Speed + 50;
-        Agent.acceleration = enemy.EnemyScriptableObject.Acceleration + 50;
+        Agent.speed = enemy.EnemyScriptableObject.Speed + 3;
+        Agent.acceleration = enemy.EnemyScriptableObject.Acceleration + 3;
         
         yield return new WaitForSeconds(1f);
         Debug.Log("Brute isn't charging");
