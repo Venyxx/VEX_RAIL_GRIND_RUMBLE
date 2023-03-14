@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 4014630952612888679}
   - component: {fileID: 4014630952612889497}
   - component: {fileID: 4014630952612888678}
-  m_Layer: 0
+  - component: {fileID: 4310445236755914091}
+  m_Layer: 6
   m_Name: cafeteriaTableLarge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 4014630952612888676}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 3.726944, y: 0.23484325, z: -7.25}
-  m_LocalScale: {x: 2, y: 1, z: 1.25}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -84,3 +85,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &4310445236755914091
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4014630952612888676}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2095611843453112085, guid: a300733a90b677641a15776b62113a45, type: 3}
