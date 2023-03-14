@@ -241,7 +241,8 @@ public class ThirdPersonMovement : MonoBehaviour
         if(isBraking)
         {
             _animator.SetBool(_animIDBrake, true);
-        }else 
+        }
+        else 
         {
             
             if (rigidBody.velocity.magnitude > 6 )     
@@ -266,6 +267,7 @@ public class ThirdPersonMovement : MonoBehaviour
                 
         }
         
+
         if (healthRef.Dizzy && !isStunned)
         {
             StartCoroutine(Stun());
