@@ -1,8 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,12 +13,14 @@ public class ProgressionManager : MonoBehaviour
 
 
     public Quest currentQuest;
+    
     public TextMeshProUGUI QuestInfoText { get; private set; }
-    private static List<Quest> completedQuests;
+    public static List<Quest> CompletedQuests { get; private set; }
     public CountQuestType CurrentCountQuestType { get; private set; } = CountQuestType.None;
     public ThirdPersonMovement Player { get; private set; }
     public DialogueManager DialogueManager { get; private set; }
     public string questInfo;
+    private bool firstAutoDialogueUsed;
 
     public static ProgressionManager Get()
     {
@@ -49,7 +49,7 @@ public class ProgressionManager : MonoBehaviour
     
     void Start()
     {
-        completedQuests = new List<Quest>();
+        CompletedQuests = new List<Quest>();
         try
         {
             QuestInfoText = GameObject.Find("QuestInfo").transform.Find("QuestInfoText").gameObject
@@ -78,6 +78,8 @@ public class ProgressionManager : MonoBehaviour
             GameObject waypoints = GameObject.Find("WayPointPrefab");
             waypoints.SetActive(false);
         }
+        
+        
 
         //QuestInfoText.text = questInfo;
     }
@@ -112,7 +114,7 @@ public class ProgressionManager : MonoBehaviour
     {
         currentQuest.isActive = false;
         currentQuest.isComplete = true;
-        completedQuests.Add(currentQuest);
+        CompletedQuests.Add(currentQuest);
         CurrentCountQuestType = CountQuestType.None;
         Debug.Log("Quest Completed");
     }
@@ -124,31 +126,33 @@ public class ProgressionManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        try
-        {
-            QuestInfoText = GameObject.Find("QuestInfo").transform.Find("QuestInfoText").gameObject
-                .GetComponent<TextMeshProUGUI>();
-        }
-        catch (Exception e)
-        {
-            Debug.LogError("Failed to assign QuestInfoText");
-        }
-
-        try
-        {
-            Player = FindObjectOfType<ThirdPersonMovement>();
-        }
-        catch (Exception e)
-        {
-            Debug.LogError("Failed to assign ThirdPersonMovement");
-        }
+        try { QuestInfoText = GameObject.Find("QuestInfo").transform.Find("QuestInfoText").gameObject.GetComponent<TextMeshProUGUI>(); }
+        catch (Exception e) { Debug.LogError("Failed to assign QuestInfoText"); }
+        try { Player = FindObjectOfType<ThirdPersonMovement>(); }
+        catch (Exception e) { Debug.LogError("Failed to assign ThirdPersonMovement"); }
+        try { DialogueManager = FindObjectOfType<DialogueManager>(); }
+        catch (Exception e) { Debug.LogError("Failed to assign DialogueManager"); }
 
         if (mainQuest1 != null && SceneManager.GetActiveScene().name == "Outskirts")
         {
-            
             TotalWaypointController totalREF = GameObject.Find("WayPointPrefab").GetComponent<TotalWaypointController>();
             GameObject mainQuestParent = GameObject.Find("MainQuest1 Objects");
             mainQuest1.LoadMainQuest1(totalREF, mainQuestParent, QuestInfoText);
         }
+
+        if (SceneManager.GetActiveScene().name == "Ari's House")
+        {
+            GameObject diego = GameObject.Find("Diego");
+            AutomaticDialogueTrigger autoTrigger = diego.transform.Find("OpeningAutoDialogue").gameObject.GetComponent<AutomaticDialogueTrigger>();
+            if (firstAutoDialogueUsed)
+            {
+                autoTrigger.gameObject.SetActive(false);
+            }
+        }
+    }
+
+    public void SetFirstAutoDialogueUsed()
+    {
+        firstAutoDialogueUsed = true;
     }
 }

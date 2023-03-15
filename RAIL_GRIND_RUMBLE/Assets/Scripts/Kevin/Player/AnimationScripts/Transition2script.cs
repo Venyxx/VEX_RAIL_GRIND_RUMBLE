@@ -15,7 +15,7 @@ public class Transition2script : StateMachineBehaviour
     {
          if (PlayerAttack.instance.IsAttacking && PlayerAttack.instance.movementScriptREF.Grounded == true)
         {
-            PlayerAttack.instance.anim.Play("LightCombo3");
+            PlayerAttack.instance.Anim.Play("LightCombo3");
             // PlayerAttack.instance.Damage = 40;
            // PlayerAttack.instance.Lefty.enabled = false;
 

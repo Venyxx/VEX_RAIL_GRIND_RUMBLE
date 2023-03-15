@@ -15,7 +15,7 @@ public class fastLightTransition2 : StateMachineBehaviour
     {
         if (PlayerAttack.instance.IsAttacking && PlayerAttack.instance.movementScriptREF.Grounded == true)
         {
-            PlayerAttack.instance.anim.Play("fastLight3Start");
+            PlayerAttack.instance.Anim.Play("fastLight3Start");
             // PlayerAttack.instance.Damage = 30;
             PlayerAttack.instance.Lefthand.enabled = false;
         }

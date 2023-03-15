@@ -227,7 +227,12 @@ public class DialogueManager : MonoBehaviour
         //Debug.Log($"nearestDialogueTemplate is NULL {thirdPersonControllerREF.nearestDialogueTemplate == null}");
         //Debug.Log($"dialogueTrigger is NULL {thirdPersonControllerREF.nearestDialogueTemplate.dialogueTrigger == null}");
 
-        if (thirdPersonControllerREF.nearestDialogueTemplate.dialogueTrigger is HealthSpawnDialogueTrigger hpSpawner)
+        DialogueTrigger trigger = null;
+        if (thirdPersonControllerREF.nearestDialogueTemplate != null)
+        {
+            trigger = thirdPersonControllerREF.nearestDialogueTemplate.dialogueTrigger;
+        }
+        if (trigger != null && trigger is HealthSpawnDialogueTrigger hpSpawner)
         {
             hpSpawner.SpawnHealth();
         }

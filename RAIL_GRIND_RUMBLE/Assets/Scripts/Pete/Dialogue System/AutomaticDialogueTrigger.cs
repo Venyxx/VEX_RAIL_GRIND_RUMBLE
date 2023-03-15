@@ -23,9 +23,8 @@ public class AutomaticDialogueTrigger : MonoBehaviour
             {
                 dialogueManager.StartAutoDialogue(dialogue);
             }
-
-
             used = true;
+            ProgressionManager.Get().SetFirstAutoDialogueUsed();
         }
     }
 }

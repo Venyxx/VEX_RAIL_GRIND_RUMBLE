@@ -8,9 +8,9 @@ public class Idlescript : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         PlayerAttack.instance.atkCount = 0;
-        PlayerAttack.instance.anim.ResetTrigger("HAttackEnd1");
-        PlayerAttack.instance.anim.ResetTrigger("HAttackEnd2");
-        PlayerAttack.instance.anim.ResetTrigger("HAttackEnd3");
+        PlayerAttack.instance.Anim.ResetTrigger("HAttackEnd1");
+        PlayerAttack.instance.Anim.ResetTrigger("HAttackEnd2");
+        PlayerAttack.instance.Anim.ResetTrigger("HAttackEnd3");
         PlayerAttack.instance.IsAttacking = false;
     }
 

@@ -15,7 +15,7 @@ public class mediumLightTransition2 : StateMachineBehaviour
     {
         if (PlayerAttack.instance.IsAttacking && PlayerAttack.instance.movementScriptREF.Grounded == true)
         {
-            PlayerAttack.instance.anim.Play("mediumLight3Start");
+            PlayerAttack.instance.Anim.Play("mediumLight3Start");
             PlayerAttack.instance.Damage = 0;
             PlayerAttack.instance.Lefthand.enabled = false;
             // PlayerAttack.instance.Damage = 30;

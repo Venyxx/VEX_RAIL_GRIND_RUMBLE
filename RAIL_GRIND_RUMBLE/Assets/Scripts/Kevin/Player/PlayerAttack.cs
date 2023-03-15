@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerAttack : MonoBehaviour
 {
-    public Animator anim;
+    public Animator Anim { get; private set; }
     public int Damage;
     public LayerMask enemyLayers;
     public bool IsAttacking = false;
@@ -56,7 +56,8 @@ public class PlayerAttack : MonoBehaviour
     void Start()
     {
         spinEffect.SetActive(false);
-        //  anim = GetComponent<Animator>();
+        GameObject ariRig = transform.Find("AriRig").gameObject;
+        Anim = ariRig.GetComponent<Animator>();
         HeavyAtkTimer = 0;
      //   hitSounds = Resources.LoadAll<AudioClip>("Sounds/DamageSounds");
        // audioSource = GetComponent<AudioSource>();
@@ -64,14 +65,11 @@ public class PlayerAttack : MonoBehaviour
 
     void Update()
     {
-        
-
-
         Timer();
         if (HeavyAtkTimer >= 3 && IsHeavyAttacking)
         {
            // Debug.Log("BugCheck1");
-            anim.SetTrigger("HAttackEnd2");
+            Anim.SetTrigger("HAttackEnd2");
             
             TimerOn = false;
            // IsHeavyAttacking = false;
@@ -138,23 +136,23 @@ public class PlayerAttack : MonoBehaviour
                 if (movementScriptREF.print < 5)
                 {
                     Debug.Log("SlowAtk");
-                    anim.SetTrigger("LAttackSlow");
+                    Anim.SetTrigger("LAttackSlow");
                 }
                 if (movementScriptREF.print > 5 && movementScriptREF.print < 20)
                 {
                     Debug.Log("MedAtk");
-                    anim.SetTrigger("LAttackMedium");
+                    Anim.SetTrigger("LAttackMedium");
                 }
                 if (movementScriptREF.print > 20)
                 {
                     Debug.Log("fastAtk");
-                    anim.SetTrigger("LAttackFast");
+                    Anim.SetTrigger("LAttackFast");
                 }
 
             }
             if (movementScriptREF.isJumping == true || movementScriptREF.Grounded == false)
             {
-                anim.SetTrigger("AirLight");
+                Anim.SetTrigger("AirLight");
             }
             
         }
@@ -195,7 +193,7 @@ public class PlayerAttack : MonoBehaviour
 
             if (movementScriptREF.Grounded == true && !movementScriptREF.isJumping)
             {
-                anim.SetTrigger("HAttackStart");
+                Anim.SetTrigger("HAttackStart");
                 TimerOn = true;
                 IsHeavyAttacking = true;
                 HeavyAtkTimer = 0;
@@ -203,7 +201,7 @@ public class PlayerAttack : MonoBehaviour
             }
             if (movementScriptREF.isJumping == true || movementScriptREF.Grounded == false)
             {
-                anim.SetTrigger("AirHeavy");
+                Anim.SetTrigger("AirHeavy");
                 
                 IsHeavyAttacking = true;
                 atkCount++;
@@ -222,7 +220,7 @@ public class PlayerAttack : MonoBehaviour
             {
                
                 //   Debug.Log("BugCheck2");
-                anim.SetTrigger("HAttackEnd2");
+                Anim.SetTrigger("HAttackEnd2");
                 //    IsHeavyAttacking = false;
                 HeavyAtkTimer = 0;
                 spinEffect.SetActive(true);
@@ -234,7 +232,7 @@ public class PlayerAttack : MonoBehaviour
             if (HeavyAtkTimer < 1 && !movementScriptREF.isJumping)
             {
              //   Debug.Log("BugCheck3");
-                anim.SetTrigger("HAttackEnd1");
+                Anim.SetTrigger("HAttackEnd1");
                 spinEffect.SetActive(true);
                 //   IsHeavyAttacking = false;
                 HeavyAtkTimer = 0;
@@ -245,7 +243,7 @@ public class PlayerAttack : MonoBehaviour
             if (HeavyAtkTimer >= 2)
             {
             //    Debug.Log("BugCheck4");
-                anim.SetTrigger("HAttackEnd3");
+                Anim.SetTrigger("HAttackEnd3");
                 //  IsHeavyAttacking = false;
                 HeavyAtkTimer = 0;
                 spinEffect.SetActive(true);

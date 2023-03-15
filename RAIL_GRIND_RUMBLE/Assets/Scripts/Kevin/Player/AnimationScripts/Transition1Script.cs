@@ -16,7 +16,7 @@ public class Transition1Script : StateMachineBehaviour
     {
           if (PlayerAttack.instance.IsAttacking && PlayerAttack.instance.movementScriptREF.Grounded == true)
         {
-            PlayerAttack.instance.anim.Play("LightCombo2");
+            PlayerAttack.instance.Anim.Play("LightCombo2");
            // PlayerAttack.instance.Damage = 30;
         }    
     

@@ -64,7 +64,7 @@ public class QuestGiver : MonoBehaviour
     {
         pauseMenu.ResumeGame();
         ProgressionManager.Get().AcceptQuest(questToGive);
-        Debug.Log("Quest accepted text: " + questToGive.questAcceptedText.paragraphs[0].englishDialogue);
+        //Debug.Log("Quest accepted text: " + questToGive.questAcceptedText.paragraphs[0].englishDialogue);
         FindObjectOfType<DialogueManager>().StartNPCDialogue(questToGive.questAcceptedText);
     }
 

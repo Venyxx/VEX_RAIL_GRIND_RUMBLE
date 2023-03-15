@@ -15,7 +15,7 @@ public class StationaryTransition1 : StateMachineBehaviour
     {
         if (PlayerAttack.instance.IsAttacking && PlayerAttack.instance.movementScriptREF.Grounded == true)
         {
-            PlayerAttack.instance.anim.Play("StationaryLight2Start");
+            PlayerAttack.instance.Anim.Play("StationaryLight2Start");
             // PlayerAttack.instance.Damage = 30;
             PlayerAttack.instance.Rightleg.enabled = false;
         }

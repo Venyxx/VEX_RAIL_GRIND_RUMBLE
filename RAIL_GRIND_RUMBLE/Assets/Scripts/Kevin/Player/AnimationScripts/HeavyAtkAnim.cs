@@ -22,9 +22,9 @@ public class HeavyAtkAnim : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 
-        PlayerAttack.instance.anim.ResetTrigger("HAttackEnd1");
-        PlayerAttack.instance.anim.ResetTrigger("HAttackEnd2");
-        PlayerAttack.instance.anim.ResetTrigger("HAttackEnd3");
+        PlayerAttack.instance.Anim.ResetTrigger("HAttackEnd1");
+        PlayerAttack.instance.Anim.ResetTrigger("HAttackEnd2");
+        PlayerAttack.instance.Anim.ResetTrigger("HAttackEnd3");
         PlayerAttack.instance.IsHeavyAttacking = false;
         PlayerAttack.instance.Leftleg.enabled = false;
         PlayerAttack.instance.spinEffect.SetActive(false);

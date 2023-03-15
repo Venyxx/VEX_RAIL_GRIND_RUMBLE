@@ -1,27 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
 using Pete.Level_Scripting;
 using UnityEngine;
 
 public class DiegoManager : NPCManager
 {
+    private bool mainQuest1Finished = false;
+    [SerializeField] private DialogueTemplate mainQuest2Dialogue;
+    
 
-    public string[] secondSetNames;
-    [TextArea(3,10)]
-    public string[] secondSetParagraphs;
-
-    public override void HandleProgress()
+    void Start()
     {
-        /*Quest firstQuest = GetComponent<QuestGiver>().GetQuest();
-        
-        if (!ProgressionManager.Get().diegoQuestFinished && firstQuest.RewardsGiven)
+        List<Quest> completedQuests = ProgressionManager.CompletedQuests;
+        foreach (Quest quest in completedQuests)
         {
-            ProgressionManager.Get().diegoQuestFinished = true;
+            if(quest is MainQuest1)
+            {
+                mainQuest1Finished = true;
+            }
         }
-        
-        if (ProgressionManager.Get().diegoQuestFinished)
+
+        if (mainQuest1Finished)
         {
-            dialogueTemplate.paragraphs.spokenDialogue = newParagraphs;
-        }*/
+            GetComponent<MainQuest1Giver>().enabled = false;
+            GetComponent<DialogueTrigger>().dialogue = mainQuest2Dialogue;
+        }
     }
 }
