@@ -58,6 +58,8 @@ public class ThirdPersonMovement : MonoBehaviour
     public GameObject dialogueBox { get; private set; }
     public DialogueTemplate nearestDialogueTemplate = null;
     public DialogueManager dialogueManager { get; private set; }
+    //Stop Overlapping Actions Stuff - Raul
+    public PlayerAttack atkScript;
 
 
 
@@ -194,7 +196,10 @@ public class ThirdPersonMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(atkScript.misControlEnabled == true) //Stop Overlapping Actions - Raul
+        {
         PlayerMovement();
+        }
         
         //Grounded Check
         Grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);

@@ -29,13 +29,15 @@ public class PlayerAttack : MonoBehaviour
     private Rigidbody ariRigidbody;
 
     [SerializeField]
-    private int slamSpeed;
+    private int slamSpeed; //RAUL
 
     //buff
     public bool isBuffed;
     public int buffDamage;
    // private AudioClip[] hitSounds;
   //  private AudioSource audioSource;
+
+   public bool misControlEnabled = true; //stop overlapping actions - Raul
 
 
     private void Awake()
@@ -205,7 +207,7 @@ public class PlayerAttack : MonoBehaviour
                 
                 IsHeavyAttacking = true;
                 atkCount++;
-                ariRigidbody.AddForce(0, -slamSpeed, 0,  ForceMode.Acceleration);
+                ariRigidbody.AddForce(0, -slamSpeed, 0,  ForceMode.Acceleration); //RAUL
 
             }
         }
@@ -347,6 +349,18 @@ public class PlayerAttack : MonoBehaviour
 
             }
         }
+    }
+
+    
+
+    public void EnableControl()
+    {
+        misControlEnabled = true;
+    }
+
+    public void DisableControl()
+    {
+        misControlEnabled = false;
     }
 
 
