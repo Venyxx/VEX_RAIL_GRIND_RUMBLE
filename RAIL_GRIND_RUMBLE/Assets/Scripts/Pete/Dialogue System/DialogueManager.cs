@@ -260,10 +260,31 @@ public class DialogueManager : MonoBehaviour
 
     private void HandleQuest(string text)
     {
-        try
+        //try
         {
-            QuestGiver questGiver = npc.GetComponent<QuestGiver>();
+            QuestGiver[] questGivers = npc.GetComponents<QuestGiver>();
+            QuestGiver questGiver = null;
+
+            if (questGivers.Length == 1)
+            {
+                questGiver = npc.GetComponent<QuestGiver>();
+            }
+            else
+            {
+                foreach (var giver in questGivers)
+                {
+                    if (giver.enabled)
+                    {
+                        questGiver = giver;
+                    }
+                }
+            }
+            
             Quest quest = questGiver.GetQuest();
+            Debug.Log(quest.GetName());
+            Debug.Log($"!questGiver.acceptedOrDeniedAlready: {!questGiver.acceptedOrDeniedAlready}");
+            Debug.Log($"!quest.isComplete: {!quest.isComplete}");
+            Debug.Log($"!quest.isActive: {!quest.isActive}");
             if (!questGiver.acceptedOrDeniedAlready && !quest.isComplete && !quest.isActive)
             {
                 questGiver.OpenQuestWindow();
@@ -290,13 +311,13 @@ public class DialogueManager : MonoBehaviour
                 ProgressionManager.Get().QuestInfoText.text = "";
             }
         }
-        catch (NullReferenceException e)
+        //catch (NullReferenceException e)
         {
-            Debug.Log("There is no QuestGiver attached to this Dialogue");
+            //Debug.Log("There is no QuestGiver attached to this Dialogue");
         }
-        catch (UnassignedReferenceException e)
+        //catch (UnassignedReferenceException e)
         {
-            Debug.Log("There is no QuestGiver attached to this Dialogue");
+            //Debug.Log("There is no QuestGiver attached to this Dialogue");
         }
 
     }

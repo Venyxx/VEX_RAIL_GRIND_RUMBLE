@@ -85,7 +85,12 @@ public class Graffiti : MonoBehaviour
                     //particle = Instantiate (graffitiParticle, canLocationForParticle.transform.position, canLocation.transform.rotation);
                     madeGraffiti = Instantiate (graffiti, spawnLoc.transform.position,canLocation.transform.rotation); 
                     particle2 = Instantiate (graffitiParticle2, player.transform.position, player.transform.rotation);
-
+                    
+                    ProgressionManager manager = ProgressionManager.Get();
+                    if (manager.currentQuest is CountQuest countQuest && countQuest.GetCountQuestType() is CountQuestType.Graffiti)
+                    {
+                        countQuest.IncrementCount("Graffiti Sprayed");
+                    }
 
                     //buff
                     graffitiBuffTimer = 60f;

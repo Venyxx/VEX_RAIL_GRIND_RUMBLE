@@ -22,13 +22,17 @@ public class QuestGiver : MonoBehaviour
     protected void Start()
     {
         pauseMenu = FindObjectOfType<PauseMenu>();
+        GameObject questUIParent = GameObject.Find("QuestParent");
+        GameObject questWindow = questUIParent.transform.Find("QuestWindow").gameObject;
+        GameObject questWindowBackground = questWindow.transform.Find("QuestWindowBackground").gameObject;
+        
         
         if(questTitleText == null)
-            questTitleText = GameObject.Find("QuestNameField").GetComponent<TextMeshProUGUI>();
+            questTitleText = questWindowBackground.transform.Find("QuestNameField").GetComponent<TextMeshProUGUI>();
         if(questDescrText == null)
-            questDescrText = GameObject.Find("DescriptionField").GetComponent<TextMeshProUGUI>();
+            questDescrText = questWindowBackground.transform.Find("DescriptionField").GetComponent<TextMeshProUGUI>();
         if(questRewardText == null)
-            questRewardText = GameObject.Find("RewardsText").GetComponent<TextMeshProUGUI>();
+            questRewardText = questWindowBackground.transform.Find("RewardsText").GetComponent<TextMeshProUGUI>();
         Debug.Log("Finished Start in QuestGiver");
 
         string myQuestName = questToGive.GetName();

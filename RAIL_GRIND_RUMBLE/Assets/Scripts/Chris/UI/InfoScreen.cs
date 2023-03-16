@@ -52,7 +52,7 @@ public class InfoScreen : MonoBehaviour
     {
         isOpen = false;
         audioUI = GetComponent<AudioSource>();
-        questWindow = gameObject.transform.Find("QuestWindow").gameObject;
+        questWindow = gameObject.transform.Find("QuestParent").transform.Find("QuestWindow").gameObject;
     }
 
     void Update()

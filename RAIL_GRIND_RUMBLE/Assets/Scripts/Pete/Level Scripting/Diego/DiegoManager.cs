@@ -26,6 +26,8 @@ public class DiegoManager : NPCManager
         {
             GetComponent<MainQuest1Giver>().enabled = false;
             GetComponent<DialogueTrigger>().dialogue = mainQuest2Dialogue;
+            GetComponent<DialogueTrigger>().dialogue.dialogueTrigger = GetComponent<DialogueTrigger>();
+            GetComponent<MainQuest2Giver>().enabled = true;
         }
     }
 }

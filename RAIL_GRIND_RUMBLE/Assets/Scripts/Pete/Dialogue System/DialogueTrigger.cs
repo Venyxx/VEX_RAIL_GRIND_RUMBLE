@@ -83,6 +83,7 @@ public class DialogueTrigger : MonoBehaviour
     
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        dialogue.dialogueTrigger = this;
         TalkPromptCheck();
         thirdPersonControllerREF = FindObjectOfType<ThirdPersonMovement>();
         if (npcModel == null)
@@ -111,6 +112,14 @@ public class DialogueTrigger : MonoBehaviour
         if (talkPrompt.activeInHierarchy)
         {
             talkPrompt.SetActive(false);
+        }
+    }
+
+    void Update()
+    {
+        if (dialogue.dialogueTrigger == null)
+        {
+            dialogue.dialogueTrigger = this;
         }
     }
 }

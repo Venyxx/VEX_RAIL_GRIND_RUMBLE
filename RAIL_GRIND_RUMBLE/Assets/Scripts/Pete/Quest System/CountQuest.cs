@@ -52,7 +52,7 @@ public class CountQuest : Quest
 public enum CountQuestType
 {
     //GrindTime,
-    //Graffiti,
+    Graffiti,
     //SpeedMeter,
     Coins,
     Enemies,
