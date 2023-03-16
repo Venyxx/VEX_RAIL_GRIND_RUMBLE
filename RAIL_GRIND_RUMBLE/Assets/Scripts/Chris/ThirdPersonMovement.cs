@@ -58,8 +58,9 @@ public class ThirdPersonMovement : MonoBehaviour
     public GameObject dialogueBox { get; private set; }
     public DialogueTemplate nearestDialogueTemplate = null;
     public DialogueManager dialogueManager { get; private set; }
+
     //Stop Overlapping Actions Stuff - Raul
-    public PlayerAttack atkScript;
+    public AnimationiManager animManager;
 
 
 
@@ -192,13 +193,13 @@ public class ThirdPersonMovement : MonoBehaviour
         //Debug.Log($"DialogueBox is null? {dialogueBox == null}");
         healthRef = GetComponent<PlayerHealth>();
 
-        atkScript = GetComponent<PlayerAttack>(); //added by pete to fix raul's nullref since he was assigning this in the inspector
+        //atkScript = GetComponent<PlayerAttack>(); //added by pete to fix raul's nullref since he was assigning this in the inspector
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(atkScript.misControlEnabled == true) //Stop Overlapping Actions - Raul
+        if(animManager.misControlEnabled == true) //Stop Overlapping Actions - Raul
         {
         PlayerMovement();
         }
@@ -209,8 +210,26 @@ public class ThirdPersonMovement : MonoBehaviour
 
         //gravity 
         GetComponent<Rigidbody>().AddForce( new Vector3(0.0f, -5.81f, 0.0f), ForceMode.Acceleration);
-
+        
+        if(animManager.misControlEnabled == true) //Stop Overlapping Actions - Raul
+        {
         PlayerInput();
+
+        }
+
+        //Stop Overlapping Actions -Raul /////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        if(animManager.misControlEnabled == true) 
+        {
+        playerActions.Player.Enable();
+        }
+        else 
+        {
+        playerActions.Player.Disable();
+        }
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
         //Drag
         if (Grounded == true && currentSpeed <= 0)
@@ -290,11 +309,14 @@ public class ThirdPersonMovement : MonoBehaviour
     
     public void Jump(InputAction.CallbackContext context)
     {
-        if (isWalking || dialogueManager.freezePlayer) return;
-        //if (isGrappling) return;
-        
-        if (context.started && Grounded)
+        if(animManager.misControlEnabled == true) //Stop Overlapping Actions -Raul
         {
+
+         if (isWalking || dialogueManager.freezePlayer) return;
+         //if (isGrappling) return;
+        
+         if (context.started && Grounded)
+         {
             isJumping = true;
             jumpTimeCounter = 0.35f;
             _animator.SetBool(_animIDJump, true);
@@ -314,12 +336,14 @@ public class ThirdPersonMovement : MonoBehaviour
 
             //Commented out - related to variable jump height
             //StartCoroutine(JumpHoldDelay());
-        }
+         }
 
-        if (context.canceled)
-        {
+         if (context.canceled)
+         {
           //  isJumping = false;
             
+         }
+
         }
     }
 
