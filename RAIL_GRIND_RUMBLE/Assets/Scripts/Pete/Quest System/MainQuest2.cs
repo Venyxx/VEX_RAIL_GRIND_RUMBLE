@@ -13,4 +13,18 @@ public class MainQuest2 : CountQuest
             questInfoText.text = "Take the bus to the Inner Ring!"; 
         }
     }
+
+    public void LoadMainQuest2InnerRing(TotalWaypointController totalWaypointController, TextMeshProUGUI questInfoText)
+    {
+        if (isActive)
+        {
+            questInfoText.text = $"Posters Sprayed: {currentCount} / {completionCount}";
+            //totalREF = totalWaypointController;
+        }
+    }
+
+    public override void IncrementCount()
+    {
+        base.IncrementCount("Posters Sprayed");
+    }
 }

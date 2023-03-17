@@ -136,18 +136,23 @@ public class ProgressionManager : MonoBehaviour
         LoadObjects();
         if (!IsFinished(mainQuest1))
         {
-            GameObject[] busStops = GameObject.FindGameObjectsWithTag("BusStop");
-            foreach (var busStop in busStops)
-            {
-                busStop.SetActive(false);
-            }
-            LoadMainQuest1();
+            //SetBusStopsActive(false);
+            //LoadMainQuest1();
         }
         if (!IsFinished(mainQuest2))
         {
             LoadMainQuest2();
         }
         HandleDiegoAutoDialogue();
+    }
+
+    public void SetBusStopsActive(bool active)
+    {
+        GameObject[] busStops = GameObject.FindGameObjectsWithTag("BusStop");
+        foreach (var busStop in busStops)
+        {
+            busStop.SetActive(active);
+        }
     }
 
     public void SetFirstAutoDialogueUsed()
@@ -198,9 +203,9 @@ public class ProgressionManager : MonoBehaviour
                 //GameObject mainQuestParent = GameObject.Find("MainQuest1 Objects");
                 mainQuest2.LoadMainQuest2Outskirts(totalREF, QuestInfoText);
             }
-            else if (SceneManager.GetActiveScene().name == "Inner Ring")
+            else if (SceneManager.GetActiveScene().name == "InnerRingLevel")
             {
-                
+                mainQuest2.LoadMainQuest2InnerRing(null, QuestInfoText);
             }
         }
         

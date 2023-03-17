@@ -34,8 +34,14 @@ public class TotalWaypointController : MonoBehaviour
         GameObject playerREF = GameObject.Find("AriRig");
         player = playerREF.GetComponent<Transform>();
 
-
-        waypoints = GameObject.FindGameObjectsWithTag("WayPoint").ToList();
+        if (GetComponent<Teleportation>())
+        {
+            waypoints = GetComponent<Teleportation>().Locations.ToList();
+        }
+        else
+        {
+            waypoints = GameObject.FindGameObjectsWithTag("WayPoint").ToList();
+        }
 
         distanceText = waypoint.GetComponentInChildren<TMP_Text>();
 

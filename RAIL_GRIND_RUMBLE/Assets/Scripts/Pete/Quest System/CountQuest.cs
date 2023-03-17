@@ -18,8 +18,21 @@ public class CountQuest : Quest
 
     public virtual void IncrementCount()
     {
-        //Debug.Log("IncrementCount('Progress')");
-        IncrementCount("Progress");
+        switch (questType)
+        {
+            case CountQuestType.Coins:
+                IncrementCount("Coins Collected");
+                break;
+            case CountQuestType.Enemies:
+                IncrementCount("Enemies Defeated");
+                break;
+            case CountQuestType.Graffiti:
+                IncrementCount("Graffiti Sprayed");
+                break;
+            default:
+                IncrementCount("Progress");
+                break;
+        }
     }
 
     public virtual void IncrementCount(string thingToCount)
@@ -27,10 +40,10 @@ public class CountQuest : Quest
         //Debug.Log("Parameterized IncrementCount");
         currentCount++;
         ProgressionManager.Get().QuestInfoText.text = $"{thingToCount}: {currentCount} / {completionCount}";
-        Debug.Log(currentCount);
+        //Debug.Log(currentCount);
         if (currentCount >= completionCount)
         {
-            Debug.Log("Count Quest Completed");
+            //Debug.Log("Count Quest Completed");
             ProgressionManager.Get().CompleteQuest();
         }
     }

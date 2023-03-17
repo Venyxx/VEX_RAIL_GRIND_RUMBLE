@@ -89,7 +89,7 @@ public class Graffiti : MonoBehaviour
                     ProgressionManager manager = ProgressionManager.Get();
                     if (manager.currentQuest is CountQuest countQuest && countQuest.GetCountQuestType() is CountQuestType.Graffiti)
                     {
-                        countQuest.IncrementCount("Graffiti Sprayed");
+                        countQuest.IncrementCount();
                     }
 
                     //buff
