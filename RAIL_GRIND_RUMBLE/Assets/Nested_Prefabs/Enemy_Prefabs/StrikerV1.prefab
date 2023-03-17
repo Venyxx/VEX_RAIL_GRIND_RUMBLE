@@ -65,6 +65,8 @@ MonoBehaviour:
   Movement: {fileID: 1495312388888140238}
   enemy: {fileID: 5265576555318656063}
   thrust: 10
+  BruteHit: 0
+  BruteWindingUp: 0
 --- !u!1 &1495312389010500589
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,6 +286,7 @@ MonoBehaviour:
   enemy: {fileID: 5265576555318656063}
   IsBrute: 0
   BruteIsCharging: 0
+  BruteChargingDelay: 0
   activated: 0
 --- !u!82 &5854847052674931944
 AudioSource:
@@ -397,7 +400,7 @@ MonoBehaviour:
   Movement: {fileID: 1495312388888140238}
   Agent: {fileID: 4694821488445018543}
   EnemyScriptableObject: {fileID: 11400000, guid: 3c9acd3ddbe3865468558cf66e5197bb, type: 2}
-  Health: 100
+  Health: 1
   Animator: {fileID: 5823354347041916475}
   Ragdoll: {fileID: 1742402826431431499}
   _takeDamageDelay: 0.6

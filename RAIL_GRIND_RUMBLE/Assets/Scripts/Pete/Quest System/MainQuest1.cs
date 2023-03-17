@@ -44,9 +44,9 @@ public class MainQuest1 : CountQuest
             this.questInfoText = questInfoText;
             if (isActive)
             {
+                questInfoText.text = "Chase that van!";
                 foreach (Transform child in mainQuestParent.transform)
                 {
-                    questInfoText.text = "Chase that van!";
                     child.gameObject.SetActive(true);
                 }
             }

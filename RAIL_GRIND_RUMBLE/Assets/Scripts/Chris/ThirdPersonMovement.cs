@@ -559,10 +559,10 @@ public class ThirdPersonMovement : MonoBehaviour
         if (rigidBody.velocity.magnitude > 14) //arbritrary cap point
         {
 
-            Vector3 passing = Vector3.Normalize(rigidBody.velocity);
+            Vector3 currentVelocity = rigidBody.velocity;
+            Vector3 passing = Vector3.Normalize(currentVelocity);
             passing *= maxSkateSpeed;
-
-            rigidBody.velocity = passing;
+            rigidBody.velocity = new Vector3(passing.x, rigidBody.velocity.y,passing.z);
         }
             
 
@@ -623,7 +623,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
     void TapJump(float force)
     {
-        rigidBody.velocity = new Vector3(rigidBody.velocity.x, 0f, rigidBody.velocity.z);
+        //rigidBody.velocity = new Vector3(rigidBody.velocity.x, 0f, rigidBody.velocity.z);
         rigidBody.AddForce(transform.up * force, ForceMode.Impulse);
     }
 

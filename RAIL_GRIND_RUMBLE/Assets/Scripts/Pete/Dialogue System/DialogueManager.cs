@@ -260,7 +260,7 @@ public class DialogueManager : MonoBehaviour
 
     private void HandleQuest(string text)
     {
-        //try
+        try
         {
             QuestGiver[] questGivers = npc.GetComponents<QuestGiver>();
             QuestGiver questGiver = null;
@@ -311,11 +311,11 @@ public class DialogueManager : MonoBehaviour
                 ProgressionManager.Get().QuestInfoText.text = "";
             }
         }
-        //catch (NullReferenceException e)
+        catch (NullReferenceException e)
         {
             //Debug.Log("There is no QuestGiver attached to this Dialogue");
         }
-        //catch (UnassignedReferenceException e)
+        catch (UnassignedReferenceException e)
         {
             //Debug.Log("There is no QuestGiver attached to this Dialogue");
         }

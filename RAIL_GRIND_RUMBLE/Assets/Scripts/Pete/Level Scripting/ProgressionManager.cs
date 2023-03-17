@@ -123,6 +123,7 @@ public class ProgressionManager : MonoBehaviour
         CompletedQuests.Add(currentQuest);
         CurrentCountQuestType = CountQuestType.None;
         Debug.Log("Quest Completed");
+        Debug.Log(CompletedQuests);
     }
 
     void OnEnable()
@@ -133,8 +134,19 @@ public class ProgressionManager : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         LoadObjects();
-        LoadMainQuest1();
-        LoadMainQuest2();
+        if (!IsFinished(mainQuest1))
+        {
+            GameObject[] busStops = GameObject.FindGameObjectsWithTag("BusStop");
+            foreach (var busStop in busStops)
+            {
+                busStop.SetActive(false);
+            }
+            LoadMainQuest1();
+        }
+        if (!IsFinished(mainQuest2))
+        {
+            LoadMainQuest2();
+        }
         HandleDiegoAutoDialogue();
     }
 
@@ -158,7 +170,7 @@ public class ProgressionManager : MonoBehaviour
 
     private void LoadMainQuest1()
     {
-        if (mainQuest1 != null && SceneManager.GetActiveScene().name == "Outskirts" && !mainQuest1.isComplete)
+        if (mainQuest1 != null && SceneManager.GetActiveScene().name == "Outskirts" && !mainQuest1.isComplete && !IsFinished(mainQuest1))
         {
             GameObject totalWayPointParent = GameObject.Find("WayPointPrefabs");
             GameObject mainQuest1WayPoints = totalWayPointParent.transform.GetChild(0).gameObject;
@@ -171,19 +183,27 @@ public class ProgressionManager : MonoBehaviour
 
     private void LoadMainQuest2()
     {
-        if (mainQuest2 != null && SceneManager.GetActiveScene().name == "Outskirts" && !mainQuest2.isComplete)
+        if (mainQuest2 != null && !mainQuest2.isComplete && !IsFinished(mainQuest2))
         {
-            GameObject totalWayPointParent = GameObject.Find("WayPointPrefabs");
-            GameObject mainQuest2WayPoints = totalWayPointParent.transform.GetChild(1).gameObject;
-            mainQuest2WayPoints.SetActive(true);
-            TotalWaypointController totalREF = mainQuest2WayPoints.GetComponent<TotalWaypointController>();
-            foreach (var waypoint in totalREF.waypoints)
+            if (SceneManager.GetActiveScene().name == "Outskirts")
             {
-                Debug.Log(waypoint.name);
+                GameObject totalWayPointParent = GameObject.Find("WayPointPrefabs");
+                GameObject mainQuest2WayPoints = totalWayPointParent.transform.GetChild(1).gameObject;
+                mainQuest2WayPoints.SetActive(true);
+                TotalWaypointController totalREF = mainQuest2WayPoints.GetComponent<TotalWaypointController>();
+                foreach (var waypoint in totalREF.waypoints)
+                {
+                    Debug.Log(waypoint.name);
+                }
+                //GameObject mainQuestParent = GameObject.Find("MainQuest1 Objects");
+                mainQuest2.LoadMainQuest2Outskirts(totalREF, QuestInfoText);
             }
-            //GameObject mainQuestParent = GameObject.Find("MainQuest1 Objects");
-            //mainQuest2.LoadMainQuest2(totalREF, mainQuestParent, QuestInfoText);
+            else if (SceneManager.GetActiveScene().name == "Inner Ring")
+            {
+                
+            }
         }
+        
     }
 
     private void LoadObjects()
@@ -194,5 +214,10 @@ public class ProgressionManager : MonoBehaviour
         catch (Exception e) { Debug.LogError("Failed to assign ThirdPersonMovement"); }
         try { DialogueManager = FindObjectOfType<DialogueManager>(); }
         catch (Exception e) { Debug.LogError("Failed to assign DialogueManager"); }
+    }
+
+    public static bool IsFinished(Quest quest)
+    {
+        return CompletedQuests.Contains(quest);
     }
 }
