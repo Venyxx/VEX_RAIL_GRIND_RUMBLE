@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class MechBossMovement : MonoBehaviour
 {
     public NavMeshAgent agent;
-
+    public Animator Animator;
     private Transform player;
 
     public LayerMask whatIsGround, whatIsPlayer;
@@ -16,6 +16,8 @@ public class MechBossMovement : MonoBehaviour
     public Vector3 walkPoint;
    public bool walkPointSet;
     public float walkPointRange;
+    [SerializeField]
+    private float Speed = 8; 
 
     //Attacking
     public float timeBetweenAttacks;
@@ -24,12 +26,15 @@ public class MechBossMovement : MonoBehaviour
 
     //States
     public float sightRange, attackRange;
-    public bool playerInSightRange, playerInAttackRange;
+    public bool playerInSightRange, playerInAttackRange, MechDown;
+    public bool Dizzy;
+
 
     private void Awake()
     {
         player = GameObject.Find("playerPrefab").transform;
         agent = GetComponent<NavMeshAgent>();
+        Speed = agent.speed;
     }
     private void Update()
     {
@@ -40,20 +45,25 @@ public class MechBossMovement : MonoBehaviour
         if (!playerInSightRange && !playerInAttackRange) Patroling();
         //if (playerInSightRange && !playerInAttackRange) ChasePlayer();
         //if (playerInSightRange && playerInAttackRange) AttackPlayer();
-        if (Input.GetKeyDown(KeyCode.K))
+      
+        if (agent.baseOffset > 0 && MechDown)
         {
-            agent.baseOffset = 1;
+            agent.speed = 0;
+            Animator.SetTrigger("KockDown");
+            walkPointSet = false;
+            agent.baseOffset = agent.baseOffset - 15 * Time.deltaTime;
         }
     }
     private void Patroling()
     {
-        if (!walkPointSet) SearchWalkPoint();
-        if (walkPointSet)
+        if (!walkPointSet && !MechDown) SearchWalkPoint();
+        if (walkPointSet && !MechDown)
             agent.SetDestination(walkPoint);
+
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
 
         //Walkpoint reached
-        if (distanceToWalkPoint.magnitude < 20f)
+        if (distanceToWalkPoint.magnitude < 20f || MechDown)
             walkPointSet = false;
     }
     private void SearchWalkPoint()
@@ -65,8 +75,10 @@ public class MechBossMovement : MonoBehaviour
 
 
         walkPoint = new Vector3(transform.position.x + randomX, transform.position.y + randomY, transform.position.z + randomZ);
-        if (Physics.Raycast(walkPoint, -transform.up, 50f, whatIsGround))
+        if (Physics.Raycast(walkPoint, -transform.up, 50f, whatIsGround) && !MechDown)
+        { 
             walkPointSet = true;
+    }
     }
     private void ChasePlayer()
     {
@@ -112,8 +124,13 @@ public class MechBossMovement : MonoBehaviour
     {
 
     }
-    public void IsDizzy(bool isDizzy)
+    public void IsDizzy(bool Dizzy)
     {
-
+       
+       
+    }
+    public IEnumerator KnockDown()
+    {
+        yield return new WaitForSeconds(5);
     }
 }

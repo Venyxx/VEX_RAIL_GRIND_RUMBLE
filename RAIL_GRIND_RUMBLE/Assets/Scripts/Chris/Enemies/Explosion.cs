@@ -29,7 +29,13 @@ public class Explosion : MonoBehaviour
             {
                 damageable.TakeDamage(Damage * 10);
             }
-            
+            if (other.gameObject.tag == "Hernandez")
+            {
+                MechBossMovement Mech = other.GetComponent<MechBossMovement>();
+                Mech.MechDown = true;
+                Debug.Log("HernandezHit");
+            }
+
         }
     }
 }

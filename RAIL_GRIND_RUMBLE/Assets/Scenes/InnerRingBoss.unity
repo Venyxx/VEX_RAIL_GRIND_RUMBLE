@@ -2329,6 +2329,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a25d5b724a7d3b8409cda94db4fe800e, type: 3}
+--- !u!95 &2146822796 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6225849041608318124, guid: 028e471716448c54fb2681a3edfd3dd3, type: 3}
+  m_PrefabInstance: {fileID: 6824130179127927624}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1012426446827331079
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2657,10 +2662,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 850429155790593132, guid: 028e471716448c54fb2681a3edfd3dd3, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 4168617640778219732, guid: 028e471716448c54fb2681a3edfd3dd3, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.08
       objectReference: {fileID: 0}
+    - target: {fileID: 4619514644766663045, guid: 028e471716448c54fb2681a3edfd3dd3, type: 3}
+      propertyPath: Animator
+      value: 
+      objectReference: {fileID: 2146822796}
     - target: {fileID: 4619514644766663045, guid: 028e471716448c54fb2681a3edfd3dd3, type: 3}
       propertyPath: sightRange
       value: 1.4
@@ -2679,7 +2692,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4682983248121609728, guid: 028e471716448c54fb2681a3edfd3dd3, type: 3}
       propertyPath: m_Speed
-      value: 15.4
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4682983248121609728, guid: 028e471716448c54fb2681a3edfd3dd3, type: 3}
       propertyPath: m_Height
@@ -2690,12 +2703,16 @@ PrefabInstance:
       value: 2.77
       objectReference: {fileID: 0}
     - target: {fileID: 4682983248121609728, guid: 028e471716448c54fb2681a3edfd3dd3, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4682983248121609728, guid: 028e471716448c54fb2681a3edfd3dd3, type: 3}
       propertyPath: m_AutoRepath
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4682983248121609728, guid: 028e471716448c54fb2681a3edfd3dd3, type: 3}
       propertyPath: m_BaseOffset
-      value: 10.59
+      value: 2.12
       objectReference: {fileID: 0}
     - target: {fileID: 4682983248121609728, guid: 028e471716448c54fb2681a3edfd3dd3, type: 3}
       propertyPath: m_AutoBraking
@@ -2707,11 +2724,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4682983248121609728, guid: 028e471716448c54fb2681a3edfd3dd3, type: 3}
       propertyPath: m_AngularSpeed
-      value: 300
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 6225849041608318124, guid: 028e471716448c54fb2681a3edfd3dd3, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6824130177305418646, guid: 028e471716448c54fb2681a3edfd3dd3, type: 3}
       propertyPath: m_Name
