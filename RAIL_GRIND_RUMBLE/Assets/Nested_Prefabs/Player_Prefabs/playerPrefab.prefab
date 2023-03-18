@@ -743,13 +743,7 @@ MonoBehaviour:
   isGrappling: 0
   swingSpeed: 5
   nearestDialogueTemplate:
-    paragraphs:
-    - speakerName: 
-      englishDialogue: 
-      englishVoiceLine: {fileID: 0}
-    - speakerName: 
-      englishDialogue: 
-      englishVoiceLine: {fileID: 0}
+    paragraphs: []
   animManager: {fileID: 7723016859887662603}
   SpeedChangeRate: 10
   analogMovement: 0
@@ -765,6 +759,7 @@ MonoBehaviour:
   healthRef: {fileID: 0}
   isStunned: 0
   CombatPause: 0
+  loadInDefaultLocation: 1
   print: 0
 --- !u!114 &2030071780202691794
 MonoBehaviour:
@@ -1227,7 +1222,7 @@ MonoBehaviour:
     m_ActionName: Player/DialogueInput[/Mouse/press,/XInputControllerWindows/buttonSouth]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3400830846209403069}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GrappleDetection, Assembly-CSharp
         m_MethodName: GrappleSwitchBack
         m_Mode: 0

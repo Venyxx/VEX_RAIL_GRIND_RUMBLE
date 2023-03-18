@@ -21,6 +21,7 @@ public class ProgressionManager : MonoBehaviour
     public DialogueManager DialogueManager { get; private set; }
     public string questInfo;
     private bool firstAutoDialogueUsed;
+    public bool firstLoad = true;
 
     public static ProgressionManager Get()
     {
@@ -137,9 +138,12 @@ public class ProgressionManager : MonoBehaviour
         if (!IsFinished(mainQuest1))
         {
             //SetBusStopsActive(false);
-            //LoadMainQuest1();
+            if (mainQuest1.isActive)
+            {
+                LoadMainQuest1();
+            }
         }
-        if (!IsFinished(mainQuest2))
+        if (!IsFinished(mainQuest2) && mainQuest2.isActive)
         {
             LoadMainQuest2();
         }

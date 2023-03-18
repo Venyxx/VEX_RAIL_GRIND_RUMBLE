@@ -134,8 +134,12 @@ public class ThirdPersonMovement : MonoBehaviour
     public PlayerHealth healthRef;
     public bool isStunned = false;
     public bool CombatPause = false;
- 
-        
+    
+    
+    [Tooltip("Leave this checked in the inspector unless you are manually moving ari in the scene and need her to spawn where you moved her. " + 
+             "Leave it unchecked if there are no gameObjects with 'LoadNewScene.cs' attached.")]
+    public bool loadInDefaultLocation = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -173,7 +177,7 @@ public class ThirdPersonMovement : MonoBehaviour
         coinCountText.text = $"{coinCount}";
 
         //Change/remove this line later based on level-to-level gameplay
-        coinCount = 0;
+        //coinCount = 0;
 
         //set speed UI element
         speedUIText = GameObject.Find("Speed").GetComponent<TextMeshProUGUI>();
@@ -194,6 +198,12 @@ public class ThirdPersonMovement : MonoBehaviour
         healthRef = GetComponent<PlayerHealth>();
 
         //atkScript = GetComponent<PlayerAttack>(); //added by pete to fix raul's nullref since he was assigning this in the inspector
+
+        if (loadInDefaultLocation)
+        {
+            transform.position = LoadNewScene.locationVector;
+        }
+
     }
 
     // Update is called once per frame
