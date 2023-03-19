@@ -39,12 +39,11 @@ public class Quest
 
     public string GetRewards()
     {
-        int num = 1;
         StringBuilder sb = new StringBuilder();
         foreach (var reward in questRewards)
         {
             
-            sb.Append($"{num}. {reward.ToString()}\n");
+            sb.Append($"{reward.ToString()}\n");
         }
         return sb.ToString();
     }

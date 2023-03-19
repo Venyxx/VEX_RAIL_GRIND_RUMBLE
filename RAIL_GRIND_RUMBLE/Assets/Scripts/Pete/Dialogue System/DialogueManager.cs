@@ -5,7 +5,6 @@ using Pete.Level_Scripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
-using UnityEngine.Rendering.Universal;
 
 public class DialogueManager : MonoBehaviour
 { 
@@ -98,7 +97,7 @@ public class DialogueManager : MonoBehaviour
         Debug.Log($"Is dialogue.dialogueTrigger null? {dialogue.dialogueTrigger == null}");
         Debug.Log($"Is ari walking? {thirdPersonControllerREF.isWalking}");*/
         if (dialogue == null || !thirdPersonControllerREF.isWalking) return;
-        Debug.Log("StartNPCDialogue called successfully");
+        //Debug.Log("StartNPCDialogue called successfully");
         freezePlayer = true;
         textSpeed = 0.01f;
         PlayDialogue(dialogue);
@@ -143,10 +142,10 @@ public class DialogueManager : MonoBehaviour
             paragraphDisplayed.Enqueue(paragraph);
         }*/
 
-        Debug.Log("Length of paragraphs: " + dialogue.paragraphs.Length);
+        //Debug.Log("Length of paragraphs: " + dialogue.paragraphs.Length);
         foreach (var dialogueParagraph in dialogue.paragraphs)
         {
-            Debug.Log(dialogueParagraph.englishDialogue);
+            //Debug.Log(dialogueParagraph.englishDialogue);
             paragraphDisplayed.Enqueue(dialogueParagraph.englishDialogue);
             nameDisplayed.Enqueue(dialogueParagraph.speakerName);
             voiceClips.Enqueue(dialogueParagraph.englishVoiceLine);
@@ -167,9 +166,9 @@ public class DialogueManager : MonoBehaviour
     {
         //Debug.Log($"Pause Menu is paused? {PauseMenu.isPaused}");
         //Debug.Log($"InfoScreen is open? {InfoScreen.isOpen}");
-        if (!context.started || PauseMenu.isPaused || InfoScreen.isOpen || thirdPersonControllerREF.nearestDialogueTemplate == null) return;
+        if (!context.started || PauseMenu.isPaused || InfoScreen.isOpen) return;
 
-        if (!isBoxActive && context.started)
+        if (!isBoxActive && context.started && thirdPersonControllerREF.nearestDialogueTemplate != null)
         {
             StartNPCDialogue(thirdPersonControllerREF.nearestDialogueTemplate);
         }
@@ -252,7 +251,7 @@ public class DialogueManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("NPC has no NPC Manager for Progression");
+            //Debug.Log("NPC has no NPC Manager for Progression");
         }
         //thirdPersonControllerREF.nearestDialogueTemplate = null;
         rotatingNPC = false;
@@ -281,10 +280,10 @@ public class DialogueManager : MonoBehaviour
             }
             
             Quest quest = questGiver.GetQuest();
-            Debug.Log(quest.GetName());
+            /*Debug.Log(quest.GetName());
             Debug.Log($"!questGiver.acceptedOrDeniedAlready: {!questGiver.acceptedOrDeniedAlready}");
             Debug.Log($"!quest.isComplete: {!quest.isComplete}");
-            Debug.Log($"!quest.isActive: {!quest.isActive}");
+            Debug.Log($"!quest.isActive: {!quest.isActive}");*/
             if (!questGiver.acceptedOrDeniedAlready && !quest.isComplete && !quest.isActive)
             {
                 questGiver.OpenQuestWindow();

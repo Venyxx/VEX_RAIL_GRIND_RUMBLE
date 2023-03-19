@@ -43,7 +43,7 @@ public class CountQuest : Quest
         //Debug.Log(currentCount);
         if (currentCount >= completionCount)
         {
-            //Debug.Log("Count Quest Completed");
+            Debug.Log("Count Quest Completed");
             ProgressionManager.Get().CompleteQuest();
         }
     }

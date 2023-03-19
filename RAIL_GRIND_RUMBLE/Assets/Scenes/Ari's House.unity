@@ -3611,11 +3611,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3528749936643343461, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000011336764
+      value: -0.000000015799076
       objectReference: {fileID: 0}
     - target: {fileID: 3528749936643343461, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000004890399
+      value: 0.0000000068153296
       objectReference: {fileID: 0}
     - target: {fileID: 3528749936814248332, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3639,11 +3639,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3528749936814248332, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 4.140836e-28
+      value: -3e-45
       objectReference: {fileID: 0}
     - target: {fileID: 3528749936814248332, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 8.731966e-28
+      value: 1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 3528749936814248333, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
       propertyPath: m_LookAt
@@ -3799,27 +3799,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3528749938080904422, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.3747177
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3528749938080904422, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.587738
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3528749938080904422, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99827033
+      value: 0.92779195
       objectReference: {fileID: 0}
     - target: {fileID: 3528749938080904422, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.058791026
+      value: 0.37309802
       objectReference: {fileID: 0}
     - target: {fileID: 3528749938080904422, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.00003690184
+      value: -0.000000031927886
       objectReference: {fileID: 0}
     - target: {fileID: 3528749938080904422, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000021732565
+      value: 0.000000012839333
       objectReference: {fileID: 0}
     - target: {fileID: 6077250091353073948, guid: e2bdcf62f51888742900bb0cc8849152, type: 3}
       propertyPath: m_Actions
@@ -20802,6 +20802,24 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1828430644 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3035513979615751368, guid: e2bf355c0c102504782aaa8d069b06fd, type: 3}
+  m_PrefabInstance: {fileID: 3035513979060278652}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1828430647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1828430644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1956ea31953247c9b07fb4ec5eabb9d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinAmount: 10
 --- !u!43 &1840472505
 Mesh:
   m_ObjectHideFlags: 0
@@ -23651,11 +23669,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1130857163402291922, guid: b1b7063463958a44f9b22f408aa11444, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000011336767
+      value: -0.000000031598155
       objectReference: {fileID: 0}
     - target: {fileID: 1130857163402291922, guid: b1b7063463958a44f9b22f408aa11444, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000048904005
+      value: 0.000000013630663
       objectReference: {fileID: 0}
     - target: {fileID: 1130857163402291922, guid: b1b7063463958a44f9b22f408aa11444, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -24911,13 +24929,62 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5884359030855217029, guid: f771723b377235d4488a7a98289a0ff6, type: 3}
-      propertyPath: m_Enabled
-      value: 0
+      propertyPath: mainQuest2.questRewards.Array.data[0]
+      value: 
+      objectReference: {fileID: 1828430647}
+    - target: {fileID: 5884359030855217029, guid: f771723b377235d4488a7a98289a0ff6, type: 3}
+      propertyPath: mainQuest2.questCompletedText.paragraphs.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5884359030855217029, guid: f771723b377235d4488a7a98289a0ff6, type: 3}
+      propertyPath: mainQuest2.questCompletedText.paragraphs.Array.data[1].speakerName
+      value: Diego
+      objectReference: {fileID: 0}
+    - target: {fileID: 5884359030855217029, guid: f771723b377235d4488a7a98289a0ff6, type: 3}
+      propertyPath: mainQuest2.questCompletedText.paragraphs.Array.data[2].speakerName
+      value: Diego
+      objectReference: {fileID: 0}
+    - target: {fileID: 5884359030855217029, guid: f771723b377235d4488a7a98289a0ff6, type: 3}
+      propertyPath: mainQuest2.questCompletedText.paragraphs.Array.data[3].speakerName
+      value: Diego
+      objectReference: {fileID: 0}
+    - target: {fileID: 5884359030855217029, guid: f771723b377235d4488a7a98289a0ff6, type: 3}
+      propertyPath: mainQuest2.questCompletedText.paragraphs.Array.data[4].speakerName
+      value: Ariadna
+      objectReference: {fileID: 0}
+    - target: {fileID: 5884359030855217029, guid: f771723b377235d4488a7a98289a0ff6, type: 3}
+      propertyPath: mainQuest2.questCompletedText.paragraphs.Array.data[5].speakerName
+      value: Diego
+      objectReference: {fileID: 0}
+    - target: {fileID: 5884359030855217029, guid: f771723b377235d4488a7a98289a0ff6, type: 3}
+      propertyPath: mainQuest2.questCompletedText.paragraphs.Array.data[0].englishDialogue
+      value: Ahaha! *sigh* Another job well done.
+      objectReference: {fileID: 0}
+    - target: {fileID: 5884359030855217029, guid: f771723b377235d4488a7a98289a0ff6, type: 3}
+      propertyPath: mainQuest2.questCompletedText.paragraphs.Array.data[1].englishDialogue
+      value: Very nice work!
+      objectReference: {fileID: 0}
+    - target: {fileID: 5884359030855217029, guid: f771723b377235d4488a7a98289a0ff6, type: 3}
+      propertyPath: mainQuest2.questCompletedText.paragraphs.Array.data[2].englishDialogue
+      value: ' Buuut, Jose also told me about this cool piece of Servos tech being
+        stored nearby. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 5884359030855217029, guid: f771723b377235d4488a7a98289a0ff6, type: 3}
+      propertyPath: mainQuest2.questCompletedText.paragraphs.Array.data[3].englishDialogue
+      value: I think you'll like it.
+      objectReference: {fileID: 0}
+    - target: {fileID: 5884359030855217029, guid: f771723b377235d4488a7a98289a0ff6, type: 3}
+      propertyPath: mainQuest2.questCompletedText.paragraphs.Array.data[4].englishDialogue
+      value: Jose did? What is it?
+      objectReference: {fileID: 0}
+    - target: {fileID: 5884359030855217029, guid: f771723b377235d4488a7a98289a0ff6, type: 3}
+      propertyPath: mainQuest2.questCompletedText.paragraphs.Array.data[5].englishDialogue
+      value: It's a surprise. Meet me near mama's orphanage!
       objectReference: {fileID: 0}
     - target: {fileID: 5884359030855217031, guid: f771723b377235d4488a7a98289a0ff6, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
+      propertyPath: mainQuest1.questRewards.Array.data[0]
+      value: 
+      objectReference: {fileID: 1828430647}
     - target: {fileID: 5884359030855217032, guid: f771723b377235d4488a7a98289a0ff6, type: 3}
       propertyPath: m_RootOrder
       value: 11

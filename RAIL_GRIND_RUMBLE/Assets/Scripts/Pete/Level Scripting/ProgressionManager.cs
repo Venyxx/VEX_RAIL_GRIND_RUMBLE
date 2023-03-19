@@ -11,6 +11,7 @@ public class ProgressionManager : MonoBehaviour
     public int coinCount;
     public MainQuest1 mainQuest1;
     public MainQuest2 mainQuest2;
+    public MainQuest3 mainQuest3;
     
     public Quest currentQuest;
     
@@ -40,6 +41,7 @@ public class ProgressionManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            CompletedQuests = new List<Quest>();
             DontDestroyOnLoad(this.gameObject);
         }
         else
@@ -50,7 +52,7 @@ public class ProgressionManager : MonoBehaviour
     
     void Start()
     {
-        CompletedQuests = new List<Quest>();
+        
         try
         {
             QuestInfoText = GameObject.Find("QuestInfo").transform.Find("QuestInfoText").gameObject
@@ -132,18 +134,30 @@ public class ProgressionManager : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         LoadObjects();
         if (!IsFinished(mainQuest1))
         {
-            //SetBusStopsActive(false);
-            if (mainQuest1.isActive)
+            //Debug.Log("MAINQUEST1 IS NOT FINISHED");
+            SetBusStopsActive(false);
+            if (mainQuest1 != null && currentQuest == mainQuest1)
             {
                 LoadMainQuest1();
             }
         }
-        if (!IsFinished(mainQuest2) && mainQuest2.isActive)
+        else
+        {
+            //Debug.Log("MAINQUEST1 IS FINISHED");
+            SetBusStopsActive(true);
+        }
+
+        if (mainQuest1 != null && !IsFinished(mainQuest2) && currentQuest == mainQuest2)
         {
             LoadMainQuest2();
         }
@@ -209,7 +223,12 @@ public class ProgressionManager : MonoBehaviour
             }
             else if (SceneManager.GetActiveScene().name == "InnerRingLevel")
             {
-                mainQuest2.LoadMainQuest2InnerRing(null, QuestInfoText);
+                GameObject totalWayPointParent = GameObject.Find("WayPointPrefabs");
+                GameObject mainQuest2WayPoints = totalWayPointParent.transform.GetChild(0).gameObject;
+                mainQuest2WayPoints.SetActive(true);
+                TotalWaypointController totalREF = mainQuest2WayPoints.GetComponent<TotalWaypointController>();
+                GameObject mainQuest2Parent = GameObject.Find("MainQuest2 Objects");
+                mainQuest2.LoadMainQuest2InnerRing(totalREF, QuestInfoText, mainQuest2Parent);
             }
         }
         

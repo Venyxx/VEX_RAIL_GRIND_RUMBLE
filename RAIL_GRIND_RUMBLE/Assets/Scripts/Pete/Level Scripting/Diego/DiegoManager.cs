@@ -11,7 +11,7 @@ public class DiegoManager : NPCManager
     [SerializeField] private DialogueTemplate mainQuest2Dialogue;
     
 
-    void Start()
+    public override void HandleProgress()
     {
         List<Quest> completedQuests = ProgressionManager.CompletedQuests;
         foreach (Quest quest in completedQuests)

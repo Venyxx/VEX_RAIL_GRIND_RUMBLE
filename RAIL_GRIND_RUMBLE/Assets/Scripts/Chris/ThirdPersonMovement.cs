@@ -15,7 +15,7 @@ public class ThirdPersonMovement : MonoBehaviour
     public float groundDrag;
     Vector3 standingStill = new Vector3 (0,0,0);
     private Vector2 moveInput;
-    public float maxSkateSpeed;
+    public float maxSkateSpeed = 15;
     private float slopeLimit;
 
     public double speedPrint;
@@ -116,6 +116,7 @@ public class ThirdPersonMovement : MonoBehaviour
     private GameObject[] skateShoes;
     private GameObject playerWeapon;
     private GameObject sprayCan;
+    private GameObject ariRig;
     [SerializeField] private Material skatesOnMaterial;
     [SerializeField] private Material skatesOffMaterial;
 
@@ -149,10 +150,11 @@ public class ThirdPersonMovement : MonoBehaviour
         baseMoveSpeed= 8;
         speedLerp = 2.22f;
         //max skate speed will be a better changable var later
-        maxSkateSpeed = 15;
+        //maxSkateSpeed = 15;
         playerCollisionFollowREF = gameObject.GetComponent<CollisionFollow>();
-        playerLeftColREF = transform.Find("AriRig").gameObject.transform.Find("LeftCollider").gameObject.GetComponent<PlayerRailLeftCollider>();
-        playerRightColREF = transform.Find("AriRig").gameObject.transform.Find("RightCollider").gameObject.GetComponent<PlayerRailRightCollider>();
+        ariRig = transform.Find("AriRig").gameObject;
+        playerLeftColREF = ariRig.gameObject.transform.Find("LeftCollider").gameObject.GetComponent<PlayerRailLeftCollider>();
+        playerRightColREF = ariRig.gameObject.transform.Find("RightCollider").gameObject.GetComponent<PlayerRailRightCollider>();
 
 
         playerActions = new InputHandler();
@@ -161,8 +163,9 @@ public class ThirdPersonMovement : MonoBehaviour
         isGrappling = false;
         canJump = true;
 
+        
         //animation setting
-        _animator = transform.Find("AriRig").gameObject.GetComponent<Animator>();
+        _animator = ariRig.gameObject.GetComponent<Animator>();
          AssignAnimationIDs();
 
         currentTime = 0;
@@ -312,6 +315,10 @@ public class ThirdPersonMovement : MonoBehaviour
         {
             isJumping = false;
         }
+        
+        //THIS PREVENTS THE GLITCH WHERE SPINNING THE STICK MAKES ARI GET OFF-AXIS
+        Quaternion ariRigRotation = ariRig.transform.localRotation;
+        ariRig.transform.localRotation = new Quaternion(0, ariRigRotation.y, ariRigRotation.z, ariRigRotation.w);
 
     }
 
@@ -566,7 +573,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
 
         //clamp skate speed
-        if (rigidBody.velocity.magnitude > 14) //arbritrary cap point
+        if (rigidBody.velocity.magnitude > maxSkateSpeed) //arbritrary cap point
         {
 
             Vector3 currentVelocity = rigidBody.velocity;
@@ -678,6 +685,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
     public void AddCoin(int coin)
     {
+        Debug.Log(coin);
         coinCount = coinCount + coin;
         ProgressionManager.Get().coinCount = coinCount;
         Debug.Log(coinCount);

@@ -4186,7 +4186,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5884359030855217035}
-  m_LocalRotation: {x: -0, y: -0.73021024, z: -0, w: 0.6832226}
+  m_LocalRotation: {x: 0, y: -0.73021, z: 0, w: 0.6832229}
   m_LocalPosition: {x: 51.87, y: 37.34, z: 966.844}
   m_LocalScale: {x: 3.2062514, y: 2.656683, z: 3.6165576}
   m_ConstrainProportionsScale: 0
@@ -4359,7 +4359,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5884359030855217035}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d883ffa7da534552b773b47ecdb25a4a, type: 3}
   m_Name: 
@@ -4381,7 +4381,8 @@ MonoBehaviour:
   questRewardText: {fileID: 0}
   acceptedOrDeniedAlready: 0
   mainQuest1:
-    questRewards: []
+    questRewards:
+    - {fileID: 0}
     isActive: 0
     isComplete: 0
     questName: Get those Goons!
@@ -4398,8 +4399,13 @@ MonoBehaviour:
         englishVoiceLine: {fileID: 0}
     questCompletedText:
       paragraphs:
-      - speakerName: Ariadna
-        englishDialogue: I got the goons
+      - speakerName: Diego
+        englishDialogue: "Jose just called me from the Inner Ring. He said he found
+          some good spots to tag. \n"
+        englishVoiceLine: {fileID: 0}
+      - speakerName: Diego
+        englishDialogue: "Why don\u2019t you go meet up with him? The bus can take
+          you to the inner Ring.\r"
         englishVoiceLine: {fileID: 0}
     questType: 1
     completionCount: 5
@@ -4411,7 +4417,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5884359030855217035}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e70b5a1acf84b2da8180fa2350089b8, type: 3}
   m_Name: 
@@ -4433,7 +4439,8 @@ MonoBehaviour:
   questRewardText: {fileID: 0}
   acceptedOrDeniedAlready: 0
   mainQuest2:
-    questRewards: []
+    questRewards:
+    - {fileID: 0}
     isActive: 0
     isComplete: 0
     questName: Spray Graffiti!

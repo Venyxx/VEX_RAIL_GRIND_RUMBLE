@@ -8,6 +8,7 @@ public class CoinReward : QuestReward
 
     public override void RewardPlayer()
     {
+        Debug.Log("CoinReward Called");
         FindObjectOfType<ThirdPersonMovement>().AddCoin(coinAmount);
     }
 

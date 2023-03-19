@@ -12,9 +12,9 @@ public class TotalWaypointController : MonoBehaviour
     public Transform finalDestination;
     private GameObject playerREF;
     private Transform player;
-    [HideInInspector] public int currentIndex;
-    
-    
+    public int currentIndex { get; set; }
+
+
 
 
     private TMP_Text distanceText;
