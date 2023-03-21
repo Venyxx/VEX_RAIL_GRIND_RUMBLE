@@ -30,6 +30,7 @@ public class SaveManager : MonoBehaviour
         if (PlayerPrefs.HasKey("save"))
         {
             state = Helper.Deserialize<SaveState>(PlayerPrefs.GetString("save"));
+            Debug.Log("found save file");
         } else
         {
             state = new SaveState();
