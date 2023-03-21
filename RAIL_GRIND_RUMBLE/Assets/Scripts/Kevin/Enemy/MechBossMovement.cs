@@ -8,9 +8,12 @@ public class MechBossMovement : MonoBehaviour
     public NavMeshAgent agent;
     public Animator Animator;
     private Transform player;
+    private GameObject playerREF;
 
     public LayerMask whatIsGround, whatIsPlayer;
     public float Health = 100;
+    public int KnockDownTime = 5;
+    private PlayerHealth playerhealth;
 
     //Patroling 
     public Vector3 walkPoint;
@@ -26,15 +29,17 @@ public class MechBossMovement : MonoBehaviour
 
     //States
     public float sightRange, attackRange;
-    public bool playerInSightRange, playerInAttackRange, MechDown;
+    public bool playerInSightRange, playerInAttackRange, MechDown, MechUp;
     public bool Dizzy;
 
 
     private void Awake()
     {
+        playerREF = GameObject.Find("playerPrefab");
         player = GameObject.Find("playerPrefab").transform;
         agent = GetComponent<NavMeshAgent>();
         Speed = agent.speed;
+        playerhealth = playerREF.GetComponent<PlayerHealth>();
     }
     private void Update()
     {
@@ -42,16 +47,32 @@ public class MechBossMovement : MonoBehaviour
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
-        if (!playerInSightRange && !playerInAttackRange) Patroling();
+        if (!playerInSightRange && !playerInAttackRange && !Dizzy)
+        { Patroling();
+            transform.LookAt(player);
+        }
         //if (playerInSightRange && !playerInAttackRange) ChasePlayer();
         //if (playerInSightRange && playerInAttackRange) AttackPlayer();
       
         if (agent.baseOffset > 0 && MechDown)
         {
             agent.speed = 0;
-            Animator.SetTrigger("KockDown");
+            Animator.SetTrigger("KnockDown");
             walkPointSet = false;
             agent.baseOffset = agent.baseOffset - 15 * Time.deltaTime;
+            if (!Dizzy)
+            {
+                StartCoroutine(KnockDown());
+            }
+        }
+        if (agent.baseOffset < 10 && MechUp)
+        {
+            agent.baseOffset = agent.baseOffset + 3 * Time.deltaTime;
+            agent.speed = Speed;
+        }
+        if (agent.baseOffset >= 10 && MechUp)
+        {
+            MechUp = false;
         }
     }
     private void Patroling()
@@ -71,7 +92,7 @@ public class MechBossMovement : MonoBehaviour
         //calculate random point in range
         float randomZ = Random.Range(-walkPointRange, walkPointRange);
         float randomX = Random.Range(-walkPointRange, walkPointRange);
-        float randomY = 8;
+        float randomY = Random.Range(0, 10);
 
 
         walkPoint = new Vector3(transform.position.x + randomX, transform.position.y + randomY, transform.position.z + randomZ);
@@ -82,23 +103,27 @@ public class MechBossMovement : MonoBehaviour
     }
     private void ChasePlayer()
     {
-        agent.SetDestination(player.transform.position);
+      //  agent.SetDestination(player.transform.position);
     }
     private void AttackPlayer()
     {
         //Attack code here
         //Make sure enemy doesn't move
-        agent.SetDestination(transform.position);
+       // agent.SetDestination(transform.position);
         transform.LookAt(player);
 
         if (!alreadyAttacked)
         {
-            //Rigidbody rb = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
+            
+            alreadyAttacked = true;
+            Invoke(nameof(ResetAttack), timeBetweenAttacks);
+            if(playerInAttackRange)
+            {
+                playerhealth.TakeDamage(50);
+                playerhealth.IsDizzy(true);
 
-            //rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
-            //rb.AddForce(transform.up * 5f, ForceMode.Impulse);
-            //alreadyAttacked = true;
-            //Invoke(nameof(ResetAttack), timeBetweenAttacks);
+                playerREF.GetComponent<ThirdPersonMovement>().rigidBody.AddForce((player.transform.position - agent.transform.position) * 150, ForceMode.Acceleration);
+            }
 
         }
     }
@@ -131,6 +156,18 @@ public class MechBossMovement : MonoBehaviour
     }
     public IEnumerator KnockDown()
     {
-        yield return new WaitForSeconds(5);
+        Dizzy = true;
+        yield return new WaitForSeconds(KnockDownTime);
+        MechDown = false;
+        Debug.Log("MechTest");
+        Animator.SetTrigger("GetUp");
+        yield return new WaitForSeconds(1);
+        Animator.SetTrigger("Attack");
+        yield return new WaitForSeconds(1.5f);
+        AttackPlayer();
+        yield return new WaitForSeconds(3);
+        Dizzy = false;
+        
+        MechUp = true;
     }
 }

@@ -1133,6 +1133,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1130857163402291922, guid: b1b7063463958a44f9b22f408aa11444, type: 3}
   m_PrefabInstance: {fileID: 699315771}
   m_PrefabAsset: {fileID: 0}
+--- !u!20 &1774324311 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 1130857163402291925, guid: b1b7063463958a44f9b22f408aa11444, type: 3}
+  m_PrefabInstance: {fileID: 699315771}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1813989741
 GameObject:
   m_ObjectHideFlags: 0
@@ -1627,6 +1632,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: playerPrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 2030071780202691822, guid: a25d5b724a7d3b8409cda94db4fe800e, type: 3}
+      propertyPath: loadInDefaultLocation
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2226213171794676310, guid: a25d5b724a7d3b8409cda94db4fe800e, type: 3}
       propertyPath: m_LocalRotation.w
       value: -0.9086823
@@ -1915,6 +1924,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0.15503684
       objectReference: {fileID: 0}
+    - target: {fileID: 5446298453998633873, guid: a25d5b724a7d3b8409cda94db4fe800e, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1774324311}
     - target: {fileID: 5446298453998633873, guid: a25d5b724a7d3b8409cda94db4fe800e, type: 3}
       propertyPath: m_ActionEvents.Array.data[16].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2679,6 +2692,14 @@ PrefabInstance:
       value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: 4619514644766663045, guid: 028e471716448c54fb2681a3edfd3dd3, type: 3}
+      propertyPath: attackRange
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4619514644766663045, guid: 028e471716448c54fb2681a3edfd3dd3, type: 3}
+      propertyPath: KnockDownTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4619514644766663045, guid: 028e471716448c54fb2681a3edfd3dd3, type: 3}
       propertyPath: walkPointRange
       value: 100
       objectReference: {fileID: 0}
@@ -2712,7 +2733,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4682983248121609728, guid: 028e471716448c54fb2681a3edfd3dd3, type: 3}
       propertyPath: m_BaseOffset
-      value: 2.12
+      value: 10.06
       objectReference: {fileID: 0}
     - target: {fileID: 4682983248121609728, guid: 028e471716448c54fb2681a3edfd3dd3, type: 3}
       propertyPath: m_AutoBraking
@@ -2724,7 +2745,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4682983248121609728, guid: 028e471716448c54fb2681a3edfd3dd3, type: 3}
       propertyPath: m_AngularSpeed
-      value: 150
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6225849041608318124, guid: 028e471716448c54fb2681a3edfd3dd3, type: 3}
       propertyPath: m_Enabled
