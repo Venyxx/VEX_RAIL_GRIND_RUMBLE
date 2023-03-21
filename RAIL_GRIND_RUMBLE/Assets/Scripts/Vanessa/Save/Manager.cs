@@ -6,9 +6,9 @@ public class Manager : MonoBehaviour
 {
     public static Manager Instance {set; get;}
 
-    public Material wallMaterial;
-    public GameObject[] roomThemeGameObjects = new GameObject[8];
-    public Material[] roomWallPapers = new Material[8];
+    //public Material wallMaterial;
+    //public GameObject[] roomThemeGameObjects = new GameObject[8];
+    //public Material[] roomWallPapers = new Material[8];
 
     public Material ariMaterial;
     public GameObject ariGraffitiSlotUp1;
@@ -17,8 +17,8 @@ public class Manager : MonoBehaviour
     public GameObject ariGraffitiSlotLeft4;
 
     public GameObject[] ariGraffitiOptions = new GameObject[8];
-    public GameObject[] ariHairOptions = new GameObject[8];
-    public Material[] ariMaterialOptions = new Material[8];
+    public GameObject[] ariHairOptions = new GameObject[3];
+    public Material[] ariMaterialOptions = new Material[3];
 
 
     private void Awake ()
@@ -29,7 +29,7 @@ public class Manager : MonoBehaviour
     }
 
     public int currentLevel = 0;
-    public int menuFocus = 0;
+    //public int menuFocus = 0;
 
 
 

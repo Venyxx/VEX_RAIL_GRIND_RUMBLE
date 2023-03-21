@@ -36,11 +36,6 @@ public class HairVendor : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
      private void InitShop ()
     {
@@ -72,7 +67,16 @@ public class HairVendor : MonoBehaviour
 
         
         //change hair material
-
+        if (activeHairIndex == 0)
+        {
+            Debug.Log("on hair 0");
+        }else if (activeHairIndex == 1)
+        {
+            Debug.Log("on hair 1");
+        }else if (activeHairIndex == 2)
+        {
+            Debug.Log("on hair 2");
+        }
 
         //change buy set text
         hairBuySetText.text = "Current hair!";

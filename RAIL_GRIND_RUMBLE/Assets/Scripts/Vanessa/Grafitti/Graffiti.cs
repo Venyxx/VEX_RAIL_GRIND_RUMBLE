@@ -41,7 +41,7 @@ public class Graffiti : MonoBehaviour
         graffitiParticle2 = Resources.Load("Particle_2") as GameObject;
 
          canLocationForParticle = GameObject.FindGameObjectWithTag("PlayerCan");
-         Debug.Log(" tried to load " + graffitiParticle);
+         //Debug.Log(" tried to load " + graffitiParticle);
         
     }
 

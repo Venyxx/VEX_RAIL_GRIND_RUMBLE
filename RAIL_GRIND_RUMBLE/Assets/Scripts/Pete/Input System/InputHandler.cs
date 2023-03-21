@@ -206,6 +206,15 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""9483b822-e0e3-4a0a-82e1-bcc52d77b365"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -681,6 +690,28 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                     ""action"": ""MouseScrollY"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9a5985df-dfc0-45af-9868-b775504fdfe6"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4e3f9bef-5caa-4b32-b054-a7a0c1965c10"",
+                    ""path"": ""<Keyboard>/#(E)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -879,6 +910,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
         m_Player_DialogueInput = m_Player.FindAction("DialogueInput", throwIfNotFound: true);
         m_Player_NoAimGrapple = m_Player.FindAction("NoAimGrapple", throwIfNotFound: true);
         m_Player_MouseScrollY = m_Player.FindAction("MouseScrollY", throwIfNotFound: true);
+        m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         // Menus
         m_Menus = asset.FindActionMap("Menus", throwIfNotFound: true);
         m_Menus_InfoTabNext = m_Menus.FindAction("InfoTabNext", throwIfNotFound: true);
@@ -967,6 +999,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_DialogueInput;
     private readonly InputAction m_Player_NoAimGrapple;
     private readonly InputAction m_Player_MouseScrollY;
+    private readonly InputAction m_Player_Interact;
     public struct PlayerActions
     {
         private @InputHandler m_Wrapper;
@@ -991,6 +1024,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
         public InputAction @DialogueInput => m_Wrapper.m_Player_DialogueInput;
         public InputAction @NoAimGrapple => m_Wrapper.m_Player_NoAimGrapple;
         public InputAction @MouseScrollY => m_Wrapper.m_Player_MouseScrollY;
+        public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1060,6 +1094,9 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 @MouseScrollY.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouseScrollY;
                 @MouseScrollY.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouseScrollY;
                 @MouseScrollY.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouseScrollY;
+                @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1124,6 +1161,9 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 @MouseScrollY.started += instance.OnMouseScrollY;
                 @MouseScrollY.performed += instance.OnMouseScrollY;
                 @MouseScrollY.canceled += instance.OnMouseScrollY;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
             }
         }
     }
@@ -1231,6 +1271,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
         void OnDialogueInput(InputAction.CallbackContext context);
         void OnNoAimGrapple(InputAction.CallbackContext context);
         void OnMouseScrollY(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
     public interface IMenusActions
     {

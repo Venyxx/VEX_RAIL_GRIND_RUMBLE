@@ -553,6 +553,7 @@ GameObject:
   - component: {fileID: 2030071779453111308}
   - component: {fileID: 2030071779453111309}
   - component: {fileID: 2030071779453111325}
+  - component: {fileID: 7833215216922784152}
   m_Layer: 7
   m_Name: playerPrefab
   m_TagString: Player
@@ -1284,6 +1285,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 87d087a2-176c-42d6-8a32-b9e3ed8a2fdf
     m_ActionName: Menus/MissionsTabPrevious
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9483b822-e0e3-4a0a-82e1-bcc52d77b365
+    m_ActionName: Player/Interact[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -1572,6 +1577,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7833215216922784152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030071780202691818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a5bdaa7dedf40544a2d06826fe29418, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2030071780611383564
 GameObject:
   m_ObjectHideFlags: 0

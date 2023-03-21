@@ -62,7 +62,7 @@ public class VendorInteraction : MonoBehaviour
         
 
         //pos camera on focus menu 
-        SetCameraTo(Manager.Instance.menuFocus);
+        //SetCameraTo(Manager.Instance.menuFocus);
 
         ///current money
         UpdateMoneyText();
