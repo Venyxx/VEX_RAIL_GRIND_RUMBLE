@@ -20,6 +20,8 @@ public class FontManager : MonoBehaviour
     public TMP_FontAsset openDyslexicFont;
     [SerializeField] private Toggle DyslexiaTog = null;
 
+    public static bool dyslexiaMode = false;
+
 
 
 
@@ -56,7 +58,14 @@ public class FontManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-     
+        if (dyslexiaMode == true)
+        {
+            DyslexiaTog.GetComponent<Toggle>().isOn = true;
+        }
+        else
+        {
+            DyslexiaTog.GetComponent<Toggle>().isOn = false;
+        }
     }
 
     public void DylexiaToggle()
@@ -64,10 +73,12 @@ public class FontManager : MonoBehaviour
         if (DyslexiaTog.GetComponent<Toggle>().isOn == false)
         {
             DeactivateDyslexiaFriendlyFont();
+            dyslexiaMode = false;
         }
         else
         {
             ActivateDyslexiaFriendlyFont();
+            dyslexiaMode = true;
         }
     }
 
