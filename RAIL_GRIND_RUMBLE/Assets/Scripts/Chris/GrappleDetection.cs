@@ -10,7 +10,7 @@ public class GrappleDetection : MonoBehaviour
     private Camera mainCamREF;
     public Transform currentAim;
     public List<Transform> aimPoints;
-    [SerializeField]private int aimPointCount;
+    [SerializeField]public int aimPointCount;
     [SerializeField]private int aimPointChoice;
     private Transform aimLookAtREF;
     private Transform nextAim;
@@ -212,7 +212,7 @@ public class GrappleDetection : MonoBehaviour
     {
         /*if (collision.gameObject.tag == "AimPoint")
         use COMPARETAG instead of == string comparison*/
-        if(collision.gameObject.CompareTag("AimPoint"))
+        if(collision.gameObject.CompareTag("AimPoint") || collision.gameObject.CompareTag("DP1Plug"))
         {
             if (!aimPoints.Exists(element => element == (collision.gameObject.transform)))
             {
@@ -264,7 +264,7 @@ public class GrappleDetection : MonoBehaviour
         }
 
 
-        if (collision.gameObject.CompareTag("AimPoint"))
+        if (collision.gameObject.CompareTag("AimPoint") || collision.gameObject.CompareTag("DP1Plug"))
         {
             if (aimPoints.Contains(collision.gameObject.transform))
             {

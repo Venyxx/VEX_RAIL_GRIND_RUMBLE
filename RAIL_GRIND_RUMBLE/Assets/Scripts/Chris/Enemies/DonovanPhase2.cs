@@ -17,6 +17,9 @@ public class DonovanPhase2 : MonoBehaviour, IDamageable
     float currentHealth;
     SphereCollider playerArea;
     BoxCollider hitArea;
+    [SerializeField]GameObject damageText;
+    private AudioClip[] hitSounds;
+    private AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +27,8 @@ public class DonovanPhase2 : MonoBehaviour, IDamageable
         phase = 1;
         aoeRunning = false;
         currentHealth = maxHealth;
+        audioSource = GetComponent<AudioSource>();
+        hitSounds = Resources.LoadAll<AudioClip>("Sounds/DamageSounds");
         //playerArea = GetComponent<SphereCollider>();
         //hitArea = GetComponent<BoxCollider>();
         //playerArea.enabled = true;
@@ -104,7 +109,9 @@ public class DonovanPhase2 : MonoBehaviour, IDamageable
             GameObject playerPrefab = GameObject.Find("playerPrefab");
 
             //Work on this
-            playerPrefab.GetComponent<Rigidbody>().AddForce((playerPrefab.transform.position - this.transform.position) * 700,  ForceMode.Acceleration);
+            //playerPrefab.GetComponent<Rigidbody>().AddForce(playerPrefab.transform.up * 55, ForceMode.Impulse);
+            playerPrefab.GetComponent<Rigidbody>().AddForce((playerPrefab.transform.position - this.transform.position) * 150,  ForceMode.Acceleration);
+            playerPrefab.GetComponent<PlayerHealth>().IsDizzy(true);
         }
         aoeRunning = false;
         /*yield return new WaitForSeconds(1f);
@@ -117,11 +124,23 @@ public class DonovanPhase2 : MonoBehaviour, IDamageable
     {
         //Add variables for maxHealth and currentHealth
         currentHealth -= damage;
+
+        //Damage Numbers
+        DamageIndicatior indicator = Instantiate (damageText, transform.position, Quaternion.identity).GetComponent<DamageIndicatior>();
+        indicator.SetDamageText(damage);
+
+        //Damage Sounds
+        int rand = Random.Range(0, hitSounds.Length);
+        if (!audioSource.isPlaying)
+        {
+            audioSource.PlayOneShot(hitSounds[rand]);
+        }
+
         Debug.Log("Donovan Health: "+currentHealth);
-        if (currentHealth <= 250 && phase == 1)
+        /*if (currentHealth <= 250 && phase == 1)
         {
             phase++;
-        }
+        }*/
 
         if (currentHealth <= 0)
         {

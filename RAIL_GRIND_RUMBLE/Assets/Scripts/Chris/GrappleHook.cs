@@ -15,7 +15,7 @@ public class GrappleHook : MonoBehaviour
     private GameObject playerREF;
     private Transform camTransform;
     private Camera cam;
-    private GameObject grappleDetectorREF;
+    private GrappleDetection grappleDetector;
     private InputHandler playerActions;
     private ThirdPersonMovement _thirdPersonMovement;
     
@@ -100,7 +100,8 @@ public class GrappleHook : MonoBehaviour
         player = playerREF.gameObject.GetComponent<Transform>();
         rigidBody = playerREF.gameObject.GetComponent<Rigidbody>();
         line = playerREF.gameObject.GetComponent<LineRenderer>();
-        grappleDetectorREF = GameObject.Find("GrappleDetector");
+        //GameObject grappleDetectorREF = GameObject.Find("GrappleDetector");
+        grappleDetector = this.transform.Find("GrappleDetector").GetComponent<GrappleDetection>(); 
         _thirdPersonMovement = FindObjectOfType<ThirdPersonMovement>();
         audioSource = GetComponent<AudioSource>();
         
@@ -187,10 +188,10 @@ public class GrappleHook : MonoBehaviour
     {
         if (context.started && playerREF.GetComponent<ThirdPersonMovement>().isWalking == false)
         {
-            if (!GameObject.Find("AimingCam") && grappleDetectorREF.GetComponent<GrappleDetection>().aimPoints.Count > 0 && isGrappling == false && grappleStored == true)
+            if (!GameObject.Find("AimingCam") && grappleDetector.aimPoints.Count > 0 && isGrappling == false && grappleStored == true)
             {
                 //Need to fix ability to account for pickups/pulling to player
-                CheckObjectType(grappleDetectorREF.GetComponent<GrappleDetection>().currentAim);
+                CheckObjectType(grappleDetector.currentAim);
                 StartSwing();
                 StartCoroutine(ZipRunning());
             }
@@ -223,7 +224,7 @@ public class GrappleHook : MonoBehaviour
         //     return;
         // }
 
-        if (grappleDetectorREF.GetComponent<GrappleDetection>().currentAim.gameObject.layer == LayerMask.NameToLayer("Enemy")) return;
+        if (grappleDetector.currentAim.gameObject.layer == LayerMask.NameToLayer("Enemy")) return;
 
         //Check if holding object
         if (GetComponent<ThrowObject>().isHoldingObject == true) return;
@@ -248,7 +249,7 @@ public class GrappleHook : MonoBehaviour
         isGrappling = true;
 
             //swingPoint = predictionHit.point;
-            swingPoint = grappleDetectorREF.GetComponent<GrappleDetection>().currentAim.transform.position;
+            swingPoint = grappleDetector.currentAim.transform.position;
             joint = player.gameObject.AddComponent<SpringJoint>();
             joint.autoConfigureConnectedAnchor = false;
             joint.connectedAnchor = swingPoint;
@@ -269,12 +270,19 @@ public class GrappleHook : MonoBehaviour
 
             //Arm Rig
             ik.enabled = true;
-            leftArmGrappleREF.GetComponent<TwoBoneIKConstraint>().data.target = grappleDetectorREF.GetComponent<GrappleDetection>().currentAim;
+            leftArmGrappleREF.GetComponent<TwoBoneIKConstraint>().data.target = grappleDetector.currentAim;
 
             playerREF.gameObject.GetComponent<ThirdPersonMovement>().isGrappling = true;
+
+        //Check for plug in Phase 1 of Donovan Fight
+        if (grappleDetector.currentAim.gameObject.tag == "DP1Plug")
+        {
+            Phase1Plug plug = grappleDetector.currentAim.GetComponent<Phase1Plug>();
+            plug.StartCoroutine(plug.Grappled());
+        }
     }
 
-    void StopSwing()
+    public void StopSwing()
     {
         //Arm Rig
         ik.enabled = false;
@@ -448,8 +456,8 @@ public class GrappleHook : MonoBehaviour
             {
                 extendingCable = true;
                 shorteningCable = false;
-            } else if (grappleDetectorREF.GetComponent<GrappleDetection>().aimPoints.Count > 0){
-                CheckObjectType(grappleDetectorREF.GetComponent<GrappleDetection>().currentAim);
+            } else if (grappleDetector.aimPoints.Count > 0){
+                CheckObjectType(grappleDetector.currentAim);
                 //reticleREF.SetActive(true);
             }
         }
@@ -563,7 +571,7 @@ public class GrappleHook : MonoBehaviour
             }
             
             pullingObject = false;
-            grappleDetectorREF.gameObject.GetComponent<GrappleDetection>().RemovePoint(collision.transform);
+            grappleDetector.RemovePoint(collision.transform);
             StopSwing();
 
             //Check for held object type
