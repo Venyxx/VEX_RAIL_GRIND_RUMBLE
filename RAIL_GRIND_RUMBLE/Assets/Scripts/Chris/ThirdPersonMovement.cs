@@ -46,6 +46,8 @@ public class ThirdPersonMovement : MonoBehaviour
     //Grapple Check
     public bool isGrappling;
     public float swingSpeed;
+    GrappleHook grappleREF;
+    PlayerAttack playerAttackREF;
 
     private Transform orientation;
 
@@ -155,7 +157,9 @@ public class ThirdPersonMovement : MonoBehaviour
         ariRig = transform.Find("AriRig").gameObject;
         playerLeftColREF = ariRig.gameObject.transform.Find("LeftCollider").gameObject.GetComponent<PlayerRailLeftCollider>();
         playerRightColREF = ariRig.gameObject.transform.Find("RightCollider").gameObject.GetComponent<PlayerRailRightCollider>();
-
+        grappleREF = gameObject.GetComponent<GrappleHook>();
+        playerAttackREF = gameObject.GetComponent<PlayerAttack>();
+        healthRef = gameObject.GetComponent<PlayerHealth>();
 
         playerActions = new InputHandler();
         playerActions.Player.Enable();
@@ -783,6 +787,30 @@ public class ThirdPersonMovement : MonoBehaviour
         dialogueManager.freezePlayer = false;
         healthRef.IsDizzy(false);
         StopCoroutine(Stun());
+    }
+
+    public void RecalculateStats ()
+    {
+        healthRef = gameObject.GetComponent<PlayerHealth>();
+        if (SaveManager.Instance.state.activeAriSkate == 0 || SaveManager.Instance.state.activeAriSkate == 2 )
+        {
+            healthRef.maxHealth = 200; // base current stat says 100
+            maxSkateSpeed = 30; //current stat is 15
+            //suppose to be decrease charge time 
+            Debug.Log("updating stats to shell 0, health 200, max speed 30");
+
+        } else if (SaveManager.Instance.state.activeAriSkate == 1 || SaveManager.Instance.state.activeAriSkate == 4 )
+        {
+            playerAttackREF.skateBuffDamage = 2;
+            healthRef.maxHealth = 250;
+            Debug.Log("updating stats to shell 1, damage buff 2, max health 250");
+
+        } else if (SaveManager.Instance.state.activeAriSkate == 3 || SaveManager.Instance.state.activeAriSkate == 5 )
+        {
+            maxSkateSpeed = 40;
+            healthRef.maxHealth = 300f;
+            Debug.Log("updating stats to shell 2, max speed 40, health 300");
+        }
     }
 
 }

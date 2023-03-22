@@ -21,6 +21,7 @@ public class PlayerAttack : MonoBehaviour
     bool TimerOn;
     public GrappleHook grappleREF;
     private WallRun wallRunREF;
+    public int skateBuffDamage;
 
     
     public GameObject spinEffect;
@@ -74,7 +75,7 @@ public class PlayerAttack : MonoBehaviour
             TimerOn = false;
            // IsHeavyAttacking = false;
             HeavyAtkTimer = 0;
-            Damage = 50;
+            Damage = 50 + skateBuffDamage;
         
         }
         if (!IsAttacking && atkCount == 0)
@@ -241,7 +242,7 @@ public class PlayerAttack : MonoBehaviour
                 HeavyAtkTimer = 0;
                 spinEffect.SetActive(true);
 
-                Damage = 35;
+                Damage = 35  + skateBuffDamage;
                
                 
             }
@@ -253,7 +254,7 @@ public class PlayerAttack : MonoBehaviour
                 //   IsHeavyAttacking = false;
                 HeavyAtkTimer = 0;
 
-                Damage = 30;
+                Damage = 30  + skateBuffDamage;
                 
             }
             if (HeavyAtkTimer >= 2)
@@ -264,7 +265,7 @@ public class PlayerAttack : MonoBehaviour
                 HeavyAtkTimer = 0;
                 spinEffect.SetActive(true);
 
-                Damage = 100;
+                Damage = 100  + skateBuffDamage;
                 
             }
 

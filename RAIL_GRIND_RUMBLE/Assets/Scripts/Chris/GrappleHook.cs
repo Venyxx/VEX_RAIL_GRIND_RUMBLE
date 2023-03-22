@@ -55,7 +55,7 @@ public class GrappleHook : MonoBehaviour
     private bool cooldownRunning;
     private bool canShoot;
     public bool grappleStored;
-    private int maxSwings = 3;
+    public int maxSwings = 3;
     private int swingCount = 0;
 
     //Aim Prediction

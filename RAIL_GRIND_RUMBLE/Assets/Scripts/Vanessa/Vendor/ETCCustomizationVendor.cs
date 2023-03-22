@@ -18,6 +18,7 @@ public class ETCCustomizationVendor : MonoBehaviour
     public Transform bottomPanel;
     public Transform sockPanel;
     public Transform skatePanel;
+    private ThirdPersonMovement thirdPersonMovementREF;
 
     //public Transform questPanel;
     public RectTransform menuContainer;
@@ -63,8 +64,9 @@ public class ETCCustomizationVendor : MonoBehaviour
     {
  
         Time.timeScale = 1f;
-        
-        
+        if (GameObject.Find("playerPrefab"))
+            thirdPersonMovementREF = GameObject.Find("playerPrefab").GetComponent<ThirdPersonMovement>();
+
         //temp starting money
         
 
@@ -277,7 +279,10 @@ public class ETCCustomizationVendor : MonoBehaviour
         skateBuySetText.text = "Current Skate!";
          Debug.Log("ran set skate");
 
+        thirdPersonMovementREF.RecalculateStats();
         SaveManager.Instance.Save();
+
+        
     }
 
 
@@ -403,7 +408,7 @@ public class ETCCustomizationVendor : MonoBehaviour
              //is it alr current?
             if (activeBottomIndex == currentIndex)
             {
-                bottomBuySetText.text = "Current Theme!";
+                bottomBuySetText.text = "Current Bottom!";
             }else 
             {
                 bottomBuySetText.text = "Select";

@@ -1,7 +1,7 @@
 using UnityEngine;
 public class SaveState 
 {
-    public float Money = 100;
+    public float Money = 9999;
     public int MaxLevel = 0;
     public int ariMaterialOwned = 0;
     public int ariGraffitiOwned = 0;
@@ -30,15 +30,15 @@ public class SaveState
     
     //public int activeSkate = 0;
 
-    public int Health = 100;
-    public int Armor = 100;
-    public int TopSpeed = 40;
+   // public int Health = 100;
+    //public int Armor = 100;
+    //public int TopSpeed = 40;
     
-    public int LightAttackIncrease = 0;
-    public int HeavyAttackIncrease = 0;
+    //public int LightAttackIncrease = 0;
+    //public int HeavyAttackIncrease = 0;
 
-    public int GrappleChargesTimePlusMinus = -5;
-    public int GrappleCharges = 3;
+    //public int GrappleChargesTimePlusMinus = -5;
+    //public int GrappleCharges = 3;
 
 
     public int completedLevel = 0;

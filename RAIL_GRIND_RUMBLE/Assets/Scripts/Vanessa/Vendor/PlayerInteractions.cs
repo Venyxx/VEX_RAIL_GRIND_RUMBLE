@@ -14,16 +14,26 @@ public class PlayerInteractions : MonoBehaviour
     private GameObject previewCamera;
     private bool inRange;
     public ThirdPersonMovement movementScriptREF;
+    private GameObject previewCamItself;
 
     private void Start ()
     {
          movementScriptREF = GetComponent<ThirdPersonMovement>();
-         canvas = GameObject.FindGameObjectWithTag("VendorCanvas");
+         
+         
+        previewCamera = GameObject.Find("CharacterPreviewBackgr");
+         if (previewCamera)
+            previewCamera.SetActive(false);
+
+        previewCamItself = GameObject.Find ("CharacterPreviewCamera");
+          if (previewCamItself)
+            previewCamItself.SetActive(false);
          prompt = GameObject.Find("PromptController");
-         previewCamera = GameObject.Find("CharacterPreviewCamera");
-         previewCamera.SetActive(false);
-         prompt.SetActive(false);
-         canvas.SetActive (false);
+         if (prompt)
+            prompt.SetActive(false);
+        canvas = GameObject.FindGameObjectWithTag("VendorCanvas");
+        if (canvas)
+            canvas.SetActive(false);
          
     }
     // Start is called before the first frame update
@@ -50,14 +60,28 @@ public class PlayerInteractions : MonoBehaviour
     private void Update ()
     {
         // i just need it to work rn
+        if (canvas == null)
+        {
+            if (previewCamera)
+                previewCamera.SetActive(false);
 
-        if (Input.GetKeyDown(KeyCode.E))
+            if (prompt)
+                prompt.SetActive(false);
+            if (previewCamera)
+                previewCamItself.SetActive(false);
+
+            return;
+        }
+            
+
+        if (Input.GetKeyDown(KeyCode.E) &&inRange)
         {
             canvas.SetActive(true);
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
                 movementScriptREF.dialogueManager.freezePlayer = true;
                 prompt.SetActive(false);
+                previewCamItself.SetActive(true);
         }
 
         if (canvas.activeInHierarchy == false && inRange)
@@ -65,7 +89,7 @@ public class PlayerInteractions : MonoBehaviour
         else  
             prompt.SetActive(false);
 
-        if (canvas)
+        if (canvas.activeInHierarchy)
             previewCamera.SetActive(true);
         else
             previewCamera.SetActive(false);

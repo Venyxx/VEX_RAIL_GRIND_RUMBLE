@@ -11,7 +11,7 @@ public class AutomaticDialogueTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Collision Detected");
+        //Debug.Log("Collision Detected");
         if (other.CompareTag("Player") && (!oneTimeUse || !used) )
         {
             var dialogueManager = FindObjectOfType<DialogueManager>();

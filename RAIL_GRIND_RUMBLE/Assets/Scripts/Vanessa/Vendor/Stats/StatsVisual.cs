@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
-public class HealthBarControllerV2 : MonoBehaviour
+public class StatsVisual : MonoBehaviour
 {
     public Image _bar;
     public RectTransform button;
@@ -25,8 +24,7 @@ public class HealthBarControllerV2 : MonoBehaviour
 
     void HealthChange(float healthValue)
     {
-        float amount = (healthValue/playerhealth.maxHealth) * .4f + .6f;
-        //Debug.Log(playerhealth.currentHealth);
+        float amount = (healthValue/100.0f) * .4f + .6f;
         _bar.fillAmount = amount;
         //float buttonAngle = amount * 360;
         //button.localEulerAngles = new Vector3(0, 0, -buttonAngle);

@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour, IDamageable
 {
-    public float maxHealth = 3;
+    public float maxHealth;
     public float currentHealth;
     private ThirdPersonMovement thirdPersonMovementREF;
     public bool Dizzy;
@@ -16,8 +16,11 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     // Start is called before the first frame update
     void Start()
     {
-        currentHealth = maxHealth;
+        
+        
         thirdPersonMovementREF = GetComponent<ThirdPersonMovement>();
+        thirdPersonMovementREF.RecalculateStats();
+        currentHealth = maxHealth;
 
     }
 
@@ -25,7 +28,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     {
         if (debugKill || outOfBounds)
         {
-            TakeDamage(100);
+            TakeDamage(maxHealth);
         }
     }
     
