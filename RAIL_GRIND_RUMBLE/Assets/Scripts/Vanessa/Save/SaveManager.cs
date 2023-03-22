@@ -60,7 +60,33 @@ public class SaveManager : MonoBehaviour
         return (state.ariHairOwned & (1 << index)) != 0;
     }
 
+    public bool IsAriAccessoryOwned(int index)
+    {
+        //check if bit is set, if yes its owned
+        return (state.ariAccessoryOwned & (1 << index)) != 0;
+    }
+    public bool IsAriTopOwned(int index)
+    {
+        //check if bit is set, if yes its owned
+        return (state.ariTopOwned & (1 << index)) != 0;
+    }
 
+    public bool IsAriBottomOwned(int index)
+    {
+        //check if bit is set, if yes its owned
+        return (state.ariBottomOwned & (1 << index)) != 0;
+    }
+
+    public bool IsAriSockOwned(int index)
+    {
+        //check if bit is set, if yes its owned
+        return (state.ariSockOwned & (1 << index)) != 0;
+    }
+    public bool IsAriSkateOwned(int index)
+    {
+        //check if bit is set, if yes its owned
+        return (state.ariSkateOwned & (1 << index)) != 0;
+    }
 
 
 
@@ -124,6 +150,99 @@ public class SaveManager : MonoBehaviour
             return false;
         }
     }
+     public bool BuyAriAccessory( int index, int cost)
+    {
+        if (state.Money >= cost)
+        {
+            //enough cash
+            state.Money  -= cost;
+            UnlockAriAccessory(index);
+
+            //save
+            Save();
+            return true;
+        }
+        else 
+        {
+            //broke 
+            return false;
+        }
+    }
+
+     public bool BuyAriTop( int index, int cost)
+    {
+        if (state.Money >= cost)
+        {
+            //enough cash
+            state.Money  -= cost;
+            UnlockAriTop(index);
+
+            //save
+            Save();
+            return true;
+        }
+        else 
+        {
+            //broke 
+            return false;
+        }
+    }
+
+     public bool BuyAriBottom( int index, int cost)
+    {
+        if (state.Money >= cost)
+        {
+            //enough cash
+            state.Money  -= cost;
+            UnlockAriBottom(index);
+
+            //save
+            Save();
+            return true;
+        }
+        else 
+        {
+            //broke 
+            return false;
+        }
+    }
+
+     public bool BuyAriSock( int index, int cost)
+    {
+        if (state.Money >= cost)
+        {
+            //enough cash
+            state.Money  -= cost;
+            UnlockAriSock(index);
+
+            //save
+            Save();
+            return true;
+        }
+        else 
+        {
+            //broke 
+            return false;
+        }
+    }
+     public bool BuyAriSkate( int index, int cost)
+    {
+        if (state.Money >= cost)
+        {
+            //enough cash
+            state.Money  -= cost;
+            UnlockAriSkate(index);
+
+            //save
+            Save();
+            return true;
+        }
+        else 
+        {
+            //broke 
+            return false;
+        }
+    }
 
 
 
@@ -146,8 +265,30 @@ public class SaveManager : MonoBehaviour
         state.ariHairOwned |= 1 << index;
     }
 
+    public void UnlockAriAccessory (int index)
+    {
+        state.ariAccessoryOwned |= 1 << index;
+    }
 
+    public void UnlockAriTop (int index)
+    {
+        state.ariTopOwned |= 1 << index;
+    }
 
+    public void UnlockAriBottom (int index)
+    {
+        state.ariBottomOwned |= 1 << index;
+    }
+
+    public void UnlockAriSock (int index)
+    {
+        state.ariSockOwned |= 1 << index;
+    }
+
+    public void UnlockAriSkate (int index)
+    {
+        state.ariSkateOwned |= 1 << index;
+    }
 
 
 

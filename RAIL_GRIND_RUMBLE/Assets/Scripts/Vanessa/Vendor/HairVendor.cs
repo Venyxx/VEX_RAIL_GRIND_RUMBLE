@@ -163,9 +163,6 @@ public class HairVendor : MonoBehaviour
         }
     }
 
-    public void CloseMenu ()
-    {
-        gameObject.transform.parent.parent.gameObject.SetActive(false);
-    }
+    
 
 }

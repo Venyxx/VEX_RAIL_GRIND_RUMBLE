@@ -11,6 +11,7 @@ public class PlayerInteractions : MonoBehaviour
     private float currentHoldXTime;
     private bool isTimer;
     private GameObject prompt;
+    private GameObject previewCamera;
     private bool inRange;
     public ThirdPersonMovement movementScriptREF;
 
@@ -19,6 +20,8 @@ public class PlayerInteractions : MonoBehaviour
          movementScriptREF = GetComponent<ThirdPersonMovement>();
          canvas = GameObject.FindGameObjectWithTag("VendorCanvas");
          prompt = GameObject.Find("PromptController");
+         previewCamera = GameObject.Find("CharacterPreviewCamera");
+         previewCamera.SetActive(false);
          prompt.SetActive(false);
          canvas.SetActive (false);
          
@@ -62,7 +65,10 @@ public class PlayerInteractions : MonoBehaviour
         else  
             prompt.SetActive(false);
 
-
+        if (canvas)
+            previewCamera.SetActive(true);
+        else
+            previewCamera.SetActive(false);
 
 
 

@@ -6,18 +6,29 @@ public class SaveState
     public int ariMaterialOwned = 0;
     public int ariGraffitiOwned = 0;
     public int ariHairOwned = 0;
+    public int ariAccessoryOwned = 0;
+    public int ariTopOwned = 0;
+    public int ariBottomOwned = 0;
+    public int ariSockOwned = 0;
+    public int ariSkateOwned = 0;
 
     public Vector3 playerLocation = new Vector3 (0,0,0);
 
     public int activeAriMaterial = 0;
     public int activeAriHair = 0;
+    public int activeAriAccessory = 0;
+    public int activeAriTop = 0;
+    public int activeAriBottom = 0;
+    public int activeAriSock = 0;
+    public int activeAriSkate = 0;
+
     public int ariGraffitiSlotUp1 = 0;
     public int ariGraffitiSlotRight2 = 1;
     public int ariGraffitiSlotDown3 = 2;
     public int ariGraffitiSlotLeft4 = 3;
 
     
-    public int activeSkate = 0;
+    //public int activeSkate = 0;
 
     public int Health = 100;
     public int Armor = 100;
