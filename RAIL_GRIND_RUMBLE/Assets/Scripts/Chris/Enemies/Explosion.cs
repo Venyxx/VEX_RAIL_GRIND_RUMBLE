@@ -25,9 +25,10 @@ public class Explosion : MonoBehaviour
             if (other.gameObject.layer == LayerMask.NameToLayer("player"))
             {
                 damageable.TakeDamage(Damage);
-            } else if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+            } else if (other.gameObject.layer == LayerMask.NameToLayer("Enemy") && other.gameObject.tag == "Enemy")
             {
-                damageable.TakeDamage(Damage * 10);
+            
+                   // damageable.TakeDamage(Damage * 10);
             }
             if (other.gameObject.tag == "Hernandez")
             {

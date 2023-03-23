@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class MechBossMovement : MonoBehaviour
+public class MechBossMovement : MonoBehaviour , IDamageable
 {
     public NavMeshAgent agent;
     public Animator Animator;
@@ -47,7 +47,7 @@ public class MechBossMovement : MonoBehaviour
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
-        if (!playerInSightRange && !playerInAttackRange && !Dizzy)
+        if (!playerInSightRange && !playerInAttackRange && !Dizzy && !MechUp)
         { Patroling();
             transform.LookAt(player);
         }
@@ -134,10 +134,15 @@ public class MechBossMovement : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        Health -= damage;
+        
+        if (Dizzy)
+        {
+            Debug.Log("MechHitfor" + (damage));
+            Health -= damage;
+        }
         if (Health <= 0)
         {
-            Destroy(gameObject);
+          //  Destroy(gameObject);
         }
     }
 

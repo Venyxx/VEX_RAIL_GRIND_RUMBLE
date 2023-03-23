@@ -28,7 +28,7 @@ public class RocketExplosion : MonoBehaviour
             }
             else if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
-                damageable.TakeDamage(Damage * 10);
+              //  damageable.TakeDamage(Damage * 10);
             }
           
 
