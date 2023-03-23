@@ -2888,6 +2888,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 178135302}
   m_CullTransparentMesh: 1
+--- !u!1 &184445273 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2805063269127148742, guid: 17c497713ecd2204d888e8d101029aa4, type: 3}
+  m_PrefabInstance: {fileID: 1575328551030225318}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &193978820
 GameObject:
   m_ObjectHideFlags: 0
@@ -12026,50 +12031,14 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[17].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 4728690126147402472}
-    - target: {fileID: 5481111582961387014, guid: a25d5b724a7d3b8409cda94db4fe800e, type: 3}
-      propertyPath: m_TargetTexture
-      value: 
-      objectReference: {fileID: 8400000, guid: d6dedf67b10c1804f93a605273bc3de7, type: 2}
-    - target: {fileID: 5481111582961387014, guid: a25d5b724a7d3b8409cda94db4fe800e, type: 3}
-      propertyPath: m_BackGroundColor.a
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5481111582961387014, guid: a25d5b724a7d3b8409cda94db4fe800e, type: 3}
-      propertyPath: m_BackGroundColor.b
-      value: 0.3055042
-      objectReference: {fileID: 0}
-    - target: {fileID: 5481111582961387014, guid: a25d5b724a7d3b8409cda94db4fe800e, type: 3}
-      propertyPath: m_BackGroundColor.g
-      value: 0.26256678
-      objectReference: {fileID: 0}
-    - target: {fileID: 5481111582961387014, guid: a25d5b724a7d3b8409cda94db4fe800e, type: 3}
-      propertyPath: m_BackGroundColor.r
-      value: 0.31132078
-      objectReference: {fileID: 0}
-    - target: {fileID: 5481111582961387014, guid: a25d5b724a7d3b8409cda94db4fe800e, type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 128
-      objectReference: {fileID: 0}
-    - target: {fileID: 5481111582961387014, guid: a25d5b724a7d3b8409cda94db4fe800e, type: 3}
-      propertyPath: m_NormalizedViewPortRect.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5481111582961387014, guid: a25d5b724a7d3b8409cda94db4fe800e, type: 3}
-      propertyPath: m_NormalizedViewPortRect.width
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5481111582961387014, guid: a25d5b724a7d3b8409cda94db4fe800e, type: 3}
-      propertyPath: m_NormalizedViewPortRect.height
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6454848923823756967, guid: a25d5b724a7d3b8409cda94db4fe800e, type: 3}
-      propertyPath: m_AllowXRRendering
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7833215216922784152, guid: a25d5b724a7d3b8409cda94db4fe800e, type: 3}
-      propertyPath: movementScriptREF
+      propertyPath: thingsToHide.Array.data[0]
       value: 
-      objectReference: {fileID: 761245931}
+      objectReference: {fileID: 1925153982}
+    - target: {fileID: 7833215216922784152, guid: a25d5b724a7d3b8409cda94db4fe800e, type: 3}
+      propertyPath: thingsToHide.Array.data[1]
+      value: 
+      objectReference: {fileID: 184445273}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a25d5b724a7d3b8409cda94db4fe800e, type: 3}
 --- !u!114 &761245930 stripped
@@ -12081,17 +12050,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1a5bdaa7dedf40544a2d06826fe29418, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &761245931 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2030071780202691822, guid: a25d5b724a7d3b8409cda94db4fe800e, type: 3}
-  m_PrefabInstance: {fileID: 761245929}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4baa9127ff3afad42848eea9ddffa557, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &776771584
@@ -35183,6 +35141,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1921685701}
   m_CullTransparentMesh: 1
+--- !u!1 &1925153982 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8584714981267433735, guid: 17c497713ecd2204d888e8d101029aa4, type: 3}
+  m_PrefabInstance: {fileID: 1575328551030225318}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1927378044
 GameObject:
   m_ObjectHideFlags: 0

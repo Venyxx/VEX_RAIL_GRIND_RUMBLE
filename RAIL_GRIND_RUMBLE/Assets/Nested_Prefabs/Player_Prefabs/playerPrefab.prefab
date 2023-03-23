@@ -805,6 +805,7 @@ MonoBehaviour:
   isGrappling: 0
   maxSwingDistance: 50
   grappleStored: 0
+  maxSwings: 3
   canPull: 0
   pullableObject: {fileID: 0}
   enemyPullTo: 0
@@ -1431,6 +1432,7 @@ MonoBehaviour:
   atkCount: 0
   movementScriptREF: {fileID: 0}
   grappleREF: {fileID: 2030071780202691821}
+  skateBuffDamage: 0
   spinEffect: {fileID: 3844792512042242024}
   ariRigidbody: {fileID: 2030071780202691823}
   slamSpeed: 900
@@ -1589,7 +1591,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a5bdaa7dedf40544a2d06826fe29418, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementScriptREF: {fileID: 0}
+  movementScriptREF: {fileID: 2030071780202691822}
 --- !u!1 &2030071780611383564
 GameObject:
   m_ObjectHideFlags: 0
@@ -1831,7 +1833,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
+  m_BackGroundColor: {r: 0.31132078, g: 0.26256678, b: 0.3055042, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1852,9 +1854,9 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 128
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
+  m_TargetTexture: {fileID: 8400000, guid: d6dedf67b10c1804f93a605273bc3de7, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1

@@ -15,9 +15,16 @@ public class PlayerInteractions : MonoBehaviour
     private bool inRange;
     public ThirdPersonMovement movementScriptREF;
     private GameObject previewCamItself;
+    public GameObject [] thingsToHide = new GameObject [2];
 
     private void Start ()
     {
+
+        foreach (GameObject g in thingsToHide) 
+        {
+            g.SetActive(true);
+        }
+
          movementScriptREF = GetComponent<ThirdPersonMovement>();
          
          
@@ -77,11 +84,13 @@ public class PlayerInteractions : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) &&inRange)
         {
             canvas.SetActive(true);
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
-                movementScriptREF.dialogueManager.freezePlayer = true;
-                prompt.SetActive(false);
-                previewCamItself.SetActive(true);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            movementScriptREF.dialogueManager.freezePlayer = true;
+            prompt.SetActive(false);
+            previewCamItself.SetActive(true);
+
+
         }
 
         if (canvas.activeInHierarchy == false && inRange)
@@ -90,10 +99,24 @@ public class PlayerInteractions : MonoBehaviour
             prompt.SetActive(false);
 
         if (canvas.activeInHierarchy)
+        {
             previewCamera.SetActive(true);
+            foreach (GameObject g in thingsToHide) 
+            {
+                g.SetActive(false);
+            }
+        }
         else
+        {
             previewCamera.SetActive(false);
+            foreach (GameObject g in thingsToHide) 
+            {
+                g.SetActive(true);
+            }
+            
 
+        }
+            
 
 
 
