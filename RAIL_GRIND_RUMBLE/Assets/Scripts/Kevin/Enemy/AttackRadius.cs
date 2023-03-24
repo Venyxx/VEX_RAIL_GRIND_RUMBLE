@@ -25,13 +25,7 @@ public class AttackRadius : MonoBehaviour
     {
         Collider = GetComponent<SphereCollider>();
     }
-    private void Update()
-    {
-        if ( Damageables.Count > 0 && AttackCoroutine == null)
-        {
-            AttackCoroutine = StartCoroutine(Attack());
-        }
-    }
+  
     protected virtual void OnTriggerEnter(Collider other)
     { 
         IDamageable damageable = other.GetComponent<IDamageable>();
