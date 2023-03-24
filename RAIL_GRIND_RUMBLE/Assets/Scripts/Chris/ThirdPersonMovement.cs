@@ -324,6 +324,12 @@ public class ThirdPersonMovement : MonoBehaviour
         Quaternion ariRigRotation = ariRig.transform.localRotation;
         ariRig.transform.localRotation = new Quaternion(0, ariRigRotation.y, ariRigRotation.z, ariRigRotation.w);
 
+
+        //DEBUG
+        if (Input.GetKeyDown(KeyCode.Keypad9) && GameObject.Find("Phase2Teleport"))
+        {
+            transform.position = GameObject.Find("Phase2Teleport").transform.position;
+        }
     }
 
     

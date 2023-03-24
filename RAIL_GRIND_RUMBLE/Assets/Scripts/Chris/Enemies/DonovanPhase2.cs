@@ -6,13 +6,13 @@ using PathCreation;
 public class DonovanPhase2 : MonoBehaviour, IDamageable
 {
     public PathCreator path1;
-    public PathCreator path2;
-    float speed = 5;
+    [SerializeField]float speed;
     float distanceTravelled;
     GameObject playerREF;
     int phase;
     bool aoeRunning;
     bool playerInRange;
+    bool aoeDelay;
     float maxHealth = 500;
     float currentHealth;
     SphereCollider playerArea;
@@ -29,10 +29,7 @@ public class DonovanPhase2 : MonoBehaviour, IDamageable
         currentHealth = maxHealth;
         audioSource = GetComponent<AudioSource>();
         hitSounds = Resources.LoadAll<AudioClip>("Sounds/DamageSounds");
-        //playerArea = GetComponent<SphereCollider>();
-        //hitArea = GetComponent<BoxCollider>();
-        //playerArea.enabled = true;
-        //hitArea.enabled = false;
+        playerInRange = false;
     }
 
     // Update is called once per frame
@@ -40,30 +37,30 @@ public class DonovanPhase2 : MonoBehaviour, IDamageable
     {
 
         float singleStep = speed * Time.deltaTime;
-
-        //Test path switching
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            if (phase < 2)
-            {
-                phase++;
-            }
-        }
+        float playerDistance = Vector3.Distance(transform.position, playerREF.transform.position);
 
         //Rotate to face player
         Vector3 playerDirection = playerREF.transform.position - transform.position;
         Vector3 newDirection = Vector3.RotateTowards(transform.forward, playerDirection, singleStep, 0f);
 
-        if (aoeRunning == false)
+        if (playerDistance < 6)
         {
-            distanceTravelled += speed * Time.deltaTime;
-            if (phase == 1)
-            {
-                transform.position = path1.path.GetPointAtDistance(distanceTravelled);
-            } else if (phase == 2)
-            {
-                transform.position = path2.path.GetPointAtDistance(distanceTravelled);
-            }
+            playerInRange = true;
+        } else {
+            playerInRange = false;
+        }
+
+
+        //Activate AOE
+        if (!aoeRunning && playerInRange)
+        {
+            StartCoroutine(AOE());
+        }
+
+        if (!aoeDelay && playerDistance < 30)
+        {
+            distanceTravelled += singleStep;
+            transform.position = path1.path.GetPointAtDistance(distanceTravelled);
             transform.rotation = Quaternion.LookRotation(newDirection);
         } else {
             //Stay in place during attack, but in range of player's y position
@@ -76,32 +73,11 @@ public class DonovanPhase2 : MonoBehaviour, IDamageable
 
     }
 
-    void OnTriggerEnter(Collider collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            Debug.Log("i'm gonna h*cking kill you idiot");
-            playerInRange = true;
-            if (aoeRunning == false)
-            {
-                StartCoroutine(AOE());
-            }
-        }
-    }
-
-    void OnTriggerExit(Collider collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            playerInRange = false;
-        }
-    }
-
     IEnumerator AOE()
     {
         aoeRunning = true;
-        //playerArea.enabled = false;
-        //hitArea.enabled = true;
+        aoeDelay = true;
+        Debug.Log("i'm gonna h*cking kill you idiot");
         yield return new WaitForSeconds(5f);
         Debug.Log("BWAAAAAAAAAAAH");
         if (playerInRange)
@@ -113,10 +89,9 @@ public class DonovanPhase2 : MonoBehaviour, IDamageable
             playerPrefab.GetComponent<Rigidbody>().AddForce((playerPrefab.transform.position - this.transform.position) * 150,  ForceMode.Acceleration);
             playerPrefab.GetComponent<PlayerHealth>().IsDizzy(true);
         }
+        aoeDelay = false;
+        yield return new WaitForSeconds(3f);
         aoeRunning = false;
-        /*yield return new WaitForSeconds(1f);
-        playerArea.enabled = true;
-        hitArea.enabled = false;*/
     }
 
     //Damageable Functions - Consult PlayerHealth script for help
