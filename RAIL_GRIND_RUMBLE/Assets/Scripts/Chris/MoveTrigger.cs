@@ -32,7 +32,7 @@ public class MoveTrigger : MonoBehaviour
         for (int i = 0; i < movingStructures.Length; i++)
         {
             movingStructures[i].GetComponent<MovingStructure>().move = true;
-            if (movingStructures[i].gameObject.tag == "AimPoint")
+            if (movingStructures[i].GetComponent<MovingStructure>().deactivate == true)
             {
                 movingStructures[i].SetActive(true);
             }

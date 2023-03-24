@@ -7,6 +7,8 @@ public class MovingStructure : MonoBehaviour
     Vector3 ogPosition;
     [SerializeField] Transform moveTo;
     public bool move;
+    [SerializeField] bool electric;
+    public bool deactivate;
     float speed = 10f;
     // Start is called before the first frame update
     void Start()
@@ -25,13 +27,25 @@ public class MovingStructure : MonoBehaviour
         } else if (move == false && transform.position != ogPosition)
         {
             transform.position = Vector3.MoveTowards(transform.position, ogPosition, step);
-        } else if (move == false && transform.position == ogPosition && this.gameObject.tag == "AimPoint")
+        } else if (move == false && transform.position == ogPosition && deactivate)
         {
             this.gameObject.SetActive(false);
-            GameObject.Find("playerPrefab").GetComponent<GrappleHook>().StopSwing();
-            GrappleDetection grappleDetector = GameObject.Find("GrappleDetector").GetComponent<GrappleDetection>();
-            grappleDetector.aimPoints.Remove(this.transform);
-            grappleDetector.aimPointCount--;
+
+            if (this.gameObject.CompareTag("AimPoint"))
+            {
+                GameObject.Find("playerPrefab").GetComponent<GrappleHook>().StopSwing();
+                GrappleDetection grappleDetector = GameObject.Find("GrappleDetector").GetComponent<GrappleDetection>();
+                grappleDetector.aimPoints.Remove(this.transform);
+                grappleDetector.aimPointCount--;
+            }
+        }
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player") && electric)
+        {
+            collision.gameObject.GetComponent<PlayerHealth>().IsDizzy(true);
         }
     }
 
