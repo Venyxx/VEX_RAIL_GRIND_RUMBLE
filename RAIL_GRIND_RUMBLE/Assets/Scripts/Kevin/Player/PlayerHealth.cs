@@ -46,9 +46,11 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         if (thirdPersonMovementREF.dialogueBox.activeInHierarchy || SettingsManager.godMode) return; 
         
         currentHealth -= damage;
+        Debug.Log(damage);
 
         if (currentHealth <= 0)
         {
+           
             currentHealth = 0;
             SceneManager.LoadScene("LoseScene");
         }

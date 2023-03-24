@@ -9,9 +9,10 @@ public class MechBossMovement : MonoBehaviour , IDamageable
     public Animator Animator;
     private Transform player;
     private GameObject playerREF;
+    public GameObject damageText;
 
     public LayerMask whatIsGround, whatIsPlayer;
-    public float Health = 100;
+    public float Health = 300;
     public int KnockDownTime = 5;
     private PlayerHealth playerhealth;
 
@@ -139,10 +140,12 @@ public class MechBossMovement : MonoBehaviour , IDamageable
         {
             Debug.Log("MechHitfor" + (damage));
             Health -= damage;
+            DamageIndicatior indicator = Instantiate(damageText, transform.position, Quaternion.identity).GetComponent<DamageIndicatior>();
+            indicator.SetDamageText(damage);
         }
         if (Health <= 0)
         {
-          //  Destroy(gameObject);
+            Destroy(gameObject);
         }
     }
 
