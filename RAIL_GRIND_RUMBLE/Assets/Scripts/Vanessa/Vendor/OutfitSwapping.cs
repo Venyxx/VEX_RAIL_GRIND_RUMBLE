@@ -26,8 +26,11 @@ public class OutfitSwapping : MonoBehaviour
     void Start()
     {
        if(SceneManager.GetActiveScene().name != "Ari's House")
+       {
         Instantiate(ETCOBJ);
         GameObject.Find("VendorCanvas").SetActive(false);
+       }
+        
 
         ManagerREF = GameObject.Find("Manager").GetComponent<Manager>();
         ariOBJREF = GameObject.Find("AriRig");
