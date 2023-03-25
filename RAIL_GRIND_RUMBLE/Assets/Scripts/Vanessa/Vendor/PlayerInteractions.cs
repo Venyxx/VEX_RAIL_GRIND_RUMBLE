@@ -15,11 +15,18 @@ public class PlayerInteractions : MonoBehaviour
     private bool inRange;
     public ThirdPersonMovement movementScriptREF;
     private GameObject previewCamItself;
-    public GameObject [] thingsToHide = new GameObject [2];
+    private GameObject [] thingsToHide = new GameObject [2];
+    private ETCCustomizationVendor ETCCusREF;
 
     private void Start ()
     {
-
+        if (GameObject.Find("CustomizationVendor"))
+            ETCCusREF = GameObject.Find("CustomizationVendor").GetComponent<ETCCustomizationVendor>();
+        else if (GameObject.Find("CustomizationVendor(Clone)"))
+            ETCCusREF = GameObject.Find("CustomizationVendor(Clone)").GetComponent<ETCCustomizationVendor>();
+        
+        thingsToHide[0] = GameObject.Find("SpeedometerUI");
+        thingsToHide[1] = GameObject.Find("CompassMask");
         foreach (GameObject g in thingsToHide) 
         {
             g.SetActive(true);
@@ -147,6 +154,8 @@ public class PlayerInteractions : MonoBehaviour
     {
         canvas.SetActive(false);
         Cursor.visible = false;
+        ETCCusREF.ResetOutfitToSaveState();
+
     }
 
 }

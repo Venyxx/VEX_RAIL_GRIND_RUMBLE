@@ -10,6 +10,7 @@ public class ShaderVendor : MonoBehaviour
     private GameObject Vendor;
     public Transform materialPanel;
     public TextMeshProUGUI materialBuySetText;
+    
 
     public TextMeshProUGUI moneyText;
 
@@ -26,6 +27,8 @@ public class ShaderVendor : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
+
         Time.timeScale = 1f;
         UpdateMoneyText();
 

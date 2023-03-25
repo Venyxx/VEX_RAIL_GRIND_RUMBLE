@@ -55,6 +55,8 @@ public class ETCCustomizationVendor : MonoBehaviour
     private int activeSockIndex;
     private int activeSkateIndex;
 
+    private Manager ManagerREF;
+
 
 
     private Vector3 desiredMenuPosition;
@@ -62,7 +64,8 @@ public class ETCCustomizationVendor : MonoBehaviour
 
     private void Start()
     {
- 
+        Debug.Log("ETC");
+        ManagerREF = GameObject.Find("Manager").GetComponent<Manager>();
         Time.timeScale = 1f;
         if (GameObject.Find("playerPrefab"))
             thirdPersonMovementREF = GameObject.Find("playerPrefab").GetComponent<ThirdPersonMovement>();
@@ -204,7 +207,8 @@ public class ETCCustomizationVendor : MonoBehaviour
 
         
         //change room material
-
+        //I DONT THINK THEER ARY ANY ACCESSORIES IN THE GAME RN
+        //GameObjectAccessorySetting();
 
         //change buy set text
         accessoryBuySetText.text = "Current Accessory!";
@@ -222,7 +226,9 @@ public class ETCCustomizationVendor : MonoBehaviour
 
         
         //change hair material
+        GameObjectTopSetting();
 
+        
 
         //change buy set text
         topBuySetText.text = "Current Top!";
@@ -239,7 +245,7 @@ public class ETCCustomizationVendor : MonoBehaviour
 
         
         //change hair material
-
+        GameObjectBottomSetting();
 
         //change buy set text
         bottomBuySetText.text = "Current Bottom!";
@@ -256,7 +262,7 @@ public class ETCCustomizationVendor : MonoBehaviour
 
         
         //change hair material
-
+        GameObjectSockSetting();
 
         //change buy set text
         sockBuySetText.text = "Current Sock!";
@@ -273,7 +279,7 @@ public class ETCCustomizationVendor : MonoBehaviour
 
         
         //change hair material
-
+        GameObjectSkateSetting();
 
         //change buy set text
         skateBuySetText.text = "Current Skate!";
@@ -339,6 +345,21 @@ public class ETCCustomizationVendor : MonoBehaviour
              accessoryBuySetText.text = "Buy " + accessoryCost[currentIndex].ToString();
         }
 
+        //accessory object preview
+        for (int i = 0; i < ManagerREF.ariAccessoryOptions.Length; i++)
+        {
+            if (selectedAccessoryIndex != i)
+            {
+                //turn the object off
+                ManagerREF.ariAccessoryOptions[i].SetActive(false);
+            } else 
+            {
+                //turn it on
+                ManagerREF.ariAccessoryOptions[i].SetActive(true);
+            }
+        }
+        //GameObjectAccessorySetting();
+
     }
 
 
@@ -379,6 +400,23 @@ public class ETCCustomizationVendor : MonoBehaviour
             //not owned
              topBuySetText.text = "Buy " + topCost[currentIndex].ToString();
         }
+
+
+
+        //top object preview
+        for (int i = 0; i <  ManagerREF.ariTopOptions.Length; i++)
+        {
+            if (selectedAccessoryIndex != i)
+            {
+                //turn the object off
+                ManagerREF.ariTopOptions[i].SetActive(false);
+            } else 
+            {
+                //turn it on
+                ManagerREF.ariTopOptions[i].SetActive(true);
+            }
+        }
+        GameObjectTopSetting();
     }
 
 
@@ -420,6 +458,7 @@ public class ETCCustomizationVendor : MonoBehaviour
             //not owned
              bottomBuySetText.text = "Buy " + bottomCost[currentIndex].ToString();
         }
+        GameObjectBottomSetting();
     }
 
     private void OnSockSelect(int currentIndex)
@@ -460,6 +499,7 @@ public class ETCCustomizationVendor : MonoBehaviour
             //not owned
              sockBuySetText.text = "Buy " + sockCost[currentIndex].ToString();
         }
+        GameObjectSockSetting();
     }
 
     
@@ -501,6 +541,7 @@ public class ETCCustomizationVendor : MonoBehaviour
             //not owned
              skateBuySetText.text = "Buy " + skateCost[currentIndex].ToString();
         }
+        GameObjectSkateSetting();
     }
 
     
@@ -544,6 +585,8 @@ public class ETCCustomizationVendor : MonoBehaviour
             }
 
         }
+
+        
     }
     public void OnTopBuySet ()
     {
@@ -689,6 +732,108 @@ public class ETCCustomizationVendor : MonoBehaviour
         SaveManager.Instance.ResetSave();
         Application.Quit();
         Debug.Log("im trying to wipe");
+    }
+
+    public void GameObjectAccessorySetting ()
+    {
+        for (int i = 0; i <  ManagerREF.ariAccessoryOptions.Length; i++)
+        {
+            if (selectedAccessoryIndex != i)
+            {
+                //turn the object off
+                ManagerREF.ariAccessoryOptions[i].SetActive(false);
+            } else 
+            {
+                //turn it on
+                ManagerREF.ariAccessoryOptions[i].SetActive(true);
+            }
+        }
+    }
+
+    public void GameObjectTopSetting ()
+    {
+        for (int i = 0; i <  ManagerREF.ariTopOptions.Length; i++)
+        {
+            if (selectedTopIndex != i)
+            {
+                //turn the object off
+                ManagerREF.ariTopOptions[i].SetActive(false);
+            } else 
+            {
+                //turn it on
+                ManagerREF.ariTopOptions[i].SetActive(true);
+            }
+        }
+    }
+
+    public void GameObjectBottomSetting ()
+    {
+        for (int i = 0; i <  ManagerREF.ariBottomOptions.Length; i++)
+        {
+            if (selectedBottomIndex != i)
+            {
+                //turn the object off
+                ManagerREF.ariBottomOptions[i].SetActive(false);
+            } else 
+            {
+                //turn it on
+                ManagerREF.ariBottomOptions[i].SetActive(true);
+            }
+        }
+    }
+
+    public void GameObjectSockSetting ()
+    {
+        for (int i = 0; i <  ManagerREF.ariSockOptions.Length; i++)
+        {
+            if (selectedSockIndex != i)
+            {
+                //turn the object off
+                ManagerREF.ariSockOptions[i].SetActive(false);
+            } else 
+            {
+                //turn it on
+                ManagerREF.ariSockOptions[i].SetActive(true);
+            }
+        }
+    }
+
+    public void GameObjectSkateSetting ()
+    {
+        for (int i = 0; i <  ManagerREF.ariSkateOptions.Length; i++)
+        {
+            if (selectedSkateIndex != i)
+            {
+                //turn the object off
+                ManagerREF.ariSkateOptions[i].SetActive(false);
+            } else 
+            {
+                //turn it on
+                ManagerREF.ariSkateOptions[i].SetActive(true);
+            }
+        }
+    }
+
+
+    
+
+    
+
+    public void ResetOutfitToSaveState()
+    {
+        //selectedAccessoryIndex = SaveManager.Instance.state.activeAccessoryIndex;
+        selectedTopIndex = SaveManager.Instance.state.activeAriTop;
+        selectedBottomIndex = SaveManager.Instance.state.activeAriBottom;
+        selectedSockIndex = SaveManager.Instance.state.activeAriSock;
+        selectedSkateIndex = SaveManager.Instance.state.activeAriSkate;
+
+        
+        //GameObjectAccessorySetting();
+        GameObjectTopSetting();
+        GameObjectBottomSetting();
+        GameObjectSockSetting();
+        GameObjectSkateSetting();
+    
     }
 
 

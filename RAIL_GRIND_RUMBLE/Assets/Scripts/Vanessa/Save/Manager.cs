@@ -20,11 +20,11 @@ public class Manager : MonoBehaviour
     public GameObject[] ariGraffitiOptions = new GameObject[8];
     public GameObject[] ariHairOptions = new GameObject[4];
     public GameObject[] ariAccessoryOptions = new GameObject[3];
-    public GameObject[] ariTopOptions = new GameObject[11];
+    public GameObject[] ariTopOptions = new GameObject[12];
     public GameObject[] ariBottomOptions = new GameObject[6];
     public GameObject[] ariSockOptions = new GameObject[2];
     public GameObject[] ariSkateOptions = new GameObject[6];
-    
+
 
 
     private void Awake ()

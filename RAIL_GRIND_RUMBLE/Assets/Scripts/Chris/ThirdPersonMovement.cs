@@ -807,6 +807,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
         } else if (SaveManager.Instance.state.activeAriSkate == 1 || SaveManager.Instance.state.activeAriSkate == 4 )
         {
+            playerAttackREF = GetComponent<PlayerAttack>();
             playerAttackREF.skateBuffDamage = 2;
             healthRef.maxHealth = 250;
             Debug.Log("updating stats to shell 1, damage buff 2, max health 250");
