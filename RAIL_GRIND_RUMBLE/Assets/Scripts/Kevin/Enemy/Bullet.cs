@@ -48,6 +48,7 @@ public class Bullet : PoolableObject
         CancelInvoke(DISABLE_METHOD_NAME);
         Rigidbody.velocity = Vector3.zero;
         gameObject.SetActive(false);
+        Destroy(gameObject);
     }
    
  

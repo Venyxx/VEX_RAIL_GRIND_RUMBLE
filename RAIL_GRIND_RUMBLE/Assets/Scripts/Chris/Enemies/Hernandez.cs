@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Hernandez : MonoBehaviour, IDamageable
 {
@@ -23,11 +24,14 @@ public class Hernandez : MonoBehaviour, IDamageable
     //Health
     float maxHealth = 1750f;
     float currentHealth;
+    //MechBossMovementReff
+    private MechBossMovement mechmovement;
     
 
     void Start()
     {
         playerObjREF = GameObject.FindWithTag("PlayerObject");
+        mechmovement = GetComponent<MechBossMovement>();
 
         gatlingGunLeft = gameObject.transform.Find("GatlingGunLeft").GetComponent<MachineGunTurret>();
         gatlingGunRight = gameObject.transform.Find("GatlingGunRight").GetComponent<MachineGunTurret>();
@@ -59,7 +63,7 @@ public class Hernandez : MonoBehaviour, IDamageable
         }
 
         //Ranged attack if not stunned; can add additional condition to check if player is within melee attack range
-        if (!stunned && !playerInRange)
+        if (!stunned && !playerInRange && !mechmovement.Dizzy && !mechmovement.MechDown)
         {
             //Shoots two rockets before activating gatling guns
             if (weaponCycle <= 2 && rocketTurret.shootRunning == false && rocketTurret.chargeRunning == false && gatlingGunLeft.shootRunning == false)

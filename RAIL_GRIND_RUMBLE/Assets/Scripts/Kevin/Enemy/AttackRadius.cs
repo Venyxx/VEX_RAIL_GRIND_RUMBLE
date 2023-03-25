@@ -25,15 +25,16 @@ public class AttackRadius : MonoBehaviour
     {
         Collider = GetComponent<SphereCollider>();
     }
-
+  
     protected virtual void OnTriggerEnter(Collider other)
     { 
         IDamageable damageable = other.GetComponent<IDamageable>();
         if (damageable != null)
         {
-           
+            Damageables.Add(damageable);
             if ( Movement.BruteIsCharging && enemy.Agent.speed > 0)
             {
+                enemy.Animator.SetBool("Dashing", false);
                 if (other.gameObject.tag == "Player")
                 {
                     AttackCoroutine = StartCoroutine(Attack());
@@ -46,10 +47,10 @@ public class AttackRadius : MonoBehaviour
                     damageable.TakeDamage(Damage);
                
             }
-            Damageables.Add(damageable);
+
             if (enemy.Health > 0)
             {
-                if (AttackCoroutine == null )
+                if (AttackCoroutine == null)
                 {
                     
                     // if (IsSharpShooter == false)
@@ -169,11 +170,12 @@ public class AttackRadius : MonoBehaviour
 
                 Damageables.RemoveAll(DisabledDamageables);
             }
-            AttackCoroutine = null;
+           AttackCoroutine = null;
 
 
 
         }
+        AttackCoroutine = null;
     }
 
     protected bool DisabledDamageables (IDamageable Damageable)

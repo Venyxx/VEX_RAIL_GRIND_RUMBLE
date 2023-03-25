@@ -152,20 +152,20 @@ public class EnemyMovement : MonoBehaviour
 
     public IEnumerator Charge()
     {
-        if (totalDistance <= 5)
-        { yield return null; }
-
+        //if (totalDistance <= 5)
+        //{ yield return null; }
+        
         BruteChargingDelay = true;
         Debug.Log("Brute is charging");
         BruteIsCharging = true;
         Agent.speed = 0;
+        Animator.SetTrigger("Charging");
         yield return new WaitForSeconds(3f);
         Animator.SetBool("Dashing", true);
         Attack.Damage = 10;
-        Agent.speed = enemy.EnemyScriptableObject.Speed + 10;
-        Agent.acceleration = enemy.EnemyScriptableObject.Acceleration + 10;
-        
-        yield return new WaitForSeconds(20f);
+        Agent.speed = enemy.EnemyScriptableObject.Speed + 20;
+        Agent.acceleration = enemy.EnemyScriptableObject.Acceleration + 20;
+        yield return new WaitForSeconds(5f);
         Debug.Log("Brute isn't charging");
         Animator.SetBool("Dashing", false);
         Agent.speed = 3;
