@@ -10,8 +10,7 @@ public class MainQuest1 : CountQuest
 {
     private bool destinationReached;
     private GameObject mainQuestParent;
-    private TextMeshProUGUI questInfoText { get; set; }
-    private bool endDialoguePlayed = false;
+    private TextMeshProUGUI questInfoText;
     private TotalWaypointController totalREF;
     
     

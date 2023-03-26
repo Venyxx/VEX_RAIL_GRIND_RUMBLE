@@ -1,19 +1,16 @@
 ﻿using UnityEngine;
 
-namespace Pete.Level_Scripting
+public abstract class NPCManager : MonoBehaviour
 {
-    public abstract class NPCManager : MonoBehaviour
-    {
 
-        protected DialogueTemplate dialogueTemplate;
-        protected void Start()
-        {
-            dialogueTemplate = GetComponent<DialogueTrigger>().dialogue;
-        }
+    protected DialogueTemplate dialogueTemplate;
+    protected virtual void Start()
+    {
+        dialogueTemplate = GetComponent<DialogueTrigger>().dialogue;
+    }
+    
+    public virtual void HandleProgress()
+    {
         
-        public virtual void HandleProgress()
-        {
-            
-        }
     }
 }

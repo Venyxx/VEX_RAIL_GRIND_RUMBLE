@@ -19,7 +19,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         
         
         thirdPersonMovementREF = GetComponent<ThirdPersonMovement>();
-        thirdPersonMovementREF.RecalculateStats();
+        //thirdPersonMovementREF.RecalculateStats();
         currentHealth = maxHealth;
 
     }

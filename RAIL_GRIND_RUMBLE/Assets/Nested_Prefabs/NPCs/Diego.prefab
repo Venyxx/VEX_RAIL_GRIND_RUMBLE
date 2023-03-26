@@ -4172,6 +4172,7 @@ GameObject:
   - component: {fileID: 5884359030855217033}
   - component: {fileID: 5884359030855217031}
   - component: {fileID: 5884359030855217029}
+  - component: {fileID: 711678213}
   m_Layer: 0
   m_Name: Diego
   m_TagString: Untagged
@@ -4271,16 +4272,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29851e8cc18218d4e837f472b7c52908, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainQuest2Dialogue:
-    paragraphs:
-    - speakerName: Diego
-      englishDialogue: "Jose just called me from the Inner Ring. He said he found
-        some good spots to tag. \n"
-      englishVoiceLine: {fileID: 0}
-    - speakerName: Diego
-      englishDialogue: "Why don\u2019t you go meet up with him? The bus can take
-        you to the inner Ring.\r"
-      englishVoiceLine: {fileID: 0}
 --- !u!114 &5884359030855217033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4359,7 +4350,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5884359030855217035}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d883ffa7da534552b773b47ecdb25a4a, type: 3}
   m_Name: 
@@ -4417,7 +4408,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5884359030855217035}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e70b5a1acf84b2da8180fa2350089b8, type: 3}
   m_Name: 
@@ -4458,11 +4449,74 @@ MonoBehaviour:
     questCompletedText:
       paragraphs:
       - speakerName: Ariadna
-        englishDialogue: I SPRAYYYYYED
+        englishDialogue: Ahaha! *sigh* Another job well done.
+        englishVoiceLine: {fileID: 0}
+      - speakerName: Diego
+        englishDialogue: Very nice work!
+        englishVoiceLine: {fileID: 0}
+      - speakerName: Diego
+        englishDialogue: ' Buuut, Jose also told me about this cool piece of Servos
+          tech being stored nearby. '
+        englishVoiceLine: {fileID: 0}
+      - speakerName: Diego
+        englishDialogue: I think you'll like it.
+        englishVoiceLine: {fileID: 0}
+      - speakerName: Ariadna
+        englishDialogue: Jose did? What is it?
+        englishVoiceLine: {fileID: 0}
+      - speakerName: Diego
+        englishDialogue: It's a surprise. Meet me near mama's orphanage!
         englishVoiceLine: {fileID: 0}
     questType: 0
     completionCount: 3
     subtractCoinsOnCompletion: 0
+--- !u!114 &711678213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5884359030855217035}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c86f290f04b949b39c866d778360835b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questToGive:
+    questRewards:
+    - {fileID: 0}
+    isActive: 0
+    isComplete: 0
+    questName: 
+    description: 
+    questAcceptedText:
+      paragraphs: []
+    questDeniedText:
+      paragraphs: []
+    questCompletedText:
+      paragraphs: []
+  questTitleText: {fileID: 0}
+  questDescrText: {fileID: 0}
+  questRewardText: {fileID: 0}
+  acceptedOrDeniedAlready: 0
+  mainQuest3:
+    questRewards: []
+    isActive: 0
+    isComplete: 0
+    questName: Diego's Cool Find
+    description: Follow Diego to find the cool tech
+    questAcceptedText:
+      paragraphs:
+      - speakerName: Diego
+        englishDialogue: I'll see  you there sis!
+        englishVoiceLine: {fileID: 0}
+    questDeniedText:
+      paragraphs:
+      - speakerName: Diego
+        englishDialogue: I promise it's really cool... But that's ok, we can go later.
+        englishVoiceLine: {fileID: 0}
+    questCompletedText:
+      paragraphs: []
 --- !u!1 &5997751561744992786
 GameObject:
   m_ObjectHideFlags: 0

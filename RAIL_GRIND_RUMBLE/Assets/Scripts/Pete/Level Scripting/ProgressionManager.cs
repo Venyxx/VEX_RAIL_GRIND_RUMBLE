@@ -111,6 +111,12 @@ public class ProgressionManager : MonoBehaviour
             CurrentCountQuestType = CountQuestType.Graffiti;
             QuestInfoText.text = $"Leave your house and take the bus to the Inner Ring!";
         }
+        else if (quest is MainQuest3)
+        {
+            mainQuest3 = (MainQuest3) quest;
+            QuestInfoText.text = $"Leave your house and meet Diego at the Orphanage!";
+            
+        }
         else if (quest is CountQuest countQuest)
         {
             CurrentCountQuestType = countQuest.GetCountQuestType();
@@ -145,7 +151,7 @@ public class ProgressionManager : MonoBehaviour
         if (!IsFinished(mainQuest1))
         {
             //Debug.Log("MAINQUEST1 IS NOT FINISHED");
-            SetBusStopsActive(false);
+            //SetBusStopsActive(false);
             if (mainQuest1 != null && currentQuest == mainQuest1)
             {
                 LoadMainQuest1();
@@ -157,10 +163,21 @@ public class ProgressionManager : MonoBehaviour
             SetBusStopsActive(true);
         }
 
-        if (mainQuest1 != null && !IsFinished(mainQuest2) && currentQuest == mainQuest2)
+        if (mainQuest2 != null && !IsFinished(mainQuest2) && currentQuest == mainQuest2)
         {
             LoadMainQuest2();
         }
+
+        if (mainQuest3 != null && !IsFinished(mainQuest3) && currentQuest == mainQuest3)
+        {
+            LoadMainQuest3();
+        }
+
+        /*if (currentQuest != mainQuest3 && SceneManager.GetActiveScene().name == "Outskirts")
+        {
+            GameObject.Find("OpenGateQuest3").SetActive(true);
+        }*/
+
         HandleDiegoAutoDialogue();
     }
 
@@ -231,7 +248,19 @@ public class ProgressionManager : MonoBehaviour
                 mainQuest2.LoadMainQuest2InnerRing(totalREF, QuestInfoText, mainQuest2Parent);
             }
         }
-        
+    }
+
+    private void LoadMainQuest3()
+    {
+        if (mainQuest3 != null && SceneManager.GetActiveScene().name == "Outskirts" && !mainQuest3.isComplete && !IsFinished(mainQuest3))
+        {
+            GameObject totalWayPointParent = GameObject.Find("WayPointPrefabs");
+            GameObject mainQuest3WayPoints = totalWayPointParent.transform.GetChild(2).gameObject;
+            mainQuest3WayPoints.SetActive(true);
+            TotalWaypointController totalREF = mainQuest3WayPoints.GetComponent<TotalWaypointController>();
+            GameObject mainQuestParent = GameObject.Find("MainQuest3 Objects");
+            mainQuest3.LoadMainQuest3(totalREF, mainQuestParent, QuestInfoText);
+        }
     }
 
     private void LoadObjects()
@@ -247,5 +276,10 @@ public class ProgressionManager : MonoBehaviour
     public static bool IsFinished(Quest quest)
     {
         return CompletedQuests.Contains(quest);
+    }
+
+    public void SetQuestInfoText(string text)
+    {
+        QuestInfoText.text = text;
     }
 }
