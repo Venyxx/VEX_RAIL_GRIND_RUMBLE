@@ -40,7 +40,11 @@ public class ServosVanController : MonoBehaviour
                 Destroy(rightDoor);
                 Destroy(leftDoor);
                 doorsPos = leftDoor.transform.position;
-                Invoke("SpawnGoons", 2f);
+                if (goonsToSpawn != 0)
+                {
+                    Invoke("SpawnGoons", 2f);
+
+                }
             }
             return;
         }

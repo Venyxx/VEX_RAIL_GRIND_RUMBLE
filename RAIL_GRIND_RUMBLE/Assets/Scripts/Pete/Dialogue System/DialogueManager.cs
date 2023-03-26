@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Pete.Level_Scripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
@@ -33,6 +32,8 @@ public class DialogueManager : MonoBehaviour
 
     public bool SpawnHealth { get; set; } = false;
 
+    
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -52,6 +53,7 @@ public class DialogueManager : MonoBehaviour
         }
         questWindow.SetActive(false);
         dialogueBox.SetActive(false);
+        
     }
     
     private void Update()
@@ -325,5 +327,16 @@ public class DialogueManager : MonoBehaviour
     {
         manager.HandleProgress();
     }
-    
+
+    public static IEnumerator DialogueWipe()
+    {
+        GameObject wipe = GameObject.Find("canvasPrefab").transform.Find("PauseWipeTransition").gameObject;
+        wipe.SetActive(true);
+        wipe.GetComponent<Animator>().CrossFade("PauseIntro", 0, 0);
+        yield return new WaitForSeconds(1f);
+        wipe.GetComponent<Animator>().CrossFade("PauseOutro", 0, 0);
+        yield return new WaitForSeconds(0.2f);
+        wipe.SetActive(false);
+    }
+
 }
