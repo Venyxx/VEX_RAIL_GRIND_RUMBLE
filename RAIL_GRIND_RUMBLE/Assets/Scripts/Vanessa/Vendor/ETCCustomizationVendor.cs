@@ -18,6 +18,8 @@ public class ETCCustomizationVendor : MonoBehaviour
     public Transform bottomPanel;
     public Transform sockPanel;
     public Transform skatePanel;
+    public Transform hairPanel;
+    
     private ThirdPersonMovement thirdPersonMovementREF;
 
     //public Transform questPanel;
@@ -28,7 +30,7 @@ public class ETCCustomizationVendor : MonoBehaviour
     public TextMeshProUGUI bottomBuySetText;
     public TextMeshProUGUI sockBuySetText;
     public TextMeshProUGUI skateBuySetText;
-
+    public TextMeshProUGUI hairBuySetText;
     public TextMeshProUGUI moneyText;
     //public TextMeshProUGUI highscoreText;
 
@@ -41,12 +43,14 @@ public class ETCCustomizationVendor : MonoBehaviour
     private int [] bottomCost = new int [] {0,50,55,60, 60, 60};
     private int [] sockCost = new int [] {10,50};
     private int [] skateCost = new int [] {10,50,55,60,60,60};
+    private int [] hairCost = new int [] {0,50,55,60};
 
     private int selectedAccessoryIndex;
     private int selectedTopIndex;
     private int selectedBottomIndex;
     private int selectedSockIndex;
     private int selectedSkateIndex;
+    private int selectedHairIndex;
 
     private int activeAccessoryIndex;
 
@@ -54,6 +58,7 @@ public class ETCCustomizationVendor : MonoBehaviour
     private int activeBottomIndex;
     private int activeSockIndex;
     private int activeSkateIndex;
+    private int activeHairIndex;
 
     private Manager ManagerREF;
 
@@ -98,6 +103,9 @@ public class ETCCustomizationVendor : MonoBehaviour
 
         OnSkateSelect(SaveManager.Instance.state.activeAriSkate);
         SetSkate(SaveManager.Instance.state.activeAriSkate);
+
+        OnHairSelect(SaveManager.Instance.state.activeAriHair);
+        SetHair(SaveManager.Instance.state.activeAriHair);
 
         //visual selected item
         accessoryPanel.GetChild(SaveManager.Instance.state.activeAriAccessory).GetComponent<RectTransform>().localScale = Vector3.one * 1.125f;

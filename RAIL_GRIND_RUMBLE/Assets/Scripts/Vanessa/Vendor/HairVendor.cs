@@ -67,16 +67,7 @@ public class HairVendor : MonoBehaviour
 
         
         //change hair material
-        if (activeHairIndex == 0)
-        {
-            Debug.Log("on hair 0");
-        }else if (activeHairIndex == 1)
-        {
-            Debug.Log("on hair 1");
-        }else if (activeHairIndex == 2)
-        {
-            Debug.Log("on hair 2");
-        }
+        GameObjectHairSetting();
 
         //change buy set text
         hairBuySetText.text = "Current hair!";
@@ -128,6 +119,8 @@ public class HairVendor : MonoBehaviour
             //not owned
              hairBuySetText.text = "Buy " + hairCost[currentIndex].ToString();
         }
+
+        GameObjectHairSetting();
     }
 
     public void OnHairBuySet ()
