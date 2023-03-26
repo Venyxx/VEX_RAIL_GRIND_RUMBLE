@@ -32,6 +32,9 @@ public class CustomizationMEnu : MonoBehaviour
     {
         isOpen = false;
         audioUI = GetComponent<AudioSource>();
+        mapTab.SetActive(true);
+        missionsTab.SetActive(false);
+        progressTab.SetActive(false);
     }
 
     
@@ -165,6 +168,8 @@ public class CustomizationMEnu : MonoBehaviour
     
 
         mapTab.SetActive(true);
+        missionsTab.SetActive(false);
+        progressTab.SetActive(false);
         currentTab = "Map";
     }
 
@@ -180,7 +185,9 @@ public class CustomizationMEnu : MonoBehaviour
         progressButton.GetComponent<Image>().sprite = tabNotSelected;
 
         
+        mapTab.SetActive(false);
         missionsTab.SetActive(true);
+        progressTab.SetActive(false);
         currentTab = "Missions";
 
         
@@ -200,6 +207,8 @@ public class CustomizationMEnu : MonoBehaviour
         
 
         
+        mapTab.SetActive(false);
+        missionsTab.SetActive(false);
         progressTab.SetActive(true);
         currentTab = "Progress";
 

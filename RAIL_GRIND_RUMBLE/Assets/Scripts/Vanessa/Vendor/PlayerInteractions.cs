@@ -42,10 +42,13 @@ public class PlayerInteractions : MonoBehaviour
         previewCamItself = GameObject.Find ("CharacterPreviewCamera");
           if (previewCamItself)
             previewCamItself.SetActive(false);
+
          prompt = GameObject.Find("PromptController");
          if (prompt)
             prompt.SetActive(false);
-        canvas = GameObject.FindGameObjectWithTag("VendorCanvas");
+
+        canvas = GameObject.Find("VendorCanvas");
+        Debug.Log("the canvas is " + canvas);
         if (canvas)
             canvas.SetActive(false);
          
