@@ -137,6 +137,9 @@ public class ThirdPersonCamera : MonoBehaviour
     public void SwitchCameraStarted()
     {
         Debug.Log ("Aim Mode Input detected");
+
+        if (ProgressionManager.Get().grappleUnlocked == false) return;
+
         //Aiming
         if (grappleDetection.gameObject.GetComponent<GrappleDetection>().aimPoints.Count != 0 && playerPrefabREF.gameObject.GetComponent<GrappleHook>().grappleStored)
         {

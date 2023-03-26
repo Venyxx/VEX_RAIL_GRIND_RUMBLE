@@ -223,7 +223,7 @@ public class GrappleDetection : MonoBehaviour
                     } 
 
                     aimPoints.Add(collision.gameObject.transform);
-                    aimPointCount++;  
+                    aimPointCount++;
                     GetComponent<Reticle>().ReticleToggle(true); 
             }
             

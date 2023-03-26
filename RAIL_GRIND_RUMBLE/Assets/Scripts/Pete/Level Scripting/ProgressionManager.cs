@@ -24,6 +24,8 @@ public class ProgressionManager : MonoBehaviour
     private bool firstAutoDialogueUsed;
     public bool firstLoad = true;
 
+    public bool grappleUnlocked;
+
     public static ProgressionManager Get()
     {
         if (instance == null)

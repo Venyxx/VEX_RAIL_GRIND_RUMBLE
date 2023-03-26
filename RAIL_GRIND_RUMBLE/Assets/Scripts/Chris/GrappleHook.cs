@@ -124,10 +124,10 @@ public class GrappleHook : MonoBehaviour
         grappleMeter = grappleMeterREF.GetComponent<Image>();
 
         //Arm Rig
-        rootRigREF = GameObject.Find("Root");
+        /*rootRigREF = GameObject.Find("Root");
         leftArmGrappleREF = GameObject.Find("LeftArmGrapple");
         ik = rootRigREF.GetComponent<RigBuilder>();
-        ik.enabled = false;
+        ik.enabled = false;*/
         
         
     }
@@ -156,7 +156,7 @@ public class GrappleHook : MonoBehaviour
     //Left Click
     public void GrapplePull(InputAction.CallbackContext context)
     {
-        if (context.started && canShoot == true && grappleStored == true && GameObject.Find("AimingCam") != null && isGrappling == false && !_thirdPersonMovement.dialogueManager.freezePlayer)
+        if (context.started && canShoot == true && grappleStored == true && GameObject.Find("AimingCam") != null && isGrappling == false && !_thirdPersonMovement.dialogueManager.freezePlayer && ProgressionManager.Get().grappleUnlocked == true)
         {
             StartSwing();
             StartCoroutine(ZipRunning());
@@ -186,7 +186,7 @@ public class GrappleHook : MonoBehaviour
 
     public void NoAimGrapple(InputAction.CallbackContext context)
     {
-        if (context.started && playerREF.GetComponent<ThirdPersonMovement>().isWalking == false)
+        if (context.started && playerREF.GetComponent<ThirdPersonMovement>().isWalking == false && ProgressionManager.Get().grappleUnlocked == true)
         {
             if (!GameObject.Find("AimingCam") && grappleDetector.aimPoints.Count > 0 && isGrappling == false && grappleStored == true)
             {
@@ -269,8 +269,8 @@ public class GrappleHook : MonoBehaviour
             currentGrapplePosition = hookTip.position;
 
             //Arm Rig
-            ik.enabled = true;
-            leftArmGrappleREF.GetComponent<TwoBoneIKConstraint>().data.target = grappleDetector.currentAim;
+            /*ik.enabled = true;
+            leftArmGrappleREF.GetComponent<TwoBoneIKConstraint>().data.target = grappleDetector.currentAim;*/
 
             playerREF.gameObject.GetComponent<ThirdPersonMovement>().isGrappling = true;
 
@@ -285,7 +285,7 @@ public class GrappleHook : MonoBehaviour
     public void StopSwing()
     {
         //Arm Rig
-        ik.enabled = false;
+        //ik.enabled = false;
 
         //Sound
         audioSource.clip = grappleSounds[4];

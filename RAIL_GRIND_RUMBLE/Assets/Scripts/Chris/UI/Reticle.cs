@@ -61,6 +61,14 @@ public class Reticle : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (ProgressionManager.Get().grappleUnlocked == true)
+        {
+            ReticleUpdate();
+        }
+    }
+
+    void ReticleUpdate()
+    {
         if (grappleDetection.aimPoints.Count <= 0)
         {
              reticleREF.SetActive(false);
@@ -72,6 +80,8 @@ public class Reticle : MonoBehaviour
 
     public void ReticleToggle (bool isOn)
     {
+        if (ProgressionManager.Get().grappleUnlocked == false) return;
+
         if (isOn == true)
         {
             reticleREF.SetActive(true);

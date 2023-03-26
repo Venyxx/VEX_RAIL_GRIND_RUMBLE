@@ -8,6 +8,7 @@ public class MachineGunTurret : MonoBehaviour, IDamageable
     GameObject playerREF;
     [SerializeField] GameObject bullet;
     [SerializeField] int bulletCount;
+    int bulletInt = 0;
     [SerializeField] float cooldownSeconds;
     public bool attached;
     public bool shootRunning;
@@ -58,7 +59,7 @@ public class MachineGunTurret : MonoBehaviour, IDamageable
         shootRunning = true;
 
         //Shoot amount of bullets specified under Bullet Count
-        for (int i = 0; i < bulletCount; i++)
+        for (bulletInt = 0; bulletInt < bulletCount; bulletInt++)
         {
             if (!dead)
             {

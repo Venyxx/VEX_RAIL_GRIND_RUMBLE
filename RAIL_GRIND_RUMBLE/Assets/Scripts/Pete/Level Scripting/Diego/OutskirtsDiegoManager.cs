@@ -56,6 +56,7 @@ public class OutskirtsDiegoManager : NPCManager
         dialogueTrigger.dialogue = thirdSetDialogue;
         thirdSetDialogue.dialogueTrigger = dialogueTrigger;
         //ACTIVATE GRAPPLING HERE!!! 
+        ProgressionManager.Get().grappleUnlocked = true;
         FindObjectOfType<DialogueManager>().StartAutoFreezeDialogue(thirdSetDialogue);
     }
 

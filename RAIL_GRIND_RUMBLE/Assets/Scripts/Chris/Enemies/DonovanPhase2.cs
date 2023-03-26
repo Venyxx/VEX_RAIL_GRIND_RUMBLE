@@ -62,13 +62,15 @@ public class DonovanPhase2 : MonoBehaviour, IDamageable
             distanceTravelled += singleStep;
             transform.position = path1.path.GetPointAtDistance(distanceTravelled);
             transform.rotation = Quaternion.LookRotation(newDirection);
-        } else {
+        } else if (playerInRange && aoeDelay) {
             //Stay in place during attack, but in range of player's y position
             //transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, playerREF.transform.position.y + 2, transform.position.z), singleStep);
             transform.position = new Vector3(transform.position.x, playerREF.transform.position.y + 2, transform.position.z);
             //Turn to face player but don't face up or down
             newDirection = Vector3.RotateTowards(transform.forward, new Vector3(playerDirection.x, 0, playerDirection.z), singleStep, 0f);
             transform.rotation = Quaternion.LookRotation(newDirection);
+        } else if (playerDistance > 30){
+            return;
         }
 
     }
