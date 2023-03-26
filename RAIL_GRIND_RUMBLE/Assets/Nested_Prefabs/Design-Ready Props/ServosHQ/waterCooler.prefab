@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8780685108038770596}
   - component: {fileID: 5710011571199874148}
   - component: {fileID: 1116808827202929701}
+  - component: {fileID: 1637096449553383621}
   m_Layer: 0
   m_Name: waterCoolerA
   m_TagString: Untagged
@@ -84,6 +85,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &1637096449553383621
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483130243050052568}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5787046062702974393, guid: a300733a90b677641a15776b62113a45, type: 3}
 --- !u!1 &2489054367142815350
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,6 +143,7 @@ GameObject:
   - component: {fileID: 1448261868095458443}
   - component: {fileID: 7280210709805179611}
   - component: {fileID: 1238608493918529126}
+  - component: {fileID: 780460964025093337}
   m_Layer: 0
   m_Name: waterCoolerB
   m_TagString: Untagged
@@ -201,3 +217,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &780460964025093337
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7415176028654512257}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7692909762654803367, guid: a300733a90b677641a15776b62113a45, type: 3}

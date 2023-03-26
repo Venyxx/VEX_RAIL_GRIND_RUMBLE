@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4182479143104801348}
   - component: {fileID: 2488105443032785183}
   - component: {fileID: 8093219344591470850}
+  - component: {fileID: 4247162769764025426}
   m_Layer: 0
   m_Name: smallMonitorBody
   m_TagString: Untagged
@@ -83,6 +84,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4247162769764025426
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6216922466691795449}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5230716, y: 1.2628195, z: 0.15539551}
+  m_Center: {x: -0.00000011920929, y: -0.009005427, z: 0.009338379}
 --- !u!1 &6299262503107195551
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,7 +170,7 @@ VideoPlayer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6605109459698210959}
-  m_Enabled: 1
+  m_Enabled: 0
   m_VideoClip: {fileID: 32900000, guid: 31a7f77c5df5f444998ac38bbd69df50, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
@@ -195,6 +209,7 @@ GameObject:
   - component: {fileID: 4433915510152861189}
   - component: {fileID: 8794275722762686084}
   - component: {fileID: 4596757368852133337}
+  - component: {fileID: 723242438514322784}
   m_Layer: 0
   m_Name: smallMonitorScreen2
   m_TagString: Untagged
@@ -267,3 +282,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &723242438514322784
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7790655272532005170}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.4486759, y: 0.8198597, z: 0}
+  m_Center: {x: 0, y: 0, z: 0.03289699}
