@@ -18,6 +18,8 @@ public class ETCCustomizationVendor : MonoBehaviour
     public Transform bottomPanel;
     public Transform sockPanel;
     public Transform skatePanel;
+    public Transform hairPanel;
+    
     private ThirdPersonMovement thirdPersonMovementREF;
 
     //public Transform questPanel;
@@ -28,7 +30,7 @@ public class ETCCustomizationVendor : MonoBehaviour
     public TextMeshProUGUI bottomBuySetText;
     public TextMeshProUGUI sockBuySetText;
     public TextMeshProUGUI skateBuySetText;
-
+    public TextMeshProUGUI hairBuySetText;
     public TextMeshProUGUI moneyText;
     //public TextMeshProUGUI highscoreText;
 
@@ -41,12 +43,14 @@ public class ETCCustomizationVendor : MonoBehaviour
     private int [] bottomCost = new int [] {0,50,55,60, 60, 60};
     private int [] sockCost = new int [] {10,50};
     private int [] skateCost = new int [] {10,50,55,60,60,60};
+    private int [] hairCost = new int [] {0,50,55,60};
 
     private int selectedAccessoryIndex;
     private int selectedTopIndex;
     private int selectedBottomIndex;
     private int selectedSockIndex;
     private int selectedSkateIndex;
+    private int selectedHairIndex;
 
     private int activeAccessoryIndex;
 
@@ -54,6 +58,7 @@ public class ETCCustomizationVendor : MonoBehaviour
     private int activeBottomIndex;
     private int activeSockIndex;
     private int activeSkateIndex;
+    private int activeHairIndex;
 
     private Manager ManagerREF;
 
@@ -99,12 +104,16 @@ public class ETCCustomizationVendor : MonoBehaviour
         OnSkateSelect(SaveManager.Instance.state.activeAriSkate);
         SetSkate(SaveManager.Instance.state.activeAriSkate);
 
+        OnHairSelect(SaveManager.Instance.state.activeAriHair);
+        SetHair(SaveManager.Instance.state.activeAriHair);
+
         //visual selected item
         accessoryPanel.GetChild(SaveManager.Instance.state.activeAriAccessory).GetComponent<RectTransform>().localScale = Vector3.one * 1.125f;
         topPanel.GetChild(SaveManager.Instance.state.activeAriTop).GetComponent<RectTransform>().localScale = Vector3.one * 1.125f;
         bottomPanel.GetChild(SaveManager.Instance.state.activeAriBottom).GetComponent<RectTransform>().localScale = Vector3.one * 1.125f;
         sockPanel.GetChild(SaveManager.Instance.state.activeAriSock).GetComponent<RectTransform>().localScale = Vector3.one * 1.125f;
         skatePanel.GetChild(SaveManager.Instance.state.activeAriSkate).GetComponent<RectTransform>().localScale = Vector3.one * 1.125f;
+        hairPanel.GetChild(SaveManager.Instance.state.activeAriHair).GetComponent<RectTransform>().localScale = Vector3.one * 1.125f;
     } 
 
     private void Update ()
@@ -146,13 +155,14 @@ public class ETCCustomizationVendor : MonoBehaviour
 
         foreach (Transform t in topPanel)
         {
+            Debug.Log("setting buttons for tops");
             int currentIndex = i;
             Button b = t.GetComponent<Button>();
             b.onClick.AddListener(() => OnTopSelect(currentIndex));
 
             //set theme if owned
             Image img = t.GetComponent<Image>();
-            img.color = SaveManager.Instance.IsGraffitiOwned(i) ? Color.white : new Color (0.7f, 0.7f, 0.7f);
+            img.color = SaveManager.Instance.IsAriTopOwned(i) ? Color.white : new Color (0.7f, 0.7f, 0.7f);
 
             i++;
         }
@@ -196,6 +206,20 @@ public class ETCCustomizationVendor : MonoBehaviour
             i++;
         }
 
+         i = 0;
+        foreach (Transform t in hairPanel)
+            {
+                int currentIndex = i;
+                Button b = t.GetComponent<Button>();
+                b.onClick.AddListener(() => OnHairSelect(currentIndex));
+
+                //set theme if owned
+                Image img = t.GetComponent<Image>();
+                img.color = SaveManager.Instance.IsAriHairOwned(i) ? Color.white : new Color (0.7f, 0.7f, 0.7f);
+
+                i++;
+            }
+
     }
 
 
@@ -211,7 +235,7 @@ public class ETCCustomizationVendor : MonoBehaviour
         //GameObjectAccessorySetting();
 
         //change buy set text
-        accessoryBuySetText.text = "Current Accessory!";
+        accessoryBuySetText.text = "Equipped";
          Debug.Log("ran set accessory");
 
         SaveManager.Instance.Save();
@@ -227,11 +251,12 @@ public class ETCCustomizationVendor : MonoBehaviour
         
         //change hair material
         GameObjectTopSetting();
+        Debug.Log("Settop method");
 
         
 
         //change buy set text
-        topBuySetText.text = "Current Top!";
+        topBuySetText.text = "Equipped";
          Debug.Log("ran set top");
 
         SaveManager.Instance.Save();
@@ -248,7 +273,7 @@ public class ETCCustomizationVendor : MonoBehaviour
         GameObjectBottomSetting();
 
         //change buy set text
-        bottomBuySetText.text = "Current Bottom!";
+        bottomBuySetText.text = "Equipped";
          Debug.Log("ran set bottom");
 
         SaveManager.Instance.Save();
@@ -265,7 +290,7 @@ public class ETCCustomizationVendor : MonoBehaviour
         GameObjectSockSetting();
 
         //change buy set text
-        sockBuySetText.text = "Current Sock!";
+        sockBuySetText.text = "Equipped";
          Debug.Log("ran set sock");
 
         SaveManager.Instance.Save();
@@ -282,7 +307,7 @@ public class ETCCustomizationVendor : MonoBehaviour
         GameObjectSkateSetting();
 
         //change buy set text
-        skateBuySetText.text = "Current Skate!";
+        skateBuySetText.text = "Equipped";
          Debug.Log("ran set skate");
 
         thirdPersonMovementREF.RecalculateStats();
@@ -291,7 +316,22 @@ public class ETCCustomizationVendor : MonoBehaviour
         
     }
 
+    private void SetHair (int index)
+    {
+        //set active
+        activeHairIndex = index;
+        SaveManager.Instance.state.activeAriHair = index;
 
+        
+        //change hair material
+        GameObjectHairSetting();
+
+        //change buy set text
+        hairBuySetText.text = "Equipped";
+         Debug.Log("ran set hair");
+
+        SaveManager.Instance.Save();
+    }
 
     private void UpdateMoneyText ()
     {
@@ -331,7 +371,7 @@ public class ETCCustomizationVendor : MonoBehaviour
             //is it alr current?
             if (activeAccessoryIndex == currentIndex)
             {
-                accessoryBuySetText.text = "Current Accessory!";
+                accessoryBuySetText.text = "Equipped";
             }else 
             {
                 accessoryBuySetText.text = "Select";
@@ -388,7 +428,7 @@ public class ETCCustomizationVendor : MonoBehaviour
              //is it alr current?
             if (activeTopIndex == currentIndex)
             {
-                topBuySetText.text = "Current Top!";
+                topBuySetText.text = "Equipped";
             }else 
             {
                 topBuySetText.text = "Select";
@@ -446,7 +486,7 @@ public class ETCCustomizationVendor : MonoBehaviour
              //is it alr current?
             if (activeBottomIndex == currentIndex)
             {
-                bottomBuySetText.text = "Current Bottom!";
+                bottomBuySetText.text = "Equipped";
             }else 
             {
                 bottomBuySetText.text = "Select";
@@ -487,7 +527,7 @@ public class ETCCustomizationVendor : MonoBehaviour
              //is it alr current?
             if (selectedSockIndex == currentIndex)
             {
-                sockBuySetText.text = "Current Sock!";
+                sockBuySetText.text = "Equipped";
             }else 
             {
                 sockBuySetText.text = "Select";
@@ -529,7 +569,7 @@ public class ETCCustomizationVendor : MonoBehaviour
              //is it alr current?
             if (selectedSkateIndex == currentIndex)
             {
-                skateBuySetText.text = "Current Skate!";
+                skateBuySetText.text = "Equipped";
             }else 
             {
                 skateBuySetText.text = "Select";
@@ -544,7 +584,47 @@ public class ETCCustomizationVendor : MonoBehaviour
         GameObjectSkateSetting();
     }
 
-    
+    private void OnHairSelect(int currentIndex)
+    {
+        Debug.Log("select hair button" + currentIndex);
+        //if clicked is alr active
+        if (selectedHairIndex == currentIndex)
+        {
+            return;
+        }
+
+
+         //if not make the icon bigger
+        hairPanel.GetChild(currentIndex).GetComponent<RectTransform>().localScale = Vector3.one * 1.125f;
+
+        //make the old one normal sized
+        hairPanel.GetChild(selectedHairIndex).GetComponent<RectTransform>().localScale = Vector3.one;
+
+        //set selected theme
+        selectedHairIndex = currentIndex;
+
+        // change content od buy set button
+        if (SaveManager.Instance.IsAriHairOwned(currentIndex))
+        {
+            //owned hair color
+             //is it alr current?
+            if (activeHairIndex == currentIndex)
+            {
+                hairBuySetText.text = "Equipped";
+            }else 
+            {
+                hairBuySetText.text = "Select";
+            }
+
+        }
+        else 
+        {
+            //not owned
+             hairBuySetText.text = "Buy " + hairCost[currentIndex].ToString();
+        }
+
+        GameObjectHairSetting();
+    }
 
 
 
@@ -723,6 +803,38 @@ public class ETCCustomizationVendor : MonoBehaviour
         
     }
 
+    public void OnHairBuySet ()
+    {
+        Debug.Log("buy or set hair");
+        
+        //is it owned
+        if (SaveManager.Instance.IsAriHairOwned(selectedHairIndex))
+        {
+            //set color hair
+            
+            SetHair(selectedHairIndex);
+        }
+        else
+        {
+            //attempt to buy
+            if (SaveManager.Instance.BuyAriHair(selectedHairIndex, hairCost[selectedHairIndex]))
+            {
+                //success
+                SetHair(selectedHairIndex);
+
+                //change color button
+                hairPanel.GetChild(selectedHairIndex).GetComponent<Image>().color = Color.white;
+
+                //update visual money text
+                UpdateMoneyText();
+
+            }else
+            {
+                Debug.Log("youre broke");
+            }
+
+        }
+    }
 
 
 
@@ -814,6 +926,22 @@ public class ETCCustomizationVendor : MonoBehaviour
         }
     }
 
+    public void GameObjectHairSetting ()
+    {
+        for (int i = 0; i <  ManagerREF.ariHairOptions.Length; i++)
+        {
+            if (selectedHairIndex != i)
+            {
+                //turn the object off
+                ManagerREF.ariHairOptions[i].SetActive(false);
+            } else 
+            {
+                //turn it on
+                ManagerREF.ariHairOptions[i].SetActive(true);
+            }
+        }
+    }
+
 
     
 
@@ -826,6 +954,7 @@ public class ETCCustomizationVendor : MonoBehaviour
         selectedBottomIndex = SaveManager.Instance.state.activeAriBottom;
         selectedSockIndex = SaveManager.Instance.state.activeAriSock;
         selectedSkateIndex = SaveManager.Instance.state.activeAriSkate;
+        selectedHairIndex = SaveManager.Instance.state.activeAriHair;
 
         
         //GameObjectAccessorySetting();
@@ -833,6 +962,7 @@ public class ETCCustomizationVendor : MonoBehaviour
         GameObjectBottomSetting();
         GameObjectSockSetting();
         GameObjectSkateSetting();
+        GameObjectHairSetting();
     
     }
 

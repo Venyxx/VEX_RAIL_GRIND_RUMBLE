@@ -76,7 +76,8 @@ public class OutfitSwapping : MonoBehaviour
         ManagerREF.ariSkateOptions[4] = GameObject.Find("craziTaxiSkate");
         ManagerREF.ariSkateOptions[5] = GameObject.Find("bruiseControl3");
 
-        //ManagerREF.ariHairOptions[6] = GameObject.Find("");
+        ManagerREF.ariHairOptions[0] = GameObject.Find("doubleBraidsRig");
+        ManagerREF.ariHairOptions[1] = GameObject.Find("messyBunsRig");
 
         //ManagerREF.ariAccessoryOptions[6] = GameObject.Find("");
 

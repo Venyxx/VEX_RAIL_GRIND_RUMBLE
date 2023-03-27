@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerInteractions : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class PlayerInteractions : MonoBehaviour
     private GameObject previewCamItself;
     private GameObject [] thingsToHide = new GameObject [2];
     private ETCCustomizationVendor ETCCusREF;
+
+    Scene m_scene;
 
     private void Start ()
     {
@@ -42,10 +45,13 @@ public class PlayerInteractions : MonoBehaviour
         previewCamItself = GameObject.Find ("CharacterPreviewCamera");
           if (previewCamItself)
             previewCamItself.SetActive(false);
+
          prompt = GameObject.Find("PromptController");
          if (prompt)
             prompt.SetActive(false);
-        canvas = GameObject.FindGameObjectWithTag("VendorCanvas");
+
+        canvas = GameObject.Find("VendorCanvas");
+        Debug.Log("the canvas is " + canvas);
         if (canvas)
             canvas.SetActive(false);
          
@@ -123,6 +129,16 @@ public class PlayerInteractions : MonoBehaviour
             
 
         }
+
+        m_scene = SceneManager.GetActiveScene();
+         
+        if (m_scene.name == "Ari's House")
+        {
+            foreach (GameObject g in thingsToHide) 
+            {
+                g.SetActive(false);
+            }
+        } 
             
 
 
