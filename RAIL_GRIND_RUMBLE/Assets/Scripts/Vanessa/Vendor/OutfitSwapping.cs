@@ -29,6 +29,7 @@ public class OutfitSwapping : MonoBehaviour
        {
         Instantiate(ETCOBJ);
         GameObject.Find("VendorCanvas").SetActive(false);
+        GameObject.Find("PromptController").SetActive(false);
        }
         
 

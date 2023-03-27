@@ -47,6 +47,7 @@ public class PlayerInteractions : MonoBehaviour
             previewCamItself.SetActive(false);
 
          prompt = GameObject.Find("PromptController");
+         Debug.Log(prompt);
          if (prompt)
             prompt.SetActive(false);
 
@@ -171,6 +172,7 @@ public class PlayerInteractions : MonoBehaviour
         canvas.SetActive(false);
         Cursor.visible = false;
         ETCCusREF.ResetOutfitToSaveState();
+        movementScriptREF.dialogueManager.freezePlayer = false;
 
     }
 
