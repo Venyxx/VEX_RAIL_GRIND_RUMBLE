@@ -6,6 +6,7 @@ public class CheckpointController : MonoBehaviour
     public static int LastScene { get; private set; }
     public static Vector3 lastCheckPointPosition;
     private GameObject ari;
+    [SerializeField] private int cutsceneToPlay;
 
     private Teleportation teleREF;
     private bool waypointAdvanced;
@@ -27,6 +28,11 @@ public class CheckpointController : MonoBehaviour
     {
         if (other.CompareTag("Player") || other.CompareTag("PlayerObject"))
         {
+            if (cutsceneToPlay != 0)
+            {
+                ProgressionManager.Get().PlayCutscene(cutsceneToPlay);
+            }
+            
             lastCheckPointPosition = this.gameObject.transform.position;
             if (!waypointAdvanced)
             {
@@ -35,6 +41,8 @@ public class CheckpointController : MonoBehaviour
                 totalRef.currentIndex++;
                 waypointAdvanced = true;
             }
+
+            
         }
     }
     

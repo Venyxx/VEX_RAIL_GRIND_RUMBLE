@@ -44,8 +44,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 14.26
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 1.4079422
+  m_Center: {x: 1.10395235e-11, y: 1.09868, z: 0.094127774}
 --- !u!114 &6050432086328859695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,6 +65,8 @@ MonoBehaviour:
   Movement: {fileID: 1495312388888140238}
   enemy: {fileID: 5265576555318656063}
   thrust: 10
+  BruteHit: 0
+  BruteWindingUp: 0
 --- !u!1 &1495312389010500589
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,7 +276,7 @@ MonoBehaviour:
     m_Bits: 4096
   LineOfSightChecker: {fileID: 1495312389010500594}
   UpdateSpeed: 0.1
-  Animator: {fileID: 2585217911223881419}
+  Animator: {fileID: 2388835082252076377}
   activationDistance: 20
   HideSensitivity: -0.7
   MinPlayerDistance: 5
@@ -399,8 +401,8 @@ MonoBehaviour:
   Movement: {fileID: 1495312388888140238}
   Agent: {fileID: 4694821488445018543}
   EnemyScriptableObject: {fileID: 11400000, guid: 79a9d8890c189ab4ca25ad842c0c3c38, type: 2}
-  Health: 100
-  Animator: {fileID: 2585217911223881419}
+  Health: 50
+  Animator: {fileID: 2388835082252076377}
   Ragdoll: {fileID: 3935559117946734428}
   _takeDamageDelay: 0.6
   dizzy: 0
@@ -892,7 +894,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -121308635253531743, guid: ae97833f3810fb345884d019f93c3243, type: 3}
       propertyPath: m_Materials.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -121308635253531743, guid: ae97833f3810fb345884d019f93c3243, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1010,6 +1012,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: f5a6ba62414cfcf4d958dfd2506156c4, type: 2}
+    - target: {fileID: 2393045467377369638, guid: ae97833f3810fb345884d019f93c3243, type: 3}
+      propertyPath: m_BlendShapeWeights.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2498842420254426001, guid: ae97833f3810fb345884d019f93c3243, type: 3}
       propertyPath: m_Layer
       value: 20
@@ -1038,6 +1044,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: f5a6ba62414cfcf4d958dfd2506156c4, type: 2}
+    - target: {fileID: 2813711654529438825, guid: ae97833f3810fb345884d019f93c3243, type: 3}
+      propertyPath: m_BlendShapeWeights.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2887439568031574373, guid: ae97833f3810fb345884d019f93c3243, type: 3}
       propertyPath: m_Layer
       value: 20

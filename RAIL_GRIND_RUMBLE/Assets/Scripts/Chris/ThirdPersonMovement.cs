@@ -206,7 +206,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
         //atkScript = GetComponent<PlayerAttack>(); //added by pete to fix raul's nullref since he was assigning this in the inspector
 
-        if (loadInDefaultLocation)
+        if (loadInDefaultLocation == true)
         {
             transform.position = LoadNewScene.locationVector;
         }
