@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,6 +8,7 @@ public class CheckpointController : MonoBehaviour
     private GameObject ari;
 
     private Teleportation teleREF;
+    private bool waypointAdvanced;
 
 
     private void Start()
@@ -31,6 +28,13 @@ public class CheckpointController : MonoBehaviour
         if (other.CompareTag("Player") || other.CompareTag("PlayerObject"))
         {
             lastCheckPointPosition = this.gameObject.transform.position;
+            if (!waypointAdvanced)
+            {
+                TotalWaypointController totalRef = FindObjectOfType<TotalWaypointController>();
+                if (totalRef == null) return;
+                totalRef.currentIndex++;
+                waypointAdvanced = true;
+            }
         }
     }
     

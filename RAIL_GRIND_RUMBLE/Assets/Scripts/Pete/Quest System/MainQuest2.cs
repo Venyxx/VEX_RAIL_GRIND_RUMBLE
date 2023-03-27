@@ -37,6 +37,7 @@ public class MainQuest2 : CountQuest
         base.IncrementCount("Posters Sprayed"); 
         if (isComplete)
         {
+            ProgressionManager.Get().PlayCutscene(3);
             IncrementWayPoint();
             GameObject jose = GameObject.Find("JoseDialogueTrigger");
             DialogueTemplate finishedDialogue = jose.GetComponent<JoseInnerRingManager>().joseQuestFinishedDialogue;

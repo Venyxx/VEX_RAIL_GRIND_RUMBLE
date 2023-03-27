@@ -25,6 +25,7 @@ public class ProgressionManager : MonoBehaviour
     public bool firstLoad = true;
 
     public bool grappleUnlocked;
+    public bool prologueComplete;
 
     public static ProgressionManager Get()
     {
@@ -54,7 +55,6 @@ public class ProgressionManager : MonoBehaviour
     
     void Start()
     {
-        
         try
         {
             QuestInfoText = GameObject.Find("QuestInfo").transform.Find("QuestInfoText").gameObject
@@ -64,6 +64,8 @@ public class ProgressionManager : MonoBehaviour
         {
             Debug.LogError("Failed to assign QuestInfoText");
         }
+        
+        PlayFirstCutscene();
         
     }
 
@@ -150,10 +152,11 @@ public class ProgressionManager : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         LoadObjects();
+
         if (!IsFinished(mainQuest1))
         {
             //Debug.Log("MAINQUEST1 IS NOT FINISHED");
-            //SetBusStopsActive(false);
+            SetBusStopsActive(false);
             if (mainQuest1 != null && currentQuest == mainQuest1)
             {
                 LoadMainQuest1();
@@ -173,6 +176,14 @@ public class ProgressionManager : MonoBehaviour
         if (mainQuest3 != null && !IsFinished(mainQuest3) && currentQuest == mainQuest3)
         {
             LoadMainQuest3();
+        }
+
+        if (mainQuest3 != null && IsFinished(mainQuest3) && !mainQuest3.RewardsGiven && SceneManager.GetActiveScene().name ==  "Ari's House")
+        {
+            PlayCutscene(4);
+            QuestInfoText.text = "Ask for intel about Diego";
+            prologueComplete = true;
+            mainQuest3.RewardPlayer();
         }
 
         /*if (currentQuest != mainQuest3 && SceneManager.GetActiveScene().name == "Outskirts")
@@ -283,5 +294,19 @@ public class ProgressionManager : MonoBehaviour
     public void SetQuestInfoText(string text)
     {
         QuestInfoText.text = text;
+    }
+
+    public void PlayFirstCutscene()
+    {
+        if (SceneManager.GetActiveScene().name == "Ari's House" && !firstAutoDialogueUsed)
+        {
+           
+            PlayCutscene(1);
+        }
+    }
+
+    public void PlayCutscene(int clip)
+    {
+        FindObjectOfType<CutscenePlayer>().PlayCutscene(clip);
     }
 }

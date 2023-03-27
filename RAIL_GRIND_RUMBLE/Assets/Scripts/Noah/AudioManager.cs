@@ -35,7 +35,14 @@ public class AudioManager : MonoBehaviour
        audioMixer.SetFloat("GameMusic", Mathf.Log10(sliderValue) * 20);
    }
 
-    public void SFXSlider(float volume)
+   public float GetMusicVolume()
+   {
+       float value = 0;
+       audioMixer.GetFloat("GameMusic", out value);
+       return value;
+   }
+
+   public void SFXSlider(float volume)
     {
         sfxTextUI.text = volume.ToString("0.0");
     }

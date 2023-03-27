@@ -50,10 +50,20 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
         if (currentHealth <= 0)
         {
-           
             currentHealth = 0;
-            SceneManager.LoadScene("LoseScene");
+            MainQuest3 mq3 = ProgressionManager.Get().mainQuest3;
+            if (mq3 != null && mq3.isComplete && !mq3.RewardsGiven)
+            {
+                ProgressionManager.Get().CompleteQuest();
+                SceneManager.LoadScene("Ari's House");
+            }
+            else
+            {
+                SceneManager.LoadScene("LoseScene");
+
+            }
         }
+        
     }
 
     public void GainHealth (float GainHealth)

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
@@ -9,14 +11,17 @@ public class CutscenePlayer : MonoBehaviour
     public VideoClip[] cutsceneClips;
     public RenderTexture[] cutsceneRTs;
     [SerializeField] Texture2D firstFrameTexture;
-    VideoPlayer videoPlayer;
+    public VideoPlayer videoPlayer;
     RawImage renderTexture;
     VideoController videoScript;
     public bool cutscenePlaying;
-    
+    private AudioSource musicSource;
+
+    private float prevMusicVolume;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        musicSource = GameObject.Find("Music").GetComponent<AudioSource>();
         videoPlayer = this.transform.GetChild(0).GetComponent<VideoPlayer>();
         renderTexture = this.transform.GetChild(1).GetComponent<RawImage>();
     }
@@ -40,12 +45,17 @@ public class CutscenePlayer : MonoBehaviour
         //Pause other game audio here
         /*AudioListener audio = GameObject.Find("Main Camera").GetComponent<AudioListener>();
         audio.pause = true;*/
+        
+        prevMusicVolume = musicSource.volume;
+        musicSource.volume = 0;
+        
 
         cutsceneRTs[clip].DiscardContents();
         Graphics.Blit(firstFrameTexture, cutsceneRTs[clip]);
 
         videoPlayer.clip = cutsceneClips[clip];
         videoPlayer.targetTexture = cutsceneRTs[clip];
+        Debug.Log(renderTexture == null);
         renderTexture.texture = cutsceneRTs[clip];
 
         videoPlayer.gameObject.SetActive(true);
@@ -58,10 +68,15 @@ public class CutscenePlayer : MonoBehaviour
         renderTexture.gameObject.SetActive(false);
 
         //Unpause other game audio here
-
-        //
+        musicSource.volume = prevMusicVolume;
 
         Time.timeScale = 1f;
         cutscenePlaying = false;
+    }
+
+    public void SkipCutscene(InputAction.CallbackContext context)
+    {
+        if (!context.started || !cutscenePlaying) return;
+        EndReached(videoPlayer);
     }
 }

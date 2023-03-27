@@ -1,5 +1,6 @@
 ﻿using Unity.VisualScripting;
 using System;
+using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,6 +13,7 @@ public class MainQuest1 : CountQuest
     private GameObject mainQuestParent;
     private TextMeshProUGUI questInfoText;
     private TotalWaypointController totalREF;
+    private bool cutscenePlayed = false;
     
     
     public override void IncrementCount()
@@ -59,8 +61,15 @@ public class MainQuest1 : CountQuest
 
     public void VanDestinationReached()
     {
+        if (!cutscenePlayed)
+        {
+            ProgressionManager.Get().PlayCutscene(2);
+            cutscenePlayed = true;
+        }
+
         destinationReached = true;
         questInfoText = ProgressionManager.Get().QuestInfoText;
         questInfoText.text = $"Goons Defeated: {currentCount} / {completionCount}";
+        
     }
 }

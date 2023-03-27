@@ -49,7 +49,7 @@ public class Quest
     }
     
 
-    public void RewardPlayer()
+    public virtual void RewardPlayer()
     {
         foreach (var reward in questRewards)
         {
@@ -66,7 +66,8 @@ public class Quest
                 player.AddCoin(-countQuest.GetCompletionCount());
             }
         }
-        
+
+        RewardsGiven = true;
     }
 
 }
