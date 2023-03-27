@@ -27,6 +27,8 @@ public class LoadNewScene : MonoBehaviour
     public static readonly Vector3 innerRingBusStop1Vector = new Vector3(-226.610001f, -6.48000002f, 755.119995f);
     public static readonly Vector3 innerRingDefaultSpawnVector = new Vector3(-8.75f, -6.48000002f, 896.5f);
 
+
+    public static readonly Vector3 servosHQDefaultSpawnVector = new Vector3(124.440002f,3.63000011f,29.5100002f);
     private void Awake()
     {
         if (!ProgressionManager.Get().firstLoad) return;
@@ -37,7 +39,6 @@ public class LoadNewScene : MonoBehaviour
             case ariHouse:
                 locationVector = ariRoomVector;
                 Debug.Log("AriRoom");
-
                 break;
             case outskirts:
                 locationVector = ariDoorOutsideVector;
@@ -48,6 +49,8 @@ public class LoadNewScene : MonoBehaviour
                 Debug.Log("Inner Ring");
                 break;
             case servosHQ:
+                locationVector = servosHQDefaultSpawnVector;
+                Debug.Log("Servos HQ");
                 break;
         }
 
@@ -89,7 +92,7 @@ public class LoadNewScene : MonoBehaviour
             case LoadLocation.ServosLotEntrance:
                 sceneName = servosHQ;
                 //MISSING VECTOR
-                locationVector = new Vector3();
+                locationVector = servosHQDefaultSpawnVector;
                 break;
             default:
                 //load ari's room in default case

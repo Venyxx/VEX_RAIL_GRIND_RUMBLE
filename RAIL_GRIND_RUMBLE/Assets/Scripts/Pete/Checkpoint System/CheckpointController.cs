@@ -7,6 +7,7 @@ public class CheckpointController : MonoBehaviour
     public static Vector3 lastCheckPointPosition;
     private GameObject ari;
     [SerializeField] private int cutsceneToPlay;
+    [SerializeField] private GameObject[] objectsToActivate;
 
     private Teleportation teleREF;
     private bool waypointAdvanced;
@@ -26,8 +27,20 @@ public class CheckpointController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        IDamageable damageable;
         if (other.CompareTag("Player") || other.CompareTag("PlayerObject"))
         {
+
+            foreach (GameObject obj in objectsToActivate)
+            {
+                obj.SetActive(true);
+            }
+
+            if (other.TryGetComponent<IDamageable>(out damageable))
+            {
+                damageable.GainHealth(100);
+            }
+            
             if (cutsceneToPlay != 0)
             {
                 ProgressionManager.Get().PlayCutscene(cutsceneToPlay);

@@ -66,7 +66,13 @@ public class ProgressionManager : MonoBehaviour
         }
         
         PlayFirstCutscene();
-        
+
+        if (firstLoad && (SceneManager.GetActiveScene().name == "Inner Ring Level" ||
+            SceneManager.GetActiveScene().name == "Servos HQ"))
+        {
+            grappleUnlocked = true;
+        }
+
     }
 
     private void Update()
@@ -190,6 +196,16 @@ public class ProgressionManager : MonoBehaviour
         {
             GameObject.Find("OpenGateQuest3").SetActive(true);
         }*/
+
+        if (SceneManager.GetActiveScene().name == "Servos HQ")
+        {
+            Debug.Log("LOADED SERVOS HQ");
+            PlayCutscene(6);
+        }
+        else
+        {
+            Debug.Log("DID NOT LOAD SERVOS HQ");
+        }
 
         HandleDiegoAutoDialogue();
     }

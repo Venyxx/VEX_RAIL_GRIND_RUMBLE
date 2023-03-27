@@ -343,7 +343,8 @@ public class ThirdPersonMovement : MonoBehaviour
          //if (isGrappling) return;
         
          if (context.started && Grounded)
-         {
+         { 
+             //Grounded = false;
             isJumping = true;
             jumpTimeCounter = 0.35f;
             _animator.SetBool(_animIDJump, true);

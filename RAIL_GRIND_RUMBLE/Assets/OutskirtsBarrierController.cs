@@ -6,6 +6,9 @@ public class OutskirtsBarrierController : MonoBehaviour
 {
     [SerializeField] private GameObject enemiesParent;
     [SerializeField] private GameObject[] barriers;
+    [SerializeField] private int quantity = 5;
+    [SerializeField] private bool quantityBased = false; 
+    
 
     private List<GameObject> enemies;
     void Start()
@@ -20,17 +23,40 @@ public class OutskirtsBarrierController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (AllEnemiesDefeated())
+        if (!quantityBased && AllEnemiesDefeated())
         {
             DestroyBarriers();
         }
+
+        if (quantityBased && CountDefeatedEnemies() >= quantity)
+        {
+            DestroyBarriers();
+        }
+    }
+
+    private int CountDefeatedEnemies()
+    {
+        int defeatedEnemyCount = 0;
+        foreach (var enemy in enemies)
+        {
+            if (!enemy.activeInHierarchy)
+            {
+                defeatedEnemyCount++;
+            }
+        }
+
+        return defeatedEnemyCount;
     }
 
     private bool AllEnemiesDefeated()
     {
         foreach (var enemy in enemies)
         {
-            if (enemy.activeInHierarchy) return false;
+            if (enemy.activeInHierarchy)
+            {
+                
+                return false;
+            }
         }
 
         return true;

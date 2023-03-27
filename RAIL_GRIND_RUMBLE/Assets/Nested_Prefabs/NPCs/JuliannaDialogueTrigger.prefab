@@ -9979,6 +9979,7 @@ GameObject:
   - component: {fileID: 8985079020068019686}
   - component: {fileID: 8985079020068019685}
   - component: {fileID: 8985079020068019684}
+  - component: {fileID: -5763252842506819254}
   m_Layer: 0
   m_Name: JuliannaDialogueTrigger
   m_TagString: Untagged
@@ -10079,11 +10080,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue:
     paragraphs:
-    - speakerName: Julianna
-      englishDialogue: 'It''s Juliannin'' time '
+    - speakerName: Ariadna
+      englishDialogue: Hola Julie.
       englishVoiceLine: {fileID: 0}
-    - speakerName: Ari
-      englishDialogue: That's cringe and you're weird
+    - speakerName: Julianna
+      englishDialogue: "Buenos dias. I\u2019m glad to see you awake.\r\n"
+      englishVoiceLine: {fileID: 0}
+    - speakerName: Ariadna
+      englishDialogue: "How\u2019s life?\r\n"
+      englishVoiceLine: {fileID: 0}
+    - speakerName: Julianna
+      englishDialogue: "Oh, you know\u2026 Servos hot on my tail while I dig too
+        deep. Same ol\u2019 same ol\u2019.\r\n"
+      englishVoiceLine: {fileID: 0}
+    - speakerName: Ariadna
+      englishDialogue: Yeah, the usual I guess. Stay safe though.
+      englishVoiceLine: {fileID: 0}
+    - speakerName: Julianna
+      englishDialogue: "I won\u2019t!\r\n"
       englishVoiceLine: {fileID: 0}
 --- !u!114 &8985079020068019685
 MonoBehaviour:
@@ -10218,6 +10232,14 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 87d087a2-176c-42d6-8a32-b9e3ed8a2fdf
     m_ActionName: Menus/MissionsTabPrevious
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9483b822-e0e3-4a0a-82e1-bcc52d77b365
+    m_ActionName: Player/Interact[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: fdc74d54-569f-4908-ac64-a6a6566720bd
+    m_ActionName: Player/SkipCutscene[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -10251,6 +10273,39 @@ MonoBehaviour:
   questDescrText: {fileID: 0}
   questRewardText: {fileID: 0}
   acceptedOrDeniedAlready: 0
+--- !u!114 &-5763252842506819254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8985079020068019681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f383582e1d7d4fe7b26b32c2f6e62423, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  secondSetDialogue:
+    paragraphs:
+    - speakerName: Ariadna
+      englishDialogue: 'Julie, got any clue where Diego might be?
+
+'
+      englishVoiceLine: {fileID: 0}
+    - speakerName: Julianna
+      englishDialogue: "Looking at the facts, it\u2019s most likely that the Craneo
+        Azul took Diego for Servos. That probably means they\u2019re going to hand 
+        him off soon.\r\n"
+      englishVoiceLine: {fileID: 0}
+    - speakerName: Julianna
+      englishDialogue: 'That means we have to be quick about this.
+
+'
+      englishVoiceLine: {fileID: 0}
+    - speakerName: Julianna
+      englishDialogue: "You could probably find a lead at the skatepark. Reports
+        say that\u2019s one of Craneo Azul\u2019s prime selling locations."
+      englishVoiceLine: {fileID: 0}
 --- !u!1 &9028050595901306149
 GameObject:
   m_ObjectHideFlags: 0
