@@ -155,13 +155,14 @@ public class ETCCustomizationVendor : MonoBehaviour
 
         foreach (Transform t in topPanel)
         {
+            Debug.Log("setting buttons for tops");
             int currentIndex = i;
             Button b = t.GetComponent<Button>();
             b.onClick.AddListener(() => OnTopSelect(currentIndex));
 
             //set theme if owned
             Image img = t.GetComponent<Image>();
-            img.color = SaveManager.Instance.IsGraffitiOwned(i) ? Color.white : new Color (0.7f, 0.7f, 0.7f);
+            img.color = SaveManager.Instance.IsAriTopOwned(i) ? Color.white : new Color (0.7f, 0.7f, 0.7f);
 
             i++;
         }
@@ -234,7 +235,7 @@ public class ETCCustomizationVendor : MonoBehaviour
         //GameObjectAccessorySetting();
 
         //change buy set text
-        accessoryBuySetText.text = "Current Accessory!";
+        accessoryBuySetText.text = "Equipped";
          Debug.Log("ran set accessory");
 
         SaveManager.Instance.Save();
@@ -250,11 +251,12 @@ public class ETCCustomizationVendor : MonoBehaviour
         
         //change hair material
         GameObjectTopSetting();
+        Debug.Log("Settop method");
 
         
 
         //change buy set text
-        topBuySetText.text = "Current Top!";
+        topBuySetText.text = "Equipped";
          Debug.Log("ran set top");
 
         SaveManager.Instance.Save();
@@ -271,7 +273,7 @@ public class ETCCustomizationVendor : MonoBehaviour
         GameObjectBottomSetting();
 
         //change buy set text
-        bottomBuySetText.text = "Current Bottom!";
+        bottomBuySetText.text = "Equipped";
          Debug.Log("ran set bottom");
 
         SaveManager.Instance.Save();
@@ -288,7 +290,7 @@ public class ETCCustomizationVendor : MonoBehaviour
         GameObjectSockSetting();
 
         //change buy set text
-        sockBuySetText.text = "Current Sock!";
+        sockBuySetText.text = "Equipped";
          Debug.Log("ran set sock");
 
         SaveManager.Instance.Save();
@@ -305,7 +307,7 @@ public class ETCCustomizationVendor : MonoBehaviour
         GameObjectSkateSetting();
 
         //change buy set text
-        skateBuySetText.text = "Current Skate!";
+        skateBuySetText.text = "Equipped";
          Debug.Log("ran set skate");
 
         thirdPersonMovementREF.RecalculateStats();
@@ -325,7 +327,7 @@ public class ETCCustomizationVendor : MonoBehaviour
         GameObjectHairSetting();
 
         //change buy set text
-        hairBuySetText.text = "Current hair!";
+        hairBuySetText.text = "Equipped";
          Debug.Log("ran set hair");
 
         SaveManager.Instance.Save();
@@ -369,7 +371,7 @@ public class ETCCustomizationVendor : MonoBehaviour
             //is it alr current?
             if (activeAccessoryIndex == currentIndex)
             {
-                accessoryBuySetText.text = "Current Accessory!";
+                accessoryBuySetText.text = "Equipped";
             }else 
             {
                 accessoryBuySetText.text = "Select";
@@ -426,7 +428,7 @@ public class ETCCustomizationVendor : MonoBehaviour
              //is it alr current?
             if (activeTopIndex == currentIndex)
             {
-                topBuySetText.text = "Current Top!";
+                topBuySetText.text = "Equipped";
             }else 
             {
                 topBuySetText.text = "Select";
@@ -484,7 +486,7 @@ public class ETCCustomizationVendor : MonoBehaviour
              //is it alr current?
             if (activeBottomIndex == currentIndex)
             {
-                bottomBuySetText.text = "Current Bottom!";
+                bottomBuySetText.text = "Equipped";
             }else 
             {
                 bottomBuySetText.text = "Select";
@@ -525,7 +527,7 @@ public class ETCCustomizationVendor : MonoBehaviour
              //is it alr current?
             if (selectedSockIndex == currentIndex)
             {
-                sockBuySetText.text = "Current Sock!";
+                sockBuySetText.text = "Equipped";
             }else 
             {
                 sockBuySetText.text = "Select";
@@ -567,7 +569,7 @@ public class ETCCustomizationVendor : MonoBehaviour
              //is it alr current?
             if (selectedSkateIndex == currentIndex)
             {
-                skateBuySetText.text = "Current Skate!";
+                skateBuySetText.text = "Equipped";
             }else 
             {
                 skateBuySetText.text = "Select";
@@ -608,7 +610,7 @@ public class ETCCustomizationVendor : MonoBehaviour
              //is it alr current?
             if (activeHairIndex == currentIndex)
             {
-                hairBuySetText.text = "Current Theme!";
+                hairBuySetText.text = "Equipped";
             }else 
             {
                 hairBuySetText.text = "Select";
