@@ -43,28 +43,28 @@ public class OutfitSwapping : MonoBehaviour
 
         //sry gonna hard code
         Debug.Log("fit setting");
-        ManagerREF.ariTopOptions[0] = GameObject.Find("frillyTopA");
+        ManagerREF.ariTopOptions[0] = GameObject.Find("OG_top");
         ManagerREF.ariTopOptions[1] = GameObject.Find("frillyTopB");
         ManagerREF.ariTopOptions[2] = GameObject.Find("longSleeveA");
         ManagerREF.ariTopOptions[3] = GameObject.Find("longSleeveB");
-        ManagerREF.ariTopOptions[4] = GameObject.Find("OG_top");
+        ManagerREF.ariTopOptions[4] = GameObject.Find("frillyTopA");
         ManagerREF.ariTopOptions[5] = GameObject.Find("oversizedShirt");
         ManagerREF.ariTopOptions[6] = GameObject.Find("shortSleeveA");
         ManagerREF.ariTopOptions[7] = GameObject.Find("shortSleeveB");
         ManagerREF.ariTopOptions[8] = GameObject.Find("suitJacket");
-        ManagerREF.ariTopOptions[9] = GameObject.Find("suitTie");
-        ManagerREF.ariTopOptions[10] = GameObject.Find("tankTopA");
-        ManagerREF.ariTopOptions[11] = GameObject.Find("tankTopB");
-        ManagerREF.ariTopOptions[12] = GameObject.Find("tubeTopA");
+        //ManagerREF.ariTopOptions[9] = GameObject.Find("suitTie");
+        ManagerREF.ariTopOptions[9] = GameObject.Find("tankTopA");
+        ManagerREF.ariTopOptions[10] = GameObject.Find("tankTopB");
+        ManagerREF.ariTopOptions[11] = GameObject.Find("tubeTopA");
 
 
-        ManagerREF.ariBottomOptions[0] = GameObject.Find("longPantssA");
+        ManagerREF.ariBottomOptions[0] = GameObject.Find("OG_pants");
         ManagerREF.ariBottomOptions[1] = GameObject.Find("longPantsB");
         ManagerREF.ariBottomOptions[2] = GameObject.Find("longPantsC");
-        ManagerREF.ariBottomOptions[3] = GameObject.Find("OG_pants");
-        ManagerREF.ariBottomOptions[4] = GameObject.Find("OG_pants2");
-        ManagerREF.ariBottomOptions[5] = GameObject.Find("shorts_Aa");
-        ManagerREF.ariBottomOptions[6] = GameObject.Find("shorts_B");
+        ManagerREF.ariBottomOptions[3] = GameObject.Find("longPantssA");
+        //ManagerREF.ariBottomOptions[4] = GameObject.Find("OG_pants2");
+        ManagerREF.ariBottomOptions[4] = GameObject.Find("shorts_Aa");
+        ManagerREF.ariBottomOptions[5] = GameObject.Find("shorts_B");
 
 
         ManagerREF.ariSockOptions[0] = GameObject.Find("lowSocks");
