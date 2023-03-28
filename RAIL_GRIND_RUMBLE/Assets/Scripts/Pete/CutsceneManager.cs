@@ -17,7 +17,7 @@ public class CutsceneManager : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
-        SceneManager.LoadScene(sceneName);
+            SceneManager.LoadScene(sceneName);
     }
 
     IEnumerator SceneChange()
