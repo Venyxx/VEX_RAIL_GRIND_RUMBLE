@@ -12,13 +12,17 @@ public class FontManager : MonoBehaviour
     public List<TMP_Text> Rebound = new List<TMP_Text>();
     public List<TMP_Text> JackArmstrong = new List<TMP_Text>();
     public List<TMP_Text> Liberation = new List<TMP_Text>();
+    public List<TMP_Text> Graffiti = new List<TMP_Text>();
     public TMP_Text[] Texts;
     public TMP_FontAsset urbanHeroesFont;
     public TMP_FontAsset reboundFont;
     public TMP_FontAsset jackArmstrongFont;
     public TMP_FontAsset liberationFont;
     public TMP_FontAsset openDyslexicFont;
+    public TMP_FontAsset graffitiFont;
     [SerializeField] private Toggle DyslexiaTog = null;
+
+    public static bool dyslexiaMode = false;
 
 
 
@@ -48,6 +52,11 @@ public class FontManager : MonoBehaviour
             {
                 Liberation.Add(Texts[i]);
             }
+            
+            if (Texts[i].font == graffitiFont)
+            {
+                Graffiti.Add(Texts[i]);
+            }
         }
        
         
@@ -56,7 +65,14 @@ public class FontManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-     
+        if (dyslexiaMode == true)
+        {
+            DyslexiaTog.GetComponent<Toggle>().isOn = true;
+        }
+        else
+        {
+            DyslexiaTog.GetComponent<Toggle>().isOn = false;
+        }
     }
 
     public void DylexiaToggle()
@@ -64,10 +80,12 @@ public class FontManager : MonoBehaviour
         if (DyslexiaTog.GetComponent<Toggle>().isOn == false)
         {
             DeactivateDyslexiaFriendlyFont();
+            dyslexiaMode = false;
         }
         else
         {
             ActivateDyslexiaFriendlyFont();
+            dyslexiaMode = true;
         }
     }
 
@@ -97,6 +115,14 @@ public class FontManager : MonoBehaviour
             Liberation[i].font = openDyslexicFont;
             Liberation[i].enableAutoSizing = true;
         }
+        
+        for (int i = 0; i < Graffiti.Count; i++)
+        {
+            Graffiti[i].font = openDyslexicFont;
+            Graffiti[i].enableAutoSizing = true;
+        }
+        
+        
     }
 
     public void DeactivateDyslexiaFriendlyFont()
@@ -119,6 +145,11 @@ public class FontManager : MonoBehaviour
         for (int i = 0; i < Liberation.Count; i++)
         {
             Liberation[i].font = liberationFont;
+        }
+        
+        for (int i = 0; i < Graffiti.Count; i++)
+        {
+            Graffiti[i].font = graffitiFont;
         }
     }
 }
