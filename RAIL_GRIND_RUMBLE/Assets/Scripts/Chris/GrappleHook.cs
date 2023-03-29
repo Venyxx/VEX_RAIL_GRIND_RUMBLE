@@ -575,7 +575,7 @@ public class GrappleHook : MonoBehaviour
             StopSwing();
 
             //Check for held object type
-            if (collision.gameObject.name == "Drone" || collision.gameObject.name == "Drone(Clone)")
+            if (collision.gameObject.GetComponent<Drone>() != null)
             {
                 throwObjectScript.SpawnHeldObject("Drone");
             } else {

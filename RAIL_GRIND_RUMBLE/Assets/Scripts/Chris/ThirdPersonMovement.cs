@@ -326,9 +326,15 @@ public class ThirdPersonMovement : MonoBehaviour
 
 
         //DEBUG
-        if (Input.GetKeyDown(KeyCode.Keypad9) && GameObject.Find("Phase2Teleport"))
+        if (Input.GetKeyDown(KeyCode.Keypad9))
         {
-            transform.position = GameObject.Find("Phase2Teleport").transform.position;
+            if (GameObject.Find("Phase2Teleport"))
+            {
+                transform.position = GameObject.Find("Phase2Teleport").transform.position;
+            } else if (GameObject.Find("HernandezTeleport"))
+            {
+                transform.position = GameObject.Find("HernandezTeleport").transform.position;
+            }
         }
     }
 
