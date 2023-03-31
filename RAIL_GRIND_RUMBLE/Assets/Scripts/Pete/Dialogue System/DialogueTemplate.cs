@@ -42,7 +42,8 @@ public struct DialogueParagraph
     public AudioClip englishVoiceLine;
     //[TextArea(3,10)] public string spanishDialogue;
     //public AudioClip spanishVoiceLine;
-    //public SOMETHING facialAnimation;
+    //public Animator facialAnimation;
+    
 
 
 }

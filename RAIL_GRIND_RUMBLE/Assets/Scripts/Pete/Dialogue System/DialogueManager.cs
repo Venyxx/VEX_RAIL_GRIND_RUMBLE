@@ -4,9 +4,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using Cinemachine;
 
 public class DialogueManager : MonoBehaviour
 { 
+
+    //RAUL FACIAL ANIM//////////////////////////////////////////////////////////////////////////
+    public bool isTalking = false;
+    public bool doneTalking = false;
+    // [SerializeField]
+    // private CinemachineVirtualCamera BasicCam;
+    // private CinemachineVirtualCamera NPCTalkingCam;
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////
+
+
     public TextMeshProUGUI textComponent;
     public TextMeshProUGUI talkingToName;
     public GameObject dialogueBox;
@@ -94,6 +107,9 @@ public class DialogueManager : MonoBehaviour
     
     public void StartNPCDialogue(DialogueTemplate dialogue)
     {
+       
+
+
         /*Debug.Log("Attempting to call StartNPCDialogue");
         Debug.Log($"Is dialogue null? {dialogue == null}");
         Debug.Log($"Is dialogue.dialogueTrigger null? {dialogue.dialogueTrigger == null}");
@@ -127,6 +143,13 @@ public class DialogueManager : MonoBehaviour
 
     private void PlayDialogue(DialogueTemplate dialogue)
     {
+         //RAUL FACIAL ANIM//////////////////////////////////////////////////////////////////////////
+        isTalking = true;
+        Debug.Log("IsTALKING");
+        // SwitchPriority();
+
+        ////////////////////////////////////////////////////////////////////////////////////////////
+        
         dialogueBox.SetActive(true);
         talkPrompt.SetActive(false);
         isBoxActive = true;
@@ -219,6 +242,16 @@ public class DialogueManager : MonoBehaviour
 
     private void EndDialogue(string text)
     {
+
+         //RAUL FACIAL ANIM//////////////////////////////////////////////////////////////////////////
+        isTalking = false;
+        doneTalking = true;
+        Debug.Log("DONESPEAKING");
+        // SwitchPriority();
+
+        ////////////////////////////////////////////////////////////////////////////////////////////
+        
+        
         dialogueBox.SetActive(false);
         isBoxActive = false;
         freezePlayer = false;

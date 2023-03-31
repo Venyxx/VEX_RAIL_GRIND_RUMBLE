@@ -12,6 +12,11 @@ public class DialogueBox : MonoBehaviour
     public string[] lines;
     public float textSpeed;
     private int conversationIndex;
+
+    
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +47,8 @@ public class DialogueBox : MonoBehaviour
     {
         conversationIndex = 0;
         StartCoroutine(TypeLine());
+
+    
     }
 
     IEnumerator TypeLine()

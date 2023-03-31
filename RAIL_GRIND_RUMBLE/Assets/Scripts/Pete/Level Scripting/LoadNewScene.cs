@@ -33,12 +33,12 @@ public class LoadNewScene : MonoBehaviour
     {
         if (!ProgressionManager.Get().firstLoad) return;
         
-        Debug.Log("Spawning Ari at default location");
+        //Debug.Log("Spawning Ari at default location");
         switch (SceneManager.GetActiveScene().name)
         {
             case ariHouse:
                 locationVector = ariRoomVector;
-                Debug.Log("AriRoom");
+                //Debug.Log("AriRoom");
                 break;
             case outskirts:
                 locationVector = ariDoorOutsideVector;

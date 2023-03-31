@@ -18,6 +18,7 @@ public class ThirdPersonCamera : MonoBehaviour
     private CinemachineFreeLook _freeLook;
     private DialogueManager dialogueManager;
     private float rotationSpeed = 7f;
+    
 
     //Aiming
     public GameObject basicCamREF;
@@ -124,6 +125,11 @@ public class ThirdPersonCamera : MonoBehaviour
                 }
                 
             }
+
+
+            
+           
+            
             
         
         }
@@ -183,4 +189,6 @@ public class ThirdPersonCamera : MonoBehaviour
         currentStyle = newStyle;
     }
 
+
+     
 }
