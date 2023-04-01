@@ -4,13 +4,14 @@ using UnityEngine;
 public class ObjectPool
 {
     private PoolableObject Prefab;
-    private int Size;
+    private int Size = 1000;
     private List<PoolableObject> AvailableObjectsPool;
 
     private ObjectPool(PoolableObject Prefab, int Size)
     {
         this.Prefab = Prefab;
-        this.Size = Size;
+        //this.Size = Size;
+        this.Size = 1000;
         AvailableObjectsPool = new List<PoolableObject>(Size);
     }
 

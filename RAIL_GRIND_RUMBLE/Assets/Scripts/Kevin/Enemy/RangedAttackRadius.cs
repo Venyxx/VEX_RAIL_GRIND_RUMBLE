@@ -39,7 +39,20 @@ public class RangedAttackRadius : AttackRadius
             }
             if (targetDamageable != null)
             {
-                PoolableObject poolableObject = BulletPool.GetObject();
+                //Instantiate(BulletPrefab);
+
+
+                //bullet = gameObject.GetComponent<Bullet>();
+
+                //    bullet.Damage = Damage;
+                //    bullet.transform.position = transform.position + BulletSpawnOffset;
+                //    bullet.transform.rotation = Agent.transform.rotation;
+                //    bullet.Rigidbody.AddForce(Agent.transform.forward * BulletPrefab.MoveSpeed, ForceMode.VelocityChange);
+
+
+                
+
+               PoolableObject poolableObject = BulletPool.GetObject();
                 if (poolableObject != null)
                 {
                     bullet = poolableObject.GetComponent<Bullet>();
