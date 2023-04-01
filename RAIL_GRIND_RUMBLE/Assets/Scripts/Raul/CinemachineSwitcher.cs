@@ -10,6 +10,7 @@ public class CinemachineSwitcher : MonoBehaviour
     [SerializeField]
     private CinemachineVirtualCamera NPCTalkingCam;
     private DialogueManager dialogueManager;
+    private AutomaticDialogueTrigger autoDialogue;
     private bool startDetecting = false;
 
     // Start is called before the first frame update
@@ -17,6 +18,7 @@ public class CinemachineSwitcher : MonoBehaviour
     void Start()
     {
         dialogueManager = FindObjectOfType<DialogueManager>();
+        //autoDialogue = FindObjectOfType<AutomaticDialogueTrigger>();
         //BasicCam = FindObjectOfType<BasicCam>();
     }
 

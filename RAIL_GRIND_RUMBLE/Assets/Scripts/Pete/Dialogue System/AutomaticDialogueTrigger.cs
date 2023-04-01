@@ -6,6 +6,7 @@ public class AutomaticDialogueTrigger : MonoBehaviour
     public DialogueTemplate dialogue;
     [SerializeField] private bool oneTimeUse;
     private bool used;
+    
 
     [SerializeField] private bool freezePlayer;
 
@@ -18,6 +19,7 @@ public class AutomaticDialogueTrigger : MonoBehaviour
             if (freezePlayer)
             {
                 dialogueManager.StartAutoFreezeDialogue(dialogue);
+                
             }
             else
             {
