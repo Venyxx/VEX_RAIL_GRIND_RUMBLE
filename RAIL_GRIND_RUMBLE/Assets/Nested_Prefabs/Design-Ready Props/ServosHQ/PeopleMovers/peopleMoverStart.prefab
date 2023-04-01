@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 3150565480509186040, guid: d99f65e7d0635a34b9cd6371037321f2, type: 3}
+  - {fileID: 2100000, guid: 66db6d2b0d0c42f4bbe2e6dc4e570b90, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -92,6 +92,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6867048817440949930}
+  - component: {fileID: 8037835259044739725}
+  - component: {fileID: 7225568526878085308}
   m_Layer: 0
   m_Name: peopleMoverStart
   m_TagString: Untagged
@@ -116,6 +118,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8037835259044739725
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8115267693134993464}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.41080087, y: 1.5954471, z: 4.14579}
+  m_Center: {x: 0.14132378, y: 0.774204, z: 1.94}
+--- !u!65 &7225568526878085308
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8115267693134993464}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.41080087, y: 1.5954471, z: 4.14579}
+  m_Center: {x: 3, y: 0.774204, z: 1.94}
 --- !u!1 &8225585094090414904
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,7 +205,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 664172949095926152, guid: d99f65e7d0635a34b9cd6371037321f2, type: 3}
+  - {fileID: 2100000, guid: c3f0c581679210743aa8c9bbf92987b0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
