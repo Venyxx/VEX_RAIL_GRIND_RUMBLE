@@ -29,4 +29,6 @@ public class AutomaticDialogueTrigger : MonoBehaviour
             ProgressionManager.Get().SetFirstAutoDialogueUsed();
         }
     }
+
+     
 }
