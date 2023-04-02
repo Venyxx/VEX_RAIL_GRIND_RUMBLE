@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class fastLight3Start : StateMachineBehaviour
 {
+    
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
+
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         PlayerAttack.instance.Damage = 20;
         PlayerAttack.instance.Weapon.enabled = true;
-        PlayerAttack.instance.movementScriptREF.currentSpeed = 0;
+         PlayerAttack.instance.movementScriptREF.currentSpeed = 0;
         PlayerAttack.instance.movementScriptREF.dialogueManager.freezePlayer = true;
+        
+
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

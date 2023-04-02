@@ -8,7 +8,7 @@ public class fastLightTransition3 : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         PlayerAttack.instance.Weapon.enabled = false;
-
+        PlayerAttack.instance.movementScriptREF.currentSpeed = 0;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -20,9 +20,10 @@ public class fastLightTransition3 : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        PlayerAttack.instance.movementScriptREF.currentSpeed = 0;
         PlayerAttack.instance.IsAttacking = false;
         PlayerAttack.instance.atkCount = 0;
-        PlayerAttack.instance.movementScriptREF.CombatPause = false;
+        //PlayerAttack.instance.movementScriptREF.CombatPause = false;
         PlayerAttack.instance.movementScriptREF.dialogueManager.freezePlayer = false;
     }
 
