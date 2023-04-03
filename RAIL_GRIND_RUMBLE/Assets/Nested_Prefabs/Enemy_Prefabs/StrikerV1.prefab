@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 1495312388888140238}
   - component: {fileID: 5854847052674931944}
   - component: {fileID: 5265576555318656063}
+  - component: {fileID: 6092601883503850215}
   m_Layer: 10
   m_Name: StrikerV1
   m_TagString: Untagged
@@ -407,6 +408,26 @@ MonoBehaviour:
   dizzy: 0
   isDizzy: 0
   damageText: {fileID: 3432252478998060102, guid: 896df2592015e3141ae952a379c8dee7, type: 3}
+--- !u!95 &6092601883503850215
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4694821488445018542}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5926c455f6167e6479152843d47e3553, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8806937911219802743
 GameObject:
   m_ObjectHideFlags: 0
@@ -1598,6 +1619,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animator: {fileID: 5823354347041916475}
+  ragdollAnimator: {fileID: 6092601883503850215}
   RagdollRoot: {fileID: 90552939770865051}
   StartRagdoll: 0
   Rigidbodies: []

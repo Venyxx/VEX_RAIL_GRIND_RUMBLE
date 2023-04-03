@@ -80,7 +80,9 @@ public class Enemy : PoolableObject, IDamageable
     {
         if (!Movement.IsBrute)
         {
-            Animator.SetTrigger(ATTACK_TRIGGER);
+            //Animator.SetTrigger(ATTACK_TRIGGER);
+            //Animator.SetBool("isAttacking", true);
+            StartCoroutine(PunchAnimCooldown());
             if (LookCoroutine != null)
             {
                 StopCoroutine(LookCoroutine);
@@ -105,6 +107,16 @@ public class Enemy : PoolableObject, IDamageable
 
         }
     }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public IEnumerator PunchAnimCooldown()
+    {
+        Animator.SetBool("isAttacking", true);
+        yield return new WaitForSeconds(1);
+        Animator.SetBool("isAttacking", false);
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private IEnumerator LookAt (Transform Target)
     {
@@ -208,7 +220,8 @@ public class Enemy : PoolableObject, IDamageable
           
             
                 Ragdoll.StartRagdoll = true;
-                
+                Debug.Log("START RAGDOLL");
+                //Animator.SetBool("ragdollEnabled", true);
             
             
             
@@ -248,11 +261,12 @@ public class Enemy : PoolableObject, IDamageable
             if(!dizzy && !isDizzy)
             {
                 Animator.SetTrigger("TakeDamage");
+                Animator.SetBool("isDamaged", true);
             }
                 
                 yield return new WaitForSeconds(_takeDamageDelay);
                 CanTakeDamage = true;
-
+                 Animator.SetBool("isDamaged", false);
             
         }
 

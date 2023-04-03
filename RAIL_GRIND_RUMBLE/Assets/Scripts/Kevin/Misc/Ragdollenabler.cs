@@ -5,6 +5,8 @@ public class Ragdollenabler : MonoBehaviour
     [SerializeField]
     private Animator Animator;
     [SerializeField]
+    private Animator ragdollAnimator;
+    [SerializeField]
     private Transform RagdollRoot;
     [SerializeField]
     public bool StartRagdoll = false;
@@ -12,6 +14,7 @@ public class Ragdollenabler : MonoBehaviour
     public Rigidbody[] Rigidbodies;
     private CharacterJoint[] Joints;
     private Collider[] Colliders;
+    
 
     private void Awake()
     {
@@ -22,6 +25,7 @@ public class Ragdollenabler : MonoBehaviour
         if (StartRagdoll)
         {
             EnableRagdoll();
+            
         }
         else
         {
@@ -35,10 +39,12 @@ public class Ragdollenabler : MonoBehaviour
         if (StartRagdoll)
         {
             EnableRagdoll();
+            ragdollAnimator.SetBool("ragdollEnabled", true);
         }
     }
     public void EnableRagdoll()
     {
+        
         
         StartRagdoll = false;
         Animator.enabled = false;
@@ -56,6 +62,8 @@ public class Ragdollenabler : MonoBehaviour
             rigidbody.detectCollisions = true;
             rigidbody.useGravity = true;
         }
+
+
        // StartRagdoll = false;
     }
 
@@ -75,6 +83,8 @@ public class Ragdollenabler : MonoBehaviour
             rigidbody.detectCollisions = false;
             rigidbody.useGravity = false;
         }
+
+        
     }
 }
 
