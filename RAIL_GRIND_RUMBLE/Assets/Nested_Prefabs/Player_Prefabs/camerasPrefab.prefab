@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 2.5, z: -4}
+  m_FollowOffset: {x: 0, y: 1, z: -4}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -219,6 +219,7 @@ GameObject:
   - component: {fileID: 8133835763515570415}
   - component: {fileID: 7121131042636465018}
   - component: {fileID: 5352124541046040718}
+  - component: {fileID: 3103055091934788545}
   m_Layer: 0
   m_Name: interiorLookCam
   m_TagString: Untagged
@@ -283,7 +284,7 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_YAxis:
-    Value: 1
+    Value: 0.5
     m_SpeedMode: 0
     m_MaxSpeed: 2
     m_AccelTime: 0.2
@@ -379,7 +380,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CollideAgainst:
     serializedVersion: 2
-    m_Bits: 257
+    m_Bits: 256
   m_IgnoreTag: Player
   m_TransparentLayers:
     serializedVersion: 2
@@ -426,6 +427,21 @@ MonoBehaviour:
   m_Offset: {x: 0.67, y: 1.73, z: 0.11}
   m_ApplyAfter: 1
   m_PreserveComposition: 0
+--- !u!114 &3103055091934788545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1845531741663803199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e452418c72823b1489a06403d67e5f2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentlyInTheWay: []
+  alreadyTransparent: []
+  player: {fileID: 0}
 --- !u!1 &3528749936499095890
 GameObject:
   m_ObjectHideFlags: 3
@@ -1238,7 +1254,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 2.5, z: -4}
+  m_FollowOffset: {x: 0, y: 1, z: -4}
   m_XDamping: 0.7
   m_YDamping: 0.7
   m_ZDamping: 0.7
@@ -1447,6 +1463,7 @@ GameObject:
   - component: {fileID: 3528749937666218127}
   - component: {fileID: 2114923123}
   - component: {fileID: 8020874222474336319}
+  - component: {fileID: 6405674960233430761}
   m_Layer: 0
   m_Name: BasicCam
   m_TagString: Untagged
@@ -1511,7 +1528,7 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_YAxis:
-    Value: 1
+    Value: 0.5
     m_SpeedMode: 0
     m_MaxSpeed: 2
     m_AccelTime: 0.2
@@ -1654,6 +1671,21 @@ MonoBehaviour:
   m_Offset: {x: 0, y: 2, z: 0}
   m_ApplyAfter: 1
   m_PreserveComposition: 0
+--- !u!114 &6405674960233430761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3528749937666218131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e452418c72823b1489a06403d67e5f2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentlyInTheWay: []
+  alreadyTransparent: []
+  player: {fileID: 0}
 --- !u!1 &3528749937836915246
 GameObject:
   m_ObjectHideFlags: 0
@@ -1952,7 +1984,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 2.5, z: -4}
+  m_FollowOffset: {x: 0, y: 1, z: -4}
   m_XDamping: 0.7
   m_YDamping: 0.7
   m_ZDamping: 0.7
@@ -2079,7 +2111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 2.5, z: -4}
+  m_FollowOffset: {x: 0, y: 1, z: -4}
   m_XDamping: 0.7
   m_YDamping: 0.7
   m_ZDamping: 0.7
@@ -2284,7 +2316,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 2.5, z: -4}
+  m_FollowOffset: {x: 0, y: 1, z: -4}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -2489,7 +2521,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 2.5, z: -4}
+  m_FollowOffset: {x: 0, y: 1, z: -4}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
