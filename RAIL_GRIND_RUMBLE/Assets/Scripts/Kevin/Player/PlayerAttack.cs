@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 //using Random = System.Random;
@@ -39,6 +40,8 @@ public class PlayerAttack : MonoBehaviour
   //  private AudioSource audioSource;
 
    public bool misControlEnabled = true; //stop overlapping actions - Raul
+    public bool Combofinisher;
+    public bool CombofinisherInProgress = false;
 
 
     private void Awake()
@@ -60,8 +63,9 @@ public class PlayerAttack : MonoBehaviour
         GameObject ariRig = transform.Find("AriRig").gameObject;
         Anim = ariRig.GetComponent<Animator>();
         HeavyAtkTimer = 0;
-     //   hitSounds = Resources.LoadAll<AudioClip>("Sounds/DamageSounds");
-       // audioSource = GetComponent<AudioSource>();
+        //   hitSounds = Resources.LoadAll<AudioClip>("Sounds/DamageSounds");
+        // audioSource = GetComponent<AudioSource>();
+    
     }
 
     void Update()
@@ -80,13 +84,20 @@ public class PlayerAttack : MonoBehaviour
         }
         if (!IsAttacking && atkCount == 0)
         {
+            IsHeavyAttacking = false;
+            spinEffect.SetActive(false);
             if (!IsHeavyAttacking) 
             {
                 Damage = 0;
+              
             }
             
         }
-
+        //if (!IsAttacking && atkCount == 0 && IsHeavyAttacking)
+        //{
+        //    IsHeavyAttacking = false;
+        //    spinEffect.SetActive(false);
+        //}
         //graffiti mulltiplier
         if (isBuffed)
         {
@@ -98,7 +109,10 @@ public class PlayerAttack : MonoBehaviour
             else if (atkCount == 3)
                 Damage += 9;
         }
-
+        
+        
+           
+        
     }
 
 
@@ -125,7 +139,7 @@ public class PlayerAttack : MonoBehaviour
 
         }
 
-
+     
        
 
 
@@ -240,7 +254,7 @@ public class PlayerAttack : MonoBehaviour
                 Anim.SetTrigger("HAttackEnd2");
                 //    IsHeavyAttacking = false;
                 HeavyAtkTimer = 0;
-                spinEffect.SetActive(true);
+               // spinEffect.SetActive(true);
 
                 Damage = 35  + skateBuffDamage;
                
@@ -250,7 +264,7 @@ public class PlayerAttack : MonoBehaviour
             {
              //   Debug.Log("BugCheck3");
                 Anim.SetTrigger("HAttackEnd1");
-                spinEffect.SetActive(true);
+                //spinEffect.SetActive(true);
                 //   IsHeavyAttacking = false;
                 HeavyAtkTimer = 0;
 
@@ -263,7 +277,7 @@ public class PlayerAttack : MonoBehaviour
                 Anim.SetTrigger("HAttackEnd3");
                 //  IsHeavyAttacking = false;
                 HeavyAtkTimer = 0;
-                spinEffect.SetActive(true);
+                //spinEffect.SetActive(true);
 
                 Damage = 100  + skateBuffDamage;
                 
@@ -379,7 +393,7 @@ public class PlayerAttack : MonoBehaviour
     }
 
 
-    
+  
 
     //void OnDrawGizmosSelected()
     //{

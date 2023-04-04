@@ -431,7 +431,7 @@ public class ThirdPersonMovement : MonoBehaviour
     public void PlayerInput()
     {
         //Debug.Log($"DialogueBox is active in hierarchy? {dialogueBox.activeSelf}");
-        if (!dialogueManager.freezePlayer)
+        if (!dialogueManager.freezePlayer )
         {
             moveInput = playerActions.Player.Move.ReadValue<Vector2>();
             horizontalInput = moveInput.x/2;
