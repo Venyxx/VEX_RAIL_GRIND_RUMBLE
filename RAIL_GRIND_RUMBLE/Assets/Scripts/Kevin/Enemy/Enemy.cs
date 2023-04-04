@@ -80,8 +80,8 @@ public class Enemy : PoolableObject, IDamageable
     {
         if (!Movement.IsBrute)
         {
-            //Animator.SetTrigger(ATTACK_TRIGGER);
-            //Animator.SetBool("isAttacking", true);
+            Animator.SetTrigger(ATTACK_TRIGGER);
+            Animator.SetBool("isAttacking", true);
             StartCoroutine(PunchAnimCooldown());
             if (LookCoroutine != null)
             {
