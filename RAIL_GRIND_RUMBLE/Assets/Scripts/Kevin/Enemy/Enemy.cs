@@ -80,8 +80,8 @@ public class Enemy : PoolableObject, IDamageable
     {
         if (!Movement.IsBrute)
         {
-            //Animator.SetTrigger(ATTACK_TRIGGER);
-            //Animator.SetBool("isAttacking", true);
+            Animator.SetTrigger(ATTACK_TRIGGER);
+            Animator.SetBool("isAttacking", true);
             StartCoroutine(PunchAnimCooldown());
             if (LookCoroutine != null)
             {
@@ -120,7 +120,7 @@ public class Enemy : PoolableObject, IDamageable
 
     private IEnumerator LookAt (Transform Target)
     {
-        Quaternion lookRotation = Quaternion.LookRotation(Target.position - transform.position);
+        Quaternion lookRotation = Quaternion.LookRotation((Target.position - transform.position)* 3) ;
         float time = 0;
 
         while (time < 1)
@@ -129,7 +129,7 @@ public class Enemy : PoolableObject, IDamageable
             time += Time.deltaTime * 20;
             yield return null;
         }
-        transform.rotation = lookRotation;
+        transform.rotation = lookRotation ;
     }
 
     public virtual void OnEnable()
