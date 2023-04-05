@@ -512,10 +512,10 @@ public class ThirdPersonMovement : MonoBehaviour
 
             //accelerate
             float acceleration = 9f; //originally 2
-            if(currentSpeed < maxSkateSpeed)
+            if(currentSpeed < maxSkateSpeed && isWalking == false)
             currentSpeed += acceleration * Time.deltaTime;
 
-        } else if (verticalInput < 0.1)
+         } else if (verticalInput < 0.1)
         {
             //check if the back arrow is active    
             if (verticalInput < 0.1 && rigidBody.velocity.magnitude > 3)
@@ -531,8 +531,8 @@ public class ThirdPersonMovement : MonoBehaviour
                 {
                     currentSpeed -= Adeceleration * Time.deltaTime;
 
-                    //if (verticalInput <= -0.3 )
-                        //isBraking = true;
+                    if (verticalInput <= -0.3 )
+                        isBraking = true;
                 }
                 
 
@@ -611,13 +611,11 @@ public class ThirdPersonMovement : MonoBehaviour
         }
         else if (Grounded)
         {
-            //moves with acceleration for forward, just walks sideways
+           //moves with acceleration for forward, just walks sideways
             if (currentSpeed > 1)
             {
                  rigidBody.velocity = new Vector3(skateDirection.normalized.x * currentSpeed, rigidBody.velocity.y, skateDirection.normalized.z * currentSpeed);
                  //PlaySound(3);
-                 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                 //velocity += Time.deltaTime * acceleration;
             }  
             else if (verticalInput < 0 || horizontalInput != 0)
                 rigidBody.velocity = new Vector3(moveDirection.normalized.x * walkSpeed * 10f, rigidBody.velocity.y, moveDirection.normalized.z * walkSpeed * 10f);
