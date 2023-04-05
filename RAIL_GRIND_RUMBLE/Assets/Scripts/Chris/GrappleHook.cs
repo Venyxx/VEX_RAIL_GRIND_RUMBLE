@@ -100,6 +100,10 @@ public class GrappleHook : MonoBehaviour
         player = playerREF.gameObject.GetComponent<Transform>();
         rigidBody = playerREF.gameObject.GetComponent<Rigidbody>();
         line = playerREF.gameObject.GetComponent<LineRenderer>();
+
+        //Fixes launch on first grapple
+        line.positionCount = 0;
+
         //GameObject grappleDetectorREF = GameObject.Find("GrappleDetector");
         grappleDetector = this.transform.Find("GrappleDetector").GetComponent<GrappleDetection>(); 
         _thirdPersonMovement = FindObjectOfType<ThirdPersonMovement>();
