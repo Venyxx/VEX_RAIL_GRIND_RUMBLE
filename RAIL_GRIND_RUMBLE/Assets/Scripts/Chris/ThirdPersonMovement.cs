@@ -7,6 +7,10 @@ using UnityEngine.SceneManagement;
 public class ThirdPersonMovement : MonoBehaviour
 {
     //Movement
+    //New Blend Tree//////////////////////////////////////////////////////////////////////////////////////////////
+    private bool Gliding;
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public float moveSpeed;
     [SerializeField] private float walkSpeed = 0.3f;
     public float currentSpeed;
@@ -146,10 +150,17 @@ public class ThirdPersonMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        //New Blend Tree//////////////////////////////////////////////////////////////////////////////////////////////
+        //VelocityHash = _animator.StringToHash("Velocity")
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
         dialogueManager = FindObjectOfType<DialogueManager>();
         coinCount = ProgressionManager.Get().coinCount;
         moveSpeed = 0;
-        baseMoveSpeed= 8;
+        baseMoveSpeed= 2;
         speedLerp = 2.22f;
         //max skate speed will be a better changable var later
         //maxSkateSpeed = 15;
@@ -216,6 +227,25 @@ public class ThirdPersonMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        
+
+
+        if (moveInput.x == 0 && moveInput.y == 0 && Grounded == true && currentSpeed >1f)
+        {
+            Gliding = true;
+            _animator.SetBool("Gliding", true);
+            //Debug.Log("NOTMOVING");
+        }
+
+        if (moveInput.x != 0 || moveInput.y != 0)
+        {
+            Gliding = false;
+            _animator.SetBool("Gliding", false);
+            //Debug.Log("Moving");
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if(animManager.misControlEnabled == true) //Stop Overlapping Actions - Raul
         {
         PlayerMovement();
@@ -459,7 +489,7 @@ public class ThirdPersonMovement : MonoBehaviour
                 currentSpeed = baseMoveSpeed;
 
             //accelerate
-            float acceleration = 2f;
+            float acceleration = 9f; //originally 2
             currentSpeed += acceleration * Time.deltaTime;
 
         } else if (verticalInput < 0.1)
@@ -518,6 +548,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
         if (verticalInput != 0 && horizontalInput != 0 && !dialogueManager.freezePlayer)
             skateDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+            
         else 
             skateDirection = orientation.forward;
 
@@ -533,6 +564,8 @@ public class ThirdPersonMovement : MonoBehaviour
                 
             //target speed changes the anim blend tree.
             targetSpeed = 0;
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //velocity = 0;
             
         }
         else if (Grounded)
@@ -542,6 +575,8 @@ public class ThirdPersonMovement : MonoBehaviour
             {
                  rigidBody.velocity = new Vector3(skateDirection.normalized.x * currentSpeed, rigidBody.velocity.y, skateDirection.normalized.z * currentSpeed);
                  //PlaySound(3);
+                 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                 //velocity += Time.deltaTime * acceleration;
             }  
             else if (verticalInput < 0 || horizontalInput != 0)
                 rigidBody.velocity = new Vector3(moveDirection.normalized.x * walkSpeed * 10f, rigidBody.velocity.y, moveDirection.normalized.z * walkSpeed * 10f);
@@ -604,7 +639,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
         
         //adjust animator speed
-        _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
+        _animationBlend = currentSpeed;
         if (_animationBlend < 0.01f) _animationBlend = 0f;
 
         _animator.SetFloat(_animIDSpeed, _animationBlend);

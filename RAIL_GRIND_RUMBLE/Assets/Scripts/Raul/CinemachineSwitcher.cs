@@ -40,7 +40,7 @@ public class CinemachineSwitcher : MonoBehaviour
     {
             BasicCam.Priority = 0;
             NPCTalkingCam.Priority = 1;
-            Debug.Log("TalkingFire");
+            //Debug.Log("TalkingFire");
         
     } 
 
@@ -48,7 +48,7 @@ public class CinemachineSwitcher : MonoBehaviour
     {
             BasicCam.Priority = 1;
             NPCTalkingCam.Priority = 0;   
-            Debug.Log("NeutralFire");
+            //Debug.Log("NeutralFire");
     } 
 
 
