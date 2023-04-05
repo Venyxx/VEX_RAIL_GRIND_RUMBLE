@@ -224,6 +224,15 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Brake"",
+                    ""type"": ""Button"",
+                    ""id"": ""9d5e05eb-2c06-4277-9105-4b19840b64ae"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -743,6 +752,17 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                     ""action"": ""SkipCutscene"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ac22732a-bcf0-45be-af56-81851506f864"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Brake"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -943,6 +963,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
         m_Player_MouseScrollY = m_Player.FindAction("MouseScrollY", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_SkipCutscene = m_Player.FindAction("SkipCutscene", throwIfNotFound: true);
+        m_Player_Brake = m_Player.FindAction("Brake", throwIfNotFound: true);
         // Menus
         m_Menus = asset.FindActionMap("Menus", throwIfNotFound: true);
         m_Menus_InfoTabNext = m_Menus.FindAction("InfoTabNext", throwIfNotFound: true);
@@ -1033,6 +1054,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_MouseScrollY;
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_SkipCutscene;
+    private readonly InputAction m_Player_Brake;
     public struct PlayerActions
     {
         private @InputHandler m_Wrapper;
@@ -1059,6 +1081,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
         public InputAction @MouseScrollY => m_Wrapper.m_Player_MouseScrollY;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @SkipCutscene => m_Wrapper.m_Player_SkipCutscene;
+        public InputAction @Brake => m_Wrapper.m_Player_Brake;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1134,6 +1157,9 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 @SkipCutscene.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSkipCutscene;
                 @SkipCutscene.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSkipCutscene;
                 @SkipCutscene.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSkipCutscene;
+                @Brake.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBrake;
+                @Brake.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBrake;
+                @Brake.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBrake;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1204,6 +1230,9 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 @SkipCutscene.started += instance.OnSkipCutscene;
                 @SkipCutscene.performed += instance.OnSkipCutscene;
                 @SkipCutscene.canceled += instance.OnSkipCutscene;
+                @Brake.started += instance.OnBrake;
+                @Brake.performed += instance.OnBrake;
+                @Brake.canceled += instance.OnBrake;
             }
         }
     }
@@ -1313,6 +1342,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
         void OnMouseScrollY(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnSkipCutscene(InputAction.CallbackContext context);
+        void OnBrake(InputAction.CallbackContext context);
     }
     public interface IMenusActions
     {

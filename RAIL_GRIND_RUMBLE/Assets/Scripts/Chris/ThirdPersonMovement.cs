@@ -9,6 +9,7 @@ public class ThirdPersonMovement : MonoBehaviour
     //Movement
     //New Blend Tree//////////////////////////////////////////////////////////////////////////////////////////////
     private bool Gliding;
+    bool brakeHeld = false;
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public float moveSpeed;
@@ -19,7 +20,7 @@ public class ThirdPersonMovement : MonoBehaviour
     public float groundDrag;
     Vector3 standingStill = new Vector3 (0,0,0);
     private Vector2 moveInput;
-    public float maxSkateSpeed = 15;
+    public float maxSkateSpeed = 1;
     private float slopeLimit;
 
     public double speedPrint;
@@ -227,11 +228,32 @@ public class ThirdPersonMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+         if(isBraking == true)
+        {
+
+        float deceleration = 30f;
+        if (currentSpeed > 0 || rigidBody.velocity.magnitude > 0)
+                {
+                    currentSpeed -= currentSpeed * 0.9f * Time.deltaTime;
+                    //rigidBody.velocity -= 0.1f*rigidBody.velocity;
+                     //rigidBody.drag = 200;
+                    isBraking = true;
+                    _animator.SetBool(_animIDBrake, false);
+                    Debug.Log("BrakingNow");
+
+                }
+        }
+
+        if(currentSpeed < 3.4f)
+        {
+            isBraking=false;
+        }
+        
 
         
 
 
-        if (moveInput.x == 0 && moveInput.y == 0 && Grounded == true && currentSpeed >1f)
+        if (moveInput.x == 0 && moveInput.y == 0 && Grounded == true && currentSpeed >5f)
         {
             Gliding = true;
             _animator.SetBool("Gliding", true);
@@ -246,7 +268,7 @@ public class ThirdPersonMovement : MonoBehaviour
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        if(animManager.misControlEnabled == true) //Stop Overlapping Actions - Raul
+        if(animManager.misControlEnabled == true || isBraking == false) //Stop Overlapping Actions - Raul
         {
         PlayerMovement();
         }
@@ -480,16 +502,17 @@ public class ThirdPersonMovement : MonoBehaviour
                 
 
         //if there is player input and we are, accelerate
-        if (verticalInput > 0.1 && GetComponent<WallRun>().isWallRunning == false)
+        if (verticalInput > 0.1 && GetComponent<WallRun>().isWallRunning == false && isBraking == false)
         {
             moveKeyUp = false;
 
             //kick start movement
-            if (rigidBody.velocity.magnitude < baseMoveSpeed)
+            if (rigidBody.velocity.magnitude < baseMoveSpeed && isBraking == false)
                 currentSpeed = baseMoveSpeed;
 
             //accelerate
             float acceleration = 9f; //originally 2
+            if(currentSpeed < maxSkateSpeed)
             currentSpeed += acceleration * Time.deltaTime;
 
         } else if (verticalInput < 0.1)
@@ -508,8 +531,8 @@ public class ThirdPersonMovement : MonoBehaviour
                 {
                     currentSpeed -= Adeceleration * Time.deltaTime;
 
-                    if (verticalInput <= -0.3 )
-                        isBraking = true;
+                    //if (verticalInput <= -0.3 )
+                        //isBraking = true;
                 }
                 
 
@@ -518,7 +541,7 @@ public class ThirdPersonMovement : MonoBehaviour
                 
                 //if no input forward
                 moveKeyUp = true;
-                float deceleration = 5f;
+                float deceleration = 9f;
 
                 //if moving, decelerate
                 if (currentSpeed > 0 || rigidBody.velocity.magnitude > 0)
@@ -535,6 +558,24 @@ public class ThirdPersonMovement : MonoBehaviour
         }
 
     }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public void Brake(InputAction.CallbackContext context)
+    {
+        isBraking = true;
+        float deceleration = 30f;
+        if (currentSpeed > 0 || rigidBody.velocity.magnitude > 0)
+                {
+                    currentSpeed -= currentSpeed * 0.9f * Time.deltaTime;
+                    rigidBody.velocity -= 0.1f*rigidBody.velocity;
+                     //rigidBody.drag = 200;
+                    //isBraking = true;
+                    //_animator.SetBool(_animIDBrake, false);
+                    Debug.Log("BrakingNow");
+
+                }
+
+    } 
 
     void PlayerMovement()
     {
