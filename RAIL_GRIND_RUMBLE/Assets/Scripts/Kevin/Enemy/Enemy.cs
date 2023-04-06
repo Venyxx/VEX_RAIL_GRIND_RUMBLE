@@ -34,6 +34,7 @@ public class Enemy : PoolableObject, IDamageable
     //damage indicator
     public GameObject damageText;
     private bool dead;
+    
 
     private void Awake()
     {
@@ -120,13 +121,14 @@ public class Enemy : PoolableObject, IDamageable
 
     private IEnumerator LookAt (Transform Target)
     {
-        Quaternion lookRotation = Quaternion.LookRotation((Target.position - transform.position)* 3) ;
+        Quaternion lookRotation = Quaternion.LookRotation((Target.position - transform.position)) ;
         float time = 0;
-
+        
         while (time < 1)
         {
+        ;
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, time);
-            time += Time.deltaTime * 20;
+            time += Time.deltaTime;
             yield return null;
         }
         transform.rotation = lookRotation ;

@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 1495312388888140238}
   - component: {fileID: 5854847052674931944}
   - component: {fileID: 5265576555318656063}
+  - component: {fileID: 2232110305750110432}
   m_Layer: 10
   m_Name: Brute
   m_TagString: Untagged
@@ -408,6 +409,25 @@ MonoBehaviour:
   dizzy: 0
   isDizzy: 0
   damageText: {fileID: 3432252478998060102, guid: 896df2592015e3141ae952a379c8dee7, type: 3}
+--- !u!1818360609 &2232110305750110432
+RotationConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4694821488445018542}
+  m_Enabled: 1
+  m_Weight: 0
+  m_RotationAtRest: {x: 0, y: 180.103, z: 0}
+  m_RotationOffset: {x: 0, y: 0, z: 0}
+  m_AffectRotationX: 1
+  m_AffectRotationY: 1
+  m_AffectRotationZ: 1
+  m_IsContraintActive: 0
+  m_IsLocked: 0
+  m_Sources:
+  - sourceTransform: {fileID: 4694821488445018536}
+    weight: 1
 --- !u!1001 &3717170323384099563
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1957,6 +1977,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animator: {fileID: 2388835082252076377}
+  ragdollAnimator: {fileID: 0}
   RagdollRoot: {fileID: 6637759521179591972}
   StartRagdoll: 0
   Rigidbodies: []

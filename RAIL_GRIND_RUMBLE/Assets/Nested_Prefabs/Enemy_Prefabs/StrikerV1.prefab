@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 5854847052674931944}
   - component: {fileID: 5265576555318656063}
   - component: {fileID: 6092601883503850215}
+  - component: {fileID: 2905785820906885310}
   m_Layer: 10
   m_Name: StrikerV1
   m_TagString: Untagged
@@ -161,7 +162,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4694821488445018542}
-  m_LocalRotation: {x: 0, y: 0.9999996, z: -0, w: -0.0008986294}
+  m_LocalRotation: {x: -0, y: 0.9999996, z: -0, w: -0.0008986294}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -428,6 +429,25 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1818360609 &2905785820906885310
+RotationConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4694821488445018542}
+  m_Enabled: 1
+  m_Weight: 0
+  m_RotationAtRest: {x: 0, y: -179.89703, z: 0}
+  m_RotationOffset: {x: 0, y: -179.89703, z: 0}
+  m_AffectRotationX: 1
+  m_AffectRotationY: 0
+  m_AffectRotationZ: 0
+  m_IsContraintActive: 1
+  m_IsLocked: 1
+  m_Sources:
+  - sourceTransform: {fileID: 4694821488445018536}
+    weight: 1
 --- !u!1 &8806937911219802743
 GameObject:
   m_ObjectHideFlags: 0

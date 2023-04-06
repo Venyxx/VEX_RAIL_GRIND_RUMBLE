@@ -213,6 +213,7 @@ GameObject:
   - component: {fileID: 709858256272780360}
   - component: {fileID: 709858256272780361}
   - component: {fileID: 5498985556827891890}
+  - component: {fileID: -2663910022574224654}
   m_Layer: 10
   m_Name: SharpShooterV1
   m_TagString: Untagged
@@ -474,6 +475,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1818360609 &-2663910022574224654
+RotationConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6646993812584244264}
+  m_Enabled: 1
+  m_Weight: 0
+  m_RotationAtRest: {x: 0, y: -179.89703, z: 0}
+  m_RotationOffset: {x: 0, y: 0, z: 0}
+  m_AffectRotationX: 1
+  m_AffectRotationY: 1
+  m_AffectRotationZ: 1
+  m_IsContraintActive: 1
+  m_IsLocked: 0
+  m_Sources:
+  - sourceTransform: {fileID: 6646993812584244270}
+    weight: 1
 --- !u!1001 &5859069881424955149
 PrefabInstance:
   m_ObjectHideFlags: 0

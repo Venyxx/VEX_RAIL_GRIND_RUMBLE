@@ -103,7 +103,7 @@ public class EnemyMovement : MonoBehaviour
         //{
           //  StopCoroutine(FollowCoroutine);
         //}
-        Player = Target;
+       // Player = Target;
         //FollowCoroutine = StartCoroutine(Hide(Target));
     }
 
