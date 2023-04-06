@@ -821,7 +821,7 @@ public class ThirdPersonMovement : MonoBehaviour
         
     }
 
-    //copy pasted speed UI section below from an earlier branch to fix increased acceleration limit in build glitch
+    
    public int print;
     private void SetSpeedUI()
     { 
