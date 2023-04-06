@@ -310,7 +310,8 @@ public class ETCCustomizationVendor : MonoBehaviour
         skateBuySetText.text = "Equipped";
          Debug.Log("ran set skate");
 
-        thirdPersonMovementREF.RecalculateStats();
+        //commented out line below it leads to max speed disparity in build vs editor - Raul
+        //thirdPersonMovementREF.RecalculateStats();
         SaveManager.Instance.Save();
 
         
