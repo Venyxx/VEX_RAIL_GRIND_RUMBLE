@@ -10,6 +10,7 @@ public class ThirdPersonMovement : MonoBehaviour
     //New Blend Tree//////////////////////////////////////////////////////////////////////////////////////////////
     private bool Gliding;
     bool brakeHeld = false;
+    private bool onStairs;
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public float moveSpeed;
@@ -820,7 +821,8 @@ public class ThirdPersonMovement : MonoBehaviour
         
     }
 
-    public int print;
+    
+   public int print;
     private void SetSpeedUI()
     { 
         //m/s to mph
@@ -835,7 +837,6 @@ public class ThirdPersonMovement : MonoBehaviour
         }else
         speedUIText.text = print.ToString();
     }
-
     private void ExitRailMain ()
     {
         //release from rail if grinding
