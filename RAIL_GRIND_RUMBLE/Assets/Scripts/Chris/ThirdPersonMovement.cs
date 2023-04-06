@@ -820,7 +820,8 @@ public class ThirdPersonMovement : MonoBehaviour
         
     }
 
-    public int print;
+    //copy pasted speed UI section below from an earlier branch to fix increased acceleration limit in build glitch
+   public int print;
     private void SetSpeedUI()
     { 
         //m/s to mph
@@ -835,7 +836,6 @@ public class ThirdPersonMovement : MonoBehaviour
         }else
         speedUIText.text = print.ToString();
     }
-
     private void ExitRailMain ()
     {
         //release from rail if grinding
