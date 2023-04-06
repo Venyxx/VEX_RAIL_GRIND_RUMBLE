@@ -186,6 +186,8 @@ public class ControllerRebinder : MonoBehaviour
             graffitiRightAction.action.bindings[1].effectivePath,
             InputControlPath.HumanReadableStringOptions.OmitDevice);
         
+        ReplaceWithIcon();
+        
     }
 
     //Jump Rebind
