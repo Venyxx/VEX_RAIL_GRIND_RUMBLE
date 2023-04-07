@@ -45,6 +45,7 @@ public class SettingsManager : MonoBehaviour
                 settingsReturnButton.GetComponent<Button>().Select();
             }
        }
+       
     }
 
     public void OpenAudio()
@@ -55,8 +56,16 @@ public class SettingsManager : MonoBehaviour
         accessibilityScreen.SetActive(false);
         settingsScreen.SetActive(false);
 
-        EventSystem.current.SetSelectedGameObject(null); 
-        EventSystem.current.SetSelectedGameObject(audioFirstButton);
+        EventSystem.current.SetSelectedGameObject(null);
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
+        else
+        {
+            EventSystem.current.SetSelectedGameObject(audioFirstButton);
+        }
+
 
         infoScreen.PlaySoundUI(infoScreen.nextSound);
     }
@@ -69,8 +78,15 @@ public class SettingsManager : MonoBehaviour
         accessibilityScreen.SetActive(false);
         settingsScreen.SetActive(false);
 
-        EventSystem.current.SetSelectedGameObject(null); 
-        EventSystem.current.SetSelectedGameObject(controlsFirstButton);
+        EventSystem.current.SetSelectedGameObject(null);
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
+        else
+        {
+            EventSystem.current.SetSelectedGameObject(controlsFirstButton);
+        }
 
         infoScreen.PlaySoundUI(infoScreen.nextSound);
     }
@@ -83,8 +99,15 @@ public class SettingsManager : MonoBehaviour
         accessibilityScreen.SetActive(false);
         settingsScreen.SetActive(false);
 
-        EventSystem.current.SetSelectedGameObject(null); 
-        EventSystem.current.SetSelectedGameObject(graphicsFirstButton);
+        EventSystem.current.SetSelectedGameObject(null);
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
+        else
+        {
+            EventSystem.current.SetSelectedGameObject(graphicsFirstButton);
+        }
 
         infoScreen.PlaySoundUI(infoScreen.nextSound);
     }
@@ -97,8 +120,15 @@ public class SettingsManager : MonoBehaviour
         accessibilityScreen.SetActive(true);
         settingsScreen.SetActive(false);
 
-        EventSystem.current.SetSelectedGameObject(null); 
-        EventSystem.current.SetSelectedGameObject(accessibilityFirstButton);
+        EventSystem.current.SetSelectedGameObject(null);
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
+        else
+        {
+            EventSystem.current.SetSelectedGameObject(accessibilityFirstButton);
+        }
 
         infoScreen.PlaySoundUI(infoScreen.nextSound);
     }
@@ -111,8 +141,16 @@ public class SettingsManager : MonoBehaviour
         accessibilityScreen.SetActive(false);
         settingsScreen.SetActive(true);
 
-        EventSystem.current.SetSelectedGameObject(null); 
-        EventSystem.current.SetSelectedGameObject(settingsReturnButton);
+        EventSystem.current.SetSelectedGameObject(null);
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
+        else
+        {
+            EventSystem.current.SetSelectedGameObject(settingsReturnButton);
+        }
+        
 
         infoScreen.PlaySoundUI(infoScreen.backSound);
     }

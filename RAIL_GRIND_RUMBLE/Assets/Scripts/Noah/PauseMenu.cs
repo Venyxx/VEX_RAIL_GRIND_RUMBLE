@@ -70,6 +70,11 @@ public class PauseMenu : MonoBehaviour
         {
             pauseFirstButton.GetComponent<Button>().Select();
         }
+
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
     }
 
     public void PauseGamePressed(InputAction.CallbackContext context)
@@ -117,18 +122,26 @@ public class PauseMenu : MonoBehaviour
     {
         infoScreen.PlaySoundUI(pauseOpen);
 
-            isPaused = true;
-            pauseMenu.SetActive(true);
-            pauseVideo.SetActive(true);
-            speedometerREF.SetActive(false);
-            reticleScript.ReticleToggle(false);
-            Debug.Log("Unpause");
-            Time.timeScale = 0f;
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-            
-            EventSystem.current.SetSelectedGameObject(null); 
+        isPaused = true;
+        pauseMenu.SetActive(true);
+        pauseVideo.SetActive(true);
+        speedometerREF.SetActive(false);
+        reticleScript.ReticleToggle(false);
+        Debug.Log("Unpause");
+        Time.timeScale = 0f;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
+        EventSystem.current.SetSelectedGameObject(null);
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
+        else
+        {
             EventSystem.current.SetSelectedGameObject(pauseFirstButton);
+
+        }
     }
 
     public void ActivateQuestWindow()
@@ -175,8 +188,15 @@ public class PauseMenu : MonoBehaviour
         //Sound
         infoScreen.PlaySoundUI(infoScreen.selectSound);
 
-        EventSystem.current.SetSelectedGameObject(null); 
-        EventSystem.current.SetSelectedGameObject(settingsFirstButton);
+        EventSystem.current.SetSelectedGameObject(null);
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
+        else
+        {
+            EventSystem.current.SetSelectedGameObject(settingsFirstButton);
+        }
 
     }
 
