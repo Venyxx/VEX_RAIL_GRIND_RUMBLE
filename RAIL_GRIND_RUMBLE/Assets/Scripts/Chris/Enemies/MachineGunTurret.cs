@@ -28,6 +28,10 @@ public class MachineGunTurret : MonoBehaviour, IDamageable
         playerREF = GameObject.FindWithTag("PlayerObject");
         dead = false;
         currentHealth = maxHealth;
+
+        if (shootRunning == true) {
+            shootRunning = false;
+        }
     }
 
     public void SetAttached()
@@ -48,8 +52,9 @@ public class MachineGunTurret : MonoBehaviour, IDamageable
                 transform.rotation = Quaternion.LookRotation(newDirection);
             }
 
-            if (!shootRunning && !dead && !attached)
+            if (!shootRunning && !dead && !attached && gameObject.activeInHierarchy)
             {
+                Debug.Log("Starting shoot");
                 StartCoroutine(Shoot());
             }
     }
@@ -61,7 +66,7 @@ public class MachineGunTurret : MonoBehaviour, IDamageable
         //Shoot amount of bullets specified under Bullet Count
         for (bulletInt = 0; bulletInt < bulletCount; bulletInt++)
         {
-            if (!dead)
+            if (!dead && gameObject.activeInHierarchy)
             {
                 if (attached && hernandez.stunned == true)
                 {
@@ -72,6 +77,10 @@ public class MachineGunTurret : MonoBehaviour, IDamageable
                     newBullet.GetComponent<Bullet>().Rigidbody.AddForce(newBullet.transform.forward * newBullet.GetComponent<Bullet>().MoveSpeed, ForceMode.VelocityChange);
                     yield return new WaitForSeconds(0.3f);
                 }
+            } else if (!gameObject.activeInHierarchy)
+            {
+                shootRunning = false;
+                yield break;
             }
         }
 

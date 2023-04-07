@@ -26,6 +26,11 @@ public class RocketTurret : MonoBehaviour, IDamageable
         target = this.gameObject.transform.Find("Target");
         currentHealth = maxHealth;
         dead = false;
+
+        if (shootRunning == true) {
+            shootRunning = false;
+        }
+
         StartCoroutine(Shooting());
     }
 
