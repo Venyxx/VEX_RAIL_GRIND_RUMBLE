@@ -39,6 +39,7 @@ public class EnemyMovement : MonoBehaviour
     private const string IsWalking = "IsWalking";
 
     public bool activated = false;
+    public bool isMoving = false;
 
     private void Awake ()
     {
@@ -142,11 +143,12 @@ public class EnemyMovement : MonoBehaviour
         {
             if (Agent.enabled)
             {
-
+                isMoving = true;
                 Agent.SetDestination(Player.transform.position);
                 
             }
             yield return Wait;
+            isMoving = false;
         }
     }
 

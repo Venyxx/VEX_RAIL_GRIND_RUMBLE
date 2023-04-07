@@ -20,7 +20,7 @@ public class HeavyAttachChargeAnim : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         PlayerAttack.instance.Leftleg.enabled = true;
-        PlayerAttack.instance.spinEffect.SetActive(true);
+       // PlayerAttack.instance.spinEffect.SetActive(true);
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

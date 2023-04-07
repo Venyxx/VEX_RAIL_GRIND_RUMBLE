@@ -85,7 +85,7 @@ public class PlayerAttack : MonoBehaviour
         if (!IsAttacking && atkCount == 0)
         {
             IsHeavyAttacking = false;
-            spinEffect.SetActive(false);
+          //  spinEffect.SetActive(false);
             if (!IsHeavyAttacking) 
             {
                 Damage = 0;
@@ -243,11 +243,14 @@ public class PlayerAttack : MonoBehaviour
 
         if (context.ReadValueAsButton() == false && IsHeavyAttacking && movementScriptREF.Grounded == true)
         {
-           
-           // Debug.Log("Key Release");
-           
 
-            if (HeavyAtkTimer >= 1 && HeavyAtkTimer <= 1.9 && movementScriptREF.Grounded == true)
+            // Debug.Log("Key Release");
+           atkCount = 0;
+          // spinEffect.SetActive(true);
+
+
+
+            if (HeavyAtkTimer >= 0 && HeavyAtkTimer <= 1.9 && movementScriptREF.Grounded == true)
             {
                
                 //   Debug.Log("BugCheck2");
@@ -264,7 +267,7 @@ public class PlayerAttack : MonoBehaviour
             {
              //   Debug.Log("BugCheck3");
                 Anim.SetTrigger("HAttackEnd1");
-                //spinEffect.SetActive(true);
+                spinEffect.SetActive(true);
                 //   IsHeavyAttacking = false;
                 HeavyAtkTimer = 0;
 
@@ -277,7 +280,7 @@ public class PlayerAttack : MonoBehaviour
                 Anim.SetTrigger("HAttackEnd3");
                 //  IsHeavyAttacking = false;
                 HeavyAtkTimer = 0;
-                //spinEffect.SetActive(true);
+                spinEffect.SetActive(true);
 
                 Damage = 100  + skateBuffDamage;
                 

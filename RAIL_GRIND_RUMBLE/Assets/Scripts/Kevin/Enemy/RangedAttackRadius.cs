@@ -86,12 +86,14 @@ public class RangedAttackRadius : AttackRadius
             if (Hit.collider.TryGetComponent<IDamageable>(out damageable))
             {
                 return damageable.GetTransform() == Target;
+              
             }
         }
         return false;
     }
     protected override void OnTriggerExit(Collider other)
     {
+    
         base.OnTriggerExit(other);
 
         if (AttackCoroutine == null)

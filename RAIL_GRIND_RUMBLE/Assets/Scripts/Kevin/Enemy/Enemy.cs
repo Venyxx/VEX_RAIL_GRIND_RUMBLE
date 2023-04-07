@@ -74,7 +74,12 @@ public class Enemy : PoolableObject, IDamageable
             }
             LookCoroutine = StartCoroutine(LookAt(Movement.Player));
         }
+        if (Movement.isMoving)
+        {
 
+          
+            LookCoroutine = StartCoroutine(LookAt(Movement.Player));
+        }
 
     }
     private void OnAttack(IDamageable Target)
@@ -128,7 +133,7 @@ public class Enemy : PoolableObject, IDamageable
         {
         ;
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, time);
-            time += Time.deltaTime;
+            time += Time.deltaTime + 5;
             yield return null;
         }
         transform.rotation = lookRotation ;
