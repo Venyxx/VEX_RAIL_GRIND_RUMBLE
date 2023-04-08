@@ -84,7 +84,7 @@ public class ShaderVendor : MonoBehaviour
 
         //change buy set text
         materialBuySetText.text = "Current Material!";
-         Debug.Log("ran set paper");
+         //Debug.Log("ran set paper");
 
         SaveManager.Instance.Save();
     }
