@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine.SceneManagement;
 
 public class ThirdPersonMovement : MonoBehaviour
@@ -15,6 +16,8 @@ public class ThirdPersonMovement : MonoBehaviour
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public float moveSpeed;
     [SerializeField] private float walkSpeed = 0.3f;
+    [SerializeField] private float brakeSpeed = 0.9f;
+    [SerializeField] private float decelerationSpeed = 5f;
     public float currentSpeed;
     private float baseMoveSpeed;
     private float speedLerp;
@@ -93,7 +96,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
 
     //Acceleration Timer
-    private bool isBraking;
+    public bool isBraking;
     private float maxTime = 1.5f;
     private float currentTime;
     private bool canAccelerate;
@@ -229,26 +232,26 @@ public class ThirdPersonMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-         if(isBraking == true)
+         /*if(isBraking == true)
         {
 
-        float deceleration = 30f;
-        if (currentSpeed > 0 || rigidBody.velocity.magnitude > 0)
-                {
-                    currentSpeed -= currentSpeed * 0.9f * Time.deltaTime;
-                    //rigidBody.velocity -= 0.1f*rigidBody.velocity;
-                     //rigidBody.drag = 200;
-                    isBraking = true;
-                    _animator.SetBool(_animIDBrake, false);
-                    Debug.Log("BrakingNow");
+            float deceleration = 30f;
+            if (currentSpeed > 0 || rigidBody.velocity.magnitude > 0)
+            {
+                currentSpeed -= currentSpeed * 0.9f * Time.deltaTime;
+                //rigidBody.velocity -= 0.1f*rigidBody.velocity;
+                 //rigidBody.drag = 200;
+                isBraking = true;
+                _animator.SetBool(_animIDBrake, false);
+                Debug.Log("BrakingNow");
 
-                }
-        }
+            }
+        }*/
 
-        if(currentSpeed < 3.4f)
+        /*if(currentSpeed < 3.4f)
         {
             isBraking=false;
-        }
+        }*/
         
 
         
@@ -332,11 +335,13 @@ public class ThirdPersonMovement : MonoBehaviour
             _animator.SetBool(_animIDGrinding, false);
 
         
+        
 
         //animation transitioning
-        if(isBraking)
+        if(isBraking && currentSpeed > 0.1)
         {
             _animator.SetBool(_animIDBrake, true);
+            ariRig.transform.rotation = Quaternion.Slerp(ariRig.transform.rotation, Quaternion.LookRotation(rigidBody.velocity.normalized), Time.deltaTime * 7f);
         }
         else 
         {
@@ -435,7 +440,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
     public void ToggleWalk(InputAction.CallbackContext context)
     {
-        if (!context.started || dialogueManager.freezePlayer || !Grounded || SceneManager.GetActiveScene().name.Equals("Ari's House")) return;
+        if (isBraking || !context.started || dialogueManager.freezePlayer || !Grounded || SceneManager.GetActiveScene().name.Equals("Ari's House")) return;
         isWalking = !isWalking;
         WalkToggleHelper();
     }
@@ -504,7 +509,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
         //if there is player input and we are, accelerate
         //ALLOW THIS DEAD ZONE VALUE (0.35) TO BE CUSTOMIZED IN THE SETTINGS
-        if ((verticalInput >= 0.35 || horizontalInput >= 0.35 || verticalInput <= -0.35 || horizontalInput <= -0.35) && GetComponent<WallRun>().isWallRunning == false)
+        if ((verticalInput >= 0.35 || horizontalInput >= 0.35 || verticalInput <= -0.35 || horizontalInput <= -0.35) && !GetComponent<WallRun>().isWallRunning && !isBraking)
         {
             moveKeyUp = false;
             //kick start movement
@@ -520,12 +525,11 @@ public class ThirdPersonMovement : MonoBehaviour
         {
             //if no input forward
             moveKeyUp = true;
-            float deceleration = 5f;
+            
             //if moving, decelerate
             if (currentSpeed > 0)
             {
-                currentSpeed -= deceleration * Time.deltaTime;
-                isBraking = false;
+                currentSpeed -= decelerationSpeed * Time.deltaTime;
                 _animator.SetBool(_animIDBrake, false);
 
             }
@@ -535,18 +539,23 @@ public class ThirdPersonMovement : MonoBehaviour
 
     public void Brake(InputAction.CallbackContext context)
     {
-        isBraking = true;
-        float deceleration = 30f;
-        if (currentSpeed > 0 || rigidBody.velocity.magnitude > 0)
+        if (context.started || context.performed)
         {
-            currentSpeed -= currentSpeed * 0.9f * Time.deltaTime;
-            rigidBody.velocity -= 0.1f*rigidBody.velocity;
-             //rigidBody.drag = 200;
-            //isBraking = true;
-            //_animator.SetBool(_animIDBrake, false);
-            Debug.Log("BrakingNow");
-
+            isBraking = true;
+            if (currentSpeed > 0 || rigidBody.velocity.magnitude > 0)
+            {
+                currentSpeed -= currentSpeed * brakeSpeed * Time.deltaTime;
+                Debug.Log("BrakingNow");
+            }
         }
+
+        if (context.canceled)
+        {
+            isBraking = false;
+            _animator.SetBool(_animIDBrake, false);
+        }
+
+
 
     } 
 

@@ -392,11 +392,11 @@ public class ETCCustomizationVendor : MonoBehaviour
             if (selectedAccessoryIndex != i)
             {
                 //turn the object off
-                ManagerREF.ariAccessoryOptions[i].SetActive(false);
+                //ManagerREF.ariAccessoryOptions[i].SetActive(false);
             } else 
             {
                 //turn it on
-                ManagerREF.ariAccessoryOptions[i].SetActive(true);
+                //ManagerREF.ariAccessoryOptions[i].SetActive(true);
             }
         }
         //GameObjectAccessorySetting();

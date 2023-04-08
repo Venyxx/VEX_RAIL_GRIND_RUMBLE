@@ -46,8 +46,8 @@ public class ThirdPersonCamera : MonoBehaviour
         playerREF = GameObject.FindWithTag("PlayerObject");
         playerPrefabREF = GameObject.Find("playerPrefab");
         playerTransform = playerREF.gameObject.GetComponent<Transform>();
-       
-        player = playerPrefabREF.gameObject.GetComponent<Transform>();
+
+        player = playerPrefabREF.transform;
         rigidBody = playerPrefabREF.gameObject.GetComponent<Rigidbody>();
         GameObject orientationREF = GameObject.Find("Orientation");
         orientation = orientationREF.gameObject.GetComponent<Transform>();
@@ -107,7 +107,7 @@ public class ThirdPersonCamera : MonoBehaviour
                //Rotate Player Object
                 Vector3 inputDir = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-                if (inputDir != Vector3.zero )
+                if (inputDir != Vector3.zero && !_thirdPersonMovement.isBraking)
                 {
                     playerTransform.forward = Vector3.Slerp(playerTransform.forward, inputDir.normalized, Time.deltaTime * rotationSpeed);
                 }

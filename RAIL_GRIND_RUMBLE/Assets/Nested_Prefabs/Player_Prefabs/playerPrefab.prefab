@@ -825,6 +825,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 9
   walkSpeed: 0.6
+  brakeSpeed: 0.9
+  decelerationSpeed: 5
   currentSpeed: 0
   groundDrag: 0.01
   maxSkateSpeed: 15
@@ -846,6 +848,7 @@ MonoBehaviour:
   animManager: {fileID: 4297476489793313150}
   SpeedChangeRate: 10
   analogMovement: 0
+  isBraking: 0
   rigidBody: {fileID: 2030071780202691823}
   skatesOnMaterial: {fileID: 2100000, guid: e13fed1f6d60d964887e47e75f62dab3, type: 2}
   skatesOffMaterial: {fileID: 2100000, guid: a4460a2665666a04eaa83bfc4da261de, type: 2}
