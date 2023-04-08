@@ -12,6 +12,8 @@ public class Graffiti : MonoBehaviour
     GameObject graffitiRight;
     GameObject graffitiLeft;
 
+    GameObject passingGraffiti;
+
     GameObject graffitiParticle;
     GameObject graffitiParticle2;
 
@@ -33,10 +35,15 @@ public class Graffiti : MonoBehaviour
         playerAttackREF = GameObject.Find("playerPrefab").GetComponent<PlayerAttack>();
         cam = Camera.main;
         player = GameObject.Find("playerPrefab");
-        graffitiUp = Resources.Load("Decal_1") as GameObject;
-        graffitiDown = Resources.Load<GameObject>("Decal_2");
-        graffitiLeft = Resources.Load("Decal_3") as GameObject;
-        graffitiRight = Resources.Load("Decal_4") as GameObject;
+        graffitiUp = Resources.Load(SaveManager.Instance.state.ariGraffitiSlotUp1) as GameObject;
+        graffitiDown = Resources.Load(SaveManager.Instance.state.ariGraffitiSlotDown3) as GameObject;
+        graffitiLeft = Resources.Load(SaveManager.Instance.state.ariGraffitiSlotLeft4) as GameObject;
+        graffitiRight = Resources.Load(SaveManager.Instance.state.ariGraffitiSlotRight2) as GameObject;
+
+        Debug.Log("Graffiti List: " + graffitiUp + " and " + graffitiDown + " and " + graffitiLeft + " and " + graffitiRight); 
+
+        
+        
         graffitiParticle = Resources.Load("Particle_1") as GameObject;
         graffitiParticle2 = Resources.Load("Particle_2") as GameObject;
 
@@ -101,7 +108,9 @@ public class Graffiti : MonoBehaviour
                 } else 
                 {
                     Debug.Log("detected no poster");
-                    madeGraffiti = Instantiate (graffiti, hit.point, canLocation.transform.rotation);
+                    Debug.Log(hit.normal);
+                    Vector3 reverseHit = new Vector3(-hit.normal.x, -hit.normal.y, -hit.normal.z);
+                    madeGraffiti = Instantiate (graffiti, hit.point, Quaternion.LookRotation(reverseHit));
                     particle = Instantiate (graffitiParticle, canLocationForParticle.transform.position, canLocation.transform.rotation);
                     Vector3 newPos = new Vector3 (player.transform.position.x, madeGraffiti.transform.position.y, player.transform.position.z);
                     madeGraffiti.transform.position = newPos;
@@ -121,6 +130,24 @@ public class Graffiti : MonoBehaviour
 
         if (context.started)
         {
+            if (GameObject.Find("CustomizationVendor") || GameObject.Find ("CustomizationVendor(Clone)"))
+            {
+                 if (GameObject.Find("CustomizationVendor").GetComponent<PickingGraffiti>().isPickingGraffiti || GameObject.Find("CustomizationVendor(Clone)").GetComponent<PickingGraffiti>().isPickingGraffiti)
+            {
+                WhichGraffiti();
+                graffitiDown = passingGraffiti;
+                Debug.Log("Switching graffiti down to" + passingGraffiti);
+                if (GameObject.Find("CustomizationVendor"))
+                        GameObject.Find("CustomizationVendor").GetComponent<PickingGraffiti>().isPickingGraffiti = false;
+                if (GameObject.Find("CustomizationVendor(Clone)"))
+                        GameObject.Find("CustomizationVendor(Clone)").GetComponent<PickingGraffiti>().isPickingGraffiti = false;
+
+                SaveManager.Instance.state.ariGraffitiSlotDown3 = graffitiDown.gameObject.name;
+                SaveManager.Instance.Save();
+                    return;         
+            }
+            }
+           
             graffiti = graffitiDown;
             GraffitiFire();
         }
@@ -132,6 +159,25 @@ public class Graffiti : MonoBehaviour
         //Debug.Log("fire context");
         if (context.started)
         {
+            if (GameObject.Find("CustomizationVendor") || GameObject.Find ("CustomizationVendor(Clone)"))
+            {
+                if (GameObject.Find("CustomizationVendor").GetComponent<PickingGraffiti>().isPickingGraffiti || GameObject.Find("CustomizationVendor(Clone)").GetComponent<PickingGraffiti>().isPickingGraffiti)
+            {
+                WhichGraffiti();
+                graffitiUp = passingGraffiti;
+                Debug.Log("Switching graffiti up to" + passingGraffiti);
+                if (GameObject.Find("CustomizationVendor"))
+                        GameObject.Find("CustomizationVendor").GetComponent<PickingGraffiti>().isPickingGraffiti = false;
+                if (GameObject.Find("CustomizationVendor(Clone)"))
+                        GameObject.Find("CustomizationVendor(Clone)").GetComponent<PickingGraffiti>().isPickingGraffiti = false;
+                
+                SaveManager.Instance.state.ariGraffitiSlotUp1 = graffitiUp.gameObject.name;
+                SaveManager.Instance.Save();
+                return;           
+            }
+            }
+            
+            
             graffiti = graffitiUp;
             GraffitiFire();
         }
@@ -142,6 +188,25 @@ public class Graffiti : MonoBehaviour
         if (PauseMenu.isPaused == true) return;
         if (context.started)
         {
+            if (GameObject.Find("CustomizationVendor") || GameObject.Find ("CustomizationVendor(Clone)"))
+            {
+              if (GameObject.Find("CustomizationVendor").GetComponent<PickingGraffiti>().isPickingGraffiti || GameObject.Find("CustomizationVendor(Clone)").GetComponent<PickingGraffiti>().isPickingGraffiti)
+            {
+                WhichGraffiti();
+                graffitiRight = passingGraffiti;
+                Debug.Log("Switching graffiti right to" + passingGraffiti);
+                if (GameObject.Find("CustomizationVendor"))
+                        GameObject.Find("CustomizationVendor").GetComponent<PickingGraffiti>().isPickingGraffiti = false;
+                if (GameObject.Find("CustomizationVendor(Clone)"))
+                        GameObject.Find("CustomizationVendor(Clone)").GetComponent<PickingGraffiti>().isPickingGraffiti = false;
+                
+                SaveManager.Instance.state.ariGraffitiSlotRight2 = graffitiRight.gameObject.name;
+                SaveManager.Instance.Save();
+                return;      
+            }  
+            }
+            
+            
             graffiti = graffitiRight;
             GraffitiFire();
         }
@@ -153,11 +218,55 @@ public class Graffiti : MonoBehaviour
         if (PauseMenu.isPaused == true) return;
         if (context.started)
         {
+            if (GameObject.Find("CustomizationVendor") || GameObject.Find ("CustomizationVendor(Clone)"))
+            {
+              if (GameObject.Find("CustomizationVendor").GetComponent<PickingGraffiti>().isPickingGraffiti || GameObject.Find("CustomizationVendor(Clone)").GetComponent<PickingGraffiti>().isPickingGraffiti)
+            {
+                WhichGraffiti();
+                graffitiLeft = passingGraffiti;
+                Debug.Log("Switching graffiti left to" + passingGraffiti);
+                if (GameObject.Find("CustomizationVendor"))
+                        GameObject.Find("CustomizationVendor").GetComponent<PickingGraffiti>().isPickingGraffiti = false;
+                if (GameObject.Find("CustomizationVendor(Clone)"))
+                        GameObject.Find("CustomizationVendor(Clone)").GetComponent<PickingGraffiti>().isPickingGraffiti = false;
+                
+                SaveManager.Instance.state.ariGraffitiSlotLeft4 = graffitiLeft.gameObject.name;
+                SaveManager.Instance.Save();
+              return;               
+            }
+              
+            }
+            
             graffiti = graffitiLeft;
             GraffitiFire();
         }
 
     }
 
+    private void WhichGraffiti()
+    {
+        if(GameObject.Find("CustomizationVendor").GetComponent<ETCCustomizationVendor>().selectedGraffitiIndex == 0)
+            passingGraffiti = Resources.Load("Decal_1") as GameObject;
+        else if(GameObject.Find("CustomizationVendor").GetComponent<ETCCustomizationVendor>().selectedGraffitiIndex == 1)
+            passingGraffiti = Resources.Load("Decal_2") as GameObject;
+        else if(GameObject.Find("CustomizationVendor").GetComponent<ETCCustomizationVendor>().selectedGraffitiIndex == 2)
+            passingGraffiti = Resources.Load("Decal_3") as GameObject; 
+        else if(GameObject.Find("CustomizationVendor").GetComponent<ETCCustomizationVendor>().selectedGraffitiIndex == 3)
+            passingGraffiti = Resources.Load("Decal_4") as GameObject;
+        else if(GameObject.Find("CustomizationVendor").GetComponent<ETCCustomizationVendor>().selectedGraffitiIndex == 4)
+            passingGraffiti = Resources.Load("Decal_5") as GameObject;
+        else if(GameObject.Find("CustomizationVendor").GetComponent<ETCCustomizationVendor>().selectedGraffitiIndex == 5)
+            passingGraffiti = Resources.Load("Decal_6") as GameObject; 
+        else if(GameObject.Find("CustomizationVendor").GetComponent<ETCCustomizationVendor>().selectedGraffitiIndex == 6)
+            passingGraffiti = Resources.Load("Decal_7") as GameObject;
+        else if(GameObject.Find("CustomizationVendor").GetComponent<ETCCustomizationVendor>().selectedGraffitiIndex == 7)
+            passingGraffiti = Resources.Load("Decal_8") as GameObject;
+        else if(GameObject.Find("CustomizationVendor").GetComponent<ETCCustomizationVendor>().selectedGraffitiIndex == 8)
+            passingGraffiti = Resources.Load("Decal_9") as GameObject; 
+        else if(GameObject.Find("CustomizationVendor").GetComponent<ETCCustomizationVendor>().selectedGraffitiIndex == 9)
+            passingGraffiti = Resources.Load("Decal_10") as GameObject;
+    }
+
+     
 
 }

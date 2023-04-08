@@ -16,6 +16,7 @@ public class CustomizationMEnu : MonoBehaviour
     public GameObject mapTab;
     public GameObject missionsTab;
     public GameObject progressTab;
+    public GameObject graffitiTab;
 
     AudioSource audioUI;
     public AudioClip backSound;
@@ -25,6 +26,7 @@ public class CustomizationMEnu : MonoBehaviour
     public Button mapButton;
     public Button missionsButton;
     public Button progressButton;
+    public Button graffitiButton;
     public Sprite tabSelected;
     public Sprite tabNotSelected;
     // Start is called before the first frame update
@@ -35,6 +37,7 @@ public class CustomizationMEnu : MonoBehaviour
         mapTab.SetActive(true);
         missionsTab.SetActive(false);
         progressTab.SetActive(false);
+        graffitiTab.SetActive(false);
     }
 
     
@@ -87,6 +90,7 @@ public class CustomizationMEnu : MonoBehaviour
         mapButton.gameObject.SetActive(true);
         missionsButton.gameObject.SetActive(true);
         progressButton.gameObject.SetActive(true);
+        graffitiButton.gameObject.SetActive(true);
         OpenMap();
         isOpen = true;
 
@@ -104,10 +108,12 @@ public class CustomizationMEnu : MonoBehaviour
         mapTab.SetActive(false);
         missionsTab.SetActive(false);
         progressTab.SetActive(false);
+        graffitiTab.SetActive(false);
 
         mapButton.gameObject.SetActive(false);
         missionsButton.gameObject.SetActive(false);
         progressButton.gameObject.SetActive(false);
+        graffitiButton.gameObject.SetActive(false);
 
         Time.timeScale = 1f;
         Cursor.visible = false;
@@ -133,8 +139,11 @@ public class CustomizationMEnu : MonoBehaviour
             OpenProgressTab();
         } else if (currentTab == "Progress")
         {
+            OpenGraffitiTab();
+        } else if (currentTab == "Graffiti")
+        {
             OpenMapTab();
-        } 
+        }
 
     }
 
@@ -142,14 +151,17 @@ public class CustomizationMEnu : MonoBehaviour
     {
         if (currentTab == "Map")
         {
-            OpenProgressTab();
+            OpenGraffitiTab();
         } else if (currentTab == "Missions")
         {
             OpenMapTab();
         } else if (currentTab == "Progress")
         {
             OpenMissionsTab();
-        } 
+        } else if (currentTab == "Graffiti")
+        {
+            OpenProgressTab();
+        }
     }
 
     //Click Events
@@ -164,12 +176,15 @@ public class CustomizationMEnu : MonoBehaviour
         mapButton.GetComponent<Image>().sprite = tabSelected;
         missionsButton.GetComponent<Image>().sprite = tabNotSelected;
         progressButton.GetComponent<Image>().sprite = tabNotSelected;
+        graffitiButton.GetComponent<Image>().sprite = tabNotSelected;
+
 
     
 
         mapTab.SetActive(true);
         missionsTab.SetActive(false);
         progressTab.SetActive(false);
+        graffitiTab.SetActive(false);
         currentTab = "Map";
     }
 
@@ -178,16 +193,19 @@ public class CustomizationMEnu : MonoBehaviour
         PlaySoundUI(nextSound);
         OpenMissions();
     }
+
     void OpenMissions()
     {
         mapButton.GetComponent<Image>().sprite = tabNotSelected;
         missionsButton.GetComponent<Image>().sprite = tabSelected;
         progressButton.GetComponent<Image>().sprite = tabNotSelected;
+        graffitiButton.GetComponent<Image>().sprite = tabNotSelected;
 
         
         mapTab.SetActive(false);
         missionsTab.SetActive(true);
         progressTab.SetActive(false);
+        graffitiTab.SetActive(false);
         currentTab = "Missions";
 
         
@@ -203,6 +221,7 @@ public class CustomizationMEnu : MonoBehaviour
         mapButton.GetComponent<Image>().sprite = tabNotSelected;
         missionsButton.GetComponent<Image>().sprite = tabNotSelected;
         progressButton.GetComponent<Image>().sprite = tabSelected;
+        graffitiButton.GetComponent<Image>().sprite = tabNotSelected;
 
         
 
@@ -210,7 +229,32 @@ public class CustomizationMEnu : MonoBehaviour
         mapTab.SetActive(false);
         missionsTab.SetActive(false);
         progressTab.SetActive(true);
+        graffitiTab.SetActive(false);
         currentTab = "Progress";
+
+       
+    }
+
+    public void OpenGraffitiTab()
+    {
+        PlaySoundUI(nextSound);
+        OpenGraffiti();
+    }
+    void OpenGraffiti()
+    {
+        mapButton.GetComponent<Image>().sprite = tabNotSelected;
+        missionsButton.GetComponent<Image>().sprite = tabNotSelected;
+        progressButton.GetComponent<Image>().sprite = tabNotSelected;
+        graffitiButton.GetComponent<Image>().sprite = tabSelected;
+
+        Debug.Log("trying to open graffiti");
+
+        
+        mapTab.SetActive(false);
+        missionsTab.SetActive(false);
+        progressTab.SetActive(false);
+        graffitiTab.SetActive(true);
+        currentTab = "Graffiti";
 
        
     }
@@ -227,6 +271,7 @@ public class CustomizationMEnu : MonoBehaviour
         {
             missionsTab.SetActive(false);
             progressTab.SetActive(false);
+            
         } else if (tabOpened == "Missions")
         {
             mapTab.SetActive(false);
@@ -235,6 +280,6 @@ public class CustomizationMEnu : MonoBehaviour
         {
             mapTab.SetActive(false);
             missionsTab.SetActive(false);
-        }
+        } 
     }
 }

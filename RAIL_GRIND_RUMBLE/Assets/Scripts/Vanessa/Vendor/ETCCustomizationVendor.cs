@@ -19,6 +19,7 @@ public class ETCCustomizationVendor : MonoBehaviour
     public Transform sockPanel;
     public Transform skatePanel;
     public Transform hairPanel;
+    public Transform graffitiPanel;
     
     private ThirdPersonMovement thirdPersonMovementREF;
 
@@ -32,6 +33,7 @@ public class ETCCustomizationVendor : MonoBehaviour
     public TextMeshProUGUI skateBuySetText;
     public TextMeshProUGUI hairBuySetText;
     public TextMeshProUGUI moneyText;
+    //public TextMeshProUGUI graffitiBuySetText;
     //public TextMeshProUGUI highscoreText;
 
     public AudioClip clip;
@@ -44,6 +46,7 @@ public class ETCCustomizationVendor : MonoBehaviour
     private int [] sockCost = new int [] {10,50};
     private int [] skateCost = new int [] {10,50,55,60,60,60};
     private int [] hairCost = new int [] {0,50,55,60};
+    //private int [] graffitiCost = new int [] {0,0,0,0,0,0,0,0};
 
     private int selectedAccessoryIndex;
     private int selectedTopIndex;
@@ -51,6 +54,8 @@ public class ETCCustomizationVendor : MonoBehaviour
     private int selectedSockIndex;
     private int selectedSkateIndex;
     private int selectedHairIndex;
+
+    public int selectedGraffitiIndex;
 
     private int activeAccessoryIndex;
 
@@ -62,9 +67,11 @@ public class ETCCustomizationVendor : MonoBehaviour
 
     private Manager ManagerREF;
 
-
+    public int GraffitiButtonIndex;
 
     private Vector3 desiredMenuPosition;
+
+    //public bool isPickingGraffiti;
     //public GameObject helpScreen;
 
     private void Start()
@@ -216,6 +223,20 @@ public class ETCCustomizationVendor : MonoBehaviour
                 //set theme if owned
                 Image img = t.GetComponent<Image>();
                 img.color = SaveManager.Instance.IsAriHairOwned(i) ? Color.white : new Color (0.7f, 0.7f, 0.7f);
+
+                i++;
+            }
+
+        i = 0;
+        foreach (Transform t in graffitiPanel)
+            {
+                int currentIndex = i;
+                Button b = t.GetComponent<Button>();
+                b.onClick.AddListener(() => OnGraffitiSelect(currentIndex));
+
+                //set theme if owned
+                //Image img = t.GetComponent<Image>();
+                //img.color = SaveManager.Instance.IsAriHairOwned(i) ? Color.white : new Color (0.7f, 0.7f, 0.7f);
 
                 i++;
             }
@@ -625,6 +646,12 @@ public class ETCCustomizationVendor : MonoBehaviour
         }
 
         GameObjectHairSetting();
+    }
+
+     private void OnGraffitiSelect(int currentIndex)
+    {
+        Debug.Log("select graffiti button" + currentIndex);
+        selectedGraffitiIndex = currentIndex;
     }
 
 

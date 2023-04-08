@@ -78,15 +78,15 @@ public class VendorInteraction : MonoBehaviour
         SetAriMaterial(SaveManager.Instance.state.activeAriMaterial);
 
         //just one for now
-        OnGraffitiSelect(SaveManager.Instance.state.ariGraffitiSlotUp1);
-        SetGraffiti1(SaveManager.Instance.state.ariGraffitiSlotUp1);
+        //OnGraffitiSelect(SaveManager.Instance.state.ariGraffitiSlotUp1);
+        //SetGraffiti1(SaveManager.Instance.state.ariGraffitiSlotUp1);
 
         OnHairSelect(SaveManager.Instance.state.activeAriHair);
         SetHair(SaveManager.Instance.state.activeAriHair);
 
         //visual selected item
         materialPanel.GetChild(SaveManager.Instance.state.activeAriMaterial).GetComponent<RectTransform>().localScale = Vector3.one * 1.125f;
-        graffitiPanel.GetChild(SaveManager.Instance.state.ariGraffitiSlotUp1).GetComponent<RectTransform>().localScale = Vector3.one * 1.125f;
+        //graffitiPanel.GetChild(SaveManager.Instance.state.ariGraffitiSlotUp1).GetComponent<RectTransform>().localScale = Vector3.one * 1.125f;
         hairPanel.GetChild(SaveManager.Instance.state.activeAriHair).GetComponent<RectTransform>().localScale = Vector3.one * 1.125f;
     } 
 
@@ -245,7 +245,7 @@ public class VendorInteraction : MonoBehaviour
 
 
 
-    private void SetGraffiti1 (int index)
+    /*private void SetGraffiti1 (int index)
     {
         //set active
         activeGraffitiIndex1 = index;
@@ -292,7 +292,7 @@ public class VendorInteraction : MonoBehaviour
         //themeBuySetText.text = "Current Theme!";
 
          SaveManager.Instance.Save();
-    }
+    }*/
 
     private void SetHair (int index)
     {
@@ -396,7 +396,7 @@ public class VendorInteraction : MonoBehaviour
         }
 
 
-         //if not make the icon bigger
+         /*//if not make the icon bigger
         graffitiPanel.GetChild(currentIndex).GetComponent<RectTransform>().localScale = Vector3.one * 1.125f;
 
         //make the old one normal sized
@@ -423,7 +423,7 @@ public class VendorInteraction : MonoBehaviour
         {
             //not owned
              graffitiBuySetText.text = "Buy " + graffitiCost[currentIndex].ToString();
-        }
+        }*/
     }
 
 
@@ -505,7 +505,7 @@ public class VendorInteraction : MonoBehaviour
 
         }
     }
-    public void OnGraffitiBuySet ()
+    /*public void OnGraffitiBuySet ()
     {
         Debug.Log("buy or set theme");
         
@@ -536,7 +536,7 @@ public class VendorInteraction : MonoBehaviour
             }
 
         }
-    }
+    }*/
 
     public void OnHairBuySet ()
     {
