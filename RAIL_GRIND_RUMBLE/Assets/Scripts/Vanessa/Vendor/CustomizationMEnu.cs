@@ -17,6 +17,7 @@ public class CustomizationMEnu : MonoBehaviour
     public GameObject missionsTab;
     public GameObject progressTab;
     public GameObject graffitiTab;
+    public GameObject DisplayTab;
 
     AudioSource audioUI;
     public AudioClip backSound;
@@ -38,6 +39,7 @@ public class CustomizationMEnu : MonoBehaviour
         missionsTab.SetActive(false);
         progressTab.SetActive(false);
         graffitiTab.SetActive(false);
+        DisplayTab.SetActive(false);
     }
 
     
@@ -91,6 +93,7 @@ public class CustomizationMEnu : MonoBehaviour
         missionsButton.gameObject.SetActive(true);
         progressButton.gameObject.SetActive(true);
         graffitiButton.gameObject.SetActive(true);
+
         OpenMap();
         isOpen = true;
 
@@ -109,6 +112,7 @@ public class CustomizationMEnu : MonoBehaviour
         missionsTab.SetActive(false);
         progressTab.SetActive(false);
         graffitiTab.SetActive(false);
+        DisplayTab.SetActive(false);
 
         mapButton.gameObject.SetActive(false);
         missionsButton.gameObject.SetActive(false);
@@ -185,6 +189,7 @@ public class CustomizationMEnu : MonoBehaviour
         missionsTab.SetActive(false);
         progressTab.SetActive(false);
         graffitiTab.SetActive(false);
+        DisplayTab.SetActive(false);
         currentTab = "Map";
     }
 
@@ -206,6 +211,7 @@ public class CustomizationMEnu : MonoBehaviour
         missionsTab.SetActive(true);
         progressTab.SetActive(false);
         graffitiTab.SetActive(false);
+        DisplayTab.SetActive(false);
         currentTab = "Missions";
 
         
@@ -230,6 +236,7 @@ public class CustomizationMEnu : MonoBehaviour
         missionsTab.SetActive(false);
         progressTab.SetActive(true);
         graffitiTab.SetActive(false);
+        DisplayTab.SetActive(false);
         currentTab = "Progress";
 
        
@@ -254,6 +261,7 @@ public class CustomizationMEnu : MonoBehaviour
         missionsTab.SetActive(false);
         progressTab.SetActive(false);
         graffitiTab.SetActive(true);
+        DisplayTab.SetActive(true);
         currentTab = "Graffiti";
 
        

@@ -28,10 +28,12 @@ public class Graffiti : MonoBehaviour
    private ThirdPersonMovement ThirdPersonMovementREF;
    private PlayerAttack playerAttackREF; 
 
-   public GameObject upDisplay;
-   public GameObject downDisplay;
-   public GameObject rightDisplay;
-   public GameObject leftDisplay;
+   [SerializeField]private GameObject upDisplay;
+   [SerializeField]private GameObject downDisplay;
+   [SerializeField]private GameObject rightDisplay;
+   [SerializeField] private GameObject leftDisplay;
+
+   private CanvasGroup fadeGroup;
 
    public Sprite[] graffitiSprites = new Sprite[10];
 
@@ -43,13 +45,23 @@ public class Graffiti : MonoBehaviour
         playerAttackREF = GameObject.Find("playerPrefab").GetComponent<PlayerAttack>();
         cam = Camera.main;
         player = GameObject.Find("playerPrefab");
+
+        upDisplay = GameObject.Find("Up");
+        rightDisplay = GameObject.Find("Right");
+        downDisplay = GameObject.Find("Down");
+        leftDisplay = GameObject.Find("Left");
+        
+
+
         graffitiUp = Resources.Load(SaveManager.Instance.state.ariGraffitiSlotUp1) as GameObject;
         graffitiDown = Resources.Load(SaveManager.Instance.state.ariGraffitiSlotDown3) as GameObject;
         graffitiLeft = Resources.Load(SaveManager.Instance.state.ariGraffitiSlotLeft4) as GameObject;
         graffitiRight = Resources.Load(SaveManager.Instance.state.ariGraffitiSlotRight2) as GameObject;
 
-        Debug.Log("Graffiti List: " + graffitiUp + " and " + graffitiDown + " and " + graffitiLeft + " and " + graffitiRight); 
+        RecalculateGraffitiDisplay();
 
+        Debug.Log("Graffiti List: " + graffitiUp + " and " + graffitiDown + " and " + graffitiLeft + " and " + graffitiRight); 
+        fadeGroup = GameObject.Find("SpriteButtons").GetComponent<CanvasGroup>();
         
         
         graffitiParticle = Resources.Load("Particle_1") as GameObject;
@@ -59,13 +71,19 @@ public class Graffiti : MonoBehaviour
 
 
          
-         RecalculateGraffitiDisplay();
+         
          //Debug.Log(" tried to load " + graffitiParticle);
         
     }
 
     void Update ()
     {
+        upDisplay = GameObject.Find("Up");
+        rightDisplay = GameObject.Find("Right");
+        downDisplay = GameObject.Find("Down");
+        leftDisplay = GameObject.Find("Left");
+        
+        
         if (graffitiBuffTimer > 0)
         {
              graffitiBuffTimer -= Time.deltaTime;
@@ -73,7 +91,23 @@ public class Graffiti : MonoBehaviour
              
         } else 
             playerAttackREF.isBuffed = false;
-           
+
+
+
+        if (GameObject.Find("CustomizationVendor") || GameObject.Find ("CustomizationVendor(Clone)"))
+            {
+                 if (GameObject.Find("CustomizationVendor").GetComponent<PickingGraffiti>().isPickingGraffiti == true)
+                {
+                    fadeGroup = GameObject.Find("SpriteButtons").GetComponent<CanvasGroup>();
+                    fadeGroup.alpha = Mathf.PingPong(Time.time, .5f);
+                }else
+                {
+                    if (fadeGroup)
+                        fadeGroup.alpha = 1;
+                } 
+                    
+            }
+                
     }
 
 
@@ -301,6 +335,8 @@ public class Graffiti : MonoBehaviour
 
     private void RecalcSprite(string saveStateInstance, GameObject displaySprite)
     {
+
+
         Debug.Log("the save string was " + saveStateInstance + " and the display sprite was " + displaySprite);
         if(saveStateInstance == "Decal_1")
             displaySprite.GetComponent<Image>().sprite = graffitiSprites[0];
