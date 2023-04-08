@@ -28,7 +28,7 @@ public class CompassManager : MonoBehaviour
         }*/
 
         mainCam = GameObject.Find("Main Camera");
-        //Debug.Log("Awaken Compass Manager");
+        Debug.Log("Awaken Compass Manager");
     }
 
     private IEnumerator Start()

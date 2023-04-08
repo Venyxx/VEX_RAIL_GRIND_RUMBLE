@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
-using UnityEngine.UI;
 
 public class Graffiti : MonoBehaviour
 {
@@ -28,13 +27,6 @@ public class Graffiti : MonoBehaviour
    private ThirdPersonMovement ThirdPersonMovementREF;
    private PlayerAttack playerAttackREF; 
 
-   public GameObject upDisplay;
-   public GameObject downDisplay;
-   public GameObject rightDisplay;
-   public GameObject leftDisplay;
-
-   public Sprite[] graffitiSprites = new Sprite[10];
-
    public float graffitiBuffTimer;
     
     void Start ()
@@ -56,10 +48,6 @@ public class Graffiti : MonoBehaviour
         graffitiParticle2 = Resources.Load("Particle_2") as GameObject;
 
          canLocationForParticle = GameObject.FindGameObjectWithTag("PlayerCan");
-
-
-         
-         RecalculateGraffitiDisplay();
          //Debug.Log(" tried to load " + graffitiParticle);
         
     }
@@ -156,7 +144,6 @@ public class Graffiti : MonoBehaviour
 
                 SaveManager.Instance.state.ariGraffitiSlotDown3 = graffitiDown.gameObject.name;
                 SaveManager.Instance.Save();
-                RecalculateGraffitiDisplay();
                     return;         
             }
             }
@@ -186,7 +173,6 @@ public class Graffiti : MonoBehaviour
                 
                 SaveManager.Instance.state.ariGraffitiSlotUp1 = graffitiUp.gameObject.name;
                 SaveManager.Instance.Save();
-                RecalculateGraffitiDisplay();
                 return;           
             }
             }
@@ -216,7 +202,6 @@ public class Graffiti : MonoBehaviour
                 
                 SaveManager.Instance.state.ariGraffitiSlotRight2 = graffitiRight.gameObject.name;
                 SaveManager.Instance.Save();
-                RecalculateGraffitiDisplay();
                 return;      
             }  
             }
@@ -247,7 +232,6 @@ public class Graffiti : MonoBehaviour
                 
                 SaveManager.Instance.state.ariGraffitiSlotLeft4 = graffitiLeft.gameObject.name;
                 SaveManager.Instance.Save();
-                RecalculateGraffitiDisplay();
               return;               
             }
               
@@ -284,47 +268,5 @@ public class Graffiti : MonoBehaviour
     }
 
      
-    public void RecalculateGraffitiDisplay ()
-    {
-        Debug.Log("recalculating sprite display");
-        upDisplay = GameObject.Find("Up");
-        rightDisplay = GameObject.Find("Right");
-        downDisplay = GameObject.Find("Down");
-        leftDisplay = GameObject.Find("Left");
-
-        RecalcSprite(SaveManager.Instance.state.ariGraffitiSlotLeft4, leftDisplay);
-        RecalcSprite(SaveManager.Instance.state.ariGraffitiSlotUp1, upDisplay);
-        RecalcSprite(SaveManager.Instance.state.ariGraffitiSlotDown3, downDisplay);
-        RecalcSprite(SaveManager.Instance.state.ariGraffitiSlotRight2, rightDisplay);
-  
-    }
-
-    private void RecalcSprite(string saveStateInstance, GameObject displaySprite)
-    {
-        Debug.Log("the save string was " + saveStateInstance + " and the display sprite was " + displaySprite);
-        if(saveStateInstance == "Decal_1")
-            displaySprite.GetComponent<Image>().sprite = graffitiSprites[0];
-        else if(saveStateInstance == "Decal_2")
-            displaySprite.GetComponent<Image>().sprite = graffitiSprites[1];
-        else if(saveStateInstance == "Decal_3")
-            displaySprite.GetComponent<Image>().sprite = graffitiSprites[2];
-        else if(saveStateInstance == "Decal_4")
-            displaySprite.GetComponent<Image>().sprite = graffitiSprites[3];
-        else if(saveStateInstance == "Decal_5")
-            displaySprite.GetComponent<Image>().sprite = graffitiSprites[4];
-        else if(saveStateInstance == "Decal_6")
-            displaySprite.GetComponent<Image>().sprite = graffitiSprites[5];
-        else if(saveStateInstance == "Decal_7")
-            displaySprite.GetComponent<Image>().sprite = graffitiSprites[6];
-        else if(saveStateInstance == "Decal_8")
-            displaySprite.GetComponent<Image>().sprite = graffitiSprites[7];
-        else if(saveStateInstance == "Decal_9")
-            displaySprite.GetComponent<Image>().sprite = graffitiSprites[8];
-        else if(saveStateInstance == "Decal_10")
-            displaySprite.GetComponent<Image>().sprite = graffitiSprites[9];
-
-
-            Debug.Log(displaySprite);
-    }
 
 }

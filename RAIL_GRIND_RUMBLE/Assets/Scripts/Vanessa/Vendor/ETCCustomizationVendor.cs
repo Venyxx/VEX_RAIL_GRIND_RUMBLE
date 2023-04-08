@@ -76,7 +76,7 @@ public class ETCCustomizationVendor : MonoBehaviour
 
     private void Start()
     {
-        //Debug.Log("ETC");
+        Debug.Log("ETC");
         ManagerREF = GameObject.Find("Manager").GetComponent<Manager>();
         Time.timeScale = 1f;
         if (GameObject.Find("playerPrefab"))
@@ -162,7 +162,7 @@ public class ETCCustomizationVendor : MonoBehaviour
 
         foreach (Transform t in topPanel)
         {
-            //Debug.Log("setting buttons for tops");
+            Debug.Log("setting buttons for tops");
             int currentIndex = i;
             Button b = t.GetComponent<Button>();
             b.onClick.AddListener(() => OnTopSelect(currentIndex));
@@ -257,7 +257,7 @@ public class ETCCustomizationVendor : MonoBehaviour
 
         //change buy set text
         accessoryBuySetText.text = "Equipped";
-        // Debug.Log("ran set accessory");
+         Debug.Log("ran set accessory");
 
         SaveManager.Instance.Save();
     }
@@ -272,13 +272,13 @@ public class ETCCustomizationVendor : MonoBehaviour
         
         //change hair material
         GameObjectTopSetting();
-        //Debug.Log("Settop method");
+        Debug.Log("Settop method");
 
         
 
         //change buy set text
         topBuySetText.text = "Equipped";
-        // Debug.Log("ran set top");
+         Debug.Log("ran set top");
 
         SaveManager.Instance.Save();
     }
@@ -295,7 +295,7 @@ public class ETCCustomizationVendor : MonoBehaviour
 
         //change buy set text
         bottomBuySetText.text = "Equipped";
-        // Debug.Log("ran set bottom");
+         Debug.Log("ran set bottom");
 
         SaveManager.Instance.Save();
     }
@@ -312,7 +312,7 @@ public class ETCCustomizationVendor : MonoBehaviour
 
         //change buy set text
         sockBuySetText.text = "Equipped";
-        // Debug.Log("ran set sock");
+         Debug.Log("ran set sock");
 
         SaveManager.Instance.Save();
     }
@@ -329,7 +329,7 @@ public class ETCCustomizationVendor : MonoBehaviour
 
         //change buy set text
         skateBuySetText.text = "Equipped";
-         //Debug.Log("ran set skate");
+         Debug.Log("ran set skate");
 
         //commented out line below it leads to max speed disparity in build vs editor - Raul
         //thirdPersonMovementREF.RecalculateStats();
@@ -350,7 +350,7 @@ public class ETCCustomizationVendor : MonoBehaviour
 
         //change buy set text
         hairBuySetText.text = "Equipped";
-         //Debug.Log("ran set hair");
+         Debug.Log("ran set hair");
 
         SaveManager.Instance.Save();
     }
