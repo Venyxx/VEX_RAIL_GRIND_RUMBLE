@@ -5,12 +5,17 @@ using UnityEngine;
 public class RocketTurret : MonoBehaviour, IDamageable
 {
     [SerializeField] GameObject rocket;
-    Transform target;
+    [SerializeField] GameObject targetObject;
+    GameObject target;
     GameObject playerREF;
     float speed = 1f;
     public bool chargeRunning;
     public bool shootRunning;
     bool attached;
+
+    //Reload Values
+    public float rechargeTime;
+    public float shootTime;
 
     Hernandez hernandez;
 
@@ -23,15 +28,15 @@ public class RocketTurret : MonoBehaviour, IDamageable
     void Start()
     {
         playerREF = GameObject.FindWithTag("PlayerObject");
-        target = this.gameObject.transform.Find("Target");
         currentHealth = maxHealth;
         dead = false;
+        target = null;
 
         if (shootRunning == true) {
             shootRunning = false;
         }
 
-        StartCoroutine(Shooting());
+        //StartCoroutine(Shooting());
     }
 
     public void SetAttached()
@@ -59,30 +64,46 @@ public class RocketTurret : MonoBehaviour, IDamageable
         }
 
         //Targeting
-        if (target.gameObject.activeInHierarchy == true)
+        if (target != null)
         {
-            target.transform.position = new Vector3(playerREF.transform.position.x, playerREF.transform.position.y, playerREF.transform.position.z);
-        } else {
+            target.transform.position = new Vector3(playerREF.transform.position.x, playerREF.transform.position.y+0.1f, playerREF.transform.position.z);
+        } /*else {
             target.transform.position = target.transform.position;
-        }
+        }*/
     }
 
     public IEnumerator Charging()
     {
         chargeRunning = true;
-        yield return new WaitForSeconds(15f);
+
+        if (attached)
+        {
+            yield return new WaitForSeconds(15f);
+        } else {
+            yield return new WaitForSeconds(rechargeTime);
+        }
+        
         if (!dead)
         {
             StartCoroutine(Shooting());
         }
+
         chargeRunning = false;
     }
 
     public IEnumerator Shooting()
     {
         shootRunning = true;
-        target.gameObject.SetActive(true);
-        yield return new WaitForSeconds(5f);
+        //target.gameObject.SetActive(true);
+
+        target = Instantiate(targetObject, playerREF.transform.position, Quaternion.identity);
+
+        if (attached)
+        {
+            yield return new WaitForSeconds(5f);
+        } else {
+            yield return new WaitForSeconds(shootTime);
+        }
 
         var z = transform.rotation.eulerAngles.z;
         var y = transform.rotation.eulerAngles.y;
@@ -95,7 +116,8 @@ public class RocketTurret : MonoBehaviour, IDamageable
             if (attached && hernandez.stunned == true)
             {
                 shootRunning = false;
-                target.gameObject.SetActive(false);
+                //target.gameObject.SetActive(false);
+                Destroy(target.gameObject);
                 yield break;
             } else {
                 GameObject rocketShot; 
@@ -107,7 +129,7 @@ public class RocketTurret : MonoBehaviour, IDamageable
                     rocketShot = Instantiate(rocket, new Vector3(transform.position.x, transform.position.y + 5, transform.position.z), /*rot*/ Quaternion.identity);
                 }
 
-                Vector3 aimAt = new Vector3(target.position.x, target.position.y, target.position.z);
+                Vector3 aimAt = new Vector3(target.transform.position.x, target.transform.position.y, target.transform.position.z);
 
                 if (!attached)
                 {
@@ -124,7 +146,8 @@ public class RocketTurret : MonoBehaviour, IDamageable
             transform.rotation = thisRot;
         }
         
-        target.gameObject.SetActive(false);
+        //target.gameObject.SetActive(false);
+        Destroy(target.gameObject);
         shootRunning = false;
     }
 
@@ -151,7 +174,8 @@ public class RocketTurret : MonoBehaviour, IDamageable
         if (currentHealth <= 0)
         {
             currentHealth = 0;
-            target.gameObject.SetActive(false);
+            //target.gameObject.SetActive(false);
+            Destroy(target.gameObject);
             StartCoroutine(Regenerate());
         }
     }

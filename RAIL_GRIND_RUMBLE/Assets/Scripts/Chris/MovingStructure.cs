@@ -45,6 +45,12 @@ public class MovingStructure : MonoBehaviour
             } else if (this.gameObject.GetComponent<RocketTurret>() != null)
             {
                 this.gameObject.GetComponent<RocketTurret>().shootRunning = false;
+                this.gameObject.GetComponent<RocketTurret>().chargeRunning = false;
+                if (GameObject.FindWithTag("TurretTarget"))
+                {
+                    GameObject turretTarget = GameObject.FindWithTag("TurretTarget");
+                    Destroy(turretTarget);
+                }
             }
         }
     }

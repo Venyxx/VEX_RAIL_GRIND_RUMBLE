@@ -6,11 +6,13 @@ public class Rocket : MonoBehaviour
 {
     Vector3 target;
     Transform explosion;
+    bool explosionRunning;
     float speed = 20f;
     bool spawnDelayRunning;
     void Start()
     {
         explosion = this.gameObject.transform.Find("Explosion");
+        explosionRunning = false;
     }
 
     // Update is called once per frame
@@ -23,19 +25,27 @@ public class Rocket : MonoBehaviour
 
         if (spawnDelayRunning == false)
         {
-            transform.position = Vector3.MoveTowards(transform.position, target, step);
-            Vector3 newDirection = Vector3.RotateTowards(transform.forward, target, step, 0f);
+            transform.position = Vector3.MoveTowards(transform.position, target, step * 2);
+            //Vector3 newDirection = Vector3.RotateTowards(transform.forward, target, step * 2, 0f);
             //transform.rotation = Quaternion.LookRotation(newDirection);
         } else {
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), step * 2);
+        }
+
+        if (transform.position == target && explosionRunning == false)
+        {
+            StartCoroutine(Explosion());
         }
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") || collision.gameObject.tag == "Player")
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") || collision.gameObject.tag == "Player" || collision.gameObject.layer == LayerMask.NameToLayer("wallrun"))
         {
-            StartCoroutine(Explosion());
+            if (explosionRunning == false)
+            {
+                StartCoroutine(Explosion());
+            }
         }
     }
     
@@ -50,6 +60,7 @@ public class Rocket : MonoBehaviour
 
     IEnumerator Explosion()
     {
+        explosionRunning = true;
         explosion.gameObject.SetActive(true);
         GetComponent<MeshRenderer>().enabled = false;
         yield return new WaitForSeconds(2f);
