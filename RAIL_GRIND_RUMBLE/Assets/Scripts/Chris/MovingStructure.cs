@@ -38,6 +38,20 @@ public class MovingStructure : MonoBehaviour
                 grappleDetector.aimPoints.Remove(this.transform);
                 grappleDetector.aimPointCount--;
             }
+
+            if (this.gameObject.GetComponent<MachineGunTurret>() != null)
+            {
+                this.gameObject.GetComponent<MachineGunTurret>().shootRunning = false;
+            } else if (this.gameObject.GetComponent<RocketTurret>() != null)
+            {
+                this.gameObject.GetComponent<RocketTurret>().shootRunning = false;
+                this.gameObject.GetComponent<RocketTurret>().chargeRunning = false;
+                if (GameObject.FindWithTag("TurretTarget"))
+                {
+                    GameObject turretTarget = GameObject.FindWithTag("TurretTarget");
+                    Destroy(turretTarget);
+                }
+            }
         }
     }
 

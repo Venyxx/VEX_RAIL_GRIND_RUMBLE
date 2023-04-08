@@ -701,6 +701,8 @@ public class ThirdPersonMovement : MonoBehaviour
 
     void TapJump(float force)
     {
+        if (isGrappling) return;
+
         //rigidBody.velocity = new Vector3(rigidBody.velocity.x, 0f, rigidBody.velocity.z);
         rigidBody.AddForce(transform.up * force, ForceMode.Impulse);
     }
