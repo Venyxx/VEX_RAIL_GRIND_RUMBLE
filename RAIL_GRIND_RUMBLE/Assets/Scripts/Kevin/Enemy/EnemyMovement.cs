@@ -13,7 +13,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField]
     private Animator Animator;
 
-    [SerializeField] private float activationDistance = 20f;
+    [SerializeField] private float activationDistance = 50f;
 
     private NavMeshAgent Agent;
     [Range(-1, 1)]
@@ -57,18 +57,24 @@ public class EnemyMovement : MonoBehaviour
     {
         totalDistance = Vector3.Distance(Player.position, Agent.transform.position);
         Animator.SetBool(IsWalking, Agent.velocity.magnitude > 0.01f);
-        if (Vector3.Distance(Player.position, transform.position) < activationDistance && !activated && enemy.Health >1 && !enemy.isDizzy)
+        if (Vector3.Distance(Player.position, transform.position) < activationDistance && !activated && enemy.Health > 1 && !enemy.isDizzy)
         {
             //Debug.Log("Player is within range, chasing the player");
             StartCoroutine(Activate());
-           
-            
-                activated = true;
-        
+
+
+            activated = true;
+
 
 
         }
-       
+
+        if (Vector3.Distance(Player.position, transform.position) > activationDistance)
+        {
+            StopAllCoroutines();
+            activated = false;
+        }
+
         if (enemy.Health <=0)
         {
             //Debug.Log("BugCheck1");

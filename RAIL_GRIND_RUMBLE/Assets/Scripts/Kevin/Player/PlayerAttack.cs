@@ -93,9 +93,9 @@ public class PlayerAttack : MonoBehaviour
             }
             
         }
-        //if (!IsAttacking && atkCount == 0 && IsHeavyAttacking)
+        //if (!IsAttacking && atkCount == 0 && !IsHeavyAttacking && spinEffect)
         //{
-        //    IsHeavyAttacking = false;
+        //  //  IsHeavyAttacking = false;
         //    spinEffect.SetActive(false);
         //}
         //graffiti mulltiplier
@@ -267,7 +267,7 @@ public class PlayerAttack : MonoBehaviour
             {
              //   Debug.Log("BugCheck3");
                 Anim.SetTrigger("HAttackEnd1");
-                spinEffect.SetActive(true);
+               // spinEffect.SetActive(true);
                 //   IsHeavyAttacking = false;
                 HeavyAtkTimer = 0;
 
@@ -280,7 +280,7 @@ public class PlayerAttack : MonoBehaviour
                 Anim.SetTrigger("HAttackEnd3");
                 //  IsHeavyAttacking = false;
                 HeavyAtkTimer = 0;
-                spinEffect.SetActive(true);
+                //spinEffect.SetActive(true);
 
                 Damage = 100  + skateBuffDamage;
                 
