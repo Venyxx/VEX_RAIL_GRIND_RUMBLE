@@ -360,7 +360,6 @@ public class ThirdPersonMovement : MonoBehaviour
             }
             else 
                 targetSpeed = Mathf.Lerp(targetSpeed, 1, 0.35f);
-                
         }
         
 
@@ -498,15 +497,19 @@ public class ThirdPersonMovement : MonoBehaviour
         }
 
 
+        //if (rigidBody.velocity.magnitude < 1)
+        //{ currentSpeed = 0; }
         if (rigidBody.velocity.magnitude < 1)
-        { currentSpeed = 0; }
-                
+            currentSpeed = 0;
 
         //if there is player input and we are, accelerate
+<<<<<<< Updated upstream
         if (verticalInput > 0.1 && GetComponent<WallRun>().isWallRunning == false && isBraking == false)
+=======
+        if ((verticalInput >= 0.25 || horizontalInput >= 0.25 || verticalInput <= -0.25 || horizontalInput <= -0.25) && GetComponent<WallRun>().isWallRunning == false)
+>>>>>>> Stashed changes
         {
             moveKeyUp = false;
-
             //kick start movement
             if (rigidBody.velocity.magnitude < baseMoveSpeed && isBraking == false)
                 currentSpeed = baseMoveSpeed;
@@ -515,12 +518,21 @@ public class ThirdPersonMovement : MonoBehaviour
             float acceleration = 9f; //originally 2
             if(currentSpeed < maxSkateSpeed && isWalking == false)
             currentSpeed += acceleration * Time.deltaTime;
+<<<<<<< Updated upstream
 
          } else if (verticalInput < 0.1)
+=======
+        } 
+        else 
+>>>>>>> Stashed changes
         {
-            //check if the back arrow is active    
-            if (verticalInput < 0.1 && rigidBody.velocity.magnitude > 3)
+            //if no input forward
+            moveKeyUp = true;
+            float deceleration = 5f;
+            //if moving, decelerate
+            if (currentSpeed > 0)
             {
+<<<<<<< Updated upstream
                 //decel faster as a breaking mech
                 
                 moveKeyUp = true;
@@ -553,9 +565,12 @@ public class ThirdPersonMovement : MonoBehaviour
 
                 }
                 
+=======
+                currentSpeed -= deceleration * Time.deltaTime;
+                isBraking = false;
+                _animator.SetBool(_animIDBrake, false);
+>>>>>>> Stashed changes
             }
-                
-       
         }
 
     }
@@ -588,13 +603,16 @@ public class ThirdPersonMovement : MonoBehaviour
         
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-        if (verticalInput != 0 && horizontalInput != 0 && !dialogueManager.freezePlayer)
+        if (!dialogueManager.freezePlayer && moveKeyUp == false)
             skateDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+<<<<<<< Updated upstream
             
         else 
             skateDirection = orientation.forward;
+=======
+>>>>>>> Stashed changes
 
-            if (isWalking)
+        if (isWalking)
         {
             rigidBody.velocity = new Vector3(moveDirection.normalized.x * walkSpeed * 10f, rigidBody.velocity.y, moveDirection.normalized.z * walkSpeed * 10f);
 
@@ -612,6 +630,7 @@ public class ThirdPersonMovement : MonoBehaviour
         }
         else if (Grounded)
         {
+<<<<<<< Updated upstream
            //moves with acceleration for forward, just walks sideways
             if (currentSpeed > 1)
             {
@@ -624,6 +643,9 @@ public class ThirdPersonMovement : MonoBehaviour
             //else 
             //rigidBody.velocity = new Vector3( rigidBody.velocity.x, rigidBody.velocity.y,  rigidBody.velocity.z); //PROBLEM AREA
             
+=======
+            rigidBody.velocity = new Vector3(skateDirection.normalized.x * currentSpeed, rigidBody.velocity.y, skateDirection.normalized.z * currentSpeed);
+>>>>>>> Stashed changes
             
             //change anim
             _animator.SetBool(_animIDWalking, false);

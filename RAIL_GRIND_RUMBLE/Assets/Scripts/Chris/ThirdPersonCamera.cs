@@ -104,17 +104,17 @@ public class ThirdPersonCamera : MonoBehaviour
 
             if (currentStyle == CameraStyle.Basic)
             {
-                //Rotate Player Object
+               //Rotate Player Object
                 Vector3 inputDir = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
                 if (inputDir != Vector3.zero )
                 {
                     playerTransform.forward = Vector3.Slerp(playerTransform.forward, inputDir.normalized, Time.deltaTime * rotationSpeed);
                 }
-                else if (inputDir == Vector3.zero && playerPrefabREF.GetComponent<Rigidbody>().velocity.magnitude > 1) // added so that you can control direction with RTS while sliding
+                /*else if (inputDir == Vector3.zero && playerPrefabREF.GetComponent<Rigidbody>().velocity.magnitude > 1) // added so that you can control direction with RTS while sliding
                 {   
                    playerTransform.forward = Vector3.Slerp(playerTransform.forward, viewDir.normalized, Time.deltaTime * rotationSpeed);
-                }
+                }*/
                 
             } else if (currentStyle == CameraStyle.Aiming) {
                 if (transform != null)
