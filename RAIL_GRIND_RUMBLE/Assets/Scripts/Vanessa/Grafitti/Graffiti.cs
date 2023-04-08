@@ -8,10 +8,10 @@ using UnityEngine.UI;
 public class Graffiti : MonoBehaviour
 {
    [SerializeField] private GameObject graffiti;
-    GameObject graffitiDown;
-    GameObject graffitiUp;
-    GameObject graffitiRight;
-    GameObject graffitiLeft;
+     GameObject graffitiDown;
+     GameObject graffitiUp;
+     GameObject graffitiRight;
+     GameObject graffitiLeft;
 
     GameObject passingGraffiti;
 
@@ -28,10 +28,10 @@ public class Graffiti : MonoBehaviour
    private ThirdPersonMovement ThirdPersonMovementREF;
    private PlayerAttack playerAttackREF; 
 
-   [SerializeField]private GameObject upDisplay;
-   [SerializeField]private GameObject downDisplay;
-   [SerializeField]private GameObject rightDisplay;
-   [SerializeField] private GameObject leftDisplay;
+   public GameObject upDisplay;
+   public GameObject downDisplay;
+   public GameObject rightDisplay;
+   public GameObject leftDisplay;
 
    private CanvasGroup fadeGroup;
 
@@ -39,8 +39,9 @@ public class Graffiti : MonoBehaviour
 
    public float graffitiBuffTimer;
     
-    void Start ()
+    void Awake ()
     {
+        Debug.Log("STARTING-------------");
         ThirdPersonMovementREF = GameObject.Find("playerPrefab").GetComponent<ThirdPersonMovement>();
         playerAttackREF = GameObject.Find("playerPrefab").GetComponent<PlayerAttack>();
         cam = Camera.main;
@@ -50,6 +51,8 @@ public class Graffiti : MonoBehaviour
         rightDisplay = GameObject.Find("Right");
         downDisplay = GameObject.Find("Down");
         leftDisplay = GameObject.Find("Left");
+
+        Debug.Log(upDisplay.transform.parent);
         
 
 
@@ -58,6 +61,7 @@ public class Graffiti : MonoBehaviour
         graffitiLeft = Resources.Load(SaveManager.Instance.state.ariGraffitiSlotLeft4) as GameObject;
         graffitiRight = Resources.Load(SaveManager.Instance.state.ariGraffitiSlotRight2) as GameObject;
 
+        
         RecalculateGraffitiDisplay();
 
         Debug.Log("Graffiti List: " + graffitiUp + " and " + graffitiDown + " and " + graffitiLeft + " and " + graffitiRight); 
@@ -94,7 +98,7 @@ public class Graffiti : MonoBehaviour
 
 
 
-        if (GameObject.Find("CustomizationVendor") || GameObject.Find ("CustomizationVendor(Clone)"))
+        if (GameObject.Find("CustomizationVendor"))
             {
                  if (GameObject.Find("CustomizationVendor").GetComponent<PickingGraffiti>().isPickingGraffiti == true)
                 {
@@ -105,8 +109,22 @@ public class Graffiti : MonoBehaviour
                     if (fadeGroup)
                         fadeGroup.alpha = 1;
                 } 
-                    
+
             }
+
+        if (GameObject.Find ("CustomizationVendor(Clone)"))
+        {
+            if(GameObject.Find("CustomizationVendor(Clone)").GetComponent<PickingGraffiti>().isPickingGraffiti == true)
+            {
+                fadeGroup = GameObject.Find("SpriteButtons").GetComponent<CanvasGroup>();
+                fadeGroup.alpha = Mathf.PingPong(Time.time, .5f);
+            }else
+            {
+                if (fadeGroup)
+                    fadeGroup.alpha = 1;
+            } 
+        }
+            
                 
     }
 
@@ -188,7 +206,8 @@ public class Graffiti : MonoBehaviour
                 if (GameObject.Find("CustomizationVendor(Clone)"))
                         GameObject.Find("CustomizationVendor(Clone)").GetComponent<PickingGraffiti>().isPickingGraffiti = false;
 
-                SaveManager.Instance.state.ariGraffitiSlotDown3 = graffitiDown.gameObject.name;
+                SaveManager.Instance.state.ariGraffitiSlotDown3 = graffitiDown.gameObject.name as string;
+                
                 SaveManager.Instance.Save();
                 RecalculateGraffitiDisplay();
                     return;         
@@ -218,7 +237,7 @@ public class Graffiti : MonoBehaviour
                 if (GameObject.Find("CustomizationVendor(Clone)"))
                         GameObject.Find("CustomizationVendor(Clone)").GetComponent<PickingGraffiti>().isPickingGraffiti = false;
                 
-                SaveManager.Instance.state.ariGraffitiSlotUp1 = graffitiUp.gameObject.name;
+                SaveManager.Instance.state.ariGraffitiSlotUp1 = graffitiUp.gameObject.name  as string;
                 SaveManager.Instance.Save();
                 RecalculateGraffitiDisplay();
                 return;           
@@ -248,7 +267,7 @@ public class Graffiti : MonoBehaviour
                 if (GameObject.Find("CustomizationVendor(Clone)"))
                         GameObject.Find("CustomizationVendor(Clone)").GetComponent<PickingGraffiti>().isPickingGraffiti = false;
                 
-                SaveManager.Instance.state.ariGraffitiSlotRight2 = graffitiRight.gameObject.name;
+                SaveManager.Instance.state.ariGraffitiSlotRight2 = graffitiRight.gameObject.name  as string;
                 SaveManager.Instance.Save();
                 RecalculateGraffitiDisplay();
                 return;      
@@ -279,7 +298,8 @@ public class Graffiti : MonoBehaviour
                 if (GameObject.Find("CustomizationVendor(Clone)"))
                         GameObject.Find("CustomizationVendor(Clone)").GetComponent<PickingGraffiti>().isPickingGraffiti = false;
                 
-                SaveManager.Instance.state.ariGraffitiSlotLeft4 = graffitiLeft.gameObject.name;
+                SaveManager.Instance.state.ariGraffitiSlotLeft4 = graffitiLeft.gameObject.name  as string;
+                Debug.Log("the save state string for left is" + SaveManager.Instance.state.ariGraffitiSlotLeft4);
                 SaveManager.Instance.Save();
                 RecalculateGraffitiDisplay();
               return;               

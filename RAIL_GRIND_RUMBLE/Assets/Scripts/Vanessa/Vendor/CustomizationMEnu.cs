@@ -39,7 +39,7 @@ public class CustomizationMEnu : MonoBehaviour
         missionsTab.SetActive(false);
         progressTab.SetActive(false);
         graffitiTab.SetActive(false);
-        DisplayTab.SetActive(false);
+        DisplayTab.SetActive(true);
     }
 
     

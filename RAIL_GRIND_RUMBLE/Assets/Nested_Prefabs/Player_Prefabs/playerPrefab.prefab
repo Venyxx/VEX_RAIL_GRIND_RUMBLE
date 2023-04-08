@@ -47,7 +47,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &294039646
 Transform:
   m_ObjectHideFlags: 0
@@ -665,6 +665,7 @@ GameObject:
   - component: {fileID: 2030071779453111325}
   - component: {fileID: 7833215216922784152}
   - component: {fileID: 2284834626807763962}
+  - component: {fileID: 6320285172999926801}
   m_Layer: 7
   m_Name: playerPrefab
   m_TagString: Player
@@ -1755,6 +1756,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ETCOBJ: {fileID: 8844044574409856523, guid: ac10ac12ef45312488c57a0177ae1615, type: 3}
+--- !u!114 &6320285172999926801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030071780202691818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3efda54784bc10428950d4477917f7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  graffiti: {fileID: 1193813719681258576, guid: 7a16962a84966584fb31eeb66b62beec, type: 3}
+  canLocation: {fileID: 294039646}
+  upDisplay: {fileID: 0}
+  downDisplay: {fileID: 0}
+  rightDisplay: {fileID: 0}
+  leftDisplay: {fileID: 0}
+  graffitiSprites:
+  - {fileID: 21300000, guid: c308d30f5279aeb419bb020d1824c44f, type: 3}
+  - {fileID: 21300000, guid: aeddfd2243e626e4587449c58cecb884, type: 3}
+  - {fileID: 21300000, guid: 28a073a3bf860dc4aae385b3c7a8682e, type: 3}
+  - {fileID: 21300000, guid: 6aea09935c664ef45843bc742a86a75a, type: 3}
+  - {fileID: 21300000, guid: f4f857ffdf59e16428597466977720a6, type: 3}
+  - {fileID: 21300000, guid: 799cef94cacd1e845b140494e18ec2d4, type: 3}
+  - {fileID: 21300000, guid: d4780dc1205c7c7478c970d8c61d24e8, type: 3}
+  - {fileID: 21300000, guid: f609c9b3b1675f947a865ec558b5ad90, type: 3}
+  - {fileID: 21300000, guid: 4273c283a5e145a468dc60af5dcb46e7, type: 3}
+  - {fileID: 21300000, guid: b0ae5f825c0f7bb47890dd9d8c48336e, type: 3}
+  graffitiBuffTimer: 0
 --- !u!1 &2030071780611383564
 GameObject:
   m_ObjectHideFlags: 0
