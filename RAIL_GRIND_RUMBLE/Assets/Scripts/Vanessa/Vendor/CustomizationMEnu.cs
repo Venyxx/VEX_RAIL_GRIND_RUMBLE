@@ -30,6 +30,8 @@ public class CustomizationMEnu : MonoBehaviour
     public Button graffitiButton;
     public Sprite tabSelected;
     public Sprite tabNotSelected;
+
+    private Graffiti graffitiREF;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +42,7 @@ public class CustomizationMEnu : MonoBehaviour
         progressTab.SetActive(false);
         graffitiTab.SetActive(false);
         DisplayTab.SetActive(true);
+        graffitiREF = GameObject.Find("SprayCanTransform").GetComponent<Graffiti>();
     }
 
     
@@ -246,6 +249,7 @@ public class CustomizationMEnu : MonoBehaviour
     {
         PlaySoundUI(nextSound);
         OpenGraffiti();
+        graffitiREF.RecalculateGraffitiDisplay();
     }
     void OpenGraffiti()
     {

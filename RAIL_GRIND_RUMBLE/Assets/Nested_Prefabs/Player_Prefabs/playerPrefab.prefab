@@ -47,7 +47,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &294039646
 Transform:
   m_ObjectHideFlags: 0
@@ -76,6 +76,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   graffiti: {fileID: 1193813719681258576, guid: 7a16962a84966584fb31eeb66b62beec, type: 3}
+  graffitiParticle: {fileID: 1032609090901506660, guid: e732da7a1c13ce142a7a58c5e854f20f, type: 3}
+  graffitiParticle2: {fileID: 1032609090901506660, guid: 56e23cc902afce04a811b9e050b711bb, type: 3}
   canLocation: {fileID: 294039646}
   upDisplay: {fileID: 0}
   downDisplay: {fileID: 0}
@@ -1763,12 +1765,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2030071780202691818}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3efda54784bc10428950d4477917f7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   graffiti: {fileID: 1193813719681258576, guid: 7a16962a84966584fb31eeb66b62beec, type: 3}
+  graffitiParticle: {fileID: 0}
+  graffitiParticle2: {fileID: 0}
   canLocation: {fileID: 294039646}
   upDisplay: {fileID: 0}
   downDisplay: {fileID: 0}
@@ -2010,7 +2014,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4375847326231556042}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 0.016220093, y: 1.1601956, z: 2.0317135}
+  m_LocalPosition: {x: 0.016220093, y: 1, z: 2.2}
   m_LocalScale: {x: 0.6351223, y: 0.6351223, z: 0.6351223}
   m_ConstrainProportionsScale: 0
   m_Children: []

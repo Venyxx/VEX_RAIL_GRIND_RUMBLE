@@ -15,8 +15,8 @@ public class Graffiti : MonoBehaviour
 
     GameObject passingGraffiti;
 
-    GameObject graffitiParticle;
-    GameObject graffitiParticle2;
+    public GameObject graffitiParticle;
+    public GameObject graffitiParticle2;
 
    [SerializeField] private Transform canLocation;
    private GameObject canLocationForParticle;
@@ -39,7 +39,7 @@ public class Graffiti : MonoBehaviour
 
    public float graffitiBuffTimer;
     
-    void Awake ()
+    void Start ()
     {
         Debug.Log("STARTING-------------");
         ThirdPersonMovementREF = GameObject.Find("playerPrefab").GetComponent<ThirdPersonMovement>();
@@ -52,7 +52,7 @@ public class Graffiti : MonoBehaviour
         downDisplay = GameObject.Find("Down");
         leftDisplay = GameObject.Find("Left");
 
-        Debug.Log(upDisplay.transform.parent);
+        //Debug.Log(upDisplay.transform.parent);
         
 
 
@@ -68,8 +68,8 @@ public class Graffiti : MonoBehaviour
         fadeGroup = GameObject.Find("SpriteButtons").GetComponent<CanvasGroup>();
         
         
-        graffitiParticle = Resources.Load("Particle_1") as GameObject;
-        graffitiParticle2 = Resources.Load("Particle_2") as GameObject;
+        //graffitiParticle = Resources.Load("Particle_1") as GameObject;
+        //graffitiParticle2 = Resources.Load("Particle_2") as GameObject;
 
          canLocationForParticle = GameObject.FindGameObjectWithTag("PlayerCan");
 
@@ -175,7 +175,7 @@ public class Graffiti : MonoBehaviour
                     Debug.Log(hit.normal);
                     Vector3 reverseHit = new Vector3(-hit.normal.x, -hit.normal.y, -hit.normal.z);
                     madeGraffiti = Instantiate (graffiti, hit.point, Quaternion.LookRotation(reverseHit));
-                    particle = Instantiate (graffitiParticle, canLocationForParticle.transform.position, canLocation.transform.rotation);
+                    particle = Instantiate (graffitiParticle, player.transform.position, player.transform.rotation);
                     Vector3 newPos = new Vector3 (player.transform.position.x, madeGraffiti.transform.position.y, player.transform.position.z);
                     madeGraffiti.transform.position = newPos;
                     return;
@@ -206,7 +206,7 @@ public class Graffiti : MonoBehaviour
                 if (GameObject.Find("CustomizationVendor(Clone)"))
                         GameObject.Find("CustomizationVendor(Clone)").GetComponent<PickingGraffiti>().isPickingGraffiti = false;
 
-                SaveManager.Instance.state.ariGraffitiSlotDown3 = graffitiDown.gameObject.name as string;
+                SaveManager.Instance.state.ariGraffitiSlotDown3 = graffitiDown.gameObject.name;
                 
                 SaveManager.Instance.Save();
                 RecalculateGraffitiDisplay();
@@ -237,7 +237,7 @@ public class Graffiti : MonoBehaviour
                 if (GameObject.Find("CustomizationVendor(Clone)"))
                         GameObject.Find("CustomizationVendor(Clone)").GetComponent<PickingGraffiti>().isPickingGraffiti = false;
                 
-                SaveManager.Instance.state.ariGraffitiSlotUp1 = graffitiUp.gameObject.name  as string;
+                SaveManager.Instance.state.ariGraffitiSlotUp1 = graffitiUp.gameObject.name;
                 SaveManager.Instance.Save();
                 RecalculateGraffitiDisplay();
                 return;           
@@ -267,7 +267,7 @@ public class Graffiti : MonoBehaviour
                 if (GameObject.Find("CustomizationVendor(Clone)"))
                         GameObject.Find("CustomizationVendor(Clone)").GetComponent<PickingGraffiti>().isPickingGraffiti = false;
                 
-                SaveManager.Instance.state.ariGraffitiSlotRight2 = graffitiRight.gameObject.name  as string;
+                SaveManager.Instance.state.ariGraffitiSlotRight2 = graffitiRight.gameObject.name;
                 SaveManager.Instance.Save();
                 RecalculateGraffitiDisplay();
                 return;      
@@ -298,7 +298,7 @@ public class Graffiti : MonoBehaviour
                 if (GameObject.Find("CustomizationVendor(Clone)"))
                         GameObject.Find("CustomizationVendor(Clone)").GetComponent<PickingGraffiti>().isPickingGraffiti = false;
                 
-                SaveManager.Instance.state.ariGraffitiSlotLeft4 = graffitiLeft.gameObject.name  as string;
+                SaveManager.Instance.state.ariGraffitiSlotLeft4 = graffitiLeft.gameObject.name;
                 Debug.Log("the save state string for left is" + SaveManager.Instance.state.ariGraffitiSlotLeft4);
                 SaveManager.Instance.Save();
                 RecalculateGraffitiDisplay();

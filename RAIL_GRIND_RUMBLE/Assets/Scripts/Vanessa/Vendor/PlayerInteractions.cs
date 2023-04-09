@@ -18,6 +18,7 @@ public class PlayerInteractions : MonoBehaviour
     private GameObject previewCamItself;
     private GameObject [] thingsToHide = new GameObject [2];
     private ETCCustomizationVendor ETCCusREF;
+    
 
     Scene m_scene;
 
@@ -52,7 +53,7 @@ public class PlayerInteractions : MonoBehaviour
             prompt.SetActive(false);
 
         canvas = GameObject.Find("VendorCanvas");
-        //Debug.Log("the canvas is " + canvas);
+        Debug.Log("the canvas is off now");
         if (canvas)
             canvas.SetActive(false);
          
@@ -98,6 +99,7 @@ public class PlayerInteractions : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) &&inRange)
         {
             canvas.SetActive(true);
+            
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             movementScriptREF.dialogueManager.freezePlayer = true;
