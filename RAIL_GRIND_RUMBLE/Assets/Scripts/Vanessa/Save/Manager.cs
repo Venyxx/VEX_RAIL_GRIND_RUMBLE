@@ -24,6 +24,7 @@ public class Manager : MonoBehaviour
     public GameObject[] ariBottomOptions = new GameObject[6];
     public GameObject[] ariSockOptions = new GameObject[2];
     public GameObject[] ariSkateOptions = new GameObject[6];
+   
 
 
 

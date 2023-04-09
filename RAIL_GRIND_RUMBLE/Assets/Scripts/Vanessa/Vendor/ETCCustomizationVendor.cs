@@ -19,6 +19,7 @@ public class ETCCustomizationVendor : MonoBehaviour
     public Transform sockPanel;
     public Transform skatePanel;
     public Transform hairPanel;
+    public Transform graffitiPanel;
     
     private ThirdPersonMovement thirdPersonMovementREF;
 
@@ -32,6 +33,7 @@ public class ETCCustomizationVendor : MonoBehaviour
     public TextMeshProUGUI skateBuySetText;
     public TextMeshProUGUI hairBuySetText;
     public TextMeshProUGUI moneyText;
+    //public TextMeshProUGUI graffitiBuySetText;
     //public TextMeshProUGUI highscoreText;
 
     public AudioClip clip;
@@ -44,6 +46,7 @@ public class ETCCustomizationVendor : MonoBehaviour
     private int [] sockCost = new int [] {10,50};
     private int [] skateCost = new int [] {10,50,55,60,60,60};
     private int [] hairCost = new int [] {0,50,55,60};
+    //private int [] graffitiCost = new int [] {0,0,0,0,0,0,0,0};
 
     private int selectedAccessoryIndex;
     private int selectedTopIndex;
@@ -51,6 +54,8 @@ public class ETCCustomizationVendor : MonoBehaviour
     private int selectedSockIndex;
     private int selectedSkateIndex;
     private int selectedHairIndex;
+
+    public int selectedGraffitiIndex;
 
     private int activeAccessoryIndex;
 
@@ -62,14 +67,16 @@ public class ETCCustomizationVendor : MonoBehaviour
 
     private Manager ManagerREF;
 
-
+    public int GraffitiButtonIndex;
 
     private Vector3 desiredMenuPosition;
+
+    //public bool isPickingGraffiti;
     //public GameObject helpScreen;
 
     private void Start()
     {
-        Debug.Log("ETC");
+        //Debug.Log("ETC");
         ManagerREF = GameObject.Find("Manager").GetComponent<Manager>();
         Time.timeScale = 1f;
         if (GameObject.Find("playerPrefab"))
@@ -155,7 +162,7 @@ public class ETCCustomizationVendor : MonoBehaviour
 
         foreach (Transform t in topPanel)
         {
-            Debug.Log("setting buttons for tops");
+            //Debug.Log("setting buttons for tops");
             int currentIndex = i;
             Button b = t.GetComponent<Button>();
             b.onClick.AddListener(() => OnTopSelect(currentIndex));
@@ -220,6 +227,20 @@ public class ETCCustomizationVendor : MonoBehaviour
                 i++;
             }
 
+        i = 0;
+        foreach (Transform t in graffitiPanel)
+            {
+                int currentIndex = i;
+                Button b = t.GetComponent<Button>();
+                b.onClick.AddListener(() => OnGraffitiSelect(currentIndex));
+
+                //set theme if owned
+                //Image img = t.GetComponent<Image>();
+                //img.color = SaveManager.Instance.IsAriHairOwned(i) ? Color.white : new Color (0.7f, 0.7f, 0.7f);
+
+                i++;
+            }
+
     }
 
 
@@ -236,7 +257,7 @@ public class ETCCustomizationVendor : MonoBehaviour
 
         //change buy set text
         accessoryBuySetText.text = "Equipped";
-         Debug.Log("ran set accessory");
+        // Debug.Log("ran set accessory");
 
         SaveManager.Instance.Save();
     }
@@ -251,13 +272,13 @@ public class ETCCustomizationVendor : MonoBehaviour
         
         //change hair material
         GameObjectTopSetting();
-        Debug.Log("Settop method");
+        //Debug.Log("Settop method");
 
         
 
         //change buy set text
         topBuySetText.text = "Equipped";
-         Debug.Log("ran set top");
+        // Debug.Log("ran set top");
 
         SaveManager.Instance.Save();
     }
@@ -274,7 +295,7 @@ public class ETCCustomizationVendor : MonoBehaviour
 
         //change buy set text
         bottomBuySetText.text = "Equipped";
-         Debug.Log("ran set bottom");
+        // Debug.Log("ran set bottom");
 
         SaveManager.Instance.Save();
     }
@@ -291,7 +312,7 @@ public class ETCCustomizationVendor : MonoBehaviour
 
         //change buy set text
         sockBuySetText.text = "Equipped";
-         Debug.Log("ran set sock");
+        // Debug.Log("ran set sock");
 
         SaveManager.Instance.Save();
     }
@@ -308,7 +329,7 @@ public class ETCCustomizationVendor : MonoBehaviour
 
         //change buy set text
         skateBuySetText.text = "Equipped";
-         Debug.Log("ran set skate");
+         //Debug.Log("ran set skate");
 
         //commented out line below it leads to max speed disparity in build vs editor - Raul
         //thirdPersonMovementREF.RecalculateStats();
@@ -329,7 +350,7 @@ public class ETCCustomizationVendor : MonoBehaviour
 
         //change buy set text
         hairBuySetText.text = "Equipped";
-         Debug.Log("ran set hair");
+         //Debug.Log("ran set hair");
 
         SaveManager.Instance.Save();
     }
@@ -625,6 +646,12 @@ public class ETCCustomizationVendor : MonoBehaviour
         }
 
         GameObjectHairSetting();
+    }
+
+     private void OnGraffitiSelect(int currentIndex)
+    {
+        Debug.Log("select graffiti button" + currentIndex);
+        selectedGraffitiIndex = currentIndex;
     }
 
 

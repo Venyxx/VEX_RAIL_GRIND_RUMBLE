@@ -32,7 +32,8 @@ public class DroneSpawner : MonoBehaviour
     {
         if (droneCount < 3 && spawnRunning == false && inRange == true)
         {
-            if (bossSpawner == true && hernandez.stunned == true) return;
+            if (hernandez) // added for testing -v
+                if (bossSpawner == true && hernandez.stunned == true) return;
 
             if (limit == true && limitCount > 0)
             {

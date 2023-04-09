@@ -22,10 +22,10 @@ public class SaveState
     public int activeAriSock = 0;
     public int activeAriSkate = 0;
 
-    public int ariGraffitiSlotUp1 = 0;
-    public int ariGraffitiSlotRight2 = 1;
-    public int ariGraffitiSlotDown3 = 2;
-    public int ariGraffitiSlotLeft4 = 3;
+    public string ariGraffitiSlotUp1 = "Decal_1";
+    public string ariGraffitiSlotRight2 = "Decal_2";
+    public string ariGraffitiSlotDown3 = "Decal_3";
+    public string ariGraffitiSlotLeft4 = "Decal_4";
 
     
     //public int activeSkate = 0;

@@ -42,7 +42,7 @@ public class OutfitSwapping : MonoBehaviour
 
 
         //sry gonna hard code
-        Debug.Log("fit setting");
+        //Debug.Log("fit setting");
         ManagerREF.ariTopOptions[0] = GameObject.Find("OG_top");
         ManagerREF.ariTopOptions[1] = GameObject.Find("frillyTopB");
         ManagerREF.ariTopOptions[2] = GameObject.Find("longSleeveA");
@@ -83,6 +83,7 @@ public class OutfitSwapping : MonoBehaviour
         //ManagerREF.ariAccessoryOptions[6] = GameObject.Find("");
 
 
+        
         StartCoroutine(DespawnETC());
         
 
