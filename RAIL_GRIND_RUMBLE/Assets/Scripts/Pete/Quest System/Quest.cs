@@ -16,16 +16,7 @@ public class Quest
     public DialogueTemplate questAcceptedText;
     public DialogueTemplate questDeniedText;
     public DialogueTemplate questCompletedText;
-
-    /*[TextArea(3,10)] [SerializeField] protected string questAcceptedText;
-    [TextArea(3,10)] [SerializeField] protected string questDeniedText;
-    [TextArea(3,10)] [SerializeField] protected string[] questCompletedText;
-    [SerializeField] protected string[] questCompletedSpeakers;
     
-    public string QuestAcceptedText => questAcceptedText;
-    public string QuestDeniedText => questDeniedText;
-    public string[] QuestCompletedText => questCompletedText;
-    public string[] QuestCompletedSpeakers => questCompletedSpeakers;*/
 
     public string GetName()
     {

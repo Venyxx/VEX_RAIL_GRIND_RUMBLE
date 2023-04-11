@@ -729,6 +729,12 @@ public class ThirdPersonMovement : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+
+        if (collision.gameObject.layer != LayerMask.NameToLayer("Ground"))
+        {
+            currentSpeed = 0;
+        }
+
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") || collision.gameObject.tag == "Rail")
         {
             if (canJump == false)

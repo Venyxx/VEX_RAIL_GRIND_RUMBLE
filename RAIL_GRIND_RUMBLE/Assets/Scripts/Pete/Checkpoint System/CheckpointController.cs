@@ -6,6 +6,7 @@ public class CheckpointController : MonoBehaviour
     public static int LastScene { get; private set; }
     public static Vector3 lastCheckPointPosition;
     private GameObject ari;
+    [SerializeField] private bool updatesPlayerSpawn = true;
     [SerializeField] private int cutsceneToPlay;
     [SerializeField] private GameObject[] objectsToActivate;
 
@@ -45,8 +46,12 @@ public class CheckpointController : MonoBehaviour
             {
                 ProgressionManager.Get().PlayCutscene(cutsceneToPlay);
             }
-            
-            lastCheckPointPosition = this.gameObject.transform.position;
+
+            if (updatesPlayerSpawn)
+            {
+                lastCheckPointPosition = this.gameObject.transform.position;
+            }
+
             if (!waypointAdvanced)
             {
                 TotalWaypointController totalRef = FindObjectOfType<TotalWaypointController>();
