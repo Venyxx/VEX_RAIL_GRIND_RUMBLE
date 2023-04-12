@@ -17,7 +17,9 @@ public class makeTransparent : MonoBehaviour
     alreadyTransparent = new List<IAmInTheWay>();
 
     camera = this.gameObject.transform;
-
+    
+    //assigning player transform to fix nullrefs by finding the object with the TPM script, then finding its child called "AriRig" - Pete
+    player = FindObjectOfType<ThirdPersonMovement>().transform.Find("AriRig");
 
 
     }

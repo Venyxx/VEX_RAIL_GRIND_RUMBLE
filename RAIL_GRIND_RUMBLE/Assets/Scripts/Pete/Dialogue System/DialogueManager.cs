@@ -145,7 +145,7 @@ public class DialogueManager : MonoBehaviour
     {
          //RAUL FACIAL ANIM//////////////////////////////////////////////////////////////////////////
         isTalking = true;
-        Debug.Log("IsTALKING");
+        //Debug.Log("IsTALKING");
         // SwitchPriority();
 
         ////////////////////////////////////////////////////////////////////////////////////////////
@@ -246,7 +246,7 @@ public class DialogueManager : MonoBehaviour
          //RAUL FACIAL ANIM//////////////////////////////////////////////////////////////////////////
         isTalking = false;
         doneTalking = true;
-        Debug.Log("DONESPEAKING");
+        //Debug.Log("DONESPEAKING");
         // SwitchPriority();
 
         ////////////////////////////////////////////////////////////////////////////////////////////
@@ -321,7 +321,8 @@ public class DialogueManager : MonoBehaviour
             Debug.Log($"!quest.isActive: {!quest.isActive}");*/
             if (!questGiver.acceptedOrDeniedAlready && !quest.isComplete && !quest.isActive)
             {
-                questGiver.OpenQuestWindow();
+                //questGiver.OpenQuestWindow();
+                questGiver.AcceptQuest();
                 questGiver.acceptedOrDeniedAlready = true;
             }
             else
@@ -330,10 +331,9 @@ public class DialogueManager : MonoBehaviour
             }
 
             //Debug.Log($"Attempting to Activate RivalQuest {text}, {quest.QuestAcceptedText}");
-            if (quest is RivalQuest rivalQuest && quest.questAcceptedText.paragraphs[0].englishDialogue == text)
-                //quest.QuestAcceptedText.Equals(text))
+            if (quest is LocuoQuest locuoQuest && quest.questAcceptedText.paragraphs[0].englishDialogue == text)
             {
-                //rivalQuest.Activate();
+                locuoQuest.Activate();
             }
 
             //Debug.Log($"Quest is marked complete? {questGiver.GetQuest().isComplete}");

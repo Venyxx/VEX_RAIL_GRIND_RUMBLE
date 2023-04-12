@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 
 public class TotalWaypointController : MonoBehaviour
 {
@@ -55,7 +56,7 @@ public class TotalWaypointController : MonoBehaviour
 
 
         //Sorts waypoints by distance
-        for (int i = 0; i < waypoints.Count; i++)
+        /*for (int i = 0; i < waypoints.Count; i++)
         {
             if (waypoints[0] != null && Vector3.Distance(finalDestination.position, waypoints[0].transform.position) > Vector3.Distance(finalDestination.position, waypoints[i].transform.position))
             {
@@ -63,7 +64,7 @@ public class TotalWaypointController : MonoBehaviour
                 waypoints.Remove(waypoints[i]);
                 waypoints.Insert(0, temp);
             }
-        }
+        }*/
 
         //set current index which waypoint is visible
         for  (int i = 0; i < waypoints.Count; i++)

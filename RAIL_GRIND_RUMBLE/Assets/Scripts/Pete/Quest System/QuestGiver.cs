@@ -19,7 +19,7 @@ public class QuestGiver : MonoBehaviour
     public bool acceptedOrDeniedAlready = false;
     
     
-    protected void Start()
+    protected virtual void Start()
     {
         pauseMenu = FindObjectOfType<PauseMenu>();
         GameObject questUIParent = GameObject.Find("QuestParent");
@@ -36,15 +36,18 @@ public class QuestGiver : MonoBehaviour
         Debug.Log("Finished Start in QuestGiver");
 
         string myQuestName = questToGive.GetName();
-        string progressionManagerQuestName = ProgressionManager.Get().currentQuest.GetName();
-        if (myQuestName == progressionManagerQuestName)
+        if (ProgressionManager.Get().currentQuest != null)
         {
-            questToGive = ProgressionManager.Get().currentQuest;
+            string progressionManagerQuestName = ProgressionManager.Get().currentQuest.GetName();
+            if (myQuestName == progressionManagerQuestName)
+            {
+                questToGive = ProgressionManager.Get().currentQuest;
+            }
         }
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         if (questToGive.isComplete && !questToGive.RewardsGiven)
         {
