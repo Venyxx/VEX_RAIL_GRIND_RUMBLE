@@ -1,11 +1,15 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Animations.Rigging;
 
 public class ThrowObject : MonoBehaviour
 {
     //holding and throwing anim stuff - Raul ////////////////////////////////////////////////////////////////////////////////////
     
-    [SerializeField] Animator ariAnimator;
+    private RigBuilder ik;
+    private GameObject leftArmGrappleREF;
+    private GameObject rootRigREF;
+    [SerializeField] GameObject playerWeapon;
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -38,6 +42,12 @@ public class ThrowObject : MonoBehaviour
         thirdPersonMovement = GetComponent<ThirdPersonMovement>();
         grappleDetection = gameObject.transform.Find("GrappleDetector").GetComponent<GrappleDetection>();
         objectHolding = "";
+
+        //Arm Rig
+        rootRigREF = GameObject.Find("mixamorig:Hips");
+        leftArmGrappleREF = GameObject.Find("leftArmHold");
+        ik = rootRigREF.GetComponent<RigBuilder>();
+        ik.enabled = false;
     }
 
     // Update is called once per frame
@@ -54,7 +64,11 @@ public class ThrowObject : MonoBehaviour
 
     public void SpawnHeldObject(string obj)
     {
-        //ariAnimator.SetBool("isHolding", true);
+        //Left Arm Rig
+        ik.enabled = true;
+        playerWeapon.SetActive(false);
+
+
         isHoldingObject = true;
         objectHolding = obj;
 
@@ -70,7 +84,10 @@ public class ThrowObject : MonoBehaviour
 
     void ThrowObjectAction()
     {
-        ariAnimator.SetBool("isHolding", false);
+        //arm rig
+        ik.enabled = false;
+        playerWeapon.SetActive(true);
+
         isHoldingObject = false;
         heldTrashcanFakeREF.SetActive(false);
         heldDroneFakeREF.SetActive(false);
