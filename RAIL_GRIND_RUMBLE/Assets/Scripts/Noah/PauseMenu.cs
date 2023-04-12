@@ -44,6 +44,10 @@ public class PauseMenu : MonoBehaviour
     public AudioClip pauseOpen;
     private InfoScreen infoScreen;
 
+    //For cutscenes
+    CutscenePlayer cutscenePlayerREF;
+    
+    
 
     public static bool isPaused;
     LoadingScreen loading;
@@ -61,6 +65,8 @@ public class PauseMenu : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         infoScreen = GetComponent<InfoScreen>();
         loading = GetComponent<LoadingScreen>();
+
+        cutscenePlayerREF = FindObjectOfType<CutscenePlayer>();
     }
 
     void Update()
@@ -79,7 +85,7 @@ public class PauseMenu : MonoBehaviour
 
     public void PauseGamePressed(InputAction.CallbackContext context)
     {
-        if (!context.started || InfoScreen.isOpen == true || questWindow.activeInHierarchy || SceneManager.GetActiveScene().name == "MainMenu") return;
+        if (!context.started || InfoScreen.isOpen == true || questWindow.activeInHierarchy || SceneManager.GetActiveScene().name == "MainMenu" || cutscenePlayerREF.cutscenePlaying == true ) return;
         
         if (isPaused)
         {
