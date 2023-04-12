@@ -109,7 +109,13 @@ public class LoadNewScene : MonoBehaviour
         this.loadLocation = loadLocation;
         LoadScene();
     }
+
+    private void OnDisable()
+    {
+        Debug.LogError("LOADNEWSCENE DISABLED");
+    }
 }
+
 
 [Serializable]
 public enum LoadLocation

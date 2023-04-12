@@ -193,7 +193,7 @@ public class DialogueManager : MonoBehaviour
         //Debug.Log($"InfoScreen is open? {InfoScreen.isOpen}");
         if (!context.started || PauseMenu.isPaused || InfoScreen.isOpen) return;
 
-        if (!isBoxActive && context.started && thirdPersonControllerREF.nearestDialogueTemplate != null)
+        if (!isBoxActive && context.started && thirdPersonControllerREF.nearestDialogueTemplate != null && thirdPersonControllerREF.nearestDialogueTemplate.dialogueTrigger!= null && thirdPersonControllerREF.nearestDialogueTemplate.dialogueTrigger.enabled)
         {
             StartNPCDialogue(thirdPersonControllerREF.nearestDialogueTemplate);
         }

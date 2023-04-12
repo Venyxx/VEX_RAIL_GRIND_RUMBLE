@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -52,9 +51,9 @@ public class OutskirtsBarrierController : MonoBehaviour
     {
         foreach (var enemy in enemies)
         {
-            if (enemy.activeInHierarchy)
+            Enemy enemyController = enemy.GetComponent<Enemy>();
+            if (!enemyController.IsDead())
             {
-                
                 return false;
             }
         }
@@ -68,6 +67,12 @@ public class OutskirtsBarrierController : MonoBehaviour
         {
             Destroy(barrier);
         }
+
+        if (gameObject.name == "Trainyard Encounter")
+        {
+            FindObjectOfType<TotalWaypointController>().currentIndex = 10;
+        }
+
         Destroy(this.gameObject);
     }
 }

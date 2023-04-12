@@ -730,7 +730,8 @@ public class ThirdPersonMovement : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
 
-        if (collision.gameObject.layer != LayerMask.NameToLayer("Ground"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("wallrun") || collision.gameObject.layer == LayerMask.NameToLayer("Enemy") 
+        || collision.gameObject.layer == LayerMask.NameToLayer("EnemyBullet"))
         {
             currentSpeed = 0;
         }
