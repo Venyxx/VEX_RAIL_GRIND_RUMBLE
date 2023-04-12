@@ -3,6 +3,12 @@ using UnityEngine.InputSystem;
 
 public class ThrowObject : MonoBehaviour
 {
+    //holding and throwing anim stuff - Raul ////////////////////////////////////////////////////////////////////////////////////
+    
+    [SerializeField] Animator ariAnimator;
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
     public bool isHoldingObject;
     string objectHolding;
     [SerializeField] GameObject heldTrashcanFakeREF;
@@ -24,6 +30,7 @@ public class ThrowObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+       
         isHoldingObject = false;
         grappleHookScript = gameObject.GetComponent<GrappleHook>();
         GameObject orientationREF = GameObject.Find("Orientation");
@@ -40,10 +47,14 @@ public class ThrowObject : MonoBehaviour
         {
             ThrowObjectAction();
         }*/
+
+
+        
     }
 
     public void SpawnHeldObject(string obj)
     {
+        //ariAnimator.SetBool("isHolding", true);
         isHoldingObject = true;
         objectHolding = obj;
 
@@ -59,6 +70,7 @@ public class ThrowObject : MonoBehaviour
 
     void ThrowObjectAction()
     {
+        ariAnimator.SetBool("isHolding", false);
         isHoldingObject = false;
         heldTrashcanFakeREF.SetActive(false);
         heldDroneFakeREF.SetActive(false);
