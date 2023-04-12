@@ -101,9 +101,36 @@ public class EnemyMovement : MonoBehaviour
           
 
         }
+        if (Vector3.Distance(Player.position, transform.position) >= 15 && activated)
+        {
+            
+            UpdateSpeed = 5;
+            
 
+
+        }
+
+        if (Vector3.Distance(Player.position, transform.position) < 15  && Vector3.Distance(Player.position, transform.position) >= .5)
+        {
+            
+            UpdateSpeed = 3;
+          
+
+
+        }
+
+        if (Vector3.Distance(Player.position, transform.position) <.5)
+        {
+            
+            UpdateSpeed = .8f;
+           
+
+
+        }
+        if (activated && Vector3.Distance(Player.position, transform.position) < 5 && isMoving)
+        { Agent.SetDestination(Player.transform.position); }
     }
-
+   
     private void HandleGainSight(Transform Target)
     {
       //  if (FollowCoroutine != null)
@@ -151,9 +178,9 @@ public class EnemyMovement : MonoBehaviour
             {
                 isMoving = true;
                 Agent.SetDestination(Player.transform.position);
-                
+             
             }
-            yield return Wait;
+            yield return new WaitForSeconds(UpdateSpeed); 
             isMoving = false;
         }
     }

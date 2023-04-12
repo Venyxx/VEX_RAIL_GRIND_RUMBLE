@@ -88,7 +88,7 @@ public class PlayerAttack : MonoBehaviour
           //  spinEffect.SetActive(false);
             if (!IsHeavyAttacking) 
             {
-                Damage = 0;
+               // Damage = 0;
               
             }
             

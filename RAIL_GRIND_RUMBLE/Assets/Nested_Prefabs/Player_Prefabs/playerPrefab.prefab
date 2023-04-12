@@ -4035,10 +4035,10 @@ MonoBehaviour:
     m_Bits: 1024
   IsAttacking: 0
   IsHeavyAttacking: 0
-  Leftleg: {fileID: 1427008057992970847}
-  Rightleg: {fileID: 1935143035396237698}
-  Lefthand: {fileID: 5407901590351302143}
-  Righthand: {fileID: 9141182517107511162}
+  Leftleg: {fileID: 3069632646687239932}
+  Rightleg: {fileID: 726509138601173022}
+  Lefthand: {fileID: 8327782064495671631}
+  Righthand: {fileID: 7450058794162686386}
   Weapon: {fileID: 236564383}
   atkCount: 0
   movementScriptREF: {fileID: 0}
@@ -5289,6 +5289,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4734465711635797250}
+  - component: {fileID: 8327782064495671631}
   m_Layer: 7
   m_Name: mixamorig:LeftHand
   m_TagString: Untagged
@@ -5312,6 +5313,19 @@ Transform:
   m_Father: {fileID: 9033965525206646328}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8327782064495671631
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2731739493501077773}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.002, y: 0.002, z: 0.002}
+  m_Center: {x: 0, y: 0.001, z: 0}
 --- !u!1 &2777195276644647606
 GameObject:
   m_ObjectHideFlags: 0
@@ -6601,6 +6615,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8698409283587647004}
+  - component: {fileID: 3069632646687239932}
   m_Layer: 7
   m_Name: mixamorig:LeftLeg
   m_TagString: Untagged
@@ -6624,6 +6639,19 @@ Transform:
   m_Father: {fileID: 4038672530795871938}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &3069632646687239932
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3591021013329740481}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.002, y: 0.009, z: 0.0025}
+  m_Center: {x: 0, y: 0.002, z: 0}
 --- !u!1 &3618567325393817990
 GameObject:
   m_ObjectHideFlags: 0
@@ -7763,6 +7791,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 161561581490601737}
+  - component: {fileID: 7450058794162686386}
   m_Layer: 7
   m_Name: mixamorig:RightHand
   m_TagString: Untagged
@@ -7787,6 +7816,19 @@ Transform:
   m_Father: {fileID: 4042835279136126313}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7450058794162686386
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4478819850181225920}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.002, y: 0.002, z: 0.002}
+  m_Center: {x: 0, y: 0.0009, z: 0.0002}
 --- !u!1 &4491011792318357960
 GameObject:
   m_ObjectHideFlags: 0
@@ -11160,6 +11202,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6308008601207508507}
+  - component: {fileID: 726509138601173022}
   m_Layer: 7
   m_Name: mixamorig:RightLeg
   m_TagString: Untagged
@@ -11183,6 +11226,19 @@ Transform:
   m_Father: {fileID: 7698672402924023937}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &726509138601173022
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6365685982091767177}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.002, y: 0.009, z: 0.0023}
+  m_Center: {x: 0, y: 0.002, z: 0}
 --- !u!1 &6432862064649300355
 GameObject:
   m_ObjectHideFlags: 0
@@ -18158,6 +18214,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 161561581490601737}
     m_Modifications:
+    - target: {fileID: 338463765, guid: c8158d1ee19a2a8409ef71bce7ac4acf, type: 3}
+      propertyPath: m_Center.z
+      value: 2.9
+      objectReference: {fileID: 0}
     - target: {fileID: 271576218984156574, guid: c8158d1ee19a2a8409ef71bce7ac4acf, type: 3}
       propertyPath: m_Layer
       value: 7
