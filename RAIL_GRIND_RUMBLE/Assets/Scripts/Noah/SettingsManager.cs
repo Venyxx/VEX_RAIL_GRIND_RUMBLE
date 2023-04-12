@@ -46,6 +46,11 @@ public class SettingsManager : MonoBehaviour
             }
        }
        
+       if (EventSystem.current.IsPointerOverGameObject())
+       {
+           EventSystem.current.SetSelectedGameObject(null);
+       }
+       
     }
 
     public void OpenAudio()

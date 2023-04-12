@@ -208,8 +208,16 @@ public class PauseMenu : MonoBehaviour
         //Animation
         settingsCloseVideo.SetActive(true);
 
-        EventSystem.current.SetSelectedGameObject(null); 
-        EventSystem.current.SetSelectedGameObject(settingsClosedButton);
+        //EventSystem.current.SetSelectedGameObject(null); 
+        //EventSystem.current.SetSelectedGameObject(settingsClosedButton);
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
+        else
+        {
+            EventSystem.current.SetSelectedGameObject(settingsClosedButton);
+        }
 
         infoScreen.PlaySoundUI(infoScreen.backSound);
     }
