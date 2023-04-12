@@ -10,7 +10,7 @@ public class fastLight1Start : StateMachineBehaviour
         PlayerAttack.instance.IsAttacking = false;
         PlayerAttack.instance.Damage = 20;
         PlayerAttack.instance.Righthand.enabled = true;
-        PlayerAttack.instance.movementScriptREF.currentSpeed = PlayerAttack.instance.movementScriptREF.currentSpeed * 0.9f;
+        PlayerAttack.instance.movementScriptREF.currentSpeed = PlayerAttack.instance.movementScriptREF.currentSpeed * 0.8f;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

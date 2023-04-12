@@ -11,7 +11,7 @@ public class fastLight3Start : StateMachineBehaviour
     {
         PlayerAttack.instance.Damage = 20;
         PlayerAttack.instance.Weapon.enabled = true;
-         PlayerAttack.instance.movementScriptREF.currentSpeed = 0.4f;
+         PlayerAttack.instance.movementScriptREF.currentSpeed = 0;
         PlayerAttack.instance.movementScriptREF.dialogueManager.freezePlayer = true;
         
 

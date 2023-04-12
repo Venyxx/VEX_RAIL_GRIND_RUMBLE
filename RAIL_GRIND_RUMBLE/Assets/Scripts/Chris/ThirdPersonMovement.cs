@@ -278,7 +278,7 @@ public class ThirdPersonMovement : MonoBehaviour
         }
         
         //Grounded Check
-        Grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.1f + 0.2f, whatIsGround); //originally 0.5f and 0.2f
+        Grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.0f + 0.2f, whatIsGround); //originally 0.5f and 0.2f
         _animator.SetBool(_animIDGrounded, Grounded);
 
         //gravity 
