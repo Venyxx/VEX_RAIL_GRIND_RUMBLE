@@ -3396,7 +3396,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 9
   walkSpeed: 0.6
-  brakeSpeed: 0.9
+  brakeSpeed: 2
   decelerationSpeed: 5
   currentSpeed: 0
   groundDrag: 0.01
@@ -13461,7 +13461,11 @@ SkinnedMeshRenderer:
   - {fileID: 8698409283587647004}
   - {fileID: 4256119421118799600}
   - {fileID: 4757149851889578095}
-  m_BlendShapeWeights: []
+  m_BlendShapeWeights:
+  - 0
+  - 0
+  - 0
+  - 0
   m_RootBone: {fileID: 5787895301951981502}
   m_AABB:
     m_Center: {x: -0.000087486114, y: -0.0027544023, z: 0.00020498462}
@@ -18940,7 +18944,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 506813472608265233, guid: f26cc4c2bf7a96a4ca87dd9fd8d8bc59, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 506813472608265233, guid: f26cc4c2bf7a96a4ca87dd9fd8d8bc59, type: 3}
       propertyPath: m_TagString
