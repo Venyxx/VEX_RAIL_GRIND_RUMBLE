@@ -11,9 +11,9 @@ public class GrappleHook : MonoBehaviour
 
     //Arm Rig //////////////////////////////////////////////////////////////////////////////////// uncomment when troubleshooting - Raul
 
-    // private RigBuilder pointToGrapplePoint;
-    // private GameObject rootRigREF;
-    // private GameObject leftArmGrappleREF;
+    private RigBuilder pointToGrapplePoint;
+    private GameObject rootRigREF;
+    private GameObject leftArmGrappleREF;
    
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -143,10 +143,10 @@ public class GrappleHook : MonoBehaviour
         grappleMeter = grappleMeterREF.GetComponent<Image>();
 
         //Arm rig uncomment when troubleshooting -Raul 
-        //rootRigREF = GameObject.Find("mixamorig:LeftShoulder");
-        //leftArmGrappleREF = GameObject.Find("LeftArmGrapple");
-        //pointToGrapplePoint = rootRigREF.GetComponent<RigBuilder>();
-        //pointToGrapplePoint.enabled = false;
+        // rootRigREF = GameObject.Find("mixamorig:LeftShoulder");
+        // leftArmGrappleREF = GameObject.Find("LeftArmGrapple");
+        // pointToGrapplePoint = rootRigREF.GetComponent<RigBuilder>();
+        // pointToGrapplePoint.enabled = false;
 
         
         
@@ -245,18 +245,17 @@ public class GrappleHook : MonoBehaviour
         //     return;
         // }
 
-        //swing animation uncomment when troubleshooting - Raul
-        //if(pullingObject == false)
-        //{
-        //_animator.SetBool("isGrappling", true);
-        //}
-        
+        //Make sure all return values come first so nothing else activates if any of these conditions are true
 
         if (grappleDetector.currentAim.gameObject.layer == LayerMask.NameToLayer("Enemy")) return;
-
-        //Check if holding object
         if (GetComponent<ThrowObject>().isHoldingObject == true) return;
         if (cooldownRunning == true) return;
+
+        //swing animation uncomment when troubleshooting - Raul
+        if(pullingObject == false)
+        {
+            _animator.SetBool("isGrappling", true);
+        }
 
         //Switch back to normal camera / resumes time
         if (GameObject.Find("AimingCam"))
@@ -309,20 +308,13 @@ public class GrappleHook : MonoBehaviour
 
 
         //Arm Rig uncomment when troubleshooting - Raul
-        //    pointToGrapplePoint.enabled = true;
-        //   leftArmGrappleREF.GetComponent<TwoBoneIKConstraint>().data.target = grappleDetector.GetComponent<GrappleDetection>().currentAim;
-        //    playerREF.gameObject.GetComponent<ThirdPersonMovement>().isGrappling = true;
-
-        
+        // pointToGrapplePoint.enabled = true;
+        // leftArmGrappleREF.GetComponent<TwoBoneIKConstraint>().data.target = grappleDetector.GetComponent<GrappleDetection>().currentAim;
+        // playerREF.gameObject.GetComponent<ThirdPersonMovement>().isGrappling = true;
     }
 
     public void StopSwing()
     {
-         //Arm Rig uncomment when troubleshooting - Raul
-        //pointToGrapplePoint.enabled = false;
-       
-
-
         //Sound
         audioSource.clip = grappleSounds[4];
         audioSource.Play(0);
@@ -333,7 +325,10 @@ public class GrappleHook : MonoBehaviour
         Destroy(joint);
 
         //swing animation uncomment when troubleshooting - Raul
-        //_animator.SetBool("isGrappling", false);
+        _animator.SetBool("isGrappling", false);
+
+        //Arm Rig uncomment when troubleshooting - Raul
+        //pointToGrapplePoint.enabled = false;
 
         //WIP Method for limiting in-air swings
         if (!SettingsManager.godMode)

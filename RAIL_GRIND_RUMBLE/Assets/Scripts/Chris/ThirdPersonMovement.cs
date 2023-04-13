@@ -280,7 +280,7 @@ public class ThirdPersonMovement : MonoBehaviour
         }
         
         //Grounded Check
-        Grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.0f + 0.2f, whatIsGround); //originally 0.5f and 0.2f
+        Grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround); 
         _animator.SetBool(_animIDGrounded, Grounded);
 
         //gravity 
@@ -374,10 +374,11 @@ public class ThirdPersonMovement : MonoBehaviour
         {
             StartCoroutine(Stun());
         }
-        if (Grounded)
-        {
-            isJumping = false;
-        }
+
+        // if (Grounded)
+        // {
+        //     isJumping = false;
+        // }
         
         //THIS PREVENTS THE GLITCH WHERE SPINNING THE STICK MAKES ARI GET OFF-AXIS
         Quaternion ariRigRotation = ariRig.transform.localRotation;
@@ -405,12 +406,14 @@ public class ThirdPersonMovement : MonoBehaviour
         {
 
          if (isWalking || dialogueManager.freezePlayer) return;
+         if (!canJump) return;
          //if (isGrappling) return;
         
          if (context.started && Grounded)
          { 
              //Grounded = false;
             isJumping = true;
+            canJump = false;
             jumpTimeCounter = 0.35f;
             _animator.SetBool(_animIDJump, true);
             _animator.SetBool(_animIDGrounded, false);
@@ -434,7 +437,6 @@ public class ThirdPersonMovement : MonoBehaviour
          if (context.canceled)
          {
           //  isJumping = false;
-            
          }
 
         }
