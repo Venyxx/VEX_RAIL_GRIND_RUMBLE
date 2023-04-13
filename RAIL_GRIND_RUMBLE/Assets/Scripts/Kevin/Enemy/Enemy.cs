@@ -2,8 +2,6 @@ using System.Collections;
 using UnityEngine.AI;
 using UnityEngine;
 using Random = System.Random;
-//using Unity.VisualScripting;
-//using UnityEngine.WSA;
 
 public class Enemy : PoolableObject, IDamageable
 {
@@ -322,5 +320,10 @@ public class Enemy : PoolableObject, IDamageable
         
 
     }
-   
+
+    public bool IsDead()
+    {
+        return dead;
+    }
+
 }

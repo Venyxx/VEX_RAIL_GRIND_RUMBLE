@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using System.Text;
-using StarterAssets;
 using UnityEngine;
 
 [System.Serializable]
@@ -59,6 +57,7 @@ public class Quest
         }
 
         RewardsGiven = true;
+        isActive = false;
     }
 
 }
