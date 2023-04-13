@@ -14,6 +14,11 @@ public class ThirdPersonMovement : MonoBehaviour
     private bool onStairs;
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    
+
+
     public float moveSpeed;
     [SerializeField] private float walkSpeed = 0.3f;
     [SerializeField] private float brakeSpeed = 0.9f;
@@ -156,10 +161,7 @@ public class ThirdPersonMovement : MonoBehaviour
     void Start()
     {
 
-        //New Blend Tree//////////////////////////////////////////////////////////////////////////////////////////////
-        //VelocityHash = _animator.StringToHash("Velocity")
-
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
 
 
         dialogueManager = FindObjectOfType<DialogueManager>();
