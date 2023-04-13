@@ -3,20 +3,18 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.Animations.Rigging;
-using UnityEngine.Animations.Rigging;
 
 public class GrappleHook : MonoBehaviour
 {
 
     //Arm Point To Grapple Rig////////////////////////////////////////////////////////////////////////////////////
 
-    private RigBuilder pointToGrapplePoint;
-    private GameObject rootRigREF;
-    private GameObject leftArmGrappleREF;
-    //private GameObject rightArmGrappleREF;
+    // private RigBuilder pointToGrapplePoint;
+    // private GameObject rootRigREF;
+    // private GameObject leftArmGrappleREF;
+   
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
     //References
     private LineRenderer line;
@@ -29,6 +27,8 @@ public class GrappleHook : MonoBehaviour
     private GrappleDetection grappleDetector;
     private InputHandler playerActions;
     private ThirdPersonMovement _thirdPersonMovement;
+    public Animator _animator;
+    
     
     public LayerMask canGrapple;
 
@@ -111,6 +111,8 @@ public class GrappleHook : MonoBehaviour
         player = playerREF.gameObject.GetComponent<Transform>();
         rigidBody = playerREF.gameObject.GetComponent<Rigidbody>();
         line = playerREF.gameObject.GetComponent<LineRenderer>();
+        //_animator = ariRig.gameObject.GetComponent<Animator>();
+        //ariRig = transform.Find("AriRig").gameObject;
 
         //Fixes launch on first grapple
         line.positionCount = 0;
@@ -140,12 +142,10 @@ public class GrappleHook : MonoBehaviour
 
         //Point Arm To Grapple Point //////////////////////////////////////////////////////////////////////////////////////////////
 
-        rootRigREF = GameObject.Find("mixamorig:LeftShoulder");
-        leftArmGrappleREF = GameObject.Find("LeftArmGrapple");
-        //rightArmGrappleREF = GameObject.Find("RightArmGrapple");
-        
-        pointToGrapplePoint = rootRigREF.GetComponent<RigBuilder>();
-        pointToGrapplePoint.enabled = false;
+        // rootRigREF = GameObject.Find("mixamorig:LeftShoulder");
+        // leftArmGrappleREF = GameObject.Find("LeftArmGrapple");
+        // pointToGrapplePoint = rootRigREF.GetComponent<RigBuilder>();
+        // pointToGrapplePoint.enabled = false;
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
@@ -243,6 +243,7 @@ public class GrappleHook : MonoBehaviour
         // {
         //     return;
         // }
+        _animator.SetBool("isGrappling", true);
 
         if (grappleDetector.currentAim.gameObject.layer == LayerMask.NameToLayer("Enemy")) return;
 
@@ -267,6 +268,7 @@ public class GrappleHook : MonoBehaviour
         shorteningCable = true;
         rigidBody.mass = (rbDefaultMass/2.75f);
         isGrappling = true;
+        _animator.SetBool("isGrappling", true);
 
             //swingPoint = predictionHit.point;
             swingPoint = grappleDetector.currentAim.transform.position;
@@ -303,11 +305,9 @@ public class GrappleHook : MonoBehaviour
 
 
         //Arm Rig //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            pointToGrapplePoint.enabled = true;
-            leftArmGrappleREF.GetComponent<TwoBoneIKConstraint>().data.target = grappleDetector.GetComponent<GrappleDetection>().currentAim;
-            //rightArmGrappleREF.GetComponent<TwoBoneIKConstraint>().data.target = grappleDetector.GetComponent<GrappleDetection>().currentAim;
-
-            playerREF.gameObject.GetComponent<ThirdPersonMovement>().isGrappling = true;
+            // pointToGrapplePoint.enabled = true;
+            // leftArmGrappleREF.GetComponent<TwoBoneIKConstraint>().data.target = grappleDetector.GetComponent<GrappleDetection>().currentAim;
+            // playerREF.gameObject.GetComponent<ThirdPersonMovement>().isGrappling = true;
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
@@ -316,7 +316,7 @@ public class GrappleHook : MonoBehaviour
     {
          ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //Arm Rig
-        pointToGrapplePoint.enabled = false;
+        //pointToGrapplePoint.enabled = false;
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         //Sound
@@ -327,6 +327,7 @@ public class GrappleHook : MonoBehaviour
         line.positionCount = 0;
         playerREF.gameObject.GetComponent<ThirdPersonMovement>().isGrappling = false;
         Destroy(joint);
+        _animator.SetBool("isGrappling", false);
 
         //WIP Method for limiting in-air swings
         if (!SettingsManager.godMode)
