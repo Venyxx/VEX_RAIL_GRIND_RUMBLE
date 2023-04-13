@@ -413,7 +413,6 @@ public class ThirdPersonMovement : MonoBehaviour
          { 
              //Grounded = false;
             isJumping = true;
-            canJump = false;
             jumpTimeCounter = 0.35f;
             _animator.SetBool(_animIDJump, true);
             _animator.SetBool(_animIDGrounded, false);
@@ -425,6 +424,8 @@ public class ThirdPersonMovement : MonoBehaviour
             //} else {
                 TapJump(jumpForce);
             //}
+
+            canJump = false;
             
             PlaySound(1);
 
@@ -706,13 +707,15 @@ public class ThirdPersonMovement : MonoBehaviour
     void TapJump(float force)
     {
         if (isGrappling) return;
+        if (!canJump) return;
 
         //rigidBody.velocity = new Vector3(rigidBody.velocity.x, 0f, rigidBody.velocity.z);
         rigidBody.AddForce(transform.up * force, ForceMode.Impulse);
     }
 
-    void ResetJump()
+    void ResetJump(/*float cooldown*/)
     {
+        //yield return new WaitForSeconds(cooldown);
         canJump = true;
     }
 
@@ -744,7 +747,7 @@ public class ThirdPersonMovement : MonoBehaviour
         {
             if (canJump == false)
             {
-                Invoke(nameof(ResetJump), jumpCoolDown);
+                ResetJump();
             }
         }
     }

@@ -144,7 +144,7 @@ public class GrappleHook : MonoBehaviour
 
         //Arm rig uncomment when troubleshooting -Raul 
         // rootRigREF = GameObject.Find("mixamorig:LeftShoulder");
-        // leftArmGrappleREF = GameObject.Find("LeftArmGrapple");
+        leftArmGrappleREF = GameObject.Find("LeftArmGrapple");
         // pointToGrapplePoint = rootRigREF.GetComponent<RigBuilder>();
         // pointToGrapplePoint.enabled = false;
 
@@ -247,6 +247,23 @@ public class GrappleHook : MonoBehaviour
 
         //Make sure all return values come first so nothing else activates if any of these conditions are true
 
+        //Raycast to check for walls (only works sometimes!!! WHY)
+        Transform playerObject = GameObject.FindWithTag("PlayerObject").transform;
+        var ray = new Ray(this.transform.position, grappleDetector.currentAim.transform.position - playerObject.position);
+        RaycastHit hit;
+        int wallLayer = LayerMask.NameToLayer("wallrun");
+        if (Physics.Raycast(ray, out hit, Vector3.Distance(playerObject.position, grappleDetector.currentAim.transform.position)))
+        {
+            //Why this aint work yo look it up dummy
+            //Debug.DrawRay(playerObject.position, grappleDetector.currentAim.transform.position - playerObject.position, Color.green);
+            if (hit.transform.gameObject.layer == wallLayer)
+            {
+                Debug.Log("Wall Hit");
+                return;
+            }
+            
+        }
+
         if (grappleDetector.currentAim.gameObject.layer == LayerMask.NameToLayer("Enemy")) return;
         if (GetComponent<ThrowObject>().isHoldingObject == true) return;
         if (cooldownRunning == true) return;
@@ -306,11 +323,11 @@ public class GrappleHook : MonoBehaviour
             plug.StartCoroutine(plug.Grappled());
         }
 
+        playerREF.gameObject.GetComponent<ThirdPersonMovement>().isGrappling = true;
 
         //Arm Rig uncomment when troubleshooting - Raul
         // pointToGrapplePoint.enabled = true;
         // leftArmGrappleREF.GetComponent<TwoBoneIKConstraint>().data.target = grappleDetector.GetComponent<GrappleDetection>().currentAim;
-        // playerREF.gameObject.GetComponent<ThirdPersonMovement>().isGrappling = true;
     }
 
     public void StopSwing()
