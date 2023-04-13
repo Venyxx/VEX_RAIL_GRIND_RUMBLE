@@ -71,8 +71,9 @@ public class OutfitSwapping : MonoBehaviour
         ManagerREF.ariBottomOptions[11] = GameObject.Find("suitPants");
 
 
-        ManagerREF.ariSockOptions[0] = GameObject.Find("lowSocks");
-        ManagerREF.ariSockOptions[1] = GameObject.Find("highSocks");
+        ManagerREF.ariSockOptions[0] = GameObject.Find("BLANKSOCKS");
+        ManagerREF.ariSockOptions[1] = GameObject.Find("lowSocks");
+        ManagerREF.ariSockOptions[2] = GameObject.Find("highSocks");
 
         ManagerREF.ariSkateOptions[0] = GameObject.Find("classicSkates");
         ManagerREF.ariSkateOptions[1] = GameObject.Find("GetSetBroadcast");
@@ -87,7 +88,8 @@ public class OutfitSwapping : MonoBehaviour
         ManagerREF.ariHairOptions[3] = GameObject.Find("messyBun");
 
         ManagerREF.ariAccessoryOptions[0] = GameObject.Find("BLANKPIERCINGS");
-        ManagerREF.ariAccessoryOptions[1] = GameObject.Find("Hoops");
+        ManagerREF.ariAccessoryOptions[1] = GameObject.Find("earringSphere");
+        ManagerREF.ariAccessoryOptions[2] = GameObject.Find("Hoops");
 
         Debug.Log("trying masks");
         ManagerREF.ariMaskOptions[0] = GameObject.Find("BLANKMASK");

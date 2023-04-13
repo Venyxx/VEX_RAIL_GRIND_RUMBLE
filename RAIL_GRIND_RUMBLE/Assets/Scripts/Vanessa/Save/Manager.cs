@@ -19,10 +19,10 @@ public class Manager : MonoBehaviour
     public Material[] ariMaterialOptions = new Material[3];
     public GameObject[] ariGraffitiOptions = new GameObject[8];
     public GameObject[] ariHairOptions = new GameObject[4];
-    public GameObject[] ariAccessoryOptions = new GameObject[2]; //piercing
+    public GameObject[] ariAccessoryOptions = new GameObject[3]; //piercing
     public GameObject[] ariTopOptions = new GameObject[12];
     public GameObject[] ariBottomOptions = new GameObject[12];
-    public GameObject[] ariSockOptions = new GameObject[2];
+    public GameObject[] ariSockOptions = new GameObject[3];
     public GameObject[] ariSkateOptions = new GameObject[6];
     public GameObject[] ariMaskOptions = new GameObject[5]; // includes glasses
 
