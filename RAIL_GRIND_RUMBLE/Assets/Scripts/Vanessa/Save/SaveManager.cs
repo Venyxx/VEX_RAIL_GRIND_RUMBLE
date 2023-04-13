@@ -88,6 +88,12 @@ public class SaveManager : MonoBehaviour
         return (state.ariSkateOwned & (1 << index)) != 0;
     }
 
+    public bool IsAriMaskOwned(int index)
+    {
+        //check if bit is set, if yes its owned
+        return (state.ariMaskOwned & (1 << index)) != 0;
+    }
+
 
 
 
@@ -244,6 +250,25 @@ public class SaveManager : MonoBehaviour
         }
     }
 
+    public bool BuyAriMask( int index, int cost)
+    {
+        if (state.Money >= cost)
+        {
+            //enough cash
+            state.Money  -= cost;
+            UnlockAriMask(index);
+
+            //save
+            Save();
+            return true;
+        }
+        else 
+        {
+            //broke 
+            return false;
+        }
+    }
+
 
 
 
@@ -288,6 +313,11 @@ public class SaveManager : MonoBehaviour
     public void UnlockAriSkate (int index)
     {
         state.ariSkateOwned |= 1 << index;
+    }
+
+    public void UnlockAriMask (int index)
+    {
+        state.ariMaskOwned |= 1 << index;
     }
 
 

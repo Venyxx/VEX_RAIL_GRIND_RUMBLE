@@ -44,6 +44,10 @@ public class PauseMenu : MonoBehaviour
     public AudioClip pauseOpen;
     private InfoScreen infoScreen;
 
+    //For cutscenes
+    CutscenePlayer cutscenePlayerREF;
+    
+    
 
     public static bool isPaused;
     LoadingScreen loading;
@@ -61,6 +65,8 @@ public class PauseMenu : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         infoScreen = GetComponent<InfoScreen>();
         loading = GetComponent<LoadingScreen>();
+
+        cutscenePlayerREF = FindObjectOfType<CutscenePlayer>();
     }
 
     void Update()
@@ -79,7 +85,7 @@ public class PauseMenu : MonoBehaviour
 
     public void PauseGamePressed(InputAction.CallbackContext context)
     {
-        if (!context.started || InfoScreen.isOpen == true || questWindow.activeInHierarchy || SceneManager.GetActiveScene().name == "MainMenu") return;
+        if (!context.started || InfoScreen.isOpen == true || questWindow.activeInHierarchy || SceneManager.GetActiveScene().name == "MainMenu" || cutscenePlayerREF.cutscenePlaying == true ) return;
         
         if (isPaused)
         {
@@ -208,8 +214,16 @@ public class PauseMenu : MonoBehaviour
         //Animation
         settingsCloseVideo.SetActive(true);
 
-        EventSystem.current.SetSelectedGameObject(null); 
-        EventSystem.current.SetSelectedGameObject(settingsClosedButton);
+        //EventSystem.current.SetSelectedGameObject(null); 
+        //EventSystem.current.SetSelectedGameObject(settingsClosedButton);
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
+        else
+        {
+            EventSystem.current.SetSelectedGameObject(settingsClosedButton);
+        }
 
         infoScreen.PlaySoundUI(infoScreen.backSound);
     }

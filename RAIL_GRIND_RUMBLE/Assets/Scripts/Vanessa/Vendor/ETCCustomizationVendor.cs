@@ -20,6 +20,7 @@ public class ETCCustomizationVendor : MonoBehaviour
     public Transform skatePanel;
     public Transform hairPanel;
     public Transform graffitiPanel;
+    public Transform maskPanel;
     
     private ThirdPersonMovement thirdPersonMovementREF;
 
@@ -33,6 +34,7 @@ public class ETCCustomizationVendor : MonoBehaviour
     public TextMeshProUGUI skateBuySetText;
     public TextMeshProUGUI hairBuySetText;
     public TextMeshProUGUI moneyText;
+    public TextMeshProUGUI maskBuySetText;
     //public TextMeshProUGUI graffitiBuySetText;
     //public TextMeshProUGUI highscoreText;
 
@@ -41,11 +43,12 @@ public class ETCCustomizationVendor : MonoBehaviour
     AudioSource audioSource;
 
     private int [] accessoryCost = new int [] {0,15,20};
-    private int [] topCost = new int [] {0,50,55,60,0,50,55,60,0,50,55};
-    private int [] bottomCost = new int [] {0,50,55,60, 60, 60};
-    private int [] sockCost = new int [] {10,50};
+    private int [] topCost = new int [] {0,50,55,60,0,50,55,60,0,50,55,60};
+    private int [] bottomCost = new int [] {0,50,55,60, 60, 60,60,60,60,70,80,80};
+    private int [] sockCost = new int [] {0,10,50};
     private int [] skateCost = new int [] {10,50,55,60,60,60};
     private int [] hairCost = new int [] {0,50,55,60};
+    private int [] maskCost = new int [] {10,50,55,60,60,60};
     //private int [] graffitiCost = new int [] {0,0,0,0,0,0,0,0};
 
     private int selectedAccessoryIndex;
@@ -54,6 +57,7 @@ public class ETCCustomizationVendor : MonoBehaviour
     private int selectedSockIndex;
     private int selectedSkateIndex;
     private int selectedHairIndex;
+    private int selectedMaskIndex;
 
     public int selectedGraffitiIndex;
 
@@ -64,6 +68,7 @@ public class ETCCustomizationVendor : MonoBehaviour
     private int activeSockIndex;
     private int activeSkateIndex;
     private int activeHairIndex;
+    private int activeMaskIndex;
 
     private Manager ManagerREF;
 
@@ -114,6 +119,9 @@ public class ETCCustomizationVendor : MonoBehaviour
         OnHairSelect(SaveManager.Instance.state.activeAriHair);
         SetHair(SaveManager.Instance.state.activeAriHair);
 
+        OnMaskSelect(SaveManager.Instance.state.activeAriMask);
+        SetMask(SaveManager.Instance.state.activeAriMask);
+
         //visual selected item
         accessoryPanel.GetChild(SaveManager.Instance.state.activeAriAccessory).GetComponent<RectTransform>().localScale = Vector3.one * 1.125f;
         topPanel.GetChild(SaveManager.Instance.state.activeAriTop).GetComponent<RectTransform>().localScale = Vector3.one * 1.125f;
@@ -121,6 +129,7 @@ public class ETCCustomizationVendor : MonoBehaviour
         sockPanel.GetChild(SaveManager.Instance.state.activeAriSock).GetComponent<RectTransform>().localScale = Vector3.one * 1.125f;
         skatePanel.GetChild(SaveManager.Instance.state.activeAriSkate).GetComponent<RectTransform>().localScale = Vector3.one * 1.125f;
         hairPanel.GetChild(SaveManager.Instance.state.activeAriHair).GetComponent<RectTransform>().localScale = Vector3.one * 1.125f;
+        maskPanel.GetChild(SaveManager.Instance.state.activeAriMask).GetComponent<RectTransform>().localScale = Vector3.one * 1.125f;
     } 
 
     private void Update ()
@@ -154,7 +163,7 @@ public class ETCCustomizationVendor : MonoBehaviour
 
             //set color if owned
             Image img = t.GetComponent<Image>();
-            img.color = SaveManager.Instance.IsAriMatOwned(i) ? Color.white : new Color (0.7f, 0.7f, 0.7f);
+            img.color = SaveManager.Instance.IsAriAccessoryOwned(i) ? Color.white : new Color (0.3f, 0.3f, 0.3f);
 
             i++;
         }
@@ -169,7 +178,7 @@ public class ETCCustomizationVendor : MonoBehaviour
 
             //set theme if owned
             Image img = t.GetComponent<Image>();
-            img.color = SaveManager.Instance.IsAriTopOwned(i) ? Color.white : new Color (0.7f, 0.7f, 0.7f);
+            img.color = SaveManager.Instance.IsAriTopOwned(i) ? Color.white : new Color (0.3f, 0.3f, 0.3f);
 
             i++;
         }
@@ -182,7 +191,7 @@ public class ETCCustomizationVendor : MonoBehaviour
 
             //set theme if owned
             Image img = t.GetComponent<Image>();
-            img.color = SaveManager.Instance.IsAriHairOwned(i) ? Color.white : new Color (0.7f, 0.7f, 0.7f);
+            img.color = SaveManager.Instance.IsAriBottomOwned(i) ? Color.white : new Color (0.3f, 0.3f, 0.3f);
 
             i++;
         }
@@ -195,7 +204,7 @@ public class ETCCustomizationVendor : MonoBehaviour
 
             //set theme if owned
             Image img = t.GetComponent<Image>();
-            img.color = SaveManager.Instance.IsAriSockOwned(i) ? Color.white : new Color (0.7f, 0.7f, 0.7f);
+            img.color = SaveManager.Instance.IsAriSockOwned(i) ? Color.white : new Color (0.3f, 0.3f, 0.3f);
 
             i++;
         }
@@ -208,7 +217,7 @@ public class ETCCustomizationVendor : MonoBehaviour
 
             //set theme if owned
             Image img = t.GetComponent<Image>();
-            img.color = SaveManager.Instance.IsAriSkateOwned(i) ? Color.white : new Color (0.7f, 0.7f, 0.7f);
+            img.color = SaveManager.Instance.IsAriSkateOwned(i) ? Color.white : new Color (0.3f, 0.3f, 0.3f);
 
             i++;
         }
@@ -222,7 +231,7 @@ public class ETCCustomizationVendor : MonoBehaviour
 
                 //set theme if owned
                 Image img = t.GetComponent<Image>();
-                img.color = SaveManager.Instance.IsAriHairOwned(i) ? Color.white : new Color (0.7f, 0.7f, 0.7f);
+                img.color = SaveManager.Instance.IsAriHairOwned(i) ? Color.white : new Color (0.3f, 0.3f, 0.3f);
 
                 i++;
             }
@@ -236,7 +245,21 @@ public class ETCCustomizationVendor : MonoBehaviour
 
                 //set theme if owned
                 //Image img = t.GetComponent<Image>();
-                //img.color = SaveManager.Instance.IsAriHairOwned(i) ? Color.white : new Color (0.7f, 0.7f, 0.7f);
+                //img.color = SaveManager.Instance.IsAriHairOwned(i) ? Color.white : new Color (0.3f, 0.3f, 0.3f);
+
+                i++;
+            }
+
+            i = 0;
+        foreach (Transform t in maskPanel)
+            {
+                int currentIndex = i;
+                Button b = t.GetComponent<Button>();
+                b.onClick.AddListener(() => OnMaskSelect(currentIndex));
+
+                //set theme if owned
+                Image img = t.GetComponent<Image>();
+                img.color = SaveManager.Instance.IsAriMaskOwned(i) ? Color.white : new Color (0.3f, 0.3f, 0.3f);
 
                 i++;
             }
@@ -253,6 +276,7 @@ public class ETCCustomizationVendor : MonoBehaviour
         
         //change room material
         //I DONT THINK THEER ARY ANY ACCESSORIES IN THE GAME RN
+        GameObjectAccessorySetting();
         //GameObjectAccessorySetting();
 
         //change buy set text
@@ -355,6 +379,23 @@ public class ETCCustomizationVendor : MonoBehaviour
         SaveManager.Instance.Save();
     }
 
+    private void SetMask (int index)
+    {
+        //set active
+        activeMaskIndex = index;
+        SaveManager.Instance.state.activeAriMask = index;
+
+        
+        //change hair material
+        GameObjectMaskSetting();
+
+        //change buy set text
+        maskBuySetText.text = "Equipped";
+         //Debug.Log("ran set hair");
+
+        SaveManager.Instance.Save();
+    }
+
     private void UpdateMoneyText ()
     {
         moneyText.text = ("$" + SaveManager.Instance.state.Money.ToString());
@@ -413,14 +454,14 @@ public class ETCCustomizationVendor : MonoBehaviour
             if (selectedAccessoryIndex != i)
             {
                 //turn the object off
-                //ManagerREF.ariAccessoryOptions[i].SetActive(false);
+                ManagerREF.ariAccessoryOptions[i].SetActive(false);
             } else 
             {
                 //turn it on
-                //ManagerREF.ariAccessoryOptions[i].SetActive(true);
+                ManagerREF.ariAccessoryOptions[i].SetActive(true);
             }
         }
-        //GameObjectAccessorySetting();
+        GameObjectAccessorySetting();
 
     }
 
@@ -547,7 +588,7 @@ public class ETCCustomizationVendor : MonoBehaviour
         {
             //owned hair color
              //is it alr current?
-            if (selectedSockIndex == currentIndex)
+            if (activeSockIndex == currentIndex)
             {
                 sockBuySetText.text = "Equipped";
             }else 
@@ -589,7 +630,7 @@ public class ETCCustomizationVendor : MonoBehaviour
         {
             //owned hair color
              //is it alr current?
-            if (selectedSkateIndex == currentIndex)
+            if (activeSkateIndex == currentIndex)
             {
                 skateBuySetText.text = "Equipped";
             }else 
@@ -646,6 +687,48 @@ public class ETCCustomizationVendor : MonoBehaviour
         }
 
         GameObjectHairSetting();
+    }
+    
+    private void OnMaskSelect(int currentIndex)
+    {
+        Debug.Log("select mask button" + currentIndex);
+        //if clicked is alr active
+        if (selectedMaskIndex == currentIndex)
+        {
+            return;
+        }
+
+
+         //if not make the icon bigger
+        maskPanel.GetChild(currentIndex).GetComponent<RectTransform>().localScale = Vector3.one * 1.125f;
+
+        //make the old one normal sized
+        maskPanel.GetChild(selectedMaskIndex).GetComponent<RectTransform>().localScale = Vector3.one;
+
+        //set selected theme
+        selectedMaskIndex = currentIndex;
+
+        // change content od buy set button
+        if (SaveManager.Instance.IsAriMaskOwned(currentIndex))
+        {
+            //owned hair color
+             //is it alr current?
+            if (activeMaskIndex == currentIndex)
+            {
+                maskBuySetText.text = "Equipped";
+            }else 
+            {
+                maskBuySetText.text = "Select";
+            }
+
+        }
+        else 
+        {
+            //not owned
+             maskBuySetText.text = "Buy " + maskCost[currentIndex].ToString();
+        }
+
+        GameObjectMaskSetting();
     }
 
      private void OnGraffitiSelect(int currentIndex)
@@ -704,7 +787,7 @@ public class ETCCustomizationVendor : MonoBehaviour
         if (SaveManager.Instance.IsAriTopOwned(selectedTopIndex))
         {
             //set color
-            SetTop(selectedAccessoryIndex);
+            SetTop(selectedTopIndex);
         }
         else
         {
@@ -864,6 +947,39 @@ public class ETCCustomizationVendor : MonoBehaviour
         }
     }
 
+    public void OnMaskBuySet ()
+    {
+        Debug.Log("buy or set mask");
+        
+        //is it owned
+        if (SaveManager.Instance.IsAriMaskOwned(selectedMaskIndex))
+        {
+            //set color hair
+            
+            SetMask(selectedMaskIndex);
+        }
+        else
+        {
+            //attempt to buy
+            if (SaveManager.Instance.BuyAriMask(selectedMaskIndex, maskCost[selectedMaskIndex]))
+            {
+                //success
+                SetMask(selectedMaskIndex);
+
+                //change color button
+                maskPanel.GetChild(selectedMaskIndex).GetComponent<Image>().color = Color.white;
+
+                //update visual money text
+                UpdateMoneyText();
+
+            }else
+            {
+                Debug.Log("youre broke");
+            }
+
+        }
+    }
+
 
 
    
@@ -946,6 +1062,7 @@ public class ETCCustomizationVendor : MonoBehaviour
             {
                 //turn the object off
                 ManagerREF.ariSkateOptions[i].SetActive(false);
+            
             } else 
             {
                 //turn it on
@@ -970,6 +1087,22 @@ public class ETCCustomizationVendor : MonoBehaviour
         }
     }
 
+    public void GameObjectMaskSetting ()
+    {
+        for (int i = 0; i <  ManagerREF.ariMaskOptions.Length; i++)
+        {
+            if (selectedMaskIndex != i)
+            {
+                //turn the object off
+                ManagerREF.ariMaskOptions[i].SetActive(false);
+            } else 
+            {
+                //turn it on
+                ManagerREF.ariMaskOptions[i].SetActive(true);
+            }
+        }
+    }
+
 
     
 
@@ -977,20 +1110,22 @@ public class ETCCustomizationVendor : MonoBehaviour
 
     public void ResetOutfitToSaveState()
     {
-        //selectedAccessoryIndex = SaveManager.Instance.state.activeAccessoryIndex;
+        selectedAccessoryIndex = SaveManager.Instance.state.activeAriAccessory;
         selectedTopIndex = SaveManager.Instance.state.activeAriTop;
         selectedBottomIndex = SaveManager.Instance.state.activeAriBottom;
         selectedSockIndex = SaveManager.Instance.state.activeAriSock;
         selectedSkateIndex = SaveManager.Instance.state.activeAriSkate;
         selectedHairIndex = SaveManager.Instance.state.activeAriHair;
+        selectedMaskIndex = SaveManager.Instance.state.activeAriMask;
 
         
-        //GameObjectAccessorySetting();
+        GameObjectAccessorySetting();
         GameObjectTopSetting();
         GameObjectBottomSetting();
         GameObjectSockSetting();
         GameObjectSkateSetting();
         GameObjectHairSetting();
+        GameObjectMaskSetting();
     
     }
 

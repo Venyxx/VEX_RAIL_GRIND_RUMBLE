@@ -1,7 +1,7 @@
 using UnityEngine;
 public class SaveState 
 {
-    public float Money = 9999;
+    public float Money = 777;
     public int MaxLevel = 0;
     public int ariMaterialOwned = 0;
     public int ariGraffitiOwned = 0;
@@ -11,6 +11,7 @@ public class SaveState
     public int ariBottomOwned = 0;
     public int ariSockOwned = 0;
     public int ariSkateOwned = 0;
+    public int ariMaskOwned = 0;
 
     public Vector3 playerLocation = new Vector3 (0,0,0);
 
@@ -21,6 +22,7 @@ public class SaveState
     public int activeAriBottom = 0;
     public int activeAriSock = 0;
     public int activeAriSkate = 0;
+    public int activeAriMask = 0;
 
     public string ariGraffitiSlotUp1 = "Decal_1";
     public string ariGraffitiSlotRight2 = "Decal_2";
