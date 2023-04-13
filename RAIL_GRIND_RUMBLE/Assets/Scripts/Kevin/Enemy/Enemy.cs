@@ -34,7 +34,7 @@ public class Enemy : PoolableObject, IDamageable
     //damage indicator
     public GameObject damageText;
     private bool dead;
-    
+    public GameObject VFX;
 
     private void Awake()
     {
@@ -46,6 +46,7 @@ public class Enemy : PoolableObject, IDamageable
 
     void Start()
     {
+        VFX.SetActive(false);
         DespawnTimer = 0;
         hitSounds = Resources.LoadAll<AudioClip>("Sounds/DamageSounds");
         audioSource = GetComponent<AudioSource>();
@@ -74,7 +75,7 @@ public class Enemy : PoolableObject, IDamageable
             }
             LookCoroutine = StartCoroutine(LookAt(Movement.Player));
         }
-        if (Movement.isMoving)
+        if (Movement.isMoving && !isDizzy && Health >0)
         {
 
           
@@ -267,6 +268,7 @@ public class Enemy : PoolableObject, IDamageable
 
             if(!dizzy && !isDizzy)
             {
+                VFX.SetActive(true);
                 Animator.SetTrigger("TakeDamage");
                 Animator.SetBool("isDamaged", true);
             }
@@ -274,7 +276,8 @@ public class Enemy : PoolableObject, IDamageable
                 yield return new WaitForSeconds(_takeDamageDelay);
                 CanTakeDamage = true;
                  Animator.SetBool("isDamaged", false);
-            
+            VFX.SetActive(false);
+
         }
 
         

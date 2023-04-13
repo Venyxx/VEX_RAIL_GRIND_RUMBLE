@@ -80,6 +80,7 @@ public class EnemyMovement : MonoBehaviour
             //Debug.Log("BugCheck1");
            
             StopAllCoroutines ();
+            activated = false;
         }
         if ( enemy.isDizzy)
         {
@@ -127,8 +128,9 @@ public class EnemyMovement : MonoBehaviour
 
 
         }
-        if (activated && Vector3.Distance(Player.position, transform.position) < 5 && isMoving)
-        { Agent.SetDestination(Player.transform.position); }
+        if (activated && Vector3.Distance(Player.position, transform.position) < 2 )
+        { Agent.SetDestination(Player.transform.position);
+          }
     }
    
     private void HandleGainSight(Transform Target)
