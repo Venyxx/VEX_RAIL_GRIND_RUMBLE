@@ -114,7 +114,7 @@ public class ProgressTab : MonoBehaviour
             {
                 ActTabs[i].SetActive(true);
             }
-            anim.SetTrigger("Return");
+            //anim.SetTrigger("Return");
             mainText.text = "";
             titleBanner.text = "";
         } else {
@@ -128,17 +128,26 @@ public class ProgressTab : MonoBehaviour
             if (select == 1)
             {
                 //anim.SetTrigger("Act1");
-                anim.CrossFade("Act1Open", 0);
+                //anim.CrossFade("Act1Open", 0);
+
+                DropDown[0].SetActive(true);
+
                 ActTabs[0].GetComponent<Button>().Select();
             } else if (select == 2)
             {
                 //anim.SetTrigger("Act2");
-                anim.CrossFade("Act2Open", 0);
+                //anim.CrossFade("Act2Open", 0);
+
+                DropDown[1].SetActive(true);
+
                 ActTabs[1].GetComponent<Button>().Select();
             } else if (select == 3)
             {
                 //anim.SetTrigger("Act3");
-                anim.CrossFade("Act3Open", 0);
+                //anim.CrossFade("Act3Open", 0);
+
+                DropDown[2].SetActive(true);
+
                 ActTabs[2].GetComponent<Button>().Select();
             }
         }

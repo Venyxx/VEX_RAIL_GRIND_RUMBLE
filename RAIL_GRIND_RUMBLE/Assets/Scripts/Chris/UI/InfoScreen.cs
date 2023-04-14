@@ -117,10 +117,11 @@ public class InfoScreen : MonoBehaviour
         PlaySoundUI(selectSound);
 
         infoScreen.SetActive(true);
-        mapButton.gameObject.SetActive(true);
+        //mapButton.gameObject.SetActive(true);
         missionsButton.gameObject.SetActive(true);
         progressButton.gameObject.SetActive(true);
-        OpenMap();
+        //OpenMap();
+        OpenMissions();
         isOpen = true;
 
         yield return new WaitForSeconds(0.75f);
@@ -158,27 +159,27 @@ public class InfoScreen : MonoBehaviour
     //Bumper Switch
     void NextTab()
     {
-        if (currentTab == "Map")
+        /*if (currentTab == "Map")
         {
             OpenMissionsTab();
-        } else if (currentTab == "Missions")
+        } else*/ if (currentTab == "Missions")
         {
             OpenProgressTab();
         } else if (currentTab == "Progress")
         {
-            OpenMapTab();
+            OpenMissionsTab();
         } 
 
     }
 
     void PreviousTab()
     {
-        if (currentTab == "Map")
+        /*if (currentTab == "Map")
         {
             OpenProgressTab();
-        } else if (currentTab == "Missions")
+        } else*/ if (currentTab == "Missions")
         {
-            OpenMapTab();
+            OpenProgressTab();
         } else if (currentTab == "Progress")
         {
             OpenMissionsTab();
