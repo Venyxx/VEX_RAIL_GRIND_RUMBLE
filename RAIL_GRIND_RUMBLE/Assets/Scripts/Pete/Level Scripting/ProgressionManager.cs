@@ -12,6 +12,9 @@ public class ProgressionManager : MonoBehaviour
     public MainQuest1 mainQuest1;
     public MainQuest2 mainQuest2;
     public MainQuest3 mainQuest3;
+    public LocuoQuest locuoRace1;
+    public LocuoQuest locuoRace2;
+    public LocuoQuest locuoRace3;
     
     public Quest currentQuest;
     
@@ -26,6 +29,7 @@ public class ProgressionManager : MonoBehaviour
 
     public bool grappleUnlocked;
     public bool prologueComplete;
+    private bool firstRaceCompleted;
 
     public static ProgressionManager Get()
     {
@@ -85,15 +89,7 @@ public class ProgressionManager : MonoBehaviour
         {
             QuestInfoText.gameObject.SetActive(true);
         }
-
-        if (currentQuest == null && GameObject.Find("WayPointPrefab") && SceneManager.GetActiveScene().name == "Outskirts")
-        {
-            GameObject waypoints = GameObject.Find("WayPointPrefab");
-            waypoints.SetActive(false);
-        }
         
-        
-
         //QuestInfoText.text = questInfo;
     }
     
@@ -158,7 +154,8 @@ public class ProgressionManager : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         LoadObjects();
-
+        string sceneName = SceneManager.GetActiveScene().name;
+        
         if (!IsFinished(mainQuest1))
         {
             //Debug.Log("MAINQUEST1 IS NOT FINISHED");
@@ -184,7 +181,7 @@ public class ProgressionManager : MonoBehaviour
             LoadMainQuest3();
         }
 
-        if (mainQuest3 != null && IsFinished(mainQuest3) && !mainQuest3.RewardsGiven && SceneManager.GetActiveScene().name ==  "Ari's House")
+        if (mainQuest3 != null && IsFinished(mainQuest3) && !mainQuest3.RewardsGiven && sceneName ==  "Ari's House")
         {
             PlayCutscene(4);
             QuestInfoText.text = "Ask for intel about Diego";
@@ -192,6 +189,22 @@ public class ProgressionManager : MonoBehaviour
             mainQuest3.RewardPlayer();
         }
 
+        if (sceneName == "Outskirts" && prologueComplete)
+        {
+            Transform locuo = GameObject.Find("Locuo").transform;
+            foreach (Transform obj in locuo)
+            {
+                obj.gameObject.SetActive(true);
+            }
+            GameObject.Find("WayPointPrefabs").transform.Find("Main Waypoints").gameObject.SetActive(true);
+            LocuoQuest race = FindObjectOfType<LocuoQuestGiver>().GetLocuoQuest();
+            if (race != null)
+            {
+                locuoRace1 = race;
+            }
+        }
+
+        
         /*if (currentQuest != mainQuest3 && SceneManager.GetActiveScene().name == "Outskirts")
         {
             GameObject.Find("OpenGateQuest3").SetActive(true);
@@ -206,6 +219,12 @@ public class ProgressionManager : MonoBehaviour
         {
             Debug.Log("DID NOT LOAD SERVOS HQ");
         }
+        
+        /*if (currentQuest == null && GameObject.Find("WayPointPrefabs") && SceneManager.GetActiveScene().name == "Outskirts")
+        {
+            GameObject waypoints = GameObject.Find("WayPointPrefabs");
+            waypoints.SetActive(false);
+        }*/
 
         HandleDiegoAutoDialogue();
     }

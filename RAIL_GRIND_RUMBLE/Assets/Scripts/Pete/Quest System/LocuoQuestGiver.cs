@@ -83,7 +83,12 @@ public class LocuoQuestGiver : QuestGiver
     public void Activate()
     {
         ProgressionManager.Get().grappleUnlocked = true;
-        GameObject.Find("Main Waypoints").GetComponent<TotalWaypointController>().currentIndex = 1;
+        GameObject mainWaypoints = GameObject.Find("Main Waypoints");
+        if (mainWaypoints != null)
+        {
+            mainWaypoints.GetComponent<TotalWaypointController>().currentIndex = 1;
+        }
+        
         _dialogueTrigger.enabled = false;
         Invoke(nameof(SetActivated), startDelay);
     }
@@ -105,7 +110,7 @@ public class LocuoQuestGiver : QuestGiver
     {
         _playerWin = true;
         _raceOver = true;
-        GetQuest().isComplete = true;
+        ProgressionManager.Get().CompleteQuest();
         StartCoroutine(DialogueManager.DialogueWipe());
         transform.position = raceOverWaitSpot.position;
         FindObjectOfType<TotalWaypointController>().currentIndex = 7;
@@ -121,5 +126,10 @@ public class LocuoQuestGiver : QuestGiver
         GetComponent<DialogueTrigger>().enabled = false;
         GetComponent<BoxCollider>().enabled = false;
         transform.Find("Locuo Model").gameObject.SetActive(false);
+    }
+
+    public LocuoQuest GetLocuoQuest()
+    {
+        return locuoQuestToGive;
     }
 }

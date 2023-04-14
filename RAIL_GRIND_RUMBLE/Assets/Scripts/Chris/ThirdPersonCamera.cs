@@ -45,7 +45,7 @@ public class ThirdPersonCamera : MonoBehaviour
 
         playerREF = GameObject.FindWithTag("PlayerObject");
         playerPrefabREF = GameObject.Find("playerPrefab");
-        playerTransform = playerREF.gameObject.GetComponent<Transform>();
+        playerTransform = playerREF.gameObject.transform;
 
         player = playerPrefabREF.transform;
         rigidBody = playerPrefabREF.gameObject.GetComponent<Rigidbody>();

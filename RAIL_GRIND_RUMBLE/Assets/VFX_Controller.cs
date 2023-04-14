@@ -9,7 +9,7 @@ public class VFX_Controller : MonoBehaviour
 
     private void Awake()
     {
-        m_Camera = GameObject.Find("camerasPrefab").GetComponent<Camera>(); ;
+        m_Camera = GameObject.Find("Main Camera").GetComponent<Camera>();
     }
     //Orient the camera after all movement is completed this frame to avoid jittering
     void LateUpdate()

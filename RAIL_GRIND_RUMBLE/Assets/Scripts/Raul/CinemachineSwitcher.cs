@@ -19,7 +19,8 @@ public class CinemachineSwitcher : MonoBehaviour
     {
         dialogueManager = FindObjectOfType<DialogueManager>();
         //autoDialogue = FindObjectOfType<AutomaticDialogueTrigger>();
-        BasicCam = GameObject.Find("BasicCam").GetComponent<CinemachineFreeLook>();
+        BasicCam = GameObject.Find("camerasPrefab").transform.Find("BasicCam").GetComponent<CinemachineFreeLook>();
+        SwitchPriorityNeutral();
     }
 
     // Update is called once per frame
