@@ -169,7 +169,9 @@ public class PlayerAttack : MonoBehaviour
             {
                 Anim.SetTrigger("AirLight");
             }
-            
+
+         
+
         }
         
 
@@ -233,13 +235,18 @@ public class PlayerAttack : MonoBehaviour
             if (movementScriptREF.isJumping == true || movementScriptREF.Grounded == false)
             {
                 Anim.SetTrigger("AirHeavy");
-                
+
                 IsHeavyAttacking = true;
                 atkCount++;
-                ariRigidbody.AddForce(0, -slamSpeed, 0,  ForceMode.Acceleration); //RAUL
+                ariRigidbody.AddForce(0, -slamSpeed, 0, ForceMode.Acceleration); //raul
 
             }
+
+
+
         }
+
+
 
         if (context.ReadValueAsButton() == false && IsHeavyAttacking && movementScriptREF.Grounded == true)
         {

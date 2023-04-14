@@ -214,6 +214,7 @@ GameObject:
   - component: {fileID: 709858256272780361}
   - component: {fileID: 5498985556827891890}
   - component: {fileID: -2663910022574224654}
+  - component: {fileID: 5868541176001231478}
   m_Layer: 10
   m_Name: SharpShooterV1
   m_TagString: Untagged
@@ -380,6 +381,7 @@ MonoBehaviour:
   dizzy: 0
   isDizzy: 0
   damageText: {fileID: 3432252478998060102, guid: 896df2592015e3141ae952a379c8dee7, type: 3}
+  VFX: {fileID: 0}
 --- !u!82 &5498985556827891890
 AudioSource:
   m_ObjectHideFlags: 0
@@ -495,6 +497,26 @@ RotationConstraint:
   m_Sources:
   - sourceTransform: {fileID: 6646993812584244270}
     weight: 1
+--- !u!95 &5868541176001231478
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6646993812584244264}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5926c455f6167e6479152843d47e3553, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &5859069881424955149
 PrefabInstance:
   m_ObjectHideFlags: 0

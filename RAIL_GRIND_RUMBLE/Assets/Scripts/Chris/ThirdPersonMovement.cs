@@ -375,11 +375,11 @@ public class ThirdPersonMovement : MonoBehaviour
             StartCoroutine(Stun());
         }
 
-        // if (Grounded)
-        // {
-        //     isJumping = false;
-        // }
-        
+        if (Grounded)
+        {
+            isJumping = false;
+        }
+
         //THIS PREVENTS THE GLITCH WHERE SPINNING THE STICK MAKES ARI GET OFF-AXIS
         Quaternion ariRigRotation = ariRig.transform.localRotation;
         ariRig.transform.localRotation = new Quaternion(0, ariRigRotation.y, ariRigRotation.z, ariRigRotation.w);
