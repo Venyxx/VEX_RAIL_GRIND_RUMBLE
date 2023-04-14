@@ -27,11 +27,15 @@ public class SettingsManager : MonoBehaviour
     //For Back to Pause
     PauseMenu pauseMenu;
 
+    //For Back to Pause
+    MainMenu mainMenu;
+    
 
     void Start()
     {
         infoScreen = GetComponent<InfoScreen>();
         pauseMenu = GetComponent<PauseMenu>();
+        mainMenu = GetComponent<MainMenu>();
     }
 
     // Update is called once per frame
@@ -177,16 +181,26 @@ public class SettingsManager : MonoBehaviour
     //B Button Back
     public void ControllerBackButton(InputAction.CallbackContext context)
     {
-        if (!context.started || PauseMenu.isPaused == false || pauseMenu.pauseSettings.activeInHierarchy == false) return;
+        if (!context.started  || pauseMenu.pauseSettings.activeInHierarchy == false) return;
 
         //Troubleshoot why this isn't going back to main pause screen instead of resuming
-        if (context.started)
+        if (context.started && PauseMenu.isPaused == true)
         {
             if (settingsScreen.activeInHierarchy == false)
             {
                 BackToSettings();
             }  else {
                 pauseMenu.ClosePauseSettings();
+            }
+        }
+        
+        if (context.started && mainMenu.mainMenuSignal.activeInHierarchy == true)
+        {
+            if (settingsScreen.activeInHierarchy == false)
+            {
+                BackToSettings();
+            }  else {
+                mainMenu.CloseSettings();
             }
         }
         
