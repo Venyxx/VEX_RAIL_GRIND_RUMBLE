@@ -44,7 +44,10 @@ public class Enemy : PoolableObject, IDamageable
 
     void Start()
     {
-        VFX.SetActive(false);
+        if (VFX != null)
+        {
+            VFX.SetActive(false);
+        }
         DespawnTimer = 0;
         hitSounds = Resources.LoadAll<AudioClip>("Sounds/DamageSounds");
         audioSource = GetComponent<AudioSource>();
@@ -266,7 +269,11 @@ public class Enemy : PoolableObject, IDamageable
 
             if(!dizzy && !isDizzy)
             {
-                VFX.SetActive(true);
+                if (VFX != null)
+                {
+                    VFX.SetActive(true);
+                }
+
                 Animator.SetTrigger("TakeDamage");
                 Animator.SetBool("isDamaged", true);
             }
@@ -274,8 +281,11 @@ public class Enemy : PoolableObject, IDamageable
                 yield return new WaitForSeconds(_takeDamageDelay);
                 CanTakeDamage = true;
                  Animator.SetBool("isDamaged", false);
-            VFX.SetActive(false);
 
+                 if (VFX != null)
+                 {
+                     VFX.SetActive(false);
+                 }
         }
 
         

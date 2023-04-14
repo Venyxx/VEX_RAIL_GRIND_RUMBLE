@@ -16,15 +16,15 @@ public class Manager : MonoBehaviour
     public GameObject ariGraffitiSlotDown3;
     public GameObject ariGraffitiSlotLeft4;
 
-    public Material[] ariMaterialOptions = new Material[3];
-    public GameObject[] ariGraffitiOptions = new GameObject[8];
-    public GameObject[] ariHairOptions = new GameObject[4];
-    public GameObject[] ariAccessoryOptions = new GameObject[3]; //piercing
-    public GameObject[] ariTopOptions = new GameObject[12];
-    public GameObject[] ariBottomOptions = new GameObject[12];
-    public GameObject[] ariSockOptions = new GameObject[3];
-    public GameObject[] ariSkateOptions = new GameObject[6];
-    public GameObject[] ariMaskOptions = new GameObject[5]; // includes glasses
+    [System.NonSerialized] public Material[] ariMaterialOptions = new Material[3];
+    [System.NonSerialized] public GameObject[] ariGraffitiOptions = new GameObject[8];
+    [System.NonSerialized] public GameObject[] ariHairOptions = new GameObject[4];
+    [System.NonSerialized] public GameObject[] ariAccessoryOptions = new GameObject[3]; //piercing
+    [System.NonSerialized] public GameObject[] ariTopOptions = new GameObject[12];
+    [System.NonSerialized] public GameObject[] ariBottomOptions = new GameObject[12];
+    [System.NonSerialized] public GameObject[] ariSockOptions = new GameObject[3];
+    [System.NonSerialized] public GameObject[] ariSkateOptions = new GameObject[6];
+    [System.NonSerialized] public GameObject[] ariMaskOptions = new GameObject[5]; // includes glasses
 
    
 

@@ -112,7 +112,7 @@ public class LoadNewScene : MonoBehaviour
 
     private void OnDisable()
     {
-        Debug.LogError("LOADNEWSCENE DISABLED");
+        //Debug.LogError("LOADNEWSCENE DISABLED");
     }
 }
 
