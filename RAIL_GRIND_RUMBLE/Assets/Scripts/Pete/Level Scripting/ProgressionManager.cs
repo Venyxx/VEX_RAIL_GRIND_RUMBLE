@@ -27,7 +27,7 @@ public class ProgressionManager : MonoBehaviour
     private bool firstAutoDialogueUsed;
     public bool firstLoad = true;
 
-    public bool grappleUnlocked;
+    public bool grappleUnlocked = true;
     public bool prologueComplete;
     private bool firstRaceCompleted;
 
@@ -213,7 +213,8 @@ public class ProgressionManager : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Servos HQ")
         {
             Debug.Log("LOADED SERVOS HQ");
-            PlayCutscene(6);
+            if(!firstLoad)
+                PlayCutscene(6);
         }
         else
         {
