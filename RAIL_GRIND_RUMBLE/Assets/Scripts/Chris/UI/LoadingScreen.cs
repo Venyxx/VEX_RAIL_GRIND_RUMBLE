@@ -21,6 +21,10 @@ public class LoadingScreen : MonoBehaviour
 
     public void LoadOutStart(string sceneName)
     {
+        if (ProgressionManager.Get() != null)
+        {
+            ProgressionManager.Get().firstLoad = true;
+        }
         StartCoroutine(LoadOut(sceneName));
     }
 
