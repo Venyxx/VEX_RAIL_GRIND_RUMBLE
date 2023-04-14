@@ -32,6 +32,8 @@ public class GrappleDetection : MonoBehaviour
     public LayerMask grappleable;
     RaycastHit hit;
 
+    bool aimIsVisible;
+
     //Throwable Checking
     private ThrowObject throwObjectScript;
 
@@ -128,6 +130,27 @@ public class GrappleDetection : MonoBehaviour
             }
         }*/
 
+    }
+
+    void FixedUpdate()
+    {
+        //Raycast to check for walls (only works sometimes!!! WHY)
+        Transform playerObject = GameObject.FindWithTag("PlayerObject").transform;
+        var ray = new Ray(this.transform.position, currentAim.transform.position - playerObject.position);
+        RaycastHit hit;
+        int wallLayer = LayerMask.NameToLayer("wallrun");
+        if (Physics.Raycast(ray, out hit, Vector3.Distance(playerObject.position, currentAim.transform.position)))
+        {
+            //Why this aint work yo look it up dummy
+            Debug.DrawRay(playerObject.position, currentAim.transform.position - playerObject.position, Color.green);
+            if (hit.transform.gameObject.layer == wallLayer)
+            {
+                //Debug.Log("Wall Hit");
+                aimIsVisible = false;
+            } else {
+                aimIsVisible = true;
+            }
+        }
     }
 
     IEnumerator CurrentAimDelay()
