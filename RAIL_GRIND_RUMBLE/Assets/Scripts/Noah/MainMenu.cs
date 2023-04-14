@@ -1,19 +1,29 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
 
     public string firstLevel;
     public GameObject mainMenu;
+    public GameObject mainMenuSignal;
 
-    public GameObject mainSettings;
+    public GameObject SettingsMainPage;
+    public GameObject SettingsScreen;
+    
+    
 
     public GameObject mainMenuFirstButton;
     public GameObject mainSettingsFirstButton;
     public GameObject mainSettingsClosedButton;
     public GameObject fastTravelButtons;
+    
+    public GameObject audioScreen;
+    public GameObject controlsScreen;
+    public GameObject graphicsScreen;
+    public GameObject accessibilityScreen;
 
 
     // Start is called before the first frame update
@@ -28,7 +38,20 @@ public class MainMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (EventSystem.current.currentSelectedGameObject == null && mainMenu.activeInHierarchy)
+        {
+            mainMenuFirstButton.GetComponent<Button>().Select();
+        }
         
+        if (EventSystem.current.currentSelectedGameObject == null && SettingsMainPage.activeInHierarchy)
+        {
+            mainSettingsFirstButton.GetComponent<Button>().Select();
+        }
+        
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
     }
 
     public void StartGame()
@@ -38,7 +61,8 @@ public class MainMenu : MonoBehaviour
 
     public void OpenSettings()
     {
-        mainSettings.SetActive(true);
+        SettingsMainPage.SetActive(true);
+        SettingsScreen.SetActive(true);
         mainMenu.SetActive(false);
         fastTravelButtons.SetActive(false);
 
@@ -48,7 +72,8 @@ public class MainMenu : MonoBehaviour
 
     public void CloseSettings()
     {
-        mainSettings.SetActive(false);
+        SettingsMainPage.SetActive(false);
+        SettingsScreen.SetActive(false);
         mainMenu.SetActive(true);
         fastTravelButtons.SetActive(true);
 
