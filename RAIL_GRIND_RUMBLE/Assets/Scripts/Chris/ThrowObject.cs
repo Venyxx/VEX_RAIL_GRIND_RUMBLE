@@ -6,9 +6,9 @@ public class ThrowObject : MonoBehaviour
 {
     //holding and throwing anim stuff - Raul ////////////////////////////////////////////////////////////////////////////////////
     
-    private RigBuilder ik;
-    private GameObject leftArmGrappleREF;
-    private GameObject rootRigREF;
+    [SerializeField] private RigBuilder ik;
+    //private GameObject leftArmGrappleREF;
+    [SerializeField] private GameObject rootRigREF;
     [SerializeField] GameObject playerWeapon;
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -45,9 +45,9 @@ public class ThrowObject : MonoBehaviour
 
         //Arm Rig
         rootRigREF = GameObject.Find("mixamorig:Hips");
-        leftArmGrappleREF = GameObject.Find("leftArmHold");
-        // = rootRigREF.GetComponent<RigBuilder>();
-        //ik.enabled = false;
+        //leftArmGrappleREF = GameObject.Find("leftArmHold");
+        //ik = rootRigREF.GetComponent<RigBuilder>();
+        ik.enabled = false;
     }
 
     // Update is called once per frame
@@ -60,7 +60,7 @@ public class ThrowObject : MonoBehaviour
 
         if(isHoldingObject == false)
         {
-            //ik.enabled = false;
+            ik.enabled = false;
         }
 
 
@@ -70,7 +70,7 @@ public class ThrowObject : MonoBehaviour
     public void SpawnHeldObject(string obj)
     {
         //Left Arm Rig
-       // ik.enabled = true;
+        ik.enabled = true;
         playerWeapon.SetActive(false);
         Debug.Log("spawnedheldObject");
 
@@ -91,7 +91,7 @@ public class ThrowObject : MonoBehaviour
     void ThrowObjectAction()
     {
         //arm rig
-        //ik.enabled = false;
+        ik.enabled = false;
         playerWeapon.SetActive(true);
 
         isHoldingObject = false;
