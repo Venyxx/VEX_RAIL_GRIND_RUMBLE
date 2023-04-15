@@ -255,11 +255,9 @@ public class ThirdPersonMovement : MonoBehaviour
             isBraking=false;
         }*/
 
-        //reset speed on air heavy impact - Raul
-        if(animManager.heavyResetSpeed == true)
-        {
-            currentSpeed = 0;
-        }
+        
+
+        
         
 
         

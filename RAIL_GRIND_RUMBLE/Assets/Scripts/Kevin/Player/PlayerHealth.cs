@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class PlayerHealth : MonoBehaviour, IDamageable
 {
@@ -8,6 +9,9 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     public float currentHealth;
     private ThirdPersonMovement thirdPersonMovementREF;
     public bool Dizzy;
+    [SerializeField] private Animator _animator;
+    private float hurtDelayAnimNumber = 0.005f;
+    
 
     [SerializeField] private bool debugKill;
 
@@ -21,6 +25,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         thirdPersonMovementREF = GetComponent<ThirdPersonMovement>();
         //thirdPersonMovementREF.RecalculateStats();
         currentHealth = maxHealth;
+        
+        
 
     }
 
@@ -31,6 +37,17 @@ public class PlayerHealth : MonoBehaviour, IDamageable
             TakeDamage(maxHealth);
         }
     }
+
+
+     IEnumerator HurtAnimDelay()
+    {
+
+        _animator.SetBool("isHurting", true);
+        yield return new WaitForSeconds(hurtDelayAnimNumber);
+        _animator.SetBool("isHurting", false);
+
+    }
+
     
     private void OnTriggerEnter(Collider other)
     {
@@ -46,7 +63,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         if (thirdPersonMovementREF.dialogueBox.activeInHierarchy || SettingsManager.godMode) return; 
         
         currentHealth -= damage;
-        Debug.Log(damage);
+        StartCoroutine(HurtAnimDelay());
+        Debug.Log("damage");
 
         if (currentHealth <= 0)
         {

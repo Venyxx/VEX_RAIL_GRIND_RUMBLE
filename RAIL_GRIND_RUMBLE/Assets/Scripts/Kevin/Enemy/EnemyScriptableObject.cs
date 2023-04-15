@@ -18,9 +18,9 @@ public class EnemyScriptableObject : ScriptableObject
     
 
     //NavMeshAgent Configs
-    public float AIUpdateInterval = 0.1f;
+    public float AIUpdateInterval = 0.01f;
 
-    public float Acceleration = 8;
+    public float Acceleration = 20;
     public float AngularSpeed = 120;
     // -1 means everthing
     public int AreaMask = -1;
@@ -29,6 +29,6 @@ public class EnemyScriptableObject : ScriptableObject
     public float Height = 2f;
     public ObstacleAvoidanceType ObstacleAvoidanceType = ObstacleAvoidanceType.LowQualityObstacleAvoidance;
     public float Radius = 0.5f;
-    public float Speed = 3f;
+    public float Speed = 1f;
     public float StoppingDistance = 0.5f;
 }

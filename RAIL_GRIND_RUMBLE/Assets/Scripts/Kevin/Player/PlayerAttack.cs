@@ -238,7 +238,7 @@ public class PlayerAttack : MonoBehaviour
 
                 IsHeavyAttacking = true;
                 atkCount++;
-                ariRigidbody.AddForce(0, -slamSpeed, 0, ForceMode.Acceleration); //raul
+                //ariRigidbody.AddForce(0, -slamSpeed, 0, ForceMode.Acceleration); //raul
 
             }
 

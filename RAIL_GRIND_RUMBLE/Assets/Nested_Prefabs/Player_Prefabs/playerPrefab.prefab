@@ -2746,6 +2746,8 @@ MonoBehaviour:
   misControlEnabled: 1
   heavyResetSpeed: 0
   script: {fileID: 2030071780202691822}
+  ariRigidbody: {fileID: 2030071780202691823}
+  slamSpeed: 900
 --- !u!1 &1680982452236734994
 GameObject:
   m_ObjectHideFlags: 0
@@ -3452,10 +3454,10 @@ CapsuleCollider:
   m_Material: {fileID: 13400000, guid: 0f258d825d959bb43afa2bf13f9523f3, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.46770182
+  m_Radius: 0.61346436
   m_Height: 2.1460724
   m_Direction: 1
-  m_Center: {x: 0.05887568, y: 1.0427246, z: 0.080190234}
+  m_Center: {x: 0.07821655, y: 1.0427246, z: 0.08019024}
 --- !u!114 &2030071780202691822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3603,6 +3605,7 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   Dizzy: 0
+  _animator: {fileID: 506141422402770697}
   debugKill: 0
 --- !u!114 &5446298453998633873
 MonoBehaviour:
@@ -18714,6 +18717,8 @@ MonoBehaviour:
   misControlEnabled: 1
   heavyResetSpeed: 0
   script: {fileID: 0}
+  ariRigidbody: {fileID: 0}
+  slamSpeed: 0
 --- !u!4 &1304353530572435433 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1304353530280516337, guid: e606cc423d70dd645bd324c595a8c70f, type: 3}
@@ -21154,6 +21159,8 @@ MonoBehaviour:
   misControlEnabled: 1
   heavyResetSpeed: 0
   script: {fileID: 0}
+  ariRigidbody: {fileID: 0}
+  slamSpeed: 0
 --- !u!114 &5264736604562496967
 MonoBehaviour:
   m_ObjectHideFlags: 0
