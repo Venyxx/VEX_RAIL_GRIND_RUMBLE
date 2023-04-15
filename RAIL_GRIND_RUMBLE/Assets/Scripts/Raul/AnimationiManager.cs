@@ -6,6 +6,13 @@ public class AnimationiManager : MonoBehaviour
 {
 
     public bool misControlEnabled = true; //stop overlapping actions - Raul
+    public bool heavyResetSpeed = false;
+    public ThirdPersonMovement script;
+
+    void Update()
+    {
+        
+    }
 
     public void EnableControl()
     {
@@ -17,4 +24,13 @@ public class AnimationiManager : MonoBehaviour
     {
         misControlEnabled = false;
     }
+
+    public void ResetSpeed()
+    {
+        heavyResetSpeed = true;
+        
+    }
+
+
+    
 }

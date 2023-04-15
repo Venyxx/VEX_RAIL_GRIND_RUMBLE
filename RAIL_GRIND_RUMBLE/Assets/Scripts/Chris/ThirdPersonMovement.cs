@@ -21,7 +21,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
     public float moveSpeed;
     [SerializeField] private float walkSpeed = 0.3f;
-    [SerializeField] private float brakeSpeed = 0.9f;
+    [SerializeField] private float brakeSpeed = 0.1f;
     [SerializeField] private float decelerationSpeed = 5f;
     public float currentSpeed;
     private float baseMoveSpeed;
@@ -254,6 +254,12 @@ public class ThirdPersonMovement : MonoBehaviour
         {
             isBraking=false;
         }*/
+
+        //reset speed on air heavy impact - Raul
+        if(animManager.heavyResetSpeed == true)
+        {
+            currentSpeed = 0;
+        }
         
 
         
@@ -886,5 +892,7 @@ public class ThirdPersonMovement : MonoBehaviour
             Debug.Log("updating stats to shell 2, max speed 40, health 300");
         }
     }
+
+    
 
 }
