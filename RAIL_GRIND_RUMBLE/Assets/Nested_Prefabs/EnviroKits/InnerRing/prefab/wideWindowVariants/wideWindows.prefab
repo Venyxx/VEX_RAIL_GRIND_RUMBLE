@@ -11,12 +11,13 @@ GameObject:
   - component: {fileID: 6500292757422439572}
   - component: {fileID: 7897754947624268593}
   - component: {fileID: 5367869703172294651}
+  - component: {fileID: 817704458776834616}
   m_Layer: 0
   m_Name: wideWindows
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6500292757422439572
 Transform:
@@ -86,6 +87,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &817704458776834616
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5872268945272415790}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.000001, y: 5, z: 0.33333018}
+  m_Center: {x: -2.5000005, y: 2.5, z: -0.16667159}
 --- !u!1 &6980232118746794780
 GameObject:
   m_ObjectHideFlags: 0
@@ -97,12 +111,13 @@ GameObject:
   - component: {fileID: 8719018604878165619}
   - component: {fileID: 1718184254909304908}
   - component: {fileID: 2325072391645930773}
+  - component: {fileID: 9010581005073850107}
   m_Layer: 0
   m_Name: door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8719018604878165619
 Transform:
@@ -170,6 +185,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &9010581005073850107
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6980232118746794780}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.570958, y: 2.8583612, z: 0.14958988}
+  m_Center: {x: -1.2097521, y: -1.4291809, z: -0.074796565}
 --- !u!1 &7270482146782357526
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,12 +209,13 @@ GameObject:
   - component: {fileID: 1654075464091779568}
   - component: {fileID: 2890056931875180292}
   - component: {fileID: 2882665746083509877}
+  - component: {fileID: 4726232746662396929}
   m_Layer: 0
   m_Name: doorFrame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1654075464091779568
 Transform:
@@ -254,3 +283,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4726232746662396929
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7270482146782357526}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.902755, y: 3.1055439, z: 0.27616215}
+  m_Center: {x: -1.3334546, y: 1.5527719, z: -0.13809207}

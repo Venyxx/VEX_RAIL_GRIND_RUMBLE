@@ -11,12 +11,13 @@ GameObject:
   - component: {fileID: 996933945523890834}
   - component: {fileID: 4926348662026267420}
   - component: {fileID: 4480928237443576400}
+  - component: {fileID: 2539780009560038586}
   m_Layer: 0
   m_Name: whiteEdgeGuard7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &996933945523890834
 Transform:
@@ -84,6 +85,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &2539780009560038586
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 570525204961871832}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 9.000002, y: 2, z: 0.43395516}
+  m_Center: {x: -4.500003, y: 1, z: 0.21697758}
 --- !u!1 &1823824900032618379
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,12 +109,13 @@ GameObject:
   - component: {fileID: 40934876430525156}
   - component: {fileID: 7947010893979698395}
   - component: {fileID: 6473100041350787458}
+  - component: {fileID: 1588675533802910552}
   m_Layer: 0
   m_Name: door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &40934876430525156
 Transform:
@@ -168,6 +183,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1588675533802910552
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823824900032618379}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.7417393, y: 8.366093, z: 0.14958988}
+  m_Center: {x: -2.1823075, y: -1.4613298, z: -0.074814}
 --- !u!1 &2122519002508967041
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,12 +207,13 @@ GameObject:
   - component: {fileID: 8026883391598712167}
   - component: {fileID: 5875728857306979219}
   - component: {fileID: 5877208566618022626}
+  - component: {fileID: 310496727140013805}
   m_Layer: 0
   m_Name: doorFrame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8026883391598712167
 Transform:
@@ -251,6 +280,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &310496727140013805
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2122519002508967041}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.843019, y: 8.449999, z: 0.27616218}
+  m_Center: {x: -2.4051323, y: 4.2249994, z: -0.13808249}
 --- !u!1 &2949644769872917177
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,12 +304,13 @@ GameObject:
   - component: {fileID: 2568440362530859011}
   - component: {fileID: 1444306875911923622}
   - component: {fileID: 3742423371467625324}
+  - component: {fileID: 7795708785004048733}
   m_Layer: 0
   m_Name: coolWindows
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2568440362530859011
 Transform:
@@ -338,3 +381,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7795708785004048733
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2949644769872917177}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 9.01843, y: 10, z: 0.33333504}
+  m_Center: {x: -4.509217, y: 5, z: -0.16666645}
