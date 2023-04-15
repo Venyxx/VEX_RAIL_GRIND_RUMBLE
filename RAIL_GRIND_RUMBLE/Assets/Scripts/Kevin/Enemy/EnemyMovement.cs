@@ -69,7 +69,7 @@ public class EnemyMovement : MonoBehaviour
 
         }
 
-        if (Vector3.Distance(Player.position, transform.position) > activationDistance)
+        if (Vector3.Distance(Player.position, transform.position) > activationDistance )
         {
             StopAllCoroutines();
             activated = false;
@@ -102,7 +102,7 @@ public class EnemyMovement : MonoBehaviour
           
 
         }
-        if (Vector3.Distance(Player.position, transform.position) >= 15 && activated)
+        if (Vector3.Distance(Player.position, transform.position) >= 15 && activated && !enemy.isDizzy)
         {
             
             UpdateSpeed = 5;
@@ -111,7 +111,7 @@ public class EnemyMovement : MonoBehaviour
 
         }
 
-        if (Vector3.Distance(Player.position, transform.position) < 15  && Vector3.Distance(Player.position, transform.position) >= .5)
+        if (Vector3.Distance(Player.position, transform.position) < 15  && Vector3.Distance(Player.position, transform.position) >= .5 && !enemy.isDizzy)
         {
             
             UpdateSpeed = 3;
@@ -120,7 +120,7 @@ public class EnemyMovement : MonoBehaviour
 
         }
 
-        if (Vector3.Distance(Player.position, transform.position) <.5)
+        if (Vector3.Distance(Player.position, transform.position) <.5 && !enemy.isDizzy)
         {
             
             UpdateSpeed = .8f;
@@ -128,7 +128,7 @@ public class EnemyMovement : MonoBehaviour
 
 
         }
-        if (activated && Vector3.Distance(Player.position, transform.position) < 2 )
+        if (activated && Vector3.Distance(Player.position, transform.position) < 2 && !enemy.isDizzy )
         { Agent.SetDestination(Player.transform.position);
           }
     }
@@ -159,7 +159,7 @@ public class EnemyMovement : MonoBehaviour
     public void StartChasing()
     {
 
-        if (FollowCoroutine == null)
+        if (FollowCoroutine == null )
         {
             FollowCoroutine = StartCoroutine(Activate()); //change this to StartCoroutine(FollowTarget()); for spawner
         }
