@@ -211,6 +211,15 @@
                     "processors": "",
                     "interactions": "Press",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Throw",
+                    "type": "Button",
+                    "id": "ab5dc335-0053-4c75-af3a-b5213b325b17",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -348,17 +357,6 @@
                 },
                 {
                     "name": "",
-                    "id": "c6551683-a54d-4d12-9515-888a4f553bb7",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Grapple Pull",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "65cfb76e-2858-4bdb-a7b4-50c4deb25b3c",
                     "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
@@ -370,8 +368,8 @@
                 },
                 {
                     "name": "",
-                    "id": "c591ae14-7422-4258-bb52-39482322c0dc",
-                    "path": "<Gamepad>/buttonWest",
+                    "id": "de81f727-7aee-46d3-b9e7-31e30d81713d",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -739,6 +737,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Brake",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a1eefa7d-1769-4e19-903c-d99b0de1a15e",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Throw",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "06149596-f953-4d77-9199-cc1c0ce7ccb1",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Throw",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

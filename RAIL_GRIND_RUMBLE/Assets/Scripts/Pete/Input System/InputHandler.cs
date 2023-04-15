@@ -233,6 +233,15 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Press"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Throw"",
+                    ""type"": ""Button"",
+                    ""id"": ""ab5dc335-0053-4c75-af3a-b5213b325b17"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -370,17 +379,6 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""c6551683-a54d-4d12-9515-888a4f553bb7"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Grapple Pull"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""65cfb76e-2858-4bdb-a7b4-50c4deb25b3c"",
                     ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
@@ -392,8 +390,8 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""c591ae14-7422-4258-bb52-39482322c0dc"",
-                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""id"": ""de81f727-7aee-46d3-b9e7-31e30d81713d"",
+                    ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -763,6 +761,28 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                     ""action"": ""Brake"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a1eefa7d-1769-4e19-903c-d99b0de1a15e"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Throw"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""06149596-f953-4d77-9199-cc1c0ce7ccb1"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Throw"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -964,6 +984,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_SkipCutscene = m_Player.FindAction("SkipCutscene", throwIfNotFound: true);
         m_Player_Brake = m_Player.FindAction("Brake", throwIfNotFound: true);
+        m_Player_Throw = m_Player.FindAction("Throw", throwIfNotFound: true);
         // Menus
         m_Menus = asset.FindActionMap("Menus", throwIfNotFound: true);
         m_Menus_InfoTabNext = m_Menus.FindAction("InfoTabNext", throwIfNotFound: true);
@@ -1055,6 +1076,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_SkipCutscene;
     private readonly InputAction m_Player_Brake;
+    private readonly InputAction m_Player_Throw;
     public struct PlayerActions
     {
         private @InputHandler m_Wrapper;
@@ -1082,6 +1104,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @SkipCutscene => m_Wrapper.m_Player_SkipCutscene;
         public InputAction @Brake => m_Wrapper.m_Player_Brake;
+        public InputAction @Throw => m_Wrapper.m_Player_Throw;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1160,6 +1183,9 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 @Brake.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBrake;
                 @Brake.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBrake;
                 @Brake.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBrake;
+                @Throw.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrow;
+                @Throw.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrow;
+                @Throw.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrow;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1233,6 +1259,9 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 @Brake.started += instance.OnBrake;
                 @Brake.performed += instance.OnBrake;
                 @Brake.canceled += instance.OnBrake;
+                @Throw.started += instance.OnThrow;
+                @Throw.performed += instance.OnThrow;
+                @Throw.canceled += instance.OnThrow;
             }
         }
     }
@@ -1343,6 +1372,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
         void OnInteract(InputAction.CallbackContext context);
         void OnSkipCutscene(InputAction.CallbackContext context);
         void OnBrake(InputAction.CallbackContext context);
+        void OnThrow(InputAction.CallbackContext context);
     }
     public interface IMenusActions
     {
