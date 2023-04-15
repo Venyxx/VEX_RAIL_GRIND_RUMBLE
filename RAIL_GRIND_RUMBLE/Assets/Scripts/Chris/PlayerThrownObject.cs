@@ -4,6 +4,7 @@ using System.Collections;
 public class PlayerThrownObject : MonoBehaviour
 {
     public bool target;
+    bool explosionRunning;
     Transform playerCurrentAim;
     GameObject playerREF;
     //[SerializeField] GameObject explosion;
@@ -16,6 +17,7 @@ public class PlayerThrownObject : MonoBehaviour
     {
         playerREF = GameObject.Find("GrappleDetector");
         playerCurrentAim = playerREF.gameObject.GetComponent<GrappleDetection>().currentAim;
+        explosionRunning = false;
     }
 
     // Update is called once per frame
@@ -24,6 +26,11 @@ public class PlayerThrownObject : MonoBehaviour
         if (target == true && playerCurrentAim.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             transform.position = Vector3.MoveTowards(transform.position, playerCurrentAim.transform.position, 25f * Time.deltaTime);
+
+            if (transform.position == playerCurrentAim.transform.position && explosionRunning == false && this.gameObject.tag == "DroneThrow")
+            {
+                StartCoroutine(Explosion());
+            }
         }
     }
 
@@ -31,10 +38,8 @@ public class PlayerThrownObject : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") || collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            if (this.gameObject.tag == "DroneThrow")
+            if (this.gameObject.tag == "DroneThrow" && explosionRunning == false)
             {
-                Debug.Log("BOOM");
-                mesh.SetActive(false);
                 StartCoroutine(Explosion());
             } else {
                 Destroy(gameObject);
@@ -44,11 +49,14 @@ public class PlayerThrownObject : MonoBehaviour
 
     IEnumerator Explosion()
     {
+        explosionRunning = true;
+        Debug.Log("BOOM");
+        mesh.SetActive(false);
         Transform explosion = this.gameObject.transform.Find("Explosion");
         explosion.gameObject.SetActive(true);
-        
-        yield return new WaitForSeconds(2f);
         DroneSpawner.droneCount--;
+        Debug.Log("Drone Count " + DroneSpawner.droneCount);
+        yield return new WaitForSeconds(2f);
         Destroy(gameObject);
     }
 

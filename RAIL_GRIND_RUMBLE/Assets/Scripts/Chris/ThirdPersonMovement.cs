@@ -395,10 +395,11 @@ public class ThirdPersonMovement : MonoBehaviour
             if (GameObject.Find("Phase2Teleport"))
             {
                 transform.position = GameObject.Find("Phase2Teleport").transform.position;
-            } else if (GameObject.Find("HernandezTeleport"))
+            } else if (GameObject.Find("Hernandez Checkpoint"))
             {
-                transform.position = GameObject.Find("HernandezTeleport").transform.position;
+                transform.position = GameObject.Find("Hernandez Checkpoint").transform.position;
             }
+            Debug.Log("Teleport");
         }
     }
 

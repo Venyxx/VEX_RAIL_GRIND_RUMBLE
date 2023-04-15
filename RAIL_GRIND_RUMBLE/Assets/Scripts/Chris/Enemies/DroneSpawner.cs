@@ -9,7 +9,8 @@ public class DroneSpawner : MonoBehaviour
     [SerializeField] bool limit;
     [SerializeField] int limitCount;
     [SerializeField] bool bossSpawner;
-    Hernandez hernandez;
+    //[SerializeField] float respawnTime;
+    [SerializeField] Hernandez hernandez;
     bool spawnRunning;
     bool inRange;
     // Start is called before the first frame update
@@ -21,7 +22,7 @@ public class DroneSpawner : MonoBehaviour
         if (bossSpawner == true)
         {
             inRange = true;
-            hernandez = GameObject.FindWithTag("Hernandez").GetComponent<Hernandez>();
+            //hernandez = GameObject.FindWithTag("Hernandez").GetComponent<Hernandez>();
         } else {
             inRange = false;
         }
@@ -30,33 +31,56 @@ public class DroneSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (droneCount < 3 && spawnRunning == false && inRange == true)
+        if ((droneCount < 3))
         {
-            if (hernandez) // added for testing -v
-                if (bossSpawner == true && hernandez.stunned == true) return;
-
-            if (limit == true && limitCount > 0)
+            if(spawnRunning == false && inRange == true)
             {
-                StartCoroutine(SpawnDrone());
-            } else if (limit == false){
-                StartCoroutine(SpawnDrone());
+                if (hernandez) // added for testing -v
+                {
+                    if (bossSpawner == true && hernandez.stunned == true) return;
+
+                    if (bossSpawner == true && !GameObject.FindWithTag("Hernandez")) return;
+                } 
+                    
+
+                if (limit == true && limitCount > 0)
+                {
+                    StartCoroutine(SpawnDrone());
+                } else if (limit == false){
+                    StartCoroutine(SpawnDrone());
+                }
+                
             }
-            
+        }
+
+        if (droneCount < 0)
+        {
+            droneCount = 0;
         }
     }
 
     IEnumerator SpawnDrone()
     {
+        if (bossSpawner && !GameObject.FindWithTag("Hernandez")) yield break;
+
         spawnRunning = true;
         GameObject spawnedDrone = Instantiate(drone, transform.position, Quaternion.identity);
         droneCount++;
+        Debug.Log("Drone Count " + droneCount);
         if (limit == true)
         {
             limitCount--;
             Debug.Log("Drones left: "+limitCount);
         }
         //Debug.Log("Drone Count: " + droneCount);
-        yield return new WaitForSeconds(30f);
+        if (bossSpawner)
+        {
+            yield return new WaitForSeconds(10f);
+            spawnedDrone.GetComponent<Drone>().bossDrone = true;
+        } else {
+            yield return new WaitForSeconds(20f);
+        }
+        
         spawnRunning = false;
     }
 

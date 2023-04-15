@@ -11,8 +11,9 @@ public class Drone : MonoBehaviour
     float degrees = 45f;
     bool moving;
     bool shootDelayRunning;
-    bool bossDrone;
+    public bool bossDrone;
     Hernandez hernandez;
+    GrappleDetection grappleDetection;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,11 +21,7 @@ public class Drone : MonoBehaviour
         moving = false;
         shootDelayRunning = false;
 
-        if (GameObject.FindWithTag("Hernandez"))
-        {
-            bossDrone = true;
-            hernandez = GameObject.FindWithTag("Hernandez").GetComponent<Hernandez>();
-        }
+        grappleDetection = GameObject.Find("GrappleDetector").GetComponent<GrappleDetection>();
     }
 
     // Update is called once per frame
@@ -46,19 +43,31 @@ public class Drone : MonoBehaviour
             }
         }
 
-        if (bossDrone && hernandez.stunned)
+        if (bossDrone && !hernandez && GameObject.FindWithTag("Hernandez"))
         {
-            Destroy(gameObject);
+            hernandez = GameObject.FindWithTag("Hernandez").GetComponent<Hernandez>();
         }
+
+        if (bossDrone && !GameObject.FindWithTag("Hernandez"))
+        {
+            RemoveFromAimList();
+        }
+
+        if (hernandez)
+        {
+            if (bossDrone && hernandez.stunned)
+            {
+                RemoveFromAimList();
+            }
+        }
+        
     }
 
     void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.tag == "Explosion")
         {
-            GrappleDetection grappleDetection = playerREF.transform.Find("GrappleDetector").GetComponent<GrappleDetection>();
-            grappleDetection.aimPoints.Remove(this.transform);
-            Destroy(gameObject);
+            RemoveFromAimList();
         }
     }
 
@@ -76,6 +85,13 @@ public class Drone : MonoBehaviour
         }
         yield return new WaitForSeconds(10f);
         shootDelayRunning = false;
+    }
+
+    void RemoveFromAimList()
+    {
+        DroneSpawner.droneCount--;
+        grappleDetection.aimPoints.Remove(this.transform);
+        Destroy(gameObject);
     }
 
 }

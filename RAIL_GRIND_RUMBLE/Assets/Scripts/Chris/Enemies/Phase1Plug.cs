@@ -5,8 +5,11 @@ using UnityEngine;
 public class Phase1Plug : MonoBehaviour
 {
     public static int plugCount = 0;
-    [SerializeField] Material blue;
-    [SerializeField] Material gray;
+    //[SerializeField] Material blue;
+    //[SerializeField] Material gray;
+    [SerializeField] GameObject plugParent;
+    Rigidbody rb;
+    BoxCollider bc;
     Renderer ren;
     bool electric;
     bool shockCycleRunning;
@@ -22,6 +25,8 @@ public class Phase1Plug : MonoBehaviour
         grappleHook = GameObject.Find("playerPrefab").GetComponent<GrappleHook>();
         grappleDetector = GameObject.Find("GrappleDetector").GetComponent<GrappleDetection>();
         playerHealth = GameObject.Find("playerPrefab").GetComponent<PlayerHealth>();
+        rb = transform.parent.GetComponent<Rigidbody>();
+        bc = transform.parent.GetComponent<BoxCollider>();
     }
 
     // Update is called once per frame
@@ -29,7 +34,7 @@ public class Phase1Plug : MonoBehaviour
     {
         if (!shockCycleRunning)
         {
-            StartCoroutine(ShockCycle());
+            //StartCoroutine(ShockCycle());
         }
     }
 
@@ -37,10 +42,10 @@ public class Phase1Plug : MonoBehaviour
     {
         shockCycleRunning = true;
         electric = true;
-        ren.material = blue;
+        //ren.material = blue;
         yield return new WaitForSeconds(7f);
         electric = false;
-        ren.material = gray;
+        //ren.material = gray;
         yield return new WaitForSeconds(3f);
         shockCycleRunning = false;
     }
@@ -58,12 +63,17 @@ public class Phase1Plug : MonoBehaviour
             if (grappleHook.isGrappling)
             {
                 grappleHook.StopSwing();
-                grappleDetector.aimPoints.Remove(this.transform);
-                grappleDetector.aimPointCount--;
-                plugCount--;
-                Debug.Log("Plug Count: "+plugCount);
-                Destroy(gameObject);
             }
+            this.GetComponent<BoxCollider>().enabled = false;
+            grappleDetector.aimPoints.Remove(this.transform);
+            grappleDetector.aimPointCount--;
+            plugCount--;
+            Debug.Log("Plug Count: "+plugCount);
+            bc.enabled = false;
+            rb.isKinematic = false;
+            // GameObject.Find("GrappleDetector").GetComponent<GrappleDetection>().aimPoints.Remove(this.transform);
+            yield return new WaitForSeconds(2f);
+            Destroy(plugParent);
         }
     }
 }

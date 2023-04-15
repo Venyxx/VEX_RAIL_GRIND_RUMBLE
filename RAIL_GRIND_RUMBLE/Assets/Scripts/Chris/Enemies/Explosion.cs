@@ -32,9 +32,13 @@ public class Explosion : MonoBehaviour
             }
             if (other.gameObject.tag == "Hernandez")
             {
-                MechBossMovement Mech = other.GetComponent<MechBossMovement>();
-                Mech.MechDown = true;
-                Debug.Log("HernandezHit");
+                if (other.gameObject.GetComponent<MechBossMovement>() != null)
+                {
+                    MechBossMovement Mech = other.gameObject.GetComponent<MechBossMovement>();
+                    Mech.MechDown = true;
+                    Debug.Log("HernandezHit");
+                }
+                
             }
 
         }
