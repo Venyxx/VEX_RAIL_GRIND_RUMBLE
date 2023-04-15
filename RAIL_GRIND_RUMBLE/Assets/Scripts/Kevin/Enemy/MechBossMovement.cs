@@ -145,6 +145,7 @@ public class MechBossMovement : MonoBehaviour , IDamageable
         }
         if (Health <= 0)
         {
+            Debug.Log("MechDestroyed");
             Destroy(gameObject);
         }
     }

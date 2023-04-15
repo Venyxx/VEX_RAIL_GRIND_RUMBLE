@@ -130,6 +130,66 @@ MonoBehaviour:
   LineOfSightLayer:
     serializedVersion: 2
     m_Bits: 8320
+--- !u!1 &4061705659429329373
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6783392656198485914}
+  - component: {fileID: 2343518425961193114}
+  - component: {fileID: 429262850062419852}
+  m_Layer: 0
+  m_Name: HurtBox
+  m_TagString: Enemy
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6783392656198485914
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4061705659429329373}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.58, y: 0, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8417001148704820734}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &2343518425961193114
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4061705659429329373}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.89
+  m_Height: 4.12
+  m_Direction: 1
+  m_Center: {x: 0.59, y: 0.94, z: 0}
+--- !u!114 &429262850062419852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4061705659429329373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f3b47ba66ce91740b0293a7ec37822c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 5265576555318656063}
 --- !u!1 &4694821488445018542
 GameObject:
   m_ObjectHideFlags: 0
@@ -403,12 +463,13 @@ MonoBehaviour:
   Agent: {fileID: 4694821488445018543}
   EnemyScriptableObject: {fileID: 11400000, guid: e5e6a91e7b0366246a090dcf473de7e8, type: 2}
   Health: 50
-  Animator: {fileID: 0}
-  Ragdoll: {fileID: 0}
+  Animator: {fileID: 2463219577017259908}
+  Ragdoll: {fileID: 1837842164539338111}
   _takeDamageDelay: 0.6
   dizzy: 0
   isDizzy: 0
   damageText: {fileID: 3432252478998060102, guid: 896df2592015e3141ae952a379c8dee7, type: 3}
+  VFX: {fileID: 0}
 --- !u!1818360609 &2232110305750110432
 RotationConstraint:
   m_ObjectHideFlags: 0
@@ -483,6 +544,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: segadorRig 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: f43d3ea4a1ff218448efa06d01b672af, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 3442f4ec16417424daea1bf2b48e79b9, type: 2}
     - target: {fileID: 7501226605127711319, guid: f43d3ea4a1ff218448efa06d01b672af, type: 3}
       propertyPath: m_DirtyAABB
       value: 0
@@ -513,6 +578,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f43d3ea4a1ff218448efa06d01b672af, type: 3}
+--- !u!4 &1020577980203673254 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9037698377726708915, guid: f43d3ea4a1ff218448efa06d01b672af, type: 3}
+  m_PrefabInstance: {fileID: 8306195232968829461}
+  m_PrefabAsset: {fileID: 0}
 --- !u!95 &2463219577017259908 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: f43d3ea4a1ff218448efa06d01b672af, type: 3}
@@ -523,3 +593,25 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f43d3ea4a1ff218448efa06d01b672af, type: 3}
   m_PrefabInstance: {fileID: 8306195232968829461}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &9188716940232447812 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: f43d3ea4a1ff218448efa06d01b672af, type: 3}
+  m_PrefabInstance: {fileID: 8306195232968829461}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1837842164539338111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9188716940232447812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6bd14a230999864fab024fb2ad984de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animator: {fileID: 2463219577017259908}
+  ragdollAnimator: {fileID: 0}
+  RagdollRoot: {fileID: 1020577980203673254}
+  StartRagdoll: 0
+  Rigidbodies: []
