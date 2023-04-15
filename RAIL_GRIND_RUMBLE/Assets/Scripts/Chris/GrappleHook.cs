@@ -11,7 +11,7 @@ public class GrappleHook : MonoBehaviour
 
     //Arm Rig //////////////////////////////////////////////////////////////////////////////////// uncomment when troubleshooting - Raul
 
-    private RigBuilder pointToGrapplePoint;
+    //private RigBuilder pointToGrapplePoint;
     private GameObject rootRigREF;
     private GameObject leftArmGrappleREF;
    
