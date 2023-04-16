@@ -59,29 +59,13 @@ public class ProgressionManager : MonoBehaviour
     
     void Start()
     {
-        try
-        {
-            QuestInfoText = GameObject.Find("QuestInfo").transform.Find("QuestInfoText").gameObject
-                .GetComponent<TextMeshProUGUI>();
-        }
-        catch (Exception e)
-        {
-            Debug.LogError("Failed to assign QuestInfoText");
-        }
-        
-        PlayFirstCutscene();
-
-        if (firstLoad && (SceneManager.GetActiveScene().name == "Inner Ring Level" ||
-            SceneManager.GetActiveScene().name == "Servos HQ"))
-        {
-            grappleUnlocked = true;
-        }
 
     }
 
     private void Update()
     {
-        if (PauseMenu.isPaused || InfoScreen.isOpen)
+        if (QuestInfoText == null) return;
+        if ((PauseMenu.isPaused || InfoScreen.isOpen))
         {
             QuestInfoText.gameObject.SetActive(false);
         }
@@ -154,6 +138,25 @@ public class ProgressionManager : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         LoadObjects();
+        
+        try
+        {
+            QuestInfoText = GameObject.Find("QuestInfo").transform.Find("QuestInfoText").gameObject
+                .GetComponent<TextMeshProUGUI>();
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Failed to assign QuestInfoText");
+        }
+        
+        PlayFirstCutscene();
+
+        if (firstLoad && (SceneManager.GetActiveScene().name == "Inner Ring Level" ||
+                          SceneManager.GetActiveScene().name == "Servos HQ"))
+        {
+            grappleUnlocked = true;
+        }
+        
         string sceneName = SceneManager.GetActiveScene().name;
         
         if (!IsFinished(mainQuest1))
