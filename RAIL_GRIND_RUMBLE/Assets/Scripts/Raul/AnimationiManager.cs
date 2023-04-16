@@ -8,10 +8,17 @@ public class AnimationiManager : MonoBehaviour
     public bool misControlEnabled = true; //stop overlapping actions - Raul
     public bool heavyResetSpeed = false;
     public ThirdPersonMovement script;
-    [SerializeField]
+     [SerializeField]
     private Rigidbody ariRigidbody;
     [SerializeField]
     private int slamSpeed; //RAUL
+    
+    public float waitForShockwave = 12f;
+
+     [SerializeField]
+    private GameObject shockwaveEffect;
+
+   
 
     void Update()
     {
@@ -32,7 +39,7 @@ public class AnimationiManager : MonoBehaviour
     public void ResetSpeed()
     {
         heavyResetSpeed = true;
-        Debug.Log("resetspeed");
+        //Debug.Log("resetspeed");
         script.currentSpeed = 0;
         
     }
@@ -40,6 +47,21 @@ public class AnimationiManager : MonoBehaviour
     private void heavyAerialImpulse()
     {
         ariRigidbody.AddForce(0, -slamSpeed, 0, ForceMode.Acceleration); //raul
+    }
+
+    private void spawnShockwavePls()
+    {
+        StartCoroutine(shockwaveBuffer());
+    }
+
+     IEnumerator shockwaveBuffer()
+    {
+        
+        shockwaveEffect.SetActive(true);
+        Debug.Log("spawnshockwave");
+        yield return new WaitForSeconds(1);
+        shockwaveEffect.SetActive(false);
+        Debug.Log("Despawnshockwave");
     }
 
 

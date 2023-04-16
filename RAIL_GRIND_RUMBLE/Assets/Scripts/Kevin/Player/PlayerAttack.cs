@@ -24,8 +24,11 @@ public class PlayerAttack : MonoBehaviour
     private WallRun wallRunREF;
     public int skateBuffDamage;
 
-    
+    //vfx refs
+    //[SerializeField] private Transform spawnShowckwaveHere;
+    //[SerializeField] private GameObject shockwave;
     public GameObject spinEffect;
+    public AnimationiManager animationEventRef;
 
     [SerializeField]
     private Rigidbody ariRigidbody;
@@ -110,6 +113,11 @@ public class PlayerAttack : MonoBehaviour
                 Damage += 9;
         }
         
+        // if(animationEventRef.spawnShockwaveNow == true)
+        // {
+        //     spawnShockwave();
+        //     Debug.Log("spawnShockwave");
+        // }
         
            
         
@@ -389,6 +397,13 @@ public class PlayerAttack : MonoBehaviour
             }
         }
     }
+
+
+    // private void spawnShockwave()
+    // {
+        
+    //     Instantiate(shockwave,spawnShowckwaveHere.position, spawnShowckwaveHere.rotation);
+    // }
 
     
 

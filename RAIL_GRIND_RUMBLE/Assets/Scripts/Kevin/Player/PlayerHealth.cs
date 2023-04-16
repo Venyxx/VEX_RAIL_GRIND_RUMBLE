@@ -9,8 +9,10 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     public float currentHealth;
     private ThirdPersonMovement thirdPersonMovementREF;
     public bool Dizzy;
-    [SerializeField] private Animator _animator;
+
+     [SerializeField] private Animator _animator;
     private float hurtDelayAnimNumber = 0.005f;
+  
     
 
     [SerializeField] private bool debugKill;
@@ -39,15 +41,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     }
 
 
-     IEnumerator HurtAnimDelay()
-    {
-
-        _animator.SetBool("isHurting", true);
-        yield return new WaitForSeconds(hurtDelayAnimNumber);
-        _animator.SetBool("isHurting", false);
-
-    }
-
+   
     
     private void OnTriggerEnter(Collider other)
     {
@@ -61,10 +55,12 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     {
         //ensures ari can not take damage from enemies while stuck in dialogue
         if (thirdPersonMovementREF.dialogueBox.activeInHierarchy || SettingsManager.godMode) return; 
-        
-        currentHealth -= damage;
+
         StartCoroutine(HurtAnimDelay());
         Debug.Log("damage");
+
+        currentHealth -= damage;
+        
 
         if (currentHealth <= 0)
         {
@@ -82,6 +78,16 @@ public class PlayerHealth : MonoBehaviour, IDamageable
             }
         }
         
+    }
+
+
+       IEnumerator HurtAnimDelay()
+    {
+
+        _animator.SetBool("isHurting", true);
+        yield return new WaitForSeconds(hurtDelayAnimNumber);
+        _animator.SetBool("isHurting", false);
+
     }
 
     public void GainHealth (float GainHealth)
