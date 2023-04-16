@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 1, z: -9.51}
+  m_FollowOffset: {x: 0, y: 1, z: -4.16}
   m_XDamping: 0.3
   m_YDamping: 0.3
   m_ZDamping: 0.3
@@ -852,7 +852,7 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_YAxis:
-    Value: 1
+    Value: 0.5
     m_SpeedMode: 0
     m_MaxSpeed: 2
     m_AccelTime: 0.2
@@ -1308,6 +1308,7 @@ GameObject:
   - component: {fileID: 2114923123}
   - component: {fileID: 8020874222474336319}
   - component: {fileID: 6405674960233430761}
+  - component: {fileID: 5134882476865194151}
   m_Layer: 0
   m_Name: BasicCam
   m_TagString: Untagged
@@ -1530,6 +1531,29 @@ MonoBehaviour:
   currentlyInTheWay: []
   alreadyTransparent: []
   player: {fileID: 0}
+--- !u!114 &5134882476865194151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3528749937666218131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ApplyAfter: 2
+  m_ChannelMask: 1
+  m_Gain: 1
+  m_Use2DDistance: 0
+  m_UseCameraSpace: 1
+  m_ReactionSettings:
+    m_SecondaryNoise: {fileID: 0}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_Duration: 1
+    m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &3528749937836915246
 GameObject:
   m_ObjectHideFlags: 0
@@ -1906,7 +1930,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 1, z: -9.51}
+  m_FollowOffset: {x: 0, y: 1, z: -4.16}
   m_XDamping: 0.3
   m_YDamping: 0.3
   m_ZDamping: 0.3
@@ -2160,7 +2184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 1, z: -9.51}
+  m_FollowOffset: {x: 0, y: 1, z: -4.16}
   m_XDamping: 0.3
   m_YDamping: 0.3
   m_ZDamping: 0.3

@@ -2675,6 +2675,7 @@ GameObject:
   - component: {fileID: 2018438161038731050}
   - component: {fileID: 506141422402770697}
   - component: {fileID: 5684441707794757262}
+  - component: {fileID: 2590398617599905372}
   m_Layer: 7
   m_Name: AriRig
   m_TagString: PlayerObject
@@ -2748,9 +2749,112 @@ MonoBehaviour:
   script: {fileID: 2030071780202691822}
   ariRigidbody: {fileID: 2030071780202691823}
   slamSpeed: 900
-  spawnShockwaveNow: 0
   waitForShockwave: 0.03
   shockwaveEffect: {fileID: 3784513952781447691}
+  shake:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2590398617599905372}
+        m_TargetAssemblyTypeName: Cinemachine.CinemachineImpulseSource, Cinemachine
+        m_MethodName: GenerateImpulse
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2590398617599905372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1677941041413373328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_ImpulseShape: 2
+    m_CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ImpulseDuration: 0.2
+    m_ImpulseType: 3
+    m_DissipationRate: 0.25
+    m_RawSignal: {fileID: 11400000, guid: 44093ed188b753d44a4f18b85da6ff96, type: 2}
+    m_AmplitudeGain: 0.2
+    m_FrequencyGain: 1.8
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 2
+          outSlope: 2
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 0.05423373
+          inSlope: -2.088279
+          outSlope: -2.088279
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.07566941
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0.2
+      m_DecayTime: 0.7
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 100
+    m_PropagationSpeed: 343
+  m_DefaultVelocity: {x: 0, y: -1, z: 0}
 --- !u!1 &1680982452236734994
 GameObject:
   m_ObjectHideFlags: 0
@@ -18761,9 +18865,11 @@ MonoBehaviour:
   script: {fileID: 0}
   ariRigidbody: {fileID: 0}
   slamSpeed: 0
-  spawnShockwaveNow: 0
   waitForShockwave: 0.03
   shockwaveEffect: {fileID: 0}
+  shake:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &1304353530572435433 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1304353530280516337, guid: e606cc423d70dd645bd324c595a8c70f, type: 3}
@@ -21206,9 +21312,11 @@ MonoBehaviour:
   script: {fileID: 0}
   ariRigidbody: {fileID: 0}
   slamSpeed: 0
-  spawnShockwaveNow: 0
   waitForShockwave: 0.03
   shockwaveEffect: {fileID: 0}
+  shake:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &5264736604562496967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21493,15 +21601,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7265127649542471457, guid: bd963463f2055894b8e8571b7211904b, type: 3}
       propertyPath: m_LocalScale.x
-      value: 6.5643167
+      value: 13.992903
       objectReference: {fileID: 0}
     - target: {fileID: 7265127649542471457, guid: bd963463f2055894b8e8571b7211904b, type: 3}
       propertyPath: m_LocalScale.y
-      value: 6.5643163
+      value: 13.992902
       objectReference: {fileID: 0}
     - target: {fileID: 7265127649542471457, guid: bd963463f2055894b8e8571b7211904b, type: 3}
       propertyPath: m_LocalScale.z
-      value: 6.5643167
+      value: 13.992903
       objectReference: {fileID: 0}
     - target: {fileID: 7265127649542471457, guid: bd963463f2055894b8e8571b7211904b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -21549,7 +21657,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7986567695354907413, guid: bd963463f2055894b8e8571b7211904b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd963463f2055894b8e8571b7211904b, type: 3}

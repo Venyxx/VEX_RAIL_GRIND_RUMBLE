@@ -5,6 +5,8 @@ using System.Collections;
 
 public class PlayerHealth : MonoBehaviour, IDamageable
 {
+     
+
     public float maxHealth;
     public float currentHealth;
     private ThirdPersonMovement thirdPersonMovementREF;

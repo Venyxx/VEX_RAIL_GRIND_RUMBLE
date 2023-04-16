@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using Cinemachine;
 
 public class AnimationiManager : MonoBehaviour
 {
@@ -17,6 +19,9 @@ public class AnimationiManager : MonoBehaviour
 
      [SerializeField]
     private GameObject shockwaveEffect;
+
+    public UnityEvent shake;
+    
 
    
 
@@ -52,6 +57,7 @@ public class AnimationiManager : MonoBehaviour
     private void spawnShockwavePls()
     {
         StartCoroutine(shockwaveBuffer());
+        shake.Invoke();
     }
 
      IEnumerator shockwaveBuffer()

@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 //using Random = System.Random;
 
+
 public class PlayerAttack : MonoBehaviour
 {
     public Animator Anim { get; private set; }
@@ -23,6 +24,8 @@ public class PlayerAttack : MonoBehaviour
     public GrappleHook grappleREF;
     private WallRun wallRunREF;
     public int skateBuffDamage;
+    
+    
 
     //vfx refs
     //[SerializeField] private Transform spawnShowckwaveHere;
@@ -170,6 +173,7 @@ public class PlayerAttack : MonoBehaviour
                 {
                     Debug.Log("fastAtk");
                     Anim.SetTrigger("LAttackFast");
+                    
                 }
 
             }
@@ -243,7 +247,6 @@ public class PlayerAttack : MonoBehaviour
             if (movementScriptREF.isJumping == true || movementScriptREF.Grounded == false)
             {
                 Anim.SetTrigger("AirHeavy");
-
                 IsHeavyAttacking = true;
                 atkCount++;
                 //ariRigidbody.AddForce(0, -slamSpeed, 0, ForceMode.Acceleration); //raul
@@ -270,6 +273,7 @@ public class PlayerAttack : MonoBehaviour
                
                 //   Debug.Log("BugCheck2");
                 Anim.SetTrigger("HAttackEnd2");
+                
                 //    IsHeavyAttacking = false;
                 HeavyAtkTimer = 0;
                // spinEffect.SetActive(true);
