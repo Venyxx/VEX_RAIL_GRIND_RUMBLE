@@ -26,7 +26,8 @@ public class Graffiti : MonoBehaviour
    private int playerZ;
    private Camera cam;
    private ThirdPersonMovement ThirdPersonMovementREF;
-   private PlayerAttack playerAttackREF; 
+   private PlayerAttack playerAttackREF;
+   private CanvasGroup buffCanvasDisplay; 
 
    public GameObject upDisplay;
    public GameObject downDisplay;
@@ -41,11 +42,15 @@ public class Graffiti : MonoBehaviour
     
     void Start ()
     {
-        Debug.Log("STARTING-------------");
+        //Debug.Log("STARTING-------------");
         ThirdPersonMovementREF = GameObject.Find("playerPrefab").GetComponent<ThirdPersonMovement>();
         playerAttackREF = GameObject.Find("playerPrefab").GetComponent<PlayerAttack>();
         cam = Camera.main;
         player = GameObject.Find("playerPrefab");
+        buffCanvasDisplay = GameObject.Find("damageBuffIcon").GetComponent<CanvasGroup>();
+
+        buffCanvasDisplay.gameObject.SetActive(false);
+
 
         upDisplay = GameObject.Find("Up");
         rightDisplay = GameObject.Find("Right");
@@ -95,6 +100,22 @@ public class Graffiti : MonoBehaviour
              
         } else 
             playerAttackREF.isBuffed = false;
+
+
+        //display damage buff
+        if (graffitiBuffTimer > 0)
+        {
+            buffCanvasDisplay.gameObject.SetActive(true);
+
+            if(graffitiBuffTimer < 5)
+                buffCanvasDisplay.alpha = Mathf.PingPong(Time.time, .25f);
+            else if (graffitiBuffTimer < 10 && graffitiBuffTimer > 29)
+                buffCanvasDisplay.alpha = Mathf.PingPong(Time.time, .5f);
+            else if (graffitiBuffTimer > 30)
+                buffCanvasDisplay.alpha = 1;
+        } else 
+            buffCanvasDisplay.gameObject.SetActive(false);
+            
 
 
 
@@ -164,7 +185,7 @@ public class Graffiti : MonoBehaviour
                     }
 
                     //buff
-                    graffitiBuffTimer = 60f;
+                    graffitiBuffTimer = 30f;
                     playerAttackREF.isBuffed = true;
                     //60 seconds
                     return;

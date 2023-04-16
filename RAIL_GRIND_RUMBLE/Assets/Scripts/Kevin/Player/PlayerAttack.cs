@@ -76,6 +76,7 @@ public class PlayerAttack : MonoBehaviour
 
     void Update()
     {
+        //removing all the skate buff additions, left the graffiti ones on line 111 for testing - v
         Timer();
         if (HeavyAtkTimer >= 3 && IsHeavyAttacking)
         {
@@ -85,7 +86,7 @@ public class PlayerAttack : MonoBehaviour
             TimerOn = false;
            // IsHeavyAttacking = false;
             HeavyAtkTimer = 0;
-            Damage = 50 + skateBuffDamage;
+            Damage = 50;
         
         }
         if (!IsAttacking && atkCount == 0)
@@ -104,6 +105,8 @@ public class PlayerAttack : MonoBehaviour
         //  //  IsHeavyAttacking = false;
         //    spinEffect.SetActive(false);
         //}
+
+
         //graffiti mulltiplier
         if (isBuffed)
         {
@@ -278,7 +281,7 @@ public class PlayerAttack : MonoBehaviour
                 HeavyAtkTimer = 0;
                // spinEffect.SetActive(true);
 
-                Damage = 35  + skateBuffDamage;
+                Damage = 35;
                
                 
             }
@@ -290,7 +293,7 @@ public class PlayerAttack : MonoBehaviour
                 //   IsHeavyAttacking = false;
                 HeavyAtkTimer = 0;
 
-                Damage = 30  + skateBuffDamage;
+                Damage = 30;
                 
             }
             if (HeavyAtkTimer >= 2)
@@ -301,7 +304,7 @@ public class PlayerAttack : MonoBehaviour
                 HeavyAtkTimer = 0;
                 //spinEffect.SetActive(true);
 
-                Damage = 100  + skateBuffDamage;
+                Damage = 100;
                 
             }
 

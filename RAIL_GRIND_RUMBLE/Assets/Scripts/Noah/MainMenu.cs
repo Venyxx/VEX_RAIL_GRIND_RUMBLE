@@ -33,6 +33,8 @@ public class MainMenu : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(mainMenuFirstButton);
         Cursor.lockState = CursorLockMode.None;
         CheckpointController.lastCheckPointPosition = new Vector3(0, 0, 0);
+
+        GameObject.Find("damageBuffIcon").SetActive(false);
     }
 
     // Update is called once per frame
