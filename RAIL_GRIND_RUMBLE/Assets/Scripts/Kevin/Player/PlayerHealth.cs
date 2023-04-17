@@ -62,16 +62,19 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         Debug.Log("damage");
 
         currentHealth -= damage;
-        
+
 
         if (currentHealth <= 0)
         {
             currentHealth = 0;
             MainQuest3 mq3 = ProgressionManager.Get().mainQuest3;
+            Debug.Log($"Is mainquest3 null? {mq3 != null}");
+            Debug.Log($"Is mainquest3 complete? {mq3.isComplete}");
+            Debug.Log($"Has the cutscene been played already? {!ProgressionManager.Get().deathCutscenePlayed}");
+
             if (mq3 != null && mq3.isComplete && !ProgressionManager.Get().deathCutscenePlayed)
             {
                 //ProgressionManager.Get().CompleteQuest();
-                ProgressionManager.Get().deathCutscenePlayed = true;
                 SceneManager.LoadScene("Ari's House");
             }
             else

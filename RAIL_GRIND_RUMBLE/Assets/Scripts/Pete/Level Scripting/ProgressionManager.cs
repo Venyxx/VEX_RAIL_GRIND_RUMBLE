@@ -60,7 +60,7 @@ public class ProgressionManager : MonoBehaviour
     
     void Start()
     {
-
+        
     }
 
     private void Update()
@@ -188,6 +188,7 @@ public class ProgressionManager : MonoBehaviour
         if (mainQuest3 != null && IsFinished(mainQuest3) && sceneName ==  "Ari's House" && !prologueComplete)
         {
             PlayCutscene(4);
+            deathCutscenePlayed = true;
             QuestInfoText.text = "Ask for intel about Diego";
             prologueComplete = true;
             mainQuest3.RewardPlayer();

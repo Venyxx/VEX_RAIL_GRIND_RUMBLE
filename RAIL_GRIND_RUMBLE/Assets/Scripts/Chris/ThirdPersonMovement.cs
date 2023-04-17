@@ -228,14 +228,19 @@ public class ThirdPersonMovement : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name == "InnerRingLevel")
         {
+            Debug.Log("LOADED INTO INNER RING ");
             MainQuest2 mq2 = ProgressionManager.Get().mainQuest2;
+            Debug.Log("MAINQUEST2 IS NULL? " + (mq2 == null));
+            Debug.Log("MAINQUEST 2 IS NOT ACTIVE?" + (!mq2.isActive));
             if (mq2 == null || !mq2.isActive)
             {
-                transform.localPosition = LoadNewScene.innerRingDefaultSpawnVector;
+                loadInDefaultLocation = false;
+                Debug.Log("SET LOAD IN DEFAULT LOCATION TO FALSE");
+                /*transform.localPosition = LoadNewScene.innerRingDefaultSpawnVector;
                 loadInDefaultLocation = false;
                 Debug.Log("Location Vector: " + LoadNewScene.locationVector);
-                Debug.Log("");
-                Debug.Log("My position: " + transform.localPosition);
+                Debug.Log("Inner Ring Vector: " + LoadNewScene.innerRingDefaultSpawnVector);
+                Debug.Log("My position: " + transform.localPosition);*/
             }
         }
         
