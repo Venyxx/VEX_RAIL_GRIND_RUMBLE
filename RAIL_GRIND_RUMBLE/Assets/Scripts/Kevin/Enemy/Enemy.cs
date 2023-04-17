@@ -11,6 +11,8 @@ public class Enemy : PoolableObject, IDamageable
     public EnemyScriptableObject EnemyScriptableObject;
     public float Health = 100;
     public Animator Animator;
+    [SerializeField] private Animator copAnimator;
+    [SerializeField] private Animator servosAnimator;
     public Ragdollenabler Ragdoll;
 
     private Coroutine LookCoroutine;
@@ -275,11 +277,13 @@ public class Enemy : PoolableObject, IDamageable
 
                 Animator.SetTrigger("TakeDamage");
                 Animator.SetBool("isDamaged", true);
+                //copAnimator.SetBool("isDamaged", true);
             }
                 
                 yield return new WaitForSeconds(_takeDamageDelay);
                 CanTakeDamage = true;
                  Animator.SetBool("isDamaged", false);
+                 copAnimator.SetBool("isDamaged", false);
 
                  if (VFX != null)
                  {

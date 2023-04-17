@@ -252,7 +252,7 @@ public class GrappleHook : MonoBehaviour
         if (cooldownRunning == true) return;
 
         //swing animation uncomment when troubleshooting - Raul
-        if(pullingObject == false)
+        if(pullingObject == false && throwObjectScript.isHoldingObject == false)
         {
             _animator.SetBool("isGrappling", true);
         }

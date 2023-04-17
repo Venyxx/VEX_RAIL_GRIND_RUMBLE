@@ -20,8 +20,8 @@ public class EnemyScriptableObject : ScriptableObject
     //NavMeshAgent Configs
     public float AIUpdateInterval = 0.01f;
 
-    public float Acceleration = 20;
-    public float AngularSpeed = 120;
+    public float Acceleration = 3;
+    public float AngularSpeed = 50;
     // -1 means everthing
     public int AreaMask = -1;
     public int AvoidancePriority = 50;
