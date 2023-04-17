@@ -2751,6 +2751,7 @@ MonoBehaviour:
   slamSpeed: 900
   waitForShockwave: 0.03
   shockwaveEffect: {fileID: 3784513952781447691}
+  BruteshockwaveEffect: {fileID: 0}
   shake:
     m_PersistentCalls:
       m_Calls:
@@ -2766,6 +2767,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  strongerShake:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &2590398617599905372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18867,7 +18871,11 @@ MonoBehaviour:
   slamSpeed: 0
   waitForShockwave: 0.03
   shockwaveEffect: {fileID: 0}
+  BruteshockwaveEffect: {fileID: 0}
   shake:
+    m_PersistentCalls:
+      m_Calls: []
+  strongerShake:
     m_PersistentCalls:
       m_Calls: []
 --- !u!4 &1304353530572435433 stripped
@@ -21314,7 +21322,11 @@ MonoBehaviour:
   slamSpeed: 0
   waitForShockwave: 0.03
   shockwaveEffect: {fileID: 0}
+  BruteshockwaveEffect: {fileID: 0}
   shake:
+    m_PersistentCalls:
+      m_Calls: []
+  strongerShake:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &5264736604562496967
