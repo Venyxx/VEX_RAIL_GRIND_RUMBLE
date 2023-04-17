@@ -224,23 +224,27 @@ public class ThirdPersonMovement : MonoBehaviour
 
         //atkScript = GetComponent<PlayerAttack>(); //added by pete to fix raul's nullref since he was assigning this in the inspector
 
+        
+
+        if (SceneManager.GetActiveScene().name == "InnerRingLevel")
+        {
+            MainQuest2 mq2 = ProgressionManager.Get().mainQuest2;
+            if (mq2 == null || !mq2.isActive)
+            {
+                transform.localPosition = LoadNewScene.innerRingDefaultSpawnVector;
+                loadInDefaultLocation = false;
+                Debug.Log("Location Vector: " + LoadNewScene.locationVector);
+                Debug.Log("");
+                Debug.Log("My position: " + transform.localPosition);
+            }
+        }
+        
         if (loadInDefaultLocation == true)
         {
             transform.localPosition = LoadNewScene.locationVector;
             Debug.Log("Location Vector: " + LoadNewScene.locationVector);
             Debug.Log("My position: " + transform.localPosition);
         }
-
-        /*if (SceneManager.GetActiveScene().name == "InnerRingLevel")
-        {
-            MainQuest2 mq2 = ProgressionManager.Get().mainQuest2;
-            if (mq2 == null || !mq2.isActive)
-            {
-                transform.localPosition = LoadNewScene.innerRingDefaultSpawnVector;
-                Debug.Log("Location Vector: " + LoadNewScene.locationVector);
-                Debug.Log("My position: " + transform.localPosition);
-            }
-        }*/
     }
 
     // Update is called once per frame

@@ -14,6 +14,8 @@ public class CheckpointController : MonoBehaviour
     [SerializeField] private bool updatesQuestInfoText;
     [SerializeField] private bool disableWaypoints;
     [SerializeField] private bool killAllDrones;
+    [SerializeField] private bool teleportsPlayer;
+    [SerializeField] private Transform placeToTeleport;
 
     private Teleportation teleREF;
     private bool waypointAdvanced;
@@ -46,11 +48,6 @@ public class CheckpointController : MonoBehaviour
             {
                 damageable.GainHealth(100);
             }
-            
-            if (cutsceneToPlay != 0)
-            {
-                ProgressionManager.Get().PlayCutscene(cutsceneToPlay);
-            }
 
             if (updatesPlayerSpawn)
             {
@@ -77,18 +74,34 @@ public class CheckpointController : MonoBehaviour
                     totalRef.currentIndex++;
                     waypointAdvanced = true;
                 }
+                
+                if (teleportsPlayer)
+                {
+                    StartCoroutine(DialogueManager.DialogueWipe());
+                    GameObject playerPrefab = other.gameObject;
+                    playerPrefab.transform.position = placeToTeleport.position;
+                }
+                
+                if (killAllDrones)
+                {
+                    var drones = FindObjectsOfType<Drone>();
+                    foreach (var drone in drones)
+                    {
+                        Destroy(drone.gameObject);
+                    }
+                }
+                
+                if (cutsceneToPlay != 0)
+                {
+                    ProgressionManager.Get().PlayCutscene(cutsceneToPlay);
+                }
 
                 performedProgressionAction = true;
             }
 
-            if (killAllDrones)
-            {
-                var drones = FindObjectsOfType<Drone>();
-                foreach (var drone in drones)
-                {
-                    Destroy(drone.gameObject);
-                }
-            }
+            
+
+            
 
 
 

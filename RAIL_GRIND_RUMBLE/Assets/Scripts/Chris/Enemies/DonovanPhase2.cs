@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using PathCreation;
+using UnityEngine.SceneManagement;
 
 public class DonovanPhase2 : MonoBehaviour, IDamageable
 {
@@ -124,7 +125,8 @@ public class DonovanPhase2 : MonoBehaviour, IDamageable
             currentHealth = 0;
 
             //Temporary
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            SceneManager.LoadScene("EndCut");
         }
     }
 

@@ -21,8 +21,6 @@ Q
 !Assets/ShieldBarrierController.cs,f\7\f71d4a9820d4dc71540b543c3d26a501b2615b2e
 ^
 .Assets/Scripts/Kevin/Enemy/MechBossMovement.cs,e\0\e0f8949f0a5e653a6d453f64f27cba5244523cc6
-m
-=Assets/Scripts/Pete/Checkpoint System/CheckpointController.cs,c\4\c498c8a4d1bde1a3ddf8f0382301a93ee12cb28a
 V
 &Assets/Scripts/Vanessa/Save/Manager.cs,9\9\994a2fe2a02e2c49d32b0aab09e751325f897f97
 Z

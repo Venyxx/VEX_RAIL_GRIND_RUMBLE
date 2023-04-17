@@ -13,8 +13,8 @@ public class TeleportationLocal : MonoBehaviour
     void Start()
     {
         playerPrefab = GameObject.Find("playerPrefab");
-        teleportationManagerREF = GameObject.Find("TeleportManager").GetComponent<Teleportation>();
-        totalREF = GameObject.Find("WayPointPrefab").GetComponent<TotalWaypointController>();
+        teleportationManagerREF = FindObjectOfType<Teleportation>();
+        totalREF = FindObjectOfType<TotalWaypointController>();
     }
 
     // Update is called once per frame
@@ -25,7 +25,8 @@ public class TeleportationLocal : MonoBehaviour
  
             if (col.CompareTag("Player") || col.CompareTag("PlayerObject"))
             {
-                Debug.Log("Collider!");
+                //Debug.Log("Collider!");
+                
                 for (int i = 0 ; i < teleportationManagerREF.Locations.Length; i ++ )
                 {
                     if (i < teleportationManagerREF.Locations.Length)
@@ -33,8 +34,12 @@ public class TeleportationLocal : MonoBehaviour
                         //Debug.Log(teleportationManagerREF.Locations[i + 1]);
 
                         if (gameObject.name == teleportationManagerREF.Locations[i].name)
+                        {
+                            StartCoroutine(DialogueManager.DialogueWipe());
                             playerPrefab.transform.position = teleportationManagerREF.Locations[i + 1].transform.position + new Vector3 (0.5f, 0, 0.5f);
+                        }
 
+                                
                         
                         if (!added)
                         {
