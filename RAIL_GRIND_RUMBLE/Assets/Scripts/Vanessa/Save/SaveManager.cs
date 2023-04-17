@@ -8,11 +8,18 @@ public class SaveManager : MonoBehaviour
     public static SaveManager Instance { set; get;}
     public SaveState state;
 
-        private void Awake ()
+    private void Awake ()
     {
         //ResetSave();
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
         DontDestroyOnLoad(gameObject);
-        Instance = this;
         Load();
 
         

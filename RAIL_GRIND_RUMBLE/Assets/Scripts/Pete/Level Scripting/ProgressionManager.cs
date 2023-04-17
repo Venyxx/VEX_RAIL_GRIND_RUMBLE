@@ -27,7 +27,7 @@ public class ProgressionManager : MonoBehaviour
     private bool firstAutoDialogueUsed;
     public bool firstLoad = true;
 
-    public bool grappleUnlocked = true;
+    public bool grappleUnlocked;
     public bool prologueComplete;
     private bool firstRaceCompleted;
 
@@ -184,7 +184,7 @@ public class ProgressionManager : MonoBehaviour
             LoadMainQuest3();
         }
 
-        if (mainQuest3 != null && IsFinished(mainQuest3) && !mainQuest3.RewardsGiven && sceneName ==  "Ari's House")
+        if (mainQuest3 != null && IsFinished(mainQuest3) && !mainQuest3.RewardsGiven && sceneName ==  "Ari's House" && !prologueComplete)
         {
             PlayCutscene(4);
             QuestInfoText.text = "Ask for intel about Diego";
@@ -207,7 +207,13 @@ public class ProgressionManager : MonoBehaviour
             }
         }
 
-        
+        if (sceneName == "InnerRingLevel" && ((mainQuest2 != null && !mainQuest2.isActive) || mainQuest2 == null))
+        {
+            //GameObject.Find("WayPointPrefabs").transform.Find("MainQuest4 Waypoints").gameObject.SetActive(true);
+            QuestInfoText.text = "Find and Destroy the shield generators to escape!";
+        }
+
+
         /*if (currentQuest != mainQuest3 && SceneManager.GetActiveScene().name == "Outskirts")
         {
             GameObject.Find("OpenGateQuest3").SetActive(true);
@@ -293,7 +299,7 @@ public class ProgressionManager : MonoBehaviour
             else if (SceneManager.GetActiveScene().name == "InnerRingLevel")
             {
                 GameObject totalWayPointParent = GameObject.Find("WayPointPrefabs");
-                GameObject mainQuest2WayPoints = totalWayPointParent.transform.GetChild(0).gameObject;
+                GameObject mainQuest2WayPoints = totalWayPointParent.transform.GetChild(1).gameObject;
                 mainQuest2WayPoints.SetActive(true);
                 TotalWaypointController totalREF = mainQuest2WayPoints.GetComponent<TotalWaypointController>();
                 GameObject mainQuest2Parent = GameObject.Find("MainQuest2 Objects");

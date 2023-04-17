@@ -146,6 +146,8 @@ public class MechBossMovement : MonoBehaviour , IDamageable
         if (Health <= 0)
         {
             Debug.Log("MechDestroyed");
+            ProgressionManager.Get().QuestInfoText.text = "Head into Servos HQ!";
+            GameObject.Find("Servos Teleporter").GetComponent<LoadNewScene>().enabled = true;
             Destroy(gameObject);
         }
     }

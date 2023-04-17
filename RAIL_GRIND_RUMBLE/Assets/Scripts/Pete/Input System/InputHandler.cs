@@ -764,6 +764,17 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""fbce8a62-9d5b-4a25-b9a0-5e322f69b313"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Brake"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""a1eefa7d-1769-4e19-903c-d99b0de1a15e"",
                     ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",

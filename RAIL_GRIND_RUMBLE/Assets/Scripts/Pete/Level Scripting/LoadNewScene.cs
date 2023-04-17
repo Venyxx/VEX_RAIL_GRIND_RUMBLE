@@ -9,7 +9,8 @@ public class LoadNewScene : MonoBehaviour
     [SerializeField] private LoadLocation loadLocation = LoadLocation.AriRoom; //ari room by default
 
     public static Vector3 locationVector { get; private set; } = ariRoomVector; //ari room by default
-
+    private Vector3 locationVectorDebug;
+    
     public const string ariHouse = "Ari's House";
     public const string outskirts = "Outskirts";
     public const string innerRing = "InnerRingLevel";
@@ -32,9 +33,8 @@ public class LoadNewScene : MonoBehaviour
     private void Awake()
     {
         if (!ProgressionManager.Get().firstLoad) return;
-        
-        //Debug.Log("Spawning Ari at default location");
-        switch (SceneManager.GetActiveScene().name)
+        locationVector = ariRoomVector;
+        /*switch (SceneManager.GetActiveScene().name)
         {
             case ariHouse:
                 locationVector = ariRoomVector;
@@ -52,7 +52,7 @@ public class LoadNewScene : MonoBehaviour
                 locationVector = servosHQDefaultSpawnVector;
                 Debug.Log("Servos HQ");
                 break;
-        }
+        }*/
 
         ProgressionManager.Get().firstLoad = false;
     }
@@ -91,11 +91,9 @@ public class LoadNewScene : MonoBehaviour
                 break;
             case LoadLocation.ServosLotEntrance:
                 sceneName = servosHQ;
-                //MISSING VECTOR
                 locationVector = servosHQDefaultSpawnVector;
                 break;
             default:
-                //load ari's room in default case
                 sceneName = ariHouse;
                 locationVector = ariRoomVector;
                 break;
@@ -113,6 +111,11 @@ public class LoadNewScene : MonoBehaviour
     private void OnDisable()
     {
         //Debug.LogError("LOADNEWSCENE DISABLED");
+    }
+
+    private void Update()
+    {
+        locationVectorDebug = locationVector;
     }
 }
 

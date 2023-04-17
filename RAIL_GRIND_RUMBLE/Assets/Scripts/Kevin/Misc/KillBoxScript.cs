@@ -5,12 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class KillBoxScript : MonoBehaviour
 {
-  private void OnCollisionEnter (Collision collision)
+  private void OnTriggerEnter (Collider other)
     {
-        if (collision.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
-            int y = SceneManager.GetActiveScene().buildIndex;
-            SceneManager.LoadScene(y);
+            SceneManager.LoadScene("LoseScene");
         }
     }
 }

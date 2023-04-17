@@ -2,6 +2,7 @@
 using PathCreation;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LocuoQuestGiver : QuestGiver
 {
@@ -9,6 +10,8 @@ public class LocuoQuestGiver : QuestGiver
     [SerializeField] private float baseMoveSpeed = 15;
     [SerializeField] private float startDelay = 2f;
     [SerializeField] private Transform raceOverWaitSpot;
+    [SerializeField] private bool inInnerRing;
+    
     public PathCreator pathCreator { get; set; }
     public EndOfPathInstruction endOfPathInstruction;
     public bool activated = false;
@@ -84,11 +87,22 @@ public class LocuoQuestGiver : QuestGiver
     {
         ProgressionManager.Get().grappleUnlocked = true;
         GameObject mainWaypoints = GameObject.Find("Main Waypoints");
-        if (mainWaypoints != null)
+        if (mainWaypoints != null && SceneManager.GetActiveScene().name == "Outskirts")
         {
             mainWaypoints.GetComponent<TotalWaypointController>().currentIndex = 1;
         }
-        
+
+        if (SceneManager.GetActiveScene().name == "InnerRingLevel")
+        {
+            FindObjectOfType<TotalWaypointController>().currentIndex = 2;
+            ProgressionManager.Get().QuestInfoText.text = "Race Locuo to the last shield generator!";
+            GameObject killboxes = GameObject.Find("Killboxes");
+            foreach (Transform child in killboxes.transform)
+            {
+                child.gameObject.SetActive(true);
+            }
+        }
+
         _dialogueTrigger.enabled = false;
         Invoke(nameof(SetActivated), startDelay);
     }
@@ -115,6 +129,15 @@ public class LocuoQuestGiver : QuestGiver
         transform.position = raceOverWaitSpot.position;
         FindObjectOfType<TotalWaypointController>().currentIndex = 7;
         FindObjectOfType<ThirdPersonMovement>().currentSpeed = 0;
+        if (SceneManager.GetActiveScene().name == "InnerRingLevel")
+        {
+            ProgressionManager.Get().QuestInfoText.text = "Destroy the last generator!";
+            GameObject killboxes = GameObject.Find("Killboxes");
+            foreach (Transform child in killboxes.transform)
+            {
+                child.gameObject.SetActive(false);
+            }
+        }
     }
 
     public void RewardPlayer()

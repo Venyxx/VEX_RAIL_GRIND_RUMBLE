@@ -226,9 +226,21 @@ public class ThirdPersonMovement : MonoBehaviour
 
         if (loadInDefaultLocation == true)
         {
-            transform.position = LoadNewScene.locationVector;
+            transform.localPosition = LoadNewScene.locationVector;
+            Debug.Log("Location Vector: " + LoadNewScene.locationVector);
+            Debug.Log("My position: " + transform.localPosition);
         }
 
+        if (SceneManager.GetActiveScene().name == "InnerRingLevel")
+        {
+            MainQuest2 mq2 = ProgressionManager.Get().mainQuest2;
+            if (mq2 == null || !mq2.isActive)
+            {
+                transform.localPosition = LoadNewScene.innerRingDefaultSpawnVector;
+                Debug.Log("Location Vector: " + LoadNewScene.locationVector);
+                Debug.Log("My position: " + transform.localPosition);
+            }
+        }
     }
 
     // Update is called once per frame

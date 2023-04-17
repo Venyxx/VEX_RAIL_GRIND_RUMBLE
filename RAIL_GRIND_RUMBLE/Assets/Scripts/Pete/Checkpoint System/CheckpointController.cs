@@ -6,9 +6,14 @@ public class CheckpointController : MonoBehaviour
     public static int LastScene { get; private set; }
     public static Vector3 lastCheckPointPosition;
     private GameObject ari;
+    private bool performedProgressionAction;
     [SerializeField] private bool updatesPlayerSpawn = true;
     [SerializeField] private int cutsceneToPlay;
     [SerializeField] private GameObject[] objectsToActivate;
+    [SerializeField] private string newQuestInfoText;
+    [SerializeField] private bool updatesQuestInfoText;
+    [SerializeField] private bool disableWaypoints;
+    [SerializeField] private bool killAllDrones;
 
     private Teleportation teleREF;
     private bool waypointAdvanced;
@@ -52,15 +57,42 @@ public class CheckpointController : MonoBehaviour
                 lastCheckPointPosition = this.gameObject.transform.position;
             }
 
-            if (!waypointAdvanced)
+            if (!performedProgressionAction)
             {
+                if (updatesQuestInfoText)
+                {
+                    ProgressionManager.Get().QuestInfoText.text = newQuestInfoText;
+                }
+            
                 TotalWaypointController totalRef = FindObjectOfType<TotalWaypointController>();
                 if (totalRef == null) return;
-                totalRef.currentIndex++;
-                waypointAdvanced = true;
+
+                if (disableWaypoints)
+                {
+                    totalRef.gameObject.SetActive(false);
+                }
+
+                if (!waypointAdvanced)
+                {
+                    totalRef.currentIndex++;
+                    waypointAdvanced = true;
+                }
+
+                performedProgressionAction = true;
             }
 
-            
+            if (killAllDrones)
+            {
+                var drones = FindObjectsOfType<Drone>();
+                foreach (var drone in drones)
+                {
+                    Destroy(drone.gameObject);
+                }
+            }
+
+
+
+
         }
     }
     
