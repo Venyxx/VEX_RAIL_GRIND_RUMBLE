@@ -28,7 +28,7 @@ public class ThirdPersonMovement : MonoBehaviour
     private float speedLerp;
     public float groundDrag;
     Vector3 standingStill = new Vector3 (0,0,0);
-    private Vector2 moveInput;
+    public Vector2 moveInput;
     public float maxSkateSpeed = 1;
     private float slopeLimit;
 

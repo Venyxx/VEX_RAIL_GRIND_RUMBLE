@@ -37,7 +37,7 @@ public class AIControl : MonoBehaviour {
     void Update() {
         if (agent.remainingDistance < 1)
         {
-            Debug.Log("changing direction   " + gameObject.name);
+            //Debug.Log("changing direction   " + gameObject.name);
             int i = Random.Range(0, goalLocations.Length);
             agent.SetDestination(goalLocations[i].transform.position);
         }
