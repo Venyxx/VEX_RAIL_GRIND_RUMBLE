@@ -13,7 +13,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField]
     private Animator Animator;
 
-    [SerializeField] private float activationDistance = 50f;
+    [SerializeField] private float activationDistance = 600f;
 
     private NavMeshAgent Agent;
     [Range(-1, 1)]

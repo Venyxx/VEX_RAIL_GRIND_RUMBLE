@@ -19,8 +19,12 @@ public class AnimationiManager : MonoBehaviour
 
      [SerializeField]
     private GameObject shockwaveEffect;
+    [SerializeField]
+    private GameObject BruteshockwaveEffect;
 
     public UnityEvent shake;
+
+    public UnityEvent strongerShake;
     
 
    
@@ -60,6 +64,12 @@ public class AnimationiManager : MonoBehaviour
         shake.Invoke();
     }
 
+    private void spawnStrongerShockwavePls()
+    {
+        StartCoroutine(BruteshockwaveBuffer());
+        strongerShake.Invoke();
+    }
+
      IEnumerator shockwaveBuffer()
     {
         
@@ -68,6 +78,16 @@ public class AnimationiManager : MonoBehaviour
         yield return new WaitForSeconds(1);
         shockwaveEffect.SetActive(false);
         Debug.Log("Despawnshockwave");
+    }
+
+     IEnumerator BruteshockwaveBuffer()
+    {
+        
+        BruteshockwaveEffect.SetActive(true);
+        //Debug.Log("spawnshockwave");
+        yield return new WaitForSeconds(1);
+        BruteshockwaveEffect.SetActive(false);
+       // Debug.Log("Despawnshockwave");
     }
 
 
