@@ -1340,10 +1340,10 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: GettingUp
-  m_Speed: 1.6
+  m_Speed: 3
   m_CycleOffset: 0
   m_Transitions:
-  - {fileID: -2267425350110525561}
+  - {fileID: -2532204592787714644}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
@@ -3746,6 +3746,28 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1101 &-2532204592787714644
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 423629169990366956}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0.25
+  m_TransitionOffset: 0
+  m_ExitTime: 0.8611111
+  m_HasExitTime: 1
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1101 &-2461280527710094531
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -3903,28 +3925,6 @@ AnimatorStateTransition:
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 2
-  m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
---- !u!1101 &-2267425350110525561
-AnimatorStateTransition:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_Conditions: []
-  m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: 0}
-  m_Solo: 0
-  m_Mute: 0
-  m_IsExit: 1
-  serializedVersion: 3
-  m_TransitionDuration: 1
-  m_TransitionOffset: 0
-  m_ExitTime: 1
-  m_HasExitTime: 1
-  m_HasFixedDuration: 1
-  m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
 --- !u!1102 &-2198034750354901762
@@ -4131,10 +4131,10 @@ AnimatorStateMachine:
     m_Position: {x: -1560, y: 2420, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -724533860757464498}
-    m_Position: {x: -890, y: 180, z: 0}
+    m_Position: {x: -350, y: 10, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6468335378093486718}
-    m_Position: {x: -760, y: 320, z: 0}
+    m_Position: {x: -160, y: -230, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 9068844600332453759}
     m_Position: {x: 640, y: 270, z: 0}

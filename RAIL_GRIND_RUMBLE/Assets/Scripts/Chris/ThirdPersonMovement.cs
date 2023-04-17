@@ -872,7 +872,7 @@ public class ThirdPersonMovement : MonoBehaviour
         _animator.SetTrigger("StunStart");
         yield return new WaitForSeconds(3);
         _animator.SetTrigger("StunEnd");
-        yield return new WaitForSeconds(2);
+       // yield return new WaitForSeconds(1);
         isStunned = false;
         dialogueManager.freezePlayer = false;
         healthRef.IsDizzy(false);

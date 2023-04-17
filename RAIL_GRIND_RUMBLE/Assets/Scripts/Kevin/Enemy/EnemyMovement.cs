@@ -148,7 +148,7 @@ public class EnemyMovement : MonoBehaviour
    if (FollowCoroutine != null)
         {
            
-            
+           //Animator.SetBool("Dashing", false);
             HasHidden = true;
             
         }
@@ -197,14 +197,15 @@ public class EnemyMovement : MonoBehaviour
         BruteIsCharging = true;
         Agent.speed = 0;
         Animator.SetTrigger("Charging");
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
         Animator.SetBool("Dashing", true);
         Attack.Damage = 10;
-        Agent.speed = enemy.EnemyScriptableObject.Speed + 20;
-        Agent.acceleration = enemy.EnemyScriptableObject.Acceleration + 20;
-        yield return new WaitForSeconds(5f);
+        Agent.speed = enemy.EnemyScriptableObject.Speed + 9;
+        Agent.acceleration = enemy.EnemyScriptableObject.Acceleration + 9;
+        yield return new WaitForSeconds(3f);
         Debug.Log("Brute isn't charging");
         Animator.SetBool("Dashing", false);
+        //BruteChargingDelay = false; //putting this here to speed up testing - Raul
         Agent.speed = 3;
         Attack.Damage = 5;
         Agent.acceleration = 8;
