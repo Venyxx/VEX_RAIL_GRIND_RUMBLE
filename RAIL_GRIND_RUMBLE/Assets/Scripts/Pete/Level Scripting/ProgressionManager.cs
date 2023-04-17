@@ -30,6 +30,7 @@ public class ProgressionManager : MonoBehaviour
     public bool grappleUnlocked;
     public bool prologueComplete;
     private bool firstRaceCompleted;
+    public bool deathCutscenePlayed = false;
 
     public static ProgressionManager Get()
     {
@@ -184,7 +185,7 @@ public class ProgressionManager : MonoBehaviour
             LoadMainQuest3();
         }
 
-        if (mainQuest3 != null && IsFinished(mainQuest3) && !mainQuest3.RewardsGiven && sceneName ==  "Ari's House" && !prologueComplete)
+        if (mainQuest3 != null && IsFinished(mainQuest3) && sceneName ==  "Ari's House" && !prologueComplete)
         {
             PlayCutscene(4);
             QuestInfoText.text = "Ask for intel about Diego";

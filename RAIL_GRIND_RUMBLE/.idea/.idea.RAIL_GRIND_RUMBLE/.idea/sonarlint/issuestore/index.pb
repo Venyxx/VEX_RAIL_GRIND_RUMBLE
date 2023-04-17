@@ -27,23 +27,3 @@ V
 &Assets/Scripts/Vanessa/Save/Manager.cs,9\9\994a2fe2a02e2c49d32b0aab09e751325f897f97
 Z
 *Assets/Scripts/Vanessa/Save/SaveManager.cs,f\3\f3b5f272ec70771ae49e148513d33ae7e5ba80cf
-c
-3Assets/Scripts/Pete/Level Scripting/LoadNewScene.cs,5\2\52956f4a8f95b459c0d12e23a9b853919bd11fb5
-Y
-)Assets/Scripts/Pete/Quest System/Quest.cs,c\0\c0af313364b41f417a08c87e05487bc681764c5e
-c
-3Assets/Scripts/Pete/Quest System/LocuoQuestGiver.cs,2\6\26d932eaec03a6890339f15ebb4245124961d47d
-Z
-*Assets/Scripts/Kevin/Misc/KillBoxScript.cs,d\6\d600e257351706fac30878eac767459ee0164876
-[
-+Assets/Scripts/Vanessa/Grafitti/Graffiti.cs,f\7\f7dfea312d3abd4847e2b756eae20d43ac136f4b
-^
-.Assets/Scripts/Pete/Quest System/MainQuest2.cs,2\7\2762fbbde8b96b3c37d96f8fcc8426eb94771d34
-[
-+Assets/Scripts/Chris/ThirdPersonMovement.cs,8\4\8445679af98e6402112b143daf7322eef94103e8
-[
-+Assets/Scripts/Kevin/Player/PlayerHealth.cs,6\0\60fcf97351316ef10679309e1aaf28a0b3da95db
-i
-9Assets/Scripts/Pete/Level Scripting/ProgressionManager.cs,c\b\cb6c40785cfb9944479b58672222d362a5a42ad6
-^
-.Assets/Scripts/Pete/Quest System/MainQuest3.cs,8\b\8b895f368c5b69a7a68d39001122c150d5ac9192

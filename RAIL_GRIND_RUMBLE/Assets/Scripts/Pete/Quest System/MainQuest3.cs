@@ -60,7 +60,7 @@ public class MainQuest3 : Quest
         kidnapperVan.GetComponent<ServosVanController>().enabled = true;
         secondSectionSpawner.GetComponent<ContinuousSpawner>().enabled = true;
         ProgressionManager.Get().CompleteQuest();
-        RewardsGiven = true;
+        //RewardsGiven = true;
     }
 
 }
