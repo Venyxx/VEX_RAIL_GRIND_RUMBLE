@@ -8,7 +8,7 @@ public class RocketTurret : MonoBehaviour, IDamageable
     [SerializeField] GameObject targetObject;
     GameObject target;
     GameObject playerREF;
-    float speed = 1f;
+    float speed = 3f;
     public bool chargeRunning;
     public bool shootRunning;
     bool attached;
@@ -53,7 +53,7 @@ public class RocketTurret : MonoBehaviour, IDamageable
         {
             float singleStep = speed * Time.deltaTime;
             Vector3 playerDirection = playerREF.transform.position - transform.position;
-            Vector3 newDirection = Vector3.RotateTowards(transform.forward, playerDirection, singleStep, 0f);
+            Vector3 newDirection = Vector3.RotateTowards(transform.forward, new Vector3(playerDirection.x, 0f, playerDirection.z), singleStep, 0f);
             transform.rotation = Quaternion.LookRotation(newDirection);
         }
 
@@ -141,10 +141,10 @@ public class RocketTurret : MonoBehaviour, IDamageable
             }
         }
 
-        if (!attached)
+        /*if (!attached)
         {
             transform.rotation = thisRot;
-        }
+        }*/
         
         //target.gameObject.SetActive(false);
         Destroy(target.gameObject);
@@ -167,7 +167,8 @@ public class RocketTurret : MonoBehaviour, IDamageable
     //Damageable Functions - Consult PlayerHealth script for help
     public void TakeDamage(float damage)
     {
-        if (attached) return;
+        return;
+        /*if (attached) return;
         //Add variables for maxHealth and currentHealth
         currentHealth -= damage;
 
@@ -177,7 +178,7 @@ public class RocketTurret : MonoBehaviour, IDamageable
             //target.gameObject.SetActive(false);
             Destroy(target.gameObject);
             StartCoroutine(Regenerate());
-        }
+        }*/
     }
 
     public void GainHealth(float GainHealth)
