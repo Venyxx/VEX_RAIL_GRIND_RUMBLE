@@ -64,16 +64,18 @@ public class Graffiti : MonoBehaviour
         
 
 
-        graffitiUp = Resources.Load(SaveManager.Instance.state.ariGraffitiSlotUp1) as GameObject;
-        graffitiDown = Resources.Load(SaveManager.Instance.state.ariGraffitiSlotDown3) as GameObject;
-        graffitiLeft = Resources.Load(SaveManager.Instance.state.ariGraffitiSlotLeft4) as GameObject;
-        graffitiRight = Resources.Load(SaveManager.Instance.state.ariGraffitiSlotRight2) as GameObject;
+        graffitiUp = (GameObject)Resources.Load(SaveManager.Instance.state.ariGraffitiSlotUp1, typeof(GameObject));
+        graffitiDown = (GameObject)Resources.Load(SaveManager.Instance.state.ariGraffitiSlotDown3, typeof(GameObject));
+        graffitiLeft =(GameObject)Resources.Load(SaveManager.Instance.state.ariGraffitiSlotLeft4, typeof(GameObject));
+        graffitiRight =(GameObject)Resources.Load(SaveManager.Instance.state.ariGraffitiSlotRight2, typeof(GameObject));
 
         
         //RecalculateGraffitiDisplay();
 
         Debug.Log("Graffiti List: " + graffitiUp + " and " + graffitiDown + " and " + graffitiLeft + " and " + graffitiRight); 
-        fadeGroup = GameObject.Find("SpriteButtons").GetComponent<CanvasGroup>();
+        
+        if(GameObject.Find("SpriteButtons"))
+            fadeGroup = GameObject.Find("SpriteButtons").GetComponent<CanvasGroup>();
         
         
         //graffitiParticle = Resources.Load("Particle_1") as GameObject;
@@ -157,8 +159,8 @@ public class Graffiti : MonoBehaviour
     {
         
         RaycastHit[] hits;
-        hits = Physics.RaycastAll(transform.position, transform.forward, 20.0f);
-        
+        hits = Physics.RaycastAll(transform.position, transform.forward, 50.0f);
+        Debug.DrawRay(transform.position, transform.forward, Color.green, 2.0f);
         for (int i = 0; i < hits.Length; i++)
         {
             RaycastHit hit = hits[i];
@@ -188,6 +190,7 @@ public class Graffiti : MonoBehaviour
                     madeGraffiti = Instantiate (graffiti, spawnLoc.transform.position,spawnLoc.transform.rotation); 
                     particle2 = Instantiate (graffitiParticle2, player.transform.position, player.transform.rotation);
                     
+                    //moved to graffitichecking cs for quest sake
                     ProgressionManager manager = ProgressionManager.Get();
                     if (manager.currentQuest is CountQuest countQuest && countQuest.GetCountQuestType() is CountQuestType.Graffiti)
                     {
@@ -382,6 +385,9 @@ public class Graffiti : MonoBehaviour
         RecalcSprite(SaveManager.Instance.state.ariGraffitiSlotUp1, upDisplay);
         RecalcSprite(SaveManager.Instance.state.ariGraffitiSlotDown3, downDisplay);
         RecalcSprite(SaveManager.Instance.state.ariGraffitiSlotRight2, rightDisplay);
+
+        if(GameObject.Find("SpriteButtons"))
+            fadeGroup = GameObject.Find("SpriteButtons").GetComponent<CanvasGroup>();
   
     }
 

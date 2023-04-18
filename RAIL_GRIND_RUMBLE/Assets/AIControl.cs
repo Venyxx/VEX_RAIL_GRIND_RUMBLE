@@ -11,14 +11,17 @@ public class AIControl : MonoBehaviour {
     private AudioSource audioSource;
     public AudioClip AudioClip;
     private bool isEvading;
-    private float maxTime = 2;
+    private float maxTime = 3;
     private float currentTime;
+    private ThirdPersonMovement tpMovREF;
 
     private float hitSpeed = 1;
+    float sm;
 
     void Start() {
 
-        
+        tpMovREF = GameObject.Find("playerPrefab").GetComponent<ThirdPersonMovement>();
+
         audioSource = this.GetComponent<AudioSource>();
         agent = this.GetComponent<NavMeshAgent>();
         goalLocations = GameObject.FindGameObjectsWithTag("walkingGoal");
@@ -27,14 +30,19 @@ public class AIControl : MonoBehaviour {
         anim = this.GetComponent<Animator>();
         anim.SetTrigger("isWalking");
         anim.SetFloat("wOffset", Random.Range(0.0f, 1.0f));
-        float sm = Random.Range(0.5f,2);
+         sm = Random.Range(0.5f,1.15f);
         anim.SetFloat("speedMult", sm);
-        agent.speed *= (sm * hitSpeed);
+        
+
+
 
     }
 
 
     void Update() {
+
+        agent.speed = (1 * sm * hitSpeed);
+        
         if (agent.remainingDistance < 1)
         {
             //Debug.Log("changing direction   " + gameObject.name);
@@ -57,20 +65,26 @@ public class AIControl : MonoBehaviour {
 
     void OnTriggerEnter (Collider col)
     {
-        if (col.gameObject.name == "playerPrefab")
+        if (tpMovREF.moveInput.y != 0 || tpMovREF.moveInput.x != 0)
         {
-            anim.SetTrigger("evade");
-            isEvading = true;
-            currentTime = maxTime;
-            Debug.Log("fall time");
-
-            float sound = Random.Range(0,5);
-
-            if (sound < 1)
+            if (col.gameObject.name == "playerPrefab")
             {
-                audioSource.PlayOneShot(AudioClip);
-            }
+                anim.SetTrigger("evade");
+                isEvading = true;
+                currentTime = maxTime;
+                Debug.Log("fall time");
 
+                float sound = Random.Range(0,5);
+
+                if (sound < 1)
+                {
+                    audioSource.PlayOneShot(AudioClip);
+                }
+
+            }
         }
+        
     }
+
+    
 }
