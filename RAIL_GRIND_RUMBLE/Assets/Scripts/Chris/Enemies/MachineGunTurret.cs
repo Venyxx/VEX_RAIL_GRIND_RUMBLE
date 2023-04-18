@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MachineGunTurret : MonoBehaviour, IDamageable
 {
-    float speed = 1f;
+    float speed = 3f;
     GameObject playerREF;
     [SerializeField] GameObject bullet;
     [SerializeField] int bulletCount;
@@ -45,7 +45,7 @@ public class MachineGunTurret : MonoBehaviour, IDamageable
     {
             float singleStep = speed * Time.deltaTime;
             playerDirection = playerREF.transform.position - transform.position;
-            newDirection = Vector3.RotateTowards(transform.forward, playerDirection, singleStep, 0f);
+            newDirection = Vector3.RotateTowards(transform.forward, new Vector3(playerDirection.x, 0f, playerDirection.z), singleStep, 0f);
 
             if (!attached)
             {
@@ -106,15 +106,16 @@ public class MachineGunTurret : MonoBehaviour, IDamageable
     //Damageable Functions - Consult PlayerHealth script for help
     public void TakeDamage(float damage)
     {
-        if (attached) return;
+        return;
+        //if (attached) return;
         //Add variables for maxHealth and currentHealth
-        currentHealth -= damage;
+        //currentHealth -= damage;
 
-        if (currentHealth <= 0)
+        /*if (currentHealth <= 0)
         {
             currentHealth = 0;
             StartCoroutine(Regenerate());
-        }
+        }*/
     }
 
     public void GainHealth(float GainHealth)
