@@ -359,7 +359,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 
                 
-                    Debug.Log("ATKtest1");
+                    Debug.Log("HitWithLeftLeg");
                 damageable.TakeDamage(Damage);
 
 
@@ -369,7 +369,7 @@ public class PlayerAttack : MonoBehaviour
                 
                 
                 
-                    Debug.Log("ATKtest1");
+                    Debug.Log("HitWithRightleg");
                 damageable.TakeDamage(Damage);
 
             }
@@ -378,7 +378,7 @@ public class PlayerAttack : MonoBehaviour
             {
 
 
-                Debug.Log("ATKtest1");
+                Debug.Log("HitWithLeftHand");
                 damageable.TakeDamage(Damage);
 
 
@@ -388,7 +388,7 @@ public class PlayerAttack : MonoBehaviour
 
 
 
-                Debug.Log("ATKtest1");
+                Debug.Log("HitWithRightHand");
                 damageable.TakeDamage(Damage);
 
             }

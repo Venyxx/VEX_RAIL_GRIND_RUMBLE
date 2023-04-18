@@ -69,10 +69,12 @@ public class EnemyMovement : MonoBehaviour
 
         }
 
-        if (Vector3.Distance(Player.position, transform.position) > activationDistance )
+        if (Vector3.Distance(Player.position, transform.position) > activationDistance && !BruteIsCharging )
         {
             StopAllCoroutines();
             activated = false;
+           
+            
         }
 
         if (enemy.Health <=0)
@@ -131,6 +133,11 @@ public class EnemyMovement : MonoBehaviour
         if (activated && Vector3.Distance(Player.position, transform.position) < 2 && !enemy.isDizzy )
         { Agent.SetDestination(Player.transform.position);
           }
+
+        if (IsBrute && !activated )
+        {
+            BruteChargingDelay = false;
+        }
     }
    
     private void HandleGainSight(Transform Target)
