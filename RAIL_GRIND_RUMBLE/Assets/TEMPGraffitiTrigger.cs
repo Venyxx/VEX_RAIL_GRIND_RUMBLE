@@ -16,6 +16,7 @@ public class TEMPGraffitiTrigger : MonoBehaviour
                         countQuest.IncrementCount();
                         countQuest.IncrementCount();
                     }
+     Destroy(gameObject);
      }
    }
 }
