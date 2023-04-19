@@ -171,10 +171,10 @@ public class Graffiti : MonoBehaviour
             GameObject particle;
             GameObject particle2;
 
-            if (hit.collider.gameObject.layer == 8)
-            {
+            
+            
                 
-                if (hit.collider.gameObject.tag == "Poster")
+                if (hit.collider.gameObject.tag == "Poster" || hit.collider.gameObject.layer == 19)
                 {
                     if (hit.collider.gameObject.GetComponent<PosterActive>().isSprayed)
                     {
@@ -204,7 +204,10 @@ public class Graffiti : MonoBehaviour
                     hit.collider.gameObject.GetComponent<PosterActive>().isSprayed = true;
                     return;
                     
-                } else 
+                } 
+                
+                
+                if (hit.collider.gameObject.layer == 8) 
                 {
                     Debug.Log("detected no poster");
                     Debug.Log(hit.normal);
@@ -217,7 +220,7 @@ public class Graffiti : MonoBehaviour
                 }
                 
                 
-            }
+            
         }
     }
 

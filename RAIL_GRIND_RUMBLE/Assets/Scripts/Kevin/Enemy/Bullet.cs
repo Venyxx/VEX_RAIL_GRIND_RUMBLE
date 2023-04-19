@@ -39,6 +39,17 @@ public class Bullet : PoolableObject
         IDamageable damageable;
         if (other.TryGetComponent<IDamageable>(out damageable))
         {
+            if (other.gameObject.layer == LayerMask.NameToLayer("player"))
+            {
+                if (other.gameObject.GetComponent<ThirdPersonMovement>().isStunned == true)
+                {
+                    return;
+                }
+            } else if (other.gameObject.CompareTag("Donovan"))
+            {
+                return;
+            } 
+
             damageable.TakeDamage(Damage);
         }
         Disable();

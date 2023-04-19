@@ -24,7 +24,11 @@ public class Explosion : MonoBehaviour
         {
             if (other.gameObject.layer == LayerMask.NameToLayer("player"))
             {
-                damageable.TakeDamage(Damage);
+                if (other.gameObject.GetComponent<ThirdPersonMovement>().isStunned == false)
+                {
+                    damageable.TakeDamage(Damage);
+                }
+                
             } else if (other.gameObject.layer == LayerMask.NameToLayer("Enemy") && other.gameObject.tag == "Enemy")
             {
             
