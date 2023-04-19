@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System.Collections;
 
 public class MainMenu : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class MainMenu : MonoBehaviour
 
     public GameObject SettingsMainPage;
     public GameObject SettingsScreen;
+
+    [SerializeField] private Animator ariAnimator;
+    [SerializeField] private Animator cameraAnimator;
     
     
 
@@ -24,6 +28,8 @@ public class MainMenu : MonoBehaviour
     public GameObject controlsScreen;
     public GameObject graphicsScreen;
     public GameObject accessibilityScreen;
+
+    
 
 
     // Start is called before the first frame update
@@ -58,6 +64,16 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     { 
+        StartCoroutine(WaitStartGame());
+    }
+
+     IEnumerator WaitStartGame()
+    {
+        
+
+        ariAnimator.SetBool("pressedStart" , true);
+        cameraAnimator.SetBool("pressedStart" , true);
+        yield return new WaitForSeconds(10);
         SceneManager.LoadScene(firstLevel);
     }
 
@@ -89,6 +105,11 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
         Debug.Log("Quitting");
     }
+
+
+    
+
+    
 
 
 

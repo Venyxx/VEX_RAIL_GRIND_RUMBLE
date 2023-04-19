@@ -8,6 +8,7 @@ using System.Collections.Generic;
 
 public class PauseMenu : MonoBehaviour
 {
+    
 
     public string mainMenuScene;
     public GameObject pauseMenu;
@@ -57,6 +58,7 @@ public class PauseMenu : MonoBehaviour
 
     void Start()
     {
+        
         isPaused = false;
 
         grappleDetectorREF = GameObject.Find("GrappleDetector");
@@ -230,13 +232,14 @@ public class PauseMenu : MonoBehaviour
 
     public void ReturnToMain()
     {
-        loading.LoadOutStart(mainMenuScene);
+        //LoadOut("Ari's House");
+        //loading.StartCoroutine(LoadOut("Ari's House"));
         //ResumeGame();
         Time.timeScale = 1f;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
 
-        //SceneManager.LoadScene(mainMenuScene);
+        SceneManager.LoadScene(mainMenuScene);
     }
 
     //B Button on Controller
@@ -252,6 +255,8 @@ public class PauseMenu : MonoBehaviour
 
 
     }
+
+    
 
 }
 
