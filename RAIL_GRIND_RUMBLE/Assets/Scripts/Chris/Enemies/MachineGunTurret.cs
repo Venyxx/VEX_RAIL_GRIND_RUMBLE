@@ -62,7 +62,11 @@ public class MachineGunTurret : MonoBehaviour, IDamageable
 
     public IEnumerator Shoot()
     {
-        mechAnimator.SetBool("shootingGun", true);
+        if (attached)
+        {
+            mechAnimator.SetBool("shootingGun", true);
+        }
+        
         shootRunning = true;
         yield return new WaitForSeconds(0.8f);
 
@@ -88,7 +92,11 @@ public class MachineGunTurret : MonoBehaviour, IDamageable
         }
 
         //Cooldown
-        mechAnimator.SetBool("shootingGun", false);
+        if (attached)
+        {
+            mechAnimator.SetBool("shootingGun", false);
+        }
+        
         yield return new WaitForSeconds(cooldownSeconds);
 
         shootRunning = false;

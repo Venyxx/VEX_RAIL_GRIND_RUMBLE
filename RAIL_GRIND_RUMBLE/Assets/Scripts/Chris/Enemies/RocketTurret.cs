@@ -132,8 +132,6 @@ public class RocketTurret : MonoBehaviour, IDamageable
         }*/
         
         //target.gameObject.SetActive(false);
-        Destroy(target.gameObject);
-        shootRunning = false;
     }
 
     IEnumerator shootMissileWait()
@@ -150,7 +148,10 @@ public class RocketTurret : MonoBehaviour, IDamageable
             } else 
             
             {
-                mechAnimator.SetTrigger("shootingMissile");
+                if (attached)
+                {
+                    mechAnimator.SetTrigger("shootingMissile");
+                }
                 yield return new WaitForSeconds(0.9f);
                 GameObject rocketShot; 
                 
@@ -174,6 +175,9 @@ public class RocketTurret : MonoBehaviour, IDamageable
                 } else {
                     rocketShot.GetComponent<Rocket>().TargetSet(aimAt, false);
                 }
+
+                Destroy(target.gameObject);
+                shootRunning = false;
             }
         }
     }

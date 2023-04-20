@@ -9,10 +9,12 @@ public class Rocket : MonoBehaviour
     bool explosionRunning;
     float speed = 20f;
     bool spawnDelayRunning;
+    GameObject rocket;
     void Start()
     {
         explosion = this.gameObject.transform.Find("Explosion");
         explosionRunning = false;
+        rocket = this.gameObject.transform.Find("rocketModel").gameObject;
     }
 
     // Update is called once per frame
@@ -62,7 +64,8 @@ public class Rocket : MonoBehaviour
     {
         explosionRunning = true;
         explosion.gameObject.SetActive(true);
-        GetComponent<MeshRenderer>().enabled = false;
+        //GetComponent<MeshRenderer>().enabled = false;
+        rocket.GetComponent<MeshRenderer>().enabled = false;
         yield return new WaitForSeconds(2f);
         Destroy(gameObject);
     }
