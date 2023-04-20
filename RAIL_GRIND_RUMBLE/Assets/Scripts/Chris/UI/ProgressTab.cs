@@ -14,6 +14,13 @@ public class ProgressTab : MonoBehaviour
     public string[] Act1TextBoxes;
     public string[] Act2TextBoxes;
     public string[] Act3TextBoxes;
+    public string[] Act1SpanishTitles;
+    public string[] Act2SpanishTitles;
+    public string[] Act3SpanishTitles;
+    public string[] Act1SpanishTextBoxes;
+    public string[] Act2SpanishTextBoxes;
+    public string[] Act3SpanishTextBoxes;
+
     public GameObject[] Act1Buttons;
     public GameObject[] Act2Buttons;
     public GameObject[] Act3Buttons;

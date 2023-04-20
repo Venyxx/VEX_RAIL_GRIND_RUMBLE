@@ -78,7 +78,13 @@ public class InfoScreen : MonoBehaviour
 
             if (galleryTab.activeInHierarchy)
             {
-                galleryButton.Select();
+                if (galleryTab.GetComponent<GalleryTab>().newspapers[0].activeInHierarchy)
+                {
+                    galleryTab.GetComponent<GalleryTab>().newspapers[0].GetComponent<Button>().Select();
+                } else {
+                    galleryButton.Select();
+                }
+                
             }
         }
     }
@@ -94,7 +100,7 @@ public class InfoScreen : MonoBehaviour
                 StartCoroutine(OpenInfoScreen());
             } else {
                 StartCoroutine(CloseInfoScreen());
-            }
+            } 
         }
     }
 
@@ -102,7 +108,13 @@ public class InfoScreen : MonoBehaviour
     {
         if (context.started && isOpen == true)
         {
-            StartCoroutine(CloseInfoScreen());
+            if (!galleryTab.GetComponent<GalleryTab>().paperIsOpen)
+            {
+                StartCoroutine(CloseInfoScreen());
+            } else {
+                galleryTab.GetComponent<GalleryTab>().ClosePaper();
+            }
+            
         }
     }
 
