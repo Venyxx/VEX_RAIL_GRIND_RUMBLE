@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MachineGunTurret : MonoBehaviour, IDamageable
 {
+    [SerializeField] private Animator mechAnimator;
     float speed = 3f;
     GameObject playerREF;
     [SerializeField] GameObject bullet;
@@ -61,7 +62,9 @@ public class MachineGunTurret : MonoBehaviour, IDamageable
 
     public IEnumerator Shoot()
     {
+        mechAnimator.SetBool("shootingGun", true);
         shootRunning = true;
+        yield return new WaitForSeconds(0.8f);
 
         //Shoot amount of bullets specified under Bullet Count
         for (bulletInt = 0; bulletInt < bulletCount; bulletInt++)
@@ -85,6 +88,7 @@ public class MachineGunTurret : MonoBehaviour, IDamageable
         }
 
         //Cooldown
+        mechAnimator.SetBool("shootingGun", false);
         yield return new WaitForSeconds(cooldownSeconds);
 
         shootRunning = false;

@@ -5,6 +5,9 @@ using UnityEngine.AI;
 
 public class Hernandez : MonoBehaviour, IDamageable
 {
+    
+
+    [SerializeField] private Animator mechAnimator;
     [SerializeField] float stunSeconds;
     MachineGunTurret gatlingGunLeft;
     MachineGunTurret gatlingGunRight;
@@ -68,7 +71,9 @@ public class Hernandez : MonoBehaviour, IDamageable
             //Shoots two rockets before activating gatling guns
             if (weaponCycle <= 2 && rocketTurret.shootRunning == false && rocketTurret.chargeRunning == false && gatlingGunLeft.shootRunning == false)
             {
+
                 rocketTurret.StartCoroutine(rocketTurret.Shooting());
+                
 
                 if (weaponCycle == 2)
                 {
@@ -80,6 +85,7 @@ public class Hernandez : MonoBehaviour, IDamageable
               //Activates gatling guns and resets weapon cycle  
             } else if (weaponCycle == 3 && gatlingGunLeft.shootRunning == false && machineGunDelayRunning == false)
             {
+                
                 gatlingGunLeft.StartCoroutine(gatlingGunLeft.Shoot());
                 gatlingGunRight.StartCoroutine(gatlingGunRight.Shoot());
                 weaponCycle = 1;
@@ -166,8 +172,10 @@ public class Hernandez : MonoBehaviour, IDamageable
     {
         if (!stunned) return;
         //Add variables for maxHealth and currentHealth
+        
         currentHealth -= damage;
         Debug.Log("Hernandez Health: "+currentHealth);
+        
 
         if (currentHealth <= 0)
         {

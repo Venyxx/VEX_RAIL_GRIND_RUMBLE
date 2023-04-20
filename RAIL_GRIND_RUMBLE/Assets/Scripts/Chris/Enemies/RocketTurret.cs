@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RocketTurret : MonoBehaviour, IDamageable
 {
+    [SerializeField] private Animator mechAnimator;
     [SerializeField] GameObject rocket;
     [SerializeField] GameObject targetObject;
     GameObject target;
@@ -74,6 +75,8 @@ public class RocketTurret : MonoBehaviour, IDamageable
 
     public IEnumerator Charging()
     {
+        
+
         chargeRunning = true;
 
         if (attached)
@@ -93,17 +96,24 @@ public class RocketTurret : MonoBehaviour, IDamageable
 
     public IEnumerator Shooting()
     {
+
         shootRunning = true;
         //target.gameObject.SetActive(true);
+        
 
         target = Instantiate(targetObject, playerREF.transform.position, Quaternion.identity);
 
         if (attached)
         {
             yield return new WaitForSeconds(5f);
+
         } else {
+        //mechAnimator.SetBool("shootingMissile", false);
             yield return new WaitForSeconds(shootTime);
+
         }
+
+        
 
         var z = transform.rotation.eulerAngles.z;
         var y = transform.rotation.eulerAngles.y;
@@ -111,35 +121,10 @@ public class RocketTurret : MonoBehaviour, IDamageable
         var rot = Quaternion.Euler(new Vector3(-90, y, z));
 
 
-        if (!dead)
-        {
-            if (attached && hernandez.stunned == true)
-            {
-                shootRunning = false;
-                //target.gameObject.SetActive(false);
-                Destroy(target.gameObject);
-                yield break;
-            } else {
-                GameObject rocketShot; 
 
-                if (attached)
-                {
-                    rocketShot = Instantiate(rocket, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
-                } else {
-                    rocketShot = Instantiate(rocket, new Vector3(transform.position.x, transform.position.y + 5, transform.position.z), /*rot*/ Quaternion.identity);
-                }
 
-                Vector3 aimAt = new Vector3(target.transform.position.x, target.transform.position.y, target.transform.position.z);
+        StartCoroutine(shootMissileWait());
 
-                if (!attached)
-                {
-                    rocketShot.GetComponent<Rocket>().TargetSet(aimAt, true);
-                    StartCoroutine(Charging());
-                } else {
-                    rocketShot.GetComponent<Rocket>().TargetSet(aimAt, false);
-                }
-            }
-        }
 
         /*if (!attached)
         {
@@ -149,6 +134,48 @@ public class RocketTurret : MonoBehaviour, IDamageable
         //target.gameObject.SetActive(false);
         Destroy(target.gameObject);
         shootRunning = false;
+    }
+
+    IEnumerator shootMissileWait()
+    {
+        if (!dead)
+        {
+            if (attached && hernandez.stunned == true)
+            {
+                shootRunning = false;
+                //target.gameObject.SetActive(false);
+                Destroy(target.gameObject);
+                yield break;
+
+            } else 
+            
+            {
+                mechAnimator.SetTrigger("shootingMissile");
+                yield return new WaitForSeconds(0.9f);
+                GameObject rocketShot; 
+                
+
+                if (attached)
+                {
+                    rocketShot = Instantiate(rocket, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+                    
+                } else {
+                    rocketShot = Instantiate(rocket, new Vector3(transform.position.x, transform.position.y + 5, transform.position.z), /*rot*/ Quaternion.identity);
+                }
+
+                Vector3 aimAt = new Vector3(target.transform.position.x, target.transform.position.y, target.transform.position.z);
+
+                if (!attached)
+                {
+                    // mechAnimator.SetBool("shootingMissile", true);
+                    // Debug.Log("StartMissile");
+                    rocketShot.GetComponent<Rocket>().TargetSet(aimAt, true);
+                    StartCoroutine(Charging());
+                } else {
+                    rocketShot.GetComponent<Rocket>().TargetSet(aimAt, false);
+                }
+            }
+        }
     }
 
     IEnumerator Regenerate()

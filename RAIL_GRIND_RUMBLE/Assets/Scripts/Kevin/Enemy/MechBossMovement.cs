@@ -58,7 +58,7 @@ public class MechBossMovement : MonoBehaviour , IDamageable
         if (agent.baseOffset > 0 && MechDown)
         {
             agent.speed = 0;
-            Animator.SetTrigger("KnockDown");
+            
             walkPointSet = false;
             agent.baseOffset = agent.baseOffset - 15 * Time.deltaTime;
             if (!Dizzy)
@@ -140,6 +140,8 @@ public class MechBossMovement : MonoBehaviour , IDamageable
         {
             Debug.Log("MechHitfor" + (damage));
             Health -= damage;
+            Animator.SetTrigger("takeDamageNow");
+            Debug.Log("takeDamageNow");
             DamageIndicatior indicator = Instantiate(damageText, transform.position, Quaternion.identity).GetComponent<DamageIndicatior>();
             indicator.SetDamageText(damage);
         }
@@ -167,16 +169,17 @@ public class MechBossMovement : MonoBehaviour , IDamageable
     }
     public IEnumerator KnockDown()
     {
+        Animator.SetTrigger("KnockDown");
         Dizzy = true;
         yield return new WaitForSeconds(KnockDownTime);
         MechDown = false;
         Debug.Log("MechTest");
         Animator.SetTrigger("GetUp");
         yield return new WaitForSeconds(1);
-        Animator.SetTrigger("Attack");
-        yield return new WaitForSeconds(1.5f);
-        AttackPlayer();
-        yield return new WaitForSeconds(3);
+        // Animator.SetTrigger("Attack");
+        // yield return new WaitForSeconds(1.5f);
+        // AttackPlayer();
+        // yield return new WaitForSeconds(3);
         Dizzy = false;
         
         MechUp = true;
