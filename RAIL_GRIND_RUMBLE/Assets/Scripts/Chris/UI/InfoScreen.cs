@@ -16,6 +16,7 @@ public class InfoScreen : MonoBehaviour
     public GameObject mapTab;
     public GameObject missionsTab;
     public GameObject progressTab;
+    public GameObject galleryTab;
 
     //Animators
     public Animator topBarAnim;
@@ -35,6 +36,7 @@ public class InfoScreen : MonoBehaviour
     public Button mapButton;
     public Button missionsButton;
     public Button progressButton;
+    public Button galleryButton;
     public Sprite tabSelected;
     public Sprite tabNotSelected;
 
@@ -44,6 +46,11 @@ public class InfoScreen : MonoBehaviour
 
     //Quest Window Check
     GameObject questWindow;
+
+    //Customization Screen
+    [SerializeField] GameObject customVendorREF;
+    GameObject customVendor;
+
 
 
 
@@ -67,6 +74,11 @@ public class InfoScreen : MonoBehaviour
             if (progressTab.activeInHierarchy)
             {
                 Act1Button.Select();
+            }
+
+            if (galleryTab.activeInHierarchy)
+            {
+                galleryButton.Select();
             }
         }
     }
@@ -120,6 +132,7 @@ public class InfoScreen : MonoBehaviour
         //mapButton.gameObject.SetActive(true);
         missionsButton.gameObject.SetActive(true);
         progressButton.gameObject.SetActive(true);
+        galleryButton.gameObject.SetActive(true);
         //OpenMap();
         OpenMissions();
         isOpen = true;
@@ -129,19 +142,25 @@ public class InfoScreen : MonoBehaviour
         Time.timeScale = 0f;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+
+        //Spawn custom vendor
+        Transform playerTransform = GameObject.FindWithTag("PlayerObject").transform;
+        //customVendor = Instantiate(customVendorREF, new Vector3(playerTransform.position.x + 1, playerTransform.position.y, playerTransform.position.z), Quaternion.identity);
     }
 
-    IEnumerator CloseInfoScreen()
+    public IEnumerator CloseInfoScreen()
     {
         PlaySoundUI(backSound);
 
         mapTab.SetActive(false);
         missionsTab.SetActive(false);
         progressTab.SetActive(false);
+        galleryTab.SetActive(false);
 
         mapButton.gameObject.SetActive(false);
         missionsButton.gameObject.SetActive(false);
         progressButton.gameObject.SetActive(false);
+        galleryButton.gameObject.SetActive(false);
 
         Time.timeScale = 1f;
         Cursor.visible = false;
@@ -167,8 +186,11 @@ public class InfoScreen : MonoBehaviour
             OpenProgressTab();
         } else if (currentTab == "Progress")
         {
+            OpenGalleryTab();
+        } else if (currentTab == "Gallery")
+        {
             OpenMissionsTab();
-        } 
+        }
 
     }
 
@@ -179,11 +201,14 @@ public class InfoScreen : MonoBehaviour
             OpenProgressTab();
         } else*/ if (currentTab == "Missions")
         {
-            OpenProgressTab();
+            OpenGalleryTab();
         } else if (currentTab == "Progress")
         {
             OpenMissionsTab();
-        } 
+        } else if (currentTab == "Gallery")
+        {
+            OpenProgressTab();
+        }
     }
 
     //Click Events
@@ -223,10 +248,11 @@ public class InfoScreen : MonoBehaviour
         mapButton.GetComponent<Image>().sprite = tabNotSelected;
         missionsButton.GetComponent<Image>().sprite = tabSelected;
         progressButton.GetComponent<Image>().sprite = tabNotSelected;
+        galleryButton.GetComponent<Image>().sprite = tabNotSelected;
 
-        if (currentTab == "Map")
+        if (currentTab == "Gallery")
         {
-            mapAnim.SetTrigger("Close");
+            galleryTab.SetActive(false);
         }
 
         if (currentTab == "Progress")
@@ -250,10 +276,11 @@ public class InfoScreen : MonoBehaviour
         mapButton.GetComponent<Image>().sprite = tabNotSelected;
         missionsButton.GetComponent<Image>().sprite = tabNotSelected;
         progressButton.GetComponent<Image>().sprite = tabSelected;
+        galleryButton.GetComponent<Image>().sprite = tabNotSelected;
 
-        if (currentTab == "Map")
+        if (currentTab == "Gallery")
         {
-            mapAnim.SetTrigger("Close");
+            galleryTab.SetActive(false);
         }
 
         if (currentTab == "Missions")
@@ -268,6 +295,38 @@ public class InfoScreen : MonoBehaviour
         Act1Button.Select();
     }
 
+    public void OpenGalleryTab()
+    {
+        PlaySoundUI(nextSound);
+        OpenGallery();
+    }
+
+    void OpenGallery()
+    {
+        mapButton.GetComponent<Image>().sprite = tabNotSelected;
+        missionsButton.GetComponent<Image>().sprite = tabNotSelected;
+        progressButton.GetComponent<Image>().sprite = tabNotSelected;
+        galleryButton.GetComponent<Image>().sprite = tabSelected;
+
+        if (currentTab == "Progress")
+        {
+            progressAnim.SetTrigger("Close");
+        }
+
+        if (currentTab == "Missions")
+        {
+            missionsAnim.SetTrigger("Close");
+        }
+
+        //Temp
+        missionsTab.SetActive(false);
+        progressTab.SetActive(false);
+
+        
+        galleryTab.SetActive(true);
+        currentTab = "Gallery";
+    }
+
     public void PlaySoundUI(AudioClip clip)
     {
         audioUI.clip = clip;
@@ -276,19 +335,23 @@ public class InfoScreen : MonoBehaviour
 
     public void TabOpened(string tabOpened)
     {
-        if (tabOpened == "Map")
+        if (tabOpened == "Missions")
         {
-            missionsTab.SetActive(false);
             progressTab.SetActive(false);
-        } else if (tabOpened == "Missions")
-        {
-            mapTab.SetActive(false);
-            progressTab.SetActive(false);
+            galleryTab.SetActive(false);
         } else if (tabOpened == "Progress")
         {
-            mapTab.SetActive(false);
             missionsTab.SetActive(false);
+            galleryTab.SetActive(false);
+        } else if (tabOpened == "Gallery")
+        {
+            missionsTab.SetActive(false);
+            progressTab.SetActive(false);
         }
     }
 
+    public void NewspaperPassthrough(int paperNum)
+    {
+        galleryTab.GetComponent<GalleryTab>().AddNewspaper(paperNum);
+    }
 }

@@ -5,8 +5,7 @@ using UnityEngine;
 public class NewspaperPickup : MonoBehaviour
 {
     float speed = 100;
-    [SerializeField] int act;
-    [SerializeField] int entry;
+    [SerializeField] int paperNum;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +29,8 @@ public class NewspaperPickup : MonoBehaviour
 
     void AddToDataLog()
     {
+        GameObject canvas = GameObject.Find("canvasPrefab");
+        canvas.GetComponent<InfoScreen>().NewspaperPassthrough(paperNum - 1);
         Destroy(gameObject);
     }
 }

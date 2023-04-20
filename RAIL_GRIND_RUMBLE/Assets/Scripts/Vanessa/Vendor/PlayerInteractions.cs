@@ -99,17 +99,22 @@ public class PlayerInteractions : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) &&inRange)
         {
             canvas.SetActive(true);
+
+            //Closes Info Screen if Customization is opened from Info Screen
+            if (InfoScreen.isOpen)
+            {
+                InfoScreen infoScreen = GameObject.Find("canvasPrefab").GetComponent<InfoScreen>();
+                infoScreen.StartCoroutine(infoScreen.CloseInfoScreen());
+            }
             
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             movementScriptREF.dialogueManager.freezePlayer = true;
             prompt.SetActive(false);
             previewCamItself.SetActive(true);
-
-
         }
 
-        if (canvas.activeInHierarchy == false && inRange)
+        if (canvas.activeInHierarchy == false && !InfoScreen.isOpen && inRange)
             prompt.SetActive(true);
         else  
             prompt.SetActive(false);
