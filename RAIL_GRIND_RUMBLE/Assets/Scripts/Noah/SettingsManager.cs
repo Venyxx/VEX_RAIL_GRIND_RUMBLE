@@ -54,6 +54,16 @@ public class SettingsManager : MonoBehaviour
        {
            EventSystem.current.SetSelectedGameObject(null);
        }
+
+       if (godMode == true)
+       {
+           godModeToggleREF.GetComponent<Toggle>().isOn = true;
+       }
+       
+       if (godMode == false)
+       {
+           godModeToggleREF.GetComponent<Toggle>().isOn = false;
+       }
        
     }
 

@@ -21,7 +21,7 @@ public class SubtitleManager : MonoBehaviour
     public SpanishMode spanishModeScript;
     public GameObject cutsceneplayerREF;
     CutscenePlayer cutsceneplayer;
-    public VideoClip cutsceneClips;
+    public VideoClip[] cutsceneClips;
     
     
     // Start is called before the first frame update
@@ -30,7 +30,7 @@ public class SubtitleManager : MonoBehaviour
 
         spanishModeScript = GetComponent<SpanishMode>();
         cutsceneplayer = cutsceneplayerREF.GetComponent<CutscenePlayer>();
-        cutsceneClips = cutsceneplayer.videoPlayer.clip;
+        cutsceneClips = cutsceneplayer.cutsceneClips;
         
         subtitleGO.SetActive(false);
     }
@@ -64,19 +64,24 @@ public class SubtitleManager : MonoBehaviour
         
         foreach (var voiceLine in englishSubtitleText)
         {
-            if (voiceLine.cutsceneclip == cutsceneClips)
+            for (int i = 0; i < cutsceneClips.Length; i++)
             {
-                if (voiceLine.text == "")
+
+
+                if (voiceLine.cutsceneclip == cutsceneClips[i])
                 {
-                    subtitleBackground.SetActive(false);
-                    englishSubtitles.text = voiceLine.text;
-                    yield return new WaitForSecondsRealtime(voiceLine.time);
-                }
-                else
-                {
-                    subtitleBackground.SetActive(true);
-                    englishSubtitles.text = voiceLine.text;
-                    yield return new WaitForSecondsRealtime(voiceLine.time);
+                    if (voiceLine.text == "")
+                    {
+                        subtitleBackground.SetActive(false);
+                        englishSubtitles.text = voiceLine.text;
+                        yield return new WaitForSecondsRealtime(voiceLine.time);
+                    }
+                    else
+                    {
+                        subtitleBackground.SetActive(true);
+                        englishSubtitles.text = voiceLine.text;
+                        yield return new WaitForSecondsRealtime(voiceLine.time);
+                    }
                 }
             }
         }
