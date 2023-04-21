@@ -14,6 +14,9 @@ public class CameraOptions : MonoBehaviour
     public Toggle YCheckbox;
     public Toggle XCheckbox;
 
+    public static bool isXInverted = false;
+    public static bool isYInverted = false;
+
     public Slider YSens;
     public Slider XSens;
 
@@ -25,6 +28,9 @@ public class CameraOptions : MonoBehaviour
     {
         if(cineMachine != null)
             _freeLook = cineMachine.GetComponent<CinemachineFreeLook>();
+        
+        XCheckbox.isOn = isXInverted;
+        YCheckbox.isOn = isYInverted;
 
         LoadValues();
      
@@ -33,13 +39,37 @@ public class CameraOptions : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       if (cineMachine != null)
-       {
-        _freeLook.m_XAxis.m_InvertInput = XCheckbox.isOn;
-        _freeLook.m_YAxis.m_InvertInput = !YCheckbox.isOn;
+        if (cineMachine != null)
+        {
+            if (XCheckbox.isOn == true)
+            {
+                isXInverted = true;
+                _freeLook.m_XAxis.m_InvertInput = true;
+            }
+            else
+            {
+                isXInverted = false;
+                _freeLook.m_XAxis.m_InvertInput = false;
+            }
 
-        _freeLook.m_XAxis.m_MaxSpeed = XSens.value * 20 + 70;
-        _freeLook.m_YAxis.m_MaxSpeed = YSens.value / 2 + 1;
+            if (YCheckbox.isOn == true)
+            {
+                isYInverted = true;
+                _freeLook.m_YAxis.m_InvertInput = false;
+
+            }
+            else
+            {
+                isYInverted = false;
+                _freeLook.m_YAxis.m_InvertInput = true;
+            } 
+            
+            
+            
+            
+            
+            _freeLook.m_XAxis.m_MaxSpeed = XSens.value * 20 + 70;
+            _freeLook.m_YAxis.m_MaxSpeed = YSens.value / 2 + 1;
        }
         
 
@@ -62,6 +92,7 @@ public class CameraOptions : MonoBehaviour
 
         PlayerPrefs.SetFloat("XSensValue", XSensValue);
         PlayerPrefs.SetFloat("YSensValue", YSensValue);
+        
 
         LoadValues();
     }

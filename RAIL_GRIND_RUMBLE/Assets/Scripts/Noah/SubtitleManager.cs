@@ -21,7 +21,7 @@ public class SubtitleManager : MonoBehaviour
     public SpanishMode spanishModeScript;
     public GameObject cutsceneplayerREF;
     CutscenePlayer cutsceneplayer;
-    public VideoClip[] cutsceneClips;
+    [SerializeField] private VideoClip[] cutsceneClips;
     
     
     // Start is called before the first frame update
@@ -74,6 +74,7 @@ public class SubtitleManager : MonoBehaviour
                     {
                         subtitleBackground.SetActive(false);
                         englishSubtitles.text = voiceLine.text;
+                        
                         yield return new WaitForSecondsRealtime(voiceLine.time);
                     }
                     else
