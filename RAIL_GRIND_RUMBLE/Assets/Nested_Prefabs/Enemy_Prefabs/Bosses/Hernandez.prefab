@@ -74,6 +74,7 @@ GameObject:
   - component: {fileID: 6824130177305418665}
   - component: {fileID: 4619514644766663045}
   - component: {fileID: 4682983248121609728}
+  - component: {fileID: 259116088}
   m_Layer: 10
   m_Name: Hernandez
   m_TagString: Hernandez
@@ -113,6 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd0cd1baa43ef9e4ea32c45b1727fd68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mechAnimator: {fileID: 0}
   stunSeconds: 5
   stunned: 0
 --- !u!65 &6824130177305418666
@@ -201,6 +203,19 @@ NavMeshAgent:
   m_BaseOffset: 10.06
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!65 &259116088
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6824130177305418646}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 7.27, y: 6.65, z: 4.42}
+  m_Center: {x: 0, y: 3.35, z: 0}
 --- !u!1 &6824130177880339585
 GameObject:
   m_ObjectHideFlags: 0

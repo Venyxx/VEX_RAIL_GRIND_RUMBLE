@@ -30,9 +30,9 @@ public class MechBossMovement : MonoBehaviour , IDamageable
 
     //States
     public float sightRange, attackRange;
-    public bool playerInSightRange, playerInAttackRange, MechDown, MechUp;
+    public bool playerInSightRange, playerInAttackRange, MechDown, MechUp, chasing, running;
     public bool Dizzy;
-
+    float StateTimer;
 
     private void Awake()
     {
@@ -41,20 +41,24 @@ public class MechBossMovement : MonoBehaviour , IDamageable
         agent = GetComponent<NavMeshAgent>();
         Speed = agent.speed;
         playerhealth = playerREF.GetComponent<PlayerHealth>();
+        StateTimer = 0;
+        chasing = true;
     }
     private void Update()
     {
+        Timer();
         //Check for sight and attack range
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
         if (!playerInSightRange && !playerInAttackRange && !Dizzy && !MechUp)
-        { Patroling();
+        {// Patroling();
             transform.LookAt(player);
         }
         //if (playerInSightRange && !playerInAttackRange) ChasePlayer();
         //if (playerInSightRange && playerInAttackRange) AttackPlayer();
-      
+        if (chasing && !MechDown) ChasePlayer();
+        if (running && !MechDown) Patroling();
         if (agent.baseOffset > 0 && MechDown)
         {
             agent.speed = 0;
@@ -104,7 +108,7 @@ public class MechBossMovement : MonoBehaviour , IDamageable
     }
     private void ChasePlayer()
     {
-      //  agent.SetDestination(player.transform.position);
+        agent.SetDestination(player.transform.position);
     }
     private void AttackPlayer()
     {
@@ -145,6 +149,18 @@ public class MechBossMovement : MonoBehaviour , IDamageable
             DamageIndicatior indicator = Instantiate(damageText, transform.position, Quaternion.identity).GetComponent<DamageIndicatior>();
             indicator.SetDamageText(damage);
         }
+
+        if (!Dizzy)
+        {
+            damage = damage * .5f;
+            Debug.Log("MechHitfor" + (damage));
+            Health -= damage;
+            Animator.SetTrigger("takeDamageNow");
+            Debug.Log("takeDamageNow");
+            DamageIndicatior indicator = Instantiate(damageText, transform.position, Quaternion.identity).GetComponent<DamageIndicatior>();
+            indicator.SetDamageText(damage);
+        }
+
         if (Health <= 0)
         {
             Debug.Log("MechDestroyed");
@@ -183,5 +199,26 @@ public class MechBossMovement : MonoBehaviour , IDamageable
         Dizzy = false;
         
         MechUp = true;
+    }
+
+    private void Timer()
+    {
+        StateTimer += Time.deltaTime;
+      
+        if (chasing && StateTimer >= 10)
+        {
+            chasing = false;
+            StateTimer = 0;
+            running = true;
+        }
+
+        if (running && StateTimer >= 10)
+        {
+            chasing = true;
+            StateTimer = 0;
+            running = false;
+        }
+        // Debug.Log(HeavyAtkTimer);
+
     }
 }
