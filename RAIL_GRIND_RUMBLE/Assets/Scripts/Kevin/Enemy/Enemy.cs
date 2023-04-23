@@ -26,7 +26,7 @@ public class Enemy : PoolableObject, IDamageable
     private AudioClip[] hitSounds;
     private AudioSource audioSource;
     bool CanTakeDamage = true;
-    public float _takeDamageDelay = .6f;
+    public float _takeDamageDelay = .2f;
     public bool dizzy = false;
     public bool isDizzy;
     public static Enemy instance;

@@ -8,7 +8,7 @@ public class Stationary3Start : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         PlayerAttack.instance.Damage = 10;
-        PlayerAttack.instance.Rightleg.enabled = true;
+        PlayerAttack.instance.Leftleg.enabled = true;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

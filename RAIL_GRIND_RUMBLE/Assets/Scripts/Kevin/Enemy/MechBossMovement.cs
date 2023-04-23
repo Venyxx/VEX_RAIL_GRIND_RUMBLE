@@ -15,6 +15,8 @@ public class MechBossMovement : MonoBehaviour , IDamageable
     public float Health = 300;
     public int KnockDownTime = 5;
     private PlayerHealth playerhealth;
+    private float takeDamageDelay = .2f;
+    private bool canTakeDamage = true;
 
     //Patroling 
     public Vector3 walkPoint;
@@ -139,34 +141,38 @@ public class MechBossMovement : MonoBehaviour , IDamageable
 
     public void TakeDamage(float damage)
     {
-        
-        if (Dizzy)
+        if (canTakeDamage)
         {
-            Debug.Log("MechHitfor" + (damage));
-            Health -= damage;
-            Animator.SetTrigger("takeDamageNow");
-            Debug.Log("takeDamageNow");
-            DamageIndicatior indicator = Instantiate(damageText, transform.position, Quaternion.identity).GetComponent<DamageIndicatior>();
-            indicator.SetDamageText(damage);
-        }
+            StartCoroutine(TakeDamage());
 
-        if (!Dizzy)
-        {
-            damage = damage * .5f;
-            Debug.Log("MechHitfor" + (damage));
-            Health -= damage;
-            Animator.SetTrigger("takeDamageNow");
-            Debug.Log("takeDamageNow");
-            DamageIndicatior indicator = Instantiate(damageText, transform.position, Quaternion.identity).GetComponent<DamageIndicatior>();
-            indicator.SetDamageText(damage);
-        }
+            if (Dizzy)
+            {
+                Debug.Log("MechHitfor" + (damage));
+                Health -= damage;
+                Animator.SetTrigger("takeDamageNow");
+                Debug.Log("takeDamageNow");
+                DamageIndicatior indicator = Instantiate(damageText, transform.position, Quaternion.identity).GetComponent<DamageIndicatior>();
+                indicator.SetDamageText(damage);
+            }
 
-        if (Health <= 0)
-        {
-            Debug.Log("MechDestroyed");
-            ProgressionManager.Get().QuestInfoText.text = "Head into Servos HQ!";
-            GameObject.Find("Servos Teleporter").GetComponent<LoadNewScene>().enabled = true;
-            Destroy(gameObject);
+            if (!Dizzy)
+            {
+                damage = damage * .5f;
+                Debug.Log("MechHitfor" + (damage));
+                Health -= damage;
+                Animator.SetTrigger("takeDamageNow");
+                Debug.Log("takeDamageNow");
+                DamageIndicatior indicator = Instantiate(damageText, transform.position, Quaternion.identity).GetComponent<DamageIndicatior>();
+                indicator.SetDamageText(damage);
+            }
+
+            if (Health <= 0)
+            {
+                Debug.Log("MechDestroyed");
+                ProgressionManager.Get().QuestInfoText.text = "Head into Servos HQ!";
+                GameObject.Find("Servos Teleporter").GetComponent<LoadNewScene>().enabled = true;
+                Destroy(gameObject);
+            }
         }
     }
 
@@ -200,7 +206,12 @@ public class MechBossMovement : MonoBehaviour , IDamageable
         
         MechUp = true;
     }
-
+    private IEnumerator TakeDamage()
+    {
+        canTakeDamage = false;
+        yield return new WaitForSeconds(takeDamageDelay);
+        canTakeDamage = true;
+    }
     private void Timer()
     {
         StateTimer += Time.deltaTime;

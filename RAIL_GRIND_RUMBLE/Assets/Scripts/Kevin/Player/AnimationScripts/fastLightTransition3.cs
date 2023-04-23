@@ -7,7 +7,7 @@ public class fastLightTransition3 : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        PlayerAttack.instance.Weapon.enabled = false;
+        PlayerAttack.instance.Rightleg.enabled = false;
         PlayerAttack.instance.movementScriptREF.currentSpeed = 0;
     }
 

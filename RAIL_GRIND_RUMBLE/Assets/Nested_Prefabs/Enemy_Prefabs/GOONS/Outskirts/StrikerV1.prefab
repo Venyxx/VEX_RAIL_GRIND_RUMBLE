@@ -280,7 +280,7 @@ MonoBehaviour:
   LineOfSightChecker: {fileID: 1495312389010500594}
   UpdateSpeed: 0.1
   Animator: {fileID: 5823354347041916475}
-  activationDistance: 20
+  activationDistance: 40
   HideSensitivity: -0.7
   MinPlayerDistance: 5
   MinObstacleHeight: 1.25
@@ -407,8 +407,10 @@ MonoBehaviour:
   EnemyScriptableObject: {fileID: 11400000, guid: 3c9acd3ddbe3865468558cf66e5197bb, type: 2}
   Health: 1
   Animator: {fileID: 5823354347041916475}
+  copAnimator: {fileID: 0}
+  servosAnimator: {fileID: 0}
   Ragdoll: {fileID: 1742402826431431499}
-  _takeDamageDelay: 0.6
+  _takeDamageDelay: 0.2
   dizzy: 0
   isDizzy: 0
   damageText: {fileID: 3432252478998060102, guid: 896df2592015e3141ae952a379c8dee7, type: 3}

@@ -61,7 +61,7 @@ public class EnemyMovement : MonoBehaviour
         {
             //Debug.Log("Player is within range, chasing the player");
             StartCoroutine(Activate());
-
+            
 
             activated = true;
 
@@ -107,7 +107,7 @@ public class EnemyMovement : MonoBehaviour
         if (Vector3.Distance(Player.position, transform.position) >= 15 && activated && !enemy.isDizzy)
         {
             
-            UpdateSpeed = 5;
+            UpdateSpeed = .01f;
             
 
 
@@ -116,7 +116,7 @@ public class EnemyMovement : MonoBehaviour
         if (Vector3.Distance(Player.position, transform.position) < 15  && Vector3.Distance(Player.position, transform.position) >= .5 && !enemy.isDizzy)
         {
             
-            UpdateSpeed = 3;
+            UpdateSpeed = .005f;
           
 
 
@@ -125,13 +125,13 @@ public class EnemyMovement : MonoBehaviour
         if (Vector3.Distance(Player.position, transform.position) <.5 && !enemy.isDizzy)
         {
             
-            UpdateSpeed = .8f;
+            UpdateSpeed = .001f;
            
 
 
         }
         if (activated && Vector3.Distance(Player.position, transform.position) < 2 && !enemy.isDizzy )
-        { Agent.SetDestination(Player.transform.position);
+        {// Agent.SetDestination(Player.transform.position);
           }
 
         if (IsBrute && !activated )

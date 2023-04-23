@@ -9,7 +9,7 @@ public class fastLight2Start : StateMachineBehaviour
     {
         PlayerAttack.instance.IsAttacking = false;
         PlayerAttack.instance.Damage = 20;
-        PlayerAttack.instance.Lefthand.enabled = true;
+        PlayerAttack.instance.Weapon.enabled = true;
         PlayerAttack.instance.movementScriptREF.currentSpeed = PlayerAttack.instance.movementScriptREF.currentSpeed * 0.8f;
     }
 

@@ -10,7 +10,7 @@ public class fastLight3Start : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         PlayerAttack.instance.Damage = 20;
-        PlayerAttack.instance.Weapon.enabled = true;
+        PlayerAttack.instance.Rightleg.enabled = true;
          PlayerAttack.instance.movementScriptREF.currentSpeed = 0;
         PlayerAttack.instance.movementScriptREF.dialogueManager.freezePlayer = true;
         
