@@ -87,6 +87,15 @@ public class InfoScreen : MonoBehaviour
                 
             }
         }
+
+        //Temp
+        /*if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (isOpen)
+            {
+                StartCoroutine(CloseInfoScreen());
+            }
+        }*/
     }
 
     public void OpenInfoButtonPressed(InputAction.CallbackContext context)
