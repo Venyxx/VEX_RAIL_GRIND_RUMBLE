@@ -151,6 +151,10 @@ public class ThirdPersonMovement : MonoBehaviour
     public PlayerHealth healthRef;
     public bool isStunned = false;
     public bool CombatPause = false;
+
+    //skates and shoes
+    private ETCCustomizationVendor ETCCustREF;
+    private Manager ManagerREF;
     
     
     [Tooltip("Leave this checked in the inspector unless you are manually moving ari in the scene and need her to spawn where you moved her. " + 
@@ -161,8 +165,9 @@ public class ThirdPersonMovement : MonoBehaviour
     void Start()
     {
 
+        ManagerREF = GameObject.Find("Manager").GetComponent<Manager>();
+        ETCCustREF = GameObject.Find("CustomizationVendor").GetComponent<ETCCustomizationVendor>();
         
-
 
         dialogueManager = FindObjectOfType<DialogueManager>();
         coinCount = ProgressionManager.Get().coinCount;
@@ -492,6 +497,9 @@ public class ThirdPersonMovement : MonoBehaviour
             ariCollider.height = walkHeight;
             playerWeapon.SetActive(false);
             sprayCan.SetActive(true);
+
+            ManagerREF.ariSkateOptions[SaveManager.Instance.state.activeAriSkate].SetActive(false);
+
         }
         else
         {
@@ -499,6 +507,9 @@ public class ThirdPersonMovement : MonoBehaviour
             ariCollider.height = skateHeight;
             playerWeapon.SetActive(true);
             sprayCan.SetActive(false);
+
+            //change to shoes
+            ManagerREF.ariSkateOptions[SaveManager.Instance.state.activeAriSkate].SetActive(true);
         }
     }
 
@@ -608,6 +619,11 @@ public class ThirdPersonMovement : MonoBehaviour
         if (isWalking)
         {
             rigidBody.velocity = new Vector3(moveDirection.normalized.x * walkSpeed * 10f, rigidBody.velocity.y, moveDirection.normalized.z * walkSpeed * 10f);
+
+
+          
+
+
 
             //change anim
             if ((moveInput.x != 0 || moveInput.y != 0) && !dialogueManager.freezePlayer)

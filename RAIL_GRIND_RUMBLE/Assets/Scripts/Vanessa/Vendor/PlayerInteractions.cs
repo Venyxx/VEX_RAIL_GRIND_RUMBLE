@@ -34,8 +34,7 @@ public class PlayerInteractions : MonoBehaviour
         //gamepadCur = GameObject.Find("GamepadCursor");
         //gamepadCur.SetActive(false);
 
-        if (GameObject.Find("CustomizationVendor"))
-            ETCCusREF = GameObject.Find("CustomizationVendor").GetComponent<ETCCustomizationVendor>();
+        ETCCusREF = GameObject.Find("CustomizationVendor").GetComponent<ETCCustomizationVendor>();
         
         previewCamera = GameObject.Find("CharacterPreviewBackgr");
          if (previewCamera)
@@ -173,14 +172,16 @@ public class PlayerInteractions : MonoBehaviour
         canvas = GameObject.Find("VendorCanvas");
         canvas.SetActive(false);
         Cursor.visible = false;
+        ETCCusREF = GameObject.Find("CustomizationVendor").GetComponent<ETCCustomizationVendor>();
         ETCCusREF.ResetOutfitToSaveState();
+        movementScriptREF = GameObject.Find("playerPrefab").GetComponent<ThirdPersonMovement>();
         movementScriptREF.dialogueManager.freezePlayer = false;
 
          //gamepadCur.SetActive(false);
 
         //reopen infoscreen
-        InfoScreen infoScreen = GameObject.Find("canvasPrefab").GetComponent<InfoScreen>();
-        infoScreen.StartCoroutine(infoScreen.OpenInfoScreen());
+        //InfoScreen infoScreen = GameObject.Find("canvasPrefab").GetComponent<InfoScreen>();
+        //infoScreen.StartCoroutine(infoScreen.OpenInfoScreen());
 
     }
 

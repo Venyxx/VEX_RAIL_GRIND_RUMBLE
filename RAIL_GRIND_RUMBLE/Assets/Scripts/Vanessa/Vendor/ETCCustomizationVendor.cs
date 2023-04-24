@@ -525,7 +525,7 @@ public class ETCCustomizationVendor : MonoBehaviour
 
     private void OnBottomSelect(int currentIndex)
     {
-        Debug.Log("select bottom button" + currentIndex);
+        //Debug.Log("select bottom button" + currentIndex);
         //if clicked is alr active
         if (selectedBottomIndex == currentIndex)
         {
@@ -566,7 +566,7 @@ public class ETCCustomizationVendor : MonoBehaviour
 
     private void OnSockSelect(int currentIndex)
     {
-        Debug.Log("select sock button" + currentIndex);
+        //Debug.Log("select sock button" + currentIndex);
         //if clicked is alr active
         if (selectedSockIndex == currentIndex)
         {
@@ -608,7 +608,7 @@ public class ETCCustomizationVendor : MonoBehaviour
     
     private void OnSkateSelect(int currentIndex)
     {
-        Debug.Log("select skate button" + currentIndex);
+        //Debug.Log("select skate button" + currentIndex);
         //if clicked is alr active
         if (selectedSkateIndex == currentIndex)
         {
@@ -649,7 +649,7 @@ public class ETCCustomizationVendor : MonoBehaviour
 
     private void OnHairSelect(int currentIndex)
     {
-        Debug.Log("select hair button" + currentIndex);
+        //Debug.Log("select hair button" + currentIndex);
         //if clicked is alr active
         if (selectedHairIndex == currentIndex)
         {
@@ -691,7 +691,7 @@ public class ETCCustomizationVendor : MonoBehaviour
     
     private void OnMaskSelect(int currentIndex)
     {
-        Debug.Log("select mask button" + currentIndex);
+        //Debug.Log("select mask button" + currentIndex);
         //if clicked is alr active
         if (selectedMaskIndex == currentIndex)
         {
@@ -733,7 +733,7 @@ public class ETCCustomizationVendor : MonoBehaviour
 
      private void OnGraffitiSelect(int currentIndex)
     {
-        Debug.Log("select graffiti button" + currentIndex);
+       // Debug.Log("select graffiti button" + currentIndex);
         selectedGraffitiIndex = currentIndex;
     }
 
@@ -750,7 +750,7 @@ public class ETCCustomizationVendor : MonoBehaviour
 
     public void OnAccessoryBuySet ()
     {
-        Debug.Log("buy or set accessory");
+        //Debug.Log("buy or set accessory");
         //is it owned
         if (SaveManager.Instance.IsAriAccessoryOwned(selectedAccessoryIndex))
         {
@@ -781,7 +781,7 @@ public class ETCCustomizationVendor : MonoBehaviour
     }
     public void OnTopBuySet ()
     {
-        Debug.Log("buy or set top");
+       // Debug.Log("buy or set top");
         
         //is it owned
         if (SaveManager.Instance.IsAriTopOwned(selectedTopIndex))
@@ -813,7 +813,7 @@ public class ETCCustomizationVendor : MonoBehaviour
 
     public void OnBottomBuySet ()
     {
-        Debug.Log("buy or set bottom");
+        //Debug.Log("buy or set bottom");
         
         //is it owned
         if (SaveManager.Instance.IsAriBottomOwned(selectedBottomIndex))
@@ -846,8 +846,8 @@ public class ETCCustomizationVendor : MonoBehaviour
 
     public void OnSockBuySet ()
     {
-        Debug.Log("buy or set sock");
-        
+        //Debug.Log("buy or set sock");
+        ///
         //is it owned
         if (SaveManager.Instance.IsAriSockOwned(selectedSockIndex))
         {
@@ -881,7 +881,7 @@ public class ETCCustomizationVendor : MonoBehaviour
 
     public void OnSkateBuySet ()
     {
-        Debug.Log("buy or set skate");
+       // Debug.Log("buy or set skate");
         
         //is it owned
         if (SaveManager.Instance.IsAriSkateOwned(selectedSkateIndex))
@@ -916,7 +916,7 @@ public class ETCCustomizationVendor : MonoBehaviour
 
     public void OnHairBuySet ()
     {
-        Debug.Log("buy or set hair");
+        //Debug.Log("buy or set hair");
         
         //is it owned
         if (SaveManager.Instance.IsAriHairOwned(selectedHairIndex))
@@ -949,7 +949,7 @@ public class ETCCustomizationVendor : MonoBehaviour
 
     public void OnMaskBuySet ()
     {
-        Debug.Log("buy or set mask");
+        //Debug.Log("buy or set mask");
         
         //is it owned
         if (SaveManager.Instance.IsAriMaskOwned(selectedMaskIndex))
