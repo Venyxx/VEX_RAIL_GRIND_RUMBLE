@@ -863,6 +863,15 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenCustomization"",
+                    ""type"": ""Button"",
+                    ""id"": ""4399648e-6220-4ab2-9707-47686ae9be2e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -964,6 +973,17 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                     ""action"": ""MissionsTabPrevious"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""036b9e92-8334-40a2-b895-72f62609257e"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenCustomization"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -1005,6 +1025,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
         m_Menus_PauseGame = m_Menus.FindAction("PauseGame", throwIfNotFound: true);
         m_Menus_MissionsTabNext = m_Menus.FindAction("MissionsTabNext", throwIfNotFound: true);
         m_Menus_MissionsTabPrevious = m_Menus.FindAction("MissionsTabPrevious", throwIfNotFound: true);
+        m_Menus_OpenCustomization = m_Menus.FindAction("OpenCustomization", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1288,6 +1309,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
     private readonly InputAction m_Menus_PauseGame;
     private readonly InputAction m_Menus_MissionsTabNext;
     private readonly InputAction m_Menus_MissionsTabPrevious;
+    private readonly InputAction m_Menus_OpenCustomization;
     public struct MenusActions
     {
         private @InputHandler m_Wrapper;
@@ -1299,6 +1321,7 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
         public InputAction @PauseGame => m_Wrapper.m_Menus_PauseGame;
         public InputAction @MissionsTabNext => m_Wrapper.m_Menus_MissionsTabNext;
         public InputAction @MissionsTabPrevious => m_Wrapper.m_Menus_MissionsTabPrevious;
+        public InputAction @OpenCustomization => m_Wrapper.m_Menus_OpenCustomization;
         public InputActionMap Get() { return m_Wrapper.m_Menus; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1329,6 +1352,9 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 @MissionsTabPrevious.started -= m_Wrapper.m_MenusActionsCallbackInterface.OnMissionsTabPrevious;
                 @MissionsTabPrevious.performed -= m_Wrapper.m_MenusActionsCallbackInterface.OnMissionsTabPrevious;
                 @MissionsTabPrevious.canceled -= m_Wrapper.m_MenusActionsCallbackInterface.OnMissionsTabPrevious;
+                @OpenCustomization.started -= m_Wrapper.m_MenusActionsCallbackInterface.OnOpenCustomization;
+                @OpenCustomization.performed -= m_Wrapper.m_MenusActionsCallbackInterface.OnOpenCustomization;
+                @OpenCustomization.canceled -= m_Wrapper.m_MenusActionsCallbackInterface.OnOpenCustomization;
             }
             m_Wrapper.m_MenusActionsCallbackInterface = instance;
             if (instance != null)
@@ -1354,6 +1380,9 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
                 @MissionsTabPrevious.started += instance.OnMissionsTabPrevious;
                 @MissionsTabPrevious.performed += instance.OnMissionsTabPrevious;
                 @MissionsTabPrevious.canceled += instance.OnMissionsTabPrevious;
+                @OpenCustomization.started += instance.OnOpenCustomization;
+                @OpenCustomization.performed += instance.OnOpenCustomization;
+                @OpenCustomization.canceled += instance.OnOpenCustomization;
             }
         }
     }
@@ -1394,5 +1423,6 @@ public partial class @InputHandler : IInputActionCollection2, IDisposable
         void OnPauseGame(InputAction.CallbackContext context);
         void OnMissionsTabNext(InputAction.CallbackContext context);
         void OnMissionsTabPrevious(InputAction.CallbackContext context);
+        void OnOpenCustomization(InputAction.CallbackContext context);
     }
 }

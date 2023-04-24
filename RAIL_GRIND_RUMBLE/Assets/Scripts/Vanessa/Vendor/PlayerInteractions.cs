@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class PlayerInteractions : MonoBehaviour
@@ -18,27 +20,23 @@ public class PlayerInteractions : MonoBehaviour
     private GameObject previewCamItself;
     private GameObject [] thingsToHide = new GameObject [2];
     private ETCCustomizationVendor ETCCusREF;
+
+    private GameObject gamepadCur;
     
 
     Scene m_scene;
 
     private void Start ()
     {
+        //references
+        movementScriptREF = GameObject.Find("playerPrefab").GetComponent<ThirdPersonMovement>();
+
+        //gamepadCur = GameObject.Find("GamepadCursor");
+        //gamepadCur.SetActive(false);
+
         if (GameObject.Find("CustomizationVendor"))
             ETCCusREF = GameObject.Find("CustomizationVendor").GetComponent<ETCCustomizationVendor>();
-        else if (GameObject.Find("CustomizationVendor(Clone)"))
-            ETCCusREF = GameObject.Find("CustomizationVendor(Clone)").GetComponent<ETCCustomizationVendor>();
         
-        thingsToHide[0] = GameObject.Find("SpeedometerUI");
-        thingsToHide[1] = GameObject.Find("CompassMask");
-        foreach (GameObject g in thingsToHide) 
-        {
-            g.SetActive(true);
-        }
-
-         movementScriptREF = GetComponent<ThirdPersonMovement>();
-         
-         
         previewCamera = GameObject.Find("CharacterPreviewBackgr");
          if (previewCamera)
             previewCamera.SetActive(false);
@@ -47,99 +45,22 @@ public class PlayerInteractions : MonoBehaviour
           if (previewCamItself)
             previewCamItself.SetActive(false);
 
-         prompt = GameObject.Find("PromptController");
-         //Debug.Log(prompt);
-         if (prompt)
-            prompt.SetActive(false);
 
         canvas = GameObject.Find("VendorCanvas");
         Debug.Log("the canvas is off now");
         if (canvas)
             canvas.SetActive(false);
-         
-    }
-    // Start is called before the first frame update
-    private void OnTriggerEnter (Collider col)
-    {
-        if (col.gameObject.transform.tag == "Vendor")
+
+        //find overlays
+        thingsToHide[0] = GameObject.Find("SpeedometerUI");
+        thingsToHide[1] = GameObject.Find("CompassMask");
+        foreach (GameObject g in thingsToHide) 
         {
-            //display interact prompt
-            inRange = true;
-            
-        }
-    }
-
-    private void OnTriggerExit (Collider col)
-    {
-        if (col.gameObject.transform.tag == "Vendor")
-        {
-            //display interact prompt
-            inRange = false;
-            
-        }
-    }
-
-    private void Update ()
-    {
-        // i just need it to work rn
-        if (canvas == null)
-        {
-            if (previewCamera)
-                previewCamera.SetActive(false);
-
-            if (prompt)
-                prompt.SetActive(false);
-            if (previewCamera)
-                previewCamItself.SetActive(false);
-
-            return;
-        }
-            
-
-        if (Input.GetKeyDown(KeyCode.E) &&inRange)
-        {
-            canvas.SetActive(true);
-
-            //Closes Info Screen if Customization is opened from Info Screen
-            if (InfoScreen.isOpen)
-            {
-                InfoScreen infoScreen = GameObject.Find("canvasPrefab").GetComponent<InfoScreen>();
-                infoScreen.StartCoroutine(infoScreen.CloseInfoScreen());
-            }
-            
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-            movementScriptREF.dialogueManager.freezePlayer = true;
-            prompt.SetActive(false);
-            previewCamItself.SetActive(true);
+            g.SetActive(true);
         }
 
-        if (canvas.activeInHierarchy == false && !InfoScreen.isOpen && inRange)
-            prompt.SetActive(true);
-        else  
-            prompt.SetActive(false);
-
-        if (canvas.activeInHierarchy)
-        {
-            previewCamera.SetActive(true);
-            foreach (GameObject g in thingsToHide) 
-            {
-                g.SetActive(false);
-            }
-        }
-        else
-        {
-            previewCamera.SetActive(false);
-            foreach (GameObject g in thingsToHide) 
-            {
-                g.SetActive(true);
-            }
-            
-
-        }
-
-        m_scene = SceneManager.GetActiveScene();
-         
+        //while in aris house hide hud overlays
+        m_scene = SceneManager.GetActiveScene(); 
         if (m_scene.name == "Ari's House")
         {
             foreach (GameObject g in thingsToHide) 
@@ -147,40 +68,122 @@ public class PlayerInteractions : MonoBehaviour
                 g.SetActive(false);
             }
         } 
-            
-
-
-
-        //for the hold x to interact sys
-        if (isTimer)
-        {
-            currentHoldXTime += Time.deltaTime;
-            Debug.Log("incr timer");
-        } else 
-            currentHoldXTime = 0;
+         
     }
 
-    /*public void Interact(InputAction.CallbackContext context)
+
+    public void OpeningCust(InputAction.CallbackContext context)
     {
-        Debug.Log("theres input");
-        if (context.ReadValueAsButton() == true)
+        Debug.Log("theres cust input");
+
+        if (context.started)
         {
-            isTimer = true;
-            if (currentHoldXTime > holdXTime)
+            //are we in info? okay was the button pressed
+            if (InfoScreen.isOpen)
             {
+            
+               //gamepadCur.SetActive(true);
+                //Closes Info Screen if Customization is opened from Info Screen
+                if (InfoScreen.isOpen)
+                {
+                    InfoScreen infoScreen = GameObject.Find("canvasPrefab").GetComponent<InfoScreen>();
+                    infoScreen.StartCoroutine(infoScreen.CloseInfoScreen());
+                }
+                
+                //show vendorcanvas
                 canvas.SetActive(true);
+
+                //hide overlays
+                if (canvas.activeInHierarchy)
+                {
+                    previewCamera.SetActive(true);
+                    foreach (GameObject g in thingsToHide) 
+                    {
+                        g.SetActive(false);
+                    }
+                }
+                else
+                {
+                    previewCamera.SetActive(false);
+                    foreach (GameObject g in thingsToHide) 
+                    {
+                        g.SetActive(true);
+                    }
+                }
+
+
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
+                movementScriptREF.dialogueManager.freezePlayer = true;
+                previewCamItself.SetActive(true);
             }
         }
-    }*/
+    }
+
+
+    public void OpeningCustomizationMK()
+    {
+        Debug.Log("theres cust input");
+
+            //are we in info? okay was the button pressed
+            if (InfoScreen.isOpen)
+            {   
+                //gamepadCur.SetActive(true);
+            
+                //Closes Info Screen if Customization is opened from Info Screen
+                if (InfoScreen.isOpen)
+                {
+                    InfoScreen infoScreen = GameObject.Find("canvasPrefab").GetComponent<InfoScreen>();
+                    infoScreen.StartCoroutine(infoScreen.CloseInfoScreen());
+                }
+                
+                //show vendorcanvas
+                canvas.SetActive(true);
+
+                //hide overlays
+                if (canvas.activeInHierarchy)
+                {
+                    previewCamera.SetActive(true);
+                    foreach (GameObject g in thingsToHide) 
+                    {
+                        g.SetActive(false);
+                    }
+                }
+                else
+                {
+                    previewCamera.SetActive(false);
+                    foreach (GameObject g in thingsToHide) 
+                    {
+                        g.SetActive(true);
+                    }
+                }
+
+
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+                movementScriptREF.dialogueManager.freezePlayer = true;
+                previewCamItself.SetActive(true);
+            }
+        
+    }
+
+
         public void CloseMenu ()
     {
+        canvas = GameObject.Find("VendorCanvas");
         canvas.SetActive(false);
         Cursor.visible = false;
         ETCCusREF.ResetOutfitToSaveState();
         movementScriptREF.dialogueManager.freezePlayer = false;
 
+         //gamepadCur.SetActive(false);
+
+        //reopen infoscreen
+        InfoScreen infoScreen = GameObject.Find("canvasPrefab").GetComponent<InfoScreen>();
+        infoScreen.StartCoroutine(infoScreen.OpenInfoScreen());
+
     }
+
+
 
 }

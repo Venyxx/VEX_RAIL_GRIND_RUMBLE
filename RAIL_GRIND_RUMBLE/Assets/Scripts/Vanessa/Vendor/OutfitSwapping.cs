@@ -25,12 +25,7 @@ public class OutfitSwapping : MonoBehaviour
 
     void Start()
     {
-       if(SceneManager.GetActiveScene().name != "Ari's House")
-       {
-        Instantiate(ETCOBJ);
-        GameObject.Find("VendorCanvas").SetActive(false);
-        GameObject.Find("PromptController").SetActive(false);
-       }
+
         
 
         ManagerREF = GameObject.Find("Manager").GetComponent<Manager>();
@@ -97,24 +92,11 @@ public class OutfitSwapping : MonoBehaviour
         ManagerREF.ariMaskOptions[2] = GameObject.Find("sunGlasses1");
         ManagerREF.ariMaskOptions[3] = GameObject.Find("Android");
         ManagerREF.ariMaskOptions[4] = GameObject.Find("Trickster");
-        
-
-
-        
-        StartCoroutine(DespawnETC());
-        
-
-        
+    
 
 
 
     }
 
-    private IEnumerator DespawnETC()
-    {
-            
-        yield return new WaitForSeconds(1);
-        Destroy(GameObject.Find("CustomizationVendor(Clone)"));
 
-    }
 }

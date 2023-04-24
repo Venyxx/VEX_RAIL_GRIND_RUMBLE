@@ -145,7 +145,7 @@ public class InfoScreen : MonoBehaviour
         }
     }
 
-    IEnumerator OpenInfoScreen()
+    public IEnumerator OpenInfoScreen()
     {
         PlaySoundUI(selectSound);
 

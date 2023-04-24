@@ -16,13 +16,13 @@ public class CarBlockChecking : MonoBehaviour
     void OnTriggerEnter (Collider col)
     {
         //Debug.Log("noticed trigger" + col.tag);
-        if (col.gameObject.tag ==  "Player" || col.gameObject.tag == "MovingCar")
+        if (col.gameObject.tag ==  "Player" || col.gameObject.tag == "MovingCar" || col.gameObject.tag == "Person")
         carMovementREF.StopCar();
     }
 
     void OnTriggerExit (Collider col)
     {
-        if (col.gameObject.tag ==  "Player" || col.gameObject.tag == "MovingCar")
+        if (col.gameObject.tag ==  "Player" || col.gameObject.tag == "MovingCar"  || col.gameObject.tag == "Person")
         carMovementREF.StartCar();
     }
 }

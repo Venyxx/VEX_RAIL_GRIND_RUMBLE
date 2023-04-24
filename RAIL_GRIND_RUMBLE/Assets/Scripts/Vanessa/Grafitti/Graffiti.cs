@@ -40,6 +40,8 @@ public class Graffiti : MonoBehaviour
 
    public float maxGraffitiBuffTime;
    private float currentGraffitiBuffTime;
+   private bool wasThereAPoster;
+   RaycastHit theHit;
     
     void Start ()
     {
@@ -83,8 +85,7 @@ public class Graffiti : MonoBehaviour
 
          canLocationForParticle = GameObject.FindGameObjectWithTag("PlayerCan");
 
-
-         
+        
          
          //Debug.Log(" tried to load " + graffitiParticle);
         
@@ -92,10 +93,10 @@ public class Graffiti : MonoBehaviour
 
     void Update ()
     {
-        upDisplay = GameObject.Find("Up");
-        rightDisplay = GameObject.Find("Right");
-        downDisplay = GameObject.Find("Down");
-        leftDisplay = GameObject.Find("Left");
+        //upDisplay = GameObject.Find("Up");
+        //rightDisplay = GameObject.Find("Right");
+        //downDisplay = GameObject.Find("Down");
+        //leftDisplay = GameObject.Find("Left");
         
         
         if (currentGraffitiBuffTime > 0)
@@ -121,10 +122,8 @@ public class Graffiti : MonoBehaviour
         } else 
             buffCanvasDisplay.gameObject.SetActive(false);
             
-
-
-
-        if (GameObject.Find("CustomizationVendor"))
+        //HANDLE THIS SOMEWHERE ELSE
+         if (GameObject.Find("CustomizationVendor"))
             {
                  if (GameObject.Find("CustomizationVendor").GetComponent<PickingGraffiti>().isPickingGraffiti == true)
                 {
@@ -150,6 +149,9 @@ public class Graffiti : MonoBehaviour
                     fadeGroup.alpha = 1;
             } 
         }
+
+
+        
             
                 
     }
@@ -159,69 +161,81 @@ public class Graffiti : MonoBehaviour
     {
         
         RaycastHit[] hits;
-        hits = Physics.RaycastAll(transform.position, transform.forward, 50.0f);
+        hits = Physics.RaycastAll(transform.position, transform.forward, 5.0f);
         Debug.DrawRay(transform.position, transform.forward, Color.green, 2.0f);
+
+        
+
         for (int i = 0; i < hits.Length; i++)
         {
             RaycastHit hit = hits[i];
-            Debug.Log(hits.Length);
+            Debug.Log("we hit " + hits.Length + " objects in the graffiti method");
             Debug.Log("hit object " + hit.collider.gameObject);
 
-            GameObject madeGraffiti;
-            GameObject particle;
-            GameObject particle2;
-
-            
-            
+            if (hit.collider.gameObject.tag == "Poster" || hit.collider.gameObject.layer == 19)
+            {
+                wasThereAPoster = true;
+                theHit = hits[i];
+                break;
+            }
                 
-                if (hit.collider.gameObject.tag == "Poster" || hit.collider.gameObject.layer == 19)
+            if (i == hits.Length)
+                theHit = hits[0];
+        }
+
+        GameObject madeGraffiti;
+        GameObject particle;
+        GameObject particle2;   
+        //if poster
+        if (wasThereAPoster)
+            {
+                if (theHit.collider.gameObject.GetComponent<PosterActive>().isSprayed)
                 {
-                    if (hit.collider.gameObject.GetComponent<PosterActive>().isSprayed)
-                    {
-                        Debug.Log("this poster was sprayed");
-                        return;
-                    }
-                        
-
-                    Debug.Log("detected poster, player would rec boost");
-                    GameObject posterInfo = hit.collider.gameObject;
-                    var spawnLoc = posterInfo.transform.Find("DecalSpawnLoc");
-                    //particle = Instantiate (graffitiParticle, canLocationForParticle.transform.position, canLocation.transform.rotation);
-                    madeGraffiti = Instantiate (graffiti, spawnLoc.transform.position,spawnLoc.transform.rotation); 
-                    particle2 = Instantiate (graffitiParticle2, player.transform.position, player.transform.rotation);
-                    
-                    //moved to graffitichecking cs for quest sake
-                    ProgressionManager manager = ProgressionManager.Get();
-                    if (manager.currentQuest is CountQuest countQuest && countQuest.GetCountQuestType() is CountQuestType.Graffiti)
-                    {
-                        countQuest.IncrementCount();
-                    }
-
-                    //buff
-                    //maxGraffitiBuffTimer = 30f;
-                    currentGraffitiBuffTime = maxGraffitiBuffTime;
-                    playerAttackREF.isBuffed = true;
-                    hit.collider.gameObject.GetComponent<PosterActive>().isSprayed = true;
-                    return;
-                    
-                } 
-                
-                
-                if (hit.collider.gameObject.layer == 8) 
-                {
-                    Debug.Log("detected no poster");
-                    Debug.Log(hit.normal);
-                    Vector3 reverseHit = new Vector3(-hit.normal.x, -hit.normal.y, -hit.normal.z);
-                    madeGraffiti = Instantiate (graffiti, hit.point, Quaternion.LookRotation(reverseHit));
-                    particle = Instantiate (graffitiParticle, player.transform.position, player.transform.rotation);
-                    Vector3 newPos = new Vector3 (player.transform.position.x, madeGraffiti.transform.position.y, player.transform.position.z);
-                    madeGraffiti.transform.position = newPos;
+                    Debug.Log("this poster was sprayed");
                     return;
                 }
+                    
+
+                Debug.Log("detected poster, player would rec boost");
+                GameObject posterInfo = theHit.collider.gameObject;
+                var spawnLoc = posterInfo.transform.Find("DecalSpawnLoc");
+                //particle = Instantiate (graffitiParticle, canLocationForParticle.transform.position, canLocation.transform.rotation);
+                madeGraffiti = Instantiate (graffiti, spawnLoc.transform.position,spawnLoc.transform.rotation); 
+                particle2 = Instantiate (graffitiParticle2, player.transform.position, player.transform.rotation);
+                
+                //moved to graffitichecking cs for quest sake
+                ProgressionManager manager = ProgressionManager.Get();
+                if (manager.currentQuest is CountQuest countQuest && countQuest.GetCountQuestType() is CountQuestType.Graffiti)
+                {
+                    countQuest.IncrementCount();
+                }
+
+                //buff
+                //maxGraffitiBuffTimer = 30f;
+                currentGraffitiBuffTime = maxGraffitiBuffTime;
+                playerAttackREF.isBuffed = true;
+                theHit.collider.gameObject.GetComponent<PosterActive>().isSprayed = true;
+                return;
+                
+            } 
                 
                 
+            if (!wasThereAPoster) 
+            {
+                Debug.Log("detected no poster");
+                Debug.Log(theHit.normal);
+                Vector3 reverseHit = new Vector3(-theHit.normal.x, -theHit.normal.y, -theHit.normal.z);
+                madeGraffiti = Instantiate (graffiti, theHit.point, Quaternion.LookRotation(reverseHit));
+                particle = Instantiate (graffitiParticle, player.transform.position, player.transform.rotation);
+                Vector3 newPos = new Vector3 (player.transform.position.x, madeGraffiti.transform.position.y, player.transform.position.z);
+                madeGraffiti.transform.position = newPos;
+                return;
+            }
+
+            wasThereAPoster = false;
             
-        }
+
+
     }
 
 
@@ -232,7 +246,7 @@ public class Graffiti : MonoBehaviour
 
         if (context.started)
         {
-            if (GameObject.Find("CustomizationVendor") || GameObject.Find ("CustomizationVendor(Clone)"))
+            if (GameObject.Find("CustomizationVendor"))
             {
                  if (GameObject.Find("CustomizationVendor").GetComponent<PickingGraffiti>().isPickingGraffiti == true)
                 {
@@ -241,8 +255,7 @@ public class Graffiti : MonoBehaviour
                     Debug.Log("Switching graffiti down to" + passingGraffiti);
                     if (GameObject.Find("CustomizationVendor"))
                             GameObject.Find("CustomizationVendor").GetComponent<PickingGraffiti>().isPickingGraffiti = false;
-                    if (GameObject.Find("CustomizationVendor(Clone)"))
-                            GameObject.Find("CustomizationVendor(Clone)").GetComponent<PickingGraffiti>().isPickingGraffiti = false;
+
 
                     SaveManager.Instance.state.ariGraffitiSlotDown3 = graffitiDown.gameObject.name;
                     
@@ -263,7 +276,7 @@ public class Graffiti : MonoBehaviour
         //Debug.Log("fire context");
         if (context.started)
         {
-            if (GameObject.Find("CustomizationVendor") || GameObject.Find ("CustomizationVendor(Clone)"))
+            if (GameObject.Find("CustomizationVendor"))
             {
                 if (GameObject.Find("CustomizationVendor").GetComponent<PickingGraffiti>().isPickingGraffiti== true)
                 {
@@ -272,8 +285,6 @@ public class Graffiti : MonoBehaviour
                     Debug.Log("Switching graffiti up to" + passingGraffiti);
                     if (GameObject.Find("CustomizationVendor"))
                             GameObject.Find("CustomizationVendor").GetComponent<PickingGraffiti>().isPickingGraffiti = false;
-                    if (GameObject.Find("CustomizationVendor(Clone)"))
-                            GameObject.Find("CustomizationVendor(Clone)").GetComponent<PickingGraffiti>().isPickingGraffiti = false;
                     
                     SaveManager.Instance.state.ariGraffitiSlotUp1 = graffitiUp.gameObject.name;
                     SaveManager.Instance.Save();
@@ -293,7 +304,7 @@ public class Graffiti : MonoBehaviour
         if (PauseMenu.isPaused == true) return;
         if (context.started)
         {
-            if (GameObject.Find("CustomizationVendor") || GameObject.Find ("CustomizationVendor(Clone)"))
+            if (GameObject.Find("CustomizationVendor"))
             {
                 if (GameObject.Find("CustomizationVendor").GetComponent<PickingGraffiti>().isPickingGraffiti== true)
                 {
@@ -302,8 +313,7 @@ public class Graffiti : MonoBehaviour
                     Debug.Log("Switching graffiti right to" + passingGraffiti);
                     if (GameObject.Find("CustomizationVendor"))
                             GameObject.Find("CustomizationVendor").GetComponent<PickingGraffiti>().isPickingGraffiti = false;
-                    if (GameObject.Find("CustomizationVendor(Clone)"))
-                            GameObject.Find("CustomizationVendor(Clone)").GetComponent<PickingGraffiti>().isPickingGraffiti = false;
+
                     
                     SaveManager.Instance.state.ariGraffitiSlotRight2 = graffitiRight.gameObject.name;
                     SaveManager.Instance.Save();
@@ -324,7 +334,7 @@ public class Graffiti : MonoBehaviour
         if (PauseMenu.isPaused == true) return;
         if (context.started)
         {
-            if (GameObject.Find("CustomizationVendor") || GameObject.Find ("CustomizationVendor(Clone)"))
+            if (GameObject.Find("CustomizationVendor"))
             {
                 if (GameObject.Find("CustomizationVendor").GetComponent<PickingGraffiti>().isPickingGraffiti== true)
                 {
@@ -333,8 +343,7 @@ public class Graffiti : MonoBehaviour
                     Debug.Log("Switching graffiti left to" + passingGraffiti);
                     if (GameObject.Find("CustomizationVendor"))
                             GameObject.Find("CustomizationVendor").GetComponent<PickingGraffiti>().isPickingGraffiti = false;
-                    if (GameObject.Find("CustomizationVendor(Clone)"))
-                            GameObject.Find("CustomizationVendor(Clone)").GetComponent<PickingGraffiti>().isPickingGraffiti = false;
+
                     
                     SaveManager.Instance.state.ariGraffitiSlotLeft4 = graffitiLeft.gameObject.name;
                     Debug.Log("the save state string for left is" + SaveManager.Instance.state.ariGraffitiSlotLeft4);

@@ -3590,6 +3590,7 @@ MonoBehaviour:
   decelerationSpeed: 5
   currentSpeed: 0
   groundDrag: 0.01
+  moveInput: {x: 0, y: 0}
   maxSkateSpeed: 15
   speedPrint: 0
   jumpForce: 55
@@ -4206,6 +4207,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: ab5dc335-0053-4c75-af3a-b5213b325b17
     m_ActionName: Player/Throw[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4399648e-6220-4ab2-9707-47686ae9be2e
+    m_ActionName: Menus/OpenCustomization
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -4505,7 +4510,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2030071780202691818}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1a5bdaa7dedf40544a2d06826fe29418, type: 3}
   m_Name: 
