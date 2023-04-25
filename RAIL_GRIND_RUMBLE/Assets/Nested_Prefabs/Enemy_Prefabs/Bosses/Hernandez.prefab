@@ -171,7 +171,7 @@ MonoBehaviour:
   KnockDownTime: 5
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointSet: 0
-  walkPointRange: 100
+  walkPointRange: 50
   Speed: 8
   timeBetweenAttacks: 5
   sightRange: 1.4
@@ -180,8 +180,8 @@ MonoBehaviour:
   playerInAttackRange: 0
   MechDown: 0
   MechUp: 0
-  chasing: 0
   running: 0
+  chasing: 1
   Dizzy: 0
 --- !u!195 &4682983248121609728
 NavMeshAgent:
@@ -191,7 +191,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6824130177305418646}
   m_Enabled: 1
-  m_AgentTypeID: 0
+  m_AgentTypeID: -1923039037
   m_Radius: 2.77
   m_Speed: 8
   m_Acceleration: 70

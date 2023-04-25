@@ -32,7 +32,8 @@ public class MechBossMovement : MonoBehaviour , IDamageable
 
     //States
     public float sightRange, attackRange;
-    public bool playerInSightRange, playerInAttackRange, MechDown, MechUp, chasing, running;
+    public bool playerInSightRange, playerInAttackRange, MechDown, MechUp, running;
+    public bool chasing = true;
     public bool Dizzy;
     float StateTimer;
 
@@ -44,7 +45,7 @@ public class MechBossMovement : MonoBehaviour , IDamageable
         Speed = agent.speed;
         playerhealth = playerREF.GetComponent<PlayerHealth>();
         StateTimer = 0;
-        chasing = true;
+        
     }
     private void Update()
     {
