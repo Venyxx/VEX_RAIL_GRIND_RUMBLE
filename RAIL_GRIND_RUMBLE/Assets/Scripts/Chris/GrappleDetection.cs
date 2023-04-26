@@ -135,7 +135,7 @@ public class GrappleDetection : MonoBehaviour
     void FixedUpdate()
     {
         //Raycast to check for walls (only works sometimes!!! WHY)
-        Transform playerObject = GameObject.FindWithTag("PlayerObject").transform;
+        /*Transform playerObject = GameObject.FindWithTag("PlayerObject").transform;
         var ray = new Ray(this.transform.position, currentAim.transform.position - playerObject.position);
         RaycastHit hit;
         int wallLayer = LayerMask.NameToLayer("wallrun");
@@ -150,7 +150,7 @@ public class GrappleDetection : MonoBehaviour
             } else {
                 aimIsVisible = true;
             }
-        }
+        }*/
     }
 
     IEnumerator CurrentAimDelay()

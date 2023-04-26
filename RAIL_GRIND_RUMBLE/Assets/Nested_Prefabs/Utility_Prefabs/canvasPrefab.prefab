@@ -3396,7 +3396,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6932113450816592354
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7063,7 +7063,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -10, y: -84}
+  m_AnchoredPosition: {x: -10, y: -69.8}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6222936944519470540
@@ -7287,7 +7287,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8755802075054058839
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7478,7 +7478,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -10, y: -84}
+  m_AnchoredPosition: {x: -10, y: -69.8}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2705768361067545605
@@ -7900,7 +7900,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -10, y: -84}
+  m_AnchoredPosition: {x: -10, y: -69.8}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &921211739597256889
@@ -9478,7 +9478,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3745572242155473257
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9917,10 +9917,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf232492a4867d446a2e5d856e84861e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  missionText: []
   locationText: {fileID: 440725750914432241}
   textObject: {fileID: 8638282804736258176}
   infoScreen: {fileID: 1624858096524125931}
+  progressTab: {fileID: 1929026598944190375}
+  missionImages:
+  - {fileID: 21300000, guid: 6b88a4eacafd87047983a5a327098da8, type: 3}
+  - {fileID: 21300000, guid: ccc422dea250653448b5c30c418b689d, type: 3}
+  - {fileID: 21300000, guid: c368d36a9b0c7ad468e57b341695560d, type: 3}
+  currentImage: {fileID: 7487425181176258588}
 --- !u!1 &1355763945469511477
 GameObject:
   m_ObjectHideFlags: 0
@@ -10292,7 +10297,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5497215234834809728
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16316,8 +16321,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 15
+  m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -16838,7 +16843,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 2.943}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2.0094833, y: 22.951794}
+  m_AnchoredPosition: {x: -2.0094833, y: 24.4}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4261104462201981192
@@ -16896,8 +16901,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 17
+  m_fontSizeBase: 17
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -16956,7 +16961,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4577813554771749980
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18113,7 +18118,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4014523907013184849
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18396,8 +18401,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 15
+  m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -20028,7 +20033,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -10, y: -84}
+  m_AnchoredPosition: {x: -10, y: -69.8}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3456582810269354432
@@ -21037,8 +21042,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 2
-  m_fontSizeBase: 2
+  m_fontSize: 3
+  m_fontSizeBase: 3
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -22468,7 +22473,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -10, y: -84}
+  m_AnchoredPosition: {x: -10, y: -69.8}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &436847754223996182
@@ -22848,7 +22853,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &9010774746432213844
 RectTransform:
   m_ObjectHideFlags: 0
@@ -25563,7 +25568,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6161658275052949710
 RectTransform:
   m_ObjectHideFlags: 0
@@ -26851,7 +26856,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -10, y: -84}
+  m_AnchoredPosition: {x: -10, y: -69.8}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4408672593515284141
@@ -30203,12 +30208,79 @@ MonoBehaviour:
     me from bashing his head in!
   - Diego's back home safe, but Servos is still kicking. We won today, but the fight's
     not over just yet. I'm just glad to have my brother back.
-  Act1SpanishTitles: []
-  Act2SpanishTitles: []
-  Act3SpanishTitles: []
-  Act1SpanishTextBoxes: []
-  Act2SpanishTextBoxes: []
-  Act3SpanishTextBoxes: []
+  Act1SpanishTitles:
+  - Recien Despertada
+  - "Partes para Luis - La Persecuci\xF3n"
+  - "Partes para Luis - Resoluci\xF3n"
+  - "Vandalismo - Duo Art\xEDstico"
+  - "Vandalismo - Resoluci\xF3n"
+  - "Otro D\xEDa productivo"
+  - Memorias
+  Act2SpanishTitles:
+  - Desastre
+  - Chotear
+  - Muerte de El Segador
+  - "Barrera Negadora de \xC1rea"
+  - El Jefe
+  - Apertura
+  Act3SpanishTitles:
+  - Asalto a Servos
+  - Puerta Estancada
+  - "Reuni\xF3n"
+  - Mechacero
+  - La Pelea Continua
+  Act1SpanishTextBoxes:
+  - "Que clase de ma\xF1an Las mentiras de Donovan nunca paran. Pero, es bueno saber
+    que a\xFAn hay muchos de nuestro lado.<br>Deber\xEDa ver que hacen los dem\xE1s. "
+  - "Diego me pidi\xF3 que siga un van que carga tecnolog\xEDa para la ganga mas
+    grande de la ciudad, el Craneo Azul. La van a pasar mal, porque nosotros tambi\xE9n
+    queremos esas piezas! Necesito seguirlos y robar la tecnolog\xEDa. Dudo que la
+    dejen ir f\xE1cilmente."
+  - "Me encargu\xE9 de los idiotas con las partes y se las di a nuestro mec\xE1nico,
+    Luis. Pero, el Cr\xE1neo Azul parece estar m\xE1s armado de lo normal. No hay
+    que preocuparse por eso. Como quiera les pateare sus traseros."
+  - "Parece que Jose encontr\xF3 unos buenos \u201Cspots\u201D para \u201Ctaggear\u201D.
+    Deber\xEDa encontrarme con \xE9l en la Zona Urbana. Solo tengo que ir a la parada
+    de guagua para hacer el viaje y despu\xE9s encontrar a Jose."
+  - "Jose y yo somos un gran equipo cuando se trata de arte. Nuestro mensaje nunca
+    dejar\xE1 de ser escuchado. Aunque, Jose actuaba un poco extra\xF1o. Espero que
+    est\xE9 bien. Deber\xEDa volver a Diego. Ha sido un largo dia.  "
+  - "Diego dice que tiene una sorpresa para m\xED. Estoy pompea\u2019! Me encontrar\xE9
+    con \xE9l cerca del orfanato de Mama."
+  - "El orfanato fue tan nost\xE1lgico como siempre. Que l\xE1stima que Mam\xE1 no
+    estuviera\u2026 Tal vez la veremos luego! Por ahora, tengo que encontrarme con
+    Diego para ver cual es la sorpresa."
+  Act2SpanishTextBoxes:
+  - "\xA1\xA1\xA1Tienen a Diego!!!! Esos malditos matones me la van a pagar antes
+    de que se lo lleven a Servos! Julie dice que un mont\xF3n de ellos estaban en
+    el parque de patinaje. Tengo que echar un vistazo. "
+  - "El mat\xF3n que interrogu\xE9 dijo que su jefe, El Segador, se prepara para
+    mandar Diego a Servos en la estaci\xF3n de ferrocarril. \xA1No dejar\xE9 que
+    se salgan con las suyas! "
+  - "Derribe al Muscul\xF3n, pero fue muy tarde! Tengo que ir a la oficina central
+    de Servos para rescatar a Diego! Necesito ir por la Zona Urbana para entrar all\xE1.
+    No va a ser f\xE1cil con esos polic\xEDas por todas partes. "
+  - "Servos me atrapo con una tecnolog\xEDa rara. Julianna dice que funcionan con
+    proyectores. Solo tengo que romperlos y luego puedo salir de aqu\xED! "
+  - "Justo cuando llego al \xE1rea de seguridad, el Jefe de la Polic\xEDa llega con
+    un \u201Cmecha\u201D gigantesco! Parece que tengo que romper el nuevo juguete
+    de Servos si quiero seguir adelante. "
+  - "No puedo creer que Jose nos haya choteado! Pero lo hizo para proteger a su familia...
+    Si estuviera en sus zapatos, habr\xEDa hecho lo mismo? \u2026 Maldita sea! Necesito
+    enfocarme en rescatar a Diego! Jose tiene una forma de entrar a Servos. Le voy
+    a tener que dar mi opini\xF3n luego. "
+  Act3SpanishTextBoxes:
+  - "Jose me dej\xF3 entrar en la oficina central de Servos. Es hora de abrir camino
+    y encontrar a Diego. Probablemente est\xE9 unos pisos arriba. Necesitar\xE9 encontrar
+    un elevador. "
+  - "Las puertas de la carcel necesitan una tarjeta de acceso. Lo m\xE1s probable,
+    uno de los ingenieros la tiene. Necesito encontrarlo y quitarsela. "
+  - "He rescatado a Diego, pero todav\xEDa est\xE1 mala la cosa. Solo debemos llegar
+    al elevador y nos podemos largar de este sitio.   "
+  - "Donovan cometi\xF3 el error de llevarnos justo a \xE9l. Ahora, nada me detendr\xE1;
+    le voy a romper la cabeza! "
+  - "Diego est\xE1 sano y salvo en casa, pero Servos sigue de pie. Ganamos hoy, pero
+    la pelea a\xFAn no ha terminado. Solo estoy feliz de tener a mi hermano de vuelta. "
   Act1Buttons:
   - {fileID: 312923590253418688}
   - {fileID: 7467561501113598266}
@@ -31803,7 +31875,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &426755886507670563
 RectTransform:
   m_ObjectHideFlags: 0
@@ -32014,7 +32086,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &542103472287950116
 RectTransform:
   m_ObjectHideFlags: 0
@@ -32569,7 +32641,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8086670035931840098
 RectTransform:
   m_ObjectHideFlags: 0
@@ -33701,8 +33773,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 15
+  m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -34405,7 +34477,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7505669651002610669
 RectTransform:
   m_ObjectHideFlags: 0
@@ -36907,7 +36979,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7807947696564127010
 RectTransform:
   m_ObjectHideFlags: 0
@@ -39760,7 +39832,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -42157,7 +42229,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -10, y: -84}
+  m_AnchoredPosition: {x: -10, y: -69.8}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &613632565073813442
@@ -44912,8 +44984,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 15
+  m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -46089,8 +46161,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 15
+  m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -50557,7 +50629,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -10, y: -84}
+  m_AnchoredPosition: {x: -10, y: -69.8}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &789844107716983659
@@ -50909,7 +50981,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8600493578604211942
 RectTransform:
   m_ObjectHideFlags: 0
@@ -51179,8 +51251,42 @@ MonoBehaviour:
     been shipped both to the United States military and the Nuevo Domingo Police
     Department."
   - This is the text for Newspaper 9!
-  spanishTitles: []
-  spanishText: []
+  spanishTitles:
+  - Nuevo Superintendente Postulado Ante La Muerte del Superintendente Previo
+  - Cortes Autorparts y Venta de Luidiacion Para Reparaciones
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  spanishText:
+  - "El superintendente de la Polic\xEDa, Ronaldo Guillermo, fue encontrado hace
+    dos d\xEDas atr\xE1s. La investigaci\xF3n posteriormente confirm\xF3 que su muerte
+    fue a causa de suicido. El informe de la polic\xEDa ha sido refutado por investigadores
+    y miembros de la poblaci\xF3n, los cuales argumentan que la evidencia apunta
+    hacia un caso de homicidio. A pesar de las reclamaciones, La Polic\xEDa de Nuevo
+    Domingo se mantiene firme ante las cr\xEDticas seg\xFAn las palabras del recientemente
+    postulado Superintendente, Armando Hernandez. El Superintendente Hernandez dijo
+    esto al respecto: \u201CEl Superintendente Guillermo fue un buen polic\xEDa pero
+    nunca supo dejar las cosas ir. Siempre se metia en donde no deb\xEDa. Nunca supe
+    si fue por temerario o porque se cre\xEDa bravo pero mira como termin\xF3.\u201D
+    Esta controversia ha creado un empuje m\xE1s fuerte ante la corrupci\xF3n que
+    alegadamente ha est\xE1 consumiendo el gobierno y le ha dado aliento al grupo
+    de luchadores por libertad conocidos como Chroma."
+  - "Ven para Cortes Autoparts y Servicio! Nuestro inventario completo a descuento
+    gracias a nuestra venta de cierre. Tenemos todas las partes que puedas necesitar,
+    desde tubos de escape a bater\xEDas solares. Reparaci\xF3n y mantenimiento tambi\xE9n
+    est\xE1n disponibles. \xA1Arranca pa\u2019 ac\xE1 que todos los productos est\xE1n
+    a un 80% de descuento! Descuentos disponibles hasta Mayo 1, 2064! Voy pa alla!"
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   readPaperScreen: {fileID: 5691269598510228303}
   paperIsOpen: 0
 --- !u!1 &6725288951244850311
@@ -52897,7 +53003,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e9e72a9800c8a4546997212cf61e1a43, type: 2}
   m_sharedMaterial: {fileID: 8351766170275876653, guid: e9e72a9800c8a4546997212cf61e1a43, type: 2}
@@ -52924,8 +53030,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 2
-  m_fontSizeBase: 2
+  m_fontSize: 3
+  m_fontSizeBase: 3
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -53059,8 +53165,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 15
+  m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -53774,7 +53880,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -55019,8 +55125,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 15
+  m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -56001,7 +56107,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2422372238131273572
 RectTransform:
   m_ObjectHideFlags: 0
@@ -56480,7 +56586,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -10, y: -84}
+  m_AnchoredPosition: {x: -10, y: -69.8}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9062351785765308235
@@ -57055,7 +57161,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7718076340648844353
 RectTransform:
   m_ObjectHideFlags: 0
@@ -59964,7 +60070,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7425044978998522050
 RectTransform:
   m_ObjectHideFlags: 0
@@ -61793,7 +61899,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &25173955878819818
 RectTransform:
   m_ObjectHideFlags: 0
@@ -64901,7 +65007,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &935894724098975814
 RectTransform:
   m_ObjectHideFlags: 0
@@ -65346,7 +65452,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:

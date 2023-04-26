@@ -25,7 +25,7 @@ public class GalleryTab : MonoBehaviour
             if (hasBeenFound[i] == true)
             {
                 newspapers[i].gameObject.SetActive(true);
-                newspapers[i].transform.Find("Title").GetComponent<TextMeshProUGUI>().text = newspaperTitles[i];
+                //newspapers[i].transform.Find("Title").GetComponent<TextMeshProUGUI>().text = newspaperTitles[i];
             } else {
                 newspapers[i].gameObject.SetActive(false);
             }
@@ -42,7 +42,7 @@ public class GalleryTab : MonoBehaviour
     {
         hasBeenFound[paperToAdd] = true;
         newspapers[paperToAdd].gameObject.SetActive(true);
-        newspapers[paperToAdd].transform.Find("Title").GetComponent<TextMeshProUGUI>().text = newspaperTitles[paperToAdd];
+        //newspapers[paperToAdd].transform.Find("Title").GetComponent<TextMeshProUGUI>().text = newspaperTitles[paperToAdd];
     }
 
     public void OpenPaper(int paperToOpen)
@@ -50,13 +50,34 @@ public class GalleryTab : MonoBehaviour
         paperIsOpen = true;
         paperToOpen = paperToOpen - 1;
         readPaperScreen.SetActive(true);
-        readPaperScreen.transform.Find("PaperTitle").GetComponent<TextMeshProUGUI>().text = newspaperTitles[paperToOpen];
-        readPaperScreen.transform.Find("PaperText").GetComponent<TextMeshProUGUI>().text = newspaperText[paperToOpen];
+
+        if (!SpanishMode.spanishMode)
+        {
+            readPaperScreen.transform.Find("PaperTitle").GetComponent<TextMeshProUGUI>().text = newspaperTitles[paperToOpen];
+            readPaperScreen.transform.Find("PaperText").GetComponent<TextMeshProUGUI>().text = newspaperText[paperToOpen];
+        } else {
+            readPaperScreen.transform.Find("PaperTitle").GetComponent<TextMeshProUGUI>().text = spanishTitles[paperToOpen];
+            readPaperScreen.transform.Find("PaperText").GetComponent<TextMeshProUGUI>().text = spanishText[paperToOpen];
+        }
+        
     }
 
     public void ClosePaper()
     {
         readPaperScreen.SetActive(false);
         paperIsOpen = false;
+    }
+
+    public void SetTitles()
+    {
+        for (int i = 0; i < newspapers.Length; i++)
+        {
+            if (SpanishMode.spanishMode)
+            {
+                newspapers[i].transform.Find("Title").GetComponent<TextMeshProUGUI>().text = spanishTitles[i];
+            } else {
+                newspapers[i].transform.Find("Title").GetComponent<TextMeshProUGUI>().text = newspaperTitles[i];
+            }
+        }
     }
 }

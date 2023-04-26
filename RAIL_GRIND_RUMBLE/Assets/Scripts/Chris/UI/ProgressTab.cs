@@ -14,16 +14,22 @@ public class ProgressTab : MonoBehaviour
     public string[] Act1TextBoxes;
     public string[] Act2TextBoxes;
     public string[] Act3TextBoxes;
+
+    //Need to be added when finished
     public string[] Act1SpanishTitles;
     public string[] Act2SpanishTitles;
     public string[] Act3SpanishTitles;
     public string[] Act1SpanishTextBoxes;
     public string[] Act2SpanishTextBoxes;
     public string[] Act3SpanishTextBoxes;
+    //
 
     public GameObject[] Act1Buttons;
     public GameObject[] Act2Buttons;
     public GameObject[] Act3Buttons;
+    public static bool[] Act1Active = new bool[7];
+    public static bool[] Act2Active = new bool[6];
+    public static bool[] Act3Active = new bool[5];
     [SerializeField] private TextMeshProUGUI mainText;
     [SerializeField] private TextMeshProUGUI titleBanner;
 
@@ -43,26 +49,8 @@ public class ProgressTab : MonoBehaviour
     {
         mainText.text = "";
         titleBanner.text = "";
-        for (int i = 0; i < Act1Titles.Length; i++)
-        {
-            Transform buttonText = Act1Buttons[i].gameObject.transform.Find("Text (TMP)");
-            buttonText.gameObject.GetComponent<TextMeshProUGUI>().text = Act1Titles[i];
-            Act1Buttons[i].name = Act1Titles[i];
-        }
 
-        for (int i = 0; i < Act2Titles.Length; i++)
-        {
-            Transform buttonText = Act2Buttons[i].gameObject.transform.Find("Text (TMP)");
-            buttonText.gameObject.GetComponent<TextMeshProUGUI>().text = Act2Titles[i];
-            Act2Buttons[i].name = Act2Titles[i];
-        }
-
-        for (int i = 0; i < Act3Titles.Length; i++)
-        {
-            Transform buttonText = Act3Buttons[i].gameObject.transform.Find("Text (TMP)");
-            buttonText.gameObject.GetComponent<TextMeshProUGUI>().text = Act3Titles[i];
-            Act3Buttons[i].name = Act3Titles[i];
-        }
+        SetButtons();
 
         anim = GetComponent<Animator>();
 
@@ -79,8 +67,15 @@ public class ProgressTab : MonoBehaviour
                 Act1Buttons[i].GetComponent<Image>().sprite = notSelected;
                 if (button.name == Act1Titles[i])
                     {
-                        titleBanner.text = Act1Titles[i];
-                        mainText.text = Act1TextBoxes[i];
+                        if (SpanishMode.spanishMode)
+                        {
+                            titleBanner.text = Act1SpanishTitles[i];
+                            mainText.text = Act1SpanishTextBoxes[i];
+                        } else {
+                            titleBanner.text = Act1Titles[i];
+                            mainText.text = Act1TextBoxes[i];
+                        }
+                        
                     }
             }
         } else if (DropDown[1].activeInHierarchy)
@@ -90,8 +85,14 @@ public class ProgressTab : MonoBehaviour
                 Act2Buttons[i].GetComponent<Image>().sprite = notSelected;
                 if (button.name == Act2Titles[i])
                     {
-                        titleBanner.text = Act2Titles[i];
-                        mainText.text = Act2TextBoxes[i];
+                        if (SpanishMode.spanishMode)
+                        {
+                            titleBanner.text = Act2SpanishTitles[i];
+                            mainText.text = Act1SpanishTextBoxes[i];
+                        } else {
+                            titleBanner.text = Act2Titles[i];
+                            mainText.text = Act2TextBoxes[i];
+                        }
                     }
             }
         } else if (DropDown[2].activeInHierarchy)
@@ -101,8 +102,14 @@ public class ProgressTab : MonoBehaviour
                 Act3Buttons[i].GetComponent<Image>().sprite = notSelected;
                 if (button.name == Act3Titles[i])
                     {
-                        titleBanner.text = Act3Titles[i];
-                        mainText.text = Act3TextBoxes[i];
+                        if (SpanishMode.spanishMode)
+                        {
+                            titleBanner.text = Act2SpanishTitles[i];
+                            mainText.text = Act2SpanishTextBoxes[i];
+                        } else {
+                            titleBanner.text = Act2Titles[i];
+                            mainText.text = Act2TextBoxes[i];
+                        }
                     }
                 }
         }
@@ -114,7 +121,7 @@ public class ProgressTab : MonoBehaviour
 
     public void ActivateTab(int select)
     {
-        if (DropDown[select - 1].activeInHierarchy)
+        if (select != 0 && DropDown[select - 1].activeInHierarchy)
         {
             DropDown[select - 1].SetActive(false);
             for (int i = 0; i < ActTabs.Length; i++)
@@ -132,7 +139,12 @@ public class ProgressTab : MonoBehaviour
                 ActTabs[i].SetActive(true);
             }
 
-            if (select == 1)
+            if (select == 0)
+            {
+                mainText.text = "";
+                titleBanner.text = "";
+                return;
+            } else if (select == 1)
             {
                 //anim.SetTrigger("Act1");
                 //anim.CrossFade("Act1Open", 0);
@@ -156,7 +168,7 @@ public class ProgressTab : MonoBehaviour
                 DropDown[2].SetActive(true);
 
                 ActTabs[2].GetComponent<Button>().Select();
-            }
+            } 
         }
 
         infoScreen.PlaySoundUI(infoScreen.selectSound);
@@ -187,5 +199,82 @@ public class ProgressTab : MonoBehaviour
     public void AnimPassthrough(string tab)
     {
         infoScreen.TabOpened(tab);
+    }
+
+    public void UnlockEntry(int actNum, int entryNum)
+    {
+        if (actNum == 1)
+        {
+            Act1Active[entryNum] = true;
+            Act1Buttons[entryNum].SetActive(true);
+        } else if (actNum == 2)
+        {
+            Act2Active[entryNum] = true;
+            Act2Buttons[entryNum].SetActive(true);
+        } else if (actNum == 3)
+        {
+            Act3Active[entryNum] = true;
+            Act3Buttons[entryNum].SetActive(true);
+        }
+    }
+
+    public void SetButtons()
+    {
+        for (int i = 0; i < Act1Titles.Length; i++)
+        {
+            Transform buttonText = Act1Buttons[i].gameObject.transform.Find("Text (TMP)");
+
+            if (SpanishMode.spanishMode)
+            {
+                buttonText.gameObject.GetComponent<TextMeshProUGUI>().text = Act1SpanishTitles[i];
+            } else {
+                buttonText.gameObject.GetComponent<TextMeshProUGUI>().text = Act1Titles[i];
+            }
+
+            Act1Buttons[i].name = Act1Titles[i];
+
+            if (Act1Active[i] == true)
+            {
+                Act1Buttons[i].SetActive(true);
+            }
+        }
+
+        for (int i = 0; i < Act2Titles.Length; i++)
+        {
+            Transform buttonText = Act2Buttons[i].gameObject.transform.Find("Text (TMP)");
+
+            if (SpanishMode.spanishMode)
+            {
+                buttonText.gameObject.GetComponent<TextMeshProUGUI>().text = Act2SpanishTitles[i];
+            } else {
+                buttonText.gameObject.GetComponent<TextMeshProUGUI>().text = Act2Titles[i];
+            }
+
+            Act2Buttons[i].name = Act2Titles[i];
+
+            if (Act2Active[i] == true)
+            {
+                Act2Buttons[i].SetActive(true);
+            }
+        }
+
+        for (int i = 0; i < Act3Titles.Length; i++)
+        {
+            Transform buttonText = Act3Buttons[i].gameObject.transform.Find("Text (TMP)");
+
+            if (SpanishMode.spanishMode)
+            {
+                buttonText.gameObject.GetComponent<TextMeshProUGUI>().text = Act3SpanishTitles[i];
+            } else {
+                buttonText.gameObject.GetComponent<TextMeshProUGUI>().text = Act3Titles[i];
+            }
+
+            Act3Buttons[i].name = Act3Titles[i];
+
+            if (Act3Active[i] == true)
+            {
+                Act3Buttons[i].SetActive(true);
+            }
+        }
     }
 }
