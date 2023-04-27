@@ -16,7 +16,7 @@ public class ThirdPersonMovement : MonoBehaviour
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    
+    public playerSounds sfxRef;
 
 
     public float moveSpeed;
@@ -447,6 +447,9 @@ public class ThirdPersonMovement : MonoBehaviour
             jumpTimeCounter = 0.35f;
             _animator.SetBool(_animIDJump, true);
             _animator.SetBool(_animIDGrounded, false);
+
+            //stops skate sound
+            sfxRef.stopSkateSFX();
 
             //Added to account for not jumping as high while going fast - this method doesn't work smoothly; jumping error likely has to do with forward velocity
             //if (currentSpeed > 15f)
