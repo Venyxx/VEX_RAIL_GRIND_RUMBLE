@@ -83,7 +83,7 @@ public class Graffiti : MonoBehaviour
         //graffitiParticle = Resources.Load("Particle_1") as GameObject;
         //graffitiParticle2 = Resources.Load("Particle_2") as GameObject;
 
-         canLocationForParticle = GameObject.FindGameObjectWithTag("PlayerCan");
+         canLocationForParticle = GameObject.Find("SprayCanTransform");
 
         
          
@@ -192,6 +192,14 @@ public class Graffiti : MonoBehaviour
                 if (theHit.collider.gameObject.GetComponent<PosterActive>().isSprayed)
                 {
                     Debug.Log("this poster was sprayed");
+                    
+                    Debug.Log(theHit.normal);
+                    Vector3 reverseHit = new Vector3(-theHit.normal.x, -theHit.normal.y, -theHit.normal.z);
+                    madeGraffiti = Instantiate (graffiti, canLocationForParticle.transform.position, Quaternion.LookRotation(reverseHit));
+                    particle = Instantiate (graffitiParticle, player.transform.position, player.transform.rotation);
+                    Vector3 newPos = new Vector3 (player.transform.position.x, madeGraffiti.transform.position.y, player.transform.position.z);
+                    madeGraffiti.transform.position = newPos;
+                    
                     return;
                 }
                     
@@ -220,17 +228,17 @@ public class Graffiti : MonoBehaviour
             } 
                 
                 
-            if (!wasThereAPoster) 
-            {
-                Debug.Log("detected no poster");
-                Debug.Log(theHit.normal);
-                Vector3 reverseHit = new Vector3(-theHit.normal.x, -theHit.normal.y, -theHit.normal.z);
-                madeGraffiti = Instantiate (graffiti, theHit.point, Quaternion.LookRotation(reverseHit));
-                particle = Instantiate (graffitiParticle, player.transform.position, player.transform.rotation);
-                Vector3 newPos = new Vector3 (player.transform.position.x, madeGraffiti.transform.position.y, player.transform.position.z);
-                madeGraffiti.transform.position = newPos;
-                return;
-            }
+        if (!wasThereAPoster) 
+        {
+            Debug.Log("detected no poster");
+            Debug.Log(theHit.normal);
+            Vector3 reverseHit = new Vector3(-theHit.normal.x, -theHit.normal.y, -theHit.normal.z);
+            madeGraffiti = Instantiate (graffiti, canLocationForParticle.transform.position, Quaternion.LookRotation(reverseHit));
+            particle = Instantiate (graffitiParticle, player.transform.position, player.transform.rotation);
+            Vector3 newPos = new Vector3 (player.transform.position.x, madeGraffiti.transform.position.y, player.transform.position.z);
+            madeGraffiti.transform.position = newPos;
+            return;
+        }
 
             wasThereAPoster = false;
             
