@@ -1,7 +1,7 @@
 using UnityEngine;
 public class SaveState 
 {
-    public float Money = 777;
+    public float Money = 9999; /*temp for presentation*/
     public int MaxLevel = 0;
     public int ariMaterialOwned = 0;
     public int ariGraffitiOwned = 0;

@@ -37,6 +37,11 @@ public class GrappleDetection : MonoBehaviour
     //Throwable Checking
     private ThrowObject throwObjectScript;
 
+    //For adaptive music
+    public AdaptiveMusic adaptiveMusic;
+    //int enemiesInRange;
+    public List<Transform> enemiesInRange;
+
     void Start()
     {
         GameObject cameraPrefabREF = GameObject.Find("camerasPrefab");
@@ -58,6 +63,9 @@ public class GrappleDetection : MonoBehaviour
         player = playerREF.GetComponent<Transform>();
         grappleHookScript = playerREF.GetComponent<GrappleHook>();
         throwObjectScript = playerREF.GetComponent<ThrowObject>();
+
+        adaptiveMusic = GameObject.Find("Music").GetComponent<AdaptiveMusic>();
+        //enemiesInRange = 0;
     }
 
     
@@ -251,6 +259,16 @@ public class GrappleDetection : MonoBehaviour
             }
             
         }
+
+        //Adaptive Music
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            if (enemiesInRange.Count == 0)
+            {
+                adaptiveMusic.StartCoroutine(adaptiveMusic.SwitchSongs("Combat"));
+            }
+            enemiesInRange.Add(collision.gameObject.transform);
+        }
     }
 
     //Enemy aimPoint conditional
@@ -283,6 +301,13 @@ public class GrappleDetection : MonoBehaviour
             {
                 aimPoints.Remove(collision.gameObject.transform);
                 aimPointCount--;
+            }
+
+            //Adaptive Music
+            enemiesInRange.Remove(collision.gameObject.transform);
+            if (enemiesInRange.Count == 0)
+            {
+                adaptiveMusic.StartCoroutine(adaptiveMusic.SwitchSongs("Standard"));
             }
         }
 

@@ -232,6 +232,15 @@ public class Enemy : PoolableObject, IDamageable
             
                 Ragdoll.StartRagdoll = true;
                 Debug.Log("START RAGDOLL");
+
+                //Added by Chris for adaptive music
+                GrappleDetection grappleDetection = GameObject.Find("GrappleDetector").GetComponent<GrappleDetection>();
+                if (grappleDetection.enemiesInRange.Exists(element => element == (this.gameObject.transform)))
+                {
+                    grappleDetection.enemiesInRange.Remove(this.gameObject.transform);
+                    grappleDetection.adaptiveMusic.StartCoroutine(grappleDetection.adaptiveMusic.SwitchSongs("Standard"));
+                }
+
                 //Animator.SetBool("ragdollEnabled", true);
             
             
