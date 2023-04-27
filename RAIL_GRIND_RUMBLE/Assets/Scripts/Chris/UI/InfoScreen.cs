@@ -88,6 +88,7 @@ public class InfoScreen : MonoBehaviour
             }
         }
 
+        /// DEBUG BEYOND THIS POINT ///
         //Temp
         /*if (Input.GetKeyDown(KeyCode.E))
         {
@@ -96,6 +97,11 @@ public class InfoScreen : MonoBehaviour
                 StartCoroutine(CloseInfoScreen());
             }
         }*/
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            SetMission(1, 5);
+        }
     }
 
     public void OpenInfoButtonPressed(InputAction.CallbackContext context)
@@ -150,6 +156,17 @@ public class InfoScreen : MonoBehaviour
         PlaySoundUI(selectSound);
 
         infoScreen.SetActive(true);
+
+        //Set Language of Tabs
+        if (SpanishMode.spanishMode)
+        {
+            missionsTab.GetComponent<NewMissionTab>().SetLanguage("Spanish");
+        } else {
+            missionsTab.GetComponent<NewMissionTab>().SetLanguage("English");
+        }
+        progressTab.GetComponent<ProgressTab>().SetButtons();
+        galleryTab.GetComponent<GalleryTab>().SetTitles();
+
         //mapButton.gameObject.SetActive(true);
         missionsButton.gameObject.SetActive(true);
         progressButton.gameObject.SetActive(true);
@@ -172,6 +189,8 @@ public class InfoScreen : MonoBehaviour
     public IEnumerator CloseInfoScreen()
     {
         PlaySoundUI(backSound);
+
+        progressTab.GetComponent<ProgressTab>().ActivateTab(0);
 
         mapTab.SetActive(false);
         missionsTab.SetActive(false);
@@ -374,5 +393,10 @@ public class InfoScreen : MonoBehaviour
     public void NewspaperPassthrough(int paperNum)
     {
         galleryTab.GetComponent<GalleryTab>().AddNewspaper(paperNum);
+    }
+
+    public void SetMission(int actNum, int missionNum)
+    {
+        missionsTab.GetComponent<NewMissionTab>().SetMission(actNum, missionNum);
     }
 }
