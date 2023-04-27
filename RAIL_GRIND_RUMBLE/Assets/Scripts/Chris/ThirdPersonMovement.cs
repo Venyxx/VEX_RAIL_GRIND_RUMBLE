@@ -70,6 +70,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
     Vector3 moveDirection;
     Vector3 skateDirection;
+    private GameObject ariWalkingShoes;
 
     public GameObject dialogueBox { get; private set; }
     public DialogueTemplate nearestDialogueTemplate = null;
@@ -167,7 +168,8 @@ public class ThirdPersonMovement : MonoBehaviour
 
         ManagerREF = GameObject.Find("Manager").GetComponent<Manager>();
         ETCCustREF = GameObject.Find("CustomizationVendor").GetComponent<ETCCustomizationVendor>();
-        
+        ariWalkingShoes = GameObject.Find("walkShoes");
+        ariWalkingShoes.SetActive(false);
 
         dialogueManager = FindObjectOfType<DialogueManager>();
         coinCount = ProgressionManager.Get().coinCount;
@@ -500,6 +502,7 @@ public class ThirdPersonMovement : MonoBehaviour
             ariCollider.height = walkHeight;
             playerWeapon.SetActive(false);
             sprayCan.SetActive(true);
+            ariWalkingShoes.SetActive(true);
 
             ManagerREF.ariSkateOptions[SaveManager.Instance.state.activeAriSkate].SetActive(false);
 
@@ -510,6 +513,7 @@ public class ThirdPersonMovement : MonoBehaviour
             ariCollider.height = skateHeight;
             playerWeapon.SetActive(true);
             sprayCan.SetActive(false);
+            ariWalkingShoes.SetActive(false);
 
             //change to shoes
             ManagerREF.ariSkateOptions[SaveManager.Instance.state.activeAriSkate].SetActive(true);
