@@ -41,10 +41,10 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         {
             TakeDamage(maxHealth);
         }
-        //if( Input.GetKeyDown(KeyCode.L) && Input.GetKeyDown(KeyCode.Keypad3))
-        //{
-        //    SceneManager.LoadScene(10);
-        //}
+        if( Input.GetKeyDown(KeyCode.L) )
+        {
+            SceneManager.LoadScene(10);
+        }
     }
 
 
