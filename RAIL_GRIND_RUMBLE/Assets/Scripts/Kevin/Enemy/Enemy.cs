@@ -244,7 +244,7 @@ public class Enemy : PoolableObject, IDamageable
                 if (grappleDetection.enemiesInRange.Exists(element => element == (this.gameObject.transform)))
                 {
                     grappleDetection.enemiesInRange.Remove(this.gameObject.transform);
-                    grappleDetection.adaptiveMusic.StartCoroutine(grappleDetection.adaptiveMusic.SwitchSongs("Standard"));
+                    //grappleDetection.adaptiveMusic.StartCoroutine(grappleDetection.adaptiveMusic.SwitchSongs("Standard"));
                 }
 
                 //Animator.SetBool("ragdollEnabled", true);

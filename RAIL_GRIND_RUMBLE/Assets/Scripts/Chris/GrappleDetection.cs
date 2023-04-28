@@ -123,6 +123,16 @@ public class GrappleDetection : MonoBehaviour
                 }
         }
 
+        if (enemiesInRange.Count > 0 && adaptiveMusic.combatMusic.volume == 0)
+        {
+            adaptiveMusic.StartCoroutine(adaptiveMusic.SwitchSongs("Combat"));
+        } else if (enemiesInRange.Count == 0 && adaptiveMusic.standardMusic.volume == 0)
+        {
+            adaptiveMusic.StartCoroutine(adaptiveMusic.SwitchSongs("Standard"));
+        }
+
+
+
         //Checking blocked AimPoints
         /*if (aimPointsNonVisible.Count != 0)
         {
@@ -263,10 +273,10 @@ public class GrappleDetection : MonoBehaviour
         //Adaptive Music
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            if (enemiesInRange.Count == 0)
+            /*if (enemiesInRange.Count == 0)
             {
                 adaptiveMusic.StartCoroutine(adaptiveMusic.SwitchSongs("Combat"));
-            }
+            }*/
             enemiesInRange.Add(collision.gameObject.transform);
         }
     }
@@ -305,10 +315,10 @@ public class GrappleDetection : MonoBehaviour
 
             //Adaptive Music
             enemiesInRange.Remove(collision.gameObject.transform);
-            if (enemiesInRange.Count == 0)
+            /*if (enemiesInRange.Count == 0)
             {
                 adaptiveMusic.StartCoroutine(adaptiveMusic.SwitchSongs("Standard"));
-            }
+            }*/
         }
 
 

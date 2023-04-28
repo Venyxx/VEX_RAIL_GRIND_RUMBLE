@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class AdaptiveMusic : MonoBehaviour
 {
-    AudioSource standardMusic;
-    AudioSource combatMusic;
+    public AudioSource standardMusic;
+    public AudioSource combatMusic;
     [SerializeField] float maxVolume;
     float lerpDuration = 3;
     // Start is called before the first frame update
