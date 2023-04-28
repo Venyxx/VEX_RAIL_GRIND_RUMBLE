@@ -171,9 +171,19 @@ public class DialogueManager : MonoBehaviour
         foreach (var dialogueParagraph in dialogue.paragraphs)
         {
             //Debug.Log(dialogueParagraph.englishDialogue);
-            paragraphDisplayed.Enqueue(dialogueParagraph.englishDialogue);
+            if (SpanishMode.spanishMode)
+            {
+                paragraphDisplayed.Enqueue(dialogueParagraph.spanishDialogue);
+                voiceClips.Enqueue(dialogueParagraph.spanishVoiceLine);
+            }
+            else
+            {
+                paragraphDisplayed.Enqueue(dialogueParagraph.englishDialogue);
+                voiceClips.Enqueue(dialogueParagraph.englishVoiceLine);
+
+            }
             nameDisplayed.Enqueue(dialogueParagraph.speakerName);
-            voiceClips.Enqueue(dialogueParagraph.englishVoiceLine);
+            
         }
 
         

@@ -140,15 +140,16 @@ public class ProgressionManager : MonoBehaviour
     {
         LoadObjects();
         
-        try
-        {
-            QuestInfoText = GameObject.Find("QuestInfo").transform.Find("QuestInfoText").gameObject
-                .GetComponent<TextMeshProUGUI>();
-        }
+        /*try
+        {*/
+            //QuestInfoText = GameObject.Find("QuestInfo").transform.Find("QuestInfoText").gameObject
+                //.GetComponent<TextMeshProUGUI>();
+            Debug.Log($"Is QuestInfoText null? {QuestInfoText == null}");
+        /*}
         catch (Exception e)
         {
             Debug.LogError("Failed to assign QuestInfoText");
-        }
+        }*/
         
         PlayFirstCutscene();
 

@@ -90,6 +90,7 @@ public class LocuoQuestGiver : QuestGiver
         if (mainWaypoints != null && SceneManager.GetActiveScene().name == "Outskirts")
         {
             mainWaypoints.GetComponent<TotalWaypointController>().currentIndex = 1;
+            ProgressionManager.Get().QuestInfoText.text = "Race Locuo to the find Diego!";
         }
 
         if (SceneManager.GetActiveScene().name == "InnerRingLevel")

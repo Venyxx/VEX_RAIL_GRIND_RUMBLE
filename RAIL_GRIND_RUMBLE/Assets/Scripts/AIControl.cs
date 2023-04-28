@@ -58,7 +58,7 @@ public class AIControl : MonoBehaviour {
 
         agent.speed = (1 * sm * hitSpeed);
         
-        if (agent.remainingDistance < 1)
+        if (agent.isOnNavMesh && agent.remainingDistance < 1)
         {
             //Debug.Log("changing direction   " + gameObject.name);
             int i = Random.Range(0, goalLocations.Length);
