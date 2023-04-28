@@ -38,8 +38,7 @@ public class GrappleDetection : MonoBehaviour
     private ThrowObject throwObjectScript;
 
     //For adaptive music
-    public AdaptiveMusic adaptiveMusic;
-    //int enemiesInRange;
+    AdaptiveMusic adaptiveMusic;
     public List<Transform> enemiesInRange;
 
     void Start()
@@ -65,7 +64,6 @@ public class GrappleDetection : MonoBehaviour
         throwObjectScript = playerREF.GetComponent<ThrowObject>();
 
         adaptiveMusic = GameObject.Find("Music").GetComponent<AdaptiveMusic>();
-        //enemiesInRange = 0;
     }
 
     
@@ -123,15 +121,25 @@ public class GrappleDetection : MonoBehaviour
                 }
         }
 
-        if (enemiesInRange.Count > 0 && adaptiveMusic.combatMusic.volume == 0)
+        if (adaptiveMusic != null)
         {
-            adaptiveMusic.StartCoroutine(adaptiveMusic.SwitchSongs("Combat"));
-        } else if (enemiesInRange.Count == 0 && adaptiveMusic.standardMusic.volume == 0)
-        {
-            adaptiveMusic.StartCoroutine(adaptiveMusic.SwitchSongs("Standard"));
+            if (enemiesInRange.Count > 0 && adaptiveMusic.combatMusic.volume == 0)
+            {
+                adaptiveMusic.StartCoroutine(adaptiveMusic.SwitchSongs("Combat"));
+            } else if (enemiesInRange.Count == 0 && adaptiveMusic.standardMusic.volume == 0)
+            {
+                adaptiveMusic.StartCoroutine(adaptiveMusic.SwitchSongs("Standard"));
+            }
         }
+        
 
-
+        if (aimPoints.Count == 0)
+        {
+            aimPointCount = 0;
+        } else if (aimPointCount != aimPoints.Count)
+        {
+            aimPointCount = aimPoints.Count;
+        }
 
         //Checking blocked AimPoints
         /*if (aimPointsNonVisible.Count != 0)
@@ -298,7 +306,6 @@ public class GrappleDetection : MonoBehaviour
                 {
                     currentAim = aimPoints[0];
                 }
-                
             }
         }
     }

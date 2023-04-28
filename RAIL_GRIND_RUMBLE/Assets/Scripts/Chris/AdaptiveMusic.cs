@@ -24,6 +24,13 @@ public class AdaptiveMusic : MonoBehaviour
     public IEnumerator SwitchSongs(string switchTo)
     {
         float timeElapsed = 0;
+
+        //Possible way to delay combat music from ending for a short time
+        /*if (switchTo == "Standard")
+        {
+            yield return new WaitForSeconds(2f);
+        }*/
+
         while (timeElapsed < lerpDuration)
         {
             if (switchTo == "Combat")
