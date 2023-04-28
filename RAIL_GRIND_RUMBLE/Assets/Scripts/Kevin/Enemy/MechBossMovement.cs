@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+//using Random = System.Random;
 
 public class MechBossMovement : MonoBehaviour , IDamageable
 {
@@ -17,6 +18,9 @@ public class MechBossMovement : MonoBehaviour , IDamageable
     private PlayerHealth playerhealth;
     private float takeDamageDelay = .2f;
     private bool canTakeDamage = true;
+    private AudioClip[] hitSounds;
+    private AudioSource audioSource;
+    public GameObject VFX;
 
     //Patroling 
     public Vector3 walkPoint;
@@ -45,7 +49,13 @@ public class MechBossMovement : MonoBehaviour , IDamageable
         Speed = agent.speed;
         playerhealth = playerREF.GetComponent<PlayerHealth>();
         StateTimer = 0;
-        
+        hitSounds = Resources.LoadAll<AudioClip>("Sounds/MetalDamageSounds");
+        audioSource = GetComponent<AudioSource>();
+        if (VFX != null)
+        {
+            VFX.SetActive(false);
+        }
+
     }
     private void Update()
     {
@@ -209,6 +219,8 @@ public class MechBossMovement : MonoBehaviour , IDamageable
     }
     private IEnumerator TakeDamage()
     {
+        //Random rand = new Random();
+        audioSource.PlayOneShot(hitSounds[Random.Range(0, hitSounds.Length)]);
         canTakeDamage = false;
         yield return new WaitForSeconds(takeDamageDelay);
         canTakeDamage = true;

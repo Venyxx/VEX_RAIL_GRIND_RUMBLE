@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
+
 public class PlayerHealth : MonoBehaviour, IDamageable
 {
      
@@ -40,6 +41,10 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         {
             TakeDamage(maxHealth);
         }
+        //if( Input.GetKeyDown(KeyCode.L) && Input.GetKeyDown(KeyCode.Keypad3))
+        //{
+        //    SceneManager.LoadScene(10);
+        //}
     }
 
 

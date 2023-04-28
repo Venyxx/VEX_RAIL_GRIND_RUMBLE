@@ -7,6 +7,10 @@ public class VFX_Controller : MonoBehaviour
 
     public Camera m_Camera;
 
+    private void Start()
+    {
+        m_Camera = GameObject.Find("Main Camera").GetComponent<Camera>();
+    }
     private void Awake()
     {
         m_Camera = GameObject.Find("Main Camera").GetComponent<Camera>();
@@ -47,7 +51,7 @@ public class VFX_Controller : MonoBehaviour
         // We're done! We can disable this component to save resources.
         if (t > 1)
         {
-            enabled = false;
+         //   enabled = false;
             
         }
     }

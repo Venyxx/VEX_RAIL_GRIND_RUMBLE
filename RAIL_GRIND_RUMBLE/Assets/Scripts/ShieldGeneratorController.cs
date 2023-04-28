@@ -1,4 +1,5 @@
 using UnityEngine;
+using Random = System.Random;
 
 public class ShieldGeneratorController : MonoBehaviour, IDamageable
 {
@@ -13,7 +14,10 @@ public class ShieldGeneratorController : MonoBehaviour, IDamageable
     private bool _invincible;
     private MeshFilter _meshFilter;
     private MeshRenderer _meshRenderer;
-    
+    private AudioClip[] hitSounds;
+    private AudioSource audioSource;
+    public GameObject VFX;
+
     void Start()
     {
         _startingHealth = 3;
@@ -21,6 +25,12 @@ public class ShieldGeneratorController : MonoBehaviour, IDamageable
         _invincible = false;
         _meshRenderer = GetComponent<MeshRenderer>();
         _meshFilter = GetComponent<MeshFilter>();
+        hitSounds = Resources.LoadAll<AudioClip>("Sounds/MetalDamageSounds");
+        audioSource = GetComponent<AudioSource>();
+        if (VFX != null)
+        {
+            VFX.SetActive(false);
+        }
     }
     
     public Transform GetTransform()
@@ -40,12 +50,16 @@ public class ShieldGeneratorController : MonoBehaviour, IDamageable
 
     public void TakeDamage(float health)
     {
-        if (!_invincible)
+      
+        if (!_invincible && _currentHealth > 0)
         {
             _currentHealth -= 1;
             _invincible = true;
             Invoke(nameof(InvincibilityCooldown), invincibilityTime);
+            Random rand = new Random();
+            audioSource.PlayOneShot(hitSounds[rand.Next(0, hitSounds.Length)]);
         }
+       
 
         switch (_currentHealth)
         {
@@ -75,6 +89,17 @@ public class ShieldGeneratorController : MonoBehaviour, IDamageable
         return _isDestroyed;
     }
 
+    private void Update()
+    {
+        if(_invincible)
+        {
+            VFX.SetActive(true);
+        }
 
+        if (!_invincible)
+        {
+            VFX.SetActive(false);
+        }
+    }
 
 }

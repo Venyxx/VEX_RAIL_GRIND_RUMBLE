@@ -8,6 +8,7 @@ public class fastLightTransition1 : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         PlayerAttack.instance.IsAttacking = false;
+        PlayerAttack.instance.Righthand.enabled = false;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -16,7 +17,7 @@ public class fastLightTransition1 : StateMachineBehaviour
         if (PlayerAttack.instance.IsAttacking && PlayerAttack.instance.movementScriptREF.Grounded == true)
         {
             PlayerAttack.instance.Anim.Play("fastLight2Start");
-            PlayerAttack.instance.Righthand.enabled = false;
+           
             // PlayerAttack.instance.Damage = 30;
         }
 

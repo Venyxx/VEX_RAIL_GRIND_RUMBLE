@@ -84,7 +84,13 @@ public class Enemy : PoolableObject, IDamageable
           
             LookCoroutine = StartCoroutine(LookAt(Movement.Player));
         }
-
+        if(CanTakeDamage)
+        {
+            if (VFX != null)
+            {
+                VFX.SetActive(false);
+            }
+        }
     }
     private void OnAttack(IDamageable Target)
     {
