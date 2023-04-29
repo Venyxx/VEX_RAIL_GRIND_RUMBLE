@@ -8,6 +8,7 @@ public class ShieldGeneratorController : MonoBehaviour, IDamageable
     [SerializeField] private Material destroyedMaterial2;
     [SerializeField] private Material destroyedMaterial3;
     [SerializeField] private float invincibilityTime = 0.5f;
+    [SerializeField] private Animator generatorAnimator;
     private int _startingHealth;
     private int _currentHealth;
     private bool _isDestroyed;
@@ -53,11 +54,13 @@ public class ShieldGeneratorController : MonoBehaviour, IDamageable
       
         if (!_invincible && _currentHealth > 0)
         {
+            generatorAnimator.SetTrigger("isHit");
             _currentHealth -= 1;
             _invincible = true;
             Invoke(nameof(InvincibilityCooldown), invincibilityTime);
             Random rand = new Random();
             audioSource.PlayOneShot(hitSounds[rand.Next(0, hitSounds.Length)]);
+            //generatorAnimator.SetTrigger("isHit");
         }
        
 

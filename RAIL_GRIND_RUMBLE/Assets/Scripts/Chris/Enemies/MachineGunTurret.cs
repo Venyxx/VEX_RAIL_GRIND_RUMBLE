@@ -5,6 +5,7 @@ using UnityEngine;
 public class MachineGunTurret : MonoBehaviour, IDamageable
 {
     [SerializeField] private Animator mechAnimator;
+    //[SerializeField] private Animator lightAnimator;
     float speed = 3f;
     GameObject playerREF;
     [SerializeField] GameObject bullet;
@@ -17,6 +18,12 @@ public class MachineGunTurret : MonoBehaviour, IDamageable
     Vector3 newDirection;
 
     Hernandez hernandez;
+
+    //machineGunFlash
+     [SerializeField] private Light LeftLight;
+     [SerializeField] private Light RightLight;
+    float FlashDuration  = 3.0f;
+    float originalRange;
 
     //Health
     float maxHealth = 300;
@@ -33,6 +40,8 @@ public class MachineGunTurret : MonoBehaviour, IDamageable
         if (shootRunning == true) {
             shootRunning = false;
         }
+
+        originalRange = LeftLight.range;
     }
 
     public void SetAttached()
@@ -58,6 +67,8 @@ public class MachineGunTurret : MonoBehaviour, IDamageable
                 Debug.Log("Starting shoot");
                 StartCoroutine(Shoot());
             }
+
+           
     }
 
     public IEnumerator Shoot()
@@ -65,6 +76,16 @@ public class MachineGunTurret : MonoBehaviour, IDamageable
         if (attached)
         {
             mechAnimator.SetBool("shootingGun", true);
+           // lightAnimator.SetBool("flashNow", true);
+
+            // //Gun flash code below
+            // var amplitude = Mathf.PingPong(Time.time, FlashDuration);
+            // // Transform from 0..duration to 0.5..1 range.
+            // amplitude = amplitude / FlashDuration * 0.5f + 0.5f;
+            // // Set light range.
+            // LeftLight.range = originalRange * amplitude;
+
+
         }
         
         shootRunning = true;
@@ -95,6 +116,7 @@ public class MachineGunTurret : MonoBehaviour, IDamageable
         if (attached)
         {
             mechAnimator.SetBool("shootingGun", false);
+            //lightAnimator.SetBool("flashNow", false);
         }
         
         yield return new WaitForSeconds(cooldownSeconds);
