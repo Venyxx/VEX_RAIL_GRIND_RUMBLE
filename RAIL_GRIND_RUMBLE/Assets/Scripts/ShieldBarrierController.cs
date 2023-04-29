@@ -2,6 +2,7 @@ using System.Runtime.CompilerServices;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ShieldBarrierController : MonoBehaviour
 {
@@ -22,7 +23,15 @@ public class ShieldBarrierController : MonoBehaviour
         generators = new GameObject[generatorParent.childCount];
         AddChildrenToArray(barrierParent, barriers);
         AddChildrenToArray(generatorParent, generators);
-        wayPointPrefab = GameObject.Find("WayPointPrefabs").transform.Find("MainQuest4 Waypoints").gameObject;
+        if (SceneManager.GetActiveScene().name == "InnerRingLevel")
+        {
+            wayPointPrefab = GameObject.Find("WayPointPrefabs").transform.Find("MainQuest4 Waypoints").gameObject;
+        }
+        else if (SceneManager.GetActiveScene().name == "Servos HQ")
+        {
+            wayPointPrefab = GameObject.Find("WayPointPrefab");
+        }
+
         questInfoText = GameObject.Find("QuestInfo").transform.Find("QuestInfoText").GetComponent<TextMeshProUGUI>();
     }
 

@@ -40,6 +40,7 @@ public class EnemyMovement : MonoBehaviour
 
     public bool activated = false;
     public bool isMoving = false;
+    private CutscenePlayer _cutscenePlayer;
 
     private void Awake ()
     {
@@ -50,23 +51,25 @@ public class EnemyMovement : MonoBehaviour
 
         //Added by Chris to prevent unassigned reference exception
         Player = GameObject.FindWithTag("Player").transform;
-        
+        _cutscenePlayer = FindObjectOfType<CutscenePlayer>();
+
 
     }
     private void Update()
     {
         totalDistance = Vector3.Distance(Player.position, Agent.transform.position);
         Animator.SetBool(IsWalking, Agent.velocity.magnitude > 0.01f);
+
         if (Vector3.Distance(Player.position, transform.position) < activationDistance && !activated && enemy.Health > 1 && !enemy.isDizzy)
         {
-            //Debug.Log("Player is within range, chasing the player");
-            StartCoroutine(Activate());
-            
-
-            activated = true;
-
-
-
+            //making sure enemies don't come after the player while a cutscene is playing, since 
+            //Time.timeScale = 0 doesn't seem to be working in CutscenePlayer.cs for some reason - Pete
+            if ((_cutscenePlayer != null && !_cutscenePlayer.cutscenePlaying) || _cutscenePlayer == null)
+            {
+                //Debug.Log("Player is within range, chasing the player");
+                StartCoroutine(Activate());
+                activated = true;
+            }
         }
 
         if (Vector3.Distance(Player.position, transform.position) > activationDistance && !BruteIsCharging )

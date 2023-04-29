@@ -153,12 +153,6 @@ public class ProgressionManager : MonoBehaviour
         
         PlayFirstCutscene();
 
-        if (firstLoad && (SceneManager.GetActiveScene().name == "Inner Ring Level" ||
-                          SceneManager.GetActiveScene().name == "Servos HQ"))
-        {
-            grappleUnlocked = true;
-        }
-        
         string sceneName = SceneManager.GetActiveScene().name;
         
         if (!IsFinished(mainQuest1))
@@ -214,6 +208,7 @@ public class ProgressionManager : MonoBehaviour
         {
             //GameObject.Find("WayPointPrefabs").transform.Find("MainQuest4 Waypoints").gameObject.SetActive(true);
             QuestInfoText.text = "Find and Destroy the shield generators to escape!";
+            grappleUnlocked = true;
         }
 
 
@@ -225,6 +220,7 @@ public class ProgressionManager : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Servos HQ")
         {
             Debug.Log("LOADED SERVOS HQ");
+            grappleUnlocked = true;
             if(!firstLoad)
                 PlayCutscene(6);
         }

@@ -24,8 +24,16 @@ public class CheckpointController : MonoBehaviour
     private void Start()
     {
         ari = GameObject.Find("playerPrefab");
-        if (!lastCheckPointPosition.Equals(new Vector3(0,0,0)))
+        if (!lastCheckPointPosition.Equals(new Vector3(0, 0, 0)))
+        {
+            Debug.Log("Spawning Ari at a Checkpoint Position");
             ari.transform.position = lastCheckPointPosition;
+        }
+        else
+        {
+            Debug.Log("NOT spawning Ari at a Checkpoint Position");
+        }
+
         Time.timeScale = 1;
         LastScene = SceneManager.GetActiveScene().buildIndex;
 

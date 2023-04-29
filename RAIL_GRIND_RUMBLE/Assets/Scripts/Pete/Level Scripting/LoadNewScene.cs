@@ -34,7 +34,7 @@ public class LoadNewScene : MonoBehaviour
     {
         if (!ProgressionManager.Get().firstLoad) return;
         locationVector = ariRoomVector;
-        /*switch (SceneManager.GetActiveScene().name)
+        switch (SceneManager.GetActiveScene().name)
         {
             case ariHouse:
                 locationVector = ariRoomVector;
@@ -52,7 +52,7 @@ public class LoadNewScene : MonoBehaviour
                 locationVector = servosHQDefaultSpawnVector;
                 Debug.Log("Servos HQ");
                 break;
-        }*/
+        }
 
         ProgressionManager.Get().firstLoad = false;
     }
