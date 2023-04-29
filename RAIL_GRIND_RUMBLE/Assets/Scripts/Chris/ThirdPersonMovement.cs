@@ -251,7 +251,7 @@ public class ThirdPersonMovement : MonoBehaviour
             }
         }
         
-        if (loadInDefaultLocation == true)
+        if (loadInDefaultLocation && CheckpointController.lastCheckPointPosition == new Vector3(0, 0, 0))
         {
             transform.localPosition = LoadNewScene.locationVector;
             Debug.Log("Location Vector: " + LoadNewScene.locationVector);

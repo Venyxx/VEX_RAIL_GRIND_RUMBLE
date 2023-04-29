@@ -53,7 +53,10 @@ public class LocuoQuestGiver : QuestGiver
                 {
                     distanceTraveled += currentMoveSpeed * Time.deltaTime;
                     transform.position = pathCreator.path.GetPointAtDistance(distanceTraveled, endOfPathInstruction);
-                    transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTraveled, endOfPathInstruction);
+                    Quaternion pathCreatorRotation = pathCreator.path.GetRotationAtDistance(distanceTraveled, endOfPathInstruction);
+                    float rotationY = pathCreatorRotation.y;
+                    transform.rotation = new Quaternion(transform.rotation.x, rotationY, transform.rotation.z,
+                        transform.rotation.w);
                     _dialogueTrigger.enabled = false;
                 }
                 currentMoveSpeed = Mathf.Lerp(currentMoveSpeed, baseMoveSpeed, .02f);
@@ -104,6 +107,12 @@ public class LocuoQuestGiver : QuestGiver
             }
         }
 
+        if (SceneManager.GetActiveScene().name == "Servos HQ")
+        {
+            FindObjectOfType<ThirdPersonMovement>().gameObject.transform.position =
+                new Vector3(1889.93994f, 85.4100037f, 3483.19995f);
+        }
+
         _dialogueTrigger.enabled = false;
         Invoke(nameof(SetActivated), startDelay);
     }
@@ -128,8 +137,11 @@ public class LocuoQuestGiver : QuestGiver
         ProgressionManager.Get().CompleteQuest();
         StartCoroutine(DialogueManager.DialogueWipe());
         transform.position = raceOverWaitSpot.position;
-        FindObjectOfType<TotalWaypointController>().currentIndex = 7;
         FindObjectOfType<ThirdPersonMovement>().currentSpeed = 0;
+        if (SceneManager.GetActiveScene().name != "Servos HQ")
+        {
+            FindObjectOfType<TotalWaypointController>().currentIndex = 7;
+        }
         if (SceneManager.GetActiveScene().name == "InnerRingLevel")
         {
             ProgressionManager.Get().QuestInfoText.text = "Destroy the last generator!";
@@ -138,6 +150,11 @@ public class LocuoQuestGiver : QuestGiver
             {
                 child.gameObject.SetActive(false);
             }
+        }
+
+        if (SceneManager.GetActiveScene().name == "Servos HQ")
+        {
+            FindObjectOfType<ThirdPersonMovement>().gameObject.transform.position = new Vector3();
         }
     }
 
