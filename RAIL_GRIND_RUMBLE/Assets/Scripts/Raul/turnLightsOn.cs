@@ -23,6 +23,13 @@ public class turnLightsOn : MonoBehaviour
 
     private void OnTriggerEnter(Collider player)
 {
+    NightLight.SetActive(true);
+    InsideLight.SetActive(false);
+   
+}
+
+ private void OnTriggerExit(Collider player)
+{
     NightLight.SetActive(false);
     InsideLight.SetActive(true);
    

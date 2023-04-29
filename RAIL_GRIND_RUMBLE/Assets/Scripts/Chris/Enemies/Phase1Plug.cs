@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using Cinemachine;
 
 public class Phase1Plug : MonoBehaviour
 {
@@ -16,6 +18,8 @@ public class Phase1Plug : MonoBehaviour
     GrappleHook grappleHook;
     GrappleDetection grappleDetector;
     PlayerHealth playerHealth;
+
+    public UnityEvent shake;
     // Start is called before the first frame update
     void Start()
     {
@@ -71,9 +75,17 @@ public class Phase1Plug : MonoBehaviour
             Debug.Log("Plug Count: "+plugCount);
             bc.enabled = false;
             rb.isKinematic = false;
+            InvokeRepeating("ShockwaveEvent", 3f, 4f);
+
             // GameObject.Find("GrappleDetector").GetComponent<GrappleDetection>().aimPoints.Remove(this.transform);
             yield return new WaitForSeconds(2f);
             Destroy(plugParent);
         }
+    }
+
+
+    private void ShakeEvent()
+    {
+        shake.Invoke();
     }
 }

@@ -7,7 +7,7 @@ public class AdaptiveMusic : MonoBehaviour
     public AudioSource standardMusic;
     public AudioSource combatMusic;
     [SerializeField] float maxVolume;
-    float lerpDuration = 3;
+    float lerpDuration = 1;
     // Start is called before the first frame update
     void Start()
     {
