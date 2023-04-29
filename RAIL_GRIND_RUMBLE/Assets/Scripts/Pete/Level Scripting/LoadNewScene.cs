@@ -98,7 +98,8 @@ public class LoadNewScene : MonoBehaviour
                 locationVector = ariRoomVector;
                 break;
         }
-
+        
+        CheckpointController.lastCheckPointPosition = new Vector3(0, 0, 0);
         SceneManager.LoadScene(sceneName);
     }
 
