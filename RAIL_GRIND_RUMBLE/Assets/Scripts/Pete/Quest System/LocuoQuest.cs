@@ -6,6 +6,7 @@ public class LocuoQuest : Quest
 {
     public LocuoQuestGiver questGiver;
     public void Activate()
+    
     {
         Debug.Log("Locuo Quest Activate()");
         questGiver.Activate();

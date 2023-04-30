@@ -31,6 +31,7 @@ public class ProgressionManager : MonoBehaviour
     public bool prologueComplete;
     private bool firstRaceCompleted;
     public bool deathCutscenePlayed = false;
+    private bool servosCutscenePlayed = false;
 
     public static ProgressionManager Get()
     {
@@ -221,8 +222,11 @@ public class ProgressionManager : MonoBehaviour
         {
             Debug.Log("LOADED SERVOS HQ");
             grappleUnlocked = true;
-            if(!firstLoad)
-                PlayCutscene(6);
+            if(!servosCutscenePlayed)
+            {
+              PlayCutscene(6);
+              servosCutscenePlayed = true;
+            }
         }
         else
         {

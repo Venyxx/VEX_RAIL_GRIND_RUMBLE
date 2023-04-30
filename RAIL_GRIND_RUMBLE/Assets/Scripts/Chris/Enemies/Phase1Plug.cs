@@ -6,7 +6,6 @@ using Cinemachine;
 
 public class Phase1Plug : MonoBehaviour
 {
-    public static int plugCount = 0;
     //[SerializeField] Material blue;
     //[SerializeField] Material gray;
     [SerializeField] GameObject plugParent;
@@ -18,6 +17,7 @@ public class Phase1Plug : MonoBehaviour
     GrappleHook grappleHook;
     GrappleDetection grappleDetector;
     PlayerHealth playerHealth;
+    public bool unplugged { get; private set; }
 
     public UnityEvent shake;
     // Start is called before the first frame update
@@ -25,7 +25,6 @@ public class Phase1Plug : MonoBehaviour
     {
         ren = GetComponent<Renderer>();
         shockCycleRunning = false;
-        plugCount++;
         grappleHook = GameObject.Find("playerPrefab").GetComponent<GrappleHook>();
         grappleDetector = GameObject.Find("GrappleDetector").GetComponent<GrappleDetection>();
         playerHealth = GameObject.Find("playerPrefab").GetComponent<PlayerHealth>();
@@ -71,15 +70,13 @@ public class Phase1Plug : MonoBehaviour
             this.GetComponent<BoxCollider>().enabled = false;
             grappleDetector.aimPoints.Remove(this.transform);
             grappleDetector.aimPointCount--;
-            plugCount--;
-            Debug.Log("Plug Count: "+plugCount);
             bc.enabled = false;
             rb.isKinematic = false;
             InvokeRepeating("ShockwaveEvent", 3f, 4f);
 
             // GameObject.Find("GrappleDetector").GetComponent<GrappleDetection>().aimPoints.Remove(this.transform);
             yield return new WaitForSeconds(2f);
-            Destroy(plugParent);
+            unplugged = true;
         }
     }
 

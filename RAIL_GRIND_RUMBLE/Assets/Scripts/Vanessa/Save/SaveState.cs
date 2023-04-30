@@ -28,6 +28,7 @@ public class SaveState
     public string ariGraffitiSlotRight2 = "Decal_2";
     public string ariGraffitiSlotDown3 = "Decal_3";
     public string ariGraffitiSlotLeft4 = "Decal_4";
+    
 
     
     //public int activeSkate = 0;

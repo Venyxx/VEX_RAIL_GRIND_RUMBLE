@@ -13,17 +13,21 @@ public class CheckpointController : MonoBehaviour
     [SerializeField] private string newQuestInfoText;
     [SerializeField] private bool updatesQuestInfoText;
     [SerializeField] private bool disableWaypoints;
+    [SerializeField] private bool enableWaypoints;
     [SerializeField] private bool killAllDrones;
     [SerializeField] private bool teleportsPlayer;
     [SerializeField] private Transform placeToTeleport;
+    [SerializeField] private bool setsWayPointIndex;
+    [SerializeField] private int nextWayPointIndex;
+    [SerializeField] private bool incrementsWaypoint;
+    TotalWaypointController totalRef; 
 
-    private Teleportation teleREF;
-    private bool waypointAdvanced;
 
 
-    private void Start()
+    private void Awake()
     {
         ari = GameObject.Find("playerPrefab");
+        totalRef = FindObjectOfType<TotalWaypointController>();
         if (!lastCheckPointPosition.Equals(new Vector3(0, 0, 0)))
         {
             Debug.Log("Spawning Ari at a Checkpoint Position");
@@ -34,11 +38,8 @@ public class CheckpointController : MonoBehaviour
             Debug.Log("NOT spawning Ari at a Checkpoint Position");
         }
 
-        Time.timeScale = 1;
+        //Time.timeScale = 1;
         LastScene = SceneManager.GetActiveScene().buildIndex;
-
-        if (GameObject.Find("TeleportManager"))
-            teleREF = GameObject.Find("TeleportManager").GetComponent<Teleportation>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -47,9 +48,13 @@ public class CheckpointController : MonoBehaviour
         if (other.CompareTag("Player") || other.CompareTag("PlayerObject"))
         {
 
-            foreach (GameObject obj in objectsToActivate)
+            if (objectsToActivate.Length > 0)
             {
-                obj.SetActive(true);
+                foreach (GameObject obj in objectsToActivate)
+                {
+                    if(obj != null)
+                        obj.SetActive(true);
+                }
             }
 
             if (other.TryGetComponent<IDamageable>(out damageable))
@@ -69,7 +74,6 @@ public class CheckpointController : MonoBehaviour
                     ProgressionManager.Get().QuestInfoText.text = newQuestInfoText;
                 }
             
-                TotalWaypointController totalRef = FindObjectOfType<TotalWaypointController>();
                 if (totalRef == null) return;
 
                 if (disableWaypoints)
@@ -77,17 +81,26 @@ public class CheckpointController : MonoBehaviour
                     totalRef.gameObject.SetActive(false);
                 }
 
-                if (!waypointAdvanced)
+                if (enableWaypoints)
                 {
-                    totalRef.currentIndex++;
-                    waypointAdvanced = true;
+                    totalRef.gameObject.SetActive(true);
                 }
                 
+                if (setsWayPointIndex)
+                {
+                    totalRef.currentIndex = nextWayPointIndex;
+                }
+                else if(incrementsWaypoint)
+                {
+                    totalRef.currentIndex++;
+                }
+
                 if (teleportsPlayer)
                 {
                     StartCoroutine(DialogueManager.DialogueWipe());
                     GameObject playerPrefab = other.gameObject;
                     playerPrefab.transform.position = placeToTeleport.position;
+                    playerPrefab.GetComponent<ThirdPersonMovement>().currentSpeed = 0;
                 }
                 
                 if (killAllDrones)
@@ -103,17 +116,8 @@ public class CheckpointController : MonoBehaviour
                 {
                     ProgressionManager.Get().PlayCutscene(cutsceneToPlay);
                 }
-
                 performedProgressionAction = true;
             }
-
-            
-
-            
-
-
-
-
         }
     }
     

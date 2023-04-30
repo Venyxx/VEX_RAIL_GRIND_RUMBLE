@@ -24,6 +24,7 @@ public class PlayerAttack : MonoBehaviour
     public GrappleHook grappleREF;
     private WallRun wallRunREF;
     public int skateBuffDamage;
+    public int spins;
     
     
 
@@ -139,6 +140,7 @@ public class PlayerAttack : MonoBehaviour
             movementScriptREF.dialogueManager.freezePlayer
             //||movementScriptREF.nearestDialogueTemplate != null
             || GetComponent<ThrowObject>().isHoldingObject == true
+            || spins > 0
             )
         {
             return;
@@ -208,6 +210,7 @@ public class PlayerAttack : MonoBehaviour
            // movementScriptREF.Grounded == false ||
             movementScriptREF.dialogueManager.freezePlayer
             || GetComponent<ThrowObject>().isHoldingObject == true
+            || spins >0
             )
         {
 
@@ -271,9 +274,9 @@ public class PlayerAttack : MonoBehaviour
 
 
 
-            if (HeavyAtkTimer >= 0 && HeavyAtkTimer <= 1.9 && movementScriptREF.Grounded == true)
+            if (HeavyAtkTimer >= 1 && HeavyAtkTimer <= 1.9 && movementScriptREF.Grounded == true)
             {
-               
+                spins = 2;
                 //   Debug.Log("BugCheck2");
                 Anim.SetTrigger("HAttackEnd2");
                 
@@ -287,7 +290,8 @@ public class PlayerAttack : MonoBehaviour
             }
             if (HeavyAtkTimer < 1 && !movementScriptREF.isJumping)
             {
-             //   Debug.Log("BugCheck3");
+                spins = 1;
+                //   Debug.Log("BugCheck3");
                 Anim.SetTrigger("HAttackEnd1");
                // spinEffect.SetActive(true);
                 //   IsHeavyAttacking = false;
@@ -298,7 +302,8 @@ public class PlayerAttack : MonoBehaviour
             }
             if (HeavyAtkTimer >= 2)
             {
-            //    Debug.Log("BugCheck4");
+                spins = 3;
+                //    Debug.Log("BugCheck4");
                 Anim.SetTrigger("HAttackEnd3");
                 //  IsHeavyAttacking = false;
                 HeavyAtkTimer = 0;

@@ -16,11 +16,14 @@ public class LoadingScreen : MonoBehaviour
     [SerializeField] GameObject startButton;
     [SerializeField] GameObject settingsButton;
     [SerializeField] GameObject quitButton;
+    private int level;
+
     
     // Start is called before the first frame update
     void Start()
     {
         anim = loadingBackground.GetComponent<Animator>();
+        level = SaveManager.Instance.state.completedLevel;
     }
 
     void Awake()
@@ -57,8 +60,23 @@ public class LoadingScreen : MonoBehaviour
             ProgressionManager.Get().firstLoad = true;
         }
 
-        //SceneManager.LoadScene("Ari's House");
-        StartCoroutine(LoadOut("Ari's House"));
+         string scene;
+         if (level == 1)
+         {
+             Debug.Log("LOADING INNER RING");
+             scene = "InnerRingLevel";
+         }
+         else if (level == 2)
+         {
+             Debug.Log("LOADING SERVOS");
+             scene = "Servos HQ";
+         }
+         else
+         {
+             Debug.Log("LOADING OPENING CUTSCENE");
+             scene = "Ari's House";
+         }
+        StartCoroutine(LoadOut(scene));
     }
 
 
