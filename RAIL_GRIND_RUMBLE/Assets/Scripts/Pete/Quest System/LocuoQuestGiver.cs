@@ -26,6 +26,11 @@ public class LocuoQuestGiver : QuestGiver
 
     private GameObject lobbyExit1;
     private GameObject lobbyExit2;
+
+    //music switch
+    [SerializeField] private GameObject dynamicMusic;
+    [SerializeField] private GameObject RaceMusic;
+
     protected override void Start()
     {
         base.Start();
@@ -135,6 +140,8 @@ public class LocuoQuestGiver : QuestGiver
     private void SetActivated()
     {
         activated = true;
+        RaceMusic.SetActive(true);
+        dynamicMusic.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -167,6 +174,9 @@ public class LocuoQuestGiver : QuestGiver
                 child.gameObject.SetActive(false);
             }
         }
+
+        RaceMusic.SetActive(false);
+        dynamicMusic.SetActive(true);
 
         
     }
