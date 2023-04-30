@@ -19,6 +19,7 @@ public class playerSounds : MonoBehaviour
     [SerializeField] private AudioSource Grunt4;
     [SerializeField] private AudioSource Grunt5;
     [SerializeField] private AudioSource Grunt6;
+    [SerializeField] private AudioSource Gliding;
 
     public ThirdPersonMovement movementRef;
     // Start is called before the first frame update
@@ -131,6 +132,18 @@ public class playerSounds : MonoBehaviour
     private void Grunt6SFX()
     {
        Grunt6.Play(0);
+
+    }
+
+    private void GlidingSFX()
+    {
+       Gliding.Play(0);
+
+    }
+
+    public void stopGlidingSFX()
+    {
+       Gliding.Stop();
 
     }
 }
