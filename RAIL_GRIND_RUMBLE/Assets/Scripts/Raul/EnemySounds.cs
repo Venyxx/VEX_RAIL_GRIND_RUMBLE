@@ -6,6 +6,8 @@ public class EnemySounds : MonoBehaviour
 {
     [SerializeField] private AudioSource Gun;
     [SerializeField] private AudioSource Skate;
+    [SerializeField] private AudioSource Death1;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +24,12 @@ public class EnemySounds : MonoBehaviour
     private void GunSFX()
     {
         Gun.Play(0);
+
+    }
+
+    private void Death1SFX()
+    {
+        Death1.Play(0);
 
     }
 }
