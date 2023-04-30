@@ -35,6 +35,7 @@ public class Enemy : PoolableObject, IDamageable
     public GameObject damageText;
     private bool dead;
     public GameObject VFX;
+    public bool IsDonnovan;
 
     private void Awake()
     {
@@ -216,7 +217,10 @@ public class Enemy : PoolableObject, IDamageable
                 CountQuest quest = (CountQuest)tracker.currentQuest;
                 quest.IncrementCount();
             }
-            
+            if (IsDonnovan)
+            {
+                gameObject.SetActive(false);
+            }
             
             
             Movement.activated = false;
