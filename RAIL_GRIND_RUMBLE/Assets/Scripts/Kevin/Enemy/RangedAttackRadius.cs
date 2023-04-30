@@ -20,7 +20,7 @@ public class RangedAttackRadius : AttackRadius
         base.Awake();
         BulletPool = ObjectPool.CreateInstance(BulletPrefab, Mathf.CeilToInt((10)));
     }
-    protected override IEnumerator Attack()
+    public override IEnumerator Attack()
     {
         WaitForSeconds Wait = new WaitForSeconds(AttackDelay);
         yield return Wait;
