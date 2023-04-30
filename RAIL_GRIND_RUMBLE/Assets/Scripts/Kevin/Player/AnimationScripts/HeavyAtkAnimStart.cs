@@ -9,6 +9,7 @@ public class HeavyAtkAnimStart : StateMachineBehaviour
     {
        PlayerAttack.instance.spinEffect.SetActive(true);
         PlayerAttack.instance.IsHeavyAttacking = true;
+
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -29,6 +30,7 @@ public class HeavyAtkAnimStart : StateMachineBehaviour
         //PlayerAttack.instance.IsHeavyAttacking = false;
         //PlayerAttack.instance.Leftleg.enabled = false;
         //PlayerAttack.instance.spinEffect.SetActive(false);
+        PlayerAttack.instance.spins = PlayerAttack.instance.spins - 1;
 
 
     }

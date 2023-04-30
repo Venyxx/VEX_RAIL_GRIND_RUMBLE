@@ -13,7 +13,7 @@ public class AttackRadius : MonoBehaviour
     public float AttackDelay = 0.5f;
     public delegate void AttackEvent(IDamageable Target);
     public AttackEvent OnAttack;
-    protected Coroutine AttackCoroutine;
+    public Coroutine AttackCoroutine;
     public bool IsSharpShooter = false;
     public EnemyMovement Movement;
     public Enemy enemy;
@@ -55,7 +55,7 @@ public class AttackRadius : MonoBehaviour
                     
                     // if (IsSharpShooter == false)
                     // {
-                    AttackCoroutine = StartCoroutine(Attack());
+                    AttackCoroutine = StartCoroutine(Attack()); //commented out testing new atk method - Raul
                     //}
                     //if (IsSharpShooter == true)
                     // { 
@@ -94,7 +94,7 @@ public class AttackRadius : MonoBehaviour
 
     }
 
-    protected virtual IEnumerator Attack()
+    public virtual IEnumerator Attack()
     {
         WaitForSeconds Wait = new WaitForSeconds(AttackDelay);
         

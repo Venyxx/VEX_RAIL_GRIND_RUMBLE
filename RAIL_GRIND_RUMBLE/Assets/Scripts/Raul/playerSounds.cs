@@ -13,6 +13,12 @@ public class playerSounds : MonoBehaviour
     [SerializeField] private AudioSource airHeavySwoosh;
     [SerializeField] private AudioSource footStep1;
     [SerializeField] private AudioSource footStep2;
+    [SerializeField] private AudioSource Grunt1;
+    [SerializeField] private AudioSource Grunt2;
+    [SerializeField] private AudioSource Grunt3;
+    [SerializeField] private AudioSource Grunt4;
+    [SerializeField] private AudioSource Grunt5;
+    [SerializeField] private AudioSource Grunt6;
 
     public ThirdPersonMovement movementRef;
     // Start is called before the first frame update
@@ -87,5 +93,44 @@ public class playerSounds : MonoBehaviour
     {
        
          footStep2.Play(0);
+    }
+
+    
+    private void Grunt1SFX()
+    {
+       Grunt1.Play(0);
+
+    }
+
+    
+    private void Grunt2SFX()
+    {
+       Grunt2.Play(0);
+
+    }
+
+    
+    private void Grunt3SFX()
+    {
+       Grunt3.Play(0);
+
+    }
+
+    private void Grunt4SFX()
+    {
+       Grunt4.Play(0);
+
+    }
+
+    private void Grunt5SFX()
+    {
+       Grunt5.Play(0);
+
+    }
+
+    private void Grunt6SFX()
+    {
+       Grunt6.Play(0);
+
     }
 }
