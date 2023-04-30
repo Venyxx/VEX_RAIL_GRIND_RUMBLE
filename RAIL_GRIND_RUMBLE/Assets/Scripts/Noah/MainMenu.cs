@@ -28,7 +28,7 @@ public class MainMenu : MonoBehaviour
     public GameObject controlsScreen;
     public GameObject graphicsScreen;
     public GameObject accessibilityScreen;
-
+    
     
 
 
@@ -39,7 +39,6 @@ public class MainMenu : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(mainMenuFirstButton);
         Cursor.lockState = CursorLockMode.None;
         CheckpointController.lastCheckPointPosition = new Vector3(0, 0, 0);
-
         GameObject.Find("damageBuffIcon").SetActive(false);
     }
 
@@ -61,22 +60,7 @@ public class MainMenu : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(null);
         }
     }
-
-    public void StartGame()
-    { 
-        StartCoroutine(WaitStartGame());
-    }
-
-     IEnumerator WaitStartGame()
-    {
-        
-
-        ariAnimator.SetBool("pressedStart" , true);
-        cameraAnimator.SetBool("pressedStart" , true);
-        yield return new WaitForSeconds(10);
-        SceneManager.LoadScene(firstLevel);
-    }
-
+    
     public void OpenSettings()
     {
         SettingsMainPage.SetActive(true);

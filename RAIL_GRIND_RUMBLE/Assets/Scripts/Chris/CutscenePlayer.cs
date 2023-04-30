@@ -29,10 +29,10 @@ public class CutscenePlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*if (Input.GetKeyDown(KeyCode.C))
+        if (cutscenePlaying)
         {
-            PlayCutscene(0);
-        }*/
+            Time.timeScale = 0f;
+        }
 
         videoPlayer.loopPointReached += EndReached;
     }
@@ -60,6 +60,7 @@ public class CutscenePlayer : MonoBehaviour
 
         videoPlayer.gameObject.SetActive(true);
         renderTexture.gameObject.SetActive(true);
+
     }
 
     void EndReached(UnityEngine.Video.VideoPlayer vp)

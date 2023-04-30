@@ -138,11 +138,11 @@ public class ThirdPersonMovement : MonoBehaviour
     [SerializeField] private Material skatesOffMaterial;
 
     //COLLIDER STUFF (so ari gets shorter when skates are turned off)
-    private CapsuleCollider ariCollider;
+    /*private CapsuleCollider ariCollider;
     private static float skateCenterY = 0.8497467f;
     private static float skateHeight = 1.92239f;
     private static float walkCenterY = 0.8990228f;
-    private static float walkHeight = 1.823838f; 
+    private static float walkHeight = 1.823838f;*/ 
 
     //Sound Effects
     [SerializeField] private AudioClip[] playerSounds;
@@ -169,7 +169,7 @@ public class ThirdPersonMovement : MonoBehaviour
         ManagerREF = GameObject.Find("Manager").GetComponent<Manager>();
         ETCCustREF = GameObject.Find("CustomizationVendor").GetComponent<ETCCustomizationVendor>();
         ariWalkingShoes = GameObject.Find("walkShoes");
-        ariWalkingShoes.SetActive(false);
+        //ariWalkingShoes.SetActive(false);
 
         dialogueManager = FindObjectOfType<DialogueManager>();
         coinCount = ProgressionManager.Get().coinCount;
@@ -218,8 +218,7 @@ public class ThirdPersonMovement : MonoBehaviour
         skateWheels = GameObject.FindGameObjectsWithTag("SkateWheel");
         playerWeapon = GameObject.FindGameObjectWithTag("PlayerWeapon");
         sprayCan = GameObject.FindGameObjectWithTag("PlayerCan");
-        ariCollider = GetComponent<CapsuleCollider>();
-        WalkToggleHelper();
+        //ariCollider = GetComponent<CapsuleCollider>();
 
         //Audio
         audioSource = GetComponent<AudioSource>();
@@ -257,6 +256,8 @@ public class ThirdPersonMovement : MonoBehaviour
             Debug.Log("Location Vector: " + LoadNewScene.locationVector);
             Debug.Log("My position: " + transform.localPosition);
         }
+        WalkToggleHelper();
+
     }
 
     // Update is called once per frame
@@ -308,7 +309,7 @@ public class ThirdPersonMovement : MonoBehaviour
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if(animManager.misControlEnabled == true || isBraking == false) //Stop Overlapping Actions - Raul
         {
-        PlayerMovement();
+            PlayerMovement();
         }
         
         //Grounded Check
@@ -320,19 +321,18 @@ public class ThirdPersonMovement : MonoBehaviour
         
         if(animManager.misControlEnabled == true) //Stop Overlapping Actions - Raul
         {
-        PlayerInput();
-
+            PlayerInput();
         }
 
         //Stop Overlapping Actions -Raul /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         if(animManager.misControlEnabled == true) 
         {
-        playerActions.Player.Enable();
+            playerActions.Player.Enable();
         }
         else 
         {
-        playerActions.Player.Disable();
+            playerActions.Player.Disable();
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -489,17 +489,10 @@ public class ThirdPersonMovement : MonoBehaviour
     void WalkToggleHelper()
     {
         //Debug.Log($"Walking: {isWalking}");
-
-        foreach (GameObject skateWheel in skateWheels)
-            skateWheel.SetActive(!isWalking); //if walking, turn off wheels. 
-
-        foreach (GameObject shoe in skateShoes)
-            shoe.GetComponent<SkinnedMeshRenderer>().material = isWalking ? skatesOffMaterial : skatesOnMaterial;
-
         if (isWalking)
         {
-            ariCollider.center = new Vector3(ariCollider.center.x, walkCenterY, ariCollider.center.z);
-            ariCollider.height = walkHeight;
+            /*ariCollider.center = new Vector3(ariCollider.center.x, walkCenterY, ariCollider.center.z);
+            ariCollider.height = walkHeight;*/
             playerWeapon.SetActive(false);
             sprayCan.SetActive(true);
             ariWalkingShoes.SetActive(true);
@@ -509,8 +502,8 @@ public class ThirdPersonMovement : MonoBehaviour
         }
         else
         {
-            ariCollider.center = new Vector3(ariCollider.center.x, skateCenterY, ariCollider.center.z);
-            ariCollider.height = skateHeight;
+            /*ariCollider.center = new Vector3(ariCollider.center.x, skateCenterY, ariCollider.center.z);
+            ariCollider.height = skateHeight;*/
             playerWeapon.SetActive(true);
             sprayCan.SetActive(false);
             ariWalkingShoes.SetActive(false);

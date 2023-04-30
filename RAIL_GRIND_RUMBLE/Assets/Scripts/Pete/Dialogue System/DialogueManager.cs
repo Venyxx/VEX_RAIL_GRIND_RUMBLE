@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 using Cinemachine;
+using UnityEngine.SceneManagement;
 
 public class DialogueManager : MonoBehaviour
 { 
@@ -352,7 +353,10 @@ public class DialogueManager : MonoBehaviour
             {
                 quest.RewardPlayer();
                 quest.RewardsGiven = true;
-                ProgressionManager.Get().QuestInfoText.text = "";
+                if (SceneManager.GetActiveScene().name != "Servos HQ")
+                {
+                    ProgressionManager.Get().QuestInfoText.text = "";
+                }
             }
         }
         catch (NullReferenceException e)
