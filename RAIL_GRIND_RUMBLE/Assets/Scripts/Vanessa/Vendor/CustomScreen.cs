@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
+
 public class CustomScreen : MonoBehaviour
 {
    public static bool isOpen;
@@ -36,6 +37,8 @@ public class CustomScreen : MonoBehaviour
     public Button skateButton;
     public Sprite tabSelected;
     public Sprite tabNotSelected;
+
+    
 
     //Selection Handling
     public Button MainMissionButton;
@@ -79,6 +82,7 @@ public class CustomScreen : MonoBehaviour
             if (isOpen == false && PauseMenu.isPaused == false)
             {
                 StartCoroutine(OpenCustomScreen());
+     
             } else {
                 StartCoroutine(CloseCustomScreen());
             }

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class CustomizationMEnu : MonoBehaviour
 {
@@ -31,6 +32,8 @@ public class CustomizationMEnu : MonoBehaviour
     public Sprite tabSelected;
     public Sprite tabNotSelected;
 
+    public Button custFirstButton, custSecButton, custThirdButton, custFourthButton;
+
     private Graffiti graffitiREF;
     // Start is called before the first frame update
     void Start()
@@ -45,6 +48,7 @@ public class CustomizationMEnu : MonoBehaviour
         graffitiREF = GameObject.Find("SprayCanTransform").GetComponent<Graffiti>();
     }
 
+
     
     public void OpenInfoButtonPressed(InputAction.CallbackContext context)
     {
@@ -55,6 +59,7 @@ public class CustomizationMEnu : MonoBehaviour
             if (isOpen == false && PauseMenu.isPaused == false)
             {
                 StartCoroutine(OpenInfoScreen());
+                custFirstButton.Select();
             } else {
                 StartCoroutine(CloseInfoScreen());
             }
@@ -141,15 +146,19 @@ public class CustomizationMEnu : MonoBehaviour
         if (currentTab == "Map")
         {
             OpenMissionsTab();
+            custFirstButton.Select();
         } else if (currentTab == "Missions")
         {
             OpenProgressTab();
+            custSecButton.Select();
         } else if (currentTab == "Progress")
         {
             OpenGraffitiTab();
+            custThirdButton.Select();
         } else if (currentTab == "Graffiti")
         {
             OpenMapTab();
+            custFourthButton.Select();
         }
 
     }

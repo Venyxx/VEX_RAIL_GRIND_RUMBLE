@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class MainMenu : MonoBehaviour
     public string firstLevel;
     public GameObject mainMenu;
     public GameObject mainMenuSignal;
+    public GameObject resetSaveButton;
 
     public GameObject SettingsMainPage;
     public GameObject SettingsScreen;
@@ -28,6 +30,7 @@ public class MainMenu : MonoBehaviour
     public GameObject controlsScreen;
     public GameObject graphicsScreen;
     public GameObject accessibilityScreen;
+    private Scene scene;
     
     
 
@@ -40,8 +43,9 @@ public class MainMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         CheckpointController.lastCheckPointPosition = new Vector3(0, 0, 0);
         GameObject.Find("damageBuffIcon").SetActive(false);
-    }
+        scene = SceneManager.GetActiveScene();
 
+    }
     // Update is called once per frame
     void Update()
     {
@@ -68,6 +72,9 @@ public class MainMenu : MonoBehaviour
         mainMenu.SetActive(false);
         fastTravelButtons.SetActive(false);
 
+         if (scene.name == "MainMenu");
+            resetSaveButton.SetActive(true);
+
         EventSystem.current.SetSelectedGameObject(null); 
         EventSystem.current.SetSelectedGameObject(mainSettingsFirstButton);
     }
@@ -78,6 +85,9 @@ public class MainMenu : MonoBehaviour
         SettingsScreen.SetActive(false);
         mainMenu.SetActive(true);
         fastTravelButtons.SetActive(true);
+
+        if (scene.name == "MainMenu");
+            resetSaveButton.SetActive(false);
 
         EventSystem.current.SetSelectedGameObject(null); 
         EventSystem.current.SetSelectedGameObject(mainSettingsClosedButton);
