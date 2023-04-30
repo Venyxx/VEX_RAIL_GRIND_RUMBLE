@@ -23,8 +23,6 @@ a
 1Assets/Scripts/Vanessa/Car Movement/CarSpawner.cs,6\b\6bdce7cfa796368b5f81ce0424852efbbd4e2dd7
 b
 2Assets/Scripts/Vanessa/Car Movement/CarMovement.cs,d\f\df27153c29df0c695f660a0ae01196ce3a3a7b7e
-S
-#Assets/Scripts/Raul/turnLightsOn.cs,3\c\3cbd797b89b33fbeb6360e4ce6c1cca717c5ebb6
 Z
 *Assets/Scripts/Kevin/Misc/KillBoxScript.cs,d\6\d600e257351706fac30878eac767459ee0164876
 [

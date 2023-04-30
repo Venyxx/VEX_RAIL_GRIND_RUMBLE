@@ -175,6 +175,12 @@ public class LocuoQuestGiver : QuestGiver
             }
         }
 
+        if (SceneManager.GetActiveScene().name == "Servos HQ")
+        {
+            FindObjectOfType<ThirdPersonMovement>().transform.position =
+                new Vector3(667.369995f, 31.9400005f, 1216.16003f);
+        }
+
         RaceMusic.SetActive(false);
         dynamicMusic.SetActive(true);
 
