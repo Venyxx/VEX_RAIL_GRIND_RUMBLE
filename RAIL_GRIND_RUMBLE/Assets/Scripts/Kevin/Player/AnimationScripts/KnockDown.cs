@@ -13,6 +13,10 @@ public class KnockDown : StateMachineBehaviour
         PlayerAttack.instance.Leftleg.enabled = false;
         PlayerAttack.instance.Weapon.enabled = false;
         PlayerAttack.instance.spinEffect.SetActive(false);
+        if (PlayerAttack.instance.spins >0)
+        {
+            PlayerAttack.instance.spins = 0;
+        }
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -30,6 +34,10 @@ public class KnockDown : StateMachineBehaviour
         PlayerAttack.instance.Leftleg.enabled = false;
         PlayerAttack.instance.Weapon.enabled = false;
         PlayerAttack.instance.spinEffect.SetActive(false);
+        if (PlayerAttack.instance.spins > 0)
+        {
+            PlayerAttack.instance.spins = 0;
+        }
 
     }
 
