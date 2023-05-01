@@ -25,9 +25,11 @@ public class MainQuest1 : CountQuest
             {
                 //change wp
                 totalREF.currentIndex++;
-                string dialogue = "Great work as always! Now grab the parts and come on back.";
+                string dialogue = "Great work as always! Now that you've got the parts, come on back.";
                 string speaker = "Diego";
+                string spanishDialogue = "Gran trabajo como siempre! Ahora que tienes las piezas, vuelve.";
                 DialogueParagraph paragraph = new DialogueParagraph(speaker, dialogue);
+                paragraph.spanishDialogue = spanishDialogue;
                 DialogueTemplate template = new DialogueTemplate(paragraph);
                 ProgressionManager.Get().DialogueManager.StartAutoDialogue(template);
             }

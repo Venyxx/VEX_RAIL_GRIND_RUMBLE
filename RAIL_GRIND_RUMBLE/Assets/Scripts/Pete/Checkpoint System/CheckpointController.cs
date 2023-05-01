@@ -88,8 +88,15 @@ public class CheckpointController : MonoBehaviour
                 {
                     ProgressionManager.Get().QuestInfoText.text = newQuestInfoText;
                 }
-            
-                if (totalRef == null) return;
+
+                if (totalRef == null)
+                {
+                    if (SceneManager.GetActiveScene().name == "Outskirts")
+                    {
+                        totalRef = GameObject.Find("WayPointPrefabs").transform.Find("Main Waypoints")
+                            .GetComponent<TotalWaypointController>();
+                    }
+                }
 
                 if (disableWaypoints)
                 {
