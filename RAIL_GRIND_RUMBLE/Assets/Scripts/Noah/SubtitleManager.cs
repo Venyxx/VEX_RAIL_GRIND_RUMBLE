@@ -22,6 +22,8 @@ public class SubtitleManager : MonoBehaviour
     public GameObject cutsceneplayerREF;
     CutscenePlayer cutsceneplayer;
     [SerializeField] private VideoClip[] cutsceneClips;
+
+    private bool subtitlePlaying;
     
     
     // Start is called before the first frame update
@@ -33,19 +35,30 @@ public class SubtitleManager : MonoBehaviour
         cutsceneClips = cutsceneplayer.cutsceneClips;
         
         subtitleGO.SetActive(false);
+        subtitlePlaying = false;
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (cutsceneplayer.cutscenePlaying == true)
+        if (cutsceneplayer.cutscenePlaying == true && subtitlePlaying == false )
         {
             StartSubtitiles();
         }
+
+        if (cutsceneplayer.cutscenePlaying == false)
+        {
+            subtitlePlaying = false;
+        }
+            
     }
 
     public void StartSubtitiles()
     {
+        subtitlePlaying = true;
+        
         if (SpanishMode.spanishMode == false)
         {
             StartCoroutine(EnglishSubtitleCoroutine());
@@ -59,8 +72,8 @@ public class SubtitleManager : MonoBehaviour
     IEnumerator EnglishSubtitleCoroutine()
     {
         subtitleGO.SetActive(true);
-        
-        
+
+
         
         foreach (var voiceLine in englishSubtitleText)
         {
@@ -84,6 +97,7 @@ public class SubtitleManager : MonoBehaviour
                         yield return new WaitForSecondsRealtime(voiceLine.time);
                     }
                 }
+                
             }
         }
         
