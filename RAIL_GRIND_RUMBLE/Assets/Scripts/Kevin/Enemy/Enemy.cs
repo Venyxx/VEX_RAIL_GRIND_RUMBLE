@@ -110,12 +110,12 @@ public class Enemy : PoolableObject, IDamageable
         {
             if(!AttackRadius.BruteWindingUp)
             {
-                Animator.SetTrigger(ATTACK_TRIGGER);
+                
             }
-            
-               
-              
-            
+
+            Animator.SetTrigger(ATTACK_TRIGGER);
+
+
             if (LookCoroutine != null)
             {
                  StopCoroutine(LookCoroutine);

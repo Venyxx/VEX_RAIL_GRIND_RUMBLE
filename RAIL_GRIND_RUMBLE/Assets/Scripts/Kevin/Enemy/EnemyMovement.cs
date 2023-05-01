@@ -213,6 +213,7 @@ public class EnemyMovement : MonoBehaviour
         Agent.speed = enemy.EnemyScriptableObject.Speed + 9;
         Agent.acceleration = enemy.EnemyScriptableObject.Acceleration + 9;
         yield return new WaitForSeconds(3f);
+        Attack.Attack();
         Debug.Log("Brute isn't charging");
         Animator.SetBool("Dashing", false);
         //BruteChargingDelay = false; //putting this here to speed up testing - Raul
@@ -225,6 +226,7 @@ public class EnemyMovement : MonoBehaviour
         yield return new WaitForSeconds(10f);
         BruteChargingDelay = false;
         StopCoroutine(Charge());
+        Attack.Attack();
               
 
     }
