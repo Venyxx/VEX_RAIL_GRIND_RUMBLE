@@ -20,6 +20,7 @@ public class CustomizationMEnu : MonoBehaviour
     public GameObject progressTab;
     public GameObject graffitiTab;
     public GameObject DisplayTab;
+    private ThirdPersonMovement movementScriptREF;
 
     AudioSource audioUI;
     public AudioClip backSound;
@@ -104,57 +105,6 @@ public class CustomizationMEnu : MonoBehaviour
            
     }
 
-
-    //for moving the mouse cursor with the controller
-    public IEnumerator IncreaseVectorLeft()
-    {
-        Vector2 currentPosition = Mouse.current.position.ReadValue();
-        Vector2 moveVector = new Vector2(-1, currentPosition.y);
-        
-        Vector2 newPosition = currentPosition + moveVector;
-        newPosition.x = Mathf.Clamp(newPosition.x, 0, Screen.width);
-        newPosition.y = Mathf.Clamp(newPosition.y, 0, Screen.width);
-        Mouse.current.WarpCursorPosition(newPosition);
-
-
-        yield return new WaitForSeconds(200f);
-    }
-
-    public IEnumerator IncreaseVectorRight()
-    {
-        Vector2 currentPosition = Mouse.current.position.ReadValue();
-        Vector2 moveVector = new Vector2(1, currentPosition.y);
-        
-        Vector2 newPosition = currentPosition + moveVector;
-        newPosition.x = Mathf.Clamp(newPosition.x, 0, Screen.width);
-        newPosition.y = Mathf.Clamp(newPosition.y, 0, Screen.width);
-        Mouse.current.WarpCursorPosition(newPosition);
-        yield return new WaitForSeconds(200f);
-    }
-
-        public IEnumerator IncreaseVectorUp()
-    {
-        Vector2 currentPosition = Mouse.current.position.ReadValue();
-        Vector2 moveVector = new Vector2(currentPosition.x, 1);
-        
-        Vector2 newPosition = currentPosition + moveVector;
-        newPosition.x = Mathf.Clamp(newPosition.x, 0, Screen.width);
-        newPosition.y = Mathf.Clamp(newPosition.y, 0, Screen.width);
-        Mouse.current.WarpCursorPosition(newPosition);
-        yield return new WaitForSeconds(200f);
-    }
-
-        public IEnumerator IncreaseVectorDown()
-    {
-        Vector2 currentPosition = Mouse.current.position.ReadValue();
-        Vector2 moveVector = new Vector2(currentPosition.x, -1);
-        
-        Vector2 newPosition = currentPosition + moveVector;
-        newPosition.x = Mathf.Clamp(newPosition.x, 0, Screen.width);
-        newPosition.y = Mathf.Clamp(newPosition.y, 0, Screen.width);
-        Mouse.current.WarpCursorPosition(newPosition);
-        yield return new WaitForSeconds(200f);
-    }
     
     public void OpenInfoButtonPressed(InputAction.CallbackContext context)
     {
@@ -182,9 +132,7 @@ public class CustomizationMEnu : MonoBehaviour
             if (isOpen == false && PauseMenu.isPaused == false)
             {
                 
-                StartCoroutine(OpenInfoScreen());
-                
-               
+                StartCoroutine(OpenInfoScreen()); 
                 
             } else {
                 StartCoroutine(CloseInfoScreen());
@@ -227,8 +175,26 @@ public class CustomizationMEnu : MonoBehaviour
         }
     }
 
+     public void OpenTheFuckingCust(InputAction.CallbackContext context)
+    {
+        if (context.started && isOpen == false)
+        {
+            StartCoroutine(OpenInfoScreen());
+            Time.timeScale = 0f;
+        }
+    }
+
     IEnumerator OpenInfoScreen()
     {
+        if (InfoScreen.isOpen)
+                {
+                    InfoScreen infoScreen = GameObject.Find("canvasPrefab").GetComponent<InfoScreen>();
+                    infoScreen.StartCoroutine(infoScreen.CloseInfoScreen());
+                } else
+                {
+                    yield return new WaitForSeconds(0.75f);
+                }  
+                    
         PlaySoundUI(selectSound);
 
         infoScreen.SetActive(true);
@@ -243,17 +209,15 @@ public class CustomizationMEnu : MonoBehaviour
         isOpen = true;
         Debug.Log("just ran toopen");
 
-        if (InfoScreen.isOpen)
-                {
-                    InfoScreen infoScreen = GameObject.Find("canvasPrefab").GetComponent<InfoScreen>();
-                    infoScreen.StartCoroutine(infoScreen.CloseInfoScreen());
-                }
+        
 
-        yield return new WaitForSeconds(0.75f);
+        
 
         Time.timeScale = 0f;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+
+        yield return new WaitForSeconds(0.75f);
     }
 
     IEnumerator CloseInfoScreen()
@@ -276,14 +240,15 @@ public class CustomizationMEnu : MonoBehaviour
         Time.timeScale = 1f;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        //topBarAnim.SetTrigger("Close");
-        //bottomBarAnim.SetTrigger("Close");
-        //backgroundAnim.SetTrigger("Close");
+        isOpen = false;
+        infoScreen.SetActive(false);
+
+        gameObject.GetComponent<ETCCustomizationVendor>().ResetOutfitToSaveState();
+        movementScriptREF = GameObject.Find("playerPrefab").GetComponent<ThirdPersonMovement>();
+        movementScriptREF.dialogueManager.freezePlayer = false;
 
         yield return new WaitForSeconds(0.75f);
-
-        infoScreen.SetActive(false);
-        isOpen = false;
+        
     }
 
     //Bumper Switch

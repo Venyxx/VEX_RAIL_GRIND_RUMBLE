@@ -176,7 +176,7 @@ public class PlayerInteractions : MonoBehaviour
         ETCCusREF.ResetOutfitToSaveState();
         movementScriptREF = GameObject.Find("playerPrefab").GetComponent<ThirdPersonMovement>();
         movementScriptREF.dialogueManager.freezePlayer = false;
-
+        Time.timeScale = 1f;
          //gamepadCur.SetActive(false);
 
         //reopen infoscreen

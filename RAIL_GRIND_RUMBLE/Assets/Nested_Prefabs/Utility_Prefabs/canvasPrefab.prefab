@@ -8394,7 +8394,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7887443027155340393, guid: ac10ac12ef45312488c57a0177ae1615, type: 3}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: CustomizationMEnu, Assembly-CSharp
         m_MethodName: OpenInfoButtonPressedLOC
         m_Mode: 1
@@ -23876,7 +23876,19 @@ MonoBehaviour:
     m_ActionId: ab5dc335-0053-4c75-af3a-b5213b325b17
     m_ActionName: Player/Throw[/Mouse/leftButton]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: CustomizationMEnu, Assembly-CSharp
+        m_MethodName: OpenTheFuckingCust
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 4399648e-6220-4ab2-9707-47686ae9be2e
     m_ActionName: Menus/OpenCustomization
   m_NeverAutoSwitchControlSchemes: 0
@@ -24200,18 +24212,27 @@ MonoBehaviour:
   englishSubtitles: {fileID: 33134402999859087}
   spanishSubtitles: {fileID: 33134402999859087}
   englishSubtitleText:
-  - cutsceneclip: {fileID: 32900000, guid: a419e795c189f744b90a6159d03a3508, type: 3}
-    time: 3
-    text: 
-  - cutsceneclip: {fileID: 32900000, guid: a419e795c189f744b90a6159d03a3508, type: 3}
-    time: 2
-    text: 'The Servos Corporation is the leader in '
-  - cutsceneclip: {fileID: 32900000, guid: a419e795c189f744b90a6159d03a3508, type: 3}
-    time: 1.5
-    text: cutting edge technology
   - cutsceneclip: {fileID: 32900000, guid: 85bbe63c15f0a2747a8c2c0c6da777dd, type: 3}
     time: 1.5
-    text: MIJA UR AWAKE
+    text: MIJA
+  - cutsceneclip: {fileID: 32900000, guid: 85bbe63c15f0a2747a8c2c0c6da777dd, type: 3}
+    time: 1.5
+    text: WAKE
+  - cutsceneclip: {fileID: 32900000, guid: 85bbe63c15f0a2747a8c2c0c6da777dd, type: 3}
+    time: 1.5
+    text: The Fuck
+  - cutsceneclip: {fileID: 32900000, guid: 85bbe63c15f0a2747a8c2c0c6da777dd, type: 3}
+    time: 1.5
+    text: UP
+  - cutsceneclip: {fileID: 32900000, guid: 4d5342a7d8487d24a9bd8b6cff9bf4b8, type: 3}
+    time: 3
+    text: 
+  - cutsceneclip: {fileID: 32900000, guid: 4d5342a7d8487d24a9bd8b6cff9bf4b8, type: 3}
+    time: 2
+    text: 'The Servos Corporation is the leader in '
+  - cutsceneclip: {fileID: 32900000, guid: 4d5342a7d8487d24a9bd8b6cff9bf4b8, type: 3}
+    time: 1.5
+    text: cutting edge technology
   SpanishSubtitleText: []
   spanishModeScript: {fileID: 0}
   cutsceneplayerREF: {fileID: 3967584942661444515}
@@ -37525,6 +37546,7 @@ GameObject:
   - component: {fileID: 2896100030015854704}
   - component: {fileID: 6071730142659887950}
   - component: {fileID: 3283004720560248554}
+  - component: {fileID: 4728690126147402474}
   m_Layer: 0
   m_Name: DialogueManager
   m_TagString: Untagged
@@ -37569,6 +37591,102 @@ MonoBehaviour:
   npcRotationSpeed: 5
   talkPrompt: {fileID: 1575328552226286665}
 --- !u!82 &3283004720560248554
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4897474327189006958}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!82 &4728690126147402474
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -51216,9 +51334,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Quest Information
-
-'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7e135286be017a243ad804d846102c9c, type: 2}
   m_sharedMaterial: {fileID: -669716059484903021, guid: 7e135286be017a243ad804d846102c9c, type: 2}
@@ -66823,6 +66939,10 @@ PrefabInstance:
     - target: {fileID: 3329247755862683088, guid: 1cd9d0d48ab86a44d8d1d6493bd1ea72, type: 3}
       propertyPath: m_Name
       value: Subtitles
+      objectReference: {fileID: 0}
+    - target: {fileID: 3329247755862683088, guid: 1cd9d0d48ab86a44d8d1d6493bd1ea72, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3329247755862683091, guid: 1cd9d0d48ab86a44d8d1d6493bd1ea72, type: 3}
       propertyPath: m_Pivot.x
