@@ -210,6 +210,7 @@ public class ProgressionManager : MonoBehaviour
             //GameObject.Find("WayPointPrefabs").transform.Find("MainQuest4 Waypoints").gameObject.SetActive(true);
             QuestInfoText.text = "Find and Destroy the shield generators to escape!";
             grappleUnlocked = true;
+            currentQuest = null;
         }
 
 
@@ -224,7 +225,7 @@ public class ProgressionManager : MonoBehaviour
             grappleUnlocked = true;
             if(!servosCutscenePlayed)
             {
-              PlayCutscene(6);
+              //PlayCutscene(6);
               servosCutscenePlayed = true;
             }
         }

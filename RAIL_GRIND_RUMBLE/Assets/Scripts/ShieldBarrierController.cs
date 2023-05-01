@@ -14,6 +14,8 @@ public class ShieldBarrierController : MonoBehaviour
     [SerializeField] private bool forcedDestroy;
     [SerializeField] private string updatedQuestInfoText;
     [SerializeField] private bool incrementWaypoint;
+    [SerializeField] private bool setWayPoint;
+    [SerializeField] private int wayPointIndex;
 
     private void Start()
     {
@@ -48,6 +50,12 @@ public class ShieldBarrierController : MonoBehaviour
             {
                 wayPointPrefab.GetComponent<TotalWaypointController>().currentIndex++;
             }
+            
+            if (setWayPoint)
+            {
+                wayPointPrefab.GetComponent<TotalWaypointController>().currentIndex = wayPointIndex;
+            }
+
             questInfoText.text = updatedQuestInfoText;
             endRoutinePerformed = true;
         }

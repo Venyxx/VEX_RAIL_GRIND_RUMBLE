@@ -115,8 +115,15 @@ public class LocuoQuestGiver : QuestGiver
 
         if (SceneManager.GetActiveScene().name == "InnerRingLevel")
         {
-            FindObjectOfType<TotalWaypointController>().currentIndex = 2;
-            ProgressionManager.Get().QuestInfoText.text = "Race Locuo to the last shield generator!";
+            TotalWaypointController totalRef = GameObject.Find("WayPointPrefabs").transform.Find("MainQuest4 Waypoints")
+                .GetComponent<TotalWaypointController>();
+            totalRef.gameObject.SetActive(true);
+            totalRef.currentIndex = 2;
+            if (ProgressionManager.Get().QuestInfoText.text != null)
+            {
+                ProgressionManager.Get().QuestInfoText.text = "Race Locuo to the last shield generator!";
+
+            }
             GameObject killboxes = GameObject.Find("Killboxes");
             foreach (Transform child in killboxes.transform)
             {
@@ -134,14 +141,19 @@ public class LocuoQuestGiver : QuestGiver
         }
 
         _dialogueTrigger.enabled = false;
+        Debug.Log("INVOKING SETACTIVATED");
         Invoke(nameof(SetActivated), startDelay);
     }
 
     private void SetActivated()
     {
+        Debug.Log("SETACTIVATED RUNNING");
         activated = true;
-        RaceMusic.SetActive(true);
-        dynamicMusic.SetActive(false);
+        if (RaceMusic != null && dynamicMusic != null)
+        {
+            RaceMusic.SetActive(true);
+            dynamicMusic.SetActive(false); 
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -181,8 +193,13 @@ public class LocuoQuestGiver : QuestGiver
                 new Vector3(667.369995f, 31.9400005f, 1216.16003f);
         }
 
-        RaceMusic.SetActive(false);
-        dynamicMusic.SetActive(true);
+        if (RaceMusic != null && dynamicMusic != null)
+        {
+            RaceMusic.SetActive(false);
+            dynamicMusic.SetActive(true);
+        }
+
+
 
         
     }
