@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Collections;
+using System.Runtime.CompilerServices;
 using PathCreation;
 using UnityEngine;
 using UnityEngine.InputSystem.DualShock;
@@ -106,10 +107,13 @@ public class LocuoQuestGiver : QuestGiver
     public void Activate()
     {
         ProgressionManager.Get().grappleUnlocked = true;
-        GameObject mainWaypoints = GameObject.Find("Main Waypoints");
-        if (mainWaypoints != null && SceneManager.GetActiveScene().name == "Outskirts")
+        
+        if (SceneManager.GetActiveScene().name == "Outskirts")
         {
-            mainWaypoints.GetComponent<TotalWaypointController>().currentIndex = 1;
+            GameObject waypointPrefabs = GameObject.Find("WayPointPrefabs");
+            GameObject mainWaypoints = waypointPrefabs.transform.Find("Main Waypoints").gameObject;
+            mainWaypoints.SetActive(true);
+            StartCoroutine(SetIndexForced(mainWaypoints.GetComponent<TotalWaypointController>()));
             ProgressionManager.Get().QuestInfoText.text = "Race Locuo to the find Diego!";
         }
 
@@ -228,5 +232,11 @@ public class LocuoQuestGiver : QuestGiver
     public LocuoQuest GetLocuoQuest()
     {
         return locuoQuestToGive;
+    }
+
+    private IEnumerator SetIndexForced(TotalWaypointController wp)
+    {
+        yield return new WaitForSeconds(0.5f);
+        wp.currentIndex = 1;
     }
 }
