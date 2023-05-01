@@ -163,7 +163,7 @@ public class ETCCustomizationVendor : MonoBehaviour
 
             //set color if owned
             Image img = t.GetComponent<Image>();
-            img.color = SaveManager.Instance.IsAriAccessoryOwned(i) ? Color.white : new Color (0.3f, 0.3f, 0.3f);
+            img.color = SaveManager.Instance.IsAriAccessoryOwned(i) ? Color.white : new Color (0.7f, 0.7f, 0.7f);
 
             i++;
         }
@@ -178,7 +178,7 @@ public class ETCCustomizationVendor : MonoBehaviour
 
             //set theme if owned
             Image img = t.GetComponent<Image>();
-            img.color = SaveManager.Instance.IsAriTopOwned(i) ? Color.white : new Color (0.3f, 0.3f, 0.3f);
+            img.color = SaveManager.Instance.IsAriTopOwned(i) ? Color.white : new Color (0.7f, 0.7f, 0.7f);
 
             i++;
         }
@@ -191,7 +191,7 @@ public class ETCCustomizationVendor : MonoBehaviour
 
             //set theme if owned
             Image img = t.GetComponent<Image>();
-            img.color = SaveManager.Instance.IsAriBottomOwned(i) ? Color.white : new Color (0.3f, 0.3f, 0.3f);
+            img.color = SaveManager.Instance.IsAriBottomOwned(i) ? Color.white : new Color (0.7f, 0.7f, 0.7f);
 
             i++;
         }
@@ -204,7 +204,7 @@ public class ETCCustomizationVendor : MonoBehaviour
 
             //set theme if owned
             Image img = t.GetComponent<Image>();
-            img.color = SaveManager.Instance.IsAriSockOwned(i) ? Color.white : new Color (0.3f, 0.3f, 0.3f);
+            img.color = SaveManager.Instance.IsAriSockOwned(i) ? Color.white : new Color (0.7f, 0.7f, 0.7f);
 
             i++;
         }
@@ -217,7 +217,7 @@ public class ETCCustomizationVendor : MonoBehaviour
 
             //set theme if owned
             Image img = t.GetComponent<Image>();
-            img.color = SaveManager.Instance.IsAriSkateOwned(i) ? Color.white : new Color (0.3f, 0.3f, 0.3f);
+            img.color = SaveManager.Instance.IsAriSkateOwned(i) ? Color.white : new Color (0.7f, 0.7f, 0.7f);
 
             i++;
         }
@@ -231,7 +231,7 @@ public class ETCCustomizationVendor : MonoBehaviour
 
                 //set theme if owned
                 Image img = t.GetComponent<Image>();
-                img.color = SaveManager.Instance.IsAriHairOwned(i) ? Color.white : new Color (0.3f, 0.3f, 0.3f);
+                img.color = SaveManager.Instance.IsAriHairOwned(i) ? Color.white : new Color (0.7f, 0.7f, 0.7f);
 
                 i++;
             }
@@ -245,7 +245,7 @@ public class ETCCustomizationVendor : MonoBehaviour
 
                 //set theme if owned
                 //Image img = t.GetComponent<Image>();
-                //img.color = SaveManager.Instance.IsAriHairOwned(i) ? Color.white : new Color (0.3f, 0.3f, 0.3f);
+                //img.color = SaveManager.Instance.IsAriHairOwned(i) ? Color.white : new Color (0.7f, 0.7f, 0.7f);
 
                 i++;
             }
@@ -259,7 +259,7 @@ public class ETCCustomizationVendor : MonoBehaviour
 
                 //set theme if owned
                 Image img = t.GetComponent<Image>();
-                img.color = SaveManager.Instance.IsAriMaskOwned(i) ? Color.white : new Color (0.3f, 0.3f, 0.3f);
+                img.color = SaveManager.Instance.IsAriMaskOwned(i) ? Color.white : new Color (0.7f, 0.7f, 0.7f);
 
                 i++;
             }

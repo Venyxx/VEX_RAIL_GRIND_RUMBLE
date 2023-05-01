@@ -183,12 +183,12 @@ public class CustomizationMEnu : MonoBehaviour
             {
                 
                 StartCoroutine(OpenInfoScreen());
-                previewCamera.SetActive(true);
+                
                
                 
             } else {
                 StartCoroutine(CloseInfoScreen());
-                previewCamera.SetActive(false);
+                
             }
 
     }
@@ -236,6 +236,8 @@ public class CustomizationMEnu : MonoBehaviour
         missionsButton.gameObject.SetActive(true);
         progressButton.gameObject.SetActive(true);
         graffitiButton.gameObject.SetActive(true);
+        previewCamera.SetActive(true);
+        previewCamItself.SetActive(true);
 
         OpenMap();
         isOpen = true;
@@ -268,6 +270,8 @@ public class CustomizationMEnu : MonoBehaviour
         missionsButton.gameObject.SetActive(false);
         progressButton.gameObject.SetActive(false);
         graffitiButton.gameObject.SetActive(false);
+        previewCamera.SetActive(false);
+        previewCamItself.SetActive(false);
 
         Time.timeScale = 1f;
         Cursor.visible = false;
