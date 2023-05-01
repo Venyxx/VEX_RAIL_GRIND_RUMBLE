@@ -64,7 +64,7 @@ public class InfoScreen : MonoBehaviour
 
     void Update()
     {
-        if (EventSystem.current.currentSelectedGameObject == null)
+        if (EventSystem.current.currentSelectedGameObject == null && isOpen)
         {
             if (missionsTab.activeInHierarchy)
             {

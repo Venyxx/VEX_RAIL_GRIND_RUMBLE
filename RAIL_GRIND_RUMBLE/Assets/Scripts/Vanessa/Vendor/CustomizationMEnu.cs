@@ -65,36 +65,39 @@ public class CustomizationMEnu : MonoBehaviour
 
         playerActions = new InputHandler();
         playerActions.Player.Enable();
+        
     }
 
     private void Update()
     {
-       moveInput = playerActions.Player.Move.ReadValue<Vector2>();
-       //Debug.Log("is open status: " + isOpen);
-
-        if(moveInput.x < 0 && isOpen)
+       if (EventSystem.current.currentSelectedGameObject == null)
         {
-            Debug.Log("trying to left");
-             StartCoroutine(IncreaseVectorLeft());
-        }
+            Debug.Log("event system was null, setting");
+            if (mapTab.activeInHierarchy)
+            {
+                custFirstButton.Select();
+                custFirstButton.OnSelect(null);
+            }
 
-        if(moveInput.x > 0 && isOpen)
-        {
-            Debug.Log("trying to right");
-            
-             StartCoroutine(IncreaseVectorRight());
-        }
+            if (missionsTab.activeInHierarchy)
+            {
+                custSecButton.Select();
+                custSecButton.OnSelect(null);
+            }
 
-        if(moveInput.y < 0 && isOpen)
-        {
-            Debug.Log("trying to down");
-             StartCoroutine(IncreaseVectorDown());
-        }
+            if (progressTab.activeInHierarchy)
+            {
+                custThirdButton.Select();
+                 custThirdButton.OnSelect(null);
+            }
 
-        if(moveInput.y > 0 && isOpen)
-        {
-            Debug.Log("trying to up");
-             StartCoroutine(IncreaseVectorUp());
+            if (graffitiTab.activeInHierarchy)
+            {
+                custFourthButton.Select();
+                custFourthButton.OnSelect(null);
+            }
+
+           
         }
 
 
@@ -161,8 +164,10 @@ public class CustomizationMEnu : MonoBehaviour
         {
             if (isOpen == false && PauseMenu.isPaused == false)
             {
+                
                 StartCoroutine(OpenInfoScreen());
-                custFirstButton.Select();
+                
+                
             } else {
                 StartCoroutine(CloseInfoScreen());
             }
@@ -176,9 +181,11 @@ public class CustomizationMEnu : MonoBehaviour
 
             if (isOpen == false && PauseMenu.isPaused == false)
             {
+                
                 StartCoroutine(OpenInfoScreen());
                 previewCamera.SetActive(true);
-                custFirstButton.Select();
+               
+                
             } else {
                 StartCoroutine(CloseInfoScreen());
                 previewCamera.SetActive(false);
@@ -234,6 +241,12 @@ public class CustomizationMEnu : MonoBehaviour
         isOpen = true;
         Debug.Log("just ran toopen");
 
+        if (InfoScreen.isOpen)
+                {
+                    InfoScreen infoScreen = GameObject.Find("canvasPrefab").GetComponent<InfoScreen>();
+                    infoScreen.StartCoroutine(infoScreen.CloseInfoScreen());
+                }
+
         yield return new WaitForSeconds(0.75f);
 
         Time.timeScale = 0f;
@@ -275,19 +288,19 @@ public class CustomizationMEnu : MonoBehaviour
         if (currentTab == "Map")
         {
             OpenMissionsTab();
-            custFirstButton.Select();
+            
         } else if (currentTab == "Missions")
         {
             OpenProgressTab();
-            custSecButton.Select();
+           
         } else if (currentTab == "Progress")
         {
             OpenGraffitiTab();
-            custThirdButton.Select();
+        ;
         } else if (currentTab == "Graffiti")
         {
             OpenMapTab();
-            custFourthButton.Select();
+           
         }
 
     }
@@ -297,15 +310,19 @@ public class CustomizationMEnu : MonoBehaviour
         if (currentTab == "Map")
         {
             OpenGraffitiTab();
+           
         } else if (currentTab == "Missions")
         {
             OpenMapTab();
+         
         } else if (currentTab == "Progress")
         {
             OpenMissionsTab();
+           
         } else if (currentTab == "Graffiti")
         {
             OpenProgressTab();
+            
         }
     }
 
