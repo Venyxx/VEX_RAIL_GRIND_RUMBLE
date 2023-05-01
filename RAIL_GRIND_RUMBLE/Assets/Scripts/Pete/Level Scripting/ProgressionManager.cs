@@ -181,7 +181,7 @@ public class ProgressionManager : MonoBehaviour
             LoadMainQuest3();
         }
 
-        if (mainQuest3 != null && IsFinished(mainQuest3) && sceneName ==  "Ari's House" && !prologueComplete)
+        if (mainQuest3 != null && mainQuest3.isComplete && sceneName ==  "Ari's House" && !prologueComplete)
         {
             PlayCutscene(4);
             deathCutscenePlayed = true;
