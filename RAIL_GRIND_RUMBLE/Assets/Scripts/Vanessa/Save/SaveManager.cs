@@ -346,6 +346,7 @@ public class SaveManager : MonoBehaviour
     public void ResetSave()
     {
         PlayerPrefs.DeleteKey("save");
+        Application.Quit();
         Debug.Log("reset!");
     }
 }
