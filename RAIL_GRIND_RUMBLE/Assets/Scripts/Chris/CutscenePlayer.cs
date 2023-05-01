@@ -16,6 +16,7 @@ public class CutscenePlayer : MonoBehaviour
     VideoController videoScript;
     public bool cutscenePlaying;
     private AudioSource musicSource;
+    [SerializeField] private GameObject dynamicMusic;
 
     
 
@@ -45,6 +46,7 @@ public class CutscenePlayer : MonoBehaviour
     {
         cutscenePlaying = true;
         Time.timeScale = 0f;
+        dynamicMusic.SetActive(false);
        
         
 
@@ -79,6 +81,7 @@ public class CutscenePlayer : MonoBehaviour
 
         Time.timeScale = 1f;
         cutscenePlaying = false;
+        dynamicMusic.SetActive(true);
     }
 
     public void SkipCutscene(InputAction.CallbackContext context)

@@ -8,11 +8,13 @@ public class VideoController : MonoBehaviour
     public UnityEngine.Video.VideoPlayer videoPlayer;
     public RenderTexture renderTexture;
     public Texture2D firstFrameTexture;
+    
 
     void Awake()
     {
         renderTexture.DiscardContents();
         Graphics.Blit(firstFrameTexture, renderTexture);
+        
     }
     void Start()
     {
@@ -29,5 +31,6 @@ public class VideoController : MonoBehaviour
         renderTexture.DiscardContents();
         Graphics.Blit(firstFrameTexture, renderTexture);
         this.gameObject.SetActive(false);
+        
     }
 }

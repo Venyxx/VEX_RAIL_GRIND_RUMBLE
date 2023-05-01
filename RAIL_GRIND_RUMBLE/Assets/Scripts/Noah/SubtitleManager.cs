@@ -22,6 +22,7 @@ public class SubtitleManager : MonoBehaviour
     public GameObject cutsceneplayerREF;
     CutscenePlayer cutsceneplayer;
     [SerializeField] private VideoClip[] cutsceneClips;
+    public VideoPlayer videoPlayer;
 
     private bool subtitlePlaying;
     
@@ -33,6 +34,7 @@ public class SubtitleManager : MonoBehaviour
         spanishModeScript = GetComponent<SpanishMode>();
         cutsceneplayer = cutsceneplayerREF.GetComponent<CutscenePlayer>();
         cutsceneClips = cutsceneplayer.cutsceneClips;
+        videoPlayer = FindObjectOfType<VideoPlayer>();
         
         subtitleGO.SetActive(false);
         subtitlePlaying = false;
@@ -51,6 +53,7 @@ public class SubtitleManager : MonoBehaviour
         if (cutsceneplayer.cutscenePlaying == false)
         {
             subtitlePlaying = false;
+            subtitleGO.SetActive(false);
         }
             
     }
@@ -79,25 +82,27 @@ public class SubtitleManager : MonoBehaviour
         {
             for (int i = 0; i < cutsceneClips.Length; i++)
             {
-
-
                 if (voiceLine.cutsceneclip == cutsceneClips[i])
                 {
-                    if (voiceLine.text == "")
+
+                    if (voiceLine.cutsceneclip == videoPlayer.clip)
                     {
-                        subtitleBackground.SetActive(false);
-                        englishSubtitles.text = voiceLine.text;
-                        
-                        yield return new WaitForSecondsRealtime(voiceLine.time);
-                    }
-                    else
-                    {
-                        subtitleBackground.SetActive(true);
-                        englishSubtitles.text = voiceLine.text;
-                        yield return new WaitForSecondsRealtime(voiceLine.time);
+                        if (voiceLine.text == "")
+                        {
+                            subtitleBackground.SetActive(false);
+                            englishSubtitles.text = voiceLine.text;
+
+                            yield return new WaitForSecondsRealtime(voiceLine.time);
+                        }
+                        else
+                        {
+                            subtitleBackground.SetActive(true);
+                            englishSubtitles.text = voiceLine.text;
+                            yield return new WaitForSecondsRealtime(voiceLine.time);
+                        }
                     }
                 }
-                
+
             }
         }
         

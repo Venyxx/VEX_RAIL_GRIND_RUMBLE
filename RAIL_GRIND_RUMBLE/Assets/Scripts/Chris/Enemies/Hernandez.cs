@@ -30,6 +30,8 @@ public class Hernandez : MonoBehaviour, IDamageable
     //MechBossMovementReff
     private MechBossMovement mechmovement;
     
+    [SerializeField] private GameObject Bossmusic;
+    [SerializeField] private GameObject DynamicMuusic;
 
     void Start()
     {
@@ -182,7 +184,12 @@ public class Hernandez : MonoBehaviour, IDamageable
             currentHealth = 0;
 
             //Temporary
+            Bossmusic.SetActive(false);
+            DynamicMuusic.SetActive(true);
             Destroy(gameObject);
+
+            
+            
         }
     }
 
