@@ -17,6 +17,8 @@ public class CutscenePlayer : MonoBehaviour
     public bool cutscenePlaying;
     private AudioSource musicSource;
 
+    
+
     private float prevMusicVolume;
     // Start is called before the first frame update
     void Awake()
@@ -24,6 +26,8 @@ public class CutscenePlayer : MonoBehaviour
         musicSource = GameObject.Find("Music").GetComponent<AudioSource>();
         videoPlayer = this.transform.GetChild(0).GetComponent<VideoPlayer>();
         renderTexture = this.transform.GetChild(1).GetComponent<RawImage>();
+
+        
     }
 
     // Update is called once per frame
@@ -41,6 +45,8 @@ public class CutscenePlayer : MonoBehaviour
     {
         cutscenePlaying = true;
         Time.timeScale = 0f;
+       
+        
 
         //Pause other game audio here
         /*AudioListener audio = GameObject.Find("Main Camera").GetComponent<AudioListener>();

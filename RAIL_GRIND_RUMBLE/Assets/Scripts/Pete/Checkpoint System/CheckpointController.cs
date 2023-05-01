@@ -10,6 +10,7 @@ public class CheckpointController : MonoBehaviour
     [SerializeField] private bool updatesPlayerSpawn = true;
     [SerializeField] private int cutsceneToPlay;
     [SerializeField] private GameObject[] objectsToActivate;
+    [SerializeField] private GameObject[] objectsToDeactivate;
     [SerializeField] private string newQuestInfoText;
     [SerializeField] private bool updatesQuestInfoText;
     [SerializeField] private bool disableWaypoints;
@@ -28,6 +29,12 @@ public class CheckpointController : MonoBehaviour
     {
         ari = GameObject.Find("playerPrefab");
         totalRef = FindObjectOfType<TotalWaypointController>();
+        if (SceneManager.GetActiveScene().name == "InnerRingLevel")
+        {
+            totalRef = GameObject.Find("WayPointPrefabs").transform.Find("MainQuest4 Waypoints")
+                .GetComponent<TotalWaypointController>();
+        }
+
         if (!lastCheckPointPosition.Equals(new Vector3(0, 0, 0)))
         {
             Debug.Log("Spawning Ari at a Checkpoint Position");
@@ -47,21 +54,7 @@ public class CheckpointController : MonoBehaviour
         IDamageable damageable;
         if (other.CompareTag("Player") || other.CompareTag("PlayerObject"))
         {
-
-            if (objectsToActivate.Length > 0)
-            {
-                foreach (GameObject obj in objectsToActivate)
-                {
-                    if(obj != null)
-                        obj.SetActive(true);
-                }
-            }
-
-            if (other.TryGetComponent<IDamageable>(out damageable))
-            {
-                damageable.GainHealth(100);
-            }
-
+            
             if (updatesPlayerSpawn)
             {
                 lastCheckPointPosition = this.gameObject.transform.position;
@@ -69,6 +62,28 @@ public class CheckpointController : MonoBehaviour
 
             if (!performedProgressionAction)
             {
+                performedProgressionAction = true;
+                if (objectsToActivate != null && objectsToActivate.Length > 0)
+                {
+                    foreach (GameObject obj in objectsToActivate)
+                    {
+                        if(obj != null)
+                            obj.SetActive(true);
+                    }
+                }
+            
+                if (objectsToDeactivate != null && objectsToDeactivate.Length > 0)
+                {
+                    foreach (GameObject obj in objectsToDeactivate)
+                    {
+                        if(obj != null)
+                            obj.SetActive(false);
+                    }
+                }
+                if (other.TryGetComponent<IDamageable>(out damageable))
+                {
+                    damageable.GainHealth(100);
+                }
                 if (updatesQuestInfoText)
                 {
                     ProgressionManager.Get().QuestInfoText.text = newQuestInfoText;
@@ -116,7 +131,7 @@ public class CheckpointController : MonoBehaviour
                 {
                     ProgressionManager.Get().PlayCutscene(cutsceneToPlay);
                 }
-                performedProgressionAction = true;
+                 //MOVE ME TO TOP
             }
         }
     }

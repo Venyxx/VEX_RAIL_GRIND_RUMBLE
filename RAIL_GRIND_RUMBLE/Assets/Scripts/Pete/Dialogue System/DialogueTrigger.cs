@@ -109,7 +109,7 @@ public class DialogueTrigger : MonoBehaviour
             talkPrompt = GameObject.Find("TalkPrompt");
 
         }
-        if (talkPrompt.activeInHierarchy)
+        if (talkPrompt != null && talkPrompt.activeInHierarchy)
         {
             talkPrompt.SetActive(false);
         }

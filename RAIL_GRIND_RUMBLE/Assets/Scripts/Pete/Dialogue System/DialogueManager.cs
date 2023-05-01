@@ -335,6 +335,10 @@ public class DialogueManager : MonoBehaviour
                 //questGiver.OpenQuestWindow();
                 questGiver.AcceptQuest();
                 questGiver.acceptedOrDeniedAlready = true;
+                if (quest is LocuoQuest locuoQuest)
+                {
+                    locuoQuest.Activate();
+                }
             }
             else
             {
@@ -342,10 +346,7 @@ public class DialogueManager : MonoBehaviour
             }
 
             //Debug.Log($"Attempting to Activate RivalQuest {text}, {quest.QuestAcceptedText}");
-            if (quest is LocuoQuest locuoQuest && quest.questAcceptedText.paragraphs[0].englishDialogue == text)
-            {
-                locuoQuest.Activate();
-            }
+            
 
             //Debug.Log($"Quest is marked complete? {questGiver.GetQuest().isComplete}");
             //Debug.Log($"QuestRewards marked as Given? {questGiver.GetQuest().RewardsGiven}");
