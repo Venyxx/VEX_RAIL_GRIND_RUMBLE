@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using Unity.VisualScripting.Dependencies.NCalc;
 
 public class CustomizationMEnu : MonoBehaviour
 {
@@ -31,8 +32,14 @@ public class CustomizationMEnu : MonoBehaviour
     public Button graffitiButton;
     public Sprite tabSelected;
     public Sprite tabNotSelected;
+    private ThirdPersonMovement ThirdPersonMovementREF;
+    public InputHandler playerActions { get; private set; }
 
+
+    public Vector2 moveInput;
     public Button custFirstButton, custSecButton, custThirdButton, custFourthButton;
+    private GameObject previewCamera;
+    private GameObject previewCamItself;
 
     private Graffiti graffitiREF;
     // Start is called before the first frame update
@@ -46,9 +53,108 @@ public class CustomizationMEnu : MonoBehaviour
         graffitiTab.SetActive(false);
         DisplayTab.SetActive(true);
         graffitiREF = GameObject.Find("SprayCanTransform").GetComponent<Graffiti>();
+        ThirdPersonMovementREF = GameObject.Find("playerPrefab").GetComponent<ThirdPersonMovement>();
+
+        previewCamera = GameObject.Find("CharacterPreviewBackgr");
+         if (previewCamera)
+            previewCamera.SetActive(false);
+
+        previewCamItself = GameObject.Find ("CharacterPreviewCamera");
+          if (previewCamItself)
+            previewCamItself.SetActive(false);
+
+        playerActions = new InputHandler();
+        playerActions.Player.Enable();
+        
+    }
+
+    private void Update()
+    {
+       if (EventSystem.current.currentSelectedGameObject == null)
+        {
+            Debug.Log("event system was null, setting");
+            if (mapTab.activeInHierarchy)
+            {
+                custFirstButton.Select();
+                custFirstButton.OnSelect(null);
+            }
+
+            if (missionsTab.activeInHierarchy)
+            {
+                custSecButton.Select();
+                custSecButton.OnSelect(null);
+            }
+
+            if (progressTab.activeInHierarchy)
+            {
+                custThirdButton.Select();
+                 custThirdButton.OnSelect(null);
+            }
+
+            if (graffitiTab.activeInHierarchy)
+            {
+                custFourthButton.Select();
+                custFourthButton.OnSelect(null);
+            }
+
+           
+        }
+
+
+           
     }
 
 
+    //for moving the mouse cursor with the controller
+    public IEnumerator IncreaseVectorLeft()
+    {
+        Vector2 currentPosition = Mouse.current.position.ReadValue();
+        Vector2 moveVector = new Vector2(-1, currentPosition.y);
+        
+        Vector2 newPosition = currentPosition + moveVector;
+        newPosition.x = Mathf.Clamp(newPosition.x, 0, Screen.width);
+        newPosition.y = Mathf.Clamp(newPosition.y, 0, Screen.width);
+        Mouse.current.WarpCursorPosition(newPosition);
+
+
+        yield return new WaitForSeconds(200f);
+    }
+
+    public IEnumerator IncreaseVectorRight()
+    {
+        Vector2 currentPosition = Mouse.current.position.ReadValue();
+        Vector2 moveVector = new Vector2(1, currentPosition.y);
+        
+        Vector2 newPosition = currentPosition + moveVector;
+        newPosition.x = Mathf.Clamp(newPosition.x, 0, Screen.width);
+        newPosition.y = Mathf.Clamp(newPosition.y, 0, Screen.width);
+        Mouse.current.WarpCursorPosition(newPosition);
+        yield return new WaitForSeconds(200f);
+    }
+
+        public IEnumerator IncreaseVectorUp()
+    {
+        Vector2 currentPosition = Mouse.current.position.ReadValue();
+        Vector2 moveVector = new Vector2(currentPosition.x, 1);
+        
+        Vector2 newPosition = currentPosition + moveVector;
+        newPosition.x = Mathf.Clamp(newPosition.x, 0, Screen.width);
+        newPosition.y = Mathf.Clamp(newPosition.y, 0, Screen.width);
+        Mouse.current.WarpCursorPosition(newPosition);
+        yield return new WaitForSeconds(200f);
+    }
+
+        public IEnumerator IncreaseVectorDown()
+    {
+        Vector2 currentPosition = Mouse.current.position.ReadValue();
+        Vector2 moveVector = new Vector2(currentPosition.x, -1);
+        
+        Vector2 newPosition = currentPosition + moveVector;
+        newPosition.x = Mathf.Clamp(newPosition.x, 0, Screen.width);
+        newPosition.y = Mathf.Clamp(newPosition.y, 0, Screen.width);
+        Mouse.current.WarpCursorPosition(newPosition);
+        yield return new WaitForSeconds(200f);
+    }
     
     public void OpenInfoButtonPressed(InputAction.CallbackContext context)
     {
@@ -58,17 +164,46 @@ public class CustomizationMEnu : MonoBehaviour
         {
             if (isOpen == false && PauseMenu.isPaused == false)
             {
+                
                 StartCoroutine(OpenInfoScreen());
-                custFirstButton.Select();
+                
+                
             } else {
                 StartCoroutine(CloseInfoScreen());
             }
         }
     }
 
+    //this version exists so it cna be attached to a button
+       public void OpenInfoButtonPressedLOC()
+    {
+       
+
+            if (isOpen == false && PauseMenu.isPaused == false)
+            {
+                
+                StartCoroutine(OpenInfoScreen());
+                previewCamera.SetActive(true);
+               
+                
+            } else {
+                StartCoroutine(CloseInfoScreen());
+                previewCamera.SetActive(false);
+            }
+
+    }
+
     public void BackPressed (InputAction.CallbackContext context)
     {
         if (context.started && isOpen == true)
+        {
+            StartCoroutine(CloseInfoScreen());
+        }
+    }
+    //for button attachment
+    public void BackPressedLOC ()
+    {
+        if (isOpen == true)
         {
             StartCoroutine(CloseInfoScreen());
         }
@@ -104,6 +239,13 @@ public class CustomizationMEnu : MonoBehaviour
 
         OpenMap();
         isOpen = true;
+        Debug.Log("just ran toopen");
+
+        if (InfoScreen.isOpen)
+                {
+                    InfoScreen infoScreen = GameObject.Find("canvasPrefab").GetComponent<InfoScreen>();
+                    infoScreen.StartCoroutine(infoScreen.CloseInfoScreen());
+                }
 
         yield return new WaitForSeconds(0.75f);
 
@@ -146,19 +288,19 @@ public class CustomizationMEnu : MonoBehaviour
         if (currentTab == "Map")
         {
             OpenMissionsTab();
-            custFirstButton.Select();
+            
         } else if (currentTab == "Missions")
         {
             OpenProgressTab();
-            custSecButton.Select();
+           
         } else if (currentTab == "Progress")
         {
             OpenGraffitiTab();
-            custThirdButton.Select();
+        ;
         } else if (currentTab == "Graffiti")
         {
             OpenMapTab();
-            custFourthButton.Select();
+           
         }
 
     }
@@ -168,15 +310,19 @@ public class CustomizationMEnu : MonoBehaviour
         if (currentTab == "Map")
         {
             OpenGraffitiTab();
+           
         } else if (currentTab == "Missions")
         {
             OpenMapTab();
+         
         } else if (currentTab == "Progress")
         {
             OpenMissionsTab();
+           
         } else if (currentTab == "Graffiti")
         {
             OpenProgressTab();
+            
         }
     }
 
