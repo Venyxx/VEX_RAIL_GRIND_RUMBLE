@@ -810,6 +810,7 @@ public class ThirdPersonMovement : MonoBehaviour
         if (SaveManager.Instance != null)
         {
             SaveManager.Instance.state.Money += coin;
+            SaveManager.Instance.Save();
             coinCountText.text = $"{(int) SaveManager.Instance.state.Money}";
         }
         PlaySound(0);

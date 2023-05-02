@@ -42,13 +42,13 @@ public class ETCCustomizationVendor : MonoBehaviour
     public AudioClip close;
     AudioSource audioSource;
 
-    private int [] accessoryCost = new int [] {0,15,20};
-    private int [] topCost = new int [] {0,50,55,60,0,50,55,60,0,50,55,60};
-    private int [] bottomCost = new int [] {0,50,55,60, 60, 60,60,60,60,70,80,80};
-    private int [] sockCost = new int [] {0,10,50};
-    private int [] skateCost = new int [] {10,50,55,60,60,60};
-    private int [] hairCost = new int [] {0,50,55,60};
-    private int [] maskCost = new int [] {10,50,55,60,60,60};
+    private int [] accessoryCost = new int [] {0,5,5};
+    private int [] topCost = new int [] {0,5,5,5,5,5,5,10,10,10,10,10};
+    private int [] bottomCost = new int [] {0,7,7,7, 7, 7,7,10,10,10,10,10};
+    private int [] sockCost = new int [] {0,5,5};
+    private int [] skateCost = new int [] {0,10,10,10,10,10};
+    private int [] hairCost = new int [] {0,10,10,10};
+    private int [] maskCost = new int [] {0,5,5,5,10,10};
     //private int [] graffitiCost = new int [] {0,0,0,0,0,0,0,0};
 
     private int selectedAccessoryIndex;
