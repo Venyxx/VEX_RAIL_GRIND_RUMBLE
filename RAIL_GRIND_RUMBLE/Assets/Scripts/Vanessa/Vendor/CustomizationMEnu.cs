@@ -41,6 +41,7 @@ public class CustomizationMEnu : MonoBehaviour
     public Button custFirstButton, custSecButton, custThirdButton, custFourthButton;
     private GameObject previewCamera;
     private GameObject previewCamItself;
+    InfoScreen infoScreenReal;
 
     private Graffiti graffitiREF;
     // Start is called before the first frame update
@@ -55,6 +56,7 @@ public class CustomizationMEnu : MonoBehaviour
         DisplayTab.SetActive(true);
         graffitiREF = GameObject.Find("SprayCanTransform").GetComponent<Graffiti>();
         ThirdPersonMovementREF = GameObject.Find("playerPrefab").GetComponent<ThirdPersonMovement>();
+        infoScreenReal = GameObject.Find("canvasPrefab").GetComponent<InfoScreen>();
 
         previewCamera = GameObject.Find("CharacterPreviewBackgr");
          if (previewCamera)
@@ -112,13 +114,14 @@ public class CustomizationMEnu : MonoBehaviour
 
         if (context.started)
         {
-            if (isOpen == false && PauseMenu.isPaused == false)
+            Debug.Log("checking for infosc");
+            if (isOpen == false && PauseMenu.isPaused == false && InfoScreen.isOpen)
             {
                 
                 StartCoroutine(OpenInfoScreen());
                 
                 
-            } else {
+            } else if (isOpen){
                 StartCoroutine(CloseInfoScreen());
             }
         }
@@ -129,7 +132,7 @@ public class CustomizationMEnu : MonoBehaviour
     {
        
 
-            if (isOpen == false && PauseMenu.isPaused == false)
+            if (isOpen == false && PauseMenu.isPaused == false && InfoScreen.isOpen)
             {
                 
                 StartCoroutine(OpenInfoScreen()); 
@@ -186,43 +189,47 @@ public class CustomizationMEnu : MonoBehaviour
 
     IEnumerator OpenInfoScreen()
     {
+        Debug.Log("ienum OIS" + InfoScreen.isOpen);
         if (InfoScreen.isOpen)
                 {
-                    InfoScreen infoScreen = GameObject.Find("canvasPrefab").GetComponent<InfoScreen>();
-                    infoScreen.StartCoroutine(infoScreen.CloseInfoScreen());
+                    PlaySoundUI(selectSound);
+
+                    infoScreen.SetActive(true);
+                    mapButton.gameObject.SetActive(true);
+                    missionsButton.gameObject.SetActive(true);
+                    progressButton.gameObject.SetActive(true);
+                    graffitiButton.gameObject.SetActive(true);
+                    previewCamera.SetActive(true);
+                    previewCamItself.SetActive(true);
+
+                    OpenMap();
+                    isOpen = true;
+                    Debug.Log("just ran toopen");
+
+                    
+
+                    
+
+                    Time.timeScale = 0f;
+                    Cursor.visible = true;
+                    Cursor.lockState = CursorLockMode.None;
+
+                    yield return new WaitForSeconds(0.75f);
+
+                    
                 } else
                 {
-                    yield return new WaitForSeconds(0.75f);
+                    Debug.Log("ienum OIS discard");
+                    InfoScreen infoScreen = GameObject.Find("canvasPrefab").GetComponent<InfoScreen>();
+                    infoScreen.StartCoroutine(infoScreen.CloseInfoScreen());
                 }  
                     
-        PlaySoundUI(selectSound);
-
-        infoScreen.SetActive(true);
-        mapButton.gameObject.SetActive(true);
-        missionsButton.gameObject.SetActive(true);
-        progressButton.gameObject.SetActive(true);
-        graffitiButton.gameObject.SetActive(true);
-        previewCamera.SetActive(true);
-        previewCamItself.SetActive(true);
-
-        OpenMap();
-        isOpen = true;
-        Debug.Log("just ran toopen");
-
         
-
-        
-
-        Time.timeScale = 0f;
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-
-        yield return new WaitForSeconds(0.75f);
     }
 
     IEnumerator CloseInfoScreen()
     {
-        PlaySoundUI(backSound);
+        //PlaySoundUI(backSound);
 
         mapTab.SetActive(false);
         missionsTab.SetActive(false);
