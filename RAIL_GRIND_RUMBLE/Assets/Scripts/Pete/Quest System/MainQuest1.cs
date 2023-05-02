@@ -65,7 +65,7 @@ public class MainQuest1 : CountQuest
     {
         if (!cutscenePlayed)
         {
-            ProgressionManager.Get().PlayCutscene(2);
+            //ProgressionManager.Get().PlayCutscene(2);
             cutscenePlayed = true;
         }
 

@@ -62,8 +62,30 @@ Y
 Z
 *Assets/Scripts/Raul/segadorMusicTrigger.cs,2\9\295de497bd5ec5ebe8bd55831226f841234b071f
 ^
-.Assets/Scripts/Pete/Quest System/MainQuest1.cs,f\1\f104c030bfe9e331603465607a9f14887ecdad17
-^
 .Assets/Scripts/Pete/Quest System/MainQuest3.cs,8\b\8b895f368c5b69a7a68d39001122c150d5ac9192
 m
 =Assets/Scripts/Pete/Checkpoint System/CheckpointController.cs,c\4\c498c8a4d1bde1a3ddf8f0382301a93ee12cb28a
+c
+3Assets/Scripts/Pete/Quest System/MainQuest3Giver.cs,7\b\7b0061197e69de1d756dc3d24031654a544c0440
+]
+-Assets/Scripts/Pete/Pickups/CoinController.cs,1\7\1742fbeed644db7e083b218304ec41e7384982f7
+Z
+*Assets/Scripts/Vanessa/Save/SaveManager.cs,f\3\f3b5f272ec70771ae49e148513d33ae7e5ba80cf
+\
+,Assets/Scripts/Chris/Enemies/DroneSpawner.cs,f\2\f2b54bb79533f9a282324f7d31118f47f4bbeb1d
+Z
+*Assets/Scripts/Raul/CinemachineSwitcher.cs,d\1\d1730fea55e2548046fd9ec9be5187521e3bcd9d
+O
+Assets/Scripts/Chris/WallRun.cs,4\e\4e716a4499fc346faeec49875ad24b782ce5c087
+X
+(Assets/Scripts/Vanessa/Save/SaveState.cs,8\4\8401900cde095764a2de39a2a58245a08b0df97e
+[
++Assets/Scripts/Chris/ThirdPersonMovement.cs,8\4\8445679af98e6402112b143daf7322eef94103e8
+[
++Assets/Scripts/Kevin/Player/PlayerHealth.cs,6\0\60fcf97351316ef10679309e1aaf28a0b3da95db
+i
+9Assets/Scripts/Pete/Level Scripting/ProgressionManager.cs,c\b\cb6c40785cfb9944479b58672222d362a5a42ad6
+^
+.Assets/Scripts/Pete/Quest System/MainQuest1.cs,f\1\f104c030bfe9e331603465607a9f14887ecdad17
+i
+9Assets/Scripts/Pete/Level Scripting/Diego/DiegoManager.cs,9\e\9eda5c3e281311a7b171032c9b5ea6a2f69df1c2
