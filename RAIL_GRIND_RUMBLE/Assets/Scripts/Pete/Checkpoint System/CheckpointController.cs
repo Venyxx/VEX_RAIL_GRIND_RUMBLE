@@ -128,6 +128,7 @@ public class CheckpointController : MonoBehaviour
                 if (killAllDrones)
                 {
                     var drones = FindObjectsOfType<Drone>();
+                    DroneSpawner.droneCount = 0;
                     foreach (var drone in drones)
                     {
                         Destroy(drone.gameObject);
