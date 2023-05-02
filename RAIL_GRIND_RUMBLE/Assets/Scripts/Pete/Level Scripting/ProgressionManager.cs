@@ -8,7 +8,6 @@ public class ProgressionManager : MonoBehaviour
 {
 
     private static ProgressionManager instance;
-    public int coinCount;
     public MainQuest1 mainQuest1;
     public MainQuest2 mainQuest2;
     public MainQuest3 mainQuest3;

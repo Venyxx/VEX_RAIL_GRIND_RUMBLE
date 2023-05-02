@@ -119,7 +119,6 @@ public class ThirdPersonMovement : MonoBehaviour
     public Rigidbody rigidBody;
 
     //Coins
-    private int coinCount;
     GameObject coinCounterREF;
     TextMeshProUGUI coinCountText;
 
@@ -172,7 +171,6 @@ public class ThirdPersonMovement : MonoBehaviour
         //ariWalkingShoes.SetActive(false);
 
         dialogueManager = FindObjectOfType<DialogueManager>();
-        coinCount = ProgressionManager.Get().coinCount;
         moveSpeed = 0;
         baseMoveSpeed= 2;
         speedLerp = 2.22f;
@@ -206,8 +204,12 @@ public class ThirdPersonMovement : MonoBehaviour
         //Coin Counter
         coinCounterREF = GameObject.Find("CoinCounter");
         coinCountText = coinCounterREF.GetComponent<TextMeshProUGUI>();
-        coinCountText.text = $"{coinCount}";
+        if (SaveManager.Instance != null)
+        {
+            coinCountText.text = $"{(int) SaveManager.Instance.state.Money}";
 
+        }
+        
         //Change/remove this line later based on level-to-level gameplay
         //coinCount = 0;
 
@@ -805,10 +807,11 @@ public class ThirdPersonMovement : MonoBehaviour
     public void AddCoin(int coin)
     {
         Debug.Log(coin);
-        coinCount = coinCount + coin;
-        ProgressionManager.Get().coinCount = coinCount;
-        Debug.Log(coinCount);
-        coinCountText.text = $"{coinCount}";
+        if (SaveManager.Instance != null)
+        {
+            SaveManager.Instance.state.Money += coin;
+            coinCountText.text = $"{(int) SaveManager.Instance.state.Money}";
+        }
         PlaySound(0);
         var questTracker = ProgressionManager.Get();
         if (questTracker.CurrentCountQuestType is CountQuestType.Coins)
