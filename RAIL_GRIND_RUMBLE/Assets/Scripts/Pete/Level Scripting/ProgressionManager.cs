@@ -31,6 +31,7 @@ public class ProgressionManager : MonoBehaviour
     private bool firstRaceCompleted;
     public bool deathCutscenePlayed = false;
     private bool servosCutscenePlayed = false;
+    public bool mainQuest3Death = false;
 
     public static ProgressionManager Get()
     {
@@ -180,10 +181,11 @@ public class ProgressionManager : MonoBehaviour
             LoadMainQuest3();
         }
 
-        if (mainQuest3 != null && mainQuest3.isComplete && sceneName ==  "Ari's House" && !prologueComplete)
+        if (mainQuest3 != null && mainQuest3Death && sceneName ==  "Ari's House" && !prologueComplete)
         {
             PlayCutscene(4);
             deathCutscenePlayed = true;
+            mainQuest3Death = false;
             QuestInfoText.text = "Ask for intel about Diego";
             prologueComplete = true;
             mainQuest3.RewardPlayer();
