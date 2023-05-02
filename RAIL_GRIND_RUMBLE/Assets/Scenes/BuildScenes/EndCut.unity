@@ -134,6 +134,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Subtitles
       objectReference: {fileID: 0}
+    - target: {fileID: 3329247755862683088, guid: 1cd9d0d48ab86a44d8d1d6493bd1ea72, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3329247755862683091, guid: 1cd9d0d48ab86a44d8d1d6493bd1ea72, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -220,30 +224,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1cd9d0d48ab86a44d8d1d6493bd1ea72, type: 3}
---- !u!114 &214933535 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3329247754313061632, guid: 1cd9d0d48ab86a44d8d1d6493bd1ea72, type: 3}
-  m_PrefabInstance: {fileID: 214933534}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &214933536 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3329247755862683091, guid: 1cd9d0d48ab86a44d8d1d6493bd1ea72, type: 3}
-  m_PrefabInstance: {fileID: 214933534}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &214933537 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3329247755919304753, guid: 1cd9d0d48ab86a44d8d1d6493bd1ea72, type: 3}
-  m_PrefabInstance: {fileID: 214933534}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &214933538 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3329247755862683088, guid: 1cd9d0d48ab86a44d8d1d6493bd1ea72, type: 3}
   m_PrefabInstance: {fileID: 214933534}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &276995999
@@ -386,7 +369,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 654653258}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: b2cb89f75e5185e43bc767708e3ef63f, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 6c2a980eb89f4004da9480875b79f996, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 654653260}
@@ -573,9 +556,6 @@ GameObject:
   - component: {fileID: 1397148504}
   - component: {fileID: 1397148503}
   - component: {fileID: 1397148502}
-  - component: {fileID: 1397148500}
-  - component: {fileID: 1397148506}
-  - component: {fileID: 1397148507}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -583,21 +563,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1397148500
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1397148499}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35b87962b545c43d2abbd78973d3c1d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SpanishTog: {fileID: 0}
-  englishUI: []
-  spanishUI: []
 --- !u!114 &1397148502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -680,56 +645,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1397148506
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1397148499}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b1be5a4889f47244ae176e33ffa1181, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  subtitleGO: {fileID: 214933538}
-  subtitleBackground: {fileID: 214933537}
-  englishSubtitles: {fileID: 214933535}
-  spanishSubtitles: {fileID: 214933535}
-  endEnglishSubtitleText:
-  - time: 2
-    text: This is a test
-  - time: 2
-    text: 'of the national emergency '
-  - time: 2
-    text: system
-  endSpanishSubtitleText: []
-  spanishModeScript: {fileID: 1397148500}
---- !u!114 &1397148507
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1397148499}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4e03083ddc426440a0ff3ff522b1551, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UrbanHeroes: []
-  Rebound: []
-  JackArmstrong: []
-  Liberation: []
-  Graffiti: []
-  Texts: []
-  urbanHeroesFont: {fileID: 11400000, guid: 7e135286be017a243ad804d846102c9c, type: 2}
-  reboundFont: {fileID: 11400000, guid: 3b84eff9946dd7d4b87ff95f944683dc, type: 2}
-  jackArmstrongFont: {fileID: 11400000, guid: e9e72a9800c8a4546997212cf61e1a43, type: 2}
-  liberationFont: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  openDyslexicFont: {fileID: 11400000, guid: 7526df0bfe096604998693f780f2732e, type: 2}
-  graffitiFont: {fileID: 11400000, guid: 537e96f4d91828b428e2bda3b1d987f1, type: 2}
-  DyslexiaTog: {fileID: 0}
 --- !u!1 &1788940980
 GameObject:
   m_ObjectHideFlags: 0

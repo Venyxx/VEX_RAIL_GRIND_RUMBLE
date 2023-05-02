@@ -19,7 +19,7 @@ public class PlugProgression : MonoBehaviour
     {
         if (CheckAllUnplugged() && !phase1Complete)
         {
-            ProgressionManager.Get().PlayCutscene(9);
+            //ProgressionManager.Get().PlayCutscene(9);
             DialogueManager.DialogueWipe();
             FindObjectOfType<ThirdPersonMovement>().gameObject.transform.position =
                 GameObject.Find("Phase2Teleport").transform.position;

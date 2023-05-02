@@ -27,7 +27,7 @@ public class SubtitleManager : MonoBehaviour
     private bool subtitlePlaying;
     
     
-    // Start is called before the first frame update
+   /* // Start is called before the first frame update
     void Start()
     {
 
@@ -47,7 +47,7 @@ public class SubtitleManager : MonoBehaviour
     {
         if (cutsceneplayer.cutscenePlaying == true && subtitlePlaying == false )
         {
-            StartSubtitiles();
+            //StartSubtitiles();
         }
 
         if (cutsceneplayer.cutscenePlaying == false)
@@ -135,6 +135,7 @@ public class SubtitleManager : MonoBehaviour
         
         subtitleGO.SetActive(false);
     }
+    */
 }
 
 [System.Serializable]

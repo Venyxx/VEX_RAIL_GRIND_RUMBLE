@@ -19,7 +19,7 @@ public class EndCutSubtitles : MonoBehaviour
 
     public SpanishMode spanishModeScript;
 
-    // Start is called before the first frame update
+    /*// Start is called before the first frame update
     void Start()
     {
 
@@ -90,7 +90,7 @@ public class EndCutSubtitles : MonoBehaviour
         }
 
         subtitleGO.SetActive(false);
-    }
+    }*/
 }
 
 [System.Serializable]

@@ -172,6 +172,7 @@ public class LocuoQuestGiver : QuestGiver
     {
         _playerWin = true;
         _raceOver = true;
+        locuoQuestToGive.isComplete = true;
         ProgressionManager.Get().CompleteQuest();
         StartCoroutine(DialogueManager.DialogueWipe());
         transform.position = raceOverWaitSpot.position;
