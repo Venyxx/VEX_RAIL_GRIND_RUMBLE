@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
@@ -31,6 +32,8 @@ public class MainMenu : MonoBehaviour
     public GameObject graphicsScreen;
     public GameObject accessibilityScreen;
     private Scene scene;
+
+    private bool isKeyboardAndMouse;
     
     
 
@@ -42,14 +45,30 @@ public class MainMenu : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(mainMenuFirstButton);
         Cursor.lockState = CursorLockMode.None;
         CheckpointController.lastCheckPointPosition = new Vector3(0, 0, 0);
-        GameObject.Find("damageBuffIcon").SetActive(false);
+        //GameObject.Find("damageBuffIcon").SetActive(false);
         scene = SceneManager.GetActiveScene();
-
+        
+        InputSystem.onActionChange += InputActionChangeCallback;
+        
     }
     // Update is called once per frame
     void Update()
     {
-        if (EventSystem.current.currentSelectedGameObject == null && mainMenu.activeInHierarchy)
+        
+        if (!EventSystem.current.IsPointerOverGameObject() && isKeyboardAndMouse)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
+        
+        if (!isKeyboardAndMouse && EventSystem.current.currentSelectedGameObject == null && mainMenu.activeInHierarchy)
+        {
+            //EventSystem.current.SetSelectedGameObject(null);
+            //Debug.Log("Forcing Main Menu Button To Be Selected Because We're Switching to Controller");
+            EventSystem.current.SetSelectedGameObject(mainMenuFirstButton);
+            //mainMenuFirstButton.GetComponent<Button>().Select();
+        }
+
+        /*if (EventSystem.current.currentSelectedGameObject == null && mainMenu.activeInHierarchy)
         {
             mainMenuFirstButton.GetComponent<Button>().Select();
         }
@@ -57,12 +76,9 @@ public class MainMenu : MonoBehaviour
         if (EventSystem.current.currentSelectedGameObject == null && SettingsMainPage.activeInHierarchy)
         {
             mainSettingsFirstButton.GetComponent<Button>().Select();
-        }
+        }*/
         
-        if (EventSystem.current.IsPointerOverGameObject())
-        {
-            EventSystem.current.SetSelectedGameObject(null);
-        }
+        
     }
     
     public void OpenSettings()
@@ -99,13 +115,30 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
         Debug.Log("Quitting");
     }
-
-
     
+ 
+    private void InputActionChangeCallback(object obj, InputActionChange change)
+    {
+        if (change == InputActionChange.ActionPerformed)
+        {
+            InputAction receivedInputAction = (InputAction) obj;
+            InputDevice lastDevice = receivedInputAction.activeControl.device;
 
+            
+            isKeyboardAndMouse = lastDevice.name.Equals("Keyboard") || lastDevice.name.Equals("Mouse");
+
+            if (isKeyboardAndMouse)
+            {
+                Cursor.lockState = CursorLockMode.None;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+
+            
+        }
+    }
     
-
-
-
 }
 
