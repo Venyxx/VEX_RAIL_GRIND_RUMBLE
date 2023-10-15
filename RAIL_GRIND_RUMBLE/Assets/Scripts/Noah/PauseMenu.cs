@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
-public class PauseMenu : MonoBehaviour
+public class PauseMenu : ControllerMenu
 {
     
 
@@ -58,12 +58,15 @@ public class PauseMenu : MonoBehaviour
 
     void Start()
     {
-        
+        base.Start();
         isPaused = false;
 
         grappleDetectorREF = GameObject.Find("GrappleDetector");
-        reticleScript = grappleDetectorREF.GetComponent<Reticle>();
+        if (grappleDetectorREF != null)
+        {
+            reticleScript = grappleDetectorREF.GetComponent<Reticle>();
 
+        }
         audioSource = GetComponent<AudioSource>();
         infoScreen = GetComponent<InfoScreen>();
         loading = GetComponent<LoadingScreen>();
@@ -71,7 +74,7 @@ public class PauseMenu : MonoBehaviour
         cutscenePlayerREF = FindObjectOfType<CutscenePlayer>();
     }
 
-    void Update()
+    /*void Update()
     {
         //Assures controllers always function on menus
         if (EventSystem.current.currentSelectedGameObject == null && isPaused == true && pauseMenu.activeInHierarchy)
@@ -83,7 +86,7 @@ public class PauseMenu : MonoBehaviour
         {
             EventSystem.current.SetSelectedGameObject(null);
         }
-    }
+    }*/
 
     public void PauseGamePressed(InputAction.CallbackContext context)
     {

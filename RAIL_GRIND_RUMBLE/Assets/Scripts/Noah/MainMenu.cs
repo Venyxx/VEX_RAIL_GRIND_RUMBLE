@@ -6,7 +6,7 @@ using System.Collections;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public class MainMenu : MonoBehaviour
+public class MainMenu : ControllerMenu
 {
 
     public string firstLevel;
@@ -33,14 +33,13 @@ public class MainMenu : MonoBehaviour
     public GameObject accessibilityScreen;
     private Scene scene;
 
-    private bool isKeyboardAndMouse;
-    
-    
+
 
 
     // Start is called before the first frame update
-    void Start()
+    new void Start()
     {
+        base.Start();
         EventSystem.current.SetSelectedGameObject(null); 
         EventSystem.current.SetSelectedGameObject(mainMenuFirstButton);
         Cursor.lockState = CursorLockMode.None;
@@ -48,25 +47,13 @@ public class MainMenu : MonoBehaviour
         //GameObject.Find("damageBuffIcon").SetActive(false);
         scene = SceneManager.GetActiveScene();
         
-        InputSystem.onActionChange += InputActionChangeCallback;
         
     }
     // Update is called once per frame
-    void Update()
+    new void Update()
     {
         
-        if (!EventSystem.current.IsPointerOverGameObject() && isKeyboardAndMouse)
-        {
-            EventSystem.current.SetSelectedGameObject(null);
-        }
-        
-        if (!isKeyboardAndMouse && EventSystem.current.currentSelectedGameObject == null && mainMenu.activeInHierarchy)
-        {
-            //EventSystem.current.SetSelectedGameObject(null);
-            //Debug.Log("Forcing Main Menu Button To Be Selected Because We're Switching to Controller");
-            EventSystem.current.SetSelectedGameObject(mainMenuFirstButton);
-            //mainMenuFirstButton.GetComponent<Button>().Select();
-        }
+        base.Update();
 
         /*if (EventSystem.current.currentSelectedGameObject == null && mainMenu.activeInHierarchy)
         {
@@ -115,30 +102,5 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
         Debug.Log("Quitting");
     }
-    
- 
-    private void InputActionChangeCallback(object obj, InputActionChange change)
-    {
-        if (change == InputActionChange.ActionPerformed)
-        {
-            InputAction receivedInputAction = (InputAction) obj;
-            InputDevice lastDevice = receivedInputAction.activeControl.device;
-
-            
-            isKeyboardAndMouse = lastDevice.name.Equals("Keyboard") || lastDevice.name.Equals("Mouse");
-
-            if (isKeyboardAndMouse)
-            {
-                Cursor.lockState = CursorLockMode.None;
-            }
-            else
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-            }
-
-            
-        }
-    }
-    
 }
 

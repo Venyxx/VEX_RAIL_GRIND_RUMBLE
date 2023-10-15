@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class GraphicsOptions : MonoBehaviour
+public class GraphicsOptions : ControllerMenu
 {
     public Toggle fullscreenTog;
     public Toggle vsyncTog;
@@ -43,6 +43,8 @@ public class GraphicsOptions : MonoBehaviour
             }
         }
 
+        base.Start();
+
         if(!foundRes)
         {
             ResItem newRes = new ResItem();
@@ -54,12 +56,7 @@ public class GraphicsOptions : MonoBehaviour
             UpdateResLabel();
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    
 
     public void ResLeft()
     {
