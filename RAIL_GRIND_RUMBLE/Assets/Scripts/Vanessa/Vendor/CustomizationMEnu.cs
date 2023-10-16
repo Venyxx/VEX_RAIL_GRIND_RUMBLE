@@ -75,7 +75,7 @@ public class CustomizationMEnu : MonoBehaviour
     {
        if (EventSystem.current.currentSelectedGameObject == null)
         {
-            Debug.Log("event system was null, setting");
+            //Debug.Log("event system was null, setting");
             if (mapTab.activeInHierarchy)
             {
                 custFirstButton.Select();

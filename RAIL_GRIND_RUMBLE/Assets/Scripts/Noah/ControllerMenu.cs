@@ -48,7 +48,7 @@ public class ControllerMenu : MonoBehaviour
 
         if (highestButton != null)
         {
-            Debug.Log("Highest Button is " + highestButton.name);
+            //Debug.Log("Highest Button is " + highestButton.name);
         }
 
         return highestButton;
