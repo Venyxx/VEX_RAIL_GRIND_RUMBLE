@@ -43,8 +43,6 @@ public class Graffiti : MonoBehaviour
 
     public float maxGraffitiBuffTime;
     private float currentGraffitiBuffTime;
-    private bool posterPresent;
-    RaycastHit theHit;
     
     [FormerlySerializedAs("IgnoreMe")] 
     public LayerMask layerMask;
@@ -166,7 +164,9 @@ public class Graffiti : MonoBehaviour
 
 
     void GraffitiFire()
-    {
+    { 
+        RaycastHit theHit = new RaycastHit();
+        bool posterPresent = false;
         
         RaycastHit[] hits;
         hits = Physics.RaycastAll(Camera.main.ScreenPointToRay(Input.mousePosition),5.0f, ~layerMask);
@@ -182,7 +182,7 @@ public class Graffiti : MonoBehaviour
 
             if (hit.collider.gameObject.tag == "Poster" || hit.collider.gameObject.layer == 19)
             {
-                posterPresent = true;
+                //posterPresent = true;
                 theHit = hits[i];
                 break;
             }
@@ -191,74 +191,35 @@ public class Graffiti : MonoBehaviour
                 theHit = hits[0];
         }
 
-        if (hits.Length == 0) return;
 
-        GameObject madeGraffiti;
-        GameObject particle;
-        GameObject particle2;   
-        //if poster
-        if (posterPresent)
+        GameObject madeGraffiti = Instantiate (decalProjector, canLocationForParticle.transform.position, ariRig.transform.rotation);
+        Instantiate (graffitiParticle, canLocationForParticle.transform.position, canLocationForParticle.transform.rotation);
+        Vector3 newPos = new Vector3 (playerGameObject.transform.position.x, madeGraffiti.transform.position.y, playerGameObject.transform.position.z);
+        madeGraffiti.transform.position = newPos;
+
+        PosterDetector posterDetector = madeGraffiti.transform.GetChild(0).GetComponent<PosterDetector>();
+        posterDetector.Initialize(this, theHit);
+    }
+
+    public void ActivateBuff(RaycastHit theHit)
+    {
+        ProgressionManager manager = ProgressionManager.Get();
+        if (manager.currentQuest is CountQuest countQuest && countQuest.GetCountQuestType() is CountQuestType.Graffiti)
         {
-            if (theHit.collider.gameObject.GetComponent<PosterActive>().isSprayed)
-            {
-                Debug.Log("this poster was sprayed");
-                
-                Debug.Log(theHit.normal);
-                Vector3 reverseHit = new Vector3(-theHit.normal.x, -theHit.normal.y, -theHit.normal.z);
-                madeGraffiti = Instantiate (decalProjector, canLocationForParticle.transform.position, ariRig.transform.rotation);
-                Debug.Log($"Decal Projector name: {madeGraffiti.name}");
-                particle = Instantiate (graffitiParticle, canLocationForParticle.transform.position, canLocationForParticle.transform.rotation);
-                Vector3 newPos = new Vector3 (playerGameObject.transform.position.x, madeGraffiti.transform.position.y, playerGameObject.transform.position.z);
-                //madeGraffiti.transform.position = newPos;
-                
-                return;
-            }
-                
-
-            Debug.Log("detected poster, playerGameobject would rec boost");
-            GameObject posterInfo = theHit.collider.gameObject;
-            var spawnLoc = posterInfo.transform.Find("DecalSpawnLoc");
-            //particle = Instantiate (graffitiParticle, canLocationForParticle.transform.position, canLocation.transform.rotation);
-            madeGraffiti = Instantiate (decalProjector, spawnLoc.transform.position, ariRig.transform.rotation); 
-            particle2 = Instantiate (graffitiParticle2, canLocationForParticle.transform.position, canLocationForParticle.transform.rotation);
-            
-            //moved to graffitichecking cs for quest sake
-            ProgressionManager manager = ProgressionManager.Get();
-            if (manager.currentQuest is CountQuest countQuest && countQuest.GetCountQuestType() is CountQuestType.Graffiti)
-            {
-                countQuest.IncrementCount();
-            }
-
-            //buff
-            //maxGraffitiBuffTimer = 30f;
-            currentGraffitiBuffTime = maxGraffitiBuffTime;
-            playerAttackREF.isBuffed = true;
-            theHit.collider.gameObject.GetComponent<PosterActive>().isSprayed = true;
-            return;
-            
-        }
-        else
-        {
-            Debug.Log("detected no poster");
-            Debug.Log(theHit.normal);
-            Vector3 reverseHit = new Vector3(-theHit.normal.x, -theHit.normal.y, -theHit.normal.z);
-            madeGraffiti = Instantiate (decalProjector, canLocationForParticle.transform.position, ariRig.transform.rotation);
-            Debug.Log($"Decal Projector name: {madeGraffiti.name}");
-            particle = Instantiate (graffitiParticle, canLocationForParticle.transform.position, canLocationForParticle.transform.rotation);
-            Vector3 newPos = new Vector3 (playerGameObject.transform.position.x, madeGraffiti.transform.position.y, playerGameObject.transform.position.z);
-            madeGraffiti.transform.position = newPos;
-            return;
+            countQuest.IncrementCount();
         }
 
-            posterPresent = false;
-            
-
-
+        //buff
+        //maxGraffitiBuffTimer = 30f;
+        currentGraffitiBuffTime = maxGraffitiBuffTime;
+        playerAttackREF.isBuffed = true;
+        //theHit.collider.gameObject.GetComponent<PosterActive>().isSprayed = true;
+        Debug.Log("BUFF TIME");
     }
 
 
 
-     public void GraffitiDown(InputAction.CallbackContext context)
+    public void GraffitiDown(InputAction.CallbackContext context)
     {
         if (PauseMenu.isPaused == true) return;
 
