@@ -166,42 +166,48 @@ public class Graffiti : MonoBehaviour
     void GraffitiFire()
     { 
         RaycastHit theHit = new RaycastHit();
-        bool posterPresent = false;
-        
         RaycastHit[] hits;
         hits = Physics.RaycastAll(Camera.main.ScreenPointToRay(Input.mousePosition),5.0f, ~layerMask);
-        
-
-        
+        Vector3 sprayLocation = new Vector3();
+        if (hits.Length == 0) return; //if the raycast hits nothing, do not spray graffiti
 
         for (int i = 0; i < hits.Length; i++)
         {
             RaycastHit hit = hits[i];
             Debug.Log("we hit " + hits.Length + " objects in the graffiti method");
             Debug.Log("hit object " + hit.collider.gameObject);
-
+            //Debug.Log(hit.collider.gameObject.transform.position);
+            sprayLocation = hit.point;
             if (hit.collider.gameObject.tag == "Poster" || hit.collider.gameObject.layer == 19)
             {
-                //posterPresent = true;
-                theHit = hits[i];
                 break;
             }
-                
-            if (i == hits.Length)
-                theHit = hits[0];
         }
 
-
-        GameObject madeGraffiti = Instantiate (decalProjector, canLocationForParticle.transform.position, ariRig.transform.rotation);
-        Instantiate (graffitiParticle, canLocationForParticle.transform.position, canLocationForParticle.transform.rotation);
-        Vector3 newPos = new Vector3 (playerGameObject.transform.position.x, madeGraffiti.transform.position.y, playerGameObject.transform.position.z);
+        Debug.Log(sprayLocation);
+        Vector3 playerPosition = playerGameObject.transform.position;
+        float distanceFromSprayLocation = Vector3.Distance(sprayLocation,playerPosition); 
+        Debug.Log($"How far is too far? {distanceFromSprayLocation}");
+        /*
+        if (distanceFromSprayLocation > 957)
+        {
+            Debug.Log("Too far away to spray graffiti.");
+            return;
+        }
+        Debug.Log("Spraying Graffiti!");*/
+        
+        GameObject madeGraffiti = Instantiate (decalProjector, canLocationForParticle.transform.position, Camera.main.transform.rotation);
+        //the particle is ugly so i commented it out 
+        //Instantiate (graffitiParticle, canLocationForParticle.transform.position, canLocationForParticle.transform.rotation);
+        
+        Vector3 newPos = new Vector3 (sprayLocation.x, madeGraffiti.transform.position.y, sprayLocation.z);
         madeGraffiti.transform.position = newPos;
 
         PosterDetector posterDetector = madeGraffiti.transform.GetChild(0).GetComponent<PosterDetector>();
-        posterDetector.Initialize(this, theHit);
+        posterDetector.Initialize(this);
     }
 
-    public void ActivateBuff(RaycastHit theHit)
+    public void ActivateBuff()
     {
         ProgressionManager manager = ProgressionManager.Get();
         if (manager.currentQuest is CountQuest countQuest && countQuest.GetCountQuestType() is CountQuestType.Graffiti)
@@ -209,11 +215,8 @@ public class Graffiti : MonoBehaviour
             countQuest.IncrementCount();
         }
 
-        //buff
-        //maxGraffitiBuffTimer = 30f;
         currentGraffitiBuffTime = maxGraffitiBuffTime;
         playerAttackREF.isBuffed = true;
-        //theHit.collider.gameObject.GetComponent<PosterActive>().isSprayed = true;
         Debug.Log("BUFF TIME");
     }
 

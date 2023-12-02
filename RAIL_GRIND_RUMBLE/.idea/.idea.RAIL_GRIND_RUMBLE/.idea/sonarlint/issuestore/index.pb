@@ -37,8 +37,6 @@ Q
 .Assets/Scripts/Pete/Quest System/CountQuest.cs,3\b\3b6ca9ab6558b5a80b51e8d1a97e69a7d84cc1a6
 S
 #Assets/Scripts/Raul/turnLightsOn.cs,3\c\3cbd797b89b33fbeb6360e4ce6c1cca717c5ebb6
-O
-Assets/Scripts/Noah/MainMenu.cs,2\f\2fd877f65c50a964169ac0b16baff120aca70b48
 Z
 *Assets/Scripts/Chris/Enemies/Phase1Plug.cs,6\9\69e1fc66d7edf154076b4ea1d66faa24a90a65f2
 X

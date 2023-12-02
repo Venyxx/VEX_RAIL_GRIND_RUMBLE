@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4688673260402915767}
   - component: {fileID: 4688673260402915766}
+  - component: {fileID: 7427715861838155056}
+  - component: {fileID: 5965503388360715671}
   m_Layer: 0
   m_Name: Decal_2D
   m_TagString: DECAL
@@ -55,6 +57,31 @@ MonoBehaviour:
   m_Offset: {x: -0.0013887011, y: 0, z: 1.2724286}
   m_Size: {x: 2, y: 2, z: 2}
   m_FadeFactor: 1
+--- !u!65 &7427715861838155056
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4688673260402915761}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5965503388360715671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4688673260402915761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39e153ee35bb90c4ba6d172fc3ded3ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8137227198449499492
 GameObject:
   m_ObjectHideFlags: 0
