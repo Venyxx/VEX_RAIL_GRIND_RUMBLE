@@ -11,8 +11,16 @@ public class PosterDetector : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Poster"))
         {
-            Debug.Log("I am a decal projector and I collided with a poster.");
-            graffitiSprayer.ActivateBuff();
+            PosterActive posterActiveDetector = other.gameObject.GetComponent<PosterActive>();
+            if (!posterActiveDetector.isSprayed)
+            {
+                posterActiveDetector.isSprayed = true;
+                graffitiSprayer.ActivateBuff();
+            }
+            else
+            {
+                Debug.Log("You already sprayed this poster");
+            } 
         }
     }
 

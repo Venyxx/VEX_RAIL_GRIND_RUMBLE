@@ -10,6 +10,8 @@ public class Graffiti : MonoBehaviour
 {
     [FormerlySerializedAs("graffiti")] 
     [SerializeField] private GameObject decalProjector;
+
+    [SerializeField] private GameObject faceCast;
     GameObject graffitiDown;
     GameObject graffitiUp;
     GameObject graffitiRight;
@@ -104,6 +106,8 @@ public class Graffiti : MonoBehaviour
         //downDisplay = GameObject.Find("Down");
         //leftDisplay = GameObject.Find("Left");
         
+        Vector3 forward = transform.TransformDirection(Vector3.forward) * 10;
+        Debug.DrawRay(transform.position, forward, Color.blue);
         
         if (currentGraffitiBuffTime > 0)
         {
@@ -165,9 +169,10 @@ public class Graffiti : MonoBehaviour
 
     void GraffitiFire()
     { 
-        RaycastHit theHit = new RaycastHit();
         RaycastHit[] hits;
-        hits = Physics.RaycastAll(Camera.main.ScreenPointToRay(Input.mousePosition),5.0f, ~layerMask);
+        Vector3 forward = transform.TransformDirection(Vector3.forward) * 10;
+        Ray ariFaceRay = new Ray(transform.position, forward);
+        hits = Physics.RaycastAll(ariFaceRay,1.5f, ~layerMask);
         Vector3 sprayLocation = new Vector3();
         if (hits.Length == 0) return; //if the raycast hits nothing, do not spray graffiti
 
@@ -185,18 +190,7 @@ public class Graffiti : MonoBehaviour
         }
 
         Debug.Log(sprayLocation);
-        Vector3 playerPosition = playerGameObject.transform.position;
-        float distanceFromSprayLocation = Vector3.Distance(sprayLocation,playerPosition); 
-        Debug.Log($"How far is too far? {distanceFromSprayLocation}");
-        /*
-        if (distanceFromSprayLocation > 957)
-        {
-            Debug.Log("Too far away to spray graffiti.");
-            return;
-        }
-        Debug.Log("Spraying Graffiti!");*/
-        
-        GameObject madeGraffiti = Instantiate (decalProjector, canLocationForParticle.transform.position, Camera.main.transform.rotation);
+        GameObject madeGraffiti = Instantiate (decalProjector, canLocationForParticle.transform.position, ariRig.transform.rotation);
         //the particle is ugly so i commented it out 
         //Instantiate (graffitiParticle, canLocationForParticle.transform.position, canLocationForParticle.transform.rotation);
         
