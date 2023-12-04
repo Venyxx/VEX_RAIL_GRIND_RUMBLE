@@ -11,7 +11,6 @@ public class Graffiti : MonoBehaviour
     [FormerlySerializedAs("graffiti")] 
     [SerializeField] private GameObject decalProjector;
 
-    [SerializeField] private GameObject faceCast;
     GameObject graffitiDown;
     GameObject graffitiUp;
     GameObject graffitiRight;
