@@ -469,7 +469,7 @@ public class VendorInteraction : MonoBehaviour
 
     private void OnLevelSelect(int currentIndex)
     {
-        Manager.Instance.currentLevel = currentIndex;
+        CustomizationOptionsStruct.Instance.currentLevel = currentIndex;
         SceneManager.LoadScene("SampleScene");
         Debug.Log("select level button: " + currentIndex);
     }

@@ -110,10 +110,11 @@ public class InfoScreen : MonoBehaviour
 
         if (context.started)
         {
-            if (isOpen == false && PauseMenu.isPaused == false)
+            Debug.Log($"isOpen == false {isOpen} && PauseMenu.isPaused == false {PauseMenu.isPaused} && CustomizationMenu.isOpen == false {CustomizationMenu.isOpen}" );
+            if (isOpen == false && PauseMenu.isPaused == false && CustomizationMenu.isOpen == false)
             {
                 StartCoroutine(OpenInfoScreen());
-            } else {
+            } else if(isOpen){
                 StartCoroutine(CloseInfoScreen());
             } 
         }
@@ -135,20 +136,20 @@ public class InfoScreen : MonoBehaviour
 
     public void NextTabPressed(InputAction.CallbackContext context)
     {
-        if (context.started && isOpen == true)
+        /*if (context.started && isOpen == true)
         {
             NextTab();
             //Debug.Log("Next Tab");
-        }
+        }*/
     }
 
     public void PreviousTabPressed(InputAction.CallbackContext context)
     {
-        if (context.started && isOpen == true)
+        /*if (context.started && isOpen == true)
         {
             PreviousTab();
             //Debug.Log("Next Tab");
-        }
+        }*/
     }
 
     public IEnumerator OpenInfoScreen()
@@ -156,7 +157,7 @@ public class InfoScreen : MonoBehaviour
         PlaySoundUI(selectSound);
 
         infoScreen.SetActive(true);
-
+        Debug.Log("Opening Info Screen");
         //Set Language of Tabs
         if (SpanishMode.spanishMode)
         {
@@ -175,7 +176,8 @@ public class InfoScreen : MonoBehaviour
         OpenMissions();
         isOpen = true;
 
-        yield return new WaitForSeconds(0.75f);
+        //yield return new WaitForSeconds(0.75f);
+        yield return new WaitForSeconds(0);
 
         Time.timeScale = 0f;
         Cursor.visible = true;
@@ -209,7 +211,8 @@ public class InfoScreen : MonoBehaviour
         bottomBarAnim.SetTrigger("Close");
         backgroundAnim.SetTrigger("Close");
 
-        yield return new WaitForSeconds(0.75f);
+        //yield return new WaitForSeconds(0.75f);
+        yield return new WaitForSeconds(0f);
 
         infoScreen.SetActive(false);
         isOpen = false;

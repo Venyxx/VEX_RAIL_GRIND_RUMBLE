@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpeedoMeter : MonoBehaviour
+public class Speedometer : MonoBehaviour
 {
     private const float maxSpeedAngle = -20;
     private const float zeroSpeedAngle = 120;
@@ -30,7 +30,7 @@ public class SpeedoMeter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        speed = (float) ThirdPersonMovementREF.speedPrint;
+        speed = (float) ThirdPersonMovementREF.speedUIValue;
         maxSpeed = 20;
 
         needleTransform.eulerAngles = new Vector3(0, 0, GetSpeedRotation());

@@ -2,9 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 using System.Collections;
-using System.Collections.Generic;
 
 public class PauseMenu : ControllerMenu
 {
@@ -90,7 +88,7 @@ public class PauseMenu : ControllerMenu
 
     public void PauseGamePressed(InputAction.CallbackContext context)
     {
-        if (!context.started || InfoScreen.isOpen == true || questWindow.activeInHierarchy || SceneManager.GetActiveScene().name == "MainMenu" || cutscenePlayerREF.cutscenePlaying == true ) return;
+        if (!context.started || InfoScreen.isOpen || questWindow.activeInHierarchy || SceneManager.GetActiveScene().name == "MainMenu" || cutscenePlayerREF.cutscenePlaying) return;
         
         if (isPaused)
         {

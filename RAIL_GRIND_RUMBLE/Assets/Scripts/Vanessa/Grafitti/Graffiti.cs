@@ -337,7 +337,7 @@ public class Graffiti : MonoBehaviour
 
     private void WhichGraffiti()
     {
-        ETCCustomizationVendor vendor = GameObject.Find("CustomizationVendor").GetComponent<ETCCustomizationVendor>();
+        CustomizationVendor vendor = GameObject.Find("CustomizationVendor").GetComponent<CustomizationVendor>();
         if(vendor.selectedGraffitiIndex == 0)
             passingGraffiti = Resources.Load("Decal_1") as GameObject;
         else if(vendor.selectedGraffitiIndex == 1)

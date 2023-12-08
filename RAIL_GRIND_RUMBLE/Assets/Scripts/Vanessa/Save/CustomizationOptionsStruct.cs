@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Manager : MonoBehaviour
+public class CustomizationOptionsStruct : MonoBehaviour
 {
-    public static Manager Instance {set; get;}
+    public static CustomizationOptionsStruct Instance {set; get;}
 
     //public Material wallMaterial;
     //public GameObject[] roomThemeGameObjects = new GameObject[8];

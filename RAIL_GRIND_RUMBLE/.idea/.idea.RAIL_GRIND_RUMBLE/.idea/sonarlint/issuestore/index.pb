@@ -3,14 +3,8 @@ g
 7Assets/Scripts/Pete/Dialogue System/DialogueTemplate.cs,4\1\41248b81a23564a8c8c69bebf7624572345316b0
 [
 +Assets/Scripts/Kevin/Player/PlayerAttack.cs,b\7\b771c517414db2640ca3f059364a3dcc31f9fec2
-_
-/Assets/Scripts/Vanessa/Vendor/OutfitSwapping.cs,2\8\280dca2532d9b39aaa293095cfcb79a5b1e29902
 S
 #Assets/Scripts/Kevin/Enemy/Enemy.cs,0\e\0e1f7995805a1572550ce505c5dcf78b8070446f
-V
-&Assets/Scripts/Vanessa/Save/Manager.cs,9\9\994a2fe2a02e2c49d32b0aab09e751325f897f97
-g
-7Assets/Scripts/Vanessa/Vendor/ETCCustomizationVendor.cs,0\4\04b92d8a5a9344a67d2f9b3937c33bfa4d8c70de
 ]
 -Assets/Scripts/Chris/Enemies/DonovanPhase2.cs,d\1\d1c8330401bf06e525f58b9f5a83b21f1bd8a939
 a
@@ -77,8 +71,6 @@ O
 Assets/Scripts/Chris/WallRun.cs,4\e\4e716a4499fc346faeec49875ad24b782ce5c087
 X
 (Assets/Scripts/Vanessa/Save/SaveState.cs,8\4\8401900cde095764a2de39a2a58245a08b0df97e
-[
-+Assets/Scripts/Chris/ThirdPersonMovement.cs,8\4\8445679af98e6402112b143daf7322eef94103e8
 [
 +Assets/Scripts/Kevin/Player/PlayerHealth.cs,6\0\60fcf97351316ef10679309e1aaf28a0b3da95db
 i

@@ -7,8 +7,8 @@ public class OutfitSwapping : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    private Manager ManagerREF;
-    private ETCCustomizationVendor ETCCusREF;
+    private CustomizationOptionsStruct customizationOptions;
+    private CustomizationVendor _cusRef;
     private GameObject ariOBJREF;
 
     //private GameObject ariAccessoryREF;
@@ -28,7 +28,7 @@ public class OutfitSwapping : MonoBehaviour
 
         
 
-        ManagerREF = GameObject.Find("Manager").GetComponent<Manager>();
+        customizationOptions = GameObject.Find("Customization Options").GetComponent<CustomizationOptionsStruct>();
         ariOBJREF = GameObject.Find("AriRig");
         ariTopREF = GameObject.Find("tops");
         ariBottomREF = GameObject.Find("bottoms");
@@ -38,60 +38,60 @@ public class OutfitSwapping : MonoBehaviour
 
         //sry gonna hard code
         //Debug.Log("fit setting");
-        ManagerREF.ariTopOptions[0] = GameObject.Find("OG_top");
-        ManagerREF.ariTopOptions[1] = GameObject.Find("frillyTopB");
-        ManagerREF.ariTopOptions[2] = GameObject.Find("longSleeveA");
-        ManagerREF.ariTopOptions[3] = GameObject.Find("longSleeveB");
-        ManagerREF.ariTopOptions[4] = GameObject.Find("frillyTopA");
-        ManagerREF.ariTopOptions[5] = GameObject.Find("shortSleeveC");
-        ManagerREF.ariTopOptions[6] = GameObject.Find("shortSleeveA");
-        ManagerREF.ariTopOptions[7] = GameObject.Find("shortSleeveB");
-        ManagerREF.ariTopOptions[8] = GameObject.Find("suitJacket");
-        ManagerREF.ariTopOptions[9] = GameObject.Find("tankTopA");
-        ManagerREF.ariTopOptions[10] = GameObject.Find("tankTopB");
-        ManagerREF.ariTopOptions[11] = GameObject.Find("longSleeveC");
+        customizationOptions.ariTopOptions[0] = GameObject.Find("OG_top");
+        customizationOptions.ariTopOptions[1] = GameObject.Find("frillyTopB");
+        customizationOptions.ariTopOptions[2] = GameObject.Find("longSleeveA");
+        customizationOptions.ariTopOptions[3] = GameObject.Find("longSleeveB");
+        customizationOptions.ariTopOptions[4] = GameObject.Find("frillyTopA");
+        customizationOptions.ariTopOptions[5] = GameObject.Find("shortSleeveC");
+        customizationOptions.ariTopOptions[6] = GameObject.Find("shortSleeveA");
+        customizationOptions.ariTopOptions[7] = GameObject.Find("shortSleeveB");
+        customizationOptions.ariTopOptions[8] = GameObject.Find("suitJacket");
+        customizationOptions.ariTopOptions[9] = GameObject.Find("tankTopA");
+        customizationOptions.ariTopOptions[10] = GameObject.Find("tankTopB");
+        customizationOptions.ariTopOptions[11] = GameObject.Find("longSleeveC");
 
 
-        ManagerREF.ariBottomOptions[0] = GameObject.Find("ClassicPants");
-        ManagerREF.ariBottomOptions[1] = GameObject.Find("longPantssA");
-        ManagerREF.ariBottomOptions[2] = GameObject.Find("longPantsB");
-        ManagerREF.ariBottomOptions[3] = GameObject.Find("longPantsC");
-        ManagerREF.ariBottomOptions[4] = GameObject.Find("longPantsD");
-        ManagerREF.ariBottomOptions[5] = GameObject.Find("longPantsE");
-        ManagerREF.ariBottomOptions[6] = GameObject.Find("shorts_A");
-        ManagerREF.ariBottomOptions[7] = GameObject.Find("shorts_B");
-        ManagerREF.ariBottomOptions[8] = GameObject.Find("shortsC");
-        ManagerREF.ariBottomOptions[9] = GameObject.Find("shortsD");
-        ManagerREF.ariBottomOptions[10] = GameObject.Find("shortsE");
-        ManagerREF.ariBottomOptions[11] = GameObject.Find("suitPants");
+        customizationOptions.ariBottomOptions[0] = GameObject.Find("ClassicPants");
+        customizationOptions.ariBottomOptions[1] = GameObject.Find("longPantssA");
+        customizationOptions.ariBottomOptions[2] = GameObject.Find("longPantsB");
+        customizationOptions.ariBottomOptions[3] = GameObject.Find("longPantsC");
+        customizationOptions.ariBottomOptions[4] = GameObject.Find("longPantsD");
+        customizationOptions.ariBottomOptions[5] = GameObject.Find("longPantsE");
+        customizationOptions.ariBottomOptions[6] = GameObject.Find("shorts_A");
+        customizationOptions.ariBottomOptions[7] = GameObject.Find("shorts_B");
+        customizationOptions.ariBottomOptions[8] = GameObject.Find("shortsC");
+        customizationOptions.ariBottomOptions[9] = GameObject.Find("shortsD");
+        customizationOptions.ariBottomOptions[10] = GameObject.Find("shortsE");
+        customizationOptions.ariBottomOptions[11] = GameObject.Find("suitPants");
 
 
-        ManagerREF.ariSockOptions[0] = GameObject.Find("BLANKSOCKS");
-        ManagerREF.ariSockOptions[1] = GameObject.Find("lowSocks");
-        ManagerREF.ariSockOptions[2] = GameObject.Find("highSocks");
+        customizationOptions.ariSockOptions[0] = GameObject.Find("BLANKSOCKS");
+        customizationOptions.ariSockOptions[1] = GameObject.Find("lowSocks");
+        customizationOptions.ariSockOptions[2] = GameObject.Find("highSocks");
 
-        ManagerREF.ariSkateOptions[0] = GameObject.Find("classicSkates");
-        ManagerREF.ariSkateOptions[1] = GameObject.Find("GetSetBroadcast");
-        ManagerREF.ariSkateOptions[2] = GameObject.Find("JuniorMiles");
-        ManagerREF.ariSkateOptions[3] = GameObject.Find("soleSlider");
-        ManagerREF.ariSkateOptions[4] = GameObject.Find("craziTaxiSkate");
-        ManagerREF.ariSkateOptions[5] = GameObject.Find("bruiseControl3");
+        customizationOptions.ariSkateOptions[0] = GameObject.Find("classicSkates");
+        customizationOptions.ariSkateOptions[1] = GameObject.Find("GetSetBroadcast");
+        customizationOptions.ariSkateOptions[2] = GameObject.Find("JuniorMiles");
+        customizationOptions.ariSkateOptions[3] = GameObject.Find("soleSlider");
+        customizationOptions.ariSkateOptions[4] = GameObject.Find("craziTaxiSkate");
+        customizationOptions.ariSkateOptions[5] = GameObject.Find("bruiseControl3");
 
-        ManagerREF.ariHairOptions[0] = GameObject.Find("twoBraids");
-        ManagerREF.ariHairOptions[1] = GameObject.Find("singleBun");
-        ManagerREF.ariHairOptions[2] = GameObject.Find("singleBraid");
-        ManagerREF.ariHairOptions[3] = GameObject.Find("messyBun");
+        customizationOptions.ariHairOptions[0] = GameObject.Find("twoBraids");
+        customizationOptions.ariHairOptions[1] = GameObject.Find("singleBun");
+        customizationOptions.ariHairOptions[2] = GameObject.Find("singleBraid");
+        customizationOptions.ariHairOptions[3] = GameObject.Find("messyBun");
 
-        ManagerREF.ariAccessoryOptions[0] = GameObject.Find("BLANKPIERCINGS");
-        ManagerREF.ariAccessoryOptions[1] = GameObject.Find("earringSphere");
-        ManagerREF.ariAccessoryOptions[2] = GameObject.Find("Hoops");
+        customizationOptions.ariAccessoryOptions[0] = GameObject.Find("BLANKPIERCINGS");
+        customizationOptions.ariAccessoryOptions[1] = GameObject.Find("earringSphere");
+        customizationOptions.ariAccessoryOptions[2] = GameObject.Find("Hoops");
 
         Debug.Log("trying masks");
-        ManagerREF.ariMaskOptions[0] = GameObject.Find("BLANKMASK");
-        ManagerREF.ariMaskOptions[1] = GameObject.Find("roundGlasses");
-        ManagerREF.ariMaskOptions[2] = GameObject.Find("sunGlasses1");
-        ManagerREF.ariMaskOptions[3] = GameObject.Find("Android");
-        ManagerREF.ariMaskOptions[4] = GameObject.Find("Trickster");
+        customizationOptions.ariMaskOptions[0] = GameObject.Find("BLANKMASK");
+        customizationOptions.ariMaskOptions[1] = GameObject.Find("roundGlasses");
+        customizationOptions.ariMaskOptions[2] = GameObject.Find("sunGlasses1");
+        customizationOptions.ariMaskOptions[3] = GameObject.Find("Android");
+        customizationOptions.ariMaskOptions[4] = GameObject.Find("Trickster");
     
 
 

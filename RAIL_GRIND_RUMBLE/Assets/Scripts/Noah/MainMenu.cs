@@ -54,18 +54,6 @@ public class MainMenu : ControllerMenu
     {
         
         base.Update();
-
-        /*if (EventSystem.current.currentSelectedGameObject == null && mainMenu.activeInHierarchy)
-        {
-            mainMenuFirstButton.GetComponent<Button>().Select();
-        }
-        
-        if (EventSystem.current.currentSelectedGameObject == null && SettingsMainPage.activeInHierarchy)
-        {
-            mainSettingsFirstButton.GetComponent<Button>().Select();
-        }*/
-        
-        
     }
     
     public void OpenSettings()

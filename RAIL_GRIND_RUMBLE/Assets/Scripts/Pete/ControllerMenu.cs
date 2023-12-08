@@ -62,7 +62,7 @@ public class ControllerMenu : MonoBehaviour
             InputDevice lastDevice = receivedInputAction.activeControl.device;
 
             
-            isMouse = /*lastDevice.name.Equals("Keyboard") ||*/ lastDevice.name.Equals("Mouse");
+            isMouse = lastDevice.name.Equals("Mouse");
 
             if (isMouse)
             {

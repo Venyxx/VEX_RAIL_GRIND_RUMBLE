@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using Unity.VisualScripting.Dependencies.NCalc;
 
-public class CustomizationMEnu : MonoBehaviour
+public class CustomizationMenu : MonoBehaviour
 {
     
     public static bool isOpen;
@@ -41,7 +41,6 @@ public class CustomizationMEnu : MonoBehaviour
     public Button custFirstButton, custSecButton, custThirdButton, custFourthButton;
     private GameObject previewCamera;
     private GameObject previewCamItself;
-    InfoScreen infoScreenReal;
 
     private Graffiti graffitiREF;
     // Start is called before the first frame update
@@ -56,7 +55,6 @@ public class CustomizationMEnu : MonoBehaviour
         DisplayTab.SetActive(true);
         graffitiREF = GameObject.Find("SprayCanTransform").GetComponent<Graffiti>();
         ThirdPersonMovementREF = GameObject.Find("playerPrefab").GetComponent<ThirdPersonMovement>();
-        infoScreenReal = GameObject.Find("canvasPrefab").GetComponent<InfoScreen>();
 
         previewCamera = GameObject.Find("CharacterPreviewBackgr");
          if (previewCamera)
@@ -108,37 +106,37 @@ public class CustomizationMEnu : MonoBehaviour
     }
 
     
-    public void OpenInfoButtonPressed(InputAction.CallbackContext context)
+    public void OpenCustomizationButtonPressed(InputAction.CallbackContext context)
     {
         if (!context.started ||  SceneManager.GetActiveScene().name == "MainMenu") return;
 
         if (context.started)
         {
             Debug.Log("checking for infosc");
-            if (isOpen == false && PauseMenu.isPaused == false && InfoScreen.isOpen)
+            /*if (isOpen == false && PauseMenu.isPaused == false && InfoScreen.isOpen)
             {
                 
-                StartCoroutine(OpenInfoScreen());
+                //StartCoroutine(OpenInfoScreen());
                 
                 
-            } else if (isOpen){
-                StartCoroutine(CloseInfoScreen());
+            } else */ if (isOpen){
+                StartCoroutine(ReturnToInfoScreen());
             }
         }
     }
 
     //this version exists so it cna be attached to a button
-       public void OpenInfoButtonPressedLOC()
+    public void OpenCustomizationButtonPressedLoc()
     {
        
 
             if (isOpen == false && PauseMenu.isPaused == false && InfoScreen.isOpen)
             {
                 
-                StartCoroutine(OpenInfoScreen()); 
+                StartCoroutine(OpenCustomizationScreen()); 
                 
             } else {
-                StartCoroutine(CloseInfoScreen());
+                StartCoroutine(ReturnToInfoScreen());
                 
             }
 
@@ -148,16 +146,22 @@ public class CustomizationMEnu : MonoBehaviour
     {
         if (context.started && isOpen == true)
         {
-            StartCoroutine(CloseInfoScreen());
+            StartCoroutine(ReturnToInfoScreen());
         }
     }
+    
     //for button attachment
     public void BackPressedLOC ()
     {
         if (isOpen == true)
         {
-            StartCoroutine(CloseInfoScreen());
+            StartCoroutine(ReturnToInfoScreen());
         }
+    }
+
+    public void CloseAllTheWay(InputAction.CallbackContext context)
+    {
+        StartCoroutine(CloseCustomizationScreenAllTheWay());
     }
 
     public void NextTabPressed(InputAction.CallbackContext context)
@@ -178,56 +182,88 @@ public class CustomizationMEnu : MonoBehaviour
         }
     }
 
-     public void OpenTheFuckingCust(InputAction.CallbackContext context)
+     public void OpenCustomization(InputAction.CallbackContext context)
     {
         if (context.started && isOpen == false)
         {
-            StartCoroutine(OpenInfoScreen());
+            StartCoroutine(OpenCustomizationScreen());
             Time.timeScale = 0f;
         }
     }
 
-    IEnumerator OpenInfoScreen()
+    IEnumerator OpenCustomizationScreen()
     {
-        Debug.Log("ienum OIS" + InfoScreen.isOpen);
+        //Debug.Log("ienum OIS" + InfoScreen.isOpen);
         if (InfoScreen.isOpen)
-                {
-                    PlaySoundUI(selectSound);
+        {
+            PlaySoundUI(selectSound);
 
-                    infoScreen.SetActive(true);
-                    mapButton.gameObject.SetActive(true);
-                    missionsButton.gameObject.SetActive(true);
-                    progressButton.gameObject.SetActive(true);
-                    graffitiButton.gameObject.SetActive(true);
-                    previewCamera.SetActive(true);
-                    previewCamItself.SetActive(true);
+            infoScreen.SetActive(true);
+            mapButton.gameObject.SetActive(true);
+            missionsButton.gameObject.SetActive(true);
+            progressButton.gameObject.SetActive(true);
+            graffitiButton.gameObject.SetActive(true);
+            previewCamera.SetActive(true);
+            previewCamItself.SetActive(true);
 
-                    OpenMap();
-                    isOpen = true;
-                    Debug.Log("just ran toopen");
+            OpenMap();
+            isOpen = true;
+            //Debug.Log("just ran toopen");
 
-                    
+            
 
-                    
+            
 
-                    Time.timeScale = 0f;
-                    Cursor.visible = true;
-                    Cursor.lockState = CursorLockMode.None;
+            Time.timeScale = 0f;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
 
-                    yield return new WaitForSeconds(0.75f);
+            yield return new WaitForSeconds(0.75f);
 
-                    
-                } else
-                {
-                    Debug.Log("ienum OIS discard");
-                    InfoScreen infoScreen = GameObject.Find("canvasPrefab").GetComponent<InfoScreen>();
-                    infoScreen.StartCoroutine(infoScreen.CloseInfoScreen());
-                }  
+            
+        } 
+        else
+        {
+            //Debug.Log("ienum OIS discard");
+            InfoScreen infoScreen = GameObject.Find("canvasPrefab").GetComponent<InfoScreen>();
+            infoScreen.StartCoroutine(infoScreen.CloseInfoScreen());
+        }  
                     
         
     }
 
-    IEnumerator CloseInfoScreen()
+    IEnumerator ReturnToInfoScreen()
+    {
+        //PlaySoundUI(backSound);
+
+        mapTab.SetActive(false);
+        missionsTab.SetActive(false);
+        progressTab.SetActive(false);
+        graffitiTab.SetActive(false);
+        DisplayTab.SetActive(false);
+
+        mapButton.gameObject.SetActive(false);
+        missionsButton.gameObject.SetActive(false);
+        progressButton.gameObject.SetActive(false);
+        graffitiButton.gameObject.SetActive(false);
+        previewCamera.SetActive(false);
+        previewCamItself.SetActive(false);
+
+        /*Time.timeScale = 1f;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;*/
+        isOpen = false;
+        infoScreen.SetActive(false);
+
+        gameObject.GetComponent<CustomizationVendor>().ResetOutfitToSaveState();
+        /*movementScriptREF = GameObject.Find("playerPrefab").GetComponent<ThirdPersonMovement>();
+        movementScriptREF.dialogueManager.freezePlayer = false;*/
+
+        yield return new WaitForSeconds(0.75f);
+        
+    }
+    
+    IEnumerator CloseCustomizationScreenAllTheWay()
     {
         //PlaySoundUI(backSound);
 
@@ -250,7 +286,7 @@ public class CustomizationMEnu : MonoBehaviour
         isOpen = false;
         infoScreen.SetActive(false);
 
-        gameObject.GetComponent<ETCCustomizationVendor>().ResetOutfitToSaveState();
+        gameObject.GetComponent<CustomizationVendor>().ResetOutfitToSaveState();
         movementScriptREF = GameObject.Find("playerPrefab").GetComponent<ThirdPersonMovement>();
         movementScriptREF.dialogueManager.freezePlayer = false;
 
@@ -315,9 +351,6 @@ public class CustomizationMEnu : MonoBehaviour
         missionsButton.GetComponent<Image>().sprite = tabNotSelected;
         progressButton.GetComponent<Image>().sprite = tabNotSelected;
         graffitiButton.GetComponent<Image>().sprite = tabNotSelected;
-
-
-    
 
         mapTab.SetActive(true);
         missionsTab.SetActive(false);

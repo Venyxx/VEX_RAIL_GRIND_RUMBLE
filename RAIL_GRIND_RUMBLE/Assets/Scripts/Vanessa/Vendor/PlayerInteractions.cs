@@ -19,7 +19,7 @@ public class PlayerInteractions : MonoBehaviour
     public ThirdPersonMovement movementScriptREF;
     private GameObject previewCamItself;
     private GameObject [] thingsToHide = new GameObject [2];
-    private ETCCustomizationVendor ETCCusREF;
+    private CustomizationVendor _cusRef;
 
     private GameObject gamepadCur;
     
@@ -34,7 +34,7 @@ public class PlayerInteractions : MonoBehaviour
         //gamepadCur = GameObject.Find("GamepadCursor");
         //gamepadCur.SetActive(false);
 
-        ETCCusREF = GameObject.Find("CustomizationVendor").GetComponent<ETCCustomizationVendor>();
+        _cusRef = GameObject.Find("CustomizationVendor").GetComponent<CustomizationVendor>();
         
         previewCamera = GameObject.Find("CharacterPreviewBackgr");
          if (previewCamera)
@@ -172,8 +172,8 @@ public class PlayerInteractions : MonoBehaviour
         canvas = GameObject.Find("VendorCanvas");
         canvas.SetActive(false);
         Cursor.visible = false;
-        ETCCusREF = GameObject.Find("CustomizationVendor").GetComponent<ETCCustomizationVendor>();
-        ETCCusREF.ResetOutfitToSaveState();
+        _cusRef = GameObject.Find("CustomizationVendor").GetComponent<CustomizationVendor>();
+        _cusRef.ResetOutfitToSaveState();
         movementScriptREF = GameObject.Find("playerPrefab").GetComponent<ThirdPersonMovement>();
         movementScriptREF.dialogueManager.freezePlayer = false;
         Time.timeScale = 1f;

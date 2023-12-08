@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 using Cinemachine;
 using TMPro;
 
-public class ETCCustomizationVendor : MonoBehaviour
+public class CustomizationVendor : MonoBehaviour
 {
     
     private GameObject Vendor;
@@ -70,7 +70,7 @@ public class ETCCustomizationVendor : MonoBehaviour
     private int activeHairIndex;
     private int activeMaskIndex;
 
-    private Manager ManagerREF;
+    private CustomizationOptionsStruct customizationOptions;
 
     public int GraffitiButtonIndex;
 
@@ -81,8 +81,7 @@ public class ETCCustomizationVendor : MonoBehaviour
 
     private void Start()
     {
-        //Debug.Log("ETC");
-        ManagerREF = GameObject.Find("Manager").GetComponent<Manager>();
+        customizationOptions = GameObject.Find("Customization Options").GetComponent<CustomizationOptionsStruct>();
         Time.timeScale = 1f;
         if (GameObject.Find("playerPrefab"))
             thirdPersonMovementREF = GameObject.Find("playerPrefab").GetComponent<ThirdPersonMovement>();
@@ -91,7 +90,6 @@ public class ETCCustomizationVendor : MonoBehaviour
         
 
         //pos camera on focus menu 
-        //SetCameraTo(Manager.Instance.menuFocus);
 
         ///current money
         UpdateMoneyText();
@@ -449,16 +447,16 @@ public class ETCCustomizationVendor : MonoBehaviour
         }
 
         //accessory object preview
-        for (int i = 0; i < ManagerREF.ariAccessoryOptions.Length; i++)
+        for (int i = 0; i < customizationOptions.ariAccessoryOptions.Length; i++)
         {
             if (selectedAccessoryIndex != i)
             {
                 //turn the object off
-                ManagerREF.ariAccessoryOptions[i].SetActive(false);
+                customizationOptions.ariAccessoryOptions[i].SetActive(false);
             } else 
             {
                 //turn it on
-                ManagerREF.ariAccessoryOptions[i].SetActive(true);
+                customizationOptions.ariAccessoryOptions[i].SetActive(true);
             }
         }
         GameObjectAccessorySetting();
@@ -507,16 +505,16 @@ public class ETCCustomizationVendor : MonoBehaviour
 
 
         //top object preview
-        for (int i = 0; i <  ManagerREF.ariTopOptions.Length; i++)
+        for (int i = 0; i <  customizationOptions.ariTopOptions.Length; i++)
         {
             if (selectedAccessoryIndex != i)
             {
                 //turn the object off
-                ManagerREF.ariTopOptions[i].SetActive(false);
+                customizationOptions.ariTopOptions[i].SetActive(false);
             } else 
             {
                 //turn it on
-                ManagerREF.ariTopOptions[i].SetActive(true);
+                customizationOptions.ariTopOptions[i].SetActive(true);
             }
         }
         GameObjectTopSetting();
@@ -741,7 +739,7 @@ public class ETCCustomizationVendor : MonoBehaviour
 
     private void OnLevelSelect(int currentIndex)
     {
-        Manager.Instance.currentLevel = currentIndex;
+        CustomizationOptionsStruct.Instance.currentLevel = currentIndex;
         SceneManager.LoadScene("SampleScene");
         Debug.Log("select level button: " + currentIndex);
     }
@@ -992,113 +990,113 @@ public class ETCCustomizationVendor : MonoBehaviour
 
     public void GameObjectAccessorySetting ()
     {
-        for (int i = 0; i <  ManagerREF.ariAccessoryOptions.Length; i++)
+        for (int i = 0; i <  customizationOptions.ariAccessoryOptions.Length; i++)
         {
             if (selectedAccessoryIndex != i)
             {
                 //turn the object off
-                ManagerREF.ariAccessoryOptions[i].SetActive(false);
+                customizationOptions.ariAccessoryOptions[i].SetActive(false);
             } else 
             {
                 //turn it on
-                ManagerREF.ariAccessoryOptions[i].SetActive(true);
+                customizationOptions.ariAccessoryOptions[i].SetActive(true);
             }
         }
     }
 
     public void GameObjectTopSetting ()
     {
-        for (int i = 0; i <  ManagerREF.ariTopOptions.Length; i++)
+        for (int i = 0; i <  customizationOptions.ariTopOptions.Length; i++)
         {
             if (selectedTopIndex != i)
             {
                 //turn the object off
-                ManagerREF.ariTopOptions[i].SetActive(false);
+                customizationOptions.ariTopOptions[i].SetActive(false);
             } else 
             {
                 //turn it on
-                ManagerREF.ariTopOptions[i].SetActive(true);
+                customizationOptions.ariTopOptions[i].SetActive(true);
             }
         }
     }
 
     public void GameObjectBottomSetting ()
     {
-        for (int i = 0; i <  ManagerREF.ariBottomOptions.Length; i++)
+        for (int i = 0; i <  customizationOptions.ariBottomOptions.Length; i++)
         {
             if (selectedBottomIndex != i)
             {
                 //turn the object off
-                ManagerREF.ariBottomOptions[i].SetActive(false);
+                customizationOptions.ariBottomOptions[i].SetActive(false);
             } else 
             {
                 //turn it on
-                ManagerREF.ariBottomOptions[i].SetActive(true);
+                customizationOptions.ariBottomOptions[i].SetActive(true);
             }
         }
     }
 
     public void GameObjectSockSetting ()
     {
-        for (int i = 0; i <  ManagerREF.ariSockOptions.Length; i++)
+        for (int i = 0; i <  customizationOptions.ariSockOptions.Length; i++)
         {
             if (selectedSockIndex != i)
             {
                 //turn the object off
-                ManagerREF.ariSockOptions[i].SetActive(false);
+                customizationOptions.ariSockOptions[i].SetActive(false);
             } else 
             {
                 //turn it on
-                ManagerREF.ariSockOptions[i].SetActive(true);
+                customizationOptions.ariSockOptions[i].SetActive(true);
             }
         }
     }
 
     public void GameObjectSkateSetting ()
     {
-        for (int i = 0; i <  ManagerREF.ariSkateOptions.Length; i++)
+        for (int i = 0; i <  customizationOptions.ariSkateOptions.Length; i++)
         {
             if (selectedSkateIndex != i)
             {
                 //turn the object off
-                ManagerREF.ariSkateOptions[i].SetActive(false);
+                customizationOptions.ariSkateOptions[i].SetActive(false);
             
             } else 
             {
                 //turn it on
-                ManagerREF.ariSkateOptions[i].SetActive(true);
+                customizationOptions.ariSkateOptions[i].SetActive(true);
             }
         }
     }
 
     public void GameObjectHairSetting ()
     {
-        for (int i = 0; i <  ManagerREF.ariHairOptions.Length; i++)
+        for (int i = 0; i <  customizationOptions.ariHairOptions.Length; i++)
         {
             if (selectedHairIndex != i)
             {
                 //turn the object off
-                ManagerREF.ariHairOptions[i].SetActive(false);
+                customizationOptions.ariHairOptions[i].SetActive(false);
             } else 
             {
                 //turn it on
-                ManagerREF.ariHairOptions[i].SetActive(true);
+                customizationOptions.ariHairOptions[i].SetActive(true);
             }
         }
     }
 
     public void GameObjectMaskSetting ()
     {
-        for (int i = 0; i <  ManagerREF.ariMaskOptions.Length; i++)
+        for (int i = 0; i <  customizationOptions.ariMaskOptions.Length; i++)
         {
             if (selectedMaskIndex != i)
             {
                 //turn the object off
-                ManagerREF.ariMaskOptions[i].SetActive(false);
+                customizationOptions.ariMaskOptions[i].SetActive(false);
             } else 
             {
                 //turn it on
-                ManagerREF.ariMaskOptions[i].SetActive(true);
+                customizationOptions.ariMaskOptions[i].SetActive(true);
             }
         }
     }

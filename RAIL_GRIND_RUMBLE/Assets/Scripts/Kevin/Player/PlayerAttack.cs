@@ -164,17 +164,17 @@ public class PlayerAttack : MonoBehaviour
             if (movementScriptREF.isJumping == false && movementScriptREF.Grounded == true)
             {
                
-                if (movementScriptREF.print < 5)
+                if (movementScriptREF.speedUIValue < 5)
                 {
                     Debug.Log("SlowAtk");
                     Anim.SetTrigger("LAttackSlow");
                 }
-                if (movementScriptREF.print > 5 && movementScriptREF.print < 20)
+                if (movementScriptREF.speedUIValue > 5 && movementScriptREF.speedUIValue < 20)
                 {
                     Debug.Log("MedAtk");
                     Anim.SetTrigger("LAttackMedium");
                 }
-                if (movementScriptREF.print > 20)
+                if (movementScriptREF.speedUIValue > 20)
                 {
                     Debug.Log("fastAtk");
                     Anim.SetTrigger("LAttackFast");
@@ -226,17 +226,17 @@ public class PlayerAttack : MonoBehaviour
 
 
 
-            if (movementScriptREF.print < 5)
+            if (movementScriptREF.speedUIValue < 5)
             {
                 Debug.Log("HeavySlowAtk");
              
             }
-            if (movementScriptREF.print > 5 && movementScriptREF.print < 20)
+            if (movementScriptREF.speedUIValue > 5 && movementScriptREF.speedUIValue < 20)
             {
                 Debug.Log("HeavyMedAtk");
                
             }
-            if (movementScriptREF.print > 20)
+            if (movementScriptREF.speedUIValue > 20)
             {
                 Debug.Log("HeavyfastAtk");
                 

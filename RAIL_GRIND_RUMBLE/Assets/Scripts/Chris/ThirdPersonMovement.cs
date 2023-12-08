@@ -4,12 +4,13 @@ using UnityEngine.InputSystem;
 using TMPro;
 using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class ThirdPersonMovement : MonoBehaviour
 {
     //Movement
     //New Blend Tree//////////////////////////////////////////////////////////////////////////////////////////////
-    private bool Gliding;
+    private bool isGliding;
     bool brakeHeld = false;
     private bool onStairs;
 
@@ -31,9 +32,7 @@ public class ThirdPersonMovement : MonoBehaviour
     public Vector2 moveInput;
     public float maxSkateSpeed = 1;
     private float slopeLimit;
-
-    public double speedPrint;
-
+    
     private CollisionFollow playerCollisionFollowREF;
     private PlayerRailLeftCollider playerLeftColREF;
     private PlayerRailRightCollider playerRightColREF;
@@ -153,8 +152,11 @@ public class ThirdPersonMovement : MonoBehaviour
     public bool CombatPause = false;
 
     //skates and shoes
-    private ETCCustomizationVendor ETCCustREF;
-    private Manager ManagerREF;
+    private CustomizationVendor _custRef;
+    private CustomizationOptionsStruct customizationOptions;
+    
+    [FormerlySerializedAs("print")] public int speedUIValue;
+
     
     
     [Tooltip("Leave this checked in the inspector unless you are manually moving ari in the scene and need her to spawn where you moved her. " + 
@@ -165,8 +167,8 @@ public class ThirdPersonMovement : MonoBehaviour
     void Start()
     {
 
-        ManagerREF = GameObject.Find("Manager").GetComponent<Manager>();
-        ETCCustREF = GameObject.Find("CustomizationVendor").GetComponent<ETCCustomizationVendor>();
+        customizationOptions = GameObject.Find("Customization Options").GetComponent<CustomizationOptionsStruct>();
+        _custRef = GameObject.Find("CustomizationVendor").GetComponent<CustomizationVendor>();
         ariWalkingShoes = GameObject.Find("walkShoes");
         //ariWalkingShoes.SetActive(false);
 
@@ -296,14 +298,14 @@ public class ThirdPersonMovement : MonoBehaviour
 
         if (moveInput.x == 0 && moveInput.y == 0 && Grounded == true && currentSpeed >5f)
         {
-            Gliding = true;
+            isGliding = true;
             _animator.SetBool("Gliding", true);
             //Debug.Log("NOTMOVING");
         }
 
         if (moveInput.x != 0 || moveInput.y != 0)
         {
-            Gliding = false;
+            isGliding = false;
             _animator.SetBool("Gliding", false);
             //Debug.Log("Moving");
         }
@@ -499,7 +501,7 @@ public class ThirdPersonMovement : MonoBehaviour
             sprayCan.SetActive(true);
             ariWalkingShoes.SetActive(true);
 
-            ManagerREF.ariSkateOptions[SaveManager.Instance.state.activeAriSkate].SetActive(false);
+            customizationOptions.ariSkateOptions[SaveManager.Instance.state.activeAriSkate].SetActive(false);
 
         }
         else
@@ -511,7 +513,7 @@ public class ThirdPersonMovement : MonoBehaviour
             ariWalkingShoes.SetActive(false);
 
             //change to shoes
-            ManagerREF.ariSkateOptions[SaveManager.Instance.state.activeAriSkate].SetActive(true);
+            customizationOptions.ariSkateOptions[SaveManager.Instance.state.activeAriSkate].SetActive(true);
         }
     }
 
@@ -853,20 +855,17 @@ public class ThirdPersonMovement : MonoBehaviour
     }
 
     
-   public int print;
     private void SetSpeedUI()
     { 
         //m/s to mph
         var passing = rigidBody.velocity.magnitude;
-        speedPrint =  (double) passing * 2.2369362920544;
-        print = (int) speedPrint;
 
         //print
-        if (print < 10)
+        if (speedUIValue < 10)
         {
-            speedUIText.text = "0" + print.ToString();
+            speedUIText.text = "0" + speedUIValue.ToString();
         }else
-        speedUIText.text = print.ToString();
+        speedUIText.text = speedUIValue.ToString();
     }
     private void ExitRailMain ()
     {
