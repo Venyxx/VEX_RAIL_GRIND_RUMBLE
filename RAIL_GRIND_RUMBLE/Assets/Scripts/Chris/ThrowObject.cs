@@ -88,7 +88,7 @@ public class ThrowObject : MonoBehaviour
         
     }
 
-    void ThrowObjectAction()
+    void ThrowObjectAction(GameObject target)
     {
         //arm rig
         ik.enabled = false;
@@ -97,13 +97,6 @@ public class ThrowObject : MonoBehaviour
         isHoldingObject = false;
         heldTrashcanFakeREF.SetActive(false);
         heldDroneFakeREF.SetActive(false);
-
-        //Resumes time
-        if (GameObject.Find("AimingCam"))
-        {
-            GameObject aimingCamREF = GameObject.Find("AimingCam");
-            aimingCamREF.GetComponent<ThirdPersonCamera>().SwitchCameraCanceled();
-        }
 
         GameObject thrownObject = null;
 
@@ -116,17 +109,21 @@ public class ThrowObject : MonoBehaviour
         }
         
         objectHolding = "";
-        
-        if(_targeting /*grappleDetection.aimPoints.Count > 0*/ && grappleDetection.currentAim.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+
+        if (target != null)
         {
-            thrownObject.gameObject.GetComponent<PlayerThrownObject>().target = true;
-            return;
-        } else {
-            thrownObject.gameObject.GetComponent<PlayerThrownObject>().target = false;
+            Debug.Log("Target is not null");
+            PlayerThrownObject thrownObjectComponentRef = thrownObject.gameObject.GetComponent<PlayerThrownObject>();
+            thrownObjectComponentRef.SetCurrentPlayerAim(target);
+            thrownObjectComponentRef.isTargeting = true;
+            
+            return; 
         }
-        
+        Debug.Log("Target is null");
+
+        thrownObject.gameObject.GetComponent<PlayerThrownObject>().isTargeting = false;
+
         Vector3 forceToAdd = orientation.transform.forward * throwForce + transform.up * throwUpwardForce;
-        //Debug.Log($"Transform Up:{transform.up}\nOrientation Transform Forward:{orientation.transform.forward}\nThrow Force{throwForce}\nThrow Upward Force{throwUpwardForce}");
         thrownObject.gameObject.GetComponent<Rigidbody>().AddForce(forceToAdd, ForceMode.Impulse);
       
     }
@@ -134,16 +131,47 @@ public class ThrowObject : MonoBehaviour
     public void Throw(InputAction.CallbackContext context)
     {
         if ((!(context.started && isHoldingObject)) || thirdPersonMovement.dialogueBox.activeInHierarchy) return;
-        ThrowObjectAction();
+        MechBossMovement hernandez = FindObjectOfType<MechBossMovement>();
+        if (hernandez != null /*and he is close enough to the player*/)
+        {
+            ThrowObjectAction(hernandez.gameObject);
+        }
+
+        EnemyMovement[] enemyMovements = FindObjectsOfType<EnemyMovement>();
+        GameObject[] enemies = new GameObject[enemyMovements.Length];
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            enemies[i] = enemyMovements[i].gameObject;
+        }
+
+        GameObject closestEnemy = null;
+        if (enemyMovements.Length > 0)
+        {
+            GameObject potentialClosest = GetClosestEnemy(enemies).gameObject;
+            //if(closestEnemy is close enough to the player ){
+                closestEnemy = potentialClosest;
+            //}
+        }
+        Debug.Log(closestEnemy);
+        ThrowObjectAction(closestEnemy);
         gameObject.GetComponent<ThirdPersonMovement>().PlaySound(2);
     }
-
-    public void SetTarget(InputAction.CallbackContext context)
-    {
-        if (context.performed) 
-            _targeting = true;
-        else 
-            _targeting = false;
-    }
     
+    Transform GetClosestEnemy(GameObject[] enemies)
+    {
+        Transform tMin = null;
+        float minDist = Mathf.Infinity;
+        Vector3 currentPos = transform.position;
+        foreach (GameObject o in enemies)
+        {
+            Transform t = o.transform;
+            float dist = Vector3.Distance(t.position, currentPos);
+            if (dist < minDist)
+            {
+                tMin = t;
+                minDist = dist;
+            }
+        }
+        return tMin;
+    }
 }

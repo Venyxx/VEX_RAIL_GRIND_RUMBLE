@@ -1,11 +1,13 @@
 using UnityEngine;
 using System.Collections;
+using UnityEditor.Experimental.GraphView;
+using UnityEngine.Serialization;
 
 public class PlayerThrownObject : MonoBehaviour
 {
-    public bool target;
+    [FormerlySerializedAs("target")] public bool isTargeting;
     bool explosionRunning;
-    Transform playerCurrentAim;
+    private Transform playerCurrentAim;
     GameObject playerREF;
     //[SerializeField] GameObject explosion;
     //Kevin
@@ -16,15 +18,15 @@ public class PlayerThrownObject : MonoBehaviour
     void Start()
     {
         playerREF = GameObject.Find("GrappleDetector");
-        playerCurrentAim = playerREF.gameObject.GetComponent<GrappleDetection>().currentAim;
         explosionRunning = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (target == true && playerCurrentAim.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        if (playerCurrentAim != null && playerCurrentAim.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
+            Debug.Log($"Moving towards {playerCurrentAim}");
             transform.position = Vector3.MoveTowards(transform.position, playerCurrentAim.transform.position, 25f * Time.deltaTime);
 
             if (transform.position == playerCurrentAim.transform.position && explosionRunning == false && this.gameObject.tag == "DroneThrow")
@@ -85,5 +87,10 @@ public class PlayerThrownObject : MonoBehaviour
             }
                 
         }
+    }
+
+    public void SetCurrentPlayerAim(GameObject aimTarget)
+    {
+        playerCurrentAim = aimTarget.transform;
     }
 }
