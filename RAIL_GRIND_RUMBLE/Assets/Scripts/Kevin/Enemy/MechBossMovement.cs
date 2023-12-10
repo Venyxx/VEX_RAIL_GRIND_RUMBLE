@@ -14,7 +14,7 @@ public class MechBossMovement : MonoBehaviour , IDamageable
 
     public LayerMask whatIsGround, whatIsPlayer;
     public float Health = 300;
-    public int KnockDownTime = 5;
+    public int KnockDownTime = 10;
     private PlayerHealth playerhealth;
     private float takeDamageDelay = .2f;
     private bool canTakeDamage = true;
@@ -176,14 +176,21 @@ public class MechBossMovement : MonoBehaviour , IDamageable
                 DamageIndicatior indicator = Instantiate(damageText, transform.position, Quaternion.identity).GetComponent<DamageIndicatior>();
                 indicator.SetDamageText(damage);
             }
+            
+            CheckDeath();
+            
+        }
+    }
 
-            if (Health <= 0)
-            {
-                Debug.Log("MechDestroyed");
-                ProgressionManager.Get().QuestInfoText.text = "Head into Servos HQ!";
-                GameObject.Find("Servos Teleporter").GetComponent<LoadNewScene>().enabled = true;
-                Destroy(gameObject);
-            }
+    private void CheckDeath()
+    {
+        if (Health <= 0)
+        {
+            Debug.Log("MechDestroyed");
+            ProgressionManager.Get().QuestInfoText.text = "Head into Servos HQ!";
+            GameObject.Find("Servos Teleporter").GetComponent<LoadNewScene>().enabled = true;
+            
+            Destroy(gameObject);
         }
     }
 
@@ -203,6 +210,10 @@ public class MechBossMovement : MonoBehaviour , IDamageable
     public IEnumerator KnockDown()
     {
         Animator.SetTrigger("KnockDown");
+        Health -= 50;
+        DamageIndicatior indicator = Instantiate(damageText, transform.position, Quaternion.identity).GetComponent<DamageIndicatior>();
+        indicator.SetDamageText(50);
+        CheckDeath();
         Dizzy = true;
         yield return new WaitForSeconds(KnockDownTime);
         MechDown = false;

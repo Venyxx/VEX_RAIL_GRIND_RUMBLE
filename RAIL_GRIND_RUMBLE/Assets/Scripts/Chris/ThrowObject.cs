@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Animations.Rigging;
+using UnityEngine.Experimental.Rendering;
 
 public class ThrowObject : MonoBehaviour
 {
@@ -131,10 +132,14 @@ public class ThrowObject : MonoBehaviour
     public void Throw(InputAction.CallbackContext context)
     {
         if ((!(context.started && isHoldingObject)) || thirdPersonMovement.dialogueBox.activeInHierarchy) return;
-        MechBossMovement hernandez = FindObjectOfType<MechBossMovement>();
-        if (hernandez != null /*and he is close enough to the player*/)
-        {
-            ThrowObjectAction(hernandez.gameObject);
+        
+        if(FindObjectOfType<MechBossMovement>()){
+            MechBossMovement hernandez = FindObjectOfType<MechBossMovement>(); 
+            if (hernandez != null && objectHolding == "Drone" && Vector3.Distance(thirdPersonMovement.transform.position, hernandez.transform.position) < 80f) ;
+            {
+                ThrowObjectAction(hernandez.gameObject);
+                return;
+            }
         }
 
         EnemyMovement[] enemyMovements = FindObjectsOfType<EnemyMovement>();
@@ -148,9 +153,9 @@ public class ThrowObject : MonoBehaviour
         if (enemyMovements.Length > 0)
         {
             GameObject potentialClosest = GetClosestEnemy(enemies).gameObject;
-            //if(closestEnemy is close enough to the player ){
+            if(potentialClosest != null /*&& Vector3.Distance(thirdPersonMovement.transform.position, potentialClosest.transform.position) < 30f*/){
                 closestEnemy = potentialClosest;
-            //}
+            }
         }
         Debug.Log(closestEnemy);
         ThrowObjectAction(closestEnemy);

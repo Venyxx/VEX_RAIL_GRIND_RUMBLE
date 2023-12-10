@@ -37,16 +37,13 @@ public class ThirdPersonMovement : MonoBehaviour
     private PlayerRailLeftCollider playerLeftColREF;
     private PlayerRailRightCollider playerRightColREF;
 
-    //Jump
-    //[SerializeField]private float jumpForceMax;
-    //[SerializeField]private float jumpForceMin;
+
     [SerializeField]private float jumpForce;
-    //[SerializeField]private float additionalJumpForce;
     public bool isJumping; // Kevin made this pub
     bool jumpDelayRunning = false;
     float jumpTimeCounter;
     private float jumpTimer;
-
+    
     public float jumpCoolDown;
     public float airMultiplier;
     public bool canJump;
@@ -157,8 +154,8 @@ public class ThirdPersonMovement : MonoBehaviour
     
     [FormerlySerializedAs("print")] public int speedUIValue;
 
-    
-    
+
+    private Vector3 vel;
     [Tooltip("Leave this checked in the inspector unless you are manually moving ari in the scene and need her to spawn where you moved her. " + 
              "Leave it unchecked if there are no gameObjects with 'LoadNewScene.cs' attached.")]
     public bool loadInDefaultLocation = false;
@@ -170,6 +167,8 @@ public class ThirdPersonMovement : MonoBehaviour
         customizationOptions = GameObject.Find("Customization Options").GetComponent<CustomizationOptionsStruct>();
         _custRef = GameObject.Find("CustomizationVendor").GetComponent<CustomizationVendor>();
         ariWalkingShoes = GameObject.Find("walkShoes");
+        Invoke("DisableSkates", 0.2f);
+
         //ariWalkingShoes.SetActive(false);
 
         dialogueManager = FindObjectOfType<DialogueManager>();
@@ -245,7 +244,7 @@ public class ThirdPersonMovement : MonoBehaviour
             if (mq2 == null || !mq2.isActive)
             {
                 loadInDefaultLocation = false;
-                Debug.Log("SET LOAD IN DEFAULT LOCATION TO FALSE");
+                //Debug.Log("SET LOAD IN DEFAULT LOCATION TO FALSE");
                 /*transform.localPosition = LoadNewScene.innerRingDefaultSpawnVector;
                 loadInDefaultLocation = false;
                 Debug.Log("Location Vector: " + LoadNewScene.locationVector);
@@ -257,11 +256,16 @@ public class ThirdPersonMovement : MonoBehaviour
         if (loadInDefaultLocation && CheckpointController.lastCheckPointPosition == new Vector3(0, 0, 0))
         {
             transform.localPosition = LoadNewScene.locationVector;
-            Debug.Log("Location Vector: " + LoadNewScene.locationVector);
-            Debug.Log("My position: " + transform.localPosition);
+            //Debug.Log("Location Vector: " + LoadNewScene.locationVector);
+            //Debug.Log("My position: " + transform.localPosition);
         }
         WalkToggleHelper();
 
+    }
+
+    void DisableSkates()
+    {
+        customizationOptions.ariSkateOptions[SaveManager.Instance.state.activeAriSkate].SetActive(false);
     }
 
     // Update is called once per frame
@@ -288,13 +292,13 @@ public class ThirdPersonMovement : MonoBehaviour
             isBraking=false;
         }*/
 
-        
 
-        
-        
 
-        
 
+
+
+
+        vel = rigidBody.velocity;
 
         if (moveInput.x == 0 && moveInput.y == 0 && Grounded == true && currentSpeed >5f)
         {
@@ -422,7 +426,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
 
         //DEBUG
-        if (Input.GetKeyDown(KeyCode.Keypad9))
+        if (Input.GetKeyDown(KeyCode.Alpha9))
         {
             if (GameObject.Find("Phase2Teleport"))
             {
@@ -756,6 +760,7 @@ public class ThirdPersonMovement : MonoBehaviour
         if (!canJump) return;
 
         //rigidBody.velocity = new Vector3(rigidBody.velocity.x, 0f, rigidBody.velocity.z);
+        Debug.Log($"Jumping with this force: {transform.up * force}");
         rigidBody.AddForce(transform.up * force, ForceMode.Impulse);
     }
 
