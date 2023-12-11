@@ -75,7 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3efda54784bc10428950d4477917f7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  graffiti: {fileID: 1193813719681258576, guid: 7a16962a84966584fb31eeb66b62beec, type: 3}
+  decalProjector: {fileID: 1193813719681258576, guid: 7a16962a84966584fb31eeb66b62beec, type: 3}
   graffitiParticle: {fileID: 1032609090901506660, guid: e732da7a1c13ce142a7a58c5e854f20f, type: 3}
   graffitiParticle2: {fileID: 1032609090901506660, guid: 56e23cc902afce04a811b9e050b711bb, type: 3}
   canLocation: {fileID: 294039646}
@@ -95,7 +95,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: f2a840282541e1549abe431c06274758, type: 3}
   - {fileID: 21300000, guid: 5c0de1b5fc9a35a4c9c0ca199d46545b, type: 3}
   maxGraffitiBuffTime: 45
-  IgnoreMe:
+  layerMask:
     serializedVersion: 2
     m_Bits: 8388337
 --- !u!1 &676992869
@@ -3885,13 +3885,12 @@ MonoBehaviour:
   sfxRef: {fileID: 816626722159224191}
   moveSpeed: 9
   walkSpeed: 0.49
-  brakeSpeed: 2
+  brakeSpeed: 20
   decelerationSpeed: 5
   currentSpeed: 0
   groundDrag: 0.01
   moveInput: {x: 0, y: 0}
   maxSkateSpeed: 15
-  speedPrint: 0
   jumpForce: 55
   isJumping: 0
   jumpCoolDown: 0.5
@@ -3922,8 +3921,8 @@ MonoBehaviour:
   healthRef: {fileID: 0}
   isStunned: 0
   CombatPause: 0
-  loadInDefaultLocation: 1
-  print: 0
+  speedUIValue: 0
+  loadInDefaultLocation: 0
 --- !u!114 &2030071780202691794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4841,7 +4840,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3efda54784bc10428950d4477917f7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  graffiti: {fileID: 1193813719681258576, guid: 7a16962a84966584fb31eeb66b62beec, type: 3}
+  decalProjector: {fileID: 1193813719681258576, guid: 7a16962a84966584fb31eeb66b62beec, type: 3}
   graffitiParticle: {fileID: 0}
   graffitiParticle2: {fileID: 0}
   canLocation: {fileID: 294039646}
@@ -4861,7 +4860,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 4273c283a5e145a468dc60af5dcb46e7, type: 3}
   - {fileID: 21300000, guid: b0ae5f825c0f7bb47890dd9d8c48336e, type: 3}
   maxGraffitiBuffTime: 0
-  IgnoreMe:
+  layerMask:
     serializedVersion: 2
     m_Bits: 0
 --- !u!95 &3023009058427426223

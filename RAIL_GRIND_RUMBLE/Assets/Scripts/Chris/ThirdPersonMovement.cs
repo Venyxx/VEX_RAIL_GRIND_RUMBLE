@@ -863,7 +863,10 @@ public class ThirdPersonMovement : MonoBehaviour
     private void SetSpeedUI()
     { 
         //m/s to mph
-        var passing = rigidBody.velocity.magnitude;
+        float velocityMagnitude = rigidBody.velocity.magnitude;
+        double milesPerHour = velocityMagnitude * 2.2369362920544;
+        speedUIValue = (int) milesPerHour;
+        
 
         //print
         if (speedUIValue < 10)
