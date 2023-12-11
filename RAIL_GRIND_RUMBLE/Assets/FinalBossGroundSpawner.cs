@@ -14,6 +14,10 @@ public class FinalBossGroundSpawner : MonoBehaviour
     private Queue<GameObject> spawnedObjects;
     private float zLengthFloor;
     private float zLengthWall;
+
+    private GameObject player;
+    private GrappleHook playerGrapple;
+    private bool paused = true;
     
     // Start is called before the first frame update
     void Start()
@@ -21,20 +25,32 @@ public class FinalBossGroundSpawner : MonoBehaviour
         spawnedObjects = new Queue<GameObject>();
         zLengthFloor = flatGround.GetComponent<Renderer>().bounds.size.z;
         zLengthWall = wall.GetComponent<Renderer>().bounds.size.z;
-        StartCoroutine(SpawnGround());
+        player = FindObjectOfType<ThirdPersonMovement>().gameObject;
+        playerGrapple = player.GetComponent<GrappleHook>();
+        
+        SpawnFloor(0);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        paused = playerGrapple.isGrappling;
+    }
+
+    public void Activate()
+    {
+        StartCoroutine(SpawnGround());
     }
 
     IEnumerator SpawnGround()
     {
-        int i = 0;
+        int i = 1;
         while (true)
         {
+
+            
+
             if (i % 7 != 0 || i == 0)
             {
                 SpawnFloor(i);
@@ -48,9 +64,13 @@ public class FinalBossGroundSpawner : MonoBehaviour
 
             }
             i++;
-            if (spawnedObjects.Count > 15)
+
+            if (!paused)
             {
-                Destroy(spawnedObjects.Dequeue());
+                if (spawnedObjects.Count > 20)
+                {
+                    Destroy(spawnedObjects.Dequeue());
+                }
             }
             yield return new WaitForSeconds(spawnDelaySeconds);
             

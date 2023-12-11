@@ -4,7 +4,7 @@ using UnityEngine;
 using PathCreation;
 using UnityEngine.SceneManagement;
 
-public class DonovanPhase2 : MonoBehaviour, IDamageable
+public class DonovanPhase2OLD : MonoBehaviour, IDamageable
 {
     public PathCreator path1;
     [SerializeField]float speed;

@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.Animations.Rigging;
 using Cinemachine;
+using UnityEngine.SceneManagement;
 
 
 public class GrappleHook : MonoBehaviour
@@ -97,6 +98,8 @@ public class GrappleHook : MonoBehaviour
     [SerializeField] private AudioClip[] grappleSounds;
     private AudioSource audioSource;
 
+    private bool isFinalBoss = false;
+
     void Start()
     {
         cooldownRunning = false;
@@ -148,9 +151,9 @@ public class GrappleHook : MonoBehaviour
         // pointToGrapplePoint = rootRigREF.GetComponent<RigBuilder>();
         // pointToGrapplePoint.enabled = false;
 
-        
-        
-        
+
+        isFinalBoss = SceneManager.GetActiveScene().name == "FinalBossExperimentation";
+
     }
 
     void Update()
@@ -193,6 +196,7 @@ public class GrappleHook : MonoBehaviour
         
         if (context.canceled)
         {
+            if (SceneManager.GetActiveScene().name == "FinalBossExperimentation") return;
             if (joint == null && canShoot == false && cooldownRunning == false && GameObject.Find("PickUpHeld") == null)
             {
                 canShoot = true;
@@ -415,13 +419,13 @@ public class GrappleHook : MonoBehaviour
 
 
         //Right Force
-        if (horizontalInput > 0)
+        if (horizontalInput > 0 && !isFinalBoss)
         {
             rigidBody.AddForce(orientation.right * horizontalThrustForce * Time.deltaTime);
         }
 
         //Left Force
-        if (horizontalInput < 0)
+        if (horizontalInput < 0 && !isFinalBoss)
         {
             rigidBody.AddForce(-orientation.right * horizontalThrustForce * Time.deltaTime);
         }
@@ -439,9 +443,17 @@ public class GrappleHook : MonoBehaviour
         //Shorten Cable
         if (shorteningCable == true)
         {
-            Debug.Log("Shortening Cable");
+            //Debug.Log("Shortening Cable");
             Vector3 directionToPoint = swingPoint - transform.position;
-            rigidBody.AddForce(directionToPoint.normalized * forwardThrustForce * Time.deltaTime);
+            if (isFinalBoss)
+            {
+                rigidBody.AddForce(directionToPoint.normalized * forwardThrustForce * 5 * Time.deltaTime, ForceMode.Force);
+            }
+            else
+            {
+                rigidBody.AddForce(directionToPoint.normalized * forwardThrustForce * Time.deltaTime);
+            }
+
 
             float distanceFromPoint = Vector3.Distance(transform.position, swingPoint);
 
