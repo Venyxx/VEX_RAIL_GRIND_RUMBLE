@@ -261,6 +261,8 @@ public class ThirdPersonMovement : MonoBehaviour
         }
         WalkToggleHelper();
 
+        //temp fix for the strange bug where something is affecting her mass 
+        rigidBody.mass = 6.0f; 
     }
 
     void DisableSkates()

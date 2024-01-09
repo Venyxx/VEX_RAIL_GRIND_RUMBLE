@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine.Serialization;
 
 public class PlayerThrownObject : MonoBehaviour
