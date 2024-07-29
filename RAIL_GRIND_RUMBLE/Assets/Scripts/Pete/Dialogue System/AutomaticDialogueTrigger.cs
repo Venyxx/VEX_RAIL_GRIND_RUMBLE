@@ -6,7 +6,7 @@ public class AutomaticDialogueTrigger : MonoBehaviour
     public DialogueTemplate dialogue;
     [SerializeField] private bool oneTimeUse;
     
-    private bool used;
+    private bool used = false;
 
     public Vector3 returnPlayerDirection;
     
@@ -23,7 +23,7 @@ public class AutomaticDialogueTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //Debug.Log("Collision Detected");
+        Debug.Log("Collision Detected");
         if (other.CompareTag("Player") && (!oneTimeUse || !used) )
         {
             var dialogueManager = FindObjectOfType<DialogueManager>();

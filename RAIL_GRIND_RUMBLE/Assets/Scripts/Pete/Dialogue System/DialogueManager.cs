@@ -29,7 +29,7 @@ public class DialogueManager : MonoBehaviour
     public bool blockingPlayer;
     private Queue<string> paragraphDisplayed;
     private Queue<string> nameDisplayed;
-    private Queue<AudioClip> voiceClips;
+    //private Queue<AudioClip> voiceClips;
     private bool isBoxActive = false;
     private float textSpeed = 0.01f;
     [SerializeField] private float npcRotationSpeed = 5;
@@ -56,7 +56,7 @@ public class DialogueManager : MonoBehaviour
     {
         paragraphDisplayed = new Queue<string>();
         nameDisplayed = new Queue<string>();
-        voiceClips = new Queue<AudioClip>();
+        //voiceClips = new Queue<AudioClip>();
         textComponent.text = string.Empty;
         talkingToName.text = string.Empty;
         audioSource = GetComponent<AudioSource>();
@@ -187,17 +187,17 @@ public class DialogueManager : MonoBehaviour
         foreach (var dialogueParagraph in dialogue.paragraphs)
         {
             //Debug.Log(dialogueParagraph.englishDialogue);
-            if (SpanishMode.spanishMode)
+            /*if (SpanishMode.spanishMode)
             {
                 paragraphDisplayed.Enqueue(dialogueParagraph.spanishDialogue);
                 voiceClips.Enqueue(dialogueParagraph.spanishVoiceLine);
             }
-            else
-            {
+            else*/
+            //{
                 paragraphDisplayed.Enqueue(dialogueParagraph.englishDialogue);
-                voiceClips.Enqueue(dialogueParagraph.englishVoiceLine);
+                //voiceClips.Enqueue(dialogueParagraph.englishVoiceLine);
 
-            }
+            //}
             nameDisplayed.Enqueue(dialogueParagraph.speakerName);
             
         }
@@ -239,12 +239,12 @@ public class DialogueManager : MonoBehaviour
 
         talkingToName.text = nameDisplayed.Dequeue();
         string paragraph = paragraphDisplayed.Dequeue();
-        AudioClip clip = voiceClips.Dequeue();
-        if (clip != null)
+        //AudioClip clip = voiceClips.Dequeue();
+        /*if (clip != null)
         {
             audioSource.Stop();
             audioSource.PlayOneShot(clip);
-        }
+        }*/
         lastString = paragraph;
         StopAllCoroutines();
         StartCoroutine(TypeParagraph(paragraph));

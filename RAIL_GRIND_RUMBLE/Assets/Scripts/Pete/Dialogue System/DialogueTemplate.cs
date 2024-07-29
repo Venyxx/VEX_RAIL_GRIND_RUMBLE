@@ -31,16 +31,16 @@ public struct DialogueParagraph
     {
         this.speakerName = speakerName;
         this.englishDialogue = englishDialogue;
-        englishVoiceLine = null;
-        spanishDialogue = null;
-        spanishVoiceLine = null;
+        //englishVoiceLine = null;
+        //spanishDialogue = null;
+        //spanishVoiceLine = null;
     }
 
     public string speakerName;
     [TextArea(3,10)] public string englishDialogue;
-    public AudioClip englishVoiceLine;
-    [TextArea(3,10)] public string spanishDialogue;
-    public AudioClip spanishVoiceLine;
+    //public AudioClip englishVoiceLine;
+    //[TextArea(3,10)] public string spanishDialogue;
+    //public AudioClip spanishVoiceLine;
     
 
 

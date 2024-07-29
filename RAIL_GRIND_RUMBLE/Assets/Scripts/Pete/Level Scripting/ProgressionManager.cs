@@ -1,12 +1,76 @@
-/*using System;
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/*
+ * NOTE: if the progress stage is a number, you are ON that level. You haven't beaten it yet
+ * Progression Stages:
+ * 0 - Prologue
+ * 1 - Collecting the Parts
+ * 2- Graffiti Tutorial
+ * 3- Diego Gets Kidnapped
+ * 4- Locuo Race 1
+ * 5- Defeat El Segador
+ * 6- The Inner Ring
+ * 7- Locuo Race 2
+ * 8- Defeat Chief Hernandez
+ * 9- Servos HQ Ascent
+ * 10- Locuo Race 3
+ * 11- Elevator Combat
+ * 12- Unplug Yourself
+ * 13- Final Boss 
+ */
+
+
 public class ProgressionManager : MonoBehaviour
 {
+    public int progressStage = 0;
 
+    private static ProgressionManager instance;
+    
+    public static ProgressionManager Get()
+    {
+        if (instance == null)
+        {
+            var gameObject = new GameObject("Progression Manager");
+            gameObject.AddComponent<ProgressionManager>();
+        }
+
+        return instance;
+    }
+
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
+    
+    public void PlayCutscene(int clip)
+    {
+        FindObjectOfType<CutscenePlayer>().PlayCutscene(clip);
+    }
+    
+    public void PlayFirstCutscene()
+    {
+        if (SceneManager.GetActiveScene().name == "Ari's House" && progressStage == 0)
+        {
+           
+            PlayCutscene(1);
+        }
+    }
+    
+    /*
+     OLD STUFF START
     private static ProgressionManager instance;
     public MainQuest1 mainQuest1;
     public MainQuest2 mainQuest2;
@@ -14,9 +78,9 @@ public class ProgressionManager : MonoBehaviour
     public LocuoQuest locuoRace1;
     public LocuoQuest locuoRace2;
     public LocuoQuest locuoRace3;
-    
+
     public Quest currentQuest;
-    
+
     public TextMeshProUGUI QuestInfoText { get; private set; }
     public static List<Quest> CompletedQuests { get; private set; }
     public CountQuestType CurrentCountQuestType { get; private set; } = CountQuestType.None;
@@ -43,7 +107,7 @@ public class ProgressionManager : MonoBehaviour
 
         return instance;
     }
-    
+
 
     private void Awake()
     {
@@ -58,7 +122,7 @@ public class ProgressionManager : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-    
+
     void Start()
     {
         
@@ -78,10 +142,10 @@ public class ProgressionManager : MonoBehaviour
         
         //QuestInfoText.text = questInfo;
     }
-    
-    
 
-    
+
+
+
     public void AcceptQuest(Quest quest)
     {
         foreach (var otherQuestGiver in FindObjectsOfType<QuestGiver>())
@@ -115,7 +179,7 @@ public class ProgressionManager : MonoBehaviour
             QuestInfoText.text = $"Progress: {0} / {countQuest.GetCompletionCount()}";
         }
     }
-    
+
 
     public void CompleteQuest()
     {
@@ -335,5 +399,5 @@ public class ProgressionManager : MonoBehaviour
     public void PlayCutscene(int clip)
     {
         FindObjectOfType<CutscenePlayer>().PlayCutscene(clip);
-    }
-}*/
+    }*/
+}
