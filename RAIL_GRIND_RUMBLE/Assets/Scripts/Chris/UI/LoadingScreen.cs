@@ -23,7 +23,9 @@ public class LoadingScreen : MonoBehaviour
     void Start()
     {
         anim = loadingBackground.GetComponent<Animator>();
-        level = SaveManager.Instance.state.completedLevel;
+        
+        //TODO: Progression Code Commented Out/Removed
+        //level = SaveManager.Instance.state.completedLevel;
     }
 
     void Awake()

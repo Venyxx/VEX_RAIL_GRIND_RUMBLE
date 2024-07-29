@@ -131,10 +131,11 @@ public class ControllerRebinder : MonoBehaviour
             jumpAction.action.bindings[1].effectivePath,
             InputControlPath.HumanReadableStringOptions.OmitDevice);
         
-       //GrapplePullDisplay
+        //TODO: Noah IndexOutOfBounds 
+       /*//GrapplePullDisplay
         grapplePullBindingDisplayNameText.text = InputControlPath.ToHumanReadableString(
             grapplePullAction.action.bindings[2].effectivePath,
-            InputControlPath.HumanReadableStringOptions.OmitDevice);
+            InputControlPath.HumanReadableStringOptions.OmitDevice);*/
         
         //GrappleSwitchDisplay
         grappleSwitchBindingDisplayNameText.text = InputControlPath.ToHumanReadableString(

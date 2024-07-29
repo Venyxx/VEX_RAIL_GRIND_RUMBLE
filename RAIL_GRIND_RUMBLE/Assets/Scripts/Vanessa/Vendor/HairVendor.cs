@@ -29,10 +29,10 @@ public class HairVendor : MonoBehaviour
         //button on click events to shop 
         InitShop();
 
-        OnHairSelect(SaveManager.Instance.state.activeAriHair);
-        SetHair(SaveManager.Instance.state.activeAriHair);
+        OnHairSelect(SaveManager.Instance.saveState.activeAriHair);
+        SetHair(SaveManager.Instance.saveState.activeAriHair);
 
-        hairPanel.GetChild(SaveManager.Instance.state.activeAriHair).GetComponent<RectTransform>().localScale = Vector3.one * 1.125f;
+        hairPanel.GetChild(SaveManager.Instance.saveState.activeAriHair).GetComponent<RectTransform>().localScale = Vector3.one * 1.125f;
 
     }
 
@@ -63,7 +63,7 @@ public class HairVendor : MonoBehaviour
     {
         //set active
         activeHairIndex = index;
-        SaveManager.Instance.state.activeAriHair = index;
+        SaveManager.Instance.saveState.activeAriHair = index;
 
         
         //change hair material
@@ -87,7 +87,7 @@ public class HairVendor : MonoBehaviour
 
     private void UpdateMoneyText ()
     {
-        moneyText.text = ("$" + SaveManager.Instance.state.Money.ToString());
+        moneyText.text = ("$" + SaveManager.Instance.saveState.Money.ToString());
     }
 
     private void OnHairSelect(int currentIndex)

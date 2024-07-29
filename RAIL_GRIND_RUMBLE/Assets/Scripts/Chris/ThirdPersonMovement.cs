@@ -205,9 +205,9 @@ public class ThirdPersonMovement : MonoBehaviour
         //Coin Counter
         coinCounterREF = GameObject.Find("CoinCounter");
         coinCountText = coinCounterREF.GetComponent<TextMeshProUGUI>();
-        if (SaveManager.Instance != null)
+        if (SaveManager.Instance != null && SaveManager.Instance.saveState != null)
         {
-            coinCountText.text = $"{(int) SaveManager.Instance.state.Money}";
+            coinCountText.text = $"{(int) SaveManager.Instance.saveState.Money}";
 
         }
         
@@ -247,7 +247,10 @@ public class ThirdPersonMovement : MonoBehaviour
 
     void DisableSkates()
     {
-        customizationOptions.ariSkateOptions[SaveManager.Instance.state.activeAriSkate].SetActive(false);
+        if (SaveManager.Instance != null && SaveManager.Instance.saveState != null)
+        {
+            customizationOptions.ariSkateOptions[SaveManager.Instance.saveState.activeAriSkate].SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -487,8 +490,10 @@ public class ThirdPersonMovement : MonoBehaviour
             sprayCan.SetActive(true);
             ariWalkingShoes.SetActive(true);
 
-            customizationOptions.ariSkateOptions[SaveManager.Instance.state.activeAriSkate].SetActive(false);
-
+            if (SaveManager.Instance != null && SaveManager.Instance.saveState != null)
+            {
+                customizationOptions.ariSkateOptions[SaveManager.Instance.saveState.activeAriSkate].SetActive(false);
+            }
         }
         else
         {
@@ -498,8 +503,11 @@ public class ThirdPersonMovement : MonoBehaviour
             sprayCan.SetActive(false);
             ariWalkingShoes.SetActive(false);
 
-            //change to shoes
-            customizationOptions.ariSkateOptions[SaveManager.Instance.state.activeAriSkate].SetActive(true);
+            if (SaveManager.Instance != null && SaveManager.Instance.saveState != null)
+            {
+                //change to shoes
+                customizationOptions.ariSkateOptions[SaveManager.Instance.saveState.activeAriSkate].SetActive(true);
+            }
         }
     }
 
@@ -795,12 +803,12 @@ public class ThirdPersonMovement : MonoBehaviour
 
     public void AddCoin(int coin)
     {
-        Debug.Log(coin);
-        if (SaveManager.Instance != null)
+        //Debug.Log(coin);
+        if (SaveManager.Instance != null && SaveManager.Instance.saveState != null)
         {
-            SaveManager.Instance.state.Money += coin;
+            SaveManager.Instance.saveState.Money += coin;
             SaveManager.Instance.Save();
-            coinCountText.text = $"{(int) SaveManager.Instance.state.Money}";
+            coinCountText.text = $"{(int) SaveManager.Instance.saveState.Money}";
         }
         PlaySound(0);
         
@@ -902,21 +910,21 @@ public class ThirdPersonMovement : MonoBehaviour
     public void RecalculateStats ()
     {
         healthRef = gameObject.GetComponent<PlayerHealth>();
-        if (SaveManager.Instance.state.activeAriSkate == 0 || SaveManager.Instance.state.activeAriSkate == 2 )
+        if (SaveManager.Instance.saveState.activeAriSkate == 0 || SaveManager.Instance.saveState.activeAriSkate == 2 )
         {
             healthRef.maxHealth = 200; // base current stat says 100
             maxSkateSpeed = 30; //current stat is 15
             //suppose to be decrease charge time 
             Debug.Log("updating stats to shell 0, health 200, max speed 30");
 
-        } else if (SaveManager.Instance.state.activeAriSkate == 1 || SaveManager.Instance.state.activeAriSkate == 4 )
+        } else if (SaveManager.Instance.saveState.activeAriSkate == 1 || SaveManager.Instance.saveState.activeAriSkate == 4 )
         {
             playerAttackREF = GetComponent<PlayerAttack>();
             playerAttackREF.skateBuffDamage = 2;
             healthRef.maxHealth = 250;
             Debug.Log("updating stats to shell 1, damage buff 2, max health 250");
 
-        } else if (SaveManager.Instance.state.activeAriSkate == 3 || SaveManager.Instance.state.activeAriSkate == 5 )
+        } else if (SaveManager.Instance.saveState.activeAriSkate == 3 || SaveManager.Instance.saveState.activeAriSkate == 5 )
         {
             maxSkateSpeed = 40;
             healthRef.maxHealth = 300f;

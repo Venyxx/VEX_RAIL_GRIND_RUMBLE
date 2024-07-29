@@ -86,7 +86,7 @@ public class OutfitSwapping : MonoBehaviour
         customizationOptions.ariAccessoryOptions[1] = GameObject.Find("earringSphere");
         customizationOptions.ariAccessoryOptions[2] = GameObject.Find("Hoops");
 
-        Debug.Log("trying masks");
+        //Debug.Log("trying masks");
         customizationOptions.ariMaskOptions[0] = GameObject.Find("BLANKMASK");
         customizationOptions.ariMaskOptions[1] = GameObject.Find("roundGlasses");
         customizationOptions.ariMaskOptions[2] = GameObject.Find("sunGlasses1");

@@ -99,35 +99,35 @@ public class CustomizationVendor : MonoBehaviour
 
         
         //player pref
-        OnAriAccessorySelect(SaveManager.Instance.state.activeAriAccessory);
-        SetAriAccessory(SaveManager.Instance.state.activeAriAccessory);
+        OnAriAccessorySelect(SaveManager.Instance.saveState.activeAriAccessory);
+        SetAriAccessory(SaveManager.Instance.saveState.activeAriAccessory);
 
-        OnTopSelect(SaveManager.Instance.state.activeAriTop);
-        SetTop(SaveManager.Instance.state.activeAriTop);
+        OnTopSelect(SaveManager.Instance.saveState.activeAriTop);
+        SetTop(SaveManager.Instance.saveState.activeAriTop);
 
-        OnBottomSelect(SaveManager.Instance.state.activeAriBottom);
-        SetBottom(SaveManager.Instance.state.activeAriBottom);
+        OnBottomSelect(SaveManager.Instance.saveState.activeAriBottom);
+        SetBottom(SaveManager.Instance.saveState.activeAriBottom);
 
-        OnSockSelect(SaveManager.Instance.state.activeAriSock);
-        SetSock(SaveManager.Instance.state.activeAriSock);
+        OnSockSelect(SaveManager.Instance.saveState.activeAriSock);
+        SetSock(SaveManager.Instance.saveState.activeAriSock);
 
-        OnSkateSelect(SaveManager.Instance.state.activeAriSkate);
-        SetSkate(SaveManager.Instance.state.activeAriSkate);
+        OnSkateSelect(SaveManager.Instance.saveState.activeAriSkate);
+        SetSkate(SaveManager.Instance.saveState.activeAriSkate);
 
-        OnHairSelect(SaveManager.Instance.state.activeAriHair);
-        SetHair(SaveManager.Instance.state.activeAriHair);
+        OnHairSelect(SaveManager.Instance.saveState.activeAriHair);
+        SetHair(SaveManager.Instance.saveState.activeAriHair);
 
-        OnMaskSelect(SaveManager.Instance.state.activeAriMask);
-        SetMask(SaveManager.Instance.state.activeAriMask);
+        OnMaskSelect(SaveManager.Instance.saveState.activeAriMask);
+        SetMask(SaveManager.Instance.saveState.activeAriMask);
 
         //visual selected item
-        accessoryPanel.GetChild(SaveManager.Instance.state.activeAriAccessory).GetComponent<RectTransform>().localScale = Vector3.one * 1.125f;
-        topPanel.GetChild(SaveManager.Instance.state.activeAriTop).GetComponent<RectTransform>().localScale = Vector3.one * 1.125f;
-        bottomPanel.GetChild(SaveManager.Instance.state.activeAriBottom).GetComponent<RectTransform>().localScale = Vector3.one * 1.125f;
-        sockPanel.GetChild(SaveManager.Instance.state.activeAriSock).GetComponent<RectTransform>().localScale = Vector3.one * 1.125f;
-        skatePanel.GetChild(SaveManager.Instance.state.activeAriSkate).GetComponent<RectTransform>().localScale = Vector3.one * 1.125f;
-        hairPanel.GetChild(SaveManager.Instance.state.activeAriHair).GetComponent<RectTransform>().localScale = Vector3.one * 1.125f;
-        maskPanel.GetChild(SaveManager.Instance.state.activeAriMask).GetComponent<RectTransform>().localScale = Vector3.one * 1.125f;
+        accessoryPanel.GetChild(SaveManager.Instance.saveState.activeAriAccessory).GetComponent<RectTransform>().localScale = Vector3.one * 1.125f;
+        topPanel.GetChild(SaveManager.Instance.saveState.activeAriTop).GetComponent<RectTransform>().localScale = Vector3.one * 1.125f;
+        bottomPanel.GetChild(SaveManager.Instance.saveState.activeAriBottom).GetComponent<RectTransform>().localScale = Vector3.one * 1.125f;
+        sockPanel.GetChild(SaveManager.Instance.saveState.activeAriSock).GetComponent<RectTransform>().localScale = Vector3.one * 1.125f;
+        skatePanel.GetChild(SaveManager.Instance.saveState.activeAriSkate).GetComponent<RectTransform>().localScale = Vector3.one * 1.125f;
+        hairPanel.GetChild(SaveManager.Instance.saveState.activeAriHair).GetComponent<RectTransform>().localScale = Vector3.one * 1.125f;
+        maskPanel.GetChild(SaveManager.Instance.saveState.activeAriMask).GetComponent<RectTransform>().localScale = Vector3.one * 1.125f;
     } 
 
     private void Update ()
@@ -269,7 +269,7 @@ public class CustomizationVendor : MonoBehaviour
     {
         //set active
         activeAccessoryIndex = index;
-        SaveManager.Instance.state.activeAriAccessory = index;
+        SaveManager.Instance.saveState.activeAriAccessory = index;
 
         
         //change room material
@@ -289,7 +289,7 @@ public class CustomizationVendor : MonoBehaviour
     {
         //set active
         activeTopIndex = index;
-        SaveManager.Instance.state.activeAriTop = index;
+        SaveManager.Instance.saveState.activeAriTop = index;
 
         
         //change hair material
@@ -309,7 +309,7 @@ public class CustomizationVendor : MonoBehaviour
     {
         //set active
         activeBottomIndex = index;
-        SaveManager.Instance.state.activeAriBottom = index;
+        SaveManager.Instance.saveState.activeAriBottom = index;
 
         
         //change hair material
@@ -326,7 +326,7 @@ public class CustomizationVendor : MonoBehaviour
     {
         //set active
         activeSockIndex = index;
-        SaveManager.Instance.state.activeAriSock = index;
+        SaveManager.Instance.saveState.activeAriSock = index;
 
         
         //change hair material
@@ -343,7 +343,7 @@ public class CustomizationVendor : MonoBehaviour
     {
         //set active
         activeSkateIndex = index;
-        SaveManager.Instance.state.activeAriSkate = index;
+        SaveManager.Instance.saveState.activeAriSkate = index;
 
         
         //change hair material
@@ -364,7 +364,7 @@ public class CustomizationVendor : MonoBehaviour
     {
         //set active
         activeHairIndex = index;
-        SaveManager.Instance.state.activeAriHair = index;
+        SaveManager.Instance.saveState.activeAriHair = index;
 
         
         //change hair material
@@ -381,7 +381,7 @@ public class CustomizationVendor : MonoBehaviour
     {
         //set active
         activeMaskIndex = index;
-        SaveManager.Instance.state.activeAriMask = index;
+        SaveManager.Instance.saveState.activeAriMask = index;
 
         
         //change hair material
@@ -396,7 +396,7 @@ public class CustomizationVendor : MonoBehaviour
 
     private void UpdateMoneyText ()
     {
-        moneyText.text = ("$" + SaveManager.Instance.state.Money.ToString());
+        moneyText.text = ("$" + SaveManager.Instance.saveState.Money.ToString());
     }
 
 
@@ -409,7 +409,7 @@ public class CustomizationVendor : MonoBehaviour
         //if clicked is alr active
         if (selectedAccessoryIndex == currentIndex)
         {
-            Debug.Log("it was the current one");
+            //Debug.Log("it was the current one");
             return;
            
         }
@@ -1108,13 +1108,13 @@ public class CustomizationVendor : MonoBehaviour
 
     public void ResetOutfitToSaveState()
     {
-        selectedAccessoryIndex = SaveManager.Instance.state.activeAriAccessory;
-        selectedTopIndex = SaveManager.Instance.state.activeAriTop;
-        selectedBottomIndex = SaveManager.Instance.state.activeAriBottom;
-        selectedSockIndex = SaveManager.Instance.state.activeAriSock;
-        selectedSkateIndex = SaveManager.Instance.state.activeAriSkate;
-        selectedHairIndex = SaveManager.Instance.state.activeAriHair;
-        selectedMaskIndex = SaveManager.Instance.state.activeAriMask;
+        selectedAccessoryIndex = SaveManager.Instance.saveState.activeAriAccessory;
+        selectedTopIndex = SaveManager.Instance.saveState.activeAriTop;
+        selectedBottomIndex = SaveManager.Instance.saveState.activeAriBottom;
+        selectedSockIndex = SaveManager.Instance.saveState.activeAriSock;
+        selectedSkateIndex = SaveManager.Instance.saveState.activeAriSkate;
+        selectedHairIndex = SaveManager.Instance.saveState.activeAriHair;
+        selectedMaskIndex = SaveManager.Instance.saveState.activeAriMask;
 
         
         GameObjectAccessorySetting();

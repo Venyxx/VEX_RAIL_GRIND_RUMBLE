@@ -46,7 +46,7 @@ public class PlayerInteractions : MonoBehaviour
 
 
         canvas = GameObject.Find("VendorCanvas");
-        Debug.Log("the canvas is off now");
+        //Debug.Log("the canvas is off now");
         if (canvas)
             canvas.SetActive(false);
 

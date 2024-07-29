@@ -74,20 +74,20 @@ public class VendorInteraction : MonoBehaviour
         InitLevel();
 
         //player pref
-        OnAriMaterialSelect(SaveManager.Instance.state.activeAriMaterial);
-        SetAriMaterial(SaveManager.Instance.state.activeAriMaterial);
+        OnAriMaterialSelect(SaveManager.Instance.saveState.activeAriMaterial);
+        SetAriMaterial(SaveManager.Instance.saveState.activeAriMaterial);
 
         //just one for now
         //OnGraffitiSelect(SaveManager.Instance.state.ariGraffitiSlotUp1);
         //SetGraffiti1(SaveManager.Instance.state.ariGraffitiSlotUp1);
 
-        OnHairSelect(SaveManager.Instance.state.activeAriHair);
-        SetHair(SaveManager.Instance.state.activeAriHair);
+        OnHairSelect(SaveManager.Instance.saveState.activeAriHair);
+        SetHair(SaveManager.Instance.saveState.activeAriHair);
 
         //visual selected item
-        materialPanel.GetChild(SaveManager.Instance.state.activeAriMaterial).GetComponent<RectTransform>().localScale = Vector3.one * 1.125f;
+        materialPanel.GetChild(SaveManager.Instance.saveState.activeAriMaterial).GetComponent<RectTransform>().localScale = Vector3.one * 1.125f;
         //graffitiPanel.GetChild(SaveManager.Instance.state.ariGraffitiSlotUp1).GetComponent<RectTransform>().localScale = Vector3.one * 1.125f;
-        hairPanel.GetChild(SaveManager.Instance.state.activeAriHair).GetComponent<RectTransform>().localScale = Vector3.one * 1.125f;
+        hairPanel.GetChild(SaveManager.Instance.saveState.activeAriHair).GetComponent<RectTransform>().localScale = Vector3.one * 1.125f;
     } 
 
     private void Update ()
@@ -157,6 +157,10 @@ public class VendorInteraction : MonoBehaviour
 
     private void InitLevel()
     {
+        
+        //TODO: Commented Out... IDK Code
+        
+        /*
         //make sure there are refs
         if (questPanel == null)
         {
@@ -172,10 +176,10 @@ public class VendorInteraction : MonoBehaviour
             //b.onClick.AddListener(() => OnLevelSelect(currentIndex));
 
             Image img = t.GetComponent<Image>();
-            if (i <= SaveManager.Instance.state.completedLevel)
+            if (i <= SaveManager.Instance.saveState.completedLevel)
             {
                 //its unlocked fr
-                if (i == SaveManager.Instance.state.completedLevel)
+                if (i == SaveManager.Instance.saveState.completedLevel)
                 {
                     img.color = Color.white;
                     //in progress
@@ -195,7 +199,7 @@ public class VendorInteraction : MonoBehaviour
             //is it unlocked
 
             i++;
-        }
+        }*/
     }
 
     private void SetCameraTo (int menuIndex)
@@ -230,7 +234,7 @@ public class VendorInteraction : MonoBehaviour
     {
         //set active
         activeMaterialIndex = index;
-        SaveManager.Instance.state.activeAriMaterial = index;
+        SaveManager.Instance.saveState.activeAriMaterial = index;
 
         
         //change room material
@@ -298,7 +302,7 @@ public class VendorInteraction : MonoBehaviour
     {
         //set active
         activeHairIndex = index;
-        SaveManager.Instance.state.activeAriHair = index;
+        SaveManager.Instance.saveState.activeAriHair = index;
 
         
         //change hair material
@@ -316,7 +320,7 @@ public class VendorInteraction : MonoBehaviour
 
     private void UpdateMoneyText ()
     {
-        moneyText.text = ("$" + SaveManager.Instance.state.Money.ToString());
+        moneyText.text = ("$" + SaveManager.Instance.saveState.Money.ToString());
     }
 
 
@@ -592,11 +596,11 @@ public class VendorInteraction : MonoBehaviour
         Debug.Log("im trying to wipe");
     }
 
-
-    public void SetHighScoreText ()
+    
+    /*public void SetHighScoreText ()
     {
-        highscoreText.text = "$" + SaveManager.Instance.state.endlessHighScore;
-    }
+        highscoreText.text = "$" + SaveManager.Instance.saveState.endlessHighScore;
+    }*/
 
     /*public void MaxOutMoney ()
     {

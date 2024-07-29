@@ -36,10 +36,10 @@ public class ShaderVendor : MonoBehaviour
         InitShop();
 
         //player pref
-        OnAriMaterialSelect(SaveManager.Instance.state.activeAriMaterial);
-        SetAriMaterial(SaveManager.Instance.state.activeAriMaterial);
+        OnAriMaterialSelect(SaveManager.Instance.saveState.activeAriMaterial);
+        SetAriMaterial(SaveManager.Instance.saveState.activeAriMaterial);
 
-        materialPanel.GetChild(SaveManager.Instance.state.activeAriMaterial).GetComponent<RectTransform>().localScale = Vector3.one * 1.125f;
+        materialPanel.GetChild(SaveManager.Instance.saveState.activeAriMaterial).GetComponent<RectTransform>().localScale = Vector3.one * 1.125f;
     }
 
     // Update is called once per frame
@@ -76,7 +76,7 @@ public class ShaderVendor : MonoBehaviour
     {
         //set active
         activeMaterialIndex = index;
-        SaveManager.Instance.state.activeAriMaterial = index;
+        SaveManager.Instance.saveState.activeAriMaterial = index;
 
         
         //change room material
@@ -91,7 +91,7 @@ public class ShaderVendor : MonoBehaviour
 
     private void UpdateMoneyText ()
     {
-        moneyText.text = ("$" + SaveManager.Instance.state.Money.ToString());
+        moneyText.text = ("$" + SaveManager.Instance.saveState.Money.ToString());
     }
 
     private void OnAriMaterialSelect(int currentIndex)

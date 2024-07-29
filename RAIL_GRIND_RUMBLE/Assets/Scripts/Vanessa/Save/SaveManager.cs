@@ -6,7 +6,7 @@ using UnityEngine;
 public class SaveManager : MonoBehaviour
 {
     public static SaveManager Instance { set; get;}
-    public SaveState state;
+    public SaveState saveState;
 
     private void Awake ()
     {
@@ -28,19 +28,21 @@ public class SaveManager : MonoBehaviour
     //save whole state-------------
     public void Save ()
     {
-        PlayerPrefs.SetString("save", Helper.Serialize<SaveState>(state));
+        PlayerPrefs.SetString("save", SaveSerializer.Serialize<SaveState>(saveState));
     }
 
     //Load last state-------------
     public void Load ()
     {
+        
+        
         if (PlayerPrefs.HasKey("save"))
         {
-            state = Helper.Deserialize<SaveState>(PlayerPrefs.GetString("save"));
+            saveState = SaveSerializer.Deserialize<SaveState>(PlayerPrefs.GetString("save"));
             Debug.Log("found save file");
         } else
         {
-            state = new SaveState();
+            saveState = new SaveState();
             Save();
             Debug.Log("no prev save, making file");
         }
@@ -52,53 +54,53 @@ public class SaveManager : MonoBehaviour
     public bool IsAriMatOwned(int index)
     {
         //check if bit is set, if yes its owned
-        return (state.ariMaterialOwned & (1 << index)) != 0;
+        return (saveState.ariMaterialOwned & (1 << index)) != 0;
     }
 
     //Check if item wallpaper color is owned
     public bool IsGraffitiOwned(int index)
     {
         //check if bit is set, if yes its owned
-        return (state.ariGraffitiOwned & (1 << index)) != 0;
+        return (saveState.ariGraffitiOwned & (1 << index)) != 0;
     }
     public bool IsAriHairOwned(int index)
     {
         //check if bit is set, if yes its owned
-        return (state.ariHairOwned & (1 << index)) != 0;
+        return (saveState.ariHairOwned & (1 << index)) != 0;
     }
 
     public bool IsAriAccessoryOwned(int index)
     {
         //check if bit is set, if yes its owned
-        return (state.ariAccessoryOwned & (1 << index)) != 0;
+        return (saveState.ariAccessoryOwned & (1 << index)) != 0;
     }
     public bool IsAriTopOwned(int index)
     {
         //check if bit is set, if yes its owned
-        return (state.ariTopOwned & (1 << index)) != 0;
+        return (saveState.ariTopOwned & (1 << index)) != 0;
     }
 
     public bool IsAriBottomOwned(int index)
     {
         //check if bit is set, if yes its owned
-        return (state.ariBottomOwned & (1 << index)) != 0;
+        return (saveState.ariBottomOwned & (1 << index)) != 0;
     }
 
     public bool IsAriSockOwned(int index)
     {
         //check if bit is set, if yes its owned
-        return (state.ariSockOwned & (1 << index)) != 0;
+        return (saveState.ariSockOwned & (1 << index)) != 0;
     }
     public bool IsAriSkateOwned(int index)
     {
         //check if bit is set, if yes its owned
-        return (state.ariSkateOwned & (1 << index)) != 0;
+        return (saveState.ariSkateOwned & (1 << index)) != 0;
     }
 
     public bool IsAriMaskOwned(int index)
     {
         //check if bit is set, if yes its owned
-        return (state.ariMaskOwned & (1 << index)) != 0;
+        return (saveState.ariMaskOwned & (1 << index)) != 0;
     }
 
 
@@ -108,10 +110,10 @@ public class SaveManager : MonoBehaviour
     //PURCHASING UPGRADES---------------------------------------------------------------
     public bool BuyAriMaterial( int index, int cost)
     {
-        if (state.Money >= cost)
+        if (saveState.Money >= cost)
         {
             //enough cash
-            state.Money  -= cost;
+            saveState.Money  -= cost;
             UnlockAriMaterial(index);
 
             //save
@@ -128,10 +130,10 @@ public class SaveManager : MonoBehaviour
     //try to buy theme
     public bool BuyGraffiti( int index, int cost)
     {
-        if (state.Money >= cost)
+        if (saveState.Money >= cost)
         {
             //enough cash
-            state.Money  -= cost;
+            saveState.Money  -= cost;
             UnlockGraffiti(index);
 
             //save
@@ -147,10 +149,10 @@ public class SaveManager : MonoBehaviour
 
     public bool BuyAriHair( int index, int cost)
     {
-        if (state.Money >= cost)
+        if (saveState.Money >= cost)
         {
             //enough cash
-            state.Money  -= cost;
+            saveState.Money  -= cost;
             UnlockAriHair(index);
 
             //save
@@ -165,10 +167,10 @@ public class SaveManager : MonoBehaviour
     }
      public bool BuyAriAccessory( int index, int cost)
     {
-        if (state.Money >= cost)
+        if (saveState.Money >= cost)
         {
             //enough cash
-            state.Money  -= cost;
+            saveState.Money  -= cost;
             UnlockAriAccessory(index);
 
             //save
@@ -184,10 +186,10 @@ public class SaveManager : MonoBehaviour
 
      public bool BuyAriTop( int index, int cost)
     {
-        if (state.Money >= cost)
+        if (saveState.Money >= cost)
         {
             //enough cash
-            state.Money  -= cost;
+            saveState.Money  -= cost;
             UnlockAriTop(index);
 
             //save
@@ -203,10 +205,10 @@ public class SaveManager : MonoBehaviour
 
      public bool BuyAriBottom( int index, int cost)
     {
-        if (state.Money >= cost)
+        if (saveState.Money >= cost)
         {
             //enough cash
-            state.Money  -= cost;
+            saveState.Money  -= cost;
             UnlockAriBottom(index);
 
             //save
@@ -222,10 +224,10 @@ public class SaveManager : MonoBehaviour
 
      public bool BuyAriSock( int index, int cost)
     {
-        if (state.Money >= cost)
+        if (saveState.Money >= cost)
         {
             //enough cash
-            state.Money  -= cost;
+            saveState.Money  -= cost;
             UnlockAriSock(index);
 
             //save
@@ -240,10 +242,10 @@ public class SaveManager : MonoBehaviour
     }
      public bool BuyAriSkate( int index, int cost)
     {
-        if (state.Money >= cost)
+        if (saveState.Money >= cost)
         {
             //enough cash
-            state.Money  -= cost;
+            saveState.Money  -= cost;
             UnlockAriSkate(index);
 
             //save
@@ -259,10 +261,10 @@ public class SaveManager : MonoBehaviour
 
     public bool BuyAriMask( int index, int cost)
     {
-        if (state.Money >= cost)
+        if (saveState.Money >= cost)
         {
             //enough cash
-            state.Money  -= cost;
+            saveState.Money  -= cost;
             UnlockAriMask(index);
 
             //save
@@ -282,65 +284,66 @@ public class SaveManager : MonoBehaviour
     //UNLOCKING------------------------------------------------------------------------
     public void UnlockAriMaterial (int index)
     {
-        state.ariMaterialOwned |= 1 << index;
+        saveState.ariMaterialOwned |= 1 << index;
     }
 
      //unlock a theme way
     public void UnlockGraffiti (int index)
     {
-        state.ariGraffitiOwned |= 1 << index;
+        saveState.ariGraffitiOwned |= 1 << index;
     }
 
     //unlock a hair way
     public void UnlockAriHair (int index)
     {
-        state.ariHairOwned |= 1 << index;
+        saveState.ariHairOwned |= 1 << index;
     }
 
     public void UnlockAriAccessory (int index)
     {
-        state.ariAccessoryOwned |= 1 << index;
+        saveState.ariAccessoryOwned |= 1 << index;
     }
 
     public void UnlockAriTop (int index)
     {
-        state.ariTopOwned |= 1 << index;
+        saveState.ariTopOwned |= 1 << index;
     }
 
     public void UnlockAriBottom (int index)
     {
-        state.ariBottomOwned |= 1 << index;
+        saveState.ariBottomOwned |= 1 << index;
     }
 
     public void UnlockAriSock (int index)
     {
-        state.ariSockOwned |= 1 << index;
+        saveState.ariSockOwned |= 1 << index;
     }
 
     public void UnlockAriSkate (int index)
     {
-        state.ariSkateOwned |= 1 << index;
+        saveState.ariSkateOwned |= 1 << index;
     }
 
     public void UnlockAriMask (int index)
     {
-        state.ariMaskOwned |= 1 << index;
+        saveState.ariMaskOwned |= 1 << index;
     }
 
 
 
-    //LEVEL COMPLETION ------------------------------------------------------------------
+    //TODO: Commented Out Progression Code
+    /*//LEVEL COMPLETION ------------------------------------------------------------------
     public void CompleteLevel (int index)
     {
         Debug.Log("tried to run complete level");
         //if current lvl 
-        if (state.completedLevel == index)
+        if (saveState.completedLevel == index)
         {
-            state.completedLevel++;
-            Debug.Log("level completed max is: " + state.completedLevel);
+            saveState.completedLevel++;
+            Debug.Log("level completed max is: " + saveState.completedLevel);
             Save();
         }
-    }
+    }*/
 
     //reset the save
     public void ResetSave()

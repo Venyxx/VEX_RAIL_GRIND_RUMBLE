@@ -84,7 +84,7 @@ public class LoadNewScene : MonoBehaviour
                 locationVector = outskirtsBusStop1Vector;
                 break;
             case LoadLocation.InnerRingDefault:
-                SaveManager.Instance.state.completedLevel = 1;
+                //SaveManager.Instance.saveState.completedLevel = 1;
                 sceneName = innerRing;
                 locationVector = innerRingDefaultSpawnVector;
                 break;
@@ -93,7 +93,7 @@ public class LoadNewScene : MonoBehaviour
                 locationVector = innerRingBusStop1Vector;
                 break;
             case LoadLocation.ServosLotEntrance:
-                SaveManager.Instance.state.completedLevel = 2;
+                //SaveManager.Instance.saveState.completedLevel = 2;
                 sceneName = servosHQ;
                 locationVector = servosHQDefaultSpawnVector;
                 break;

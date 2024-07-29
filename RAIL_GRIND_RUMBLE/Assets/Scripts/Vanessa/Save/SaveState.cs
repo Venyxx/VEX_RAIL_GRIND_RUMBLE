@@ -2,7 +2,6 @@ using UnityEngine;
 public class SaveState 
 {
     public float Money = 0; /*temp for presentation*/
-    public int MaxLevel = 0;
     public int ariMaterialOwned = 0;
     public int ariGraffitiOwned = 0;
     public int ariHairOwned = 0;
@@ -12,9 +11,7 @@ public class SaveState
     public int ariSockOwned = 0;
     public int ariSkateOwned = 0;
     public int ariMaskOwned = 0;
-
-    public Vector3 playerLocation = new Vector3 (0,0,0);
-
+    
     public int activeAriMaterial = 0;
     public int activeAriHair = 0;
     public int activeAriAccessory = 0;
@@ -44,6 +41,6 @@ public class SaveState
     //public int GrappleCharges = 3;
 
 
-    public int completedLevel = 0;
-    public float endlessHighScore = 0;
+    //public int completedLevel = 0;
+    //public float endlessHighScore = 0;
 }
