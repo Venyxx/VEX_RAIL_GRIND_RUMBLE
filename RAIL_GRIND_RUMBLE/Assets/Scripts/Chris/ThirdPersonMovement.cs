@@ -232,26 +232,6 @@ public class ThirdPersonMovement : MonoBehaviour
         healthRef = GetComponent<PlayerHealth>();
 
         //atkScript = GetComponent<PlayerAttack>(); //added by pete to fix raul's nullref since he was assigning this in the inspector
-
-        
-
-        if (SceneManager.GetActiveScene().name == "InnerRingLevel")
-        {
-            Debug.Log("LOADED INTO INNER RING ");
-            MainQuest2 mq2 = ProgressionManager.Get().mainQuest2;
-            Debug.Log("MAINQUEST2 IS NULL? " + (mq2 == null));
-            Debug.Log("MAINQUEST 2 IS NOT ACTIVE?" + (!mq2.isActive));
-            if (mq2 == null || !mq2.isActive)
-            {
-                loadInDefaultLocation = false;
-                //Debug.Log("SET LOAD IN DEFAULT LOCATION TO FALSE");
-                /*transform.localPosition = LoadNewScene.innerRingDefaultSpawnVector;
-                loadInDefaultLocation = false;
-                Debug.Log("Location Vector: " + LoadNewScene.locationVector);
-                Debug.Log("Inner Ring Vector: " + LoadNewScene.innerRingDefaultSpawnVector);
-                Debug.Log("My position: " + transform.localPosition);*/
-            }
-        }
         
         if (loadInDefaultLocation && CheckpointController.lastCheckPointPosition == new Vector3(0, 0, 0))
         {
@@ -823,12 +803,14 @@ public class ThirdPersonMovement : MonoBehaviour
             coinCountText.text = $"{(int) SaveManager.Instance.state.Money}";
         }
         PlaySound(0);
-        var questTracker = ProgressionManager.Get();
+        
+        //TODO: Progression Code Commented Out/Removed
+        /*var questTracker = ProgressionManager.Get();
         if (questTracker.CurrentCountQuestType is CountQuestType.Coins)
         {
             CountQuest quest = (CountQuest) questTracker.currentQuest;
             quest.IncrementCount();
-        }
+        }*/
     }
 
     //Camera Switch

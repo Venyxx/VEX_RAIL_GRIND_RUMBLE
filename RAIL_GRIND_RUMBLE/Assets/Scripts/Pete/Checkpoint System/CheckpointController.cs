@@ -86,7 +86,8 @@ public class CheckpointController : MonoBehaviour
                 }
                 if (updatesQuestInfoText)
                 {
-                    ProgressionManager.Get().QuestInfoText.text = newQuestInfoText;
+                    //TODO: Progression Code Commented Out/Removed
+                    //ProgressionManager.Get().QuestInfoText.text = newQuestInfoText;
                 }
 
                 if (totalRef == null)
@@ -137,7 +138,8 @@ public class CheckpointController : MonoBehaviour
                 
                 if (cutsceneToPlay != 0)
                 {
-                    ProgressionManager.Get().PlayCutscene(cutsceneToPlay);
+                    //TODO: Progression Code Commented Out/Removed
+                    //ProgressionManager.Get().PlayCutscene(cutsceneToPlay);
                 }
                  //MOVE ME TO TOP
             }

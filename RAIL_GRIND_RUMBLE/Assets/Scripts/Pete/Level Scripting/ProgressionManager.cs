@@ -1,4 +1,4 @@
-using System;
+/*using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -140,18 +140,7 @@ public class ProgressionManager : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         LoadObjects();
-        
-        /*try
-        {*/
-            //QuestInfoText = GameObject.Find("QuestInfo").transform.Find("QuestInfoText").gameObject
-                //.GetComponent<TextMeshProUGUI>();
-            Debug.Log($"Is QuestInfoText null? {QuestInfoText == null}");
-        /*}
-        catch (Exception e)
-        {
-            Debug.LogError("Failed to assign QuestInfoText");
-        }*/
-        
+
         PlayFirstCutscene();
 
         string sceneName = SceneManager.GetActiveScene().name;
@@ -213,13 +202,7 @@ public class ProgressionManager : MonoBehaviour
             grappleUnlocked = true;
             currentQuest = null;
         }
-
-
-        /*if (currentQuest != mainQuest3 && SceneManager.GetActiveScene().name == "Outskirts")
-        {
-            GameObject.Find("OpenGateQuest3").SetActive(true);
-        }*/
-
+        
         if (SceneManager.GetActiveScene().name == "Servos HQ")
         {
             Debug.Log("LOADED SERVOS HQ");
@@ -234,12 +217,6 @@ public class ProgressionManager : MonoBehaviour
         {
             Debug.Log("DID NOT LOAD SERVOS HQ");
         }
-        
-        /*if (currentQuest == null && GameObject.Find("WayPointPrefabs") && SceneManager.GetActiveScene().name == "Outskirts")
-        {
-            GameObject waypoints = GameObject.Find("WayPointPrefabs");
-            waypoints.SetActive(false);
-        }*/
 
         HandleDiegoAutoDialogue();
     }
@@ -359,4 +336,4 @@ public class ProgressionManager : MonoBehaviour
     {
         FindObjectOfType<CutscenePlayer>().PlayCutscene(clip);
     }
-}
+}*/

@@ -32,7 +32,8 @@ public class LoadNewScene : MonoBehaviour
     public static readonly Vector3 servosHQDefaultSpawnVector = new Vector3(124.440002f,3.63000011f,29.5100002f);
     private void Awake()
     {
-        if (!ProgressionManager.Get().firstLoad) return;
+        //TODO: Progression Code Commented Out/Removed
+        //if (!ProgressionManager.Get().firstLoad) return;
         locationVector = ariRoomVector;
         switch (SceneManager.GetActiveScene().name)
         {
@@ -54,7 +55,8 @@ public class LoadNewScene : MonoBehaviour
                 break;
         }
 
-        ProgressionManager.Get().firstLoad = false;
+        //TODO: Progression Code Commented Out/Removedw
+        //ProgressionManager.Get().firstLoad = false;
     }
 
     private void OnTriggerEnter(Collider other)

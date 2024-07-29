@@ -7,7 +7,8 @@ public class OutskirtsDiegoManager : NPCManager
     [SerializeField] private GameObject dialogueGoon1;
     [SerializeField] private GameObject dialogueGoon2;
 
-    private DialogueTrigger dialogueTrigger;
+    //TODO: Progression Code Commented Out/Removed
+    /*private DialogueTrigger dialogueTrigger;
     private int state = 1;
 
     protected override void Start()
@@ -74,5 +75,5 @@ public class OutskirtsDiegoManager : NPCManager
         ProgressionManager.Get().mainQuest3.BeginCombat();
         //GetComponent<BoxCollider>().enabled = false;
         gameObject.SetActive(false);
-    }
+    }*/
 }

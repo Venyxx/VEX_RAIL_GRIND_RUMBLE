@@ -61,7 +61,8 @@ public class Reticle : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (ProgressionManager.Get().grappleUnlocked == true)
+        //TODO: Progression Code Commented Out/Removed
+        //if (ProgressionManager.Get().grappleUnlocked == true)
         {
             ReticleUpdate();
         }
@@ -80,7 +81,8 @@ public class Reticle : MonoBehaviour
 
     public void ReticleToggle (bool isOn)
     {
-        if (ProgressionManager.Get().grappleUnlocked == false) return;
+        //TODO: Progression Code Commented Out/Removed
+        //if (ProgressionManager.Get().grappleUnlocked == false) return;
 
         if (isOn == true)
         {

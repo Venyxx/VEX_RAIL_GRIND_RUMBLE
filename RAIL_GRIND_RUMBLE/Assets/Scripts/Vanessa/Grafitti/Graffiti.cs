@@ -202,11 +202,13 @@ public class Graffiti : MonoBehaviour
 
     public void ActivateBuff()
     {
+        //TODO: Progression Code Commented Out/Removed
+        /*
         ProgressionManager manager = ProgressionManager.Get();
         if (manager.currentQuest is CountQuest countQuest && countQuest.GetCountQuestType() is CountQuestType.Graffiti)
         {
             countQuest.IncrementCount();
-        }
+        }*/
 
         currentGraffitiBuffTime = maxGraffitiBuffTime;
         playerAttackREF.isBuffed = true;

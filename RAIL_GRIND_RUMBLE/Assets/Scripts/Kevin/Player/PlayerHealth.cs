@@ -72,18 +72,21 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         if (currentHealth <= 0)
         {
             currentHealth = 0;
-            MainQuest3 mq3 = ProgressionManager.Get().mainQuest3;
+            
+            //TODO: Progression Code Commented Out/Removed
+            /*MainQuest3 mq3 = ProgressionManager.Get().mainQuest3;
 
             if (mq3 != null && mq3.isComplete && !ProgressionManager.Get().deathCutscenePlayed)
             {
                 ProgressionManager.Get().mainQuest3Death = true;
                 SceneManager.LoadScene("Ari's House");
             }
-            else
+            else*/
             {
                 SceneManager.LoadScene("LoseScene");
 
             }
+            
         }
         
     }

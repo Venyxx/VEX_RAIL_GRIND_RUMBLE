@@ -26,7 +26,9 @@ public class AutomaticDialogueTrigger : MonoBehaviour
                 dialogueManager.StartAutoDialogue(dialogue);
             }
             used = true;
-            ProgressionManager.Get().SetFirstAutoDialogueUsed();
+            
+            //TODO: Progression Code Commented Out/Removed
+            //ProgressionManager.Get().SetFirstAutoDialogueUsed();
         }
     }
 

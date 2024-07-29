@@ -9,14 +9,15 @@ public class TEMPGraffitiTrigger : MonoBehaviour
    {
      if (col.gameObject.tag == "Player")
      {
-        ProgressionManager manager = ProgressionManager.Get();
+         //TODO: Progression Code Commented Out/Removed
+         /*ProgressionManager manager = ProgressionManager.Get();
                     if (manager.currentQuest is CountQuest countQuest && countQuest.GetCountQuestType() is CountQuestType.Graffiti)
                     {
                         countQuest.IncrementCount();
                         countQuest.IncrementCount();
                         countQuest.IncrementCount();
                     }
-     Destroy(gameObject);
+     Destroy(gameObject);*/
      }
    }
 }

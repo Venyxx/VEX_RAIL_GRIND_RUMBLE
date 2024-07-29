@@ -12,6 +12,9 @@ public class ServosVanController : MonoBehaviour
     [SerializeField] private float startDelay;
     [SerializeField] private GameObject enemy;
     [SerializeField] private int goonsToSpawn = 5;
+    
+    //TODO: Progression Code Commented Out/Removed
+    /*
     private GameObject leftDoor;
     private GameObject rightDoor;
     private Vector3 doorsPos;
@@ -70,4 +73,5 @@ public class ServosVanController : MonoBehaviour
         Invoke("SpawnGoons", 2f);
         goonCount++;
     }
+    */
 }

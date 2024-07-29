@@ -43,7 +43,8 @@ public class DiegoManager : NPCManager
     }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public override void HandleProgress()
+    //TODO: Progression Code Commented Out/Removed
+    /*public override void HandleProgress()
     {
         List<Quest> completedQuests = ProgressionManager.CompletedQuests;
         foreach (Quest quest in completedQuests)
@@ -81,5 +82,5 @@ public class DiegoManager : NPCManager
             GetComponent<DialogueTrigger>().dialogue.dialogueTrigger = GetComponent<DialogueTrigger>();
             GetComponent<MainQuest3Giver>().enabled = true;
         }
-    }
+    }*/
 }

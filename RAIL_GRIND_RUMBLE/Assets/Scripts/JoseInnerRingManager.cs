@@ -8,6 +8,8 @@ public class JoseInnerRingManager : NPCManager
     private bool used = false;
     public DialogueTemplate joseQuestFinishedDialogue;
     
+    //TODO: Progression Code Commented Out/Removed
+    /*
     public override void HandleProgress()
     {
         if (!used)
@@ -15,5 +17,5 @@ public class JoseInnerRingManager : NPCManager
             ProgressionManager.Get().mainQuest2.IncrementWayPoint();
             used = true;
         }
-    }
+    }*/
 }

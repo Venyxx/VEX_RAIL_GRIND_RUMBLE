@@ -209,14 +209,16 @@ public class Enemy : PoolableObject, IDamageable
         if (Health <= 0 && !dead)
         {
             dead = true;
-            ProgressionManager tracker = ProgressionManager.Get();
+            
+            //TODO: Progression Code Commented Out/Removed
+            /*ProgressionManager tracker = ProgressionManager.Get();
             Debug.Log(tracker.CurrentCountQuestType);
             if (tracker.CurrentCountQuestType is CountQuestType.Enemies)
             {
                 Debug.Log("Calling IncrementCount");
                 CountQuest quest = (CountQuest)tracker.currentQuest;
                 quest.IncrementCount();
-            }
+            }*/
             if (IsDonnovan)
             {
                 gameObject.SetActive(false);

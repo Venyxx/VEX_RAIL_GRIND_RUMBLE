@@ -11,6 +11,7 @@ public class JuliannaManager: NPCManager
     public DialogueManager script;
     ////////////////////////////////////////////////////////////////////////////////////////////
 
+    /*
     void Start()
     {
         ProgressionManager pm = ProgressionManager.Get();
@@ -42,5 +43,5 @@ public class JuliannaManager: NPCManager
         if (!pm.prologueComplete) return;
 
         pm.QuestInfoText.text = "Head to the skate park!";
-    }
+    }*/
 }

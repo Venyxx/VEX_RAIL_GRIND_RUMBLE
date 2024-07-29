@@ -55,10 +55,12 @@ public class LoadingScreen : MonoBehaviour
         gameTitle.SetActive(false);
         yield return new WaitForSeconds(4);
 
-         if (ProgressionManager.Get() != null)
+        //TODO: Progression Code Commented Out/Removed
+        /*
+        if (ProgressionManager.Get() != null)
         {
             ProgressionManager.Get().firstLoad = true;
-        }
+        }*/
 
          string scene;
          if (level == 1)

@@ -290,7 +290,8 @@ public class DialogueManager : MonoBehaviour
         }
         //Debug.Log($"NPC Manager is null: {npcManager == null}");
         
-        HandleQuest(text);
+        //TODO: Progression Code Commented Out/Removed
+        //HandleQuest(text);
         if (npcManager != null)
         {
             HandleProgression(npcManager);
@@ -303,7 +304,8 @@ public class DialogueManager : MonoBehaviour
         rotatingNPC = false;
     }
 
-    private void HandleQuest(string text)
+    //TODO: Progression Code Commented Out/Removed
+    /*private void HandleQuest(string text)
     {
         try
         {
@@ -326,10 +328,10 @@ public class DialogueManager : MonoBehaviour
             }
             
             Quest quest = questGiver.GetQuest();
-            /*Debug.Log(quest.GetName());
-            Debug.Log($"!questGiver.acceptedOrDeniedAlready: {!questGiver.acceptedOrDeniedAlready}");
-            Debug.Log($"!quest.isComplete: {!quest.isComplete}");
-            Debug.Log($"!quest.isActive: {!quest.isActive}");*/
+            //Debug.Log(quest.GetName());
+            //Debug.Log($"!questGiver.acceptedOrDeniedAlready: {!questGiver.acceptedOrDeniedAlready}");
+            //Debug.Log($"!quest.isComplete: {!quest.isComplete}");
+            //Debug.Log($"!quest.isActive: {!quest.isActive}");
             if (!questGiver.acceptedOrDeniedAlready && !quest.isComplete && !quest.isActive)
             {
                 //questGiver.OpenQuestWindow();
@@ -356,7 +358,8 @@ public class DialogueManager : MonoBehaviour
                 quest.RewardsGiven = true;
                 if (SceneManager.GetActiveScene().name != "Servos HQ")
                 {
-                    ProgressionManager.Get().QuestInfoText.text = "";
+                    //TODO: Progression Code Commented Out/Removed
+                    //ProgressionManager.Get().QuestInfoText.text = "";
                 }
             }
         }
@@ -369,7 +372,7 @@ public class DialogueManager : MonoBehaviour
             //Debug.Log("There is no QuestGiver attached to this Dialogue");
         }
 
-    }
+    }*/
 
     private void HandleProgression(NPCManager manager)
     {

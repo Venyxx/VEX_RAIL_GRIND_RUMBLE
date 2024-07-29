@@ -177,10 +177,13 @@ public class GrappleHook : MonoBehaviour
         }
     }
 
+    
+    //TODO: Progression Code Commented Out/Removed
+    
     //Left Click
     public void GrapplePull(InputAction.CallbackContext context)
     {
-        if (context.started && canShoot == true && grappleStored == true && GameObject.Find("AimingCam") != null && isGrappling == false && !_thirdPersonMovement.dialogueManager.freezePlayer && ProgressionManager.Get().grappleUnlocked == true)
+        if (context.started && canShoot == true && grappleStored == true && GameObject.Find("AimingCam") != null && isGrappling == false && !_thirdPersonMovement.dialogueManager.freezePlayer /*&& ProgressionManager.Get().grappleUnlocked == true*/)
         {
             StartSwing();
             StartCoroutine(ZipRunning());
@@ -211,7 +214,8 @@ public class GrappleHook : MonoBehaviour
 
     public void NoAimGrapple(InputAction.CallbackContext context)
     {
-        if (context.started && playerREF.GetComponent<ThirdPersonMovement>().isWalking == false && ProgressionManager.Get().grappleUnlocked == true)
+        //TODO: Progression Code Commented Out/Removed
+        if (context.started && playerREF.GetComponent<ThirdPersonMovement>().isWalking == false /*&& ProgressionManager.Get().grappleUnlocked == true*/)
         {
             if (!GameObject.Find("AimingCam") && grappleDetector.aimPoints.Count > 0 && isGrappling == false && grappleStored == true)
             {
