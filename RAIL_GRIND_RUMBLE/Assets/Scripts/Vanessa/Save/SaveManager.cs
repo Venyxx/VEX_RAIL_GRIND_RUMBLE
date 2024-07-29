@@ -34,8 +34,6 @@ public class SaveManager : MonoBehaviour
     //Load last state-------------
     public void Load ()
     {
-        
-        
         if (PlayerPrefs.HasKey("save"))
         {
             saveState = SaveSerializer.Deserialize<SaveState>(PlayerPrefs.GetString("save"));

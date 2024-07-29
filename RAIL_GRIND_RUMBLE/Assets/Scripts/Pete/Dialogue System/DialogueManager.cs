@@ -26,6 +26,7 @@ public class DialogueManager : MonoBehaviour
     public GameObject dialogueBox;
     public GameObject questWindow;
     public bool freezePlayer;
+    public bool blockingPlayer;
     private Queue<string> paragraphDisplayed;
     private Queue<string> nameDisplayed;
     private Queue<AudioClip> voiceClips;
@@ -45,6 +46,8 @@ public class DialogueManager : MonoBehaviour
     private AudioSource audioSource;
 
     public bool SpawnHealth { get; set; } = false;
+
+    private Vector3 returnDirection;
 
     
 
@@ -121,6 +124,18 @@ public class DialogueManager : MonoBehaviour
         textSpeed = 0.01f;
         PlayDialogue(dialogue);
         
+    }
+
+    public void StartPlayerBlockedDialogue(DialogueTemplate dialogue, Vector3 returnDirection)
+    {
+        if (dialogue != null)
+        {
+            blockingPlayer = true;
+            this.returnDirection = returnDirection;
+            freezePlayer = true;
+            textSpeed = 0.01f;
+            PlayDialogue(dialogue);
+        }
     }
 
     public void StartAutoFreezeDialogue(DialogueTemplate dialogue)
@@ -214,7 +229,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
     
-    private void DisplayNextParagraph ()
+    private void DisplayNextParagraph()
     {
         if (paragraphDisplayed.Count == 0)
         {
@@ -265,7 +280,7 @@ public class DialogueManager : MonoBehaviour
         
         dialogueBox.SetActive(false);
         isBoxActive = false;
-        freezePlayer = false;
+        //freezePlayer = false;
         audioSource.Stop();
         
         //Debug.Log($"ThirdPersonControllerREF is NULL {thirdPersonControllerREF == null}");
@@ -280,6 +295,17 @@ public class DialogueManager : MonoBehaviour
         if (trigger != null && trigger is HealthSpawnDialogueTrigger hpSpawner)
         {
             hpSpawner.SpawnHealth();
+        }
+
+        if (blockingPlayer)
+        {
+            blockingPlayer = false;
+            thirdPersonControllerREF.ReturnPlayerAfterBlock(returnDirection);
+            Invoke("UnfreezePlayer", ThirdPersonMovement.ReturnTime);
+        }
+        else
+        {
+            freezePlayer = false;
         }
 
         NPCManager npcManager = null;
@@ -302,6 +328,11 @@ public class DialogueManager : MonoBehaviour
         }
         //thirdPersonControllerREF.nearestDialogueTemplate = null;
         rotatingNPC = false;
+    }
+
+    private void UnfreezePlayer()
+    {
+        freezePlayer = false;
     }
 
     //TODO: Progression Code Commented Out/Removed

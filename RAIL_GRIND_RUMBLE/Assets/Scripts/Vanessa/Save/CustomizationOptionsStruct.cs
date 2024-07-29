@@ -18,7 +18,7 @@ public class CustomizationOptionsStruct : MonoBehaviour
 
     [System.NonSerialized] public Material[] ariMaterialOptions = new Material[3];
     [System.NonSerialized] public GameObject[] ariGraffitiOptions = new GameObject[8];
-    [System.NonSerialized] public GameObject[] ariHairOptions = new GameObject[4];
+    /*System.NonSerialized]*/ public GameObject[] ariHairOptions = new GameObject[4];
     [System.NonSerialized] public GameObject[] ariAccessoryOptions = new GameObject[3]; //piercing
     [System.NonSerialized] public GameObject[] ariTopOptions = new GameObject[12];
     [System.NonSerialized] public GameObject[] ariBottomOptions = new GameObject[12];

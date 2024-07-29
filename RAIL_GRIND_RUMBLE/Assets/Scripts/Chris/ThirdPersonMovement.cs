@@ -32,6 +32,7 @@ public class ThirdPersonMovement : MonoBehaviour
     public Vector2 moveInput;
     public float maxSkateSpeed = 1;
     private float slopeLimit;
+    private bool returning;
     
     private CollisionFollow playerCollisionFollowREF;
     private PlayerRailLeftCollider playerLeftColREF;
@@ -64,7 +65,8 @@ public class ThirdPersonMovement : MonoBehaviour
     float horizontalInput;
     float verticalInput;
 
-    Vector3 moveDirection;
+    public Vector3 MoveDirection { get; set; }
+    
     Vector3 skateDirection;
     private GameObject ariWalkingShoes;
 
@@ -159,6 +161,8 @@ public class ThirdPersonMovement : MonoBehaviour
     [Tooltip("Leave this checked in the inspector unless you are manually moving ari in the scene and need her to spawn where you moved her. " + 
              "Leave it unchecked if there are no gameObjects with 'LoadNewScene.cs' attached.")]
     public bool loadInDefaultLocation = false;
+    
+    public const float ReturnTime = 0.1f;
 
     // Start is called before the first frame update
     void Start()
@@ -413,14 +417,16 @@ public class ThirdPersonMovement : MonoBehaviour
         //DEBUG
         if (Input.GetKeyDown(KeyCode.Alpha9))
         {
-            if (GameObject.Find("Phase2Teleport"))
+            /*if (GameObject.Find("Phase2Teleport"))
             {
                 transform.position = GameObject.Find("Phase2Teleport").transform.position;
             } else if (GameObject.Find("Hernandez Checkpoint"))
             {
                 transform.position = GameObject.Find("Hernandez Checkpoint").transform.position;
             }
-            Debug.Log("Teleport");
+            Debug.Log("Teleport");*/
+            
+            SaveManager.Instance.ResetSave();
         }
     }
 
@@ -577,6 +583,18 @@ public class ThirdPersonMovement : MonoBehaviour
 
     }
 
+    public void ReturnPlayerAfterBlock(Vector3 returnDirection)
+    {
+        returning = true;
+        MoveDirection = returnDirection;
+        Invoke("StopReturn", ReturnTime);
+    }
+
+    private void StopReturn()
+    {
+        returning = false;
+    }
+
     public void Brake(InputAction.CallbackContext context)
     {
         if (context.started || context.performed)
@@ -606,23 +624,20 @@ public class ThirdPersonMovement : MonoBehaviour
         {
             return;
         }
-        
-        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
+        if (!returning)
+        {
+            MoveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        }
+        
         if (!dialogueManager.freezePlayer && moveKeyUp == false)
             skateDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
-
-
-
-        if (isWalking)
+        
+        if (isWalking || returning)
         {
-            rigidBody.velocity = new Vector3(moveDirection.normalized.x * walkSpeed * 10f, rigidBody.velocity.y, moveDirection.normalized.z * walkSpeed * 10f);
+            rigidBody.velocity = new Vector3(MoveDirection.normalized.x * walkSpeed * 10f, rigidBody.velocity.y, MoveDirection.normalized.z * walkSpeed * 10f);
 
-
-          
-
-
-
+            
             //change anim
             if ((moveInput.x != 0 || moveInput.y != 0) && !dialogueManager.freezePlayer)
                 _animator.SetBool(_animIDWalking, true);
@@ -648,9 +663,9 @@ public class ThirdPersonMovement : MonoBehaviour
         {
             if (isGrappling == true)
             {
-                rigidBody.AddForce(moveDirection.normalized * currentSpeed * 10f * swingSpeed, ForceMode.Force);
+                rigidBody.AddForce(MoveDirection.normalized * currentSpeed * 10f * swingSpeed, ForceMode.Force);
             } else {
-                rigidBody.AddForce(moveDirection.normalized * currentSpeed * 10f * airMultiplier, ForceMode.Force);
+                rigidBody.AddForce(MoveDirection.normalized * currentSpeed * 10f * airMultiplier, ForceMode.Force);
             }
             _animator.SetBool(_animIDJump, true);
         }

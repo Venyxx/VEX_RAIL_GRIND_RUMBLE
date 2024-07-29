@@ -61,18 +61,24 @@ public class ThirdPersonCamera : MonoBehaviour
         {
              _freeLook = aimingCam.GetComponent<CinemachineFreeLook>();
              _freeLook.LookAt = aimingLookAt;
-        } else {
-            _freeLook.LookAt = player;
+        } else { 
+            //Debug.Log($"FreeLook is Null:{_freeLook == null} from gameobject {gameObject.name}");
+            //Debug.Log($"FreeLook.LookAt is Null:{_freeLook.LookAt == null}");
+            //Debug.Log($"Player is Null:{player == null}");
+            if (_freeLook != null)
+            {
+                _freeLook.LookAt = player;
+            }
         }
 
         //v hot fix for rotatation lock on load
         currentStyle = CameraStyle.Aiming;
         currentStyle = CameraStyle.Basic;
-           
-        
-        _freeLook.Follow = player;
-        
 
+        if (_freeLook != null)
+        {
+            _freeLook.Follow = player;
+        }
         // GameObject mainCamREF = GameObject.Find("Main Camera");
         // cam = mainCamREF.gameObject.GetComponent<Transform>();
 

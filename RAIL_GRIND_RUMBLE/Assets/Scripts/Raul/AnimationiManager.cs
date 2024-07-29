@@ -89,7 +89,5 @@ public class AnimationiManager : MonoBehaviour
         BruteshockwaveEffect.SetActive(false);
        // Debug.Log("Despawnshockwave");
     }
-
-
-    
+     
 }
