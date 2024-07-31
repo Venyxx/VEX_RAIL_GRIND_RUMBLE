@@ -26,8 +26,9 @@ using UnityEngine.SceneManagement;
 
 public class ProgressionManager : MonoBehaviour
 {
-    public int progressStage = 0;
 
+    //main variables and methods
+    public int progressStage = 0;
     private static ProgressionManager instance;
     
     public static ProgressionManager Get()
@@ -69,6 +70,31 @@ public class ProgressionManager : MonoBehaviour
         }
     }
     
+    //level-specific variables and methods
+    
+    //prologue
+    private bool _prologueJulieTalkedTo = false;
+    private bool _prologueJoseTalkedTo = false;
+
+    public void PrologueTalkedToJulie()
+    {
+        _prologueJulieTalkedTo = true;
+        if (_prologueJoseTalkedTo)
+        {
+            FindObjectOfType<DiegoManager>().ActivateMission1Dialogue();
+        }
+    }
+
+    public void PrologueTalkedToJose()
+    {
+        _prologueJoseTalkedTo = true;
+        if (_prologueJulieTalkedTo)
+        {
+            FindObjectOfType<DiegoManager>().ActivateMission1Dialogue();
+        }
+    }
+
+
     /*
      OLD STUFF START
     private static ProgressionManager instance;

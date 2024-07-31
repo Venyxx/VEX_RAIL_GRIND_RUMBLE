@@ -54,6 +54,7 @@ public class DialogueTrigger : MonoBehaviour
         {
             if (thirdPersonControllerREF.isWalking)
             {
+                thirdPersonControllerREF.nearestDialogueTemplate = dialogue;
                 talkPrompt.GetComponent<TextMeshProUGUI>().SetText("Click or Press A to Talk");
             }
             else

@@ -7,10 +7,7 @@ public class AutomaticDialogueTrigger : MonoBehaviour
     [SerializeField] private bool oneTimeUse;
     
     private bool used = false;
-
-    public Vector3 returnPlayerDirection;
     
-
     [SerializeField] private bool freezePlayer;
     [SerializeField] private bool blockPlayer;
 
@@ -23,13 +20,16 @@ public class AutomaticDialogueTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Collision Detected");
+        //Debug.Log("Collision Detected");
+
+        if (!this.enabled) return;
+        
         if (other.CompareTag("Player") && (!oneTimeUse || !used) )
         {
             var dialogueManager = FindObjectOfType<DialogueManager>();
             if (blockPlayer)
             {
-                returnPlayerDirection = FindObjectOfType<ThirdPersonMovement>().MoveDirection * -1;
+                Vector3 returnPlayerDirection = FindObjectOfType<ThirdPersonMovement>().MoveDirection * -1;
                 dialogueManager.StartPlayerBlockedDialogue(dialogue, returnPlayerDirection);
 
             }

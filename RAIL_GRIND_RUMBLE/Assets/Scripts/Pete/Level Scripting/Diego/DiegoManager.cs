@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using UnityEditor;
 using UnityEngine;
 
 public class DiegoManager : NPCManager
@@ -12,23 +13,17 @@ public class DiegoManager : NPCManager
     public DialogueManager script2;
     ////////////////////////////////////////////////////////////////////////////////////////////
 
-
-    private bool mainQuest1Finished = false;
-
-    private bool mainQuest2Finished = false;
-    [SerializeField] private DialogueTemplate mainQuest2Dialogue;
-    [SerializeField] private DialogueTemplate mainQuest3Dialogue;
-
-    
+    [SerializeField] private DialogueTemplate firstMissionDialogue;
+    private bool mission1Ready = true;
 
     protected override void Start()
     {
         base.Start();
-        HandleProgress();
+        //HandleProgress();
         
     }
 
-//RAUL FACIAL ANIM TEST//////////////////////////////////////////////////////////////////////////////////////
+    //RAUL FACIAL ANIM TEST//////////////////////////////////////////////////////////////////////////////////////
     void Update()
     {
         if (script2.isTalking == true)
@@ -41,46 +36,32 @@ public class DiegoManager : NPCManager
             DiegoAnimator.SetBool("isTalking", false);
         }  
     }
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //TODO: Progression Code Commented Out/Removed
-    /*public override void HandleProgress()
+    public override void HandleProgress()
     {
-        List<Quest> completedQuests = ProgressionManager.CompletedQuests;
-        foreach (Quest quest in completedQuests)
+        //ProgressionManager.Get().PrologueTalkedToJose();
+        //ProgressionManager.Get().PrologueTalkedToJulie();
+        if (mission1Ready)
         {
-            Debug.Log($"THE FOLLOWING QUEST IS COMPLETED: {quest.GetName()}");
-            if(quest is MainQuest1)
-            {
-                mainQuest1Finished = true;
-            }
+            ProgressionManager.Get().progressStage = 1;
+            GameObject doorTrigger = GameObject.Find("DoorTrigger");
+            LoadNewScene sceneLoader = doorTrigger.GetComponent<LoadNewScene>();
+            AutomaticDialogueTrigger automaticDialogueTrigger = doorTrigger.GetComponent<AutomaticDialogueTrigger>();
 
-            if (quest is MainQuest2)
-            {
-                mainQuest2Finished = true;
-            }
+            sceneLoader.enabled = true;
+            automaticDialogueTrigger.enabled = false;
 
-            if (quest is MainQuest3)
-            {
-                gameObject.SetActive(false);
-            }
         }
+    }
 
-        if (mainQuest1Finished && !mainQuest2Finished)
-        {
-            GetComponent<MainQuest1Giver>().enabled = false;
-            GetComponent<DialogueTrigger>().dialogue = mainQuest2Dialogue;
-            GetComponent<DialogueTrigger>().dialogue.dialogueTrigger = GetComponent<DialogueTrigger>();
-            GetComponent<MainQuest2Giver>().enabled = true;
-        }
-
-        if (mainQuest2Finished)
-        {
-            GetComponent<MainQuest1Giver>().enabled = false;
-            GetComponent<MainQuest2Giver>().enabled = false;
-            GetComponent<DialogueTrigger>().dialogue = mainQuest3Dialogue;
-            GetComponent<DialogueTrigger>().dialogue.dialogueTrigger = GetComponent<DialogueTrigger>();
-            GetComponent<MainQuest3Giver>().enabled = true;
-        }
-    }*/
+    public void ActivateMission1Dialogue()
+    {
+        Debug.Log("mission 1 is ready to start!");
+        DialogueTrigger diegoTrigger = GetComponent<DialogueTrigger>();
+        diegoTrigger.dialogue = firstMissionDialogue;
+        firstMissionDialogue.dialogueTrigger = diegoTrigger;
+        mission1Ready = true;
+    }
 }

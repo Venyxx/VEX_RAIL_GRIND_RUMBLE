@@ -3,14 +3,14 @@
 public abstract class NPCManager : MonoBehaviour
 {
 
-    protected DialogueTemplate dialogueTemplate;
+    //protected DialogueTemplate dialogueTemplate;
     protected virtual void Start()
     {
-        dialogueTemplate = GetComponent<DialogueTrigger>().dialogue;
+        //dialogueTemplate = GetComponent<DialogueTrigger>().dialogue;
     }
     
     public virtual void HandleProgress()
-    {
+    {   
         
     }
 }

@@ -61,6 +61,8 @@ public class LoadNewScene : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!this.enabled) return;
+        
         if (other.gameObject.CompareTag("PlayerObject") || other.gameObject.CompareTag("Player"))
         {
             LoadScene();

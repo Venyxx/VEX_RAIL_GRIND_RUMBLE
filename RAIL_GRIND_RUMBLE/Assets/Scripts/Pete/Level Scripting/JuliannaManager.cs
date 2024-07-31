@@ -3,23 +3,22 @@ using UnityEngine;
 
 public class JuliannaManager: NPCManager
 {
-    public DialogueTemplate secondSetDialogue;
-
-
+    //public DialogueTemplate secondSetDialogue;
+    
     //RAUL FACIAL ANIM TEST//////////////////////////////////////////////////////////////////////////
     public Animator JulieAnimator;
     public DialogueManager script;
     ////////////////////////////////////////////////////////////////////////////////////////////
 
-    /*
+    
     void Start()
     {
-        ProgressionManager pm = ProgressionManager.Get();
+        /*ProgressionManager pm = ProgressionManager.Get();
         if (pm.prologueComplete)
         {
             GetComponent<DialogueTrigger>().dialogue = secondSetDialogue;
             secondSetDialogue.dialogueTrigger = GetComponent<DialogueTrigger>();
-        }
+        }*/
     }
 
 //RAUL FACIAL ANIM TEST//////////////////////////////////////////////////////////////////////////////////////
@@ -39,9 +38,12 @@ public class JuliannaManager: NPCManager
 
     public override void HandleProgress()
     {
-        ProgressionManager pm = ProgressionManager.Get();
+        /*ProgressionManager pm = ProgressionManager.Get();
         if (!pm.prologueComplete) return;
 
-        pm.QuestInfoText.text = "Head to the skate park!";
-    }*/
+        pm.QuestInfoText.text = "Head to the skate park!";*/
+        
+        ProgressionManager pm = ProgressionManager.Get();
+        pm.PrologueTalkedToJulie();
+    }
 }
