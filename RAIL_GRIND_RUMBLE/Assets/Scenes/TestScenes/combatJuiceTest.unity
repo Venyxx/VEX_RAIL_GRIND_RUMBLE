@@ -476,6 +476,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hernandez (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6824130177305418646, guid: 028e471716448c54fb2681a3edfd3dd3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6824130177305418664, guid: 028e471716448c54fb2681a3edfd3dd3, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -567,6 +571,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plugParent: {fileID: 0}
+  shake:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &326164833
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2695,7 +2702,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.96000004
+  m_VoxelSize: 0.33333334
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: e70614146c0fd114a9fd69bf3a738be4, type: 2}
   m_BuildHeightMesh: 0

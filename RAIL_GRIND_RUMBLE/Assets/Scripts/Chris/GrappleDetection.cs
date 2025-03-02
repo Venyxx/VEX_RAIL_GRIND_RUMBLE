@@ -63,7 +63,12 @@ public class GrappleDetection : MonoBehaviour
         grappleHookScript = playerREF.GetComponent<GrappleHook>();
         throwObjectScript = playerREF.GetComponent<ThrowObject>();
 
-        adaptiveMusic = GameObject.Find("Music").GetComponent<AdaptiveMusic>();
+        GameObject adaptiveMusicGameObject = GameObject.Find("Music");
+        if (adaptiveMusicGameObject != null)
+        {
+            adaptiveMusic = GameObject.Find("Music").GetComponent<AdaptiveMusic>();
+
+        }
     }
 
     

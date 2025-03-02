@@ -244,9 +244,6 @@ public class ThirdPersonMovement : MonoBehaviour
             //Debug.Log("My position: " + transform.localPosition);
         }
         WalkToggleHelper();
-
-        //temp fix for the strange bug where something is affecting her mass 
-        rigidBody.mass = 6.0f; 
     }
 
     void DisableSkates()
@@ -260,6 +257,7 @@ public class ThirdPersonMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log(rigidBody.mass);
          /*if(isBraking == true)
         {
 
